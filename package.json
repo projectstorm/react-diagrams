@@ -12,7 +12,6 @@
   "author": "dylanvorster",
   "contributors": [],
   "dependencies": {
-    "color": "^0.11.1",
     "react": "^15.1.0"
   },
   "devDependencies": {
