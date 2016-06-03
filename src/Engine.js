@@ -141,11 +141,19 @@ module.exports = function(){
 			return FinalLink;
 		},
 
-		addNode: function(node){
+		addNode: function(node,event){
+
+			var point = {x:0,y:0};
+			if(event !== undefined){
+				point = this.getRelativeMousePoint(event);
+			}
+			
 			var DefaultNode  = {
 				id: this.UID(),
 				type: 'default',
-				data:{}
+				data:{},
+				x: point.x,
+				y: point.y
 			};
 			var FinalNode = _.merge(DefaultNode,node);
 			this.state.nodes[FinalNode.id] = FinalNode;

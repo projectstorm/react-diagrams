@@ -45,11 +45,10 @@ module.exports = React.createClass({
 	generatePoint: function(pointIndex){
 		return React.DOM.g(null,
 			React.DOM.circle({
-				className:'point',
+				className:'point pointui',
 				cx:this.getPoint(pointIndex).x,
 				cy:this.getPoint(pointIndex).y,
 				r:5,
-				fill:'black',
 			}),
 			React.DOM.circle({
 				className:'point',

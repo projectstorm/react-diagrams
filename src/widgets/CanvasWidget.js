@@ -27,6 +27,7 @@ module.exports = React.createClass({
 	
 	componentWillUnmount: function(){
 		this.props.engine.removeListener(this.state.listenerID);
+		window.removeEventListener('keydown',this.state.windowListener);
 	},
 	
 	componentDidMount: function(){
@@ -51,11 +52,15 @@ module.exports = React.createClass({
 		
 		
 		//add a keybaord listener
-		window.addEventListener('keydown',function(){
-			if(this.props.engine.state.selectedLink){
-				this.props.engine.removeLink(this.props.engine.state.selectedLink);
-			}
-		}.bind(this));
+		this.setState({
+			windowListener: window.addEventListener('keydown',function(event){
+				if(event.keyCode === 46){
+					if(this.props.engine.state.selectedLink){
+						this.props.engine.removeLink(this.props.engine.state.selectedLink);
+					}
+				}
+			}.bind(this))
+		});
 		window.focus();
 	},
 	render: function () {
@@ -160,16 +165,18 @@ module.exports = React.createClass({
 						
 					}.bind(this),
 					onMouseUp: function(event){
-						
 						if(this.state.selectedPointID){
 							var element = event.target.closest('.port[data-name]');
 							if(element){
 								var nodeElement = event.target.closest('.node[data-nodeid]');
-								this.state.selectedLink.target = nodeElement.dataset.nodeid;
-								this.state.selectedLink.targetPort = element.dataset.name;
+								
+								//cant add link to self
+								if(this.state.selectedLink.source !== nodeElement.dataset.nodeid){
+									this.state.selectedLink.target = nodeElement.dataset.nodeid;
+									this.state.selectedLink.targetPort = element.dataset.name;
+								}
 							}
 						}
-						
 						
 						this.setState({
 							selectedLink: null,
