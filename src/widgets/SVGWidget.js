@@ -33,9 +33,14 @@ module.exports = React.createClass({
 						}
 					}
 					
-					return React.createElement(LinkWidget,{newPoint: function(pointID){
-						this.props.newPoint(link,pointID);
-					}.bind(this),link: link,engine: this.props.engine});
+					return React.createElement(LinkWidget,{
+						key: link.id,
+						newPoint: function(pointID){
+							this.props.newPoint(link,pointID);
+						}.bind(this),
+						link: link,
+						engine: this.props.engine
+					});
 				}.bind(this))
 			)
 		);

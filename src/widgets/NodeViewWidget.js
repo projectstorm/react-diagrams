@@ -21,7 +21,7 @@ module.exports = React.createClass({
 			React.DOM.div({className:'node-view'},
 				_.map(this.props.engine.state.nodes,function(node){
 					return(
-						React.createElement(Node,{node: node,engine: this.props.engine},
+						React.createElement(Node,{key:node.id,node: node,engine: this.props.engine},
 							this.props.engine.getNodeFactory(node.type).generateModel(node))
 					);
 				}.bind(this))

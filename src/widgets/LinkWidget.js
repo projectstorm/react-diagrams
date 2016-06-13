@@ -43,7 +43,7 @@ module.exports = React.createClass({
 	},
 	
 	generatePoint: function(pointIndex){
-		return React.DOM.g(null,
+		return React.DOM.g({key:'point-'+this.props.link.points[pointIndex].id},
 			React.DOM.circle({
 				className:'point pointui',
 				cx:this.getPoint(pointIndex).x,
@@ -90,7 +90,7 @@ module.exports = React.createClass({
 			}.bind(this),
 		},extraProps));
 		
-		return React.DOM.g(null,
+		return React.DOM.g({key:'link-'+extraProps.id},
 			Bottom,
 			Top
 		);
@@ -106,6 +106,7 @@ module.exports = React.createClass({
 		var paths = [];
 		if(points.length === 2){
 			paths.push(this.generateLink({
+				id: '0',
 				onMouseDown: function(event){
 					var point = this.props.engine.getRelativeMousePoint(event);
 					point.id = this.props.engine.UID();
@@ -139,6 +140,7 @@ module.exports = React.createClass({
 			
 			paths = ds.map(function(data,index){
 				return this.generateLink({
+					id:index,
 					'data-link':this.props.link.id,
 					'data-point':index,
 					onMouseDown: function(event){
