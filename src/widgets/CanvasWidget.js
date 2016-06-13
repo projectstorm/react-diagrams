@@ -55,8 +55,11 @@ module.exports = React.createClass({
 		this.setState({
 			windowListener: window.addEventListener('keydown',function(event){
 				if(event.keyCode === 46){
+					
 					if(this.props.engine.state.selectedLink){
 						this.props.engine.removeLink(this.props.engine.state.selectedLink);
+					}else if(this.props.engine.state.selectedNode){
+						this.props.engine.removeNode(this.props.engine.state.selectedNode);
 					}
 				}
 			}.bind(this))
@@ -67,6 +70,7 @@ module.exports = React.createClass({
 		return (
 			React.DOM.div({
 					style:{
+						//transform: 'scaleX('+this.props.engine.state.zoom/100.0+') scaleY('+this.props.engine.state.zoom/100.0+')'
 						zoom: this.props.engine.state.zoom+"%",
 					},
 					ref:'canvas',
@@ -103,6 +107,8 @@ module.exports = React.createClass({
 						}
 					}.bind(this),
 					onMouseDown: function(event){
+						
+						this.props.engine.setSelectedNode(null);
 						
 						//look for a port
 						var element = event.target.closest('.port[data-name]');
@@ -144,6 +150,7 @@ module.exports = React.createClass({
 						element = event.target.closest('.node[data-nodeid]');
 						if(element){
 							var model = this.props.engine.getNode(element.dataset['nodeid']);
+							this.props.engine.setSelectedNode(model);
 							this.setState({
 								selectedModel: model,
 								initialX: event.pageX,
@@ -171,7 +178,9 @@ module.exports = React.createClass({
 								var nodeElement = event.target.closest('.node[data-nodeid]');
 								
 								//cant add link to self
-								if(this.state.selectedLink.source !== nodeElement.dataset.nodeid){
+								if(this.state.selectedLink.source === nodeElement.dataset.nodeid){
+									this.props.engine.removeLink(this.state.selectedLink);
+								}else{
 									this.state.selectedLink.target = nodeElement.dataset.nodeid;
 									this.state.selectedLink.targetPort = element.dataset.name;
 								}

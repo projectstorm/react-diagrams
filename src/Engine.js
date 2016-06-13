@@ -1,4 +1,5 @@
 var _ = require("lodash");
+var React = require("react");
 /**
  * @author Dylan Vorster
  */
@@ -13,7 +14,8 @@ module.exports = function(){
 			offsetY:0,
 			zoom: 100,
 			listeners:{},
-			selectedLink: null
+			selectedLink: null,
+			selectedNode: null
 		},
 		
 		update: function(){
@@ -121,9 +123,16 @@ module.exports = function(){
 			};
 		},
 		
+		setSelectedNode: function(node){
+			this.state.selectedLink = null;
+			this.state.selectedNode = node;
+			this.update();
+		},
 		
 		setSelectedLink: function(link){
+			this.state.selectedNode = null;
 			this.state.selectedLink = link;
+			this.update();
 		},
 
 		addLink: function(link){

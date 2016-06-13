@@ -25,7 +25,6 @@ module.exports = React.createClass({
 							this.props.engine.getNodeFactory(node.type).generateModel(node))
 					);
 				}.bind(this))
-					
 			)
 		);
 	}

@@ -12,17 +12,17 @@ module.exports = React.createClass({
 	getDefaultProps: function () {
 		return {
 			node: null,
-			engine: null,
+			engine: null
 		};
-	},
-	componentDidMount: function(){
-		
 	},
 	render: function () {
 		return (
 			React.DOM.div({
+				onMouseDown: function(){
+					this.props.engine.setSelectedNode(this.props.node);
+				}.bind(this),
 				'data-nodeid': this.props.node.id,
-				className:'node',
+				className:'node'+(this.props.engine.state.selectedNode && this.props.engine.state.selectedNode.id == this.props.node.id?' selected':''),
 				style:{top:this.props.node.y+this.props.engine.state.offsetY,left: this.props.node.x+this.props.engine.state.offsetX}},
 				this.props.children
 			)

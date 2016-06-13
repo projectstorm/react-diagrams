@@ -27,6 +27,13 @@
 		user-select: none;
 		cursor: move;
 		pointer-events: all;
+		
+		&.selected{
+			.basic-node{
+				border-color:rgb(0,192,255);
+				box-shadow: 0 0 10px rgba(0,192,255,0.5);
+			}
+		}
 	}
 	
 	@keyframes dash {
@@ -62,12 +69,12 @@
 	.basic-node{
 		background-color: rgb(30,30,30);
 		border-radius: 5px;
-		box-shadow: 0 0 10px rgba(black,0.5);
 		font-family:Arial;
 		color: white;
-		border: solid 1px black;
+		border: solid 2px black;
 		overflow: hidden;
 		font-size: 11px;
+		box-shadow: 0 0 10px rgba(black,0.5);
 		
 		.title{
 /*			background-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));*/
@@ -107,13 +114,13 @@
 					align-self: center;
 				}
 				.name{
-					flex-grow:1;
 					padding: 0 5px;
 				}
 			}
 			.out-port{
-				
+				justify-content: flex-end;
 				.name{
+					justify-content: flex-end;
 					text-align: right;
 				}
 			}
