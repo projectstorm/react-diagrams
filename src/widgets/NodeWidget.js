@@ -23,7 +23,10 @@ module.exports = React.createClass({
 				}.bind(this),
 				'data-nodeid': this.props.node.id,
 				className:'node'+(this.props.engine.state.selectedNode && this.props.engine.state.selectedNode.id == this.props.node.id?' selected':''),
-				style:{top:this.props.node.y+this.props.engine.state.offsetY,left: this.props.node.x+this.props.engine.state.offsetX}},
+				style:{
+					top: this.props.node.y,
+					left: this.props.node.x,
+				}},
 				this.props.children
 			)
 		);

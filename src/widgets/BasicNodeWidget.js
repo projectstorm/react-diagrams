@@ -25,10 +25,13 @@ module.exports = React.createClass({
 	},
 	
 	render: function () {
+		
+		var props = {
+			
+		};
+		
 		return (
-			React.DOM.div(_.merge({className:'basic-node', style: {background:this.props.color }},_.omitBy(this.props,function(value,key){
-				return ['inPorts','outPorts'].indexOf(key) !== -1;
-			})),
+			React.DOM.div({className:'basic-node', style: {background:this.props.color }},
 				React.DOM.div({className:'title'},
 					React.DOM.div({className:'name'},this.props.name),
 					React.DOM.div({className:'fa fa-close',onClick: this.props.removeAction})

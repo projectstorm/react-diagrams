@@ -30,8 +30,8 @@ module.exports = React.createClass({
 			return this.props.link.points[index];
 		}
 		return {
-			x: this.props.link.points[index].x+this.props.engine.state.offsetX,
-			y: this.props.link.points[index].y+this.props.engine.state.offsetY
+			x: this.props.link.points[index].x,
+			y: this.props.link.points[index].y
 		};
 	},
 	

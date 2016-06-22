@@ -18,9 +18,21 @@ module.exports = React.createClass({
 			}
 		};
 	},
+	componentDidMount: function(){
+		this.props.engine.registerListener(function(event){
+			if(event.type === 'repaint'){
+				this.forceUpdate();
+			}
+		}.bind(this));
+	},
 	render: function () {
 		return (
-			React.DOM.svg({},
+			React.DOM.svg(
+				{style:{
+					transform: 'scale('+this.props.engine.state.zoom/100.0+') translate('+this.props.engine.state.offsetX+'px,'+this.props.engine.state.offsetY+'px)',
+					width: '100%',
+					height: '100%'
+				}},
 				_.map(this.props.engine.state.links,function(link){
 					if(link.points.length < 2){
 						return;

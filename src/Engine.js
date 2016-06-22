@@ -23,7 +23,11 @@ module.exports = function(){
 		},
 		
 		getRelativeMousePoint: function(event){
-			return this.getRelativePoint((event.pageX/(this.state.zoom/100.0))-this.state.offsetX,(event.pageY/(this.state.zoom/100.0))-this.state.offsetY);
+			var point = this.getRelativePoint(event.pageX,event.pageY);
+			return {
+				x:(point.x/(this.state.zoom/100.0))-this.state.offsetX,
+				y:(point.y/(this.state.zoom/100.0))-this.state.offsetY
+			};
 		},
 		
 		getRelativePoint: function(x,y){
@@ -49,11 +53,13 @@ module.exports = function(){
 		
 		setZoom: function(zoom){
 			this.state.zoom = zoom;
+			this.update();
 		},
 		
 		setOffset: function(x,y){
 			this.state.offsetX = x;
 			this.state.offsetY = y;
+			this.update();
 		},
 		
 		loadModel: function(model){
@@ -118,8 +124,8 @@ module.exports = function(){
 			var rel = this.getRelativePoint(sourceRect.left,sourceRect.top);
 
 			return {
-				x: (sourceElement.offsetWidth/2) + rel.x,
-				y: (sourceElement.offsetHeight/2) + rel.y
+				x: ((sourceElement.offsetWidth/2)+rel.x/(this.state.zoom/100.0)) -(this.state.offsetX),
+				y: ((sourceElement.offsetHeight/2)+rel.y/(this.state.zoom/100.0)) -(this.state.offsetY)
 			};
 		},
 		
@@ -136,35 +142,32 @@ module.exports = function(){
 		},
 
 		addLink: function(link){
-			var DefaultLink  = {
+			var FinalLink = _.defaults(link,{
 				id: this.UID(),
 				source: null,
 				sourcePort: null,
 				target: null, 
 				targetPort: null,
 				points: []
-			};
-			var FinalLink = _.merge(DefaultLink,link);
+			});
 		
 			this.state.links[FinalLink.id] = FinalLink;
 			return FinalLink;
 		},
 
 		addNode: function(node,event){
-
 			var point = {x:0,y:0};
 			if(event !== undefined){
 				point = this.getRelativeMousePoint(event);
 			}
 			
-			var DefaultNode  = {
+			var FinalNode = _.defaults(node,{
 				id: this.UID(),
 				type: 'default',
 				data:{},
 				x: point.x,
 				y: point.y
-			};
-			var FinalNode = _.merge(DefaultNode,node);
+			});
 			this.state.nodes[FinalNode.id] = FinalNode;
 		},
 		
@@ -184,14 +187,12 @@ module.exports = function(){
 		},
 
 		registerNodeFactory: function(factory){
-			var DefaultFactory = {
+			var FinalModel = _.defaults(factory,{
 				type: "factoty",
 				generateModel: function(model){
 					return null;
 				}
-			};
-
-			var FinalModel = _.merge(DefaultFactory,factory);
+			});
 			this.state.factories[FinalModel.type] = FinalModel;
 		}
 	};
