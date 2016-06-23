@@ -47,8 +47,7 @@ module.exports = React.createClass({
 							portName = port;
 							displayName = port;
 						}
-						
-						return React.DOM.div({className:'in-port',key: port.name},
+						return React.DOM.div({className:'in-port',key: portName},
 							React.createElement(Port,{name:portName,node:this.props.node}),
 							React.DOM.div({className:'name'},displayName)
 						);
@@ -63,7 +62,7 @@ module.exports = React.createClass({
 							portName = port;
 							displayName = port;
 						}
-						return React.DOM.div({className:'out-port',key: port.name},
+						return React.DOM.div({className:'out-port',key: portName},
 							React.DOM.div({className:'name'},displayName),
 							React.createElement(Port,{name:portName,node:this.props.node})
 						);

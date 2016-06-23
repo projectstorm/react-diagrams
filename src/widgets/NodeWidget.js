@@ -15,6 +15,14 @@ module.exports = React.createClass({
 			engine: null
 		};
 	},
+	
+	shouldComponentUpdate: function(){
+		if(this.props.engine.state.updatingNodes !== null){
+			return this.props.engine.state.updatingNodes[this.props.node.id] !== undefined;
+		}
+		return true;
+	},
+	
 	render: function () {
 		return (
 			React.DOM.div({

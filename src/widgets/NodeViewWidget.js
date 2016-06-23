@@ -16,14 +16,6 @@ module.exports = React.createClass({
 		};
 	},
 	
-	componentDidMount: function(){
-		this.props.engine.registerListener(function(event){
-			if(event.type === 'repaint'){
-				this.forceUpdate();
-			}
-		}.bind(this));
-	},
-	
 	render: function () {
 		return (
 			React.DOM.div({

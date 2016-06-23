@@ -96,6 +96,13 @@ module.exports = React.createClass({
 		);
 	},
 	
+	shouldComponentUpdate: function(){
+		if(this.props.engine.state.updatingLinks !== null){
+			return this.props.engine.state.updatingLinks[this.props.link.id] !== undefined;
+		}
+		return true;
+	},
+	
 	render: function () {
 		var points = this.props.link.points;
 		points.forEach(function(point){

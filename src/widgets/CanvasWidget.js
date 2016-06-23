@@ -19,6 +19,7 @@ module.exports = React.createClass({
 			listenerID: null
 		};
 	},
+	
 	getDefaultProps: function () {
 		return {
 			engine: null
@@ -73,6 +74,7 @@ module.exports = React.createClass({
 					className:'storm-flow-canvas',
 					onWheel: function(event){
 						this.props.engine.setZoom(this.props.engine.state.zoom+(event.deltaY/60));
+						this.props.engine.repaintNodes([]);
 					}.bind(this),
 					onMouseMove: function(event){
 						
@@ -80,7 +82,7 @@ module.exports = React.createClass({
 						if(this.state.selectedModel){
 							this.state.selectedModel.x = this.state.initialObjectX+((event.pageX-this.state.initialX)/(this.props.engine.state.zoom/100));
 							this.state.selectedModel.y = this.state.initialObjectY+((event.pageY-this.state.initialY)/(this.props.engine.state.zoom/100));
-							this.setState(this.state);
+							this.props.engine.repaintNodes([this.state.selectedModel]);
 						}
 						
 						//move the point
@@ -90,6 +92,7 @@ module.exports = React.createClass({
 							point.x = rel.x;
 							point.y = rel.y;
 							this.props.engine.update();
+							this.props.engine.repaintLinks([this.state.selectedLink]);
 						}
 						
 						//move the canvas
@@ -98,6 +101,7 @@ module.exports = React.createClass({
 								this.state.initialObjectX+((event.pageX-this.state.initialX)/(this.props.engine.state.zoom/100)),
 								this.state.initialObjectY+((event.pageY-this.state.initialY)/(this.props.engine.state.zoom/100))
 							);
+							this.props.engine.repaintNodes([]);
 						}
 						
 					}.bind(this),

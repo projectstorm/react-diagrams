@@ -15,7 +15,34 @@ module.exports = function(){
 			zoom: 100,
 			listeners:{},
 			selectedLink: null,
-			selectedNode: null
+			selectedNode: null,
+			
+			updatingNodes: null,
+			updatingLinks: null
+		},
+		
+		repaintLinks: function(links){
+			this.state.updatingNodes = {};
+			this.state.updatingLinks = {};
+			links.forEach(function(link){
+				this.state.updatingLinks[link.id] = link;
+			}.bind(this));
+			this.update();
+		},
+		
+		repaintNodes: function(nodes){
+			this.state.updatingNodes = {};
+			this.state.updatingLinks = {};
+			
+			//store the updating node is's
+			nodes.forEach(function(node){
+				this.state.updatingNodes[node.id] = node;
+				this.getNodeLinks(node).forEach(function(link){
+					this.state.updatingLinks[link.id] = link;
+				}.bind(this));
+			}.bind(this));
+			
+			this.update();
 		},
 		
 		update: function(){
@@ -75,8 +102,13 @@ module.exports = function(){
 			}.bind(this));
 		},
 		
+		
+		
 		updateNode: function(node){
+			
 			//find the links and move those as well
+			this.getNodeLinks(node);
+			this.fireEvent({type:'repaint'});
 		},
 
 		UID: function(){
@@ -132,12 +164,16 @@ module.exports = function(){
 		setSelectedNode: function(node){
 			this.state.selectedLink = null;
 			this.state.selectedNode = node;
+			this.state.updatingNodes =  null;
+			this.state.updatingLinks = null;
 			this.update();
 		},
 		
 		setSelectedLink: function(link){
 			this.state.selectedNode = null;
 			this.state.selectedLink = link;
+			this.state.updatingNodes = null;
+			this.state.updatingLinks = null;
 			this.update();
 		},
 

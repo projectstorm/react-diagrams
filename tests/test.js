@@ -7,80 +7,91 @@ require("./test.scss");
 window.onload = function () {
 	
 	var Engine = require("../src/Engine")();
-
-	var Model = {
-		links:[
+	
+	var model = {links:[],nodes: []};
+	
+	function generateSet(model,offsetX,offsetY){
+		
+		var node1 = Engine.UID();
+		var node2 = Engine.UID();
+		var node3 = Engine.UID();
+		var node4 = Engine.UID();
+		var node5 = Engine.UID();
+		
+		
+		model.links = model.links.concat([
 			{
-				id: 1,
-				source: 1,
+				id: Engine.UID(),
+				source: node1,
 				sourcePort: 'out',
-				target: 2,
+				target: node2,
 				targetPort: 'in',
 			},
 			{
-				id: 2,
-				source: 1,
+				id: Engine.UID(),
+				source: node1,
 				sourcePort: 'out',
-				target: 3,
+				target: node3,
 				targetPort: 'in'
 			},
 			{
-				id: 3,
-				source: 2,
+				id: Engine.UID(),
+				source: node2,
 				sourcePort: 'out',
-				target: 4,
+				target: node4,
 				targetPort: 'in'
 			},
 			{
-				id: 4,
-				source: 4,
+				id: Engine.UID(),
+				source: node4,
 				sourcePort: 'out',
-				target: 5,
+				target: node5,
 				targetPort: 'in2'
 			},
 			{
-				id: 5,
-				source: 2,
+				id: Engine.UID(),
+				source: node2,
 				sourcePort: 'out',
-				target: 5,
+				target: node5,
 				targetPort: 'in'
 			}
-		],
-		nodes:[
-			{
-				id:1,
+		]);
+		
+		model.nodes = model.nodes.concat([
+		{
+				id:node1,
 				type: 'action',
 				data: {
 					name: "Create User",
 					outVariables: ['out']
 				},
-				x:50,
-				y:50
+				x:50 + offsetX,
+				y:50 + offsetY
 			},
 			{
-				id:2,
+				id:node2,
 				type: 'action',
 				data: {
 					name: "Add Card to User",
 					inVariables: ['in','in 2'],
 					outVariables: ['out']
 				},
-				x:250,
-				y:50
+				x:250 +offsetX,
+				y:50 + offsetY
 			},
 			{
-				id:3,
+				id:node3,
 				type: 'action',
 				data: {
 					color: 'rgb(0,192,255)',
 					name: "Remove User",
 					inVariables: ['in']
 				},
-				x:250,
-				y:150
+				x:250 + offsetX,
+				y:150 + offsetY
 			},
 			{
-				id:4,
+				id:node4,
 				type: 'action',
 				data: {
 					color: 'rgb(0,192,255)',
@@ -88,22 +99,43 @@ window.onload = function () {
 					inVariables: ['in'],
 					outVariables: ['out']
 				},
-				x:500,
-				y:150
+				x:500 + offsetX,
+				y:150 + offsetY
 			},
 			{
-				id:5,
+				id:node5,
 				type: 'action',
 				data: {
 					color: 'rgb(192,255,0)',
 					name: "Complex Action 2",
 					inVariables: ['in','in2','in3']
 				},
-				x:800,
-				y:100
+				x:800 + offsetX,
+				y:100 + offsetY
 			},
-		]
-	};
+		]);
+	}
+	
+	generateSet(model,0,0);
+	generateSet(model,800,0);
+	generateSet(model,1600,0);
+	generateSet(model,2400,0);
+	
+	generateSet(model,0,300);
+	generateSet(model,800,300);
+	generateSet(model,1600,300);
+	generateSet(model,2400,300);
+	
+	generateSet(model,0,600);
+	generateSet(model,800,600);
+	generateSet(model,1600,600);
+	generateSet(model,2400,600);
+	
+	generateSet(model,0,900);
+	generateSet(model,800,900);
+	generateSet(model,1600,900);
+	generateSet(model,2400,900);
+
 
 	Engine.registerNodeFactory({
 		type:'action',
@@ -121,7 +153,7 @@ window.onload = function () {
 		}
 	});
 
-	Engine.loadModel(Model);
+	Engine.loadModel(model);
 
 
 	ReactDOM.render(React.createElement(Canvas,{engine: Engine}), document.body);
