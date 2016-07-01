@@ -30,12 +30,13 @@ module.exports = React.createClass({
 					this.props.engine.setSelectedNode(this.props.node);
 				}.bind(this),
 				'data-nodeid': this.props.node.id,
-				className:'node'+(this.props.engine.state.selectedNode && this.props.engine.state.selectedNode.id == this.props.node.id?' selected':''),
+				className:'node'+(this.props.engine.state.selectedNode 
+					&& this.props.engine.state.selectedNode.id == this.props.node.id?' selected':''),
 				style:{
 					top: this.props.node.y,
 					left: this.props.node.x,
 				}},
-				this.props.children
+				React.cloneElement(this.props.children,{engine: this.props.engine})
 			)
 		);
 	}

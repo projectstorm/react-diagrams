@@ -11,8 +11,7 @@ module.exports = React.createClass({
 	},
 	getDefaultProps: function () {
 		return {
-			name: "unknown",
-			element: null
+			name: "unknown"
 		};
 	},
 	render: function () {

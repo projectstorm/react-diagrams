@@ -102,8 +102,6 @@ module.exports = function(){
 			}.bind(this));
 		},
 		
-		
-		
 		updateNode: function(node){
 			
 			//find the links and move those as well
@@ -119,16 +117,34 @@ module.exports = function(){
 		},
 		
 		getNodePortElement: function(node,port){
-			return this.state.canvas.querySelector('.port[data-name="'+port+'"][data-nodeid="'+node.id+'"]')
+			return this.state.canvas.querySelector('.port[data-name="'+port+'"][data-nodeid="'+node.id+'"]');
 		},
 
-		getAllConnectedPorts: function(node){
-			return this.state.canvas.querySelectorAll('.port[data-nodeid="'+node.id+'"]');
+		getNodePortLinks: function(node,port){
+			var nodeID = this.getNodeID(node);
+			var links = this.getNodeLinks(nodeID);
+			return links.filter(function(link){
+				if(link.target === nodeID && link.targetPort === port){
+					return true;
+				}
+				else if(link.source === nodeID && link.sourcePort === port){
+					return true;
+				}
+				return false;
+			});
+		},
+		
+		getNodeID: function(node){
+			if(typeof node === 'object'){
+				node = node.id;
+			}
+			return node;
 		},
 		
 		getNodeLinks: function(node){
+			var nodeID = this.getNodeID(node);
 			return _.values(_.filter(this.state.links,function(link,index){
-				return link.source == node.id || link.target == node.id;
+				return link.source == nodeID || link.target == nodeID;
 			}));
 		},
 		
@@ -224,8 +240,11 @@ module.exports = function(){
 
 		registerNodeFactory: function(factory){
 			var FinalModel = _.defaults(factory,{
-				type: "factoty",
-				generateModel: function(model){
+				type: "factory",
+				isPortAllowed: function(sourceNode,sourceport,targetNode,targetPort){
+					return true;
+				},
+				generateModel: function(model,engine){
 					return null;
 				}
 			});

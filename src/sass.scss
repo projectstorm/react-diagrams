@@ -32,7 +32,7 @@
 		pointer-events: all;
 		
 		&.selected{
-			.basic-node{
+			>* {
 				border-color:rgb(0,192,255);
 				box-shadow: 0 0 10px rgba(0,192,255,0.5);
 			}

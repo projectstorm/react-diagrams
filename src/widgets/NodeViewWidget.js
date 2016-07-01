@@ -29,7 +29,7 @@ module.exports = React.createClass({
 				_.map(this.props.engine.state.nodes,function(node){
 					return(
 						React.createElement(Node,{key:node.id,node: node,engine: this.props.engine},
-							this.props.engine.getNodeFactory(node.type).generateModel(node))
+							this.props.engine.getNodeFactory(node.type).generateModel(node,this.props.engine))
 					);
 				}.bind(this))
 			)

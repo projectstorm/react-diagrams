@@ -112,6 +112,12 @@ module.exports = React.createClass({
 		}.bind(this));
 		var paths = [];
 		if(points.length === 2){
+			
+			var margin = 50;
+			if(Math.abs(this.getPoint(0).x-this.getPoint(1).x) < 50){
+				margin = 5;
+			}
+			
 			paths.push(this.generateLink({
 				id: '0',
 				onMouseDown: function(event){
@@ -123,8 +129,8 @@ module.exports = React.createClass({
 				}.bind(this),
 				d:
 					 " M"+this.getPoint(0).x+" "+this.getPoint(0).y
-					+" C"+(this.getPoint(0).x+50)+" "+this.getPoint(0).y
-					+" " +(this.getPoint(1).x-50)+" "+this.getPoint(1).y
+					+" C"+(this.getPoint(0).x+margin)+" "+this.getPoint(0).y
+					+" " +(this.getPoint(1).x-margin)+" "+this.getPoint(1).y
 					+" " +this.getPoint(1).x+" "+this.getPoint(1).y
 			}));
 			if(this.props.link.target === null){

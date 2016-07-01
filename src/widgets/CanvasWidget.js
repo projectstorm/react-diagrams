@@ -91,7 +91,6 @@ module.exports = React.createClass({
 							var rel = this.props.engine.getRelativeMousePoint(event);
 							point.x = rel.x;
 							point.y = rel.y;
-							this.props.engine.update();
 							this.props.engine.repaintLinks([this.state.selectedLink]);
 						}
 						
@@ -138,6 +137,7 @@ module.exports = React.createClass({
 									linkid: element.getAttribute('data-linkid')
 								};
 							}
+							
 							this.setState({
 								selectedPointID: element.dataset.id,
 								selectedLink: this.props.engine.getLink(element.dataset.linkid)
@@ -167,8 +167,6 @@ module.exports = React.createClass({
 							initialObjectX: this.props.engine.state.offsetX,
 							initialObjectY: this.props.engine.state.offsetY
 						});
-						
-						
 					}.bind(this),
 					onMouseUp: function(event){
 						if(this.state.selectedPointID){
@@ -179,9 +177,24 @@ module.exports = React.createClass({
 								//cant add link to self
 								if(this.state.selectedLink.source === nodeElement.dataset.nodeid){
 									this.props.engine.removeLink(this.state.selectedLink);
-								}else{
-									this.state.selectedLink.target = nodeElement.dataset.nodeid;
-									this.state.selectedLink.targetPort = element.dataset.name;
+								}
+								
+								//do the merge
+								else{
+									
+									var nodeObject = this.props.engine.getNode(nodeElement.dataset.nodeid);
+									var NodeFactory = this.props.engine.getNodeFactory(nodeObject.type);
+
+									//check if the port is allowed by using the factory
+									if(NodeFactory.isPortAllowed(
+										this.props.engine.getNode(this.state.selectedLink.source),
+										this.state.selectedLink.sourcePort,
+										nodeObject,element.dataset.name)){
+										
+										this.state.selectedLink.target = nodeElement.dataset.nodeid;
+										this.state.selectedLink.targetPort = element.dataset.name;
+										this.props.engine.repaintNodes([nodeObject]);
+									}
 								}
 							}
 						}
