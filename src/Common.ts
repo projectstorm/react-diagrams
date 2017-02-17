@@ -78,8 +78,8 @@ export class PointModel extends BaseModel{
 export class LinkModel extends BaseModel{
 	
 	linkType: string;
-	sourcePort: PortModel;
-	targetPort: PortModel;
+	sourcePort: PortModel|null;
+	targetPort: PortModel|null;
 	points: PointModel[];
 	extras: {};
 	
@@ -91,6 +91,17 @@ export class LinkModel extends BaseModel{
 			new PointModel(this,{x: 0,y: 0}),
 		];
 		this.extras = {};
+		this.sourcePort = null;
+		this.targetPort = null;
+	}
+	
+	isLastPoint(point: PointModel){
+		var index = this.getPointIndex(point);
+		return index === this.points.length-1;
+	}
+	
+	getPointIndex(point: PointModel){
+		return this.points.indexOf(point);
 	}
 	
 	getPointModel(id: string): PointModel|null{
@@ -102,12 +113,24 @@ export class LinkModel extends BaseModel{
 		return null;
 	}
 	
+	getFirstPoint(): PointModel{
+		return this.points[0];
+	}
+	
+	getLastPoint(): PointModel{
+		return this.points[this.points.length-1];
+	}
+	
 	setSourcePort(port: PortModel){
 		this.sourcePort = port;
 	}
 	
 	setTargetPort(port: PortModel){
 		this.targetPort = port;
+	}
+	
+	getPoints(): PointModel[]{
+		return this.points;
 	}
 	
 	setPoints(points: PointModel[]){

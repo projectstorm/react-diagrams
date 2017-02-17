@@ -20616,8 +20616,17 @@ var LinkModel = (function (_super) {
             new PointModel(_this, { x: 0, y: 0 }),
         ];
         _this.extras = {};
+        _this.sourcePort = null;
+        _this.targetPort = null;
         return _this;
     }
+    LinkModel.prototype.isLastPoint = function (point) {
+        var index = this.getPointIndex(point);
+        return index === this.points.length - 1;
+    };
+    LinkModel.prototype.getPointIndex = function (point) {
+        return this.points.indexOf(point);
+    };
     LinkModel.prototype.getPointModel = function (id) {
         for (var i = 0; i < this.points.length; i++) {
             if (this.points[i].id === id) {
@@ -20626,11 +20635,20 @@ var LinkModel = (function (_super) {
         }
         return null;
     };
+    LinkModel.prototype.getFirstPoint = function () {
+        return this.points[0];
+    };
+    LinkModel.prototype.getLastPoint = function () {
+        return this.points[this.points.length - 1];
+    };
     LinkModel.prototype.setSourcePort = function (port) {
         this.sourcePort = port;
     };
     LinkModel.prototype.setTargetPort = function (port) {
         this.targetPort = port;
+    };
+    LinkModel.prototype.getPoints = function () {
+        return this.points;
     };
     LinkModel.prototype.setPoints = function (points) {
         this.points = points;
@@ -40135,10 +40153,16 @@ var MoveCanvasAction = (function (_super) {
 }(BaseAction));
 var MoveItemsAction = (function (_super) {
     __extends(MoveItemsAction, _super);
-    function MoveItemsAction(mouseX, mouseY, selectionModels) {
+    function MoveItemsAction(mouseX, mouseY, diagramModel) {
         var _this = _super.call(this, mouseX, mouseY) || this;
         _this.moved = false;
-        _this.selectionModels = selectionModels;
+        _this.selectionModels = diagramModel.getSelectedItems().map(function (item) {
+            return {
+                model: item,
+                initialX: item.x,
+                initialY: item.y
+            };
+        });
         return _this;
     }
     return MoveItemsAction;
@@ -40152,12 +40176,6 @@ var DiagramWidget = (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             action: null,
-            stateModel: null,
-            mouseDownModel: null,
-            selectedPointID: null,
-            mouseDown: false,
-            selectionModels: [],
-            listenerID: null,
             renderedNodes: false,
             windowListener: null
         };
@@ -40298,6 +40316,19 @@ var DiagramWidget = (function (_super) {
                         });
                     }
                 }
+                else if (model.model instanceof Common_1.PortModel) {
+                    var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+                    var link = new Common_1.LinkModel();
+                    link.setSourcePort(model.model);
+                    link.getFirstPoint().updateLocation(relative);
+                    link.getLastPoint().updateLocation(relative);
+                    diagramModel.clearSelection();
+                    link.getLastPoint().setSelected(true);
+                    diagramModel.addLink(link);
+                    _this.setState({
+                        action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
+                    });
+                }
                 else {
                     if (!event.shiftKey && !model.model.isSelected()) {
                         console.log("clear selection");
@@ -40305,60 +40336,24 @@ var DiagramWidget = (function (_super) {
                     }
                     model.model.setSelected(true);
                     _this.setState({
-                        action: new MoveItemsAction(event.pageX, event.pageY, diagramModel.getSelectedItems().map(function (item) {
-                            return {
-                                model: item,
-                                initialX: item.x,
-                                initialY: item.y
-                            };
-                        }))
+                        action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
                     });
                 }
             },
             onMouseUp: function (event) {
-                //						var element = this.getMouseElement(event);
-                //						if (element.model && element.model.isSelected()){
-                //							
-                //						}
-                //						
-                //						
-                //						var standardClick = (new Date()).getTime()-this.state.action.ms < 10;
-                //						if (standardClick && !event.shiftKey){
-                //							var element = this.getMouseElement(event);
-                //							if (element){
-                //								diagramModel.clearSelection();
-                //								element.model.setSelected(true);
-                //							}
-                //						}
-                //						if(this.state.selectedPointID){
-                //							
-                //							var target = event.target as HTMLElement;
-                //							var element = target.closest('.port[data-name]') as HTMLElement;
-                //							if(element){
-                //								var nodeElement = target.closest('.node[data-nodeid]');
-                //								
-                //								//cant add link to self
-                //								if (this.state.selectedLink.source === nodeElement.getAttribute('data-nodeid')){
-                //									diagramModel.removeLink(this.state.selectedLink);
-                //								}
-                //								
-                //								//do the merge
-                //								else{
-                //									
-                //									var nodeObject = diagramModel.getNode(nodeElement.getAttribute('data-nodeid'));
-                //
-                //									//check if the port is allowed by using the factory
-                ////									if(NodeFactory.isPortAllowed(
-                ////										this.props.engine.getNode(this.state.selectedLink.source),
-                ////										this.state.selectedLink.sourcePort,
-                ////										nodeObject,element.dataset.name)){
-                //										
-                //									this.state.selectedLink.target = nodeElement.getAttribute('data-nodeid');
-                //										this.state.selectedLink.targetPort = element.getAttribute('data-name');
-                //										nodeObject.setSelected(true);
-                //									}
-                //								}
-                //							}
+                //are we going to connect a link to something?
+                if (_this.state.action instanceof MoveItemsAction) {
+                    var element = _this.getMouseElement(event);
+                    _.forEach(_this.state.action.selectionModels, function (model) {
+                        //only care about points connecting to things
+                        if (!(model.model instanceof Common_1.PointModel)) {
+                            return;
+                        }
+                        if (element.model instanceof Common_1.PortModel) {
+                            model.model.getLink().setTargetPort(element.model);
+                        }
+                    });
+                }
                 _this.setState({ action: null });
             }
         }, this.state.renderedNodes ?

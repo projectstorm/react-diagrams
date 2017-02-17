@@ -2,7 +2,7 @@ import * as React from "react";
 import {DiagramEngine} from "../DiagramEngine";
 import {DiagramModel} from "../DiagramModel";
 import * as _ from "lodash";
-import {PointModel, NodeModel, BaseModel} from "../Common";
+import {PointModel, NodeModel, BaseModel, LinkModel,PortModel} from "../Common";
 import {LinkLayerWidget} from "./LinkLayerWidget";
 import {NodeLayerWidget} from "./NodeLayerWidget";
 
@@ -49,10 +49,16 @@ class MoveCanvasAction extends BaseAction{
 class MoveItemsAction extends BaseAction{
 	selectionModels: SelectionModel[];
 	moved:boolean;
-	constructor(mouseX: number,mouseY: number,selectionModels: SelectionModel[]){
+	constructor(mouseX: number, mouseY: number, diagramModel: DiagramModel){
 		super(mouseX, mouseY);
 		this.moved = false;
-		this.selectionModels = selectionModels;
+		this.selectionModels = diagramModel.getSelectedItems().map((item: PointModel | NodeModel) => {
+			return {
+				model: item,
+				initialX: item.x,
+				initialY: item.y,
+			}
+		});
 	}
 }
 
@@ -61,13 +67,9 @@ interface DiagramProps {
 }
 
 interface DiagramState {
-	selectedPointID: any,
 	action: BaseAction| null;
-	mouseDownModel: BaseModel|null,
-	listenerID: any,
 	renderedNodes: boolean,
 	windowListener: any,
-	mouseDown: false
 }
 
 /**
@@ -79,12 +81,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		super(props);
 		this.state = {
 			action: null,
-			stateModel: null,
-			mouseDownModel: null,
-			selectedPointID: null,
-			mouseDown: false,
-			selectionModels:[],
-			listenerID: null,
 			renderedNodes: false,
 			windowListener: null
 		}
@@ -254,7 +250,26 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 									action: new MoveCanvasAction(relative.x, relative.y, diagramModel)
 								});
 							}
-						} else{
+						}
+						//its a port element, we want to drag a link
+						else if (model.model instanceof PortModel){
+							var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+							var link = new LinkModel();
+							link.setSourcePort(model.model);
+							
+							link.getFirstPoint().updateLocation(relative)
+							link.getLastPoint().updateLocation(relative);
+							
+							diagramModel.clearSelection();
+							link.getLastPoint().setSelected(true);
+							diagramModel.addLink(link);
+							
+							this.setState({
+								action: new MoveItemsAction(event.pageX, event.pageY,diagramModel)
+							});
+						}
+						//
+						else{
 							if (!event.shiftKey && !model.model.isSelected()){
 								console.log("clear selection");
 								diagramModel.clearSelection();
@@ -262,65 +277,31 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							model.model.setSelected(true);
 							
 							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY,diagramModel.getSelectedItems().map((item: PointModel | NodeModel) => {
-									return {
-										model: item,
-										initialX: item.x,
-										initialY: item.y,
-									}
-								}))
+								action: new MoveItemsAction(event.pageX, event.pageY,diagramModel)
 							});
 						}
 					},
 					onMouseUp: (event) => {
 						
-//						var element = this.getMouseElement(event);
-//						if (element.model && element.model.isSelected()){
-//							
-//						}
-//						
-//						
-//						var standardClick = (new Date()).getTime()-this.state.action.ms < 10;
-//						if (standardClick && !event.shiftKey){
-//							var element = this.getMouseElement(event);
-//							if (element){
-//								diagramModel.clearSelection();
-//								element.model.setSelected(true);
-//							}
-//						}
-						
-						
-//						if(this.state.selectedPointID){
-//							
-//							var target = event.target as HTMLElement;
-//							var element = target.closest('.port[data-name]') as HTMLElement;
-//							if(element){
-//								var nodeElement = target.closest('.node[data-nodeid]');
-//								
-//								//cant add link to self
-//								if (this.state.selectedLink.source === nodeElement.getAttribute('data-nodeid')){
-//									diagramModel.removeLink(this.state.selectedLink);
-//								}
-//								
-//								//do the merge
-//								else{
-//									
-//									var nodeObject = diagramModel.getNode(nodeElement.getAttribute('data-nodeid'));
-//
-//									//check if the port is allowed by using the factory
-////									if(NodeFactory.isPortAllowed(
-////										this.props.engine.getNode(this.state.selectedLink.source),
-////										this.state.selectedLink.sourcePort,
-////										nodeObject,element.dataset.name)){
-//										
-//									this.state.selectedLink.target = nodeElement.getAttribute('data-nodeid');
-//										this.state.selectedLink.targetPort = element.getAttribute('data-name');
-//										nodeObject.setSelected(true);
-//									}
-//								}
-//							}
-							this.setState({action: null});
+						//are we going to connect a link to something?
+						if (this.state.action instanceof MoveItemsAction){
+							var element = this.getMouseElement(event);
+							
+							_.forEach(this.state.action.selectionModels,(model) => {
+								
+								//only care about points connecting to things
+								if (!(model.model instanceof PointModel)){
+									return;
+								}
+								
+								if (element.model instanceof PortModel){
+									model.model.getLink().setTargetPort(element.model);
+								}
+							});
 						}
+						
+						this.setState({action: null});
+					}
 				},
 				this.state.renderedNodes?
 					React.createElement(LinkLayerWidget, {diagramEngine: diagramEngine}):null,
