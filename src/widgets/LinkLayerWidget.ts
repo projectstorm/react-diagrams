@@ -6,7 +6,8 @@ import {LinkWidget} from "./LinkWidget";
 import * as _ from "lodash";
 
 interface LinkLayerProps {
-	diagramEngine: DiagramEngine
+	diagramEngine: DiagramEngine,
+	pointAdded: (point: PointModel,event) => any
 }
 
 interface LinkLayerState {
@@ -80,8 +81,8 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 						React.createElement(LinkWidget, {
 							key: link.getID(), 
 							link: link,
-							diagramEngine: this.props.diagramEngine
-						},generatedLink)
+							diagramEngine: this.props.diagramEngine,
+						}, React.cloneElement(generatedLink,{pointAdded: this.props.pointAdded}))
 					);
 				})
 			)

@@ -39,8 +39,11 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 		this.zoom = 100;
 	}
 	
-	clearSelection(){
+	clearSelection(ignore: BaseModel|null = null){
 		_.forEach(this.getSelectedItems(),(element) => {
+			if (ignore && ignore.getID() === element.getID()){
+				return;
+			}
 			element.setSelected(false); //TODO dont fire the listener
 		});
 	}

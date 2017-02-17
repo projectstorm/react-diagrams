@@ -26799,8 +26799,12 @@ var DiagramModel = (function (_super) {
         _this.zoom = 100;
         return _this;
     }
-    DiagramModel.prototype.clearSelection = function () {
+    DiagramModel.prototype.clearSelection = function (ignore) {
+        if (ignore === void 0) { ignore = null; }
         _.forEach(this.getSelectedItems(), function (element) {
+            if (ignore && ignore.getID() === element.getID()) {
+                return;
+            }
             element.setSelected(false); //TODO dont fire the listener
         });
     };
@@ -27105,7 +27109,9 @@ var DefaultLinkWidget = (function (_super) {
                 onMouseDown: function (event) {
                     var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
                     point.setSelected(true);
+                    _this.forceUpdate();
                     _this.props.link.addPoint(point, 1);
+                    _this.props.pointAdded(point, event);
                 },
                 d: " M" + pointLeft.x + " " + pointLeft.y
                     + " C" + (pointLeft.x + margin) + " " + pointLeft.y
@@ -27137,10 +27143,11 @@ var DefaultLinkWidget = (function (_super) {
                     'data-link': _this.props.link.id,
                     'data-point': index,
                     onMouseDown: function (event) {
-                        event.stopPropagation();
                         var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
                         point.setSelected(true);
+                        _this.forceUpdate();
                         _this.props.link.addPoint(point, index + 1);
+                        _this.props.pointAdded(point, event);
                     },
                     d: data
                 });
@@ -40220,6 +40227,14 @@ var DiagramWidget = (function (_super) {
                 element: element
             };
         }
+        //look for a link
+        element = target.closest('[data-linkid]');
+        if (element) {
+            return {
+                model: diagramModel.getLink(element.getAttribute('data-linkid')),
+                element: element
+            };
+        }
         //look for a node
         element = target.closest('.node[data-nodeid]');
         if (element) {
@@ -40350,20 +40365,30 @@ var DiagramWidget = (function (_super) {
                 //are we going to connect a link to something?
                 if (_this.state.action instanceof MoveItemsAction) {
                     var element = _this.getMouseElement(event);
-                    _.forEach(_this.state.action.selectionModels, function (model) {
-                        //only care about points connecting to things
-                        if (!(model.model instanceof Common_1.PointModel)) {
-                            return;
-                        }
-                        if (element.model instanceof Common_1.PortModel) {
-                            model.model.getLink().setTargetPort(element.model);
-                        }
-                    });
+                    if (element) {
+                        _.forEach(_this.state.action.selectionModels, function (model) {
+                            //only care about points connecting to things
+                            if (!(model.model instanceof Common_1.PointModel)) {
+                                return;
+                            }
+                            if (element.model instanceof Common_1.PortModel) {
+                                model.model.getLink().setTargetPort(element.model);
+                            }
+                        });
+                    }
                 }
                 _this.setState({ action: null });
             }
         }, this.state.renderedNodes ?
-            React.createElement(LinkLayerWidget_1.LinkLayerWidget, { diagramEngine: diagramEngine }) : null, React.createElement(NodeLayerWidget_1.NodeLayerWidget, { diagramEngine: diagramEngine }), this.state.action instanceof SelectingAction ?
+            React.createElement(LinkLayerWidget_1.LinkLayerWidget, {
+                diagramEngine: diagramEngine, pointAdded: function (point, event) {
+                    event.stopPropagation();
+                    diagramModel.clearSelection(point);
+                    _this.setState({
+                        action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
+                    });
+                }
+            }) : null, React.createElement(NodeLayerWidget_1.NodeLayerWidget, { diagramEngine: diagramEngine }), this.state.action instanceof SelectingAction ?
             React.DOM.div({
                 className: 'selector',
                 style: {
@@ -40453,7 +40478,7 @@ var LinkLayerWidget = (function (_super) {
                 key: link.getID(),
                 link: link,
                 diagramEngine: _this.props.diagramEngine
-            }, generatedLink));
+            }, React.cloneElement(generatedLink, { pointAdded: _this.props.pointAdded })));
         })));
     };
     return LinkLayerWidget;

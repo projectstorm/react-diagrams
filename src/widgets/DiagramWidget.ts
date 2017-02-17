@@ -123,12 +123,23 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				element: element
 			};
 		}
+		
+		
 
 		//look for a point
 		element = target.closest('.point[data-id]');
 		if(element){
 			return {
 				model: diagramModel.getLink(element.getAttribute('data-linkid')).getPointModel(element.getAttribute('data-id')),
+				element: element
+			};
+		}
+		
+		//look for a link
+		element = target.closest('[data-linkid]');
+		if(element){
+			return {
+				model: diagramModel.getLink(element.getAttribute('data-linkid')),
 				element: element
 			};
 		}
@@ -260,6 +271,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 								});
 							}
 						}
+						
 						//its a port element, we want to drag a link
 						else if (model.model instanceof PortModel){
 							var relative = diagramEngine.getRelativeMousePoint(event);
@@ -279,6 +291,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 						//
 						else{
+							
 							if (!event.shiftKey && !model.model.isSelected()){
 								console.log("clear selection");
 								diagramModel.clearSelection();
@@ -295,25 +308,33 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						//are we going to connect a link to something?
 						if (this.state.action instanceof MoveItemsAction){
 							var element = this.getMouseElement(event);
-							
-							_.forEach(this.state.action.selectionModels,(model) => {
-								
-								//only care about points connecting to things
-								if (!(model.model instanceof PointModel)){
-									return;
-								}
-								
-								if (element.model instanceof PortModel){
-									model.model.getLink().setTargetPort(element.model);
-								}
-							});
+							if(element){
+								_.forEach(this.state.action.selectionModels,(model) => {
+
+									//only care about points connecting to things
+									if (!(model.model instanceof PointModel)){
+										return;
+									}
+
+									if (element.model instanceof PortModel){
+										model.model.getLink().setTargetPort(element.model);
+									}
+								});
+							}
 						}
 						
 						this.setState({action: null});
 					}
 				},
 				this.state.renderedNodes?
-					React.createElement(LinkLayerWidget, {diagramEngine: diagramEngine}):null,
+					React.createElement(LinkLayerWidget, {
+						diagramEngine: diagramEngine, pointAdded: (point: PointModel,event) => {
+							event.stopPropagation();
+							diagramModel.clearSelection(point);
+							this.setState({
+								action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
+							});
+						}}):null,
 					React.createElement(NodeLayerWidget, {diagramEngine: diagramEngine}),
 					this.state.action instanceof SelectingAction?
 						React.DOM.div({

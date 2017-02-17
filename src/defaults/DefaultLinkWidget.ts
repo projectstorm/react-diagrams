@@ -9,6 +9,7 @@ interface DefaultLinkProps {
 	link: LinkModel;
 	smooth?: boolean;
 	diagramEngine: DiagramEngine;
+	pointAdded?: (point: PointModel,event) => any
 }
 
 interface DefaultLinkState {
@@ -123,7 +124,9 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				onMouseDown: (event) =>{
 					var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
 					point.setSelected(true);
+					this.forceUpdate();
 					this.props.link.addPoint(point,1);
+					this.props.pointAdded(point,event);
 				},
 				d:
 					 " M"+pointLeft.x+" "+pointLeft.y
@@ -158,10 +161,11 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					'data-link':this.props.link.id,
 					'data-point':index,
 					onMouseDown: (event) => {
-						event.stopPropagation();
 						var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
 						point.setSelected(true);
+						this.forceUpdate();
 						this.props.link.addPoint(point,index+1);
+						this.props.pointAdded(point,event);
 					},
 					d:data
 				});
