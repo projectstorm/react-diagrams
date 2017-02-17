@@ -1,24 +1,37 @@
-var webpack = require("webpack");
-var path = require("path");
 module.exports = {
-	watch: true,
-	entry: "./tests/test.js",
+	entry: './tests/test1/index.ts',
 	output: {
-		path: path.resolve(__dirname, "tests"),
-		filename: "bundle.js"
+		filename: 'bundle.js',
+		path: './tests/test1'
 	},
-	plugins: [
-		new webpack.optimize.DedupePlugin()
-	],
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.scss$/,
-				loaders: ["style", "css", "sass"]
-			}
+				use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+				}, {
+					loader: "css-loader" // translates CSS into CommonJS
+				}, {
+					loader: "sass-loader" // compiles Sass to CSS
+				}]
+			},
+			{
+				enforce: 'pre',
+				test: /\.js$/,
+				loader: "source-map-loader"
+			},
+			{
+				test: /\.tsx?$/,
+				loader: 'ts-loader?' + JSON.stringify({
+					transpileOnly: true
+				}),
+				exclude: /node_modules/,
+			},
 		]
 	},
-	devServer: {
-		contentBase: "./tests",
-	}
+	resolve: {
+		extensions: [".tsx", ".ts", ".js"]
+	},
+	devtool: 'source-map'
 };

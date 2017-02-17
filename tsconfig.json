@@ -1,0 +1,10 @@
+{
+	"name": "dylanvorster",
+	"compilerOptions": {
+		"jsx": "react",
+		"suppressExcessPropertyErrors": true,
+		"allowJs": true,
+		"outDir": "./lib",
+		"module": "commonjs"
+	}
+}
