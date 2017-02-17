@@ -40139,6 +40139,13 @@ var SelectingAction = (function (_super) {
         _this.mouseY2 = mouseY;
         return _this;
     }
+    SelectingAction.prototype.containsElement = function (x, y, diagramModel) {
+        var z = diagramModel.getZoomLevel() / 100.0;
+        return ((x + diagramModel.getOffsetX()) * z > this.mouseX &&
+            (x + diagramModel.getOffsetX()) * z < this.mouseX2 &&
+            (y + diagramModel.getOffsetY()) * z > this.mouseY &&
+            (y + diagramModel.getOffsetY()) * z < this.mouseY2);
+    };
     return SelectingAction;
 }(BaseAction));
 var MoveCanvasAction = (function (_super) {
@@ -40252,22 +40259,21 @@ var DiagramWidget = (function (_super) {
                 event.preventDefault();
                 event.stopPropagation();
                 diagramModel.setZoomLevel(diagramModel.getZoomLevel() + (event.deltaY / 60));
+                _this.forceUpdate();
             },
             onMouseMove: function (event) {
                 //select items so draw a bounding box
                 if (_this.state.action instanceof SelectingAction) {
                     var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
                     _.forEach(diagramModel.getNodes(), function (node) {
-                        if (node.x > _this.state.action.mouseX && node.x < relative.x &&
-                            node.y > _this.state.action.mouseY && node.y < relative.y) {
+                        if (_this.state.action.containsElement(node.x, node.y, diagramModel)) {
                             node.setSelected(true);
                         }
                     });
                     _.forEach(diagramModel.getLinks(), function (link) {
                         var allSelected = true;
                         _.forEach(link.points, function (point) {
-                            if (point.x > _this.state.action.mouseX && point.x < relative.x &&
-                                point.y > _this.state.action.mouseY && point.y < relative.y) {
+                            if (_this.state.action.containsElement(point.x, point.y, diagramModel)) {
                                 point.setSelected(true);
                             }
                             else {
@@ -40317,7 +40323,7 @@ var DiagramWidget = (function (_super) {
                     }
                 }
                 else if (model.model instanceof Common_1.PortModel) {
-                    var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+                    var relative = diagramEngine.getRelativeMousePoint(event);
                     var link = new Common_1.LinkModel();
                     link.setSourcePort(model.model);
                     link.getFirstPoint().updateLocation(relative);

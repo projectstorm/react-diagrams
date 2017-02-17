@@ -33,6 +33,16 @@ class SelectingAction extends BaseAction{
 		this.mouseX2 = mouseX;
 		this.mouseY2 = mouseY;
 	}
+	
+	containsElement(x: number, y: number, diagramModel: DiagramModel): boolean{
+		var z = diagramModel.getZoomLevel()/100.0;
+		return (
+			(x + diagramModel.getOffsetX())*z > this.mouseX	&& 
+			(x + diagramModel.getOffsetX())*z < this.mouseX2&& 
+			(y + diagramModel.getOffsetY())*z > this.mouseY	&& 
+			(y + diagramModel.getOffsetY())*z < this.mouseY2
+		)
+	}
 }
 
 class MoveCanvasAction extends BaseAction{
@@ -169,17 +179,17 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
                         event.preventDefault();
                         event.stopPropagation();
 						diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
+						this.forceUpdate();
 					},
 					onMouseMove: (event) => {
+						
 						
 						//select items so draw a bounding box
 						if (this.state.action instanceof SelectingAction){
 							var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
 							
-							
 							_.forEach(diagramModel.getNodes(),(node) => {
-								if (node.x > this.state.action.mouseX && node.x < relative.x && 
-									node.y > this.state.action.mouseY && node.y < relative.y){
+								if ((this.state.action as SelectingAction).containsElement(node.x, node.y, diagramModel)){
 									node.setSelected(true);
 								}
 							});
@@ -187,8 +197,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							_.forEach(diagramModel.getLinks(),(link) => {
 								var allSelected = true;
 								_.forEach(link.points,(point) => {
-									if (point.x > this.state.action.mouseX && point.x < relative.x && 
-										point.y > this.state.action.mouseY && point.y < relative.y){
+									if ((this.state.action as SelectingAction).containsElement(point.x, point.y, diagramModel)){
 										point.setSelected(true);
 									}else{
 										allSelected = false;
@@ -253,7 +262,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 						//its a port element, we want to drag a link
 						else if (model.model instanceof PortModel){
-							var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+							var relative = diagramEngine.getRelativeMousePoint(event);
 							var link = new LinkModel();
 							link.setSourcePort(model.model);
 							
