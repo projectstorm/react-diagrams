@@ -5,6 +5,13 @@
 	cursor: move;
 	overflow: hidden;
 	
+	.point{
+		fill: rgba(white,0.5);
+		&.selected{
+			fill: rgb(0,192,255);
+		}
+	}
+	
 	.selector{
 		position: absolute;
 		background-color: rgba(0,192,255,0.2);

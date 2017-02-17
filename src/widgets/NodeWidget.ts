@@ -1,9 +1,11 @@
 import * as React from "react";
 import {NodeModel} from "../Common";
+import {DiagramEngine} from "../DiagramEngine";
 
 interface NodeProps {
 	node:NodeModel;
 	children?: any;
+	diagramEngine: DiagramEngine
 }
 
 interface NodeState {
@@ -19,14 +21,14 @@ export class NodeWidget extends React.Component<NodeProps, NodeState> {
 		this.state = {
 		}
 	}
+	
+	shouldComponentUpdate(){
+		return this.props.diagramEngine.canEntityRepaint(this.props.node);
+	}
 
 	render() {
-		console.log(this.props.node);
 		return (
 			React.DOM.div({
-				onMouseDown: () => {
-					this.props.node.setSelected(true);
-				},
 				'data-nodeid': this.props.node.id,
 				className: 'node' + (this.props.node.isSelected()?' selected':''),
 				style:{

@@ -39,7 +39,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	generatePoint(pointIndex: number): JSX.Element{
 		return React.DOM.g({key:'point-'+this.props.link.points[pointIndex].id},
 			React.DOM.circle({
-				className:'point pointui',
+				className: 'point pointui' + (this.props.link.points[pointIndex].isSelected()?' selected':''),
 				cx:this.props.link.points[pointIndex].x,
 				cy:this.props.link.points[pointIndex].y,
 				r:5,
@@ -122,6 +122,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				id: 0,
 				onMouseDown: (event) =>{
 					var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
+					point.setSelected(true);
 					this.props.link.addPoint(point,1);
 				},
 				d:
@@ -130,7 +131,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					+" " +(pointRight.x-margin)+" "+pointRight.y
 					+" " +pointRight.x+" "+pointRight.y
 			}));
-			if(this.props.link.target === null){
+			if (this.props.link.targetPort === null){
 				paths.push(this.generatePoint(1));
 			}
 		}
@@ -157,7 +158,9 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					'data-link':this.props.link.id,
 					'data-point':index,
 					onMouseDown: (event) => {
+						event.stopPropagation();
 						var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
+						point.setSelected(true);
 						this.props.link.addPoint(point,index+1);
 					},
 					d:data
@@ -169,7 +172,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				paths.push(this.generatePoint(i));
 			}
 			
-			if(this.props.link.target === null){
+			if (this.props.link.targetPort === null){
 				paths.push(this.generatePoint(points.length-1));
 			}
 		}

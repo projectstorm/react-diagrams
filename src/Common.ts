@@ -1,10 +1,19 @@
 import {Toolkit} from "./Toolkit";
 import {BaseEnity, BaseListener} from "./BaseEntity";
 import * as _ from "lodash";
+
+export interface BaseModelListener extends BaseListener{
+	
+	selectionChanged?();
+	
+	entityRemoved?();
+}
+
 /**
  * @author Dylan Vorster
  */
-export class BaseModel extends BaseEnity<BaseListener>{
+export class BaseModel extends BaseEnity<BaseModelListener>{
+	
 	selected: boolean;
 	
 	constructor(){
@@ -23,10 +32,15 @@ export class BaseModel extends BaseEnity<BaseListener>{
 	
 	public setSelected(selected: boolean){
 		this.selected = selected;
+		this.itterateListeners((listener) => {
+			listener.selectionChanged();
+		});
 	}
 	
 	remove(){
-		
+		this.itterateListeners((listener) => {
+			listener.entityRemoved();
+		});
 	}
 }
 
@@ -64,10 +78,8 @@ export class PointModel extends BaseModel{
 export class LinkModel extends BaseModel{
 	
 	linkType: string;
-	source;
-	sourcePort;
-	target;
-	targetPort;
+	sourcePort: PortModel;
+	targetPort: PortModel;
 	points: PointModel[];
 	extras: {};
 	
@@ -90,6 +102,14 @@ export class LinkModel extends BaseModel{
 		return null;
 	}
 	
+	setSourcePort(port: PortModel){
+		this.sourcePort = port;
+	}
+	
+	setTargetPort(port: PortModel){
+		this.targetPort = port;
+	}
+	
 	setPoints(points: PointModel[]){
 		this.points = points;
 	}
@@ -104,12 +124,40 @@ export class LinkModel extends BaseModel{
 }
 
 export class PortModel extends BaseModel{
+	
 	name: string;
 	parentNode: NodeModel;
+	links: {[id: string]: LinkModel};
 	
 	constructor(name: string){
 		super();
 		this.name = name;
+		this.links = {};
+		this.parentNode = null;
+	}
+	
+	getName(): string{
+		return this.name;
+	}
+	
+	getParent(): NodeModel{
+		return this.parentNode;
+	}
+	
+	setParentNode(node: NodeModel){
+		this.parentNode = node;
+	}
+	
+	removeLink(link: LinkModel){
+		delete this.links[link.getID()];
+	}
+	
+	addLink(link: LinkModel){
+		this.links[link.getID()] = link;
+	}
+	
+	getLinks(): {[id: string]: LinkModel}{
+		return this.links;
 	}
 }
 
@@ -120,7 +168,7 @@ export class NodeModel extends BaseModel{
 	x: number;
 	y: number;
 	extras: {};
-	ports: PortModel[];
+	ports:  {[s: string]:PortModel};
 	
 	constructor(){
 		super();
@@ -129,24 +177,29 @@ export class NodeModel extends BaseModel{
 		this.x = 0;
 		this.y = 0;
 		this.extras = {};
-		this.ports = [];
+		this.ports = {};
 	}
 	
 	getPort(name: string): PortModel | null{
-		for (var i = 0; i < this.ports.length;i++){
-			if (this.ports[i].name === name){
-				return this.ports[i];
-			}
-		}
-		return null;
+		return this.ports[name];
 	}
 	
-	getPorts(): PortModel[]{
+	getPorts(): {[s: string]:PortModel}{
 		return this.ports;
 	}
 	
-	addPort(port: PortModel){
-		this.ports.push(port);
+	removePort(port: PortModel){
+		//clear the parent node reference
+		if(this.ports[port.name]){
+			this.ports[port.name].setParentNode(null);
+			delete this.ports[port.name];
+		}
+	}
+	
+	addPort(port: PortModel): PortModel{
+		port.setParentNode(this);
+		this.ports[port.name] = port;
+		return port;
 	}
 	
 	getType(): string{

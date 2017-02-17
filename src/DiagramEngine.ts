@@ -1,8 +1,9 @@
 import {NodeWidgetFactory, LinkWidgetFactory} from "./WidgetFactories";
-import {LinkModel, NodeModel} from "./Common";
+import {LinkModel, NodeModel, BaseModel, PortModel} from "./Common";
 import {BaseEnity, BaseListener} from "./BaseEntity";
 import {DiagramModel} from "./DiagramModel";
 import * as React from "react";
+import * as _ from "lodash";
 /**
  * @author Dylan Vorster
  */
@@ -22,6 +23,7 @@ export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 	linkFactories: {[s: string]:LinkWidgetFactory};
 	diagramModel: DiagramModel;
 	canvas: Element;
+	paintableWidgets: {};
 	
 	constructor(){
 		super();
@@ -29,6 +31,37 @@ export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 		this.nodeFactories = {};
 		this.linkFactories = {};
 		this.canvas = null;
+		this.paintableWidgets = null;
+	}
+	
+	clearRepaintEntities(){
+		this.paintableWidgets = {};
+	}
+	
+	enableRepaintEntities(entities: BaseModel[]){
+		this.paintableWidgets = {};
+		entities.forEach((entity) => {
+			
+			//if a node is requested to repaint, add all of its links
+			if (entity instanceof NodeModel){
+				_.forEach(entity.getPorts(),(port) => {
+					_.forEach(port.getLinks(),(link) => {
+						this.paintableWidgets[link.getID()] = true;
+					});
+				});
+			}
+			
+			this.paintableWidgets[entity.getID()] = true;
+		});
+	}
+	
+	canEntityRepaint(baseModel: BaseModel){
+		//no rules applied, allow repaint
+		if(this.paintableWidgets === null){
+			return true;
+		}
+		
+		return this.paintableWidgets[baseModel.getID()] !== undefined;
 	}
 	
 	setCanvas(canvas: Element| null){
@@ -110,16 +143,16 @@ export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 		return {x: x-canvasRect.left,y:y-canvasRect.top};
 	}
 	
-	getNodePortElement(node: NodeModel, portName:string): any{
-		var selector = this.canvas.querySelector('.port[data-name="'+portName+'"][data-nodeid="'+node.id+'"]');
+	getNodePortElement(port: PortModel): any{
+		var selector = this.canvas.querySelector('.port[data-name="' + port.getName() + '"][data-nodeid="' + port.getParent().getID()+'"]');
 		if(selector === null){
-			throw "Cannot find Node Port element with nodeID: ["+node.id+"] and name: ["+portName+"]";
+			throw "Cannot find Node Port element with nodeID: [" + port.getParent().getID()+"] and name: ["+port.getName()+"]";
 		}
 		return selector;
 	}
 	
-	getPortCenter(node: NodeModel,port:string){
-		var sourceElement = this.getNodePortElement(node,port);
+	getPortCenter(port: PortModel){
+		var sourceElement = this.getNodePortElement(port);
 		var sourceRect = sourceElement.getBoundingClientRect();
 
 		var rel = this.getRelativePoint(sourceRect.left,sourceRect.top);

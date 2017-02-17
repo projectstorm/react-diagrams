@@ -37,7 +37,7 @@ export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerSt
 				},
 				_.map(diagramModel.getNodes(),(node) => {
 					return(
-						React.createElement(NodeWidget,{key:node.id,node: node},
+						React.createElement(NodeWidget, {diagramEngine: this.props.diagramEngine,key:node.id,node: node},
 							this.props.diagramEngine.generateWidgetForNode(node))
 					);
 				})

@@ -2,6 +2,7 @@ import * as React from "react";
 import {DiagramModel} from "../DiagramModel";
 import {DiagramEngine} from "../DiagramEngine";
 import {PointModel} from "../Common";
+import {LinkWidget} from "./LinkWidget";
 import * as _ from "lodash";
 
 interface LinkLayerProps {
@@ -44,10 +45,10 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 				_.map(diagramModel.getLinks(),(link) => {
 					
 					//TODO just improve this vastly x_x
-					if(link.source !== null){
+					if (link.sourcePort !== null){
 						try{
 							//generate a point
-							link.points[0].updateLocation(this.props.diagramEngine.getPortCenter(diagramModel.getNode(link.source),link.sourcePort));
+							link.points[0].updateLocation(this.props.diagramEngine.getPortCenter(link.sourcePort));
 						}
 						//remove the link because its problematic (TODO implement this rather at an engine level)
 						catch(ex){
@@ -56,9 +57,9 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 							return;
 						}
 					}
-					if(link.target !== null){
+					if (link.targetPort !== null){
 						try{
-							_.last(link.points).updateLocation(this.props.diagramEngine.getPortCenter(diagramModel.getNode(link.target), link.targetPort));
+							_.last(link.points).updateLocation(this.props.diagramEngine.getPortCenter(link.targetPort));
 						}
 						//remove the link because its problematic (TODO implement this rather at an engine level)
 						catch(ex){
@@ -74,7 +75,14 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 						console.log("no link generated for type: " + link.getType());
 						return null;
                     }
-					return React.cloneElement(generatedLink,{key: link.id});
+					
+					return (
+						React.createElement(LinkWidget, {
+							key: link.getID(), 
+							link: link,
+							diagramEngine: this.props.diagramEngine
+						},generatedLink)
+					);
 				})
 			)
 		);

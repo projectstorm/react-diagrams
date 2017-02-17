@@ -2,7 +2,7 @@ import {Toolkit} from "./Toolkit";
 /**
  * @author Dylan Vorster
  */
-export interface BaseListener{
+export class BaseListener{
 	
 }
 
@@ -24,13 +24,13 @@ export class BaseEnity<T extends BaseListener>{
 		this.listeners = {};
 	}
 	
-	itterateListeners(cb: (t: T) => any){
+	public itterateListeners(cb: (t: T) => any){
 		for (var i in this.listeners){
 			cb(this.listeners[i]);
 		}
 	}
 	
-	removeListener(listener: string){
+	public removeListener(listener: string){
 		if (this.listeners[listener]){
 			delete this.listeners[listener];
 			return true;
@@ -38,7 +38,7 @@ export class BaseEnity<T extends BaseListener>{
 		return false;
 	}
 	
-	addListener(listener: T): string{
+	public addListener(listener: T): string{
 		var uid = Toolkit.UID();
 		this.listeners[uid] = listener;
 		return uid;

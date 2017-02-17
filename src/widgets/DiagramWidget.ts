@@ -1,7 +1,8 @@
 import * as React from "react";
 import {DiagramEngine} from "../DiagramEngine";
+import {DiagramModel} from "../DiagramModel";
 import * as _ from "lodash";
-import {LinkModel, PointModel, NodeModel, BaseModel} from "../Common";
+import {PointModel, NodeModel, BaseModel} from "../Common";
 import {LinkLayerWidget} from "./LinkLayerWidget";
 import {NodeLayerWidget} from "./NodeLayerWidget";
 
@@ -35,7 +36,14 @@ class SelectingAction extends BaseAction{
 }
 
 class MoveCanvasAction extends BaseAction{
+	initialOffsetX: number;
+	initialOffsetY: number;
 	
+	constructor(mouseX: number, mouseY: number, diagramModel: DiagramModel){
+		super(mouseX,mouseY);
+		this.initialOffsetX = diagramModel.getOffsetX();
+		this.initialOffsetY = diagramModel.getOffsetY();
+	}
 }
 
 class MoveItemsAction extends BaseAction{
@@ -131,10 +139,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		return null;
 	}
 	
-	componentWillMount(){
-//		this.props.engine.repaintNodes(false);
-	}
-	
 	componentDidMount(){
 		this.props.diagramEngine.setCanvas(this.refs['canvas'] as Element);
 		
@@ -158,13 +162,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	
 
 	render() {
-//		_.forEach(this.props.diagramEngine.getDiagramModel().getLinks(),(link) => {
-//			if(link.points.length === 0){
-//				link.points.push(this.props.diagramEngine.getPortCenter(this.props.diagramEngine.getDiagramModel().getNode(link.source),link.sourcePort));
-//				link.points.push(this.props.diagramEngine.getPortCenter(this.props.diagramEngine.getDiagramModel().getNode(link.target),link.targetPort));
-//			}
-//		});
-		
 		var diagramEngine = this.props.diagramEngine;
 		var diagramModel = diagramEngine.getDiagramModel();
 		
@@ -212,7 +209,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							this.setState({action: this.state.action});
 							return;
 						}
-						//translate the items
+						
+						//translate the items on the canvas
 						else if (this.state.action instanceof MoveItemsAction){
 							_.forEach(this.state.action.selectionModels,(model) => {
 								if (model.model instanceof NodeModel || model.model instanceof PointModel){
@@ -223,36 +221,14 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							this.forceUpdate();
 						}
 						
-//						if (this.state.mouseDown){
-//							_.forEach(this.state.selectionModels,(model) => {
-//								if (model.model instanceof NodeModel){
-//									model.model.x = model.initialX + ((event.pageX - this.state.initialX) / (diagramModel.getZoomLevel()/100));
-//									model.model.y = model.initialY + ((event.pageY - this.state.initialY) / (diagramModel.getZoomLevel()/100));
-//								}else if(model.model instanceof PointModel){
-//									
-//								}
-//							});
-//						}
-//						
-//						
-//						//move the point
-//						else if(this.state.selectedPointID){
-//							var point = _.find(this.state.selectedLink.points,{id:this.state.selectedPointID});
-//							var rel = diagramEngine.getRelativeMousePoint(event);
-//							point.x = rel.x;
-//							point.y = rel.y;
-////							this.props.engine.repaintLinks([this.state.selectedLink]);
-//						}
-//						
-//						//move the canvas
-//						else if(this.state.initialObjectX !== null){
-//							diagramModel.setOffset(
-//								this.state.initialObjectX + ((event.pageX - this.state.initialX) / (diagramModel.getZoomLevel()/100)),
-//								this.state.initialObjectY+((event.pageY-this.state.initialY)/(diagramModel.getZoomLevel()/100))
-//							);
-////							this.props.engine.repaintNodes([]);
-//						}
-						
+						//translate the actual canvas
+						else if (this.state.action instanceof MoveCanvasAction){
+							diagramModel.setOffset(
+								this.state.action.initialOffsetX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100)),
+								this.state.action.initialOffsetY+((event.pageY-this.state.action.mouseY)/(diagramModel.getZoomLevel()/100))
+							);
+							this.forceUpdate();
+						}
 					},
 					onMouseDown: (event) =>{
 						
@@ -275,15 +251,15 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 								var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
 								diagramModel.clearSelection();
 								this.setState({
-									action: new MoveCanvasAction(relative.x, relative.y)
+									action: new MoveCanvasAction(relative.x, relative.y, diagramModel)
 								});
 							}
 						} else{
-						
-							//are we additionally selecting things
-							if (event.shiftKey){
-								model.model.setSelected(true);
+							if (!event.shiftKey && !model.model.isSelected()){
+								console.log("clear selection");
+								diagramModel.clearSelection();
 							}
+							model.model.setSelected(true);
 							
 							this.setState({
 								action: new MoveItemsAction(event.pageX, event.pageY,diagramModel.getSelectedItems().map((item: PointModel | NodeModel) => {
@@ -297,15 +273,21 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 					},
 					onMouseUp: (event) => {
-//						console.log((0+event.timeStamp) - this.state.action.ms);
-						var standardClick = (new Date()).getTime()-this.state.action.ms < 10;
-						if (standardClick && !event.shiftKey){
-							var element = this.getMouseElement(event);
-							if (element){
-								diagramModel.clearSelection();
-								element.model.setSelected(true);
-							}
-						}
+						
+//						var element = this.getMouseElement(event);
+//						if (element.model && element.model.isSelected()){
+//							
+//						}
+//						
+//						
+//						var standardClick = (new Date()).getTime()-this.state.action.ms < 10;
+//						if (standardClick && !event.shiftKey){
+//							var element = this.getMouseElement(event);
+//							if (element){
+//								diagramModel.clearSelection();
+//								element.model.setSelected(true);
+//							}
+//						}
 						
 						
 //						if(this.state.selectedPointID){

@@ -127,6 +127,11 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 	}
 	
 	addLink(link: LinkModel): LinkModel{
+//		link.addListener({
+//			entityRemoved: () => {
+//				this.removeLink(link);
+//			}
+//		});
 		this.links[link.getID()] = link;
 		this.itterateListeners((listener) => {
 			listener.linksUpdated();
@@ -135,6 +140,11 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 	}
 	
 	addNode(node: NodeModel): NodeModel{
+//		node.addListener({
+//			entityRemoved: () => {
+//				this.removeNode(node);
+//			}
+//		});
 		this.nodes[node.getID()] = node;
 		this.itterateListeners((listener) => {
 			listener.nodesUpdated();

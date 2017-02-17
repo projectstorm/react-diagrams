@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 200);
+/******/ 	return __webpack_require__(__webpack_require__.s = 201);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -331,7 +331,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -1147,6 +1147,16 @@ module.exports = { debugTool: debugTool };
 "use strict";
 
 
+module.exports = __webpack_require__(21);
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -1185,16 +1195,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(20);
-
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1217,7 +1217,7 @@ var _prodInvariant = __webpack_require__(3),
 var CallbackQueue = __webpack_require__(60);
 var PooledClass = __webpack_require__(15);
 var ReactFeatureFlags = __webpack_require__(65);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var Transaction = __webpack_require__(31);
 
 var invariant = __webpack_require__(1);
@@ -1508,7 +1508,7 @@ var _assign = __webpack_require__(4);
 
 var PooledClass = __webpack_require__(15);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var warning = __webpack_require__(2);
 
 var didWarnForAddedNewProperty = false;
@@ -2488,424 +2488,6 @@ module.exports = reactProdInvariant;
 
 /***/ }),
 /* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var DOMNamespaces = __webpack_require__(36);
-var setInnerHTML = __webpack_require__(33);
-
-var createMicrosoftUnsafeLocalFunction = __webpack_require__(43);
-var setTextContent = __webpack_require__(78);
-
-var ELEMENT_NODE_TYPE = 1;
-var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
-
-/**
- * In IE (8-11) and Edge, appending nodes with no children is dramatically
- * faster than appending a full subtree, so we essentially queue up the
- * .appendChild calls here and apply them so each node is added to its parent
- * before any children are added.
- *
- * In other browsers, doing so is slower or neutral compared to the other order
- * (in Firefox, twice as slow) so we only do this inversion in IE.
- *
- * See https://github.com/spicyj/innerhtml-vs-createelement-vs-clonenode.
- */
-var enableLazy = typeof document !== 'undefined' && typeof document.documentMode === 'number' || typeof navigator !== 'undefined' && typeof navigator.userAgent === 'string' && /\bEdge\/\d/.test(navigator.userAgent);
-
-function insertTreeChildren(tree) {
-  if (!enableLazy) {
-    return;
-  }
-  var node = tree.node;
-  var children = tree.children;
-  if (children.length) {
-    for (var i = 0; i < children.length; i++) {
-      insertTreeBefore(node, children[i], null);
-    }
-  } else if (tree.html != null) {
-    setInnerHTML(node, tree.html);
-  } else if (tree.text != null) {
-    setTextContent(node, tree.text);
-  }
-}
-
-var insertTreeBefore = createMicrosoftUnsafeLocalFunction(function (parentNode, tree, referenceNode) {
-  // DocumentFragments aren't actually part of the DOM after insertion so
-  // appending children won't update the DOM. We need to ensure the fragment
-  // is properly populated first, breaking out of our lazy approach for just
-  // this level. Also, some <object> plugins (like Flash Player) will read
-  // <param> nodes immediately upon insertion into the DOM, so <object>
-  // must also be populated prior to insertion into the DOM.
-  if (tree.node.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE || tree.node.nodeType === ELEMENT_NODE_TYPE && tree.node.nodeName.toLowerCase() === 'object' && (tree.node.namespaceURI == null || tree.node.namespaceURI === DOMNamespaces.html)) {
-    insertTreeChildren(tree);
-    parentNode.insertBefore(tree.node, referenceNode);
-  } else {
-    parentNode.insertBefore(tree.node, referenceNode);
-    insertTreeChildren(tree);
-  }
-});
-
-function replaceChildWithTree(oldNode, newTree) {
-  oldNode.parentNode.replaceChild(newTree.node, oldNode);
-  insertTreeChildren(newTree);
-}
-
-function queueChild(parentTree, childTree) {
-  if (enableLazy) {
-    parentTree.children.push(childTree);
-  } else {
-    parentTree.node.appendChild(childTree.node);
-  }
-}
-
-function queueHTML(tree, html) {
-  if (enableLazy) {
-    tree.html = html;
-  } else {
-    setInnerHTML(tree.node, html);
-  }
-}
-
-function queueText(tree, text) {
-  if (enableLazy) {
-    tree.text = text;
-  } else {
-    setTextContent(tree.node, text);
-  }
-}
-
-function toString() {
-  return this.node.nodeName;
-}
-
-function DOMLazyTree(node) {
-  return {
-    node: node,
-    children: [],
-    html: null,
-    text: null,
-    toString: toString
-  };
-}
-
-DOMLazyTree.insertTreeBefore = insertTreeBefore;
-DOMLazyTree.replaceChildWithTree = replaceChildWithTree;
-DOMLazyTree.queueChild = queueChild;
-DOMLazyTree.queueHTML = queueHTML;
-DOMLazyTree.queueText = queueText;
-
-module.exports = DOMLazyTree;
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var ReactRef = __webpack_require__(149);
-var ReactInstrumentation = __webpack_require__(8);
-
-var warning = __webpack_require__(2);
-
-/**
- * Helper to call ReactRef.attachRefs with this composite component, split out
- * to avoid allocations in the transaction mount-ready queue.
- */
-function attachRefs() {
-  ReactRef.attachRefs(this, this._currentElement);
-}
-
-var ReactReconciler = {
-
-  /**
-   * Initializes the component, renders markup, and registers event listeners.
-   *
-   * @param {ReactComponent} internalInstance
-   * @param {ReactReconcileTransaction|ReactServerRenderingTransaction} transaction
-   * @param {?object} the containing host component instance
-   * @param {?object} info about the host container
-   * @return {?string} Rendered markup to be inserted into the DOM.
-   * @final
-   * @internal
-   */
-  mountComponent: function (internalInstance, transaction, hostParent, hostContainerInfo, context, parentDebugID // 0 in production and for roots
-  ) {
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeMountComponent(internalInstance._debugID, internalInstance._currentElement, parentDebugID);
-      }
-    }
-    var markup = internalInstance.mountComponent(transaction, hostParent, hostContainerInfo, context, parentDebugID);
-    if (internalInstance._currentElement && internalInstance._currentElement.ref != null) {
-      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onMountComponent(internalInstance._debugID);
-      }
-    }
-    return markup;
-  },
-
-  /**
-   * Returns a value that can be passed to
-   * ReactComponentEnvironment.replaceNodeWithMarkup.
-   */
-  getHostNode: function (internalInstance) {
-    return internalInstance.getHostNode();
-  },
-
-  /**
-   * Releases any resources allocated by `mountComponent`.
-   *
-   * @final
-   * @internal
-   */
-  unmountComponent: function (internalInstance, safely) {
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeUnmountComponent(internalInstance._debugID);
-      }
-    }
-    ReactRef.detachRefs(internalInstance, internalInstance._currentElement);
-    internalInstance.unmountComponent(safely);
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onUnmountComponent(internalInstance._debugID);
-      }
-    }
-  },
-
-  /**
-   * Update a component using a new element.
-   *
-   * @param {ReactComponent} internalInstance
-   * @param {ReactElement} nextElement
-   * @param {ReactReconcileTransaction} transaction
-   * @param {object} context
-   * @internal
-   */
-  receiveComponent: function (internalInstance, nextElement, transaction, context) {
-    var prevElement = internalInstance._currentElement;
-
-    if (nextElement === prevElement && context === internalInstance._context) {
-      // Since elements are immutable after the owner is rendered,
-      // we can do a cheap identity compare here to determine if this is a
-      // superfluous reconcile. It's possible for state to be mutable but such
-      // change should trigger an update of the owner which would recreate
-      // the element. We explicitly check for the existence of an owner since
-      // it's possible for an element created outside a composite to be
-      // deeply mutated and reused.
-
-      // TODO: Bailing out early is just a perf optimization right?
-      // TODO: Removing the return statement should affect correctness?
-      return;
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, nextElement);
-      }
-    }
-
-    var refsChanged = ReactRef.shouldUpdateRefs(prevElement, nextElement);
-
-    if (refsChanged) {
-      ReactRef.detachRefs(internalInstance, prevElement);
-    }
-
-    internalInstance.receiveComponent(nextElement, transaction, context);
-
-    if (refsChanged && internalInstance._currentElement && internalInstance._currentElement.ref != null) {
-      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
-      }
-    }
-  },
-
-  /**
-   * Flush any dirty changes in a component.
-   *
-   * @param {ReactComponent} internalInstance
-   * @param {ReactReconcileTransaction} transaction
-   * @internal
-   */
-  performUpdateIfNecessary: function (internalInstance, transaction, updateBatchNumber) {
-    if (internalInstance._updateBatchNumber !== updateBatchNumber) {
-      // The component's enqueued batch number should always be the current
-      // batch or the following one.
-      process.env.NODE_ENV !== 'production' ? warning(internalInstance._updateBatchNumber == null || internalInstance._updateBatchNumber === updateBatchNumber + 1, 'performUpdateIfNecessary: Unexpected batch number (current %s, ' + 'pending %s)', updateBatchNumber, internalInstance._updateBatchNumber) : void 0;
-      return;
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, internalInstance._currentElement);
-      }
-    }
-    internalInstance.performUpdateIfNecessary(transaction);
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
-      }
-    }
-  }
-
-};
-
-module.exports = ReactReconciler;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var _assign = __webpack_require__(4);
-
-var ReactChildren = __webpack_require__(180);
-var ReactComponent = __webpack_require__(50);
-var ReactPureComponent = __webpack_require__(184);
-var ReactClass = __webpack_require__(181);
-var ReactDOMFactories = __webpack_require__(182);
-var ReactElement = __webpack_require__(16);
-var ReactPropTypes = __webpack_require__(183);
-var ReactVersion = __webpack_require__(185);
-
-var onlyChild = __webpack_require__(187);
-var warning = __webpack_require__(2);
-
-var createElement = ReactElement.createElement;
-var createFactory = ReactElement.createFactory;
-var cloneElement = ReactElement.cloneElement;
-
-if (process.env.NODE_ENV !== 'production') {
-  var ReactElementValidator = __webpack_require__(81);
-  createElement = ReactElementValidator.createElement;
-  createFactory = ReactElementValidator.createFactory;
-  cloneElement = ReactElementValidator.cloneElement;
-}
-
-var __spread = _assign;
-
-if (process.env.NODE_ENV !== 'production') {
-  var warned = false;
-  __spread = function () {
-    process.env.NODE_ENV !== 'production' ? warning(warned, 'React.__spread is deprecated and should not be used. Use ' + 'Object.assign directly or another helper function with similar ' + 'semantics. You may be seeing this warning due to your compiler. ' + 'See https://fb.me/react-spread-deprecation for more details.') : void 0;
-    warned = true;
-    return _assign.apply(null, arguments);
-  };
-}
-
-var React = {
-
-  // Modern
-
-  Children: {
-    map: ReactChildren.map,
-    forEach: ReactChildren.forEach,
-    count: ReactChildren.count,
-    toArray: ReactChildren.toArray,
-    only: onlyChild
-  },
-
-  Component: ReactComponent,
-  PureComponent: ReactPureComponent,
-
-  createElement: createElement,
-  cloneElement: cloneElement,
-  isValidElement: ReactElement.isValidElement,
-
-  // Classic
-
-  PropTypes: ReactPropTypes,
-  createClass: ReactClass.createClass,
-  createFactory: createFactory,
-  createMixin: function (mixin) {
-    // Currently a noop. Will be used to validate and trace mixins.
-    return mixin;
-  },
-
-  // This looks DOM specific but these are actually isomorphic helpers
-  // since they are just generating DOM strings.
-  DOM: ReactDOMFactories,
-
-  version: ReactVersion,
-
-  // Deprecated hook for JSX spread, don't use this for anything.
-  __spread: __spread
-};
-
-module.exports = React;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var emptyObject = {};
-
-if (process.env.NODE_ENV !== 'production') {
-  Object.freeze(emptyObject);
-}
-
-module.exports = emptyObject;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -19997,6 +19579,424 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(190), __webpack_require__(191)(module)))
 
 /***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2015-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var DOMNamespaces = __webpack_require__(36);
+var setInnerHTML = __webpack_require__(33);
+
+var createMicrosoftUnsafeLocalFunction = __webpack_require__(43);
+var setTextContent = __webpack_require__(78);
+
+var ELEMENT_NODE_TYPE = 1;
+var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
+
+/**
+ * In IE (8-11) and Edge, appending nodes with no children is dramatically
+ * faster than appending a full subtree, so we essentially queue up the
+ * .appendChild calls here and apply them so each node is added to its parent
+ * before any children are added.
+ *
+ * In other browsers, doing so is slower or neutral compared to the other order
+ * (in Firefox, twice as slow) so we only do this inversion in IE.
+ *
+ * See https://github.com/spicyj/innerhtml-vs-createelement-vs-clonenode.
+ */
+var enableLazy = typeof document !== 'undefined' && typeof document.documentMode === 'number' || typeof navigator !== 'undefined' && typeof navigator.userAgent === 'string' && /\bEdge\/\d/.test(navigator.userAgent);
+
+function insertTreeChildren(tree) {
+  if (!enableLazy) {
+    return;
+  }
+  var node = tree.node;
+  var children = tree.children;
+  if (children.length) {
+    for (var i = 0; i < children.length; i++) {
+      insertTreeBefore(node, children[i], null);
+    }
+  } else if (tree.html != null) {
+    setInnerHTML(node, tree.html);
+  } else if (tree.text != null) {
+    setTextContent(node, tree.text);
+  }
+}
+
+var insertTreeBefore = createMicrosoftUnsafeLocalFunction(function (parentNode, tree, referenceNode) {
+  // DocumentFragments aren't actually part of the DOM after insertion so
+  // appending children won't update the DOM. We need to ensure the fragment
+  // is properly populated first, breaking out of our lazy approach for just
+  // this level. Also, some <object> plugins (like Flash Player) will read
+  // <param> nodes immediately upon insertion into the DOM, so <object>
+  // must also be populated prior to insertion into the DOM.
+  if (tree.node.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE || tree.node.nodeType === ELEMENT_NODE_TYPE && tree.node.nodeName.toLowerCase() === 'object' && (tree.node.namespaceURI == null || tree.node.namespaceURI === DOMNamespaces.html)) {
+    insertTreeChildren(tree);
+    parentNode.insertBefore(tree.node, referenceNode);
+  } else {
+    parentNode.insertBefore(tree.node, referenceNode);
+    insertTreeChildren(tree);
+  }
+});
+
+function replaceChildWithTree(oldNode, newTree) {
+  oldNode.parentNode.replaceChild(newTree.node, oldNode);
+  insertTreeChildren(newTree);
+}
+
+function queueChild(parentTree, childTree) {
+  if (enableLazy) {
+    parentTree.children.push(childTree);
+  } else {
+    parentTree.node.appendChild(childTree.node);
+  }
+}
+
+function queueHTML(tree, html) {
+  if (enableLazy) {
+    tree.html = html;
+  } else {
+    setInnerHTML(tree.node, html);
+  }
+}
+
+function queueText(tree, text) {
+  if (enableLazy) {
+    tree.text = text;
+  } else {
+    setTextContent(tree.node, text);
+  }
+}
+
+function toString() {
+  return this.node.nodeName;
+}
+
+function DOMLazyTree(node) {
+  return {
+    node: node,
+    children: [],
+    html: null,
+    text: null,
+    toString: toString
+  };
+}
+
+DOMLazyTree.insertTreeBefore = insertTreeBefore;
+DOMLazyTree.replaceChildWithTree = replaceChildWithTree;
+DOMLazyTree.queueChild = queueChild;
+DOMLazyTree.queueHTML = queueHTML;
+DOMLazyTree.queueText = queueText;
+
+module.exports = DOMLazyTree;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var ReactRef = __webpack_require__(149);
+var ReactInstrumentation = __webpack_require__(8);
+
+var warning = __webpack_require__(2);
+
+/**
+ * Helper to call ReactRef.attachRefs with this composite component, split out
+ * to avoid allocations in the transaction mount-ready queue.
+ */
+function attachRefs() {
+  ReactRef.attachRefs(this, this._currentElement);
+}
+
+var ReactReconciler = {
+
+  /**
+   * Initializes the component, renders markup, and registers event listeners.
+   *
+   * @param {ReactComponent} internalInstance
+   * @param {ReactReconcileTransaction|ReactServerRenderingTransaction} transaction
+   * @param {?object} the containing host component instance
+   * @param {?object} info about the host container
+   * @return {?string} Rendered markup to be inserted into the DOM.
+   * @final
+   * @internal
+   */
+  mountComponent: function (internalInstance, transaction, hostParent, hostContainerInfo, context, parentDebugID // 0 in production and for roots
+  ) {
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeMountComponent(internalInstance._debugID, internalInstance._currentElement, parentDebugID);
+      }
+    }
+    var markup = internalInstance.mountComponent(transaction, hostParent, hostContainerInfo, context, parentDebugID);
+    if (internalInstance._currentElement && internalInstance._currentElement.ref != null) {
+      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onMountComponent(internalInstance._debugID);
+      }
+    }
+    return markup;
+  },
+
+  /**
+   * Returns a value that can be passed to
+   * ReactComponentEnvironment.replaceNodeWithMarkup.
+   */
+  getHostNode: function (internalInstance) {
+    return internalInstance.getHostNode();
+  },
+
+  /**
+   * Releases any resources allocated by `mountComponent`.
+   *
+   * @final
+   * @internal
+   */
+  unmountComponent: function (internalInstance, safely) {
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeUnmountComponent(internalInstance._debugID);
+      }
+    }
+    ReactRef.detachRefs(internalInstance, internalInstance._currentElement);
+    internalInstance.unmountComponent(safely);
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onUnmountComponent(internalInstance._debugID);
+      }
+    }
+  },
+
+  /**
+   * Update a component using a new element.
+   *
+   * @param {ReactComponent} internalInstance
+   * @param {ReactElement} nextElement
+   * @param {ReactReconcileTransaction} transaction
+   * @param {object} context
+   * @internal
+   */
+  receiveComponent: function (internalInstance, nextElement, transaction, context) {
+    var prevElement = internalInstance._currentElement;
+
+    if (nextElement === prevElement && context === internalInstance._context) {
+      // Since elements are immutable after the owner is rendered,
+      // we can do a cheap identity compare here to determine if this is a
+      // superfluous reconcile. It's possible for state to be mutable but such
+      // change should trigger an update of the owner which would recreate
+      // the element. We explicitly check for the existence of an owner since
+      // it's possible for an element created outside a composite to be
+      // deeply mutated and reused.
+
+      // TODO: Bailing out early is just a perf optimization right?
+      // TODO: Removing the return statement should affect correctness?
+      return;
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, nextElement);
+      }
+    }
+
+    var refsChanged = ReactRef.shouldUpdateRefs(prevElement, nextElement);
+
+    if (refsChanged) {
+      ReactRef.detachRefs(internalInstance, prevElement);
+    }
+
+    internalInstance.receiveComponent(nextElement, transaction, context);
+
+    if (refsChanged && internalInstance._currentElement && internalInstance._currentElement.ref != null) {
+      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
+      }
+    }
+  },
+
+  /**
+   * Flush any dirty changes in a component.
+   *
+   * @param {ReactComponent} internalInstance
+   * @param {ReactReconcileTransaction} transaction
+   * @internal
+   */
+  performUpdateIfNecessary: function (internalInstance, transaction, updateBatchNumber) {
+    if (internalInstance._updateBatchNumber !== updateBatchNumber) {
+      // The component's enqueued batch number should always be the current
+      // batch or the following one.
+      process.env.NODE_ENV !== 'production' ? warning(internalInstance._updateBatchNumber == null || internalInstance._updateBatchNumber === updateBatchNumber + 1, 'performUpdateIfNecessary: Unexpected batch number (current %s, ' + 'pending %s)', updateBatchNumber, internalInstance._updateBatchNumber) : void 0;
+      return;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, internalInstance._currentElement);
+      }
+    }
+    internalInstance.performUpdateIfNecessary(transaction);
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
+      }
+    }
+  }
+
+};
+
+module.exports = ReactReconciler;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var _assign = __webpack_require__(4);
+
+var ReactChildren = __webpack_require__(180);
+var ReactComponent = __webpack_require__(50);
+var ReactPureComponent = __webpack_require__(184);
+var ReactClass = __webpack_require__(181);
+var ReactDOMFactories = __webpack_require__(182);
+var ReactElement = __webpack_require__(16);
+var ReactPropTypes = __webpack_require__(183);
+var ReactVersion = __webpack_require__(185);
+
+var onlyChild = __webpack_require__(187);
+var warning = __webpack_require__(2);
+
+var createElement = ReactElement.createElement;
+var createFactory = ReactElement.createFactory;
+var cloneElement = ReactElement.cloneElement;
+
+if (process.env.NODE_ENV !== 'production') {
+  var ReactElementValidator = __webpack_require__(81);
+  createElement = ReactElementValidator.createElement;
+  createFactory = ReactElementValidator.createFactory;
+  cloneElement = ReactElementValidator.cloneElement;
+}
+
+var __spread = _assign;
+
+if (process.env.NODE_ENV !== 'production') {
+  var warned = false;
+  __spread = function () {
+    process.env.NODE_ENV !== 'production' ? warning(warned, 'React.__spread is deprecated and should not be used. Use ' + 'Object.assign directly or another helper function with similar ' + 'semantics. You may be seeing this warning due to your compiler. ' + 'See https://fb.me/react-spread-deprecation for more details.') : void 0;
+    warned = true;
+    return _assign.apply(null, arguments);
+  };
+}
+
+var React = {
+
+  // Modern
+
+  Children: {
+    map: ReactChildren.map,
+    forEach: ReactChildren.forEach,
+    count: ReactChildren.count,
+    toArray: ReactChildren.toArray,
+    only: onlyChild
+  },
+
+  Component: ReactComponent,
+  PureComponent: ReactPureComponent,
+
+  createElement: createElement,
+  cloneElement: cloneElement,
+  isValidElement: ReactElement.isValidElement,
+
+  // Classic
+
+  PropTypes: ReactPropTypes,
+  createClass: ReactClass.createClass,
+  createFactory: createFactory,
+  createMixin: function (mixin) {
+    // Currently a noop. Will be used to validate and trace mixins.
+    return mixin;
+  },
+
+  // This looks DOM specific but these are actually isomorphic helpers
+  // since they are just generating DOM strings.
+  DOM: ReactDOMFactories,
+
+  version: ReactVersion,
+
+  // Deprecated hook for JSX spread, don't use this for anything.
+  __spread: __spread
+};
+
+module.exports = React;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var emptyObject = {};
+
+if (process.env.NODE_ENV !== 'production') {
+  Object.freeze(emptyObject);
+}
+
+module.exports = emptyObject;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20569,8 +20569,14 @@ var BaseModel = (function (_super) {
     };
     BaseModel.prototype.setSelected = function (selected) {
         this.selected = selected;
+        this.itterateListeners(function (listener) {
+            listener.selectionChanged();
+        });
     };
     BaseModel.prototype.remove = function () {
+        this.itterateListeners(function (listener) {
+            listener.entityRemoved();
+        });
     };
     return BaseModel;
 }(BaseEntity_1.BaseEnity));
@@ -20620,6 +20626,12 @@ var LinkModel = (function (_super) {
         }
         return null;
     };
+    LinkModel.prototype.setSourcePort = function (port) {
+        this.sourcePort = port;
+    };
+    LinkModel.prototype.setTargetPort = function (port) {
+        this.targetPort = port;
+    };
     LinkModel.prototype.setPoints = function (points) {
         this.points = points;
     };
@@ -20638,8 +20650,28 @@ var PortModel = (function (_super) {
     function PortModel(name) {
         var _this = _super.call(this) || this;
         _this.name = name;
+        _this.links = {};
+        _this.parentNode = null;
         return _this;
     }
+    PortModel.prototype.getName = function () {
+        return this.name;
+    };
+    PortModel.prototype.getParent = function () {
+        return this.parentNode;
+    };
+    PortModel.prototype.setParentNode = function (node) {
+        this.parentNode = node;
+    };
+    PortModel.prototype.removeLink = function (link) {
+        delete this.links[link.getID()];
+    };
+    PortModel.prototype.addLink = function (link) {
+        this.links[link.getID()] = link;
+    };
+    PortModel.prototype.getLinks = function () {
+        return this.links;
+    };
     return PortModel;
 }(BaseModel));
 exports.PortModel = PortModel;
@@ -20652,22 +20684,26 @@ var NodeModel = (function (_super) {
         _this.x = 0;
         _this.y = 0;
         _this.extras = {};
-        _this.ports = [];
+        _this.ports = {};
         return _this;
     }
     NodeModel.prototype.getPort = function (name) {
-        for (var i = 0; i < this.ports.length; i++) {
-            if (this.ports[i].name === name) {
-                return this.ports[i];
-            }
-        }
-        return null;
+        return this.ports[name];
     };
     NodeModel.prototype.getPorts = function () {
         return this.ports;
     };
+    NodeModel.prototype.removePort = function (port) {
+        //clear the parent node reference
+        if (this.ports[port.name]) {
+            this.ports[port.name].setParentNode(null);
+            delete this.ports[port.name];
+        }
+    };
     NodeModel.prototype.addPort = function (port) {
-        this.ports.push(port);
+        port.setParentNode(this);
+        this.ports[port.name] = port;
+        return port;
     };
     NodeModel.prototype.getType = function () {
         return this.nodeType;
@@ -21900,7 +21936,7 @@ module.exports = shallowEqual;
 
 
 
-var DOMLazyTree = __webpack_require__(18);
+var DOMLazyTree = __webpack_require__(19);
 var Danger = __webpack_require__(112);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactInstrumentation = __webpack_require__(8);
@@ -22454,7 +22490,7 @@ module.exports = KeyEscapeUtils;
 
 var _prodInvariant = __webpack_require__(3);
 
-var React = __webpack_require__(20);
+var React = __webpack_require__(21);
 var ReactPropTypesSecret = __webpack_require__(70);
 
 var invariant = __webpack_require__(1);
@@ -23254,7 +23290,7 @@ module.exports = shouldUpdateReactComponent;
 
 var _assign = __webpack_require__(4);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var warning = __webpack_require__(2);
 
 var validateDOMNesting = emptyFunction;
@@ -23645,7 +23681,7 @@ var _prodInvariant = __webpack_require__(17);
 var ReactNoopUpdateQueue = __webpack_require__(51);
 
 var canDefineProperty = __webpack_require__(53);
-var emptyObject = __webpack_require__(21);
+var emptyObject = __webpack_require__(22);
 var invariant = __webpack_require__(1);
 var warning = __webpack_require__(2);
 
@@ -23965,6 +24001,15 @@ module.exports = getIteratorFn;
 "use strict";
 
 var Toolkit_1 = __webpack_require__(84);
+/**
+ * @author Dylan Vorster
+ */
+var BaseListener = (function () {
+    function BaseListener() {
+    }
+    return BaseListener;
+}());
+exports.BaseListener = BaseListener;
 var BaseEnity = (function () {
     function BaseEnity() {
         this.listeners = {};
@@ -24023,7 +24068,7 @@ exports.BaseEnity = BaseEnity;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -25194,9 +25239,9 @@ module.exports = ReactInputSelection;
 
 var _prodInvariant = __webpack_require__(3);
 
-var DOMLazyTree = __webpack_require__(18);
+var DOMLazyTree = __webpack_require__(19);
 var DOMProperty = __webpack_require__(14);
-var React = __webpack_require__(20);
+var React = __webpack_require__(21);
 var ReactBrowserEventEmitter = __webpack_require__(29);
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactDOMComponentTree = __webpack_require__(5);
@@ -25206,11 +25251,11 @@ var ReactFeatureFlags = __webpack_require__(65);
 var ReactInstanceMap = __webpack_require__(25);
 var ReactInstrumentation = __webpack_require__(8);
 var ReactMarkupChecksum = __webpack_require__(144);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var ReactUpdateQueue = __webpack_require__(42);
 var ReactUpdates = __webpack_require__(11);
 
-var emptyObject = __webpack_require__(21);
+var emptyObject = __webpack_require__(22);
 var instantiateReactComponent = __webpack_require__(76);
 var invariant = __webpack_require__(1);
 var setInnerHTML = __webpack_require__(33);
@@ -25739,7 +25784,7 @@ module.exports = ReactMount;
 
 var _prodInvariant = __webpack_require__(3);
 
-var React = __webpack_require__(20);
+var React = __webpack_require__(21);
 
 var invariant = __webpack_require__(1);
 
@@ -26721,7 +26766,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Common_1 = __webpack_require__(27);
 var BaseEntity_1 = __webpack_require__(55);
-var _ = __webpack_require__(22);
+var _ = __webpack_require__(18);
 /**
  *
  */
@@ -26811,6 +26856,11 @@ var DiagramModel = (function (_super) {
         return this.links[link];
     };
     DiagramModel.prototype.addLink = function (link) {
+        //		link.addListener({
+        //			entityRemoved: () => {
+        //				this.removeLink(link);
+        //			}
+        //		});
         this.links[link.getID()] = link;
         this.itterateListeners(function (listener) {
             listener.linksUpdated();
@@ -26818,6 +26868,11 @@ var DiagramModel = (function (_super) {
         return link;
     };
     DiagramModel.prototype.addNode = function (node) {
+        //		node.addListener({
+        //			entityRemoved: () => {
+        //				this.removeNode(node);
+        //			}
+        //		});
         this.nodes[node.getID()] = node;
         this.itterateListeners(function (listener) {
             listener.nodesUpdated();
@@ -26941,9 +26996,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var React = __webpack_require__(10);
+var React = __webpack_require__(9);
 var Common_1 = __webpack_require__(27);
-var _ = __webpack_require__(22);
+var _ = __webpack_require__(18);
 /**
  * @author Dylan Vorster
  */
@@ -26959,7 +27014,7 @@ var DefaultLinkWidget = (function (_super) {
     DefaultLinkWidget.prototype.generatePoint = function (pointIndex) {
         var _this = this;
         return React.DOM.g({ key: 'point-' + this.props.link.points[pointIndex].id }, React.DOM.circle({
-            className: 'point pointui',
+            className: 'point pointui' + (this.props.link.points[pointIndex].isSelected() ? ' selected' : ''),
             cx: this.props.link.points[pointIndex].x,
             cy: this.props.link.points[pointIndex].y,
             r: 5
@@ -27031,6 +27086,7 @@ var DefaultLinkWidget = (function (_super) {
                 id: 0,
                 onMouseDown: function (event) {
                     var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
+                    point.setSelected(true);
                     _this.props.link.addPoint(point, 1);
                 },
                 d: " M" + pointLeft.x + " " + pointLeft.y
@@ -27038,7 +27094,7 @@ var DefaultLinkWidget = (function (_super) {
                     + " " + (pointRight.x - margin) + " " + pointRight.y
                     + " " + pointRight.x + " " + pointRight.y
             }));
-            if (this.props.link.target === null) {
+            if (this.props.link.targetPort === null) {
                 paths.push(this.generatePoint(1));
             }
         }
@@ -27063,7 +27119,9 @@ var DefaultLinkWidget = (function (_super) {
                     'data-link': _this.props.link.id,
                     'data-point': index,
                     onMouseDown: function (event) {
+                        event.stopPropagation();
                         var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
+                        point.setSelected(true);
                         _this.props.link.addPoint(point, index + 1);
                     },
                     d: data
@@ -27073,7 +27131,7 @@ var DefaultLinkWidget = (function (_super) {
             for (var i = 1; i < points.length - 1; i++) {
                 paths.push(this.generatePoint(i));
             }
-            if (this.props.link.target === null) {
+            if (this.props.link.targetPort === null) {
                 paths.push(this.generatePoint(points.length - 1));
             }
         }
@@ -27103,8 +27161,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var React = __webpack_require__(10);
-var PortWidget_1 = __webpack_require__(199);
+var React = __webpack_require__(9);
+var PortWidget_1 = __webpack_require__(200);
 /**
  * @author Dylan Vorster
  */
@@ -27223,7 +27281,7 @@ exports = module.exports = __webpack_require__(92)();
 
 
 // module
-exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background: #3c3c3c;\n  display: flex; }\n\n.storm-diagrams-canvas {\n  position: relative;\n  flex-grow: 1;\n  display: flex;\n  cursor: move;\n  overflow: hidden; }\n  .storm-diagrams-canvas .selector {\n    position: absolute;\n    background-color: rgba(0, 192, 255, 0.2);\n    border: solid 2px #00c0ff; }\n  .storm-diagrams-canvas svg {\n    position: absolute;\n    height: 100%;\n    width: 100%;\n    transform-origin: 0 0;\n    overflow: visible; }\n  .storm-diagrams-canvas .node-view {\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    position: absolute;\n    pointer-events: none;\n    transform-origin: 0 0; }\n  .storm-diagrams-canvas .node {\n    position: absolute;\n    -webkit-touch-callout: none;\n    /* iOS Safari */\n    -webkit-user-select: none;\n    /* Chrome/Safari/Opera */\n    user-select: none;\n    cursor: move;\n    pointer-events: all; }\n    .storm-diagrams-canvas .node.selected > * {\n      border-color: #00c0ff !important;\n      box-shadow: 0 0 20px rgba(0, 192, 255, 0.5); }\n\n@keyframes dash {\n  from {\n    stroke-dashoffset: 24; }\n  to {\n    stroke-dashoffset: 0; } }\n  .storm-diagrams-canvas path {\n    fill: none;\n    pointer-events: all; }\n    .storm-diagrams-canvas path.selected {\n      stroke: #00c0ff !important;\n      stroke-dasharray: 10,2;\n      animation: dash 1s linear infinite; }\n  .storm-diagrams-canvas .port {\n    width: 15px;\n    height: 15px;\n    background: rgba(255, 255, 255, 0.1); }\n    .storm-diagrams-canvas .port:hover, .storm-diagrams-canvas .port.selected {\n      background: #c0ff00; }\n  .storm-diagrams-canvas .basic-node {\n    background-color: #1e1e1e;\n    border-radius: 5px;\n    font-family: Arial;\n    color: white;\n    border: solid 2px black;\n    overflow: hidden;\n    font-size: 11px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }\n    .storm-diagrams-canvas .basic-node .title {\n      /*\t\t\tbackground-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));*/\n      background: rgba(0, 0, 0, 0.3);\n      display: flex;\n      white-space: nowrap; }\n      .storm-diagrams-canvas .basic-node .title > * {\n        align-self: center; }\n      .storm-diagrams-canvas .basic-node .title .fa {\n        padding: 5px;\n        opacity: 0.2;\n        cursor: pointer; }\n        .storm-diagrams-canvas .basic-node .title .fa:hover {\n          opacity: 1.0; }\n      .storm-diagrams-canvas .basic-node .title .name {\n        flex-grow: 1;\n        padding: 5px 5px; }\n    .storm-diagrams-canvas .basic-node .ports {\n      display: flex;\n      background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); }\n      .storm-diagrams-canvas .basic-node .ports .in, .storm-diagrams-canvas .basic-node .ports .out {\n        flex-grow: 1;\n        display: flex;\n        flex-direction: column; }\n      .storm-diagrams-canvas .basic-node .ports .in-port, .storm-diagrams-canvas .basic-node .ports .out-port {\n        display: flex;\n        margin-top: 1px; }\n        .storm-diagrams-canvas .basic-node .ports .in-port > *, .storm-diagrams-canvas .basic-node .ports .out-port > * {\n          align-self: center; }\n        .storm-diagrams-canvas .basic-node .ports .in-port .name, .storm-diagrams-canvas .basic-node .ports .out-port .name {\n          padding: 0 5px; }\n      .storm-diagrams-canvas .basic-node .ports .out-port {\n        justify-content: flex-end; }\n        .storm-diagrams-canvas .basic-node .ports .out-port .name {\n          justify-content: flex-end;\n          text-align: right; }\n", ""]);
+exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background: #3c3c3c;\n  display: flex; }\n\n.storm-diagrams-canvas {\n  position: relative;\n  flex-grow: 1;\n  display: flex;\n  cursor: move;\n  overflow: hidden; }\n  .storm-diagrams-canvas .point {\n    fill: rgba(255, 255, 255, 0.5); }\n    .storm-diagrams-canvas .point.selected {\n      fill: #00c0ff; }\n  .storm-diagrams-canvas .selector {\n    position: absolute;\n    background-color: rgba(0, 192, 255, 0.2);\n    border: solid 2px #00c0ff; }\n  .storm-diagrams-canvas svg {\n    position: absolute;\n    height: 100%;\n    width: 100%;\n    transform-origin: 0 0;\n    overflow: visible; }\n  .storm-diagrams-canvas .node-view {\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    position: absolute;\n    pointer-events: none;\n    transform-origin: 0 0; }\n  .storm-diagrams-canvas .node {\n    position: absolute;\n    -webkit-touch-callout: none;\n    /* iOS Safari */\n    -webkit-user-select: none;\n    /* Chrome/Safari/Opera */\n    user-select: none;\n    cursor: move;\n    pointer-events: all; }\n    .storm-diagrams-canvas .node.selected > * {\n      border-color: #00c0ff !important;\n      box-shadow: 0 0 20px rgba(0, 192, 255, 0.5); }\n\n@keyframes dash {\n  from {\n    stroke-dashoffset: 24; }\n  to {\n    stroke-dashoffset: 0; } }\n  .storm-diagrams-canvas path {\n    fill: none;\n    pointer-events: all; }\n    .storm-diagrams-canvas path.selected {\n      stroke: #00c0ff !important;\n      stroke-dasharray: 10,2;\n      animation: dash 1s linear infinite; }\n  .storm-diagrams-canvas .port {\n    width: 15px;\n    height: 15px;\n    background: rgba(255, 255, 255, 0.1); }\n    .storm-diagrams-canvas .port:hover, .storm-diagrams-canvas .port.selected {\n      background: #c0ff00; }\n  .storm-diagrams-canvas .basic-node {\n    background-color: #1e1e1e;\n    border-radius: 5px;\n    font-family: Arial;\n    color: white;\n    border: solid 2px black;\n    overflow: hidden;\n    font-size: 11px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }\n    .storm-diagrams-canvas .basic-node .title {\n      /*\t\t\tbackground-image: linear-gradient(rgba(black,0.1),rgba(black,0.2));*/\n      background: rgba(0, 0, 0, 0.3);\n      display: flex;\n      white-space: nowrap; }\n      .storm-diagrams-canvas .basic-node .title > * {\n        align-self: center; }\n      .storm-diagrams-canvas .basic-node .title .fa {\n        padding: 5px;\n        opacity: 0.2;\n        cursor: pointer; }\n        .storm-diagrams-canvas .basic-node .title .fa:hover {\n          opacity: 1.0; }\n      .storm-diagrams-canvas .basic-node .title .name {\n        flex-grow: 1;\n        padding: 5px 5px; }\n    .storm-diagrams-canvas .basic-node .ports {\n      display: flex;\n      background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); }\n      .storm-diagrams-canvas .basic-node .ports .in, .storm-diagrams-canvas .basic-node .ports .out {\n        flex-grow: 1;\n        display: flex;\n        flex-direction: column; }\n      .storm-diagrams-canvas .basic-node .ports .in-port, .storm-diagrams-canvas .basic-node .ports .out-port {\n        display: flex;\n        margin-top: 1px; }\n        .storm-diagrams-canvas .basic-node .ports .in-port > *, .storm-diagrams-canvas .basic-node .ports .out-port > * {\n          align-self: center; }\n        .storm-diagrams-canvas .basic-node .ports .in-port .name, .storm-diagrams-canvas .basic-node .ports .out-port .name {\n          padding: 0 5px; }\n      .storm-diagrams-canvas .basic-node .ports .out-port {\n        justify-content: flex-end; }\n        .storm-diagrams-canvas .basic-node .ports .out-port .name {\n          justify-content: flex-end;\n          text-align: right; }\n", ""]);
 
 // exports
 
@@ -29079,11 +29137,11 @@ module.exports = ChangeEventPlugin;
 
 var _prodInvariant = __webpack_require__(3);
 
-var DOMLazyTree = __webpack_require__(18);
+var DOMLazyTree = __webpack_require__(19);
 var ExecutionEnvironment = __webpack_require__(6);
 
 var createNodesFromMarkup = __webpack_require__(97);
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var invariant = __webpack_require__(1);
 
 var Danger = {
@@ -29584,7 +29642,7 @@ module.exports = HTMLDOMPropertyConfig;
 
 
 
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 
 var instantiateReactComponent = __webpack_require__(76);
 var KeyEscapeUtils = __webpack_require__(38);
@@ -29782,20 +29840,20 @@ module.exports = ReactComponentBrowserEnvironment;
 var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
-var React = __webpack_require__(20);
+var React = __webpack_require__(21);
 var ReactComponentEnvironment = __webpack_require__(40);
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactErrorUtils = __webpack_require__(41);
 var ReactInstanceMap = __webpack_require__(25);
 var ReactInstrumentation = __webpack_require__(8);
 var ReactNodeTypes = __webpack_require__(69);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 
 if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(167);
 }
 
-var emptyObject = __webpack_require__(21);
+var emptyObject = __webpack_require__(22);
 var invariant = __webpack_require__(1);
 var shallowEqual = __webpack_require__(34);
 var shouldUpdateReactComponent = __webpack_require__(48);
@@ -30692,7 +30750,7 @@ module.exports = ReactCompositeComponent;
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDefaultInjection = __webpack_require__(137);
 var ReactMount = __webpack_require__(68);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var ReactUpdates = __webpack_require__(11);
 var ReactVersion = __webpack_require__(152);
 
@@ -30811,7 +30869,7 @@ var _prodInvariant = __webpack_require__(3),
 
 var AutoFocusUtils = __webpack_require__(108);
 var CSSPropertyOperations = __webpack_require__(110);
-var DOMLazyTree = __webpack_require__(18);
+var DOMLazyTree = __webpack_require__(19);
 var DOMNamespaces = __webpack_require__(36);
 var DOMProperty = __webpack_require__(14);
 var DOMPropertyOperations = __webpack_require__(61);
@@ -30828,7 +30886,7 @@ var ReactInstrumentation = __webpack_require__(8);
 var ReactMultiChild = __webpack_require__(145);
 var ReactServerRenderingTransaction = __webpack_require__(150);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var escapeTextContentForBrowser = __webpack_require__(32);
 var invariant = __webpack_require__(1);
 var isEventSupported = __webpack_require__(47);
@@ -31852,7 +31910,7 @@ module.exports = ReactDOMContainerInfo;
 
 var _assign = __webpack_require__(4);
 
-var DOMLazyTree = __webpack_require__(18);
+var DOMLazyTree = __webpack_require__(19);
 var ReactDOMComponentTree = __webpack_require__(5);
 
 var ReactDOMEmptyComponent = function (instantiate) {
@@ -32412,7 +32470,7 @@ module.exports = ReactDOMNullInputValuePropHook;
 
 var _assign = __webpack_require__(4);
 
-var React = __webpack_require__(20);
+var React = __webpack_require__(21);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMSelect = __webpack_require__(63);
 
@@ -32760,7 +32818,7 @@ var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
 var DOMChildrenOperations = __webpack_require__(35);
-var DOMLazyTree = __webpack_require__(18);
+var DOMLazyTree = __webpack_require__(19);
 var ReactDOMComponentTree = __webpack_require__(5);
 
 var escapeTextContentForBrowser = __webpack_require__(32);
@@ -33724,7 +33782,7 @@ var _assign = __webpack_require__(4);
 var ReactUpdates = __webpack_require__(11);
 var Transaction = __webpack_require__(31);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -34289,10 +34347,10 @@ var ReactInstanceMap = __webpack_require__(25);
 var ReactInstrumentation = __webpack_require__(8);
 
 var ReactCurrentOwner = __webpack_require__(12);
-var ReactReconciler = __webpack_require__(19);
+var ReactReconciler = __webpack_require__(20);
 var ReactChildReconciler = __webpack_require__(117);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var flattenChildren = __webpack_require__(170);
 var invariant = __webpack_require__(1);
 
@@ -35928,7 +35986,7 @@ var SyntheticTransitionEvent = __webpack_require__(164);
 var SyntheticUIEvent = __webpack_require__(26);
 var SyntheticWheelEvent = __webpack_require__(165);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var getEventCharCode = __webpack_require__(44);
 var invariant = __webpack_require__(1);
 
@@ -37614,7 +37672,7 @@ module.exports = PooledClass;
 var PooledClass = __webpack_require__(179);
 var ReactElement = __webpack_require__(16);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var traverseAllChildren = __webpack_require__(188);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -37815,7 +37873,7 @@ var ReactElement = __webpack_require__(16);
 var ReactPropTypeLocationNames = __webpack_require__(52);
 var ReactNoopUpdateQueue = __webpack_require__(51);
 
-var emptyObject = __webpack_require__(21);
+var emptyObject = __webpack_require__(22);
 var invariant = __webpack_require__(1);
 var warning = __webpack_require__(2);
 
@@ -38710,7 +38768,7 @@ var ReactElement = __webpack_require__(16);
 var ReactPropTypeLocationNames = __webpack_require__(52);
 var ReactPropTypesSecret = __webpack_require__(82);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var getIteratorFn = __webpack_require__(54);
 var warning = __webpack_require__(2);
 
@@ -39151,7 +39209,7 @@ var _assign = __webpack_require__(4);
 var ReactComponent = __webpack_require__(50);
 var ReactNoopUpdateQueue = __webpack_require__(51);
 
-var emptyObject = __webpack_require__(21);
+var emptyObject = __webpack_require__(22);
 
 /**
  * Base class helpers for the updating state of a component.
@@ -39832,8 +39890,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Common_1 = __webpack_require__(27);
 var BaseEntity_1 = __webpack_require__(55);
 var DiagramModel_1 = __webpack_require__(83);
+var _ = __webpack_require__(18);
 /**
  *
  */
@@ -39845,8 +39905,34 @@ var DiagramEngine = (function (_super) {
         _this.nodeFactories = {};
         _this.linkFactories = {};
         _this.canvas = null;
+        _this.paintableWidgets = null;
         return _this;
     }
+    DiagramEngine.prototype.clearRepaintEntities = function () {
+        this.paintableWidgets = {};
+    };
+    DiagramEngine.prototype.enableRepaintEntities = function (entities) {
+        var _this = this;
+        this.paintableWidgets = {};
+        entities.forEach(function (entity) {
+            //if a node is requested to repaint, add all of its links
+            if (entity instanceof Common_1.NodeModel) {
+                _.forEach(entity.getPorts(), function (port) {
+                    _.forEach(port.getLinks(), function (link) {
+                        _this.paintableWidgets[link.getID()] = true;
+                    });
+                });
+            }
+            _this.paintableWidgets[entity.getID()] = true;
+        });
+    };
+    DiagramEngine.prototype.canEntityRepaint = function (baseModel) {
+        //no rules applied, allow repaint
+        if (this.paintableWidgets === null) {
+            return true;
+        }
+        return this.paintableWidgets[baseModel.getID()] !== undefined;
+    };
     DiagramEngine.prototype.setCanvas = function (canvas) {
         this.canvas = canvas;
     };
@@ -39913,15 +39999,15 @@ var DiagramEngine = (function (_super) {
         var canvasRect = this.canvas.getBoundingClientRect();
         return { x: x - canvasRect.left, y: y - canvasRect.top };
     };
-    DiagramEngine.prototype.getNodePortElement = function (node, portName) {
-        var selector = this.canvas.querySelector('.port[data-name="' + portName + '"][data-nodeid="' + node.id + '"]');
+    DiagramEngine.prototype.getNodePortElement = function (port) {
+        var selector = this.canvas.querySelector('.port[data-name="' + port.getName() + '"][data-nodeid="' + port.getParent().getID() + '"]');
         if (selector === null) {
-            throw "Cannot find Node Port element with nodeID: [" + node.id + "] and name: [" + portName + "]";
+            throw "Cannot find Node Port element with nodeID: [" + port.getParent().getID() + "] and name: [" + port.getName() + "]";
         }
         return selector;
     };
-    DiagramEngine.prototype.getPortCenter = function (node, port) {
-        var sourceElement = this.getNodePortElement(node, port);
+    DiagramEngine.prototype.getPortCenter = function (port) {
+        var sourceElement = this.getNodePortElement(port);
         var sourceRect = sourceElement.getBoundingClientRect();
         var rel = this.getRelativePoint(sourceRect.left, sourceRect.top);
         return {
@@ -39946,7 +40032,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var WidgetFactories_1 = __webpack_require__(85);
-var React = __webpack_require__(10);
+var React = __webpack_require__(9);
 var DefaultLinkWidget_1 = __webpack_require__(86);
 /**
  * @author Dylan Vorster
@@ -39979,7 +40065,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var WidgetFactories_1 = __webpack_require__(85);
-var React = __webpack_require__(10);
+var React = __webpack_require__(9);
 var DefaultNodeWidget_1 = __webpack_require__(87);
 /**
  * @author Dylan Vorster
@@ -40014,11 +40100,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var React = __webpack_require__(10);
-var _ = __webpack_require__(22);
+var React = __webpack_require__(9);
+var _ = __webpack_require__(18);
 var Common_1 = __webpack_require__(27);
 var LinkLayerWidget_1 = __webpack_require__(196);
-var NodeLayerWidget_1 = __webpack_require__(197);
+var NodeLayerWidget_1 = __webpack_require__(198);
 var BaseAction = (function () {
     function BaseAction(mouseX, mouseY) {
         this.mouseX = mouseX;
@@ -40039,8 +40125,11 @@ var SelectingAction = (function (_super) {
 }(BaseAction));
 var MoveCanvasAction = (function (_super) {
     __extends(MoveCanvasAction, _super);
-    function MoveCanvasAction() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function MoveCanvasAction(mouseX, mouseY, diagramModel) {
+        var _this = _super.call(this, mouseX, mouseY) || this;
+        _this.initialOffsetX = diagramModel.getOffsetX();
+        _this.initialOffsetY = diagramModel.getOffsetY();
+        return _this;
     }
     return MoveCanvasAction;
 }(BaseAction));
@@ -40116,9 +40205,6 @@ var DiagramWidget = (function (_super) {
         }
         return null;
     };
-    DiagramWidget.prototype.componentWillMount = function () {
-        //		this.props.engine.repaintNodes(false);
-    };
     DiagramWidget.prototype.componentDidMount = function () {
         var _this = this;
         this.props.diagramEngine.setCanvas(this.refs['canvas']);
@@ -40138,12 +40224,6 @@ var DiagramWidget = (function (_super) {
         window.focus();
     };
     DiagramWidget.prototype.render = function () {
-        //		_.forEach(this.props.diagramEngine.getDiagramModel().getLinks(),(link) => {
-        //			if(link.points.length === 0){
-        //				link.points.push(this.props.diagramEngine.getPortCenter(this.props.diagramEngine.getDiagramModel().getNode(link.source),link.sourcePort));
-        //				link.points.push(this.props.diagramEngine.getPortCenter(this.props.diagramEngine.getDiagramModel().getNode(link.target),link.targetPort));
-        //			}
-        //		});
         var _this = this;
         var diagramEngine = this.props.diagramEngine;
         var diagramModel = diagramEngine.getDiagramModel();
@@ -40194,35 +40274,10 @@ var DiagramWidget = (function (_super) {
                     });
                     _this.forceUpdate();
                 }
-                //						if (this.state.mouseDown){
-                //							_.forEach(this.state.selectionModels,(model) => {
-                //								if (model.model instanceof NodeModel){
-                //									model.model.x = model.initialX + ((event.pageX - this.state.initialX) / (diagramModel.getZoomLevel()/100));
-                //									model.model.y = model.initialY + ((event.pageY - this.state.initialY) / (diagramModel.getZoomLevel()/100));
-                //								}else if(model.model instanceof PointModel){
-                //									
-                //								}
-                //							});
-                //						}
-                //						
-                //						
-                //						//move the point
-                //						else if(this.state.selectedPointID){
-                //							var point = _.find(this.state.selectedLink.points,{id:this.state.selectedPointID});
-                //							var rel = diagramEngine.getRelativeMousePoint(event);
-                //							point.x = rel.x;
-                //							point.y = rel.y;
-                ////							this.props.engine.repaintLinks([this.state.selectedLink]);
-                //						}
-                //						
-                //						//move the canvas
-                //						else if(this.state.initialObjectX !== null){
-                //							diagramModel.setOffset(
-                //								this.state.initialObjectX + ((event.pageX - this.state.initialX) / (diagramModel.getZoomLevel()/100)),
-                //								this.state.initialObjectY+((event.pageY-this.state.initialY)/(diagramModel.getZoomLevel()/100))
-                //							);
-                ////							this.props.engine.repaintNodes([]);
-                //						}
+                else if (_this.state.action instanceof MoveCanvasAction) {
+                    diagramModel.setOffset(_this.state.action.initialOffsetX + ((event.pageX - _this.state.action.mouseX) / (diagramModel.getZoomLevel() / 100)), _this.state.action.initialOffsetY + ((event.pageY - _this.state.action.mouseY) / (diagramModel.getZoomLevel() / 100)));
+                    _this.forceUpdate();
+                }
             },
             onMouseDown: function (event) {
                 var model = _this.getMouseElement(event);
@@ -40239,15 +40294,16 @@ var DiagramWidget = (function (_super) {
                         var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
                         diagramModel.clearSelection();
                         _this.setState({
-                            action: new MoveCanvasAction(relative.x, relative.y)
+                            action: new MoveCanvasAction(relative.x, relative.y, diagramModel)
                         });
                     }
                 }
                 else {
-                    //are we additionally selecting things
-                    if (event.shiftKey) {
-                        model.model.setSelected(true);
+                    if (!event.shiftKey && !model.model.isSelected()) {
+                        console.log("clear selection");
+                        diagramModel.clearSelection();
                     }
+                    model.model.setSelected(true);
                     _this.setState({
                         action: new MoveItemsAction(event.pageX, event.pageY, diagramModel.getSelectedItems().map(function (item) {
                             return {
@@ -40260,15 +40316,20 @@ var DiagramWidget = (function (_super) {
                 }
             },
             onMouseUp: function (event) {
-                //						console.log((0+event.timeStamp) - this.state.action.ms);
-                var standardClick = (new Date()).getTime() - _this.state.action.ms < 10;
-                if (standardClick && !event.shiftKey) {
-                    var element = _this.getMouseElement(event);
-                    if (element) {
-                        diagramModel.clearSelection();
-                        element.model.setSelected(true);
-                    }
-                }
+                //						var element = this.getMouseElement(event);
+                //						if (element.model && element.model.isSelected()){
+                //							
+                //						}
+                //						
+                //						
+                //						var standardClick = (new Date()).getTime()-this.state.action.ms < 10;
+                //						if (standardClick && !event.shiftKey){
+                //							var element = this.getMouseElement(event);
+                //							if (element){
+                //								diagramModel.clearSelection();
+                //								element.model.setSelected(true);
+                //							}
+                //						}
                 //						if(this.state.selectedPointID){
                 //							
                 //							var target = event.target as HTMLElement;
@@ -40328,8 +40389,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var React = __webpack_require__(10);
-var _ = __webpack_require__(22);
+var React = __webpack_require__(9);
+var LinkWidget_1 = __webpack_require__(197);
+var _ = __webpack_require__(18);
 /**
  * @author Dylan Vorster
  */
@@ -40357,10 +40419,10 @@ var LinkLayerWidget = (function (_super) {
             }
         }, _.map(diagramModel.getLinks(), function (link) {
             //TODO just improve this vastly x_x
-            if (link.source !== null) {
+            if (link.sourcePort !== null) {
                 try {
                     //generate a point
-                    link.points[0].updateLocation(_this.props.diagramEngine.getPortCenter(diagramModel.getNode(link.source), link.sourcePort));
+                    link.points[0].updateLocation(_this.props.diagramEngine.getPortCenter(link.sourcePort));
                 }
                 //remove the link because its problematic (TODO implement this rather at an engine level)
                 catch (ex) {
@@ -40369,9 +40431,9 @@ var LinkLayerWidget = (function (_super) {
                     return;
                 }
             }
-            if (link.target !== null) {
+            if (link.targetPort !== null) {
                 try {
-                    _.last(link.points).updateLocation(_this.props.diagramEngine.getPortCenter(diagramModel.getNode(link.target), link.targetPort));
+                    _.last(link.points).updateLocation(_this.props.diagramEngine.getPortCenter(link.targetPort));
                 }
                 //remove the link because its problematic (TODO implement this rather at an engine level)
                 catch (ex) {
@@ -40386,7 +40448,11 @@ var LinkLayerWidget = (function (_super) {
                 console.log("no link generated for type: " + link.getType());
                 return null;
             }
-            return React.cloneElement(generatedLink, { key: link.id });
+            return (React.createElement(LinkWidget_1.LinkWidget, {
+                key: link.getID(),
+                link: link,
+                diagramEngine: _this.props.diagramEngine
+            }, generatedLink));
         })));
     };
     return LinkLayerWidget;
@@ -40405,9 +40471,42 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var React = __webpack_require__(10);
-var _ = __webpack_require__(22);
-var NodeWidget_1 = __webpack_require__(198);
+var React = __webpack_require__(9);
+/**
+ * @author Dylan Vorster
+ */
+var LinkWidget = (function (_super) {
+    __extends(LinkWidget, _super);
+    function LinkWidget(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {};
+        return _this;
+    }
+    LinkWidget.prototype.shouldComponentUpdate = function () {
+        return this.props.diagramEngine.canEntityRepaint(this.props.link);
+    };
+    LinkWidget.prototype.render = function () {
+        return this.props.children;
+    };
+    return LinkWidget;
+}(React.Component));
+exports.LinkWidget = LinkWidget;
+
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var React = __webpack_require__(9);
+var _ = __webpack_require__(18);
+var NodeWidget_1 = __webpack_require__(199);
 /**
  * @author Dylan Vorster
  */
@@ -40429,7 +40528,7 @@ var NodeLayerWidget = (function (_super) {
                 height: '100%'
             }
         }, _.map(diagramModel.getNodes(), function (node) {
-            return (React.createElement(NodeWidget_1.NodeWidget, { key: node.id, node: node }, _this.props.diagramEngine.generateWidgetForNode(node)));
+            return (React.createElement(NodeWidget_1.NodeWidget, { diagramEngine: _this.props.diagramEngine, key: node.id, node: node }, _this.props.diagramEngine.generateWidgetForNode(node)));
         })));
     };
     return NodeLayerWidget;
@@ -40438,7 +40537,7 @@ exports.NodeLayerWidget = NodeLayerWidget;
 
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40448,7 +40547,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var React = __webpack_require__(10);
+var React = __webpack_require__(9);
 /**
  * @author Dylan Vorster
  */
@@ -40459,13 +40558,11 @@ var NodeWidget = (function (_super) {
         _this.state = {};
         return _this;
     }
+    NodeWidget.prototype.shouldComponentUpdate = function () {
+        return this.props.diagramEngine.canEntityRepaint(this.props.node);
+    };
     NodeWidget.prototype.render = function () {
-        var _this = this;
-        console.log(this.props.node);
         return (React.DOM.div({
-            onMouseDown: function () {
-                _this.props.node.setSelected(true);
-            },
             'data-nodeid': this.props.node.id,
             className: 'node' + (this.props.node.isSelected() ? ' selected' : ''),
             style: {
@@ -40480,7 +40577,7 @@ exports.NodeWidget = NodeWidget;
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40490,7 +40587,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var React = __webpack_require__(10);
+var React = __webpack_require__(9);
 /**
  * @author Dylan Vorster
  */
@@ -40523,13 +40620,13 @@ exports.PortWidget = PortWidget;
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var SRD = __webpack_require__(90);
-var React = __webpack_require__(10);
+var React = __webpack_require__(9);
 var ReactDOM = __webpack_require__(88);
 __webpack_require__(89);
 /**
@@ -40546,6 +40643,7 @@ window.onload = function () {
     engine.registerLinkFactory(new SRD.DefaultLinkFactory());
     //2) setup the diagram model
     var model = new SRD.DiagramModel();
+    //3-A) create a default node
     var node1 = new SRD.NodeModel();
     node1.extras = {
         name: "Node 1",
@@ -40554,6 +40652,8 @@ window.onload = function () {
     };
     node1.x = 100;
     node1.y = 100;
+    var port1 = node1.addPort(new SRD.PortModel("out-1"));
+    //3-B) create another default node
     var node2 = new SRD.NodeModel();
     node2.extras = {
         name: "Node 2",
@@ -40562,17 +40662,18 @@ window.onload = function () {
     };
     node2.x = 400;
     node2.y = 100;
+    var port2 = node2.addPort(new SRD.PortModel("in-1"));
+    //3-C) link the 2 nodes together
     var link1 = new SRD.LinkModel();
-    link1.source = node1.getID();
-    link1.target = node2.getID();
-    link1.sourcePort = 'out-1';
-    link1.targetPort = 'in-1';
+    link1.setSourcePort(port1);
+    link1.setTargetPort(port2);
+    //4) add the models to the root graph
     model.addNode(node1);
     model.addNode(node2);
     model.addLink(link1);
-    //3) load model into engine
+    //5) load model into engine
     engine.setDiagramModel(model);
-    //4) render the diagram
+    //6) render the diagram!
     ReactDOM.render(React.createElement(SRD.DiagramWidget, { diagramEngine: engine }), document.body);
 };
 

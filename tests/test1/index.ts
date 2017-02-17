@@ -24,6 +24,7 @@ window.onload = () => {
 	//2) setup the diagram model
 	var model = new SRD.DiagramModel();
 	
+	//3-A) create a default node
 	var node1 = new SRD.NodeModel();
 	node1.extras= {
 		name:"Node 1",
@@ -32,7 +33,9 @@ window.onload = () => {
 	};
 	node1.x = 100;
 	node1.y = 100;
+	var port1 = node1.addPort(new SRD.PortModel("out-1"));
 	
+	//3-B) create another default node
 	var node2 = new SRD.NodeModel();
 	node2.extras= {
 		name:"Node 2",
@@ -41,21 +44,22 @@ window.onload = () => {
 	};
 	node2.x = 400;
 	node2.y = 100;
+	var port2 = node2.addPort(new SRD.PortModel("in-1"));
 	
+	//3-C) link the 2 nodes together
 	var link1 = new SRD.LinkModel();
-	link1.source = node1.getID();
-	link1.target = node2.getID();
-	link1.sourcePort = 'out-1';
-	link1.targetPort = 'in-1';
+	link1.setSourcePort(port1);
+	link1.setTargetPort(port2);
 	
+	//4) add the models to the root graph
 	model.addNode(node1);
 	model.addNode(node2);
 	model.addLink(link1);
 	
-	//3) load model into engine
+	//5) load model into engine
 	engine.setDiagramModel(model);
 	
-	//4) render the diagram
+	//6) render the diagram!
 	ReactDOM.render(React.createElement(SRD.DiagramWidget,{diagramEngine: engine}), document.body);
 	
 }
