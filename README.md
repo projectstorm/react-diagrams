@@ -1,15 +1,67 @@
 # STORM React Diagrams
 
-This library makes it easy to create interactive flow diagrams using react.
-You can create custom elements as long as they contain Port Components.
-
-The system is not yet 100% production ready and there are still many improvements regarding speed and optimisation that need to be made, but those are all currently in the works, and will be gradually improved over time.
-
-## Integration into other projects
-
-Here you can see the library integrated into an external web app that has some custom nodes. To create a custom node, register a new factory with the engine that knows how to render the JSON model for that node. As long as you render at least one port component with a unique name in that node, a link can be connected to it.
-
 ![Demo2](./demo2.png)
+
+## Introduction
+
+A no-nonsense diagramming library written entirely in React with the help of Lodash. It aims to be:
+
+* Simple, and void of any fuss/complications when implementing it into your own application
+* Customizable without having to hack the core (adapters/factories etc..)
+* Simple to operate and understand without sugar and magic
+* Fast and optimized to handle large diagrams with hundreds of nodes/links
+* Super easy to use, and should work as you expect it to
+
+## How to install
+
+```npm install projectstorm/react-diagrams```
+
+(until I decide to put it on npm)
+
+* Its only dependency is Lodash so it will install that too.
+
+## How to see the examples
+
+simply navigate to the __tests__ directory and load up the corresponding index.html
+
+## How does it work
+
+The library uses a Model Graph to represent the virtual diagram and then renders the diagram using
+2 layers:
+* Node Layer -> which is responsible for rendering nodes as HTML components
+* Link Layer -> which renders the links as SVG paths
+
+Each node and link is fed into a factory that then generates the corresponding node or link react widget.
+Therefore, to create custom nodes and links, register your own factories that return your own widgets.
+
+As long as a node contains at least one port and the corresponding NodeWidget contains at least one PortWidget,
+a link can be connected to it.
+
+## Questions
+
+### Why didnt I render the nodes as SVG's?
+
+Because its vastly better to render nodes as standard HTML so that we can embed input controls and not have
+to deal with the complexities of trying to get SVG to work like we want it to. I also created this primarily to embed into
+enterprise applications where the nodes themselves are highly interactive with buttons and other controls that cave when I try to use SVG.
+
+### Why Typescript?
+
+Because it can transpile into any level of ECMA Script, and the library got really complicated, so I ported it to Typescript
+to acomodate the heavy architecural changes I was starting to make. <3 Type Script
+
+### Why is there no JSX?
+
+Because most of the library is 95% all logic anyway, and I construct very complex DOM elements with many dynamic properties. JSX
+Would just get in the way, and I personally hate JSX for a multitude of reasons anyway.
+
+### How do I make my own elements?
+
+Take a look at the __defaults__ directory, with specific attention to the __DefaultNodeWidget__
+
+### How do I use the library?
+
+Take a look at the tests folders, they have simple and complex examples of the complete usage.
 
 ## Usage Demo
 

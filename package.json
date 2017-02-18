@@ -12,16 +12,16 @@
   "author": "dylanvorster",
   "contributors": [],
   "dependencies": {
-    "@types/lodash": "^4.14.52",
-    "@types/react": "^15.0.9",
-    "@types/react-dom": "^0.14.23",
     "lodash": "^4.13.1",
     "react": "^15.1.0",
-    "source-map-loader": "^0.1.6",
-    "ts-loader": "^2.0.0",
-    "typescript": "^2.1.6"
   },
   "devDependencies": {
+	"@types/lodash": "^4.14.52",
+    "@types/react": "^15.0.9",
+    "@types/react-dom": "^0.14.23",
+	"source-map-loader": "^0.1.6",
+    "ts-loader": "^2.0.0",
+    "typescript": "^2.1.6"
     "css-loader": "^0.26.1",
     "node-sass": "^4.5.0",
     "react-dom": "^15.1.0",
