@@ -14,7 +14,9 @@ A no-nonsense diagramming library written entirely in React with the help of Lod
 
 ## How to install
 
-```npm install projectstorm/react-diagrams```
+```
+npm install projectstorm/react-diagrams
+```
 
 (until I decide to put it on npm)
 
@@ -45,7 +47,7 @@ a link can be connected to it.
 
 ## Questions
 
-#### Why didnt I render the nodes as SVG's?
+#### Why didn’t I render the nodes as SVG's?
 
 Because its vastly better to render nodes as standard HTML so that we can embed input controls and not have
 to deal with the complexities of trying to get SVG to work like we want it to. I also created this primarily to embed into
@@ -54,7 +56,7 @@ enterprise applications where the nodes themselves are highly interactive with b
 #### Why Typescript?
 
 Because it can transpile into any level of ECMA Script, and the library got really complicated, so I ported it to Typescript
-to acomodate the heavy architecural changes I was starting to make. <3 Type Script
+to accommodate the heavy architectural changes I was starting to make. <3 Type Script
 
 #### Why is there no JSX?
 
@@ -87,5 +89,5 @@ __mouse wheel__ will zoom in or out the entire diagram
 
 __click link and drag__ will create a new link anchor/point that you can then drag around
 
-__click node-port and drag__ will create a new link that is anchored to the port, allowing you 
+__click node-port and drag__ will create a new link that is anchored to the port, allowing you
 to drag the link to another connecting port

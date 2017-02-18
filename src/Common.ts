@@ -33,13 +33,18 @@ export class BaseModel extends BaseEnity<BaseModelListener>{
 	public setSelected(selected: boolean){
 		this.selected = selected;
 		this.itterateListeners((listener) => {
-			listener.selectionChanged();
+			if(listener.selectionChanged){
+				listener.selectionChanged();
+			}
 		});
 	}
 	
 	remove(){
+		console.log("removing: ",this);
 		this.itterateListeners((listener) => {
-			listener.entityRemoved();
+			if(listener.entityRemoved){
+				listener.entityRemoved();
+			}
 		});
 	}
 }
@@ -55,6 +60,15 @@ export class PointModel extends BaseModel{
 		this.x = points.x;
 		this.y = points.y;
 		this.link = link;
+	}
+	
+	remove(){
+		super.remove();
+		
+		//clear references
+		if (this.link){
+			this.link.removePoint(this);
+		}
 	}
 	
 	updateLocation(points: {x:number,y: number}){
@@ -95,6 +109,16 @@ export class LinkModel extends BaseModel{
 		this.targetPort = null;
 	}
 	
+	remove(){
+		super.remove();
+		if (this.sourcePort){
+			this.sourcePort.removeLink(this);
+		}
+		if (this.targetPort){
+			this.targetPort.removeLink(this);
+		}
+	}
+	
 	isLastPoint(point: PointModel){
 		var index = this.getPointIndex(point);
 		return index === this.points.length-1;
@@ -126,6 +150,14 @@ export class LinkModel extends BaseModel{
 		this.sourcePort = port;
 	}
 	
+	getSourcePort(): PortModel{
+		return this.sourcePort;
+	}
+	
+	getTargetPort(): PortModel{
+		return this.targetPort;
+	}
+	
 	setTargetPort(port: PortModel){
 		port.addLink(this);
 		this.targetPort = port;
@@ -137,6 +169,10 @@ export class LinkModel extends BaseModel{
 	
 	setPoints(points: PointModel[]){
 		this.points = points;
+	}
+	
+	removePoint(pointModel: PointModel){
+		this.points.splice(this.getPointIndex(pointModel),1);
 	}
 	
 	addPoint(pointModel:PointModel,index = 1){
@@ -203,6 +239,15 @@ export class NodeModel extends BaseModel{
 		this.y = 0;
 		this.extras = {};
 		this.ports = {};
+	}
+	
+	remove(){
+		super.remove();
+		for (var i in this.ports){
+			_.forEach(this.ports[i].getLinks(),(link) => {
+				link.remove();
+			});
+		}
 	}
 	
 	getPort(name: string): PortModel | null{

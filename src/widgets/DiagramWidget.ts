@@ -172,6 +172,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(),(element) => {
 						element.remove();
 					});
+					this.forceUpdate();
 				}
 			})
 		});

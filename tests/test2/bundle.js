@@ -20550,6 +20550,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Toolkit_1 = __webpack_require__(84);
 var BaseEntity_1 = __webpack_require__(55);
+var _ = __webpack_require__(18);
 /**
  * @author Dylan Vorster
  */
@@ -20570,12 +20571,17 @@ var BaseModel = (function (_super) {
     BaseModel.prototype.setSelected = function (selected) {
         this.selected = selected;
         this.itterateListeners(function (listener) {
-            listener.selectionChanged();
+            if (listener.selectionChanged) {
+                listener.selectionChanged();
+            }
         });
     };
     BaseModel.prototype.remove = function () {
+        console.log("removing: ", this);
         this.itterateListeners(function (listener) {
-            listener.entityRemoved();
+            if (listener.entityRemoved) {
+                listener.entityRemoved();
+            }
         });
     };
     return BaseModel;
@@ -20590,6 +20596,13 @@ var PointModel = (function (_super) {
         _this.link = link;
         return _this;
     }
+    PointModel.prototype.remove = function () {
+        _super.prototype.remove.call(this);
+        //clear references
+        if (this.link) {
+            this.link.removePoint(this);
+        }
+    };
     PointModel.prototype.updateLocation = function (points) {
         this.x = points.x;
         this.y = points.y;
@@ -20620,6 +20633,15 @@ var LinkModel = (function (_super) {
         _this.targetPort = null;
         return _this;
     }
+    LinkModel.prototype.remove = function () {
+        _super.prototype.remove.call(this);
+        if (this.sourcePort) {
+            this.sourcePort.removeLink(this);
+        }
+        if (this.targetPort) {
+            this.targetPort.removeLink(this);
+        }
+    };
     LinkModel.prototype.isLastPoint = function (point) {
         var index = this.getPointIndex(point);
         return index === this.points.length - 1;
@@ -20645,6 +20667,12 @@ var LinkModel = (function (_super) {
         port.addLink(this);
         this.sourcePort = port;
     };
+    LinkModel.prototype.getSourcePort = function () {
+        return this.sourcePort;
+    };
+    LinkModel.prototype.getTargetPort = function () {
+        return this.targetPort;
+    };
     LinkModel.prototype.setTargetPort = function (port) {
         port.addLink(this);
         this.targetPort = port;
@@ -20654,6 +20682,9 @@ var LinkModel = (function (_super) {
     };
     LinkModel.prototype.setPoints = function (points) {
         this.points = points;
+    };
+    LinkModel.prototype.removePoint = function (pointModel) {
+        this.points.splice(this.getPointIndex(pointModel), 1);
     };
     LinkModel.prototype.addPoint = function (pointModel, index) {
         if (index === void 0) { index = 1; }
@@ -20707,6 +20738,14 @@ var NodeModel = (function (_super) {
         _this.ports = {};
         return _this;
     }
+    NodeModel.prototype.remove = function () {
+        _super.prototype.remove.call(this);
+        for (var i in this.ports) {
+            _.forEach(this.ports[i].getLinks(), function (link) {
+                link.remove();
+            });
+        }
+    };
     NodeModel.prototype.getPort = function (name) {
         return this.ports[name];
     };
@@ -26880,11 +26919,12 @@ var DiagramModel = (function (_super) {
         return this.links[link];
     };
     DiagramModel.prototype.addLink = function (link) {
-        //		link.addListener({
-        //			entityRemoved: () => {
-        //				this.removeLink(link);
-        //			}
-        //		});
+        var _this = this;
+        link.addListener({
+            entityRemoved: function () {
+                _this.removeLink(link);
+            }
+        });
         this.links[link.getID()] = link;
         this.itterateListeners(function (listener) {
             listener.linksUpdated();
@@ -26892,11 +26932,12 @@ var DiagramModel = (function (_super) {
         return link;
     };
     DiagramModel.prototype.addNode = function (node) {
-        //		node.addListener({
-        //			entityRemoved: () => {
-        //				this.removeNode(node);
-        //			}
-        //		});
+        var _this = this;
+        node.addListener({
+            entityRemoved: function () {
+                _this.removeNode(node);
+            }
+        });
         this.nodes[node.getID()] = node;
         this.itterateListeners(function (listener) {
             listener.nodesUpdated();
@@ -26905,7 +26946,7 @@ var DiagramModel = (function (_super) {
     };
     DiagramModel.prototype.removeLink = function (link) {
         if (link instanceof Common_1.LinkModel) {
-            delete this.links[link.getType()];
+            delete this.links[link.getID()];
             this.itterateListeners(function (listener) {
                 listener.linksUpdated();
             });
@@ -26917,8 +26958,8 @@ var DiagramModel = (function (_super) {
         });
     };
     DiagramModel.prototype.removeNode = function (node) {
-        if (node instanceof Common_1.LinkModel) {
-            delete this.nodes[node.getType()];
+        if (node instanceof Common_1.NodeModel) {
+            delete this.nodes[node.getID()];
             this.itterateListeners(function (listener) {
                 listener.nodesUpdated();
             });
@@ -40266,6 +40307,7 @@ var DiagramWidget = (function (_super) {
                     _.forEach(_this.props.diagramEngine.getDiagramModel().getSelectedItems(), function (element) {
                         element.remove();
                     });
+                    _this.forceUpdate();
                 }
             })
         });

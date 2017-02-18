@@ -130,11 +130,11 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 	}
 	
 	addLink(link: LinkModel): LinkModel{
-//		link.addListener({
-//			entityRemoved: () => {
-//				this.removeLink(link);
-//			}
-//		});
+		link.addListener({
+			entityRemoved: () => {
+				this.removeLink(link);
+			}
+		});
 		this.links[link.getID()] = link;
 		this.itterateListeners((listener) => {
 			listener.linksUpdated();
@@ -143,11 +143,11 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 	}
 	
 	addNode(node: NodeModel): NodeModel{
-//		node.addListener({
-//			entityRemoved: () => {
-//				this.removeNode(node);
-//			}
-//		});
+		node.addListener({
+			entityRemoved: () => {
+				this.removeNode(node);
+			}
+		});
 		this.nodes[node.getID()] = node;
 		this.itterateListeners((listener) => {
 			listener.nodesUpdated();
@@ -157,7 +157,7 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 	
 	removeLink(link: LinkModel | string){
 		if (link instanceof LinkModel){
-			delete this.links[link.getType()];
+			delete this.links[link.getID()];
 			this.itterateListeners((listener) => {
 				listener.linksUpdated();
 			});
@@ -169,8 +169,8 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 		});
 	}
 	removeNode(node: NodeModel | string){
-		if (node instanceof LinkModel){
-			delete this.nodes[node.getType()];
+		if (node instanceof NodeModel){
+			delete this.nodes[node.getID()];
 			this.itterateListeners((listener) => {
 				listener.nodesUpdated();
 			});
