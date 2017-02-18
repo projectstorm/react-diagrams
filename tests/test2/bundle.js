@@ -40053,6 +40053,7 @@ var DefaultNodeFactory = (function (_super) {
         return React.createElement(DefaultNodeWidget_1.DefaultNodeWidget, {
             node: node,
             diagramEngine: diagramEngine,
+            color: node.extras['color'],
             name: node.extras['name'],
             inPorts: node.extras['inPorts'],
             outPorts: node.extras['outPorts']
@@ -40224,6 +40225,7 @@ var DiagramWidget = (function (_super) {
                 event.preventDefault();
                 event.stopPropagation();
                 diagramModel.setZoomLevel(diagramModel.getZoomLevel() + (event.deltaY / 60));
+                diagramEngine.enableRepaintEntities([]);
                 _this.forceUpdate();
             },
             onMouseMove: function (event) {
@@ -40610,8 +40612,8 @@ var ReactDOM = __webpack_require__(88);
 __webpack_require__(89);
 /**
  *
- * Simple test showing the Object oriented way of using this library.
- * It creates 2 nodes and links them together with a single link
+ * Simple stress test of the system, shows that it can handle many nodes, and
+ * retain good performance
  *
  * @Author Dylan Vorster
  */
@@ -40638,7 +40640,7 @@ window.onload = function () {
             color: 'rgb(192,255,0)',
             inPorts: ['in-1']
         };
-        node2.x = 400 + offsetX;
+        node2.x = 200 + offsetX;
         node2.y = 100 + offsetY;
         var port2 = node2.addPort(new SRD.PortModel("in-1"));
         //3-C) link the 2 nodes together
@@ -40652,21 +40654,11 @@ window.onload = function () {
     }
     //2) setup the diagram model
     var model = new SRD.DiagramModel();
-    generateNodes(model, 0, 0);
-    generateNodes(model, 0, 100);
-    generateNodes(model, 0, 200);
-    generateNodes(model, 0, 300);
-    generateNodes(model, 0, 400);
-    generateNodes(model, 400, 0);
-    generateNodes(model, 400, 100);
-    generateNodes(model, 400, 200);
-    generateNodes(model, 400, 300);
-    generateNodes(model, 400, 400);
-    generateNodes(model, 800, 0);
-    generateNodes(model, 800, 100);
-    generateNodes(model, 800, 200);
-    generateNodes(model, 800, 300);
-    generateNodes(model, 800, 400);
+    for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < 8; j++) {
+            generateNodes(model, i * 200, j * 100);
+        }
+    }
     //5) load model into engine
     engine.setDiagramModel(model);
     //6) render the diagram!

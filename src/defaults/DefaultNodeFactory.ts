@@ -16,6 +16,7 @@ export class DefaultNodeFactory extends NodeWidgetFactory{
 		return React.createElement(DefaultNodeWidget,{
 			node: node,
 			diagramEngine: diagramEngine,
+			color: node.extras['color'],
 			name: node.extras['name'],
 			inPorts: node.extras['inPorts'],
 			outPorts: node.extras['outPorts'],

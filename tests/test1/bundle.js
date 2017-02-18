@@ -40053,6 +40053,7 @@ var DefaultNodeFactory = (function (_super) {
         return React.createElement(DefaultNodeWidget_1.DefaultNodeWidget, {
             node: node,
             diagramEngine: diagramEngine,
+            color: node.extras['color'],
             name: node.extras['name'],
             inPorts: node.extras['inPorts'],
             outPorts: node.extras['outPorts']
@@ -40224,6 +40225,7 @@ var DiagramWidget = (function (_super) {
                 event.preventDefault();
                 event.stopPropagation();
                 diagramModel.setZoomLevel(diagramModel.getZoomLevel() + (event.deltaY / 60));
+                diagramEngine.enableRepaintEntities([]);
                 _this.forceUpdate();
             },
             onMouseMove: function (event) {

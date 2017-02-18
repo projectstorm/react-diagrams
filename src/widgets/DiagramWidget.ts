@@ -191,6 +191,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
                         event.preventDefault();
                         event.stopPropagation();
 						diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
+						diagramEngine.enableRepaintEntities([]);
 						this.forceUpdate();
 					},
 					onMouseMove: (event) => {
