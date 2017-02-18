@@ -1,8 +1,11 @@
 module.exports = {
-	entry: './tests/test1/index.ts',
+	entry: {
+		'test1/bundle': './tests/test1/index.ts',
+		'test2/bundle': './tests/test2/index.ts',
+	},
 	output: {
-		filename: 'bundle.js',
-		path: './tests/test1'
+		filename: '[name].js',
+		path: './tests'
 	},
 	module: {
 		rules: [

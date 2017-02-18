@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 
 declare var require;
 
-require("./test.scss");
+require("../test.scss");
 
 
 /**
