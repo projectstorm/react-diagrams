@@ -2,13 +2,13 @@ import * as React from "react";
 import {NodeModel} from "../Common";
 import {DiagramEngine} from "../DiagramEngine";
 
-interface NodeProps {
+export interface NodeProps {
 	node:NodeModel;
 	children?: any;
 	diagramEngine: DiagramEngine
 }
 
-interface NodeState {
+export interface NodeState {
 }
 
 /**

@@ -12,7 +12,7 @@ interface SelectionModel{
 	initialY: number;
 }
 
-class BaseAction{
+export class BaseAction{
 	mouseX: number;
 	mouseY: number;
 	ms: number;
@@ -73,11 +73,11 @@ class MoveItemsAction extends BaseAction{
 	}
 }
 
-interface DiagramProps {
+export interface DiagramProps {
 	diagramEngine:DiagramEngine;
 }
 
-interface DiagramState {
+export interface DiagramState {
 	action: BaseAction| null;
 	renderedNodes: boolean,
 	windowListener: any,

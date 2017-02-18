@@ -3,7 +3,7 @@ import {LinkModel, PointModel} from "../Common";
 import * as _ from "lodash";
 import {DiagramEngine} from "../DiagramEngine";
 
-interface DefaultLinkProps {
+export interface DefaultLinkProps {
 	color?: string;
 	width?: number;
 	link: LinkModel;
@@ -12,7 +12,7 @@ interface DefaultLinkProps {
 	pointAdded?: (point: PointModel,event) => any
 }
 
-interface DefaultLinkState {
+export interface DefaultLinkState {
 	selected: boolean;
 }
 

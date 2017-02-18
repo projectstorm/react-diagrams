@@ -2,7 +2,7 @@ import * as React from "react";
 import {NodeModel} from "../Common";
 import {PortWidget} from "../widgets/PortWidget";
 
-interface DefaultNodeProps {
+export interface DefaultNodeProps {
 	name?: string;
 	node: NodeModel;
 	inPorts?: (string | {name: string, display: string})[];
@@ -10,7 +10,7 @@ interface DefaultNodeProps {
 	color?: string;
 }
 
-interface DefaultNodeState {
+export interface DefaultNodeState {
 }
 
 /**

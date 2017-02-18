@@ -5,12 +5,12 @@ import {PointModel} from "../Common";
 import {LinkWidget} from "./LinkWidget";
 import * as _ from "lodash";
 
-interface LinkLayerProps {
+export interface LinkLayerProps {
 	diagramEngine: DiagramEngine,
 	pointAdded: (point: PointModel,event) => any
 }
 
-interface LinkLayerState {
+export interface LinkLayerState {
 }
 
 /**

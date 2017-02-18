@@ -1,12 +1,12 @@
 import * as React from "react";
 import {NodeModel} from "../Common";
 
-interface PortProps {
+export interface PortProps {
 	name: string;
 	node: NodeModel;
 }
 
-interface PortState{
+export interface PortState{
 	selected: boolean
 }
 

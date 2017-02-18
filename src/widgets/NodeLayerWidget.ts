@@ -4,11 +4,11 @@ import {DiagramEngine} from "../DiagramEngine";
 import * as _ from "lodash";
 import {NodeWidget} from "./NodeWidget";
 
-interface NodeLayerProps {
+export interface NodeLayerProps {
 	diagramEngine: DiagramEngine
 }
 
-interface NodeLayerState {
+export interface NodeLayerState {
 }
 
 /**

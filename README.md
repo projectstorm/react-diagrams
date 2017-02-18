@@ -20,9 +20,15 @@ A no-nonsense diagramming library written entirely in React with the help of Lod
 
 * Its only dependency is Lodash so it will install that too.
 
-## How to see the examples
+#### How to see the examples
 
 simply navigate to the __tests__ directory and load up the corresponding index.html
+
+#### How to build
+
+Simply run ```tsc``` in the root directory and it will spit out the transpiled code and typescript definitions
+into the dist directory.
+
 
 ## How does it work
 
@@ -39,32 +45,47 @@ a link can be connected to it.
 
 ## Questions
 
-### Why didnt I render the nodes as SVG's?
+#### Why didnt I render the nodes as SVG's?
 
 Because its vastly better to render nodes as standard HTML so that we can embed input controls and not have
 to deal with the complexities of trying to get SVG to work like we want it to. I also created this primarily to embed into
 enterprise applications where the nodes themselves are highly interactive with buttons and other controls that cave when I try to use SVG.
 
-### Why Typescript?
+#### Why Typescript?
 
 Because it can transpile into any level of ECMA Script, and the library got really complicated, so I ported it to Typescript
 to acomodate the heavy architecural changes I was starting to make. <3 Type Script
 
-### Why is there no JSX?
+#### Why is there no JSX?
 
 Because most of the library is 95% all logic anyway, and I construct very complex DOM elements with many dynamic properties. JSX
 Would just get in the way, and I personally hate JSX for a multitude of reasons anyway.
 
-### How do I make my own elements?
+#### How do I make my own elements?
 
 Take a look at the __defaults__ directory, with specific attention to the __DefaultNodeWidget__
 
-### How do I use the library?
+#### How do I use the library?
 
 Take a look at the tests folders, they have simple and complex examples of the complete usage.
 
-## Usage Demo
+## Usage Demo and Guide
 
 This is a demo of the interaction taken directly from the test folder.
 
 ![Demo](./demo.gif)
+
+#### Key commands
+
+__shift and drag__ will trigger a multi selection box
+
+__shift and select nodes__ will select multiple nodes
+
+__drag canvas__ will drag the complete diagram
+
+__mouse wheel__ will zoom in or out the entire diagram
+
+__click link and drag__ will create a new link anchor/point that you can then drag around
+
+__click node-port and drag__ will create a new link that is anchored to the port, allowing you 
+to drag the link to another connecting port

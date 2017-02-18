@@ -27,7 +27,8 @@ module.exports = {
 			{
 				test: /\.tsx?$/,
 				loader: 'ts-loader?' + JSON.stringify({
-					transpileOnly: true
+					transpileOnly: true,
+					configFileName: 'tsconfig.webpack.json'
 				}),
 				exclude: /node_modules/,
 			},

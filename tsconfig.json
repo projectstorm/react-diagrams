@@ -3,8 +3,14 @@
 	"compilerOptions": {
 		"jsx": "react",
 		"suppressExcessPropertyErrors": true,
-		"allowJs": true,
 		"outDir": "./lib",
-		"module": "commonjs"
-	}
+		"declaration": true
+	},
+	"exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+		"webpack.config.js",
+		"tests",
+		"./lib"
+    ]
 }

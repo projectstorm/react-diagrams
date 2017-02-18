@@ -2,13 +2,13 @@ import * as React from "react";
 import {LinkModel} from "../Common";
 import {DiagramEngine} from "../DiagramEngine";
 
-interface LinkProps {
+export interface LinkProps {
 	link: LinkModel;
 	diagramEngine: DiagramEngine;
 	children?: any;
 }
 
-interface LinkState {
+export interface LinkState {
 }
 
 /**
