@@ -1,6 +1,7 @@
 # STORM React Diagrams
 
 [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![NPM](https://nodei.co/npm/storm-react-diagrams.png?mini=true)](https://npmjs.org/package/storm-react-diagrams)
 
 ![Demo2](./demo2.png)
 
@@ -81,9 +82,11 @@ This is a demo of the interaction taken directly from the test folder.
 
 #### Key commands
 
+__del key__ will remove anything selected including links
+
 __shift and drag__ will trigger a multi selection box
 
-__shift and select nodes__ will select multiple nodes
+__shift and select nodes/links/points__ will select multiple nodes
 
 __drag canvas__ will drag the complete diagram
 
