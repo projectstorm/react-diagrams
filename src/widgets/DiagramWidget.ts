@@ -125,8 +125,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			};
 		}
 		
-		
-
 		//look for a point
 		element = target.closest('.point[data-id]');
 		if(element){
@@ -253,7 +251,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						diagramEngine.clearRepaintEntities();
 						
 						var model = this.getMouseElement(event);
-						
 						//its the canvas
 						if(model === null){
 							//is it a multiple selection
@@ -297,7 +294,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						else{
 							
 							if (!event.shiftKey && !model.model.isSelected()){
-								console.log("clear selection");
 								diagramModel.clearSelection();
 							}
 							model.model.setSelected(true);

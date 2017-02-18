@@ -27111,12 +27111,11 @@ var DefaultLinkWidget = (function (_super) {
         var Top = React.DOM.path(_.merge({
             onMouseLeave: function () {
                 _this.setState({ selected: false });
-                //				this.props.link.setSelected(false);
             },
             onMouseEnter: function () {
                 _this.setState({ selected: true });
-                //				this.props.link.setSelected(true);
             },
+            'data-linkid': this.props.link.getID(),
             stroke: this.props.color,
             strokeOpacity: this.state.selected ? 0.1 : 0,
             strokeWidth: 20,
@@ -27150,11 +27149,13 @@ var DefaultLinkWidget = (function (_super) {
             paths.push(this.generateLink({
                 id: 0,
                 onMouseDown: function (event) {
-                    var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
-                    point.setSelected(true);
-                    _this.forceUpdate();
-                    _this.props.link.addPoint(point, 1);
-                    _this.props.pointAdded(point, event);
+                    if (!event.shiftKey) {
+                        var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
+                        point.setSelected(true);
+                        _this.forceUpdate();
+                        _this.props.link.addPoint(point, 1);
+                        _this.props.pointAdded(point, event);
+                    }
                 },
                 d: " M" + pointLeft.x + " " + pointLeft.y
                     + " C" + (pointLeft.x + margin) + " " + pointLeft.y
@@ -27183,14 +27184,16 @@ var DefaultLinkWidget = (function (_super) {
             paths = ds.map(function (data, index) {
                 return _this.generateLink({
                     id: index,
-                    'data-link': _this.props.link.id,
+                    'data-linkid': _this.props.link.id,
                     'data-point': index,
                     onMouseDown: function (event) {
-                        var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
-                        point.setSelected(true);
-                        _this.forceUpdate();
-                        _this.props.link.addPoint(point, index + 1);
-                        _this.props.pointAdded(point, event);
+                        if (!event.shiftKey) {
+                            var point = new Common_1.PointModel(_this.props.link, _this.props.diagramEngine.getRelativeMousePoint(event));
+                            point.setSelected(true);
+                            _this.forceUpdate();
+                            _this.props.link.addPoint(point, index + 1);
+                            _this.props.pointAdded(point, event);
+                        }
                     },
                     d: data
                 });
@@ -40404,7 +40407,6 @@ var DiagramWidget = (function (_super) {
                 }
                 else {
                     if (!event.shiftKey && !model.model.isSelected()) {
-                        console.log("clear selection");
                         diagramModel.clearSelection();
                     }
                     model.model.setSelected(true);

@@ -75,12 +75,11 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		var Top = React.DOM.path(_.merge({
 			onMouseLeave:() => {
 				this.setState({selected: false});
-//				this.props.link.setSelected(false);
 			},
 			onMouseEnter:() => {
 				this.setState({selected: true});
-//				this.props.link.setSelected(true);
 			},
+			'data-linkid': this.props.link.getID(),
 			stroke: this.props.color,
 			strokeOpacity:this.state.selected?0.1:0 ,
 			strokeWidth: 20,
@@ -122,11 +121,13 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			paths.push(this.generateLink({
 				id: 0,
 				onMouseDown: (event) =>{
-					var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
-					point.setSelected(true);
-					this.forceUpdate();
-					this.props.link.addPoint(point,1);
-					this.props.pointAdded(point,event);
+					if (!event.shiftKey){
+						var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
+						point.setSelected(true);
+						this.forceUpdate();
+						this.props.link.addPoint(point,1);
+						this.props.pointAdded(point,event);
+					}
 				},
 				d:
 					 " M"+pointLeft.x+" "+pointLeft.y
@@ -158,14 +159,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			paths = ds.map((data,index) => {
 				return this.generateLink({
 					id:index,
-					'data-link':this.props.link.id,
+					'data-linkid':this.props.link.id,
 					'data-point':index,
-					onMouseDown: (event) => {
-						var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
-						point.setSelected(true);
-						this.forceUpdate();
-						this.props.link.addPoint(point,index+1);
-						this.props.pointAdded(point,event);
+					onMouseDown: (event: MouseEvent) => {
+						if (!event.shiftKey){
+							var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
+							point.setSelected(true);
+							this.forceUpdate();
+							this.props.link.addPoint(point,index+1);
+							this.props.pointAdded(point,event);
+						}
 					},
 					d:data
 				});

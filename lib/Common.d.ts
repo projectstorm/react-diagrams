@@ -22,6 +22,7 @@ export declare class PointModel extends BaseModel {
         x: number;
         y: number;
     });
+    remove(): void;
     updateLocation(points: {
         x: number;
         y: number;
@@ -37,15 +38,19 @@ export declare class LinkModel extends BaseModel {
     points: PointModel[];
     extras: {};
     constructor();
+    remove(): void;
     isLastPoint(point: PointModel): boolean;
     getPointIndex(point: PointModel): number;
     getPointModel(id: string): PointModel | null;
     getFirstPoint(): PointModel;
     getLastPoint(): PointModel;
     setSourcePort(port: PortModel): void;
+    getSourcePort(): PortModel;
+    getTargetPort(): PortModel;
     setTargetPort(port: PortModel): void;
     getPoints(): PointModel[];
     setPoints(points: PointModel[]): void;
+    removePoint(pointModel: PointModel): void;
     addPoint(pointModel: PointModel, index?: number): void;
     getType(): string;
 }
@@ -75,6 +80,7 @@ export declare class NodeModel extends BaseModel {
         [s: string]: PortModel;
     };
     constructor();
+    remove(): void;
     getPort(name: string): PortModel | null;
     getPorts(): {
         [s: string]: PortModel;
