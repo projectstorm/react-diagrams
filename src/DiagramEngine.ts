@@ -1,5 +1,5 @@
 import {NodeWidgetFactory, LinkWidgetFactory} from "./WidgetFactories";
-import {LinkModel, NodeModel, BaseModel, PortModel} from "./Common";
+import {LinkModel, NodeModel, BaseModel, PortModel, PointModel} from "./Common";
 import {BaseEnity, BaseListener} from "./BaseEntity";
 import {DiagramModel} from "./DiagramModel";
 import * as React from "react";
@@ -35,7 +35,7 @@ export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 	}
 	
 	clearRepaintEntities(){
-		this.paintableWidgets = {};
+		this.paintableWidgets = null;
 	}
 	
 	enableRepaintEntities(entities: BaseModel[]){
@@ -49,6 +49,10 @@ export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 						this.paintableWidgets[link.getID()] = true;
 					});
 				});
+			}
+			
+			if (entity instanceof PointModel){
+				this.paintableWidgets[entity.getLink().getID()] = true;
 			}
 			
 			this.paintableWidgets[entity.getID()] = true;

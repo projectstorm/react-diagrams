@@ -122,10 +122,12 @@ export class LinkModel extends BaseModel{
 	}
 	
 	setSourcePort(port: PortModel){
+		port.addLink(this);
 		this.sourcePort = port;
 	}
 	
 	setTargetPort(port: PortModel){
+		port.addLink(this);
 		this.targetPort = port;
 	}
 	

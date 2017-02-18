@@ -59,10 +59,11 @@ class MoveCanvasAction extends BaseAction{
 class MoveItemsAction extends BaseAction{
 	selectionModels: SelectionModel[];
 	moved:boolean;
-	constructor(mouseX: number, mouseY: number, diagramModel: DiagramModel){
+	constructor(mouseX: number, mouseY: number, diagramEngine: DiagramEngine){
 		super(mouseX, mouseY);
 		this.moved = false;
-		this.selectionModels = diagramModel.getSelectedItems().map((item: PointModel | NodeModel) => {
+		diagramEngine.enableRepaintEntities(diagramEngine.getDiagramModel().getSelectedItems());
+		this.selectionModels = diagramEngine.getDiagramModel().getSelectedItems().map((item: PointModel | NodeModel) => {
 			return {
 				model: item,
 				initialX: item.x,
@@ -247,6 +248,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 					},
 					onMouseDown: (event) =>{
+						diagramEngine.clearRepaintEntities();
 						
 						var model = this.getMouseElement(event);
 						
@@ -286,10 +288,10 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							diagramModel.addLink(link);
 							
 							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY,diagramModel)
+								action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
 							});
 						}
-						//
+						//its some or other element, probably want to move it
 						else{
 							
 							if (!event.shiftKey && !model.model.isSelected()){
@@ -299,7 +301,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							model.model.setSelected(true);
 							
 							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY,diagramModel)
+								action: new MoveItemsAction(event.pageX, event.pageY,diagramEngine)
 							});
 						}
 					},
@@ -323,6 +325,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							}
 						}
 						
+						diagramEngine.clearRepaintEntities();
 						this.setState({action: null});
 					}
 				},
@@ -332,7 +335,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							event.stopPropagation();
 							diagramModel.clearSelection(point);
 							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
+								action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
 							});
 						}}):null,
 					React.createElement(NodeLayerWidget, {diagramEngine: diagramEngine}),

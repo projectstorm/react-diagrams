@@ -20642,9 +20642,11 @@ var LinkModel = (function (_super) {
         return this.points[this.points.length - 1];
     };
     LinkModel.prototype.setSourcePort = function (port) {
+        port.addLink(this);
         this.sourcePort = port;
     };
     LinkModel.prototype.setTargetPort = function (port) {
+        port.addLink(this);
         this.targetPort = port;
     };
     LinkModel.prototype.getPoints = function () {
@@ -39934,7 +39936,7 @@ var DiagramEngine = (function (_super) {
         return _this;
     }
     DiagramEngine.prototype.clearRepaintEntities = function () {
-        this.paintableWidgets = {};
+        this.paintableWidgets = null;
     };
     DiagramEngine.prototype.enableRepaintEntities = function (entities) {
         var _this = this;
@@ -39947,6 +39949,9 @@ var DiagramEngine = (function (_super) {
                         _this.paintableWidgets[link.getID()] = true;
                     });
                 });
+            }
+            if (entity instanceof Common_1.PointModel) {
+                _this.paintableWidgets[entity.getLink().getID()] = true;
             }
             _this.paintableWidgets[entity.getID()] = true;
         });
@@ -40167,10 +40172,11 @@ var MoveCanvasAction = (function (_super) {
 }(BaseAction));
 var MoveItemsAction = (function (_super) {
     __extends(MoveItemsAction, _super);
-    function MoveItemsAction(mouseX, mouseY, diagramModel) {
+    function MoveItemsAction(mouseX, mouseY, diagramEngine) {
         var _this = _super.call(this, mouseX, mouseY) || this;
         _this.moved = false;
-        _this.selectionModels = diagramModel.getSelectedItems().map(function (item) {
+        diagramEngine.enableRepaintEntities(diagramEngine.getDiagramModel().getSelectedItems());
+        _this.selectionModels = diagramEngine.getDiagramModel().getSelectedItems().map(function (item) {
             return {
                 model: item,
                 initialX: item.x,
@@ -40319,6 +40325,7 @@ var DiagramWidget = (function (_super) {
                 }
             },
             onMouseDown: function (event) {
+                diagramEngine.clearRepaintEntities();
                 var model = _this.getMouseElement(event);
                 //its the canvas
                 if (model === null) {
@@ -40347,7 +40354,7 @@ var DiagramWidget = (function (_super) {
                     link.getLastPoint().setSelected(true);
                     diagramModel.addLink(link);
                     _this.setState({
-                        action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
+                        action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
                     });
                 }
                 else {
@@ -40357,7 +40364,7 @@ var DiagramWidget = (function (_super) {
                     }
                     model.model.setSelected(true);
                     _this.setState({
-                        action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
+                        action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
                     });
                 }
             },
@@ -40377,6 +40384,7 @@ var DiagramWidget = (function (_super) {
                         });
                     }
                 }
+                diagramEngine.clearRepaintEntities();
                 _this.setState({ action: null });
             }
         }, this.state.renderedNodes ?
@@ -40385,7 +40393,7 @@ var DiagramWidget = (function (_super) {
                     event.stopPropagation();
                     diagramModel.clearSelection(point);
                     _this.setState({
-                        action: new MoveItemsAction(event.pageX, event.pageY, diagramModel)
+                        action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
                     });
                 }
             }) : null, React.createElement(NodeLayerWidget_1.NodeLayerWidget, { diagramEngine: diagramEngine }), this.state.action instanceof SelectingAction ?
