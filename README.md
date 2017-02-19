@@ -27,7 +27,7 @@ npm install projectstorm/react-diagrams
 
 #### How to see the examples
 
-simply navigate to the __tests__ directory and load up the corresponding index.html
+simply navigate to the __demos__ directory and load up the corresponding index.html
 
 #### How to build
 

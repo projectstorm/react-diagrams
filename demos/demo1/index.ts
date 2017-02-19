@@ -2,7 +2,11 @@ import * as SRD from "../../src/main";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-declare var require;
+declare var require: {
+    <T>(path: string): T;
+    (paths: string[], callback: (...modules: any[]) => void): void;
+    ensure: (paths: string[], callback: (require: <T>(path: string) => T) => void) => void;
+};
 
 require("../test.scss");
 

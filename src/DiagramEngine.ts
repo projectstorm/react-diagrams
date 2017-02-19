@@ -15,7 +15,7 @@ export interface DiagramEngineListener extends BaseListener{
 }
 
 /**
- * 
+ * Passed as a parameter to the DiagramWidget
  */
 export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 	
