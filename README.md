@@ -72,7 +72,7 @@ Take a look at the __defaults__ directory, with specific attention to the __Defa
 
 #### How do I use the library?
 
-Take a look at the tests folders, they have simple and complex examples of the complete usage.
+Take a look at the demo folders, they have simple and complex examples of the complete usage.
 
 ## Usage Demo and Guide
 

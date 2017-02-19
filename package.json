@@ -16,7 +16,7 @@
     "nodes"
   ],
   "main": "./dist/main.js",
-  "typings": "./dist/main",
+  "typings": "./dist/src/main",
   "author": "dylanvorster",
   "dependencies": {
     "lodash": "^4.13.1",
