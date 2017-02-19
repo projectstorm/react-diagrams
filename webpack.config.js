@@ -10,7 +10,7 @@ module.exports = [
 			filename: 'main.js',
 			path: './dist',
 			libraryTarget: 'umd',
-			library: 'SRD'
+			library: 'storm-react-diagrams'
 		},
 		externals: {
             "react": "React",
@@ -46,7 +46,7 @@ module.exports = [
 			filename: '[name]',
 			path: './demos',
 			libraryTarget: 'umd',
-			library: 'SRD'
+			library: 'storm-react-diagrams'
 		},
 		externals: {
 			"react-dom": "ReactDOM",

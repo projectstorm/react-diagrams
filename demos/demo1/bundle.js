@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["React", "_", "ReactDOM"], factory);
 	else if(typeof exports === 'object')
-		exports["SRD"] = factory(require("React"), require("_"), require("ReactDOM"));
+		exports["storm-react-diagrams"] = factory(require("React"), require("_"), require("ReactDOM"));
 	else
-		root["SRD"] = factory(root["React"], root["_"], root["ReactDOM"]);
+		root["storm-react-diagrams"] = factory(root["React"], root["_"], root["ReactDOM"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_11__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
