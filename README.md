@@ -1,5 +1,7 @@
 # STORM React Diagrams
 
+A super simple, no-nonsense diagramming library written in react that just works.
+
 [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![NPM](https://nodei.co/npm/storm-react-diagrams.png?mini=true)](https://npmjs.org/package/storm-react-diagrams)
 
