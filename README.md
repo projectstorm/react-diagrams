@@ -1,6 +1,6 @@
 # STORM React Diagrams
 
-A super simple, no-nonsense diagramming library written in react that just works.
+A super simple, no-nonsense diagramming library written in React that just works.
 
 [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![NPM](https://nodei.co/npm/storm-react-diagrams.png?mini=true)](https://npmjs.org/package/storm-react-diagrams)
@@ -20,12 +20,14 @@ A no-nonsense diagramming library written entirely in React with the help of Lod
 ## How to install
 
 ```
-npm install projectstorm/react-diagrams
+npm install storm-react-diagrams
+```
+or
+```
+yarn add storm-react-diagrams
 ```
 
-(until I decide to put it on npm)
-
-* Its only dependency is Lodash so it will install that too.
+* Its only dependency is Lodash and obviously React so it will install that too.
 
 #### How to see the examples
 
