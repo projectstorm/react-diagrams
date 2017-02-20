@@ -1,10 +1,10 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("React"), require("_"), require("ReactDOM"));
+		module.exports = factory(require("React"), require("lodash"), require("ReactDOM"));
 	else if(typeof define === 'function' && define.amd)
 		define(["React", "_", "ReactDOM"], factory);
 	else if(typeof exports === 'object')
-		exports["storm-react-diagrams"] = factory(require("React"), require("_"), require("ReactDOM"));
+		exports["storm-react-diagrams"] = factory(require("React"), require("lodash"), require("ReactDOM"));
 	else
 		root["storm-react-diagrams"] = factory(root["React"], root["_"], root["ReactDOM"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_11__) {

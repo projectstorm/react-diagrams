@@ -1,12 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("React"), require("_"));
+		module.exports = factory(require("react"), require("lodash"));
 	else if(typeof define === 'function' && define.amd)
-		define(["React", "_"], factory);
+		define(["react", "_"], factory);
 	else if(typeof exports === 'object')
-		exports["storm-react-diagrams"] = factory(require("React"), require("_"));
+		exports["storm-react-diagrams"] = factory(require("react"), require("lodash"));
 	else
-		root["storm-react-diagrams"] = factory(root["React"], root["_"]);
+		root["storm-react-diagrams"] = factory(root["react"], root["_"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
