@@ -7,7 +7,7 @@
 		exports["storm-react-diagrams"] = factory(require("React"), require("lodash"), require("ReactDOM"));
 	else
 		root["storm-react-diagrams"] = factory(root["React"], root["_"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_11__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_16__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -99,7 +99,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Toolkit_1 = __webpack_require__(5);
+var Toolkit_1 = __webpack_require__(4);
 var BaseEntity_1 = __webpack_require__(3);
 var _ = __webpack_require__(1);
 /**
@@ -329,7 +329,7 @@ exports.NodeModel = NodeModel;
 
 "use strict";
 
-var Toolkit_1 = __webpack_require__(5);
+var Toolkit_1 = __webpack_require__(4);
 /**
  * @author Dylan Vorster
  */
@@ -374,6 +374,75 @@ exports.BaseEnity = BaseEnity;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * @author Dylan Vorster
+ */
+var Toolkit = (function () {
+    function Toolkit() {
+    }
+    /**
+   * Generats a unique ID (thanks Stack overflow :3)
+   * @returns {String}
+   */
+    Toolkit.UID = function () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    };
+    return Toolkit;
+}());
+exports.Toolkit = Toolkit;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * @author Dylan Vorster
+ */
+var WidgetFactory = (function () {
+    function WidgetFactory(name) {
+        this.type = name;
+    }
+    WidgetFactory.prototype.getType = function () {
+        return this.type;
+    };
+    return WidgetFactory;
+}());
+exports.WidgetFactory = WidgetFactory;
+var NodeWidgetFactory = (function (_super) {
+    __extends(NodeWidgetFactory, _super);
+    function NodeWidgetFactory() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return NodeWidgetFactory;
+}(WidgetFactory));
+exports.NodeWidgetFactory = NodeWidgetFactory;
+var LinkWidgetFactory = (function (_super) {
+    __extends(LinkWidgetFactory, _super);
+    function LinkWidgetFactory() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return LinkWidgetFactory;
+}(WidgetFactory));
+exports.LinkWidgetFactory = LinkWidgetFactory;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -539,75 +608,6 @@ var DiagramModel = (function (_super) {
     return DiagramModel;
 }(BaseEntity_1.BaseEnity));
 exports.DiagramModel = DiagramModel;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * @author Dylan Vorster
- */
-var Toolkit = (function () {
-    function Toolkit() {
-    }
-    /**
-   * Generats a unique ID (thanks Stack overflow :3)
-   * @returns {String}
-   */
-    Toolkit.UID = function () {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    };
-    return Toolkit;
-}());
-exports.Toolkit = Toolkit;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-/**
- * @author Dylan Vorster
- */
-var WidgetFactory = (function () {
-    function WidgetFactory(name) {
-        this.type = name;
-    }
-    WidgetFactory.prototype.getType = function () {
-        return this.type;
-    };
-    return WidgetFactory;
-}());
-exports.WidgetFactory = WidgetFactory;
-var NodeWidgetFactory = (function (_super) {
-    __extends(NodeWidgetFactory, _super);
-    function NodeWidgetFactory() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return NodeWidgetFactory;
-}(WidgetFactory));
-exports.NodeWidgetFactory = NodeWidgetFactory;
-var LinkWidgetFactory = (function (_super) {
-    __extends(LinkWidgetFactory, _super);
-    function LinkWidgetFactory() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return LinkWidgetFactory;
-}(WidgetFactory));
-exports.LinkWidgetFactory = LinkWidgetFactory;
 
 
 /***/ }),
@@ -793,7 +793,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var React = __webpack_require__(0);
-var PortWidget_1 = __webpack_require__(23);
+var PortWidget_1 = __webpack_require__(13);
 /**
  * @author Dylan Vorster
  */
@@ -848,13 +848,254 @@ exports.DefaultNodeWidget = DefaultNodeWidget;
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var React = __webpack_require__(0);
+var LinkWidget_1 = __webpack_require__(10);
+var _ = __webpack_require__(1);
+/**
+ * @author Dylan Vorster
+ */
+var LinkLayerWidget = (function (_super) {
+    __extends(LinkLayerWidget, _super);
+    function LinkLayerWidget(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {};
+        return _this;
+    }
+    LinkLayerWidget.prototype.componentDidMount = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.forceUpdate();
+        }, 10);
+    };
+    LinkLayerWidget.prototype.render = function () {
+        var _this = this;
+        var diagramModel = this.props.diagramEngine.getDiagramModel();
+        return (React.DOM.svg({
+            style: {
+                transform: 'scale(' + diagramModel.getZoomLevel() / 100.0 + ') translate(' + diagramModel.getOffsetX() + 'px,' + diagramModel.getOffsetY() + 'px)',
+                width: '100%',
+                height: '100%'
+            }
+        }, _.map(diagramModel.getLinks(), function (link) {
+            //TODO just improve this vastly x_x
+            if (link.sourcePort !== null) {
+                try {
+                    //generate a point
+                    link.points[0].updateLocation(_this.props.diagramEngine.getPortCenter(link.sourcePort));
+                }
+                //remove the link because its problematic (TODO implement this rather at an engine level)
+                catch (ex) {
+                    console.log(ex);
+                    diagramModel.removeLink(link);
+                    return;
+                }
+            }
+            if (link.targetPort !== null) {
+                try {
+                    _.last(link.points).updateLocation(_this.props.diagramEngine.getPortCenter(link.targetPort));
+                }
+                //remove the link because its problematic (TODO implement this rather at an engine level)
+                catch (ex) {
+                    console.log(ex);
+                    diagramModel.removeLink(link);
+                    return;
+                }
+            }
+            //generate links
+            var generatedLink = _this.props.diagramEngine.generateWidgetForLink(link);
+            if (!generatedLink) {
+                console.log("no link generated for type: " + link.getType());
+                return null;
+            }
+            return (React.createElement(LinkWidget_1.LinkWidget, {
+                key: link.getID(),
+                link: link,
+                diagramEngine: _this.props.diagramEngine,
+            }, React.cloneElement(generatedLink, { pointAdded: _this.props.pointAdded })));
+        })));
+    };
+    return LinkLayerWidget;
+}(React.Component));
+exports.LinkLayerWidget = LinkLayerWidget;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var React = __webpack_require__(0);
+/**
+ * @author Dylan Vorster
+ */
+var LinkWidget = (function (_super) {
+    __extends(LinkWidget, _super);
+    function LinkWidget(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {};
+        return _this;
+    }
+    LinkWidget.prototype.shouldComponentUpdate = function () {
+        return this.props.diagramEngine.canEntityRepaint(this.props.link);
+    };
+    LinkWidget.prototype.render = function () {
+        return this.props.children;
+    };
+    return LinkWidget;
+}(React.Component));
+exports.LinkWidget = LinkWidget;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var React = __webpack_require__(0);
+var _ = __webpack_require__(1);
+var NodeWidget_1 = __webpack_require__(12);
+/**
+ * @author Dylan Vorster
+ */
+var NodeLayerWidget = (function (_super) {
+    __extends(NodeLayerWidget, _super);
+    function NodeLayerWidget(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {};
+        return _this;
+    }
+    NodeLayerWidget.prototype.render = function () {
+        var _this = this;
+        var diagramModel = this.props.diagramEngine.getDiagramModel();
+        return (React.DOM.div({
+            className: 'node-view',
+            style: {
+                transform: 'scale(' + diagramModel.getZoomLevel() / 100.0 + ') translate(' + diagramModel.getOffsetX() + 'px,' + diagramModel.getOffsetY() + 'px)',
+                width: '100%',
+                height: '100%'
+            }
+        }, _.map(diagramModel.getNodes(), function (node) {
+            return (React.createElement(NodeWidget_1.NodeWidget, { diagramEngine: _this.props.diagramEngine, key: node.id, node: node }, _this.props.diagramEngine.generateWidgetForNode(node)));
+        })));
+    };
+    return NodeLayerWidget;
+}(React.Component));
+exports.NodeLayerWidget = NodeLayerWidget;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var React = __webpack_require__(0);
+/**
+ * @author Dylan Vorster
+ */
+var NodeWidget = (function (_super) {
+    __extends(NodeWidget, _super);
+    function NodeWidget(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {};
+        return _this;
+    }
+    NodeWidget.prototype.shouldComponentUpdate = function () {
+        return this.props.diagramEngine.canEntityRepaint(this.props.node);
+    };
+    NodeWidget.prototype.render = function () {
+        return (React.DOM.div({
+            'data-nodeid': this.props.node.id,
+            className: 'node' + (this.props.node.isSelected() ? ' selected' : ''),
+            style: {
+                top: this.props.node.y,
+                left: this.props.node.x,
+            }
+        }, React.cloneElement(this.props.children, {})));
+    };
+    return NodeWidget;
+}(React.Component));
+exports.NodeWidget = NodeWidget;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var React = __webpack_require__(0);
+/**
+ * @author Dylan Vorster
+ */
+var PortWidget = (function (_super) {
+    __extends(PortWidget, _super);
+    function PortWidget(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            selected: false
+        };
+        return _this;
+    }
+    PortWidget.prototype.render = function () {
+        var _this = this;
+        return (React.DOM.div({
+            onMouseEnter: function () {
+                _this.setState({ selected: true });
+            },
+            onMouseLeave: function () {
+                _this.setState({ selected: false });
+            },
+            className: 'port' + (this.state.selected ? ' selected' : ''),
+            'data-name': this.props.name,
+            'data-nodeid': this.props.node.getID()
+        }));
+    };
+    return PortWidget;
+}(React.Component));
+exports.PortWidget = PortWidget;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(17);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(14)(content, {});
+var update = __webpack_require__(19)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -871,7 +1112,7 @@ if(false) {
 }
 
 /***/ }),
-/* 10 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -883,27 +1124,35 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 //export defaults
-__export(__webpack_require__(16));
+__export(__webpack_require__(21));
 __export(__webpack_require__(7));
-__export(__webpack_require__(17));
+__export(__webpack_require__(22));
 __export(__webpack_require__(8));
-__export(__webpack_require__(15));
+__export(__webpack_require__(5));
 __export(__webpack_require__(4));
+__export(__webpack_require__(20));
+__export(__webpack_require__(6));
+__export(__webpack_require__(3));
 __export(__webpack_require__(2));
-__export(__webpack_require__(18));
+__export(__webpack_require__(23));
+__export(__webpack_require__(9));
+__export(__webpack_require__(10));
+__export(__webpack_require__(11));
+__export(__webpack_require__(12));
+__export(__webpack_require__(13));
 
 
 /***/ }),
-/* 11 */
+/* 16 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_16__;
 
 /***/ }),
-/* 12 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)();
+exports = module.exports = __webpack_require__(18)();
 // imports
 
 
@@ -914,7 +1163,7 @@ exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nhtml, body {\n  w
 
 
 /***/ }),
-/* 13 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /*
@@ -970,7 +1219,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 14 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /*
@@ -1222,7 +1471,7 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 15 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1234,7 +1483,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Common_1 = __webpack_require__(2);
 var BaseEntity_1 = __webpack_require__(3);
-var DiagramModel_1 = __webpack_require__(4);
+var DiagramModel_1 = __webpack_require__(6);
 var _ = __webpack_require__(1);
 /**
  * Passed as a parameter to the DiagramWidget
@@ -1366,7 +1615,7 @@ exports.DiagramEngine = DiagramEngine;
 
 
 /***/ }),
-/* 16 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1376,7 +1625,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var WidgetFactories_1 = __webpack_require__(6);
+var WidgetFactories_1 = __webpack_require__(5);
 var React = __webpack_require__(0);
 var DefaultLinkWidget_1 = __webpack_require__(7);
 /**
@@ -1399,7 +1648,7 @@ exports.DefaultLinkFactory = DefaultLinkFactory;
 
 
 /***/ }),
-/* 17 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1409,7 +1658,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var WidgetFactories_1 = __webpack_require__(6);
+var WidgetFactories_1 = __webpack_require__(5);
 var React = __webpack_require__(0);
 var DefaultNodeWidget_1 = __webpack_require__(8);
 /**
@@ -1436,7 +1685,7 @@ exports.DefaultNodeFactory = DefaultNodeFactory;
 
 
 /***/ }),
-/* 18 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1449,8 +1698,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 var React = __webpack_require__(0);
 var _ = __webpack_require__(1);
 var Common_1 = __webpack_require__(2);
-var LinkLayerWidget_1 = __webpack_require__(19);
-var NodeLayerWidget_1 = __webpack_require__(21);
+var LinkLayerWidget_1 = __webpack_require__(9);
+var NodeLayerWidget_1 = __webpack_require__(11);
 var BaseAction = (function () {
     function BaseAction(mouseX, mouseY) {
         this.mouseX = mouseX;
@@ -1731,256 +1980,15 @@ exports.DiagramWidget = DiagramWidget;
 
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var React = __webpack_require__(0);
-var LinkWidget_1 = __webpack_require__(20);
-var _ = __webpack_require__(1);
-/**
- * @author Dylan Vorster
- */
-var LinkLayerWidget = (function (_super) {
-    __extends(LinkLayerWidget, _super);
-    function LinkLayerWidget(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {};
-        return _this;
-    }
-    LinkLayerWidget.prototype.componentDidMount = function () {
-        var _this = this;
-        setTimeout(function () {
-            _this.forceUpdate();
-        }, 10);
-    };
-    LinkLayerWidget.prototype.render = function () {
-        var _this = this;
-        var diagramModel = this.props.diagramEngine.getDiagramModel();
-        return (React.DOM.svg({
-            style: {
-                transform: 'scale(' + diagramModel.getZoomLevel() / 100.0 + ') translate(' + diagramModel.getOffsetX() + 'px,' + diagramModel.getOffsetY() + 'px)',
-                width: '100%',
-                height: '100%'
-            }
-        }, _.map(diagramModel.getLinks(), function (link) {
-            //TODO just improve this vastly x_x
-            if (link.sourcePort !== null) {
-                try {
-                    //generate a point
-                    link.points[0].updateLocation(_this.props.diagramEngine.getPortCenter(link.sourcePort));
-                }
-                //remove the link because its problematic (TODO implement this rather at an engine level)
-                catch (ex) {
-                    console.log(ex);
-                    diagramModel.removeLink(link);
-                    return;
-                }
-            }
-            if (link.targetPort !== null) {
-                try {
-                    _.last(link.points).updateLocation(_this.props.diagramEngine.getPortCenter(link.targetPort));
-                }
-                //remove the link because its problematic (TODO implement this rather at an engine level)
-                catch (ex) {
-                    console.log(ex);
-                    diagramModel.removeLink(link);
-                    return;
-                }
-            }
-            //generate links
-            var generatedLink = _this.props.diagramEngine.generateWidgetForLink(link);
-            if (!generatedLink) {
-                console.log("no link generated for type: " + link.getType());
-                return null;
-            }
-            return (React.createElement(LinkWidget_1.LinkWidget, {
-                key: link.getID(),
-                link: link,
-                diagramEngine: _this.props.diagramEngine,
-            }, React.cloneElement(generatedLink, { pointAdded: _this.props.pointAdded })));
-        })));
-    };
-    return LinkLayerWidget;
-}(React.Component));
-exports.LinkLayerWidget = LinkLayerWidget;
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var React = __webpack_require__(0);
-/**
- * @author Dylan Vorster
- */
-var LinkWidget = (function (_super) {
-    __extends(LinkWidget, _super);
-    function LinkWidget(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {};
-        return _this;
-    }
-    LinkWidget.prototype.shouldComponentUpdate = function () {
-        return this.props.diagramEngine.canEntityRepaint(this.props.link);
-    };
-    LinkWidget.prototype.render = function () {
-        return this.props.children;
-    };
-    return LinkWidget;
-}(React.Component));
-exports.LinkWidget = LinkWidget;
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var React = __webpack_require__(0);
-var _ = __webpack_require__(1);
-var NodeWidget_1 = __webpack_require__(22);
-/**
- * @author Dylan Vorster
- */
-var NodeLayerWidget = (function (_super) {
-    __extends(NodeLayerWidget, _super);
-    function NodeLayerWidget(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {};
-        return _this;
-    }
-    NodeLayerWidget.prototype.render = function () {
-        var _this = this;
-        var diagramModel = this.props.diagramEngine.getDiagramModel();
-        return (React.DOM.div({
-            className: 'node-view',
-            style: {
-                transform: 'scale(' + diagramModel.getZoomLevel() / 100.0 + ') translate(' + diagramModel.getOffsetX() + 'px,' + diagramModel.getOffsetY() + 'px)',
-                width: '100%',
-                height: '100%'
-            }
-        }, _.map(diagramModel.getNodes(), function (node) {
-            return (React.createElement(NodeWidget_1.NodeWidget, { diagramEngine: _this.props.diagramEngine, key: node.id, node: node }, _this.props.diagramEngine.generateWidgetForNode(node)));
-        })));
-    };
-    return NodeLayerWidget;
-}(React.Component));
-exports.NodeLayerWidget = NodeLayerWidget;
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var React = __webpack_require__(0);
-/**
- * @author Dylan Vorster
- */
-var NodeWidget = (function (_super) {
-    __extends(NodeWidget, _super);
-    function NodeWidget(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {};
-        return _this;
-    }
-    NodeWidget.prototype.shouldComponentUpdate = function () {
-        return this.props.diagramEngine.canEntityRepaint(this.props.node);
-    };
-    NodeWidget.prototype.render = function () {
-        return (React.DOM.div({
-            'data-nodeid': this.props.node.id,
-            className: 'node' + (this.props.node.isSelected() ? ' selected' : ''),
-            style: {
-                top: this.props.node.y,
-                left: this.props.node.x,
-            }
-        }, React.cloneElement(this.props.children, {})));
-    };
-    return NodeWidget;
-}(React.Component));
-exports.NodeWidget = NodeWidget;
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var React = __webpack_require__(0);
-/**
- * @author Dylan Vorster
- */
-var PortWidget = (function (_super) {
-    __extends(PortWidget, _super);
-    function PortWidget(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {
-            selected: false
-        };
-        return _this;
-    }
-    PortWidget.prototype.render = function () {
-        var _this = this;
-        return (React.DOM.div({
-            onMouseEnter: function () {
-                _this.setState({ selected: true });
-            },
-            onMouseLeave: function () {
-                _this.setState({ selected: false });
-            },
-            className: 'port' + (this.state.selected ? ' selected' : ''),
-            'data-name': this.props.name,
-            'data-nodeid': this.props.node.getID()
-        }));
-    };
-    return PortWidget;
-}(React.Component));
-exports.PortWidget = PortWidget;
-
-
-/***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var SRD = __webpack_require__(10);
+var SRD = __webpack_require__(15);
 var React = __webpack_require__(0);
-var ReactDOM = __webpack_require__(11);
-__webpack_require__(9);
+var ReactDOM = __webpack_require__(16);
+__webpack_require__(14);
 /**
  *
  * Simple test showing the Object oriented way of using this library.
