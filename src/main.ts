@@ -7,6 +7,8 @@ export * from "./defaults/DefaultLinkFactory";
 export * from "./defaults/DefaultLinkWidget";
 export * from "./defaults/DefaultNodeFactory";
 export * from "./defaults/DefaultNodeWidget";
+export * from "./defaults/DefaultNodeModel";
+export * from "./defaults/DefaultPortModel";
 
 export * from "./WidgetFactories";
 export * from "./Toolkit";

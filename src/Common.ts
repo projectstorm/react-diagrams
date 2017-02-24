@@ -225,16 +225,14 @@ export class PortModel extends BaseModel{
 export class NodeModel extends BaseModel{
 	
 	nodeType: string;
-	canDelete: boolean;
 	x: number;
 	y: number;
 	extras: {};
 	ports:  {[s: string]:PortModel};
 	
-	constructor(){
+	constructor(nodeType: string = 'default'){
 		super();
-		this.canDelete = true;
-		this.nodeType = "default";
+		this.nodeType = nodeType;
 		this.x = 0;
 		this.y = 0;
 		this.extras = {};

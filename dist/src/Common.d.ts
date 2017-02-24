@@ -72,14 +72,13 @@ export declare class PortModel extends BaseModel {
 }
 export declare class NodeModel extends BaseModel {
     nodeType: string;
-    canDelete: boolean;
     x: number;
     y: number;
     extras: {};
     ports: {
         [s: string]: PortModel;
     };
-    constructor();
+    constructor(nodeType?: string);
     remove(): void;
     getPort(name: string): PortModel | null;
     getPorts(): {

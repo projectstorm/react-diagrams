@@ -1,4 +1,3 @@
-var webpack = require("webpack");
 /**
  * @author Dylan Vorster
  */

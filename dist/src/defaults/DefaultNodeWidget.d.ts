@@ -1,18 +1,8 @@
 /// <reference types="react" />
 import * as React from "react";
-import { NodeModel } from "../Common";
+import { DefaultNodeModel } from "./DefaultNodeModel";
 export interface DefaultNodeProps {
-    name?: string;
-    node: NodeModel;
-    inPorts?: (string | {
-        name: string;
-        display: string;
-    })[];
-    outPorts?: (string | {
-        name: string;
-        display: string;
-    })[];
-    color?: string;
+    node: DefaultNodeModel;
 }
 export interface DefaultNodeState {
 }
