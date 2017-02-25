@@ -18,6 +18,7 @@ export * from "./DiagramModel";
 export * from "./BaseEntity";
 export * from "./Common";
 export * from "./AbstractInstanceFactory";
+export * from "./LinkInstanceFactory";
 
 export * from "./widgets/DiagramWidget";
 export * from "./widgets/LinkLayerWidget";

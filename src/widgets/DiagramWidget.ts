@@ -102,10 +102,43 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		window.removeEventListener('keydown',this.state.windowListener);
 	}
 	
-	componentWillReceiveProps(nextProps: DiagramProps){
-		if (this.props.diagramEngine.id !== nextProps.diagramEngine.id){
+	componentWillUpdate(nextProps: DiagramProps){
+		if (this.props.diagramEngine.diagramModel.id !== nextProps.diagramEngine.diagramModel.id){
 			this.setState({renderedNodes: false});
+			nextProps.diagramEngine.diagramModel.rendered = true;
 		}
+		if (!nextProps.diagramEngine.diagramModel.rendered){
+			this.setState({renderedNodes: false});
+			nextProps.diagramEngine.diagramModel.rendered = true;
+		}
+	}
+	
+	componentDidUpdate(){
+		if (!this.state.renderedNodes){
+			this.setState({
+				renderedNodes: true
+			});
+		}
+	}
+	
+	componentDidMount(){
+		this.props.diagramEngine.setCanvas(this.refs['canvas'] as Element);
+		
+		//add a keyboard listener
+		this.setState({
+			renderedNodes: true,
+			windowListener: window.addEventListener('keydown',(event) => {
+				
+				//delete all selected
+				if(event.keyCode === 46){
+					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(),(element) => {
+						element.remove();
+					});
+					this.forceUpdate();
+				}
+			})
+		});
+		window.focus();
 	}
 	
 	/**
@@ -153,28 +186,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 		
 		return null;
-	}
-	
-	componentDidMount(){
-		this.props.diagramEngine.setCanvas(this.refs['canvas'] as Element);
-		
-		//TODO
-		
-		//add a keybaord listener
-		this.setState({
-			renderedNodes: true,
-			windowListener: window.addEventListener('keydown',(event) => {
-				
-				//delete all selected
-				if(event.keyCode === 46){
-					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(),(element) => {
-						element.remove();
-					});
-					this.forceUpdate();
-				}
-			})
-		});
-		window.focus();
 	}
 	
 

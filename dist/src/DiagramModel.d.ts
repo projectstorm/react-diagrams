@@ -23,6 +23,7 @@ export declare class DiagramModel extends BaseEntity<DiagramListener> {
     offsetX: number;
     offsetY: number;
     zoom: number;
+    rendered: boolean;
     constructor();
     deSerializeDiagram(object: any, diagramEngine: DiagramEngine): void;
     serializeDiagram(): {

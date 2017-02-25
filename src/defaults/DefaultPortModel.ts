@@ -26,6 +26,12 @@ export class DefaultPortModel extends PortModel{
 		this.label = label || name;
 	}
 	
+	deSerialize(object){
+		super.deSerialize(object);
+		this.in = object.in;
+		this.label = object.label;
+	}
+	
 	serialize(){
 		return _.merge(super.serialize(),{
 			in: this.in,

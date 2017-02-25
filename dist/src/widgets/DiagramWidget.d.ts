@@ -22,7 +22,9 @@ export interface DiagramState {
 export declare class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
     constructor(props: DiagramProps);
     componentWillUnmount(): void;
-    componentWillReceiveProps(nextProps: DiagramProps): void;
+    componentWillUpdate(nextProps: DiagramProps): void;
+    componentDidUpdate(): void;
+    componentDidMount(): void;
     /**
      * Gets a model and element under the mouse cursor
      */
@@ -30,6 +32,5 @@ export declare class DiagramWidget extends React.Component<DiagramProps, Diagram
         model: BaseModel;
         element: Element;
     };
-    componentDidMount(): void;
     render(): React.DOMElement<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 }

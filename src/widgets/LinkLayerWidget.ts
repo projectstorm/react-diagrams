@@ -24,14 +24,7 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 		}
 	}
 	
-	componentDidMount(){
-		setTimeout(()=> {
-			this.forceUpdate();
-		},10);
-	}
-	
 	render() {
-		
 		var diagramModel = this.props.diagramEngine.getDiagramModel();
 		
 		return (

@@ -100,6 +100,7 @@ export declare class PortModel extends BaseModel {
     links: {
         [id: string]: LinkModel;
     };
+    deSerialize(ob: any): void;
     serialize(): {
         id: string;
     } & {
@@ -152,6 +153,7 @@ export declare class NodeModel extends BaseModel {
         })[];
     };
     remove(): void;
+    getPortFromID(id: any): PortModel | null;
     getPort(name: string): PortModel | null;
     getPorts(): {
         [s: string]: PortModel;

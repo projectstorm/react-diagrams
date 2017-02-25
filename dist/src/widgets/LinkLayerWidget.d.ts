@@ -13,6 +13,5 @@ export interface LinkLayerState {
  */
 export declare class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerState> {
     constructor(props: LinkLayerProps);
-    componentDidMount(): void;
     render(): React.DOMElement<React.SVGAttributes<SVGElement>, SVGElement>;
 }

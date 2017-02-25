@@ -30,6 +30,12 @@ export class DefaultNodeModel extends NodeModel{
 		this.color = color;
 	}
 	
+	deSerialize(object){
+		super.deSerialize(object);
+		this.name = object.name;
+		this.color = object.color;
+	}
+	
 	serialize(){
 		return _.merge(super.serialize(),{
 			name: this.name,

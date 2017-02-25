@@ -80,7 +80,7 @@ export class PointModel extends BaseModel{
 	}
 	
 	serialize(){
-		return _.extend(super.serialize(),{
+		return _.merge(super.serialize(),{
 			x: this.x,
 			y: this.y
 		});
@@ -237,6 +237,11 @@ export class PortModel extends BaseModel{
 	parentNode: NodeModel;
 	links: {[id: string]: LinkModel};
 	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.name = ob.name;
+	}
+	
 	serialize(){
 		return _.merge(super.serialize(),{
 			name: this.name,
@@ -323,6 +328,15 @@ export class NodeModel extends BaseModel{
 				link.remove();
 			});
 		}
+	}
+	
+	getPortFromID(id): PortModel | null{
+		for (var i in this.ports){
+			if (this.ports[i].id === id){
+				return this.ports[i];
+			}
+		}
+		return null;
 	}
 	
 	getPort(name: string): PortModel | null{

@@ -11,6 +11,7 @@ export declare class DefaultPortModel extends PortModel {
     in: boolean;
     label: string;
     constructor(isInput: boolean, name: string, label?: string);
+    deSerialize(object: any): void;
     serialize(): {
         id: string;
     } & {

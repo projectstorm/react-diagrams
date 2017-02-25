@@ -15,6 +15,7 @@ export declare class DefaultNodeModel extends NodeModel {
         [s: string]: DefaultPortModel;
     };
     constructor(name?: string, color?: string);
+    deSerialize(object: any): void;
     serialize(): {
         id: string;
     } & {

@@ -28,6 +28,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 	offsetX: number;
 	offsetY: number;
 	zoom: number;
+	rendered: boolean;
 	
 	constructor(){
 		super();
@@ -38,6 +39,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		this.offsetX = 0;
 		this.offsetY = 0;
 		this.zoom = 100;
+		this.rendered = false;
 	}
 	
 	deSerializeDiagram(object: any, diagramEngine: DiagramEngine){
@@ -67,11 +69,11 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 			linkOb.deSerialize(link);
 			
 			if(link.target){
-				this.getNode(link.target).getPort(link.targetPort).addLink(linkOb);
+				linkOb.setTargetPort(this.getNode(link.target).getPortFromID(link.targetPort));
 			}
 			
 			if(link.source){
-				this.getNode(link.source).getPort(link.sourcePort).addLink(linkOb);
+				linkOb.setSourcePort(this.getNode(link.source).getPortFromID(link.sourcePort))
 			}
 			
 			this.addLink(linkOb);
