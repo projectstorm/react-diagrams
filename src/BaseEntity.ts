@@ -1,4 +1,5 @@
 import {Toolkit} from "./Toolkit";
+import {AbstractInstanceFactory} from "./AbstractInstanceFactory";
 /**
  * @author Dylan Vorster
  */
@@ -6,7 +7,7 @@ export class BaseListener{
 	
 }
 
-export class BaseEnity<T extends BaseListener>{
+export class BaseEntity<T extends BaseListener>{
 	
 	public listeners:{[s: string]: T};
 	public id: string;
@@ -22,6 +23,10 @@ export class BaseEnity<T extends BaseListener>{
 	
 	clearListeners(){
 		this.listeners = {};
+	}
+	
+	public deSerialize(data){
+		this.id = data.id;
 	}
 	
 	public serialize(){

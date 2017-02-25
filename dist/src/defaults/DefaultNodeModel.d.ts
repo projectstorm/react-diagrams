@@ -1,5 +1,10 @@
 import { NodeModel } from "../Common";
 import { DefaultPortModel } from "./DefaultPortModel";
+import { AbstractInstanceFactory } from "../AbstractInstanceFactory";
+export declare class DefaultNodeInstanceFactory extends AbstractInstanceFactory<DefaultNodeModel> {
+    constructor();
+    getInstance(): DefaultNodeModel;
+}
 /**
  * @author Dylan Vorster
  */

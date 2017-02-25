@@ -1,4 +1,4 @@
-import { BaseEnity, BaseListener } from "./BaseEntity";
+import { BaseEntity, BaseListener } from "./BaseEntity";
 export interface BaseModelListener extends BaseListener {
     selectionChanged?(): any;
     entityRemoved?(): any;
@@ -6,9 +6,10 @@ export interface BaseModelListener extends BaseListener {
 /**
  * @author Dylan Vorster
  */
-export declare class BaseModel extends BaseEnity<BaseModelListener> {
+export declare class BaseModel extends BaseEntity<BaseModelListener> {
     selected: boolean;
     constructor();
+    deSerialize(ob: any): void;
     serialize(): {
         id: string;
     } & {
@@ -28,6 +29,7 @@ export declare class PointModel extends BaseModel {
         x: number;
         y: number;
     });
+    deSerialize(ob: any): void;
     serialize(): {
         id: string;
     } & {
@@ -53,6 +55,7 @@ export declare class LinkModel extends BaseModel {
     points: PointModel[];
     extras: {};
     constructor();
+    deSerialize(ob: any): void;
     serialize(): {
         id: string;
     } & {
@@ -62,6 +65,8 @@ export declare class LinkModel extends BaseModel {
         type: string;
         source: string;
         sourcePort: string;
+        target: string;
+        targetPort: string;
         points: ({
             id: string;
         } & {
@@ -124,6 +129,7 @@ export declare class NodeModel extends BaseModel {
         [s: string]: PortModel;
     };
     constructor(nodeType?: string);
+    deSerialize(ob: any): void;
     serialize(): {
         id: string;
     } & {

@@ -25,6 +25,7 @@ window.onload = () => {
 	engine.registerNodeFactory(new SRD.DefaultNodeFactory());
 	engine.registerLinkFactory(new SRD.DefaultLinkFactory());
 	
+	
 	//2) setup the diagram model
 	var model = new SRD.DiagramModel();
 	
@@ -56,6 +57,21 @@ window.onload = () => {
 	//6) render the diagram!
 	ReactDOM.render(React.createElement(SRD.DiagramWidget,{diagramEngine: engine}), document.body);
 	
-	console.log(JSON.stringify(model.serialize()));
 	
+	//!------------- SERIALIZING / DESERIALIZING ------------
+	
+	//we need this to help the system know what models to create form the JSON
+	engine.registerInstanceFactory(new SRD.DefaultNodeInstanceFactory());
+	engine.registerInstanceFactory(new SRD.DefaultPortInstanceFactory());
+	
+	//serialize the model
+	var str = JSON.stringify(model.serializeDiagram());
+	console.log(str);
+	
+	//deserialize the model
+	var model2 = new SRD.DiagramModel();
+	model2.deSerializeDiagram(str,engine);
+	
+	//re-render the model
+	ReactDOM.render(React.createElement(SRD.DiagramWidget,{diagramEngine: engine}), document.body);
 }

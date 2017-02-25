@@ -1,8 +1,9 @@
 /// <reference types="react" />
 import { NodeWidgetFactory, LinkWidgetFactory } from "./WidgetFactories";
 import { LinkModel, NodeModel, BaseModel, PortModel } from "./Common";
-import { BaseEnity, BaseListener } from "./BaseEntity";
+import { BaseEntity, BaseListener } from "./BaseEntity";
 import { DiagramModel } from "./DiagramModel";
+import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
 /**
  * @author Dylan Vorster
  */
@@ -13,12 +14,15 @@ export interface DiagramEngineListener extends BaseListener {
 /**
  * Passed as a parameter to the DiagramWidget
  */
-export declare class DiagramEngine extends BaseEnity<DiagramEngineListener> {
+export declare class DiagramEngine extends BaseEntity<DiagramEngineListener> {
     nodeFactories: {
         [s: string]: NodeWidgetFactory;
     };
     linkFactories: {
         [s: string]: LinkWidgetFactory;
+    };
+    instanceFactories: {
+        [s: string]: AbstractInstanceFactory<BaseEntity<BaseListener>>;
     };
     diagramModel: DiagramModel;
     canvas: Element;
@@ -36,6 +40,8 @@ export declare class DiagramEngine extends BaseEnity<DiagramEngineListener> {
     getLinkFactories(): {
         [s: string]: LinkWidgetFactory;
     };
+    getInstanceFactory(className: string): AbstractInstanceFactory<BaseEntity<BaseListener>>;
+    registerInstanceFactory(factory: AbstractInstanceFactory<BaseEntity<BaseListener>>): void;
     registerNodeFactory(factory: NodeWidgetFactory): void;
     registerLinkFactory(factory: LinkWidgetFactory): void;
     getFactoryForNode(node: NodeModel): NodeWidgetFactory | null;

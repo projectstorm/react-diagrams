@@ -7,6 +7,5 @@ import { DiagramEngine } from "../DiagramEngine";
  */
 export declare class DefaultNodeFactory extends NodeWidgetFactory {
     constructor();
-    generateModel(): void;
     generateReactWidget(diagramEngine: DiagramEngine, node: DefaultNodeModel): JSX.Element;
 }

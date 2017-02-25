@@ -1,6 +1,7 @@
-import {LinkModel, NodeModel, BaseModel} from "./Common";
-import {BaseListener, BaseEnity} from "./BaseEntity";
+import {LinkModel, NodeModel, BaseModel, PortModel} from "./Common";
+import {BaseListener, BaseEntity} from "./BaseEntity";
 import * as _ from "lodash";
+import {DiagramEngine} from "./DiagramEngine";
 /**
  * @author Dylan Vorster
  * 
@@ -17,7 +18,7 @@ export interface DiagramListener extends BaseListener{
 /**
  * 
  */
-export class DiagramModel extends BaseEnity<DiagramListener>{
+export class DiagramModel extends BaseEntity<DiagramListener>{
 	
 	//models
 	links: {[s:string] : LinkModel};
@@ -39,13 +40,46 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 		this.zoom = 100;
 	}
 	
-	deSerialize(object: any){
+	deSerializeDiagram(object: any, diagramEngine: DiagramEngine){
+		this.deSerialize(object);
 		
+		this.offsetX = object.offsetX;
+		this.offsetY = object.offsetY;
+		this.zoom = object.zoom;
 		
+		//deserialize nodes
+		_.forEach(object.nodes,(node) => {
+			let nodeOb = diagramEngine.getInstanceFactory(node._class).getInstance() as NodeModel;
+			nodeOb.deSerialize(node);
+			
+			//deserialize ports
+			_.forEach(node.ports,(port) => {
+				let portOb = diagramEngine.getInstanceFactory(port._class).getInstance() as PortModel;
+				portOb.deSerialize(port);
+				nodeOb.addPort(portOb);
+			});
+			
+			this.addNode(nodeOb);
+		});
+		
+		_.forEach(object.links,(link) => {
+			let linkOb = diagramEngine.getInstanceFactory(link._class).getInstance() as LinkModel;
+			linkOb.deSerialize(link);
+			
+			if(link.target){
+				this.getNode(link.target).getPort(link.targetPort).addLink(linkOb);
+			}
+			
+			if(link.source){
+				this.getNode(link.source).getPort(link.sourcePort).addLink(linkOb);
+			}
+			
+			this.addLink(linkOb);
+		});
 	}
 	
-	serialize(){
-		return _.merge(super.serialize(),{
+	serializeDiagram(){
+		return _.merge(this.serialize(),{
 			offsetX: this.offsetX,
 			offsetY: this.offsetY,
 			zoom: this.zoom,

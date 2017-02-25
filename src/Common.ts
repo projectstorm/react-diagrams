@@ -1,5 +1,5 @@
 import {Toolkit} from "./Toolkit";
-import {BaseEnity, BaseListener} from "./BaseEntity";
+import {BaseEntity, BaseListener} from "./BaseEntity";
 import * as _ from "lodash";
 
 export interface BaseModelListener extends BaseListener{
@@ -12,14 +12,18 @@ export interface BaseModelListener extends BaseListener{
 /**
  * @author Dylan Vorster
  */
-export class BaseModel extends BaseEnity<BaseModelListener>{
+export class BaseModel extends BaseEntity<BaseModelListener>{
 	
 	selected: boolean;
 	
 	constructor(){
 		super();
-		this.id = Toolkit.UID();
 		this.selected = false;
+	}
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.selected = ob.selected;
 	}
 	
 	serialize(){
@@ -67,6 +71,12 @@ export class PointModel extends BaseModel{
 		this.x = points.x;
 		this.y = points.y;
 		this.link = link;
+	}
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.x = ob.x;
+		this.y = ob.y;
 	}
 	
 	serialize(){
@@ -123,11 +133,23 @@ export class LinkModel extends BaseModel{
 		this.targetPort = null;
 	}
 	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.linkType = ob.type;
+		this.points = _.map(ob.points,(point: {x,y}) => {
+			var p = new PointModel(this, {x: point.x,y:point.y});
+			p.deSerialize(point);
+			return p;
+		})
+	}
+	
 	serialize(){
 		return _.merge(super.serialize(),{
 			type: this.linkType,
 			source: this.sourcePort ? this.sourcePort.getParent().id:null,
 			sourcePort: this.sourcePort ? this.sourcePort.id:null,
+			target: this.targetPort ? this.targetPort.getParent().id:null,
+			targetPort: this.targetPort ? this.targetPort.id:null,
 			points: _.map(this.points,(point) => {
 				return point.serialize();
 			}),
@@ -272,6 +294,14 @@ export class NodeModel extends BaseModel{
 		this.y = 0;
 		this.extras = {};
 		this.ports = {};
+	}
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.nodeType = ob.type;
+		this.x = ob.x;
+		this.y = ob.y;
+		this.extras = ob.extras;
 	}
 	
 	serialize(){

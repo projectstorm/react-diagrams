@@ -1,5 +1,6 @@
 import { LinkModel, NodeModel, BaseModel } from "./Common";
-import { BaseListener, BaseEnity } from "./BaseEntity";
+import { BaseListener, BaseEntity } from "./BaseEntity";
+import { DiagramEngine } from "./DiagramEngine";
 /**
  * @author Dylan Vorster
  *
@@ -12,7 +13,7 @@ export interface DiagramListener extends BaseListener {
 /**
  *
  */
-export declare class DiagramModel extends BaseEnity<DiagramListener> {
+export declare class DiagramModel extends BaseEntity<DiagramListener> {
     links: {
         [s: string]: LinkModel;
     };
@@ -23,8 +24,8 @@ export declare class DiagramModel extends BaseEnity<DiagramListener> {
     offsetY: number;
     zoom: number;
     constructor();
-    deSerialize(object: any): void;
-    serialize(): {
+    deSerializeDiagram(object: any, diagramEngine: DiagramEngine): void;
+    serializeDiagram(): {
         id: string;
     } & {
         offsetX: number;
@@ -39,6 +40,8 @@ export declare class DiagramModel extends BaseEnity<DiagramListener> {
             type: string;
             source: string;
             sourcePort: string;
+            target: string;
+            targetPort: string;
             points: ({
                 id: string;
             } & {

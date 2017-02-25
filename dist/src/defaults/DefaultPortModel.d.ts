@@ -1,4 +1,9 @@
 import { PortModel } from "../Common";
+import { AbstractInstanceFactory } from "../AbstractInstanceFactory";
+export declare class DefaultPortInstanceFactory extends AbstractInstanceFactory<DefaultPortModel> {
+    constructor();
+    getInstance(): DefaultPortModel;
+}
 /**
  * @author Dylan Vorster
  */

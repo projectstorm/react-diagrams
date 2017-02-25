@@ -1,8 +1,8 @@
 import {NodeWidgetFactory, LinkWidgetFactory} from "./WidgetFactories";
 import {LinkModel, NodeModel, BaseModel, PortModel, PointModel} from "./Common";
-import {BaseEnity, BaseListener} from "./BaseEntity";
+import {BaseEntity, BaseListener} from "./BaseEntity";
 import {DiagramModel} from "./DiagramModel";
-import * as React from "react";
+import {AbstractInstanceFactory} from "./AbstractInstanceFactory";
 import * as _ from "lodash";
 /**
  * @author Dylan Vorster
@@ -17,10 +17,12 @@ export interface DiagramEngineListener extends BaseListener{
 /**
  * Passed as a parameter to the DiagramWidget
  */
-export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
+export class DiagramEngine extends BaseEntity<DiagramEngineListener>{
 	
 	nodeFactories: {[s: string]:NodeWidgetFactory};
 	linkFactories: {[s: string]:LinkWidgetFactory};
+	instanceFactories: {[s: string]: AbstractInstanceFactory<BaseEntity<BaseListener>>};
+	
 	diagramModel: DiagramModel;
 	canvas: Element;
 	paintableWidgets: {};
@@ -30,6 +32,7 @@ export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 		this.diagramModel = new DiagramModel();
 		this.nodeFactories = {};
 		this.linkFactories = {};
+		this.instanceFactories = {};
 		this.canvas = null;
 		this.paintableWidgets = null;
 	}
@@ -86,6 +89,14 @@ export class DiagramEngine extends BaseEnity<DiagramEngineListener>{
 	
 	getLinkFactories(): {[s: string]:LinkWidgetFactory}{
 		return this.linkFactories;
+	}
+	
+	getInstanceFactory(className: string): AbstractInstanceFactory<BaseEntity<BaseListener>>{
+		return this.instanceFactories[className];
+	}
+	
+	registerInstanceFactory(factory: AbstractInstanceFactory<BaseEntity<BaseListener>>){
+		this.instanceFactories[factory.getName()] = factory;
 	}
 	
 	registerNodeFactory(factory: NodeWidgetFactory){

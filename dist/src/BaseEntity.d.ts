@@ -3,7 +3,7 @@
  */
 export declare class BaseListener {
 }
-export declare class BaseEnity<T extends BaseListener> {
+export declare class BaseEntity<T extends BaseListener> {
     listeners: {
         [s: string]: T;
     };
@@ -11,6 +11,7 @@ export declare class BaseEnity<T extends BaseListener> {
     constructor();
     getID(): string;
     clearListeners(): void;
+    deSerialize(data: any): void;
     serialize(): {
         id: string;
     };
