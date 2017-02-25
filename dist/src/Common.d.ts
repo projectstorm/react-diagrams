@@ -9,6 +9,12 @@ export interface BaseModelListener extends BaseListener {
 export declare class BaseModel extends BaseEnity<BaseModelListener> {
     selected: boolean;
     constructor();
+    serialize(): {
+        id: string;
+    } & {
+        _class: string;
+        selected: boolean;
+    };
     getID(): string;
     isSelected(): boolean;
     setSelected(selected: boolean): void;
@@ -22,6 +28,15 @@ export declare class PointModel extends BaseModel {
         x: number;
         y: number;
     });
+    serialize(): {
+        id: string;
+    } & {
+        _class: string;
+        selected: boolean;
+    } & {
+        x: number;
+        y: number;
+    };
     remove(): void;
     updateLocation(points: {
         x: number;
@@ -38,6 +53,26 @@ export declare class LinkModel extends BaseModel {
     points: PointModel[];
     extras: {};
     constructor();
+    serialize(): {
+        id: string;
+    } & {
+        _class: string;
+        selected: boolean;
+    } & {
+        type: string;
+        source: string;
+        sourcePort: string;
+        points: ({
+            id: string;
+        } & {
+            _class: string;
+            selected: boolean;
+        } & {
+            x: number;
+            y: number;
+        })[];
+        extras: {};
+    };
     remove(): void;
     isLastPoint(point: PointModel): boolean;
     getPointIndex(point: PointModel): number;
@@ -60,6 +95,16 @@ export declare class PortModel extends BaseModel {
     links: {
         [id: string]: LinkModel;
     };
+    serialize(): {
+        id: string;
+    } & {
+        _class: string;
+        selected: boolean;
+    } & {
+        name: string;
+        parentNode: string;
+        links: string[];
+    };
     constructor(name: string);
     getName(): string;
     getParent(): NodeModel;
@@ -79,6 +124,27 @@ export declare class NodeModel extends BaseModel {
         [s: string]: PortModel;
     };
     constructor(nodeType?: string);
+    serialize(): {
+        id: string;
+    } & {
+        _class: string;
+        selected: boolean;
+    } & {
+        type: string;
+        x: number;
+        y: number;
+        extras: {};
+        ports: ({
+            id: string;
+        } & {
+            _class: string;
+            selected: boolean;
+        } & {
+            name: string;
+            parentNode: string;
+            links: string[];
+        })[];
+    };
     remove(): void;
     getPort(name: string): PortModel | null;
     getPorts(): {

@@ -56,4 +56,6 @@ window.onload = () => {
 	//6) render the diagram!
 	ReactDOM.render(React.createElement(SRD.DiagramWidget,{diagramEngine: engine}), document.body);
 	
+	console.log(JSON.stringify(model.serialize()));
+	
 }

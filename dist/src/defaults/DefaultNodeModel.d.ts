@@ -10,6 +10,30 @@ export declare class DefaultNodeModel extends NodeModel {
         [s: string]: DefaultPortModel;
     };
     constructor(name?: string, color?: string);
+    serialize(): {
+        id: string;
+    } & {
+        _class: string;
+        selected: boolean;
+    } & {
+        type: string;
+        x: number;
+        y: number;
+        extras: {};
+        ports: ({
+            id: string;
+        } & {
+            _class: string;
+            selected: boolean;
+        } & {
+            name: string;
+            parentNode: string;
+            links: string[];
+        })[];
+    } & {
+        name: string;
+        color: string;
+    };
     getInPorts(): DefaultPortModel[];
     getOutPorts(): DefaultPortModel[];
 }

@@ -1,0 +1,3 @@
+interface Function{
+	name: string
+}

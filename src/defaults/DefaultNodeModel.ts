@@ -16,6 +16,13 @@ export class DefaultNodeModel extends NodeModel{
 		this.color = color;
 	}
 	
+	serialize(){
+		return _.merge(super.serialize(),{
+			name: this.name,
+			color: this.color,
+		});
+	}
+	
 	getInPorts(): DefaultPortModel[]{
 		return _.filter(this.ports,(portModel) => {
 			return portModel.in;

@@ -39,6 +39,25 @@ export class DiagramModel extends BaseEnity<DiagramListener>{
 		this.zoom = 100;
 	}
 	
+	deSerialize(object: any){
+		
+		
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			offsetX: this.offsetX,
+			offsetY: this.offsetY,
+			zoom: this.zoom,
+			links: _.map(this.links,(link) => {
+				return link.serialize();
+			}),
+			nodes: _.map(this.nodes,(link) => {
+				return link.serialize();
+			}),
+		});
+	}
+	
 	clearSelection(ignore: BaseModel|null = null){
 		_.forEach(this.getSelectedItems(),(element) => {
 			if (ignore && ignore.getID() === element.getID()){

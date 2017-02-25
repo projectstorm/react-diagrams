@@ -22,6 +22,13 @@ export class BaseModel extends BaseEnity<BaseModelListener>{
 		this.selected = false;
 	}
 	
+	serialize(){
+		return _.merge(super.serialize(),{
+			_class: this.constructor.name,
+			selected: this.selected
+		});
+	}
+	
 	public getID(): string{
 		return this.id
 	}
@@ -60,6 +67,13 @@ export class PointModel extends BaseModel{
 		this.x = points.x;
 		this.y = points.y;
 		this.link = link;
+	}
+	
+	serialize(){
+		return _.extend(super.serialize(),{
+			x: this.x,
+			y: this.y
+		});
 	}
 	
 	remove(){
@@ -107,6 +121,18 @@ export class LinkModel extends BaseModel{
 		this.extras = {};
 		this.sourcePort = null;
 		this.targetPort = null;
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			type: this.linkType,
+			source: this.sourcePort ? this.sourcePort.getParent().id:null,
+			sourcePort: this.sourcePort ? this.sourcePort.id:null,
+			points: _.map(this.points,(point) => {
+				return point.serialize();
+			}),
+			extras: this.extras
+		});
 	}
 	
 	remove(){
@@ -185,10 +211,19 @@ export class LinkModel extends BaseModel{
 }
 
 export class PortModel extends BaseModel{
-	
 	name: string;
 	parentNode: NodeModel;
 	links: {[id: string]: LinkModel};
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			name: this.name,
+			parentNode: this.parentNode.id,
+			links: _.map(this.links,(link) => {
+				return link.id;
+			})
+		});
+	}
 	
 	constructor(name: string){
 		super();
@@ -237,6 +272,18 @@ export class NodeModel extends BaseModel{
 		this.y = 0;
 		this.extras = {};
 		this.ports = {};
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			type: this.nodeType,
+			x: this.x,
+			y: this.y,
+			extras: this.extras,
+			ports: _.map(this.ports,(port) => {
+				return port.serialize()
+			})
+		});
 	}
 	
 	remove(){

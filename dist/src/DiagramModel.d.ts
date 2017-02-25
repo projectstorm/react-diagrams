@@ -23,6 +23,55 @@ export declare class DiagramModel extends BaseEnity<DiagramListener> {
     offsetY: number;
     zoom: number;
     constructor();
+    deSerialize(object: any): void;
+    serialize(): {
+        id: string;
+    } & {
+        offsetX: number;
+        offsetY: number;
+        zoom: number;
+        links: ({
+            id: string;
+        } & {
+            _class: string;
+            selected: boolean;
+        } & {
+            type: string;
+            source: string;
+            sourcePort: string;
+            points: ({
+                id: string;
+            } & {
+                _class: string;
+                selected: boolean;
+            } & {
+                x: number;
+                y: number;
+            })[];
+            extras: {};
+        })[];
+        nodes: ({
+            id: string;
+        } & {
+            _class: string;
+            selected: boolean;
+        } & {
+            type: string;
+            x: number;
+            y: number;
+            extras: {};
+            ports: ({
+                id: string;
+            } & {
+                _class: string;
+                selected: boolean;
+            } & {
+                name: string;
+                parentNode: string;
+                links: string[];
+            })[];
+        })[];
+    };
     clearSelection(ignore?: BaseModel | null): void;
     getSelectedItems(): BaseModel[];
     setZoomLevel(zoom: number): void;

@@ -24,6 +24,12 @@ export class BaseEnity<T extends BaseListener>{
 		this.listeners = {};
 	}
 	
+	public serialize(){
+		return {
+			id: this.id,
+		}
+	}
+	
 	public itterateListeners(cb: (t: T) => any){
 		for (var i in this.listeners){
 			cb(this.listeners[i]);

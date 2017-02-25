@@ -11,6 +11,9 @@ export declare class BaseEnity<T extends BaseListener> {
     constructor();
     getID(): string;
     clearListeners(): void;
+    serialize(): {
+        id: string;
+    };
     itterateListeners(cb: (t: T) => any): void;
     removeListener(listener: string): boolean;
     addListener(listener: T): string;
