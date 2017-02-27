@@ -73,6 +73,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		},extraProps));
 		
 		var Top = React.DOM.path(_.merge({
+			strokeLinecap:'round' as 'round',
 			onMouseLeave:() => {
 				this.setState({selected: false});
 			},
