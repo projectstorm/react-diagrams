@@ -9,6 +9,7 @@ export * from "./defaults/DefaultNodeFactory";
 export * from "./defaults/DefaultNodeWidget";
 export * from "./defaults/DefaultNodeModel";
 export * from "./defaults/DefaultPortModel";
+export * from "./defaults/DefaultPortLabelWidget";
 
 export * from "./WidgetFactories";
 export * from "./Toolkit";
