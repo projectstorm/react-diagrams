@@ -130,7 +130,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			windowListener: window.addEventListener('keydown',(event) => {
 				
 				//delete all selected
-				if(event.keyCode === 46){
+				if(event.keyCode === 46 || event.keyCode === 8){
 					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(),(element) => {
 						element.remove();
 					});
