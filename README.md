@@ -33,6 +33,11 @@ yarn add storm-react-diagrams
 
 simply navigate to the __demos__ directory and load up the corresponding index.html
 
+To see how to create your own nodes like the one below, take a look at __demo3__:
+
+![Demo2](./custom-nodes.png)
+
+
 #### How to build
 
 Simply run ```webpack``` in the root directory and it will spit out the transpiled code and typescript definitions

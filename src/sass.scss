@@ -47,7 +47,7 @@
 		&.selected{
 			>* {
 				border-color:rgb(0,192,255) !important;
-				box-shadow: 0 0 20px rgba(0,192,255,0.5);
+				-webkit-filter: drop-shadow( 0 0 20px rgba(0,192,255,0.5));
 			}
 		}
 	}
