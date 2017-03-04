@@ -16,8 +16,9 @@ require("../test.scss");
 
 /**
  * 
- * Simple test showing the Object oriented way of using this library.
- * It creates 2 nodes and links them together with a single link
+ * Shows a much more complex way on how to use this library, by creating custom
+ * node elements
+ * 
  * 
  * @Author Dylan Vorster
  */
@@ -45,7 +46,7 @@ window.onload = () => {
 	node2.y = 100;
 	
 	var node3 = new SRD.DefaultNodeModel("Node 3","red");
-	var port3 = node3.addPort(new SRD.DefaultPortModel(false,"in-1","In"));
+	var port3 = node3.addPort(new SRD.DefaultPortModel(true,"in-1","In"));
 	node3.x = 800;
 	node3.y = 150;
 	
