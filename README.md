@@ -35,8 +35,9 @@ simply navigate to the __demos__ directory and load up the corresponding index.h
 
 #### How to build
 
-Simply run ```tsc``` in the root directory and it will spit out the transpiled code and typescript definitions
-into the dist directory.
+Simply run ```webpack``` in the root directory and it will spit out the transpiled code and typescript definitions
+into the dist directory as a single file. We use webpack for this because TSC cannot compile a single UMD file (TSC can currently
+only output multiple UMD files).
 
 
 ## How does it work
