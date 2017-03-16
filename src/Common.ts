@@ -4,9 +4,9 @@ import * as _ from "lodash";
 
 export interface BaseModelListener extends BaseListener{
 	
-	selectionChanged?();
+	selectionChanged?(item:any, isSelected:boolean);
 	
-	entityRemoved?();
+	entityRemoved?(item:any);
 }
 
 /**
@@ -45,7 +45,7 @@ export class BaseModel extends BaseEntity<BaseModelListener>{
 		this.selected = selected;
 		this.itterateListeners((listener) => {
 			if(listener.selectionChanged){
-				listener.selectionChanged();
+				listener.selectionChanged(this, selected);
 			}
 		});
 	}
@@ -54,7 +54,7 @@ export class BaseModel extends BaseEntity<BaseModelListener>{
 		console.log("removing: ",this);
 		this.itterateListeners((listener) => {
 			if(listener.entityRemoved){
-				listener.entityRemoved();
+				listener.entityRemoved(this);
 			}
 		});
 	}

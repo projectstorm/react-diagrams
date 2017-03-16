@@ -1,7 +1,7 @@
 import { BaseEntity, BaseListener } from "./BaseEntity";
 export interface BaseModelListener extends BaseListener {
-    selectionChanged?(): any;
-    entityRemoved?(): any;
+    selectionChanged?(item: any, isSelected: boolean): any;
+    entityRemoved?(item: any): any;
 }
 /**
  * @author Dylan Vorster

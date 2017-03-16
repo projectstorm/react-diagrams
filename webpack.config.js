@@ -12,7 +12,8 @@ module.exports = [
 			library: 'storm-react-diagrams'
 		},
 		externals: {
-			"react": 'react',
+      "react-dom": "ReactDOM",
+      "react": 'React',
 			"lodash": {
 				commonjs: 'lodash',
 				commonjs2: 'lodash',
