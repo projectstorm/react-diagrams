@@ -5,7 +5,6 @@ import * as _ from "lodash";
 export interface BaseModelListener extends BaseListener{
 	
 	selectionChanged?(item:any, isSelected:boolean);
-	
 	entityRemoved?(item:any);
 }
 
@@ -51,7 +50,6 @@ export class BaseModel extends BaseEntity<BaseModelListener>{
 	}
 	
 	remove(){
-		console.log("removing: ",this);
 		this.itterateListeners((listener) => {
 			if(listener.entityRemoved){
 				listener.entityRemoved(this);

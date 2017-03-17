@@ -138,7 +138,6 @@ var BaseModel = (function (_super) {
     };
     BaseModel.prototype.remove = function () {
         var _this = this;
-        console.log("removing: ", this);
         this.itterateListeners(function (listener) {
             if (listener.entityRemoved) {
                 listener.entityRemoved(_this);
