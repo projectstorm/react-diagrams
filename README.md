@@ -59,6 +59,10 @@ As long as a node contains at least one port and the corresponding NodeWidget co
 a link can be connected to it.
 
 ## Events
+
+Each model (DiagramModel, NodeModel etc..) are all built ontop of an event system. You can listen for most of these events by registering
+an event on the model itself. See below for some common events (I will add better documentation soon)
+
  - entityRemoved (entity)
  - selectionChanged (entity, isSelected:Boolean)
  - nodeFactoriesUpdated
@@ -66,7 +70,7 @@ a link can be connected to it.
  - controlsUpdated
  - linksUpdated
  - nodesUpdated
- 
+
  ### Example of usage
  ```ecmascript 6
 var node1 = new SRD.DefaultNodeModel("default","rgb(0,192,255)");
