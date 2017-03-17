@@ -626,26 +626,30 @@ var DiagramModel = (function (_super) {
     DiagramModel.prototype.setZoomLevel = function (zoom) {
         this.zoom = zoom;
         this.itterateListeners(function (listener) {
-            listener.controlsUpdated();
+            if (listener.controlsUpdated)
+                listener.controlsUpdated();
         });
     };
     DiagramModel.prototype.setOffset = function (offsetX, offsetY) {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
         this.itterateListeners(function (listener) {
-            listener.controlsUpdated();
+            if (listener.controlsUpdated)
+                listener.controlsUpdated();
         });
     };
     DiagramModel.prototype.setOffsetX = function (offsetX) {
         this.offsetX = offsetX;
         this.itterateListeners(function (listener) {
-            listener.controlsUpdated();
+            if (listener.controlsUpdated)
+                listener.controlsUpdated();
         });
     };
     DiagramModel.prototype.setOffsetY = function (offsetY) {
         this.offsetX = offsetY;
         this.itterateListeners(function (listener) {
-            listener.controlsUpdated();
+            if (listener.controlsUpdated)
+                listener.controlsUpdated();
         });
     };
     DiagramModel.prototype.getOffsetY = function () {
@@ -684,7 +688,8 @@ var DiagramModel = (function (_super) {
         });
         this.links[link.getID()] = link;
         this.itterateListeners(function (listener) {
-            listener.linksUpdated();
+            if (listener.linksUpdated)
+                listener.linksUpdated(link, true);
         });
         return link;
     };
@@ -697,7 +702,8 @@ var DiagramModel = (function (_super) {
         });
         this.nodes[node.getID()] = node;
         this.itterateListeners(function (listener) {
-            listener.nodesUpdated();
+            if (listener.nodesUpdated)
+                listener.nodesUpdated(node, true);
         });
         return node;
     };
@@ -705,26 +711,30 @@ var DiagramModel = (function (_super) {
         if (link instanceof Common_1.LinkModel) {
             delete this.links[link.getID()];
             this.itterateListeners(function (listener) {
-                listener.linksUpdated();
+                if (listener.linksUpdated)
+                    listener.linksUpdated(link, false);
             });
             return;
         }
         delete this.links['' + link];
         this.itterateListeners(function (listener) {
-            listener.linksUpdated();
+            if (listener.linksUpdated)
+                listener.linksUpdated(link, false);
         });
     };
     DiagramModel.prototype.removeNode = function (node) {
         if (node instanceof Common_1.NodeModel) {
             delete this.nodes[node.getID()];
             this.itterateListeners(function (listener) {
-                listener.nodesUpdated();
+                if (listener.nodesUpdated)
+                    listener.nodesUpdated(node, false);
             });
             return;
         }
         delete this.nodes['' + node];
         this.itterateListeners(function (listener) {
-            listener.nodesUpdated();
+            if (listener.nodesUpdated)
+                listener.nodesUpdated(node, false);
         });
     };
     DiagramModel.prototype.getLinks = function () {

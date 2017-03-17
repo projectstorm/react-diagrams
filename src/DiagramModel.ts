@@ -8,12 +8,11 @@ import {DiagramEngine} from "./DiagramEngine";
  */
 export interface DiagramListener extends BaseListener{
 	
-	nodesUpdated(): any;
+	nodesUpdated(node: any, isCreated:boolean): any;
 	
-	linksUpdated(): any;
+	linksUpdated(link: any, isCreated:boolean): any;
 	
 	controlsUpdated(): any;
-	
 }
 /**
  * 
@@ -127,7 +126,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 	setZoomLevel(zoom:number){
 		this.zoom = zoom;
 		this.itterateListeners((listener) => {
-			listener.controlsUpdated();
+			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
 	}
 	
@@ -135,20 +134,20 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
 		this.itterateListeners((listener) => {
-			listener.controlsUpdated();
+			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
 	}
 	
 	setOffsetX(offsetX: number){
 		this.offsetX = offsetX;
 		this.itterateListeners((listener) => {
-			listener.controlsUpdated();
+			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
 	}
 	setOffsetY(offsetY: number){
 		this.offsetX = offsetY;
 		this.itterateListeners((listener) => {
-			listener.controlsUpdated();
+			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
 	}
 	
@@ -192,7 +191,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		});
 		this.links[link.getID()] = link;
 		this.itterateListeners((listener) => {
-			listener.linksUpdated();
+			if(listener.linksUpdated) listener.linksUpdated(link, true);
 		});
 		return link
 	}
@@ -205,7 +204,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		});
 		this.nodes[node.getID()] = node;
 		this.itterateListeners((listener) => {
-			listener.nodesUpdated();
+			if(listener.nodesUpdated) listener.nodesUpdated(node, true);
 		});
 		return node;
 	}
@@ -214,27 +213,27 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		if (link instanceof LinkModel){
 			delete this.links[link.getID()];
 			this.itterateListeners((listener) => {
-				listener.linksUpdated();
+				if(listener.linksUpdated) listener.linksUpdated(link, false);
 			});
 			return;
 		}
 		delete this.links[''+link];
 		this.itterateListeners((listener) => {
-			listener.linksUpdated();
+			if(listener.linksUpdated) listener.linksUpdated(link, false);
 		});
 	}
 	removeNode(node: NodeModel | string){
 		if (node instanceof NodeModel){
 			delete this.nodes[node.getID()];
 			this.itterateListeners((listener) => {
-				listener.nodesUpdated();
+				if(listener.nodesUpdated) listener.nodesUpdated(node, false);
 			});
 			return;
 		}
 	
 		delete this.nodes[''+node];
 		this.itterateListeners((listener) => {
-			listener.nodesUpdated();
+			if(listener.nodesUpdated) listener.nodesUpdated(node, false);
 		});
 	}
 	

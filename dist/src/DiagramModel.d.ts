@@ -6,8 +6,8 @@ import { DiagramEngine } from "./DiagramEngine";
  *
  */
 export interface DiagramListener extends BaseListener {
-    nodesUpdated(): any;
-    linksUpdated(): any;
+    nodesUpdated(node: any, isCreated: boolean): any;
+    linksUpdated(link: any, isCreated: boolean): any;
     controlsUpdated(): any;
 }
 /**
