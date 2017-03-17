@@ -35,10 +35,10 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps, Default
 				),
 				div({className:'ports'},
 					div({className: 'in'}, _.map(this.props.node.getInPorts(),(port) => {
-						return React.createElement(DefaultPortLabel,{model: port});
+						return React.createElement(DefaultPortLabel,{model: port, key:port.id});
 					})),
 					div({className: 'out'}, _.map(this.props.node.getOutPorts(),(port) => {
-						return React.createElement(DefaultPortLabel,{model: port});
+						return React.createElement(DefaultPortLabel,{model: port, key:port.id});
 					})),
 				)
 			)

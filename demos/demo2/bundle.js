@@ -1000,9 +1000,9 @@ var DefaultNodeWidget = (function (_super) {
     }
     DefaultNodeWidget.prototype.render = function () {
         return (div({ className: 'basic-node', style: { background: this.props.node.color } }, div({ className: 'title' }, div({ className: 'name' }, this.props.node.name), div({ className: 'fa fa-close', onClick: this.props.node.remove })), div({ className: 'ports' }, div({ className: 'in' }, _.map(this.props.node.getInPorts(), function (port) {
-            return React.createElement(DefaultPortLabelWidget_1.DefaultPortLabel, { model: port });
+            return React.createElement(DefaultPortLabelWidget_1.DefaultPortLabel, { model: port, key: port.id });
         })), div({ className: 'out' }, _.map(this.props.node.getOutPorts(), function (port) {
-            return React.createElement(DefaultPortLabelWidget_1.DefaultPortLabel, { model: port });
+            return React.createElement(DefaultPortLabelWidget_1.DefaultPortLabel, { model: port, key: port.id });
         })))));
     };
     return DefaultNodeWidget;
