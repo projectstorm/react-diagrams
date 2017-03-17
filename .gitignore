@@ -7,7 +7,6 @@
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 nbactions.xml
 .nb-gradle/
@@ -184,3 +183,4 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+.idea

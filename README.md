@@ -1,5 +1,10 @@
 # STORM React Diagrams
 
+A super simple, no-nonsense diagramming library written in React that just works.
+
+[![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![NPM](https://nodei.co/npm/storm-react-diagrams.png?mini=true)](https://npmjs.org/package/storm-react-diagrams)
+
 ![Demo2](./demo2.png)
 
 ## Introduction
@@ -15,21 +20,29 @@ A no-nonsense diagramming library written entirely in React with the help of Lod
 ## How to install
 
 ```
-npm install projectstorm/react-diagrams
+npm install storm-react-diagrams
+```
+or
+```
+yarn add storm-react-diagrams
 ```
 
-(until I decide to put it on npm)
-
-* Its only dependency is Lodash so it will install that too.
+* Its only dependency is Lodash and obviously React so it will install that too.
 
 #### How to see the examples
 
-simply navigate to the __tests__ directory and load up the corresponding index.html
+simply navigate to the __demos__ directory and load up the corresponding index.html
+
+To see how to create your own nodes like the one below, take a look at __demo3__:
+
+![Demo2](./custom-nodes.png)
+
 
 #### How to build
 
-Simply run ```tsc``` in the root directory and it will spit out the transpiled code and typescript definitions
-into the dist directory.
+Simply run ```webpack``` in the root directory and it will spit out the transpiled code and typescript definitions
+into the dist directory as a single file. We use webpack for this because TSC cannot compile a single UMD file (TSC can currently
+only output multiple UMD files).
 
 
 ## How does it work
@@ -44,6 +57,29 @@ Therefore, to create custom nodes and links, register your own factories that re
 
 As long as a node contains at least one port and the corresponding NodeWidget contains at least one PortWidget,
 a link can be connected to it.
+
+## Events
+ - entityRemoved (entity)
+ - selectionChanged (entity, isSelected:Boolean)
+ - nodeFactoriesUpdated
+ - linkFactoriesUpdated
+ - controlsUpdated
+ - linksUpdated
+ - nodesUpdated
+ 
+ ### Example of usage
+ ```ecmascript 6
+var node1 = new SRD.DefaultNodeModel("default","rgb(0,192,255)");
+node1.addListener({
+      entityRemoved: (node) => {
+        console.log('Removed', node.id)
+      },
+      selectionChanged: (node, isSelected) => {
+        console.log(isSelected?'Selected':'Unselected', node)
+      }
+    });
+```
+
 
 ## Questions
 
@@ -69,7 +105,7 @@ Take a look at the __defaults__ directory, with specific attention to the __Defa
 
 #### How do I use the library?
 
-Take a look at the tests folders, they have simple and complex examples of the complete usage.
+Take a look at the demo folders, they have simple and complex examples of the complete usage.
 
 ## Usage Demo and Guide
 
@@ -79,9 +115,11 @@ This is a demo of the interaction taken directly from the test folder.
 
 #### Key commands
 
+__del key__ will remove anything selected including links
+
 __shift and drag__ will trigger a multi selection box
 
-__shift and select nodes__ will select multiple nodes
+__shift and select nodes/links/points__ will select multiple nodes
 
 __drag canvas__ will drag the complete diagram
 

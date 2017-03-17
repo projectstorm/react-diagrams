@@ -47,7 +47,7 @@
 		&.selected{
 			>* {
 				border-color:rgb(0,192,255) !important;
-				box-shadow: 0 0 20px rgba(0,192,255,0.5);
+				-webkit-filter: drop-shadow( 0 0 20px rgba(0,192,255,0.5));
 			}
 		}
 	}
@@ -87,7 +87,7 @@
 		font-family:Arial;
 		color: white;
 		border: solid 2px black;
-		overflow: hidden;
+		overflow: visible;
 		font-size: 11px;
 		box-shadow: 0 0 10px rgba(black,0.5);
 		

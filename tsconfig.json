@@ -1,16 +1,17 @@
 {
-	"name": "dylanvorster",
+	"compileOnSave": false,
+	"name": "storm-react-diagrams",
 	"compilerOptions": {
-		"jsx": "react",
 		"suppressExcessPropertyErrors": true,
-		"outDir": "./lib",
-		"declaration": true
+		"declaration": true,
+		"target": "es5",
+		"sourceMap": true,
+		"skipLibCheck": true
 	},
 	"exclude": [
         "node_modules",
         "**/*.spec.ts",
 		"webpack.config.js",
-		"tests",
-		"./lib"
+		"./dist"
     ]
 }

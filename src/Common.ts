@@ -1,25 +1,35 @@
 import {Toolkit} from "./Toolkit";
-import {BaseEnity, BaseListener} from "./BaseEntity";
+import {BaseEntity, BaseListener} from "./BaseEntity";
 import * as _ from "lodash";
 
 export interface BaseModelListener extends BaseListener{
 	
-	selectionChanged?();
-	
-	entityRemoved?();
+	selectionChanged?(item:any, isSelected:boolean);
+	entityRemoved?(item:any);
 }
 
 /**
  * @author Dylan Vorster
  */
-export class BaseModel extends BaseEnity<BaseModelListener>{
+export class BaseModel extends BaseEntity<BaseModelListener>{
 	
 	selected: boolean;
 	
 	constructor(){
 		super();
-		this.id = Toolkit.UID();
 		this.selected = false;
+	}
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.selected = ob.selected;
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			_class: this.constructor.name,
+			selected: this.selected
+		});
 	}
 	
 	public getID(): string{
@@ -34,16 +44,15 @@ export class BaseModel extends BaseEnity<BaseModelListener>{
 		this.selected = selected;
 		this.itterateListeners((listener) => {
 			if(listener.selectionChanged){
-				listener.selectionChanged();
+				listener.selectionChanged(this, selected);
 			}
 		});
 	}
 	
 	remove(){
-		console.log("removing: ",this);
 		this.itterateListeners((listener) => {
 			if(listener.entityRemoved){
-				listener.entityRemoved();
+				listener.entityRemoved(this);
 			}
 		});
 	}
@@ -60,6 +69,19 @@ export class PointModel extends BaseModel{
 		this.x = points.x;
 		this.y = points.y;
 		this.link = link;
+	}
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.x = ob.x;
+		this.y = ob.y;
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			x: this.x,
+			y: this.y
+		});
 	}
 	
 	remove(){
@@ -107,6 +129,30 @@ export class LinkModel extends BaseModel{
 		this.extras = {};
 		this.sourcePort = null;
 		this.targetPort = null;
+	}
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.linkType = ob.type;
+		this.points = _.map(ob.points,(point: {x,y}) => {
+			var p = new PointModel(this, {x: point.x,y:point.y});
+			p.deSerialize(point);
+			return p;
+		})
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			type: this.linkType,
+			source: this.sourcePort ? this.sourcePort.getParent().id:null,
+			sourcePort: this.sourcePort ? this.sourcePort.id:null,
+			target: this.targetPort ? this.targetPort.getParent().id:null,
+			targetPort: this.targetPort ? this.targetPort.id:null,
+			points: _.map(this.points,(point) => {
+				return point.serialize();
+			}),
+			extras: this.extras
+		});
 	}
 	
 	remove(){
@@ -185,10 +231,24 @@ export class LinkModel extends BaseModel{
 }
 
 export class PortModel extends BaseModel{
-	
 	name: string;
 	parentNode: NodeModel;
 	links: {[id: string]: LinkModel};
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.name = ob.name;
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			name: this.name,
+			parentNode: this.parentNode.id,
+			links: _.map(this.links,(link) => {
+				return link.id;
+			})
+		});
+	}
 	
 	constructor(name: string){
 		super();
@@ -225,20 +285,38 @@ export class PortModel extends BaseModel{
 export class NodeModel extends BaseModel{
 	
 	nodeType: string;
-	canDelete: boolean;
 	x: number;
 	y: number;
 	extras: {};
 	ports:  {[s: string]:PortModel};
 	
-	constructor(){
+	constructor(nodeType: string = 'default'){
 		super();
-		this.canDelete = true;
-		this.nodeType = "default";
+		this.nodeType = nodeType;
 		this.x = 0;
 		this.y = 0;
 		this.extras = {};
 		this.ports = {};
+	}
+	
+	deSerialize(ob){
+		super.deSerialize(ob);
+		this.nodeType = ob.type;
+		this.x = ob.x;
+		this.y = ob.y;
+		this.extras = ob.extras;
+	}
+	
+	serialize(){
+		return _.merge(super.serialize(),{
+			type: this.nodeType,
+			x: this.x,
+			y: this.y,
+			extras: this.extras,
+			ports: _.map(this.ports,(port) => {
+				return port.serialize()
+			})
+		});
 	}
 	
 	remove(){
@@ -248,6 +326,15 @@ export class NodeModel extends BaseModel{
 				link.remove();
 			});
 		}
+	}
+	
+	getPortFromID(id): PortModel | null{
+		for (var i in this.ports){
+			if (this.ports[i].id === id){
+				return this.ports[i];
+			}
+		}
+		return null;
 	}
 	
 	getPort(name: string): PortModel | null{

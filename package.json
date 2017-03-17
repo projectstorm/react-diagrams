@@ -1,23 +1,32 @@
 {
   "name": "storm-react-diagrams",
-  "version": "2.0.0",
+  "version": "2.3.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/projectstorm/react-diagrams.git"
+  },
   "keywords": [
-    "web","diagram","react","typescript","flowchart","simple",
-	"links","nodes"
+    "web",
+    "diagram",
+    "react",
+    "typescript",
+    "flowchart",
+    "simple",
+    "links",
+    "nodes"
   ],
-  "main": "./lib/main.js",
-  "typings": "./lib/main",
+  "main": "./dist/main.js",
+  "typings": "./dist/src/main",
   "author": "dylanvorster",
-  "contributors": [],
   "dependencies": {
     "lodash": "^4.13.1",
     "react": "^15.1.0"
   },
   "devDependencies": {
-	"@types/lodash": "^4.14.52",
+    "@types/lodash": "^4.14.52",
     "@types/react": "^15.0.9",
     "@types/react-dom": "^0.14.23",
-	"source-map-loader": "^0.1.6",
+    "source-map-loader": "^0.1.6",
     "ts-loader": "^2.0.0",
     "typescript": "^2.1.6",
     "css-loader": "^0.26.1",

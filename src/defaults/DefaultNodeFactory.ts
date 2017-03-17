@@ -1,5 +1,5 @@
 import {NodeWidgetFactory} from "../WidgetFactories";
-import {NodeModel} from "../Common";
+import {DefaultNodeModel} from "./DefaultNodeModel";
 import * as React from "react";
 import {DefaultNodeWidget} from "./DefaultNodeWidget";
 import {DiagramEngine} from "../DiagramEngine";
@@ -12,14 +12,10 @@ export class DefaultNodeFactory extends NodeWidgetFactory{
 		super("default");
 	}
 	
-	generateReactWidget(diagramEngine:DiagramEngine,node: NodeModel): JSX.Element{
+	generateReactWidget(diagramEngine:DiagramEngine,node: DefaultNodeModel): JSX.Element{
 		return React.createElement(DefaultNodeWidget,{
 			node: node,
-			diagramEngine: diagramEngine,
-			color: node.extras['color'],
-			name: node.extras['name'],
-			inPorts: node.extras['inPorts'],
-			outPorts: node.extras['outPorts'],
+			diagramEngine: diagramEngine
 		});
 	}
 }

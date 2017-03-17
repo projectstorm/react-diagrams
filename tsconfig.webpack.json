@@ -1,7 +1,0 @@
-{
-	"name": "dylanvorster",
-	"compilerOptions": {
-		"jsx": "react",
-		"suppressExcessPropertyErrors": true
-	}
-}

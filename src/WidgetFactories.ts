@@ -19,6 +19,7 @@ export abstract class WidgetFactory{
 
 export abstract class NodeWidgetFactory extends WidgetFactory{
 	
+	
 	abstract generateReactWidget(diagramEngine:DiagramEngine,node: NodeModel): JSX.Element;
 	
 }
