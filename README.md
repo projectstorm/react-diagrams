@@ -64,18 +64,27 @@ a link can be connected to it.
  - nodeFactoriesUpdated
  - linkFactoriesUpdated
  - controlsUpdated
- - linksUpdated
- - nodesUpdated
+ - linksUpdated (entity, isAdded:Boolean)
+ - nodesUpdated (entity, isAdded:Boolean)
  
  ### Example of usage
  ```ecmascript 6
-var node1 = new SRD.DefaultNodeModel("default","rgb(0,192,255)");
+let model = new SRD.DiagramModel();
+let node1 = new SRD.DefaultNodeModel("default","rgb(0,192,255)");
 node1.addListener({
       entityRemoved: (node) => {
         console.log('Removed', node.id)
       },
       selectionChanged: (node, isSelected) => {
         console.log(isSelected?'Selected':'Unselected', node)
+      }
+    });
+model.addListener({
+      linksUpdated:(entity, isAdded) => {
+        console.log(isAdded?'added':'removed', entity)
+      },
+      nodesUpdated: (entity, isAdded) => {
+        console.log(isAdded?'added':'removed', entity)
       }
     });
 ```
