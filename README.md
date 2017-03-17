@@ -58,6 +58,29 @@ Therefore, to create custom nodes and links, register your own factories that re
 As long as a node contains at least one port and the corresponding NodeWidget contains at least one PortWidget,
 a link can be connected to it.
 
+## Events
+ - entityRemoved (entity)
+ - selectionChanged (entity, isSelected:Boolean)
+ - nodeFactoriesUpdated
+ - linkFactoriesUpdated
+ - controlsUpdated
+ - linksUpdated
+ - nodesUpdated
+ 
+ ### Example of usage
+ ```ecmascript 6
+var node1 = new SRD.DefaultNodeModel("default","rgb(0,192,255)");
+node1.addListener({
+      entityRemoved: (node) => {
+        console.log('Removed', node.id)
+      },
+      selectionChanged: (node, isSelected) => {
+        console.log(isSelected?'Selected':'Unselected', node)
+      }
+    });
+```
+
+
 ## Questions
 
 #### Why didn’t I render the nodes as SVG's?
