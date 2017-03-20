@@ -12,8 +12,18 @@ module.exports = [
 			library: 'storm-react-diagrams'
 		},
 		externals: {
-      "react-dom": "ReactDOM",
-      "react": 'React',
+			react: {
+				root: 'React',
+				commonjs2: 'react',
+				commonjs: 'react',
+				amd: 'react'
+			},
+			'react-dom': {
+				root: 'ReactDOM',
+				commonjs2: 'react-dom',
+				commonjs: 'react-dom',
+				amd: 'react-dom'
+			},
 			"lodash": {
 				commonjs: 'lodash',
 				commonjs2: 'lodash',
@@ -55,15 +65,25 @@ module.exports = [
 			library: 'storm-react-diagrams'
 		},
 		externals: {
-			"react-dom": "ReactDOM",
-			"react": 'React',
+			react: {
+				root: 'React',
+				commonjs2: 'react',
+				commonjs: 'react',
+				amd: 'react'
+			},
+			'react-dom': {
+				root: 'ReactDOM',
+				commonjs2: 'react-dom',
+				commonjs: 'react-dom',
+				amd: 'react-dom'
+			},
 			"lodash": {
 				commonjs: 'lodash',
 				commonjs2: 'lodash',
 				amd: '_',
 				root: '_'
 			}
-        },
+		},
 		module: {
 			rules: [
 				{
