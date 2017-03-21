@@ -18,6 +18,9 @@
   "main": "./dist/main.js",
   "typings": "./dist/src/main",
   "author": "dylanvorster",
+  "scripts":{
+    "postinstall":"webpack"
+  },
   "dependencies": {
     "lodash": "^4.13.1",
     "react": "^15.1.0"
