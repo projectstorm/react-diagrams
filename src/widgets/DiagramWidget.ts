@@ -75,6 +75,7 @@ class MoveItemsAction extends BaseAction{
 
 export interface DiagramProps {
 	diagramEngine:DiagramEngine;
+	onLinkStateChanged?: any;
 }
 
 export interface DiagramState {
@@ -328,9 +329,26 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 									}
 
 									if (element.model instanceof PortModel){
-										model.model.getLink().setTargetPort(element.model);
+										let link = model.model.getLink();
+										link.setTargetPort(element.model);
+										if(this.props.onLinkStateChanged && typeof this.props.onLinkStateChanged === 'function'){
+											this.props.onLinkStateChanged(link, true);
+										}
 									}
 								});
+							} else {
+								console.log('unwired');
+								// it does not work :(
+								// _.forEach(this.state.action.selectionModels,(model) => {
+								// 	//only care about points connecting to things
+								// 	if (!(model.model instanceof PointModel)){
+								// 		return;
+								// 	}
+								// 	let link = model.model.getLink();
+								// 	if (this.props.onLinkStateChanged && typeof this.props.onLinkStateChanged === 'function') {
+								// 		this.props.onLinkStateChanged(link, false);
+								// 	}
+								// })
 							}
 						}
 						

@@ -10,6 +10,7 @@ export declare class BaseAction {
 }
 export interface DiagramProps {
     diagramEngine: DiagramEngine;
+    onLinkStateChanged?: any;
 }
 export interface DiagramState {
     action: BaseAction | null;

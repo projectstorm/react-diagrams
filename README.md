@@ -69,6 +69,7 @@ an event on the model itself. See below for some common events (I will add bette
  - controlsUpdated
  - linksUpdated (entity, isAdded:Boolean)
  - nodesUpdated (entity, isAdded:Boolean)
+ 
 
  ### Example of usage
  ```javascript
@@ -91,6 +92,12 @@ model.addListener({
       }
     });
 ```
+
+
+## DiagramWidget props
+
+- onLinkStateChanged (link, isConnected)
+- diagramEngine
 
 
 ## Questions
