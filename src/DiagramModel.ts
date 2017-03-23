@@ -132,10 +132,10 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 	
 	setZoomLevel(zoom:number){
 		this.zoom = zoom;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			listener.zoomUpdated && listener.zoomUpdated(this,this.zoom);
 		});
 	}
@@ -143,29 +143,29 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 	setOffset(offsetX: number, offsetY: number){
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			listener.offsetUpdated && listener.offsetUpdated(this,this.offsetX, this.offsetY)
 		});
 	}
 	
 	setOffsetX(offsetX: number){
 		this.offsetX = offsetX;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			listener.offsetUpdated && listener.offsetUpdated(this,this.offsetX, this.offsetY)
 		});
 	}
 	setOffsetY(offsetY: number){
 		this.offsetX = offsetY;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			listener.offsetUpdated && listener.offsetUpdated(this,this.offsetX, this.offsetY)
 		});
 	}
@@ -209,7 +209,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 			}
 		});
 		this.links[link.getID()] = link;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.linksUpdated) listener.linksUpdated(link, true);
 		});
 		return link
@@ -222,7 +222,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 			}
 		});
 		this.nodes[node.getID()] = node;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.nodesUpdated) listener.nodesUpdated(node, true);
 		});
 		return node;
@@ -231,27 +231,27 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 	removeLink(link: LinkModel | string){
 		if (link instanceof LinkModel){
 			delete this.links[link.getID()];
-			this.itterateListeners((listener) => {
+			this.iterateListeners((listener) => {
 				if(listener.linksUpdated) listener.linksUpdated(link, false);
 			});
 			return;
 		}
 		delete this.links[''+link];
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.linksUpdated) listener.linksUpdated(link, false);
 		});
 	}
 	removeNode(node: NodeModel | string){
 		if (node instanceof NodeModel){
 			delete this.nodes[node.getID()];
-			this.itterateListeners((listener) => {
+			this.iterateListeners((listener) => {
 				if(listener.nodesUpdated) listener.nodesUpdated(node, false);
 			});
 			return;
 		}
 	
 		delete this.nodes[''+node];
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.nodesUpdated) listener.nodesUpdated(node, false);
 		});
 	}

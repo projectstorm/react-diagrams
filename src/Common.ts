@@ -42,7 +42,7 @@ export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModel
 	
 	public setSelected(selected: boolean = true){
 		this.selected = selected;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.selectionChanged){
 				listener.selectionChanged(this, selected);
 			}
@@ -50,7 +50,7 @@ export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModel
 	}
 	
 	remove(){
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if(listener.entityRemoved){
 				listener.entityRemoved(this);
 			}
@@ -201,7 +201,7 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 	setSourcePort(port: PortModel){
 		port.addLink(this);
 		this.sourcePort = port;
-		this.itterateListeners((listener: LinkModelListener) => {
+		this.iterateListeners((listener: LinkModelListener) => {
 			listener.sourcePortChanged && listener.sourcePortChanged(this, port);
 		});
 	}
@@ -217,7 +217,7 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 	setTargetPort(port: PortModel){
 		port.addLink(this);
 		this.targetPort = port;
-		this.itterateListeners((listener: LinkModelListener) => {
+		this.iterateListeners((listener: LinkModelListener) => {
 			listener.targetPortChanged && listener.targetPortChanged(this, port);
 		});
 	}

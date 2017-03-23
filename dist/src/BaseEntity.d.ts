@@ -17,7 +17,7 @@ export declare class BaseEntity<T extends BaseListener> {
     serialize(): {
         id: string;
     };
-    itterateListeners(cb: (t: T) => any): void;
+    iterateListeners(cb: (t: T) => any): void;
     removeListener(listener: string): boolean;
     addListener(listener: T): string;
     isLocked(): boolean;

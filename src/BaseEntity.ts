@@ -36,7 +36,7 @@ export class BaseEntity<T extends BaseListener>{
 		}
 	}
 	
-	public itterateListeners(cb: (t: T) => any){
+	public iterateListeners(cb: (t: T) => any){
 		for (var i in this.listeners){
 			cb(this.listeners[i]);
 		}
@@ -62,7 +62,7 @@ export class BaseEntity<T extends BaseListener>{
 	
 	public setLocked(locked: boolean = true){
 		this.locked = locked;
-		this.itterateListeners((listener) => {
+		this.iterateListeners((listener) => {
 			if (listener.lockChanged){
 				listener.lockChanged(this, locked);
 			}
