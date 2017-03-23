@@ -37,6 +37,7 @@ export class BaseEntity<T extends BaseListener>{
 	}
 	
 	public iterateListeners(cb: (t: T) => any){
+		
 		for (var i in this.listeners){
 			cb(this.listeners[i]);
 		}

@@ -91,6 +91,7 @@ export interface DiagramState {
 	action: BaseAction| null;
 	renderedNodes: boolean,
 	windowListener: any,
+	diagramEngineListener: any
 }
 
 /**
@@ -110,11 +111,23 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		this.state = {
 			action: null,
 			renderedNodes: false,
-			windowListener: null
+			windowListener: null,
+			diagramEngineListener: null
 		}
+	}
+	
+	componentWillMount(){
+		this.setState({
+			diagramEngineListener: this.props.diagramEngine.addListener({
+				repaintCanvas: () => {
+					this.forceUpdate();
+				}
+			})
+		});
 	}
 
 	componentWillUnmount(){
+		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
 		this.props.diagramEngine.setCanvas(null);
 		window.removeEventListener('keydown',this.state.windowListener);
 	}

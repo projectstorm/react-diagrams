@@ -18,6 +18,7 @@ export interface DiagramState {
     action: BaseAction | null;
     renderedNodes: boolean;
     windowListener: any;
+    diagramEngineListener: any;
 }
 /**
  * @author Dylan Vorster
@@ -25,6 +26,7 @@ export interface DiagramState {
 export declare class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
     static defaultProps: DiagramProps;
     constructor(props: DiagramProps);
+    componentWillMount(): void;
     componentWillUnmount(): void;
     componentWillUpdate(nextProps: DiagramProps): void;
     componentDidUpdate(): void;

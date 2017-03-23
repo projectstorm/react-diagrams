@@ -3,9 +3,11 @@ import * as _ from "lodash";
 var div = React.DOM.div;
 import {DefaultNodeModel} from "./DefaultNodeModel";
 import {DefaultPortLabel} from "./DefaultPortLabelWidget";
+import {DiagramEngine} from "../DiagramEngine";
 
 export interface DefaultNodeProps {
 	node: DefaultNodeModel;
+	diagramEngine: DiagramEngine;
 }
 
 export interface DefaultNodeState {
@@ -15,10 +17,6 @@ export interface DefaultNodeState {
  * @author Dylan Vorster
  */
 export class DefaultNodeWidget extends React.Component<DefaultNodeProps, DefaultNodeState> {
-
-	public static defaultProps: DefaultNodeProps = {
-		node: null,
-	};
 
 	constructor(props: DefaultNodeProps) {
 		super(props);
@@ -31,7 +29,10 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps, Default
 			div({className: 'basic-node', style: {background: this.props.node.color }},
 				div({className:'title'},
 					div({className:'name'},this.props.node.name),
-					div({className: 'fa fa-close', onClick: this.props.node.remove})
+					div({className: 'fa fa-close', onClick: () => {
+						this.props.node.remove();
+						this.props.diagramEngine.repaintCanvas();
+					}})
 				),
 				div({className:'ports'},
 					div({className: 'in'}, _.map(this.props.node.getInPorts(),(port) => {

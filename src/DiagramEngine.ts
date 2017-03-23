@@ -9,9 +9,11 @@ import * as _ from "lodash";
  */
 export interface DiagramEngineListener extends BaseListener{
 	
-	nodeFactoriesUpdated(): any;
+	nodeFactoriesUpdated?(): void;
 	
-	linkFactoriesUpdated(): any;
+	linkFactoriesUpdated?(): void;
+	
+	repaintCanvas?(): void;
 }
 
 /**
@@ -35,6 +37,12 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener>{
 		this.instanceFactories = {};
 		this.canvas = null;
 		this.paintableWidgets = null;
+	}
+	
+	repaintCanvas(){
+		this.iterateListeners((listener) => {
+			listener.repaintCanvas && listener.repaintCanvas();
+		})
 	}
 	
 	clearRepaintEntities(){

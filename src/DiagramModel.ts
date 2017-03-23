@@ -8,18 +8,18 @@ import {DiagramEngine} from "./DiagramEngine";
  */
 export interface DiagramListener extends BaseListener{
 	
-	nodesUpdated(node: any, isCreated:boolean): void;
+	nodesUpdated?(node: any, isCreated:boolean): void;
 	
-	linksUpdated(link: any, isCreated:boolean): void;
+	linksUpdated?(link: any, isCreated:boolean): void;
 	
 	/**
 	 * @deprecated
 	 */
-	controlsUpdated(): void;
+	controlsUpdated?(): void;
 	
-	offsetUpdated(model: DiagramModel,offsetX: number, offsetY: number): void;
+	offsetUpdated?(model: DiagramModel,offsetX: number, offsetY: number): void;
 	
-	zoomUpdated(model: DiagramModel,zoom: number): void;
+	zoomUpdated?(model: DiagramModel,zoom: number): void;
 }
 /**
  * 

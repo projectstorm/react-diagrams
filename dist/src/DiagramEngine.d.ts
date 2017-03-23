@@ -8,8 +8,9 @@ import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
  * @author Dylan Vorster
  */
 export interface DiagramEngineListener extends BaseListener {
-    nodeFactoriesUpdated(): any;
-    linkFactoriesUpdated(): any;
+    nodeFactoriesUpdated?(): void;
+    linkFactoriesUpdated?(): void;
+    repaintCanvas?(): void;
 }
 /**
  * Passed as a parameter to the DiagramWidget
@@ -28,6 +29,7 @@ export declare class DiagramEngine extends BaseEntity<DiagramEngineListener> {
     canvas: Element;
     paintableWidgets: {};
     constructor();
+    repaintCanvas(): void;
     clearRepaintEntities(): void;
     enableRepaintEntities(entities: BaseModel<BaseModelListener>[]): void;
     /**
