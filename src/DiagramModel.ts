@@ -55,8 +55,10 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		this.offsetY = object.offsetY;
 		this.zoom = object.zoom;
 		
+		
 		//deserialize nodes
 		_.forEach(object.nodes,(node) => {
+//			console.log(node._class);
 			let nodeOb = diagramEngine.getInstanceFactory(node._class).getInstance() as NodeModel;
 			nodeOb.deSerialize(node);
 			

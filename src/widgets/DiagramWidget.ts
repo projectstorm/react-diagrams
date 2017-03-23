@@ -102,7 +102,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	public static defaultProps: DiagramProps = {
 		diagramEngine:null,
 		allowLooseLinks: true,
-		allowCanvasTranslations: true,
+		allowCanvasTranslation: true,
 		allowCanvasZoom: true
 	};
 

@@ -1,3 +1,4 @@
+var webpack = require("webpack");
 /**
  * @author Dylan Vorster
  */
@@ -31,6 +32,16 @@ module.exports = [
 				root: '_'
 			}
 		},
+		plugins:[
+			new webpack.optimize.UglifyJsPlugin({
+				mangle: {
+					keep_fnames: true
+				},
+				compress: {
+					warnings: false,
+				}
+			})
+		],
 		module: {
 			rules: [
 				{
@@ -49,7 +60,7 @@ module.exports = [
 		resolve: {
 			extensions: [".tsx", ".ts", ".js"]
 		},
-		devtool: 'source-map'
+//		devtool: 'source-map'
 	},
 	//for building the demos and tests
 	{
@@ -85,6 +96,16 @@ module.exports = [
 				root: '_'
 			}
 		},
+		plugins:[
+			new webpack.optimize.UglifyJsPlugin({
+				mangle: {
+					keep_fnames: true
+				},
+				compress: {
+					warnings: false,
+				}
+			})
+		],
 		module: {
 			rules: [
 				{
@@ -116,6 +137,6 @@ module.exports = [
 		resolve: {
 			extensions: [".tsx", ".ts", ".js"]
 		},
-		devtool: 'source-map'
+//		devtool: 'source-map'
 	}
 ];
