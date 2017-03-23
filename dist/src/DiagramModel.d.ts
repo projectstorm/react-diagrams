@@ -1,4 +1,4 @@
-import { LinkModel, NodeModel, BaseModel } from "./Common";
+import { LinkModel, NodeModel, BaseModel, BaseModelListener } from "./Common";
 import { BaseListener, BaseEntity } from "./BaseEntity";
 import { DiagramEngine } from "./DiagramEngine";
 /**
@@ -6,9 +6,14 @@ import { DiagramEngine } from "./DiagramEngine";
  *
  */
 export interface DiagramListener extends BaseListener {
-    nodesUpdated(node: any, isCreated: boolean): any;
-    linksUpdated(link: any, isCreated: boolean): any;
-    controlsUpdated(): any;
+    nodesUpdated(node: any, isCreated: boolean): void;
+    linksUpdated(link: any, isCreated: boolean): void;
+    /**
+     * @deprecated
+     */
+    controlsUpdated(): void;
+    offsetUpdated(model: DiagramModel, offsetX: number, offsetY: number): void;
+    zoomUpdated(model: DiagramModel, zoom: number): void;
 }
 /**
  *
@@ -76,8 +81,8 @@ export declare class DiagramModel extends BaseEntity<DiagramListener> {
             })[];
         })[];
     };
-    clearSelection(ignore?: BaseModel | null): void;
-    getSelectedItems(): BaseModel[];
+    clearSelection(ignore?: BaseModel<BaseModelListener> | null): void;
+    getSelectedItems(): BaseModel<BaseModelListener>[];
     setZoomLevel(zoom: number): void;
     setOffset(offsetX: number, offsetY: number): void;
     setOffsetX(offsetX: number): void;

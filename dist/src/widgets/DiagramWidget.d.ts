@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
-import { BaseModel } from "../Common";
+import { BaseModel, BaseModelListener } from "../Common";
 export declare class BaseAction {
     mouseX: number;
     mouseY: number;
@@ -10,7 +10,9 @@ export declare class BaseAction {
 }
 export interface DiagramProps {
     diagramEngine: DiagramEngine;
-    onLinkStateChanged?: any;
+    allowLooseLinks?: boolean;
+    allowCanvasTranslation?: boolean;
+    allowCanvasZoom?: boolean;
 }
 export interface DiagramState {
     action: BaseAction | null;
@@ -21,6 +23,7 @@ export interface DiagramState {
  * @author Dylan Vorster
  */
 export declare class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
+    static defaultProps: DiagramProps;
     constructor(props: DiagramProps);
     componentWillUnmount(): void;
     componentWillUpdate(nextProps: DiagramProps): void;
@@ -30,7 +33,7 @@ export declare class DiagramWidget extends React.Component<DiagramProps, Diagram
      * Gets a model and element under the mouse cursor
      */
     getMouseElement(event: any): {
-        model: BaseModel;
+        model: BaseModel<BaseModelListener>;
         element: Element;
     };
     render(): React.DOMElement<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;

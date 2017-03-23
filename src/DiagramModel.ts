@@ -1,4 +1,4 @@
-import {LinkModel, NodeModel, BaseModel, PortModel} from "./Common";
+import {LinkModel, NodeModel, BaseModel,BaseModelListener, PortModel} from "./Common";
 import {BaseListener, BaseEntity} from "./BaseEntity";
 import * as _ from "lodash";
 import {DiagramEngine} from "./DiagramEngine";
@@ -8,11 +8,18 @@ import {DiagramEngine} from "./DiagramEngine";
  */
 export interface DiagramListener extends BaseListener{
 	
-	nodesUpdated(node: any, isCreated:boolean): any;
+	nodesUpdated(node: any, isCreated:boolean): void;
 	
-	linksUpdated(link: any, isCreated:boolean): any;
+	linksUpdated(link: any, isCreated:boolean): void;
 	
-	controlsUpdated(): any;
+	/**
+	 * @deprecated
+	 */
+	controlsUpdated(): void;
+	
+	offsetUpdated(model: DiagramModel,offsetX: number, offsetY: number): void;
+	
+	zoomUpdated(model: DiagramModel,zoom: number): void;
 }
 /**
  * 
@@ -93,7 +100,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		});
 	}
 	
-	clearSelection(ignore: BaseModel|null = null){
+	clearSelection(ignore: BaseModel<BaseModelListener>|null = null){
 		_.forEach(this.getSelectedItems(),(element) => {
 			if (ignore && ignore.getID() === element.getID()){
 				return;
@@ -102,7 +109,7 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		});
 	}
 	
-	getSelectedItems(): BaseModel[]{
+	getSelectedItems(): BaseModel<BaseModelListener>[]{
 		var items  = [];
 		
 		//find all nodes
@@ -128,6 +135,9 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		this.itterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
+		this.itterateListeners((listener) => {
+			listener.zoomUpdated && listener.zoomUpdated(this,this.zoom);
+		});
 	}
 	
 	setOffset(offsetX: number, offsetY: number){
@@ -136,6 +146,9 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		this.itterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
+		this.itterateListeners((listener) => {
+			listener.offsetUpdated && listener.offsetUpdated(this,this.offsetX, this.offsetY)
+		});
 	}
 	
 	setOffsetX(offsetX: number){
@@ -143,11 +156,17 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		this.itterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
 		});
+		this.itterateListeners((listener) => {
+			listener.offsetUpdated && listener.offsetUpdated(this,this.offsetX, this.offsetY)
+		});
 	}
 	setOffsetY(offsetY: number){
 		this.offsetX = offsetY;
 		this.itterateListeners((listener) => {
 			if(listener.controlsUpdated) listener.controlsUpdated();
+		});
+		this.itterateListeners((listener) => {
+			listener.offsetUpdated && listener.offsetUpdated(this,this.offsetX, this.offsetY)
 		});
 	}
 	

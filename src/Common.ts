@@ -1,17 +1,17 @@
-import {Toolkit} from "./Toolkit";
 import {BaseEntity, BaseListener} from "./BaseEntity";
 import * as _ from "lodash";
 
 export interface BaseModelListener extends BaseListener{
 	
-	selectionChanged?(item:any, isSelected:boolean);
-	entityRemoved?(item:any);
+	selectionChanged?(item: BaseModel<BaseModelListener>, isSelected:boolean): void;
+	
+	entityRemoved?(item:any): void;
 }
 
 /**
  * @author Dylan Vorster
  */
-export class BaseModel extends BaseEntity<BaseModelListener>{
+export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModelListener>{
 	
 	selected: boolean;
 	
@@ -40,7 +40,7 @@ export class BaseModel extends BaseEntity<BaseModelListener>{
 		return this.selected;
 	}
 	
-	public setSelected(selected: boolean){
+	public setSelected(selected: boolean = true){
 		this.selected = selected;
 		this.itterateListeners((listener) => {
 			if(listener.selectionChanged){
@@ -58,7 +58,7 @@ export class BaseModel extends BaseEntity<BaseModelListener>{
 	}
 }
 
-export class PointModel extends BaseModel{
+export class PointModel extends BaseModel<BaseModelListener>{
 	
 	x:number;
 	y:number;
@@ -111,7 +111,14 @@ export class PointModel extends BaseModel{
 	}
 }
 
-export class LinkModel extends BaseModel{
+export interface LinkModelListener extends BaseModelListener{
+	
+	sourcePortChanged?(item:LinkModel,target: null|PortModel): void;
+	
+	targetPortChanged?(item:LinkModel,target: null|PortModel): void;
+}
+
+export class LinkModel extends BaseModel<LinkModelListener>{
 	
 	linkType: string;
 	sourcePort: PortModel|null;
@@ -194,6 +201,9 @@ export class LinkModel extends BaseModel{
 	setSourcePort(port: PortModel){
 		port.addLink(this);
 		this.sourcePort = port;
+		this.itterateListeners((listener: LinkModelListener) => {
+			listener.sourcePortChanged && listener.sourcePortChanged(this, port);
+		});
 	}
 	
 	getSourcePort(): PortModel{
@@ -207,6 +217,9 @@ export class LinkModel extends BaseModel{
 	setTargetPort(port: PortModel){
 		port.addLink(this);
 		this.targetPort = port;
+		this.itterateListeners((listener: LinkModelListener) => {
+			listener.targetPortChanged && listener.targetPortChanged(this, port);
+		});
 	}
 	
 	getPoints(): PointModel[]{
@@ -230,7 +243,7 @@ export class LinkModel extends BaseModel{
 	}
 }
 
-export class PortModel extends BaseModel{
+export class PortModel extends BaseModel<BaseModelListener>{
 	name: string;
 	parentNode: NodeModel;
 	links: {[id: string]: LinkModel};
@@ -282,7 +295,7 @@ export class PortModel extends BaseModel{
 	}
 }
 
-export class NodeModel extends BaseModel{
+export class NodeModel extends BaseModel<BaseModelListener>{
 	
 	nodeType: string;
 	x: number;

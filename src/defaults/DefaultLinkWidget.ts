@@ -55,11 +55,9 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				opacity: 0,
 				onMouseLeave:() => {
 					this.setState({selected: false});
-	//				this.props.link.setSelected(false);
 				},
 				onMouseEnter:() => {
 					this.setState({selected: true});
-	//				this.props.link.setSelected(true);
 				},
 			})
 		);
@@ -122,7 +120,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			paths.push(this.generateLink({
 				id: 0,
 				onMouseDown: (event) =>{
-					if (!event.shiftKey){
+					if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)){
 						var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
 						point.setSelected(true);
 						this.forceUpdate();

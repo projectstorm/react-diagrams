@@ -1,12 +1,12 @@
 import { BaseEntity, BaseListener } from "./BaseEntity";
 export interface BaseModelListener extends BaseListener {
-    selectionChanged?(item: any, isSelected: boolean): any;
-    entityRemoved?(item: any): any;
+    selectionChanged?(item: BaseModel<BaseModelListener>, isSelected: boolean): void;
+    entityRemoved?(item: any): void;
 }
 /**
  * @author Dylan Vorster
  */
-export declare class BaseModel extends BaseEntity<BaseModelListener> {
+export declare class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModelListener> {
     selected: boolean;
     constructor();
     deSerialize(ob: any): void;
@@ -18,10 +18,10 @@ export declare class BaseModel extends BaseEntity<BaseModelListener> {
     };
     getID(): string;
     isSelected(): boolean;
-    setSelected(selected: boolean): void;
+    setSelected(selected?: boolean): void;
     remove(): void;
 }
-export declare class PointModel extends BaseModel {
+export declare class PointModel extends BaseModel<BaseModelListener> {
     x: number;
     y: number;
     link: LinkModel;
@@ -48,7 +48,11 @@ export declare class PointModel extends BaseModel {
     getY(): number;
     getLink(): LinkModel;
 }
-export declare class LinkModel extends BaseModel {
+export interface LinkModelListener extends BaseModelListener {
+    sourcePortChanged?(item: LinkModel, target: null | PortModel): void;
+    targetPortChanged?(item: LinkModel, target: null | PortModel): void;
+}
+export declare class LinkModel extends BaseModel<LinkModelListener> {
     linkType: string;
     sourcePort: PortModel | null;
     targetPort: PortModel | null;
@@ -94,7 +98,7 @@ export declare class LinkModel extends BaseModel {
     addPoint(pointModel: PointModel, index?: number): void;
     getType(): string;
 }
-export declare class PortModel extends BaseModel {
+export declare class PortModel extends BaseModel<BaseModelListener> {
     name: string;
     parentNode: NodeModel;
     links: {
@@ -121,7 +125,7 @@ export declare class PortModel extends BaseModel {
         [id: string]: LinkModel;
     };
 }
-export declare class NodeModel extends BaseModel {
+export declare class NodeModel extends BaseModel<BaseModelListener> {
     nodeType: string;
     x: number;
     y: number;

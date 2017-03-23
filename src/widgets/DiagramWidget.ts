@@ -2,12 +2,12 @@ import * as React from "react";
 import {DiagramEngine} from "../DiagramEngine";
 import {DiagramModel} from "../DiagramModel";
 import * as _ from "lodash";
-import {PointModel, NodeModel, BaseModel, LinkModel,PortModel} from "../Common";
+import {PointModel, NodeModel, BaseModel, BaseModelListener, LinkModel,PortModel} from "../Common";
 import {LinkLayerWidget} from "./LinkLayerWidget";
 import {NodeLayerWidget} from "./NodeLayerWidget";
 
 interface SelectionModel{
-	model: BaseModel;
+	model: BaseModel<BaseModelListener>;
 	initialX: number;
 	initialY: number;
 }
@@ -63,7 +63,14 @@ class MoveItemsAction extends BaseAction{
 		super(mouseX, mouseY);
 		this.moved = false;
 		diagramEngine.enableRepaintEntities(diagramEngine.getDiagramModel().getSelectedItems());
-		this.selectionModels = diagramEngine.getDiagramModel().getSelectedItems().map((item: PointModel | NodeModel) => {
+		var selectedItems = diagramEngine.getDiagramModel().getSelectedItems();
+		
+		//dont allow items which are locked to move
+		selectedItems = selectedItems.filter((item) => {
+			return !diagramEngine.isModelLocked(item);
+		})
+		
+		this.selectionModels = selectedItems.map((item: PointModel | NodeModel) => {
 			return {
 				model: item,
 				initialX: item.x,
@@ -75,7 +82,9 @@ class MoveItemsAction extends BaseAction{
 
 export interface DiagramProps {
 	diagramEngine:DiagramEngine;
-	onLinkStateChanged?: any;
+	allowLooseLinks?: boolean;
+	allowCanvasTranslation?: boolean;
+	allowCanvasZoom?: boolean;
 }
 
 export interface DiagramState {
@@ -88,6 +97,13 @@ export interface DiagramState {
  * @author Dylan Vorster
  */
 export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
+	
+	public static defaultProps: DiagramProps = {
+		diagramEngine:null,
+		allowLooseLinks: true,
+		allowCanvasTranslations: true,
+		allowCanvasZoom: true
+	};
 
 	constructor(props: DiagramProps) {
 		super(props);
@@ -133,7 +149,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				//delete all selected
 				if(event.keyCode === 46 || event.keyCode === 8){
 					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(),(element) => {
-						element.remove();
+						
+						//only delete items which are not locked
+						if (!this.props.diagramEngine.isModelLocked(element)){
+							element.remove();
+						}
 					});
 					this.forceUpdate();
 				}
@@ -145,7 +165,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event): {model: BaseModel, element: Element}{
+	getMouseElement(event): {model: BaseModel<BaseModelListener>, element: Element}{
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 		
@@ -199,11 +219,13 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					ref:'canvas',
 					className:'storm-diagrams-canvas',
 					onWheel: (event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-						diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
-						diagramEngine.enableRepaintEntities([]);
-						this.forceUpdate();
+						if (this.props.allowCanvasZoom){
+							event.preventDefault();
+							event.stopPropagation();
+							diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
+							diagramEngine.enableRepaintEntities([]);
+							this.forceUpdate();
+						}
 					},
 					onMouseMove: (event) => {
 						
@@ -252,18 +274,21 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						
 						//translate the actual canvas
 						else if (this.state.action instanceof MoveCanvasAction){
-							diagramModel.setOffset(
-								this.state.action.initialOffsetX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100)),
-								this.state.action.initialOffsetY+((event.pageY-this.state.action.mouseY)/(diagramModel.getZoomLevel()/100))
-							);
-							this.forceUpdate();
+							if (this.props.allowCanvasTranslation){
+								diagramModel.setOffset(
+									this.state.action.initialOffsetX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100)),
+									this.state.action.initialOffsetY+((event.pageY-this.state.action.mouseY)/(diagramModel.getZoomLevel()/100))
+								);
+								this.forceUpdate();
+							}
 						}
 					},
 					onMouseDown: (event) =>{
 						diagramEngine.clearRepaintEntities();
 						
 						var model = this.getMouseElement(event);
-						//its the canvas
+						
+						//the canvas was selected
 						if(model === null){
 							//is it a multiple selection
 							if (event.shiftKey){
@@ -320,7 +345,23 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						//are we going to connect a link to something?
 						if (this.state.action instanceof MoveItemsAction){
 							var element = this.getMouseElement(event);
-							if(element){
+							var linkConnected = false;
+							_.forEach(this.state.action.selectionModels,(model) => {
+
+								//only care about points connecting to things
+								if (!(model.model instanceof PointModel)){
+									return;
+								}
+
+								if (element.model instanceof PortModel){
+									linkConnected = true;
+									let link = model.model.getLink();
+									link.setTargetPort(element.model);
+								}
+							});
+							
+							//do we want to allow loose links on the diagram model or not
+							if (!linkConnected && !this.props.allowLooseLinks){
 								_.forEach(this.state.action.selectionModels,(model) => {
 
 									//only care about points connecting to things
@@ -328,27 +369,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 										return;
 									}
 
-									if (element.model instanceof PortModel){
-										let link = model.model.getLink();
-										link.setTargetPort(element.model);
-										if(this.props.onLinkStateChanged && typeof this.props.onLinkStateChanged === 'function'){
-											this.props.onLinkStateChanged(link, true);
-										}
+									var link = model.model.getLink();
+									if(link.isLastPoint(model.model)){
+										link.remove();
 									}
 								});
-							} else {
-								console.log('unwired');
-								// it does not work :(
-								// _.forEach(this.state.action.selectionModels,(model) => {
-								// 	//only care about points connecting to things
-								// 	if (!(model.model instanceof PointModel)){
-								// 		return;
-								// 	}
-								// 	let link = model.model.getLink();
-								// 	if (this.props.onLinkStateChanged && typeof this.props.onLinkStateChanged === 'function') {
-								// 		this.props.onLinkStateChanged(link, false);
-								// 	}
-								// })
 							}
 						}
 						

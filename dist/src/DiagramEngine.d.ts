@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { NodeWidgetFactory, LinkWidgetFactory } from "./WidgetFactories";
-import { LinkModel, NodeModel, BaseModel, PortModel } from "./Common";
+import { LinkModel, NodeModel, BaseModel, BaseModelListener, PortModel } from "./Common";
 import { BaseEntity, BaseListener } from "./BaseEntity";
 import { DiagramModel } from "./DiagramModel";
 import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
@@ -29,8 +29,13 @@ export declare class DiagramEngine extends BaseEntity<DiagramEngineListener> {
     paintableWidgets: {};
     constructor();
     clearRepaintEntities(): void;
-    enableRepaintEntities(entities: BaseModel[]): void;
-    canEntityRepaint(baseModel: BaseModel): boolean;
+    enableRepaintEntities(entities: BaseModel<BaseModelListener>[]): void;
+    /**
+     * Checks to see if a model is locked by running through
+     * its parents to see if they are locked first
+     */
+    isModelLocked(model: BaseEntity<BaseListener>): boolean;
+    canEntityRepaint(baseModel: BaseModel<BaseModelListener>): boolean;
     setCanvas(canvas: Element | null): void;
     setDiagramModel(model: DiagramModel): void;
     getDiagramModel(): DiagramModel;
