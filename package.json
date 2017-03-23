@@ -1,6 +1,6 @@
 {
   "name": "storm-react-diagrams",
-  "version": "2.3.6",
+  "version": "2.4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/projectstorm/react-diagrams.git"
@@ -18,8 +18,8 @@
   "main": "./dist/main.js",
   "typings": "./dist/src/main",
   "author": "dylanvorster",
-  "scripts":{
-    "postinstall":"webpack"
+  "scripts": {
+    "postinstall": "webpack"
   },
   "dependencies": {
     "lodash": "^4.13.1",
