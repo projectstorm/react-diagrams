@@ -7,7 +7,7 @@ module.exports = [
 		entry: './src/main.ts',
 		output: {
 			filename: 'main.js',
-			path: './dist',
+			path: __dirname + '/dist',
 			libraryTarget: 'umd',
 			library: 'storm-react-diagrams'
 		},
@@ -61,7 +61,7 @@ module.exports = [
 		},
 		output: {
 			filename: '[name]',
-			path: './demos',
+			path: __dirname + '/demos',
 			libraryTarget: 'umd',
 			library: 'storm-react-diagrams'
 		},
