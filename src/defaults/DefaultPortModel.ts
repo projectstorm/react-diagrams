@@ -20,8 +20,8 @@ export class DefaultPortModel extends PortModel{
 	in: boolean;
 	label: string;
 	
-	constructor(isInput:boolean,name: string,label: string = null){
-		super(name);
+	constructor(isInput:boolean,name: string,label: string = null, id?: string){
+		super(name, id);
 		this.in = isInput;
 		this.label = label || name;
 	}
