@@ -15,8 +15,8 @@ export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModel
 	
 	selected: boolean;
 	
-	constructor(){
-		super();
+	constructor(id?:string){
+		super(id);
 		this.selected = false;
 	}
 	
@@ -263,8 +263,8 @@ export class PortModel extends BaseModel<BaseModelListener>{
 		});
 	}
 	
-	constructor(name: string){
-		super();
+	constructor(name: string, id?:string){
+		super(id);
 		this.name = name;
 		this.links = {};
 		this.parentNode = null;
@@ -303,8 +303,8 @@ export class NodeModel extends BaseModel<BaseModelListener>{
 	extras: {};
 	ports:  {[s: string]:PortModel};
 	
-	constructor(nodeType: string = 'default'){
-		super();
+	constructor(nodeType: string = 'default', id?:string){
+		super(id);
 		this.nodeType = nodeType;
 		this.x = 0;
 		this.y = 0;
