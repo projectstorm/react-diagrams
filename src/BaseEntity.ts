@@ -12,9 +12,9 @@ export class BaseEntity<T extends BaseListener>{
 	public id: string;
 	public locked: boolean;
 	
-	constructor(){
+	constructor(id?:string){
 		this.listeners = {};
-		this.id = Toolkit.UID();
+		this.id = id || Toolkit.UID();
 		this.locked = false;
 	}
 	
