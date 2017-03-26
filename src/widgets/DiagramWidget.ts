@@ -6,7 +6,7 @@ import {PointModel, NodeModel, BaseModel, BaseModelListener, LinkModel,PortModel
 import {LinkLayerWidget} from "./LinkLayerWidget";
 import {NodeLayerWidget} from "./NodeLayerWidget";
 
-interface SelectionModel{
+export interface SelectionModel{
 	model: BaseModel<BaseModelListener>;
 	initialX: number;
 	initialY: number;
@@ -24,7 +24,7 @@ export class BaseAction{
 	}
 }
 
-class SelectingAction extends BaseAction{
+export class SelectingAction extends BaseAction{
 	mouseX2: number;
 	mouseY2: number;
 	
@@ -45,7 +45,7 @@ class SelectingAction extends BaseAction{
 	}
 }
 
-class MoveCanvasAction extends BaseAction{
+export class MoveCanvasAction extends BaseAction{
 	initialOffsetX: number;
 	initialOffsetY: number;
 	
@@ -56,7 +56,7 @@ class MoveCanvasAction extends BaseAction{
 	}
 }
 
-class MoveItemsAction extends BaseAction{
+export class MoveItemsAction extends BaseAction{
 	selectionModels: SelectionModel[];
 	moved:boolean;
 	constructor(mouseX: number, mouseY: number, diagramEngine: DiagramEngine){
