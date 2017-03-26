@@ -6,6 +6,7 @@ demos/demo3/bundle.js
 demos/demo3/bundle.js.map
 demos/demo4/bundle.js
 demos/demo4/bundle.js.map
+dist/
 dist/main.js
 dist/main.js.map
 
