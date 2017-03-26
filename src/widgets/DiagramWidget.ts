@@ -82,9 +82,14 @@ class MoveItemsAction extends BaseAction{
 
 export interface DiagramProps {
 	diagramEngine:DiagramEngine;
+	
 	allowLooseLinks?: boolean;
 	allowCanvasTranslation?: boolean;
 	allowCanvasZoom?: boolean;
+	
+	actionStartedFiring?: (action: BaseAction) => boolean;
+	actionStillFiring?: (action: BaseAction) => void;
+	actionStoppedFiring?: (action: BaseAction) => void;
 }
 
 export interface DiagramState {
@@ -222,6 +227,29 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		return null;
 	}
 	
+	fireAction(){
+		if (this.state.action && this.props.actionStillFiring){
+			this.props.actionStillFiring(this.state.action);
+		}
+	}
+	
+	stopFiringAction(){
+		if (this.props.actionStoppedFiring){
+			this.props.actionStoppedFiring(this.state.action);
+		}
+		this.setState({action:null});
+	}
+	
+	startFiringAction(action: BaseAction){
+		var setState = true;
+		if(this.props.actionStartedFiring){
+			setState = this.props.actionStartedFiring(action);
+		}
+		if(setState){
+			this.setState({action:action});
+		}
+	}
+	
 
 	render() {
 		var diagramEngine = this.props.diagramEngine;
@@ -241,7 +269,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 					},
 					onMouseMove: (event) => {
-						
 						
 						//select items so draw a bounding box
 						if (this.state.action instanceof SelectingAction){
@@ -270,6 +297,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							
 							this.state.action.mouseX2 = relative.x;
 							this.state.action.mouseY2 = relative.y;
+							
+							this.fireAction();
 							this.setState({action: this.state.action});
 							return;
 						}
@@ -282,6 +311,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 									model.model.y = model.initialY + ((event.pageY - this.state.action.mouseY) / (diagramModel.getZoomLevel()/100));
 								}
 							});
+							this.fireAction();
 							this.forceUpdate();
 						}
 						
@@ -292,6 +322,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 									this.state.action.initialOffsetX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100)),
 									this.state.action.initialOffsetY+((event.pageY-this.state.action.mouseY)/(diagramModel.getZoomLevel()/100))
 								);
+								this.fireAction();
 								this.forceUpdate();
 							}
 						}
@@ -306,20 +337,14 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							//is it a multiple selection
 							if (event.shiftKey){
 								var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
-								this.setState({
-									action: new SelectingAction(
-										relative.x, relative.y
-									)
-								});
+								this.startFiringAction(new SelectingAction(relative.x, relative.y));
 							}
 							
 							//its a drag the canvas event
 							else{
 								var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
 								diagramModel.clearSelection();
-								this.setState({
-									action: new MoveCanvasAction(relative.x, relative.y, diagramModel)
-								});
+								this.startFiringAction(new MoveCanvasAction(relative.x, relative.y, diagramModel));
 							}
 						}
 						
@@ -336,9 +361,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							link.getLastPoint().setSelected(true);
 							diagramModel.addLink(link);
 							
-							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
-							});
+							this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY, diagramEngine));
 						}
 						//its some or other element, probably want to move it
 						else{
@@ -348,9 +371,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							}
 							model.model.setSelected(true);
 							
-							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY,diagramEngine)
-							});
+							this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY,diagramEngine));
 						}
 					},
 					onMouseUp: (event) => {
@@ -391,7 +412,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 						
 						diagramEngine.clearRepaintEntities();
-						this.setState({action: null});
+						
+						this.stopFiringAction();
 					}
 				},
 				this.state.renderedNodes?
