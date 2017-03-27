@@ -58,10 +58,8 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 		
 		//deserialize nodes
 		_.forEach(object.nodes,(node) => {
-//			console.log(node._class);
-			let nodeOb = diagramEngine.getInstanceFactory(node._class).getInstance() as NodeModel;
+			let nodeOb = diagramEngine.getInstanceFactory(node._class).getInstance(node) as NodeModel;
 			nodeOb.deSerialize(node);
-			
 			//deserialize ports
 			_.forEach(node.ports,(port) => {
 				let portOb = diagramEngine.getInstanceFactory(port._class).getInstance() as PortModel;
