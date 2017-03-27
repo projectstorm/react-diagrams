@@ -14,6 +14,6 @@ export abstract class AbstractInstanceFactory<T extends BaseEntity<BaseListener>
 		return this.className;
 	}
 	
-	abstract getInstance(): T;
+	abstract getInstance(initialConfig?:any): T;
 	
 }
