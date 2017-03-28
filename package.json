@@ -19,7 +19,6 @@
   "typings": "./dist/src/main",
   "author": "dylanvorster",
   "scripts": {
-    "postinstall": "webpack",
     "prepublishOnly": "webpack -p && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
   },
   "dependencies": {
