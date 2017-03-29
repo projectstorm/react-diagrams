@@ -134,7 +134,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	componentWillUnmount(){
 		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
 		this.props.diagramEngine.setCanvas(null);
-		window.removeEventListener('keydown',this.state.windowListener);
+		window.removeEventListener('keyup',this.state.windowListener);
 	}
 	
 	componentWillUpdate(nextProps: DiagramProps){
@@ -162,12 +162,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		//add a keyboard listener
 		this.setState({
 			renderedNodes: true,
-			windowListener: window.addEventListener('keydown',(event) => {
-				
+			windowListener: window.addEventListener('keyup',(event) => {
 				//delete all selected
 				if(event.keyCode === 46 || event.keyCode === 8){
 					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(),(element) => {
-						
+
 						//only delete items which are not locked
 						if (!this.props.diagramEngine.isModelLocked(element)){
 							element.remove();
@@ -175,7 +174,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					});
 					this.forceUpdate();
 				}
-			})
+			},false)
 		});
 		window.focus();
 	}
