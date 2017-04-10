@@ -265,6 +265,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
 							diagramEngine.enableRepaintEntities([]);
 							this.forceUpdate();
+							setTimeout(() => {
+								this.forceUpdate();
+							},100)
 						}
 					},
 					onMouseMove: (event) => {
@@ -341,9 +344,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							
 							//its a drag the canvas event
 							else{
-								var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
 								diagramModel.clearSelection();
-								this.startFiringAction(new MoveCanvasAction(relative.x, relative.y, diagramModel));
+								this.startFiringAction(new MoveCanvasAction(event.pageX, event.pageY, diagramModel));
 							}
 						}
 						

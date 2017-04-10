@@ -1,0 +1,79 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html,body{
+	height: 100%;
+}
+
+body{
+	display: flex;
+	background: rgb(60,60,60);
+}
+
+.body{
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	.header{
+		display: flex;
+		background: rgb(30,30,30);
+		flex-grow: 0;
+		flex-shrink: 0;
+		color: white;
+		font-family: Helvetica, Arial;
+		padding: 10px;
+		>*{
+			align-self:center;
+		}
+	}
+	
+	.content{
+		display: flex;
+		flex-grow: 1;
+		.tray{
+			min-width: 200px;
+			background: rgb(20,20,20);
+			flex-grow: 0;
+			flex-shrink: 0;
+		}
+	}
+}
+
+.storm-diagrams-canvas{
+	$color: rgba(white, .05);
+	background: rgba(black,0.2);
+	background-image: 
+		linear-gradient(0deg, 
+			transparent 24%, 
+			$color 25%, 
+			$color 26%,
+			transparent 27%, 
+			transparent 74%, 
+			$color 75%, 
+			$color 76%, 
+			transparent 77%, 
+			transparent), 
+		linear-gradient(90deg, 
+			transparent 24%, 
+			$color 25%, 
+			$color 26%, 
+			transparent 27%, 
+			transparent 74%, 
+			$color 75%, 
+			$color 76%, 
+			transparent 77%, 
+			transparent);
+	background-size:50px 50px;
+	
+	path{
+		stroke: rgba(white,0.5);
+	}
+	
+	.pointui{
+		fill: rgba(white,0.5);
+	}
+}
+
+@import "../../../src/sass.scss";

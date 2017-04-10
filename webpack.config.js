@@ -69,6 +69,7 @@ module.exports = [
 			'demo2/bundle.js': './demos/demo2/index.ts',
 			'demo3/bundle.js': './demos/demo3/index.ts',
 			'demo4/bundle.js': './demos/demo4/index.ts',
+			'demo5/bundle.js': './demos/demo5/index.ts',
 		},
 		output: {
 			filename: '[name]',
