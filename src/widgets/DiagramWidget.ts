@@ -234,8 +234,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 	}
 	
-	stopFiringAction(){
-		if (this.props.actionStoppedFiring){
+	stopFiringAction(shouldSkipEvent?:boolean){
+		if (this.props.actionStoppedFiring && !shouldSkipEvent){
 			this.props.actionStoppedFiring(this.state.action);
 		}
 		this.setState({action:null});
@@ -417,9 +417,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 								});
 							}
 							diagramEngine.clearRepaintEntities();
-							if(this.state.wasMoved){
-								this.stopFiringAction();
-							}
+							this.stopFiringAction(!this.state.wasMoved);
+
 						} else {
 							diagramEngine.clearRepaintEntities();
 							this.stopFiringAction();
