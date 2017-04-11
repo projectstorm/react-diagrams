@@ -94,6 +94,7 @@ export interface DiagramProps {
 
 export interface DiagramState {
 	action: BaseAction| null;
+	wasMoved: boolean,
 	renderedNodes: boolean,
 	windowListener: any,
 	diagramEngineListener: any
@@ -115,6 +116,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		super(props);
 		this.state = {
 			action: null,
+			wasMoved: false,
 			renderedNodes: false,
 			windowListener: null,
 			diagramEngineListener: null
@@ -307,6 +309,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						
 						//translate the items on the canvas
 						else if (this.state.action instanceof MoveItemsAction){
+							if(!this.state.wasMoved){
+								this.setState({...this.state,wasMoved:true});
+							}
 							_.forEach(this.state.action.selectionModels,(model) => {
 								if (model.model instanceof NodeModel || model.model instanceof PointModel){
 									model.model.x = model.initialX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100));
@@ -330,8 +335,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 					},
 					onMouseDown: (event) =>{
+						this.setState({...this.state,wasMoved:false});
+
 						diagramEngine.clearRepaintEntities();
-						
 						var model = this.getMouseElement(event);
 						
 						//the canvas was selected
@@ -410,11 +416,18 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 									}
 								});
 							}
+							diagramEngine.clearRepaintEntities();
+							if(this.state.wasMoved){
+								this.stopFiringAction();
+							}
+						} else {
+							diagramEngine.clearRepaintEntities();
+							this.stopFiringAction();
 						}
 						
-						diagramEngine.clearRepaintEntities();
-						
-						this.stopFiringAction();
+
+
+
 					}
 				},
 				this.state.renderedNodes?
