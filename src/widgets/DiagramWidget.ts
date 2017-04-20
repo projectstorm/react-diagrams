@@ -393,7 +393,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					},
 
 					onMouseDown: (event) =>{
-						console.log(event);
 						this.setState({...this.state,wasMoved:false});
 
 						diagramEngine.clearRepaintEntities();
