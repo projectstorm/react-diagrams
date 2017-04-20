@@ -393,11 +393,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					},
 
 					onMouseDown: (event) =>{
+						console.log(event);
 						this.setState({...this.state,wasMoved:false});
 
 						diagramEngine.clearRepaintEntities();
 						var model = this.getMouseElement(event);
-						
 						//the canvas was selected
 						if(model === null){
 							//is it a multiple selection
@@ -430,7 +430,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 						//its some or other element, probably want to move it
 						else{
-							
 							if (!event.shiftKey && !model.model.isSelected()){
 								diagramModel.clearSelection();
 							}
@@ -445,6 +444,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				this.state.renderedNodes?
 					React.createElement(LinkLayerWidget, {
 						diagramEngine: diagramEngine, pointAdded: (point: PointModel,event) => {
+							this.state.document.addEventListener('mousemove', this.onMouseMove);
+							this.state.document.addEventListener('mouseup', this.onMouseUp);
 							event.stopPropagation();
 							diagramModel.clearSelection(point);
 							this.setState({

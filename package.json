@@ -19,7 +19,7 @@
   "typings": "./dist/src/main",
   "author": "dylanvorster",
   "scripts": {
-    "prepare": "webpack -p && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
+    "prepare": "webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
   },
   "dependencies": {
     "lodash": "^4.13.1",

@@ -38,6 +38,7 @@ module.exports = [
 					keep_fnames: true
 				},
 				compress: {
+					keep_fnames: true,
 					warnings: false,
 				}
 			})
@@ -103,6 +104,7 @@ module.exports = [
 					keep_fnames: true
 				},
 				compress: {
+					keep_fnames: true,
 					warnings: false,
 				}
 			})
