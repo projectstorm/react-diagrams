@@ -8,6 +8,7 @@
   "keywords": [
     "web",
     "diagram",
+    "diagrams",
     "react",
     "typescript",
     "flowchart",
@@ -19,7 +20,7 @@
   "typings": "./dist/src/main",
   "author": "dylanvorster",
   "scripts": {
-    "prepare": "webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
+    "prepare": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
   },
   "dependencies": {
     "closest": "^0.0.1",

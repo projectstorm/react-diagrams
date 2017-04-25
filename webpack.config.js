@@ -3,6 +3,7 @@ var plugins = [];
 
 //do we minify it all
 if(process.env.NODE_ENV === 'production'){
+	console.log("creating production build");
 	plugins.push(new webpack.optimize.UglifyJsPlugin({
 		mangle: {
 			keep_fnames: true
@@ -12,9 +13,9 @@ if(process.env.NODE_ENV === 'production'){
 			warnings: false,
 		}
 	}));
-	new webpack.DefinePlugin({
+	plugins.push(new webpack.DefinePlugin({
 		'process.env.NODE_ENV': JSON.stringify('production')
-	})
+	}));
 }
 
 /**
@@ -69,7 +70,7 @@ module.exports = [
 		resolve: {
 			extensions: [".tsx", ".ts", ".js"]
 		},
-		devtool: 'eval-cheap-module-source-map'
+		devtool: process.env.NODE_ENV === 'production'?false:'eval-cheap-module-source-map'
 	},
 	//for building the demos and tests
 	{
@@ -138,6 +139,6 @@ module.exports = [
 		resolve: {
 			extensions: [".tsx", ".ts", ".js"]
 		},
-		devtool: 'eval-cheap-module-source-map'
+		devtool: process.env.NODE_ENV === 'production'?false:'eval-cheap-module-source-map'
 	}
 ];
