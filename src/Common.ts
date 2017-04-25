@@ -2,9 +2,9 @@ import {BaseEntity, BaseListener} from "./BaseEntity";
 import * as _ from "lodash";
 
 export interface BaseModelListener extends BaseListener{
-	
+
 	selectionChanged?(item: BaseModel<BaseModelListener>, isSelected:boolean): void;
-	
+
 	entityRemoved?(item:any): void;
 }
 
@@ -12,34 +12,34 @@ export interface BaseModelListener extends BaseListener{
  * @author Dylan Vorster
  */
 export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModelListener>{
-	
+
 	selected: boolean;
-	
+
 	constructor(id?:string){
 		super(id);
 		this.selected = false;
 	}
-	
+
 	deSerialize(ob){
 		super.deSerialize(ob);
 		this.selected = ob.selected;
 	}
-	
+
 	serialize(){
 		return _.merge(super.serialize(),{
 			_class: this.constructor.name,
 			selected: this.selected
 		});
 	}
-	
+
 	public getID(): string{
 		return this.id
 	}
-	
+
 	public isSelected(): boolean{
 		return this.selected;
 	}
-	
+
 	public setSelected(selected: boolean = true){
 		this.selected = selected;
 		this.iterateListeners((listener) => {
@@ -48,7 +48,7 @@ export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModel
 			}
 		});
 	}
-	
+
 	remove(){
 		this.iterateListeners((listener) => {
 			if(listener.entityRemoved){
@@ -59,73 +59,73 @@ export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModel
 }
 
 export class PointModel extends BaseModel<BaseModelListener>{
-	
+
 	x:number;
 	y:number;
 	link: LinkModel;
-	
+
 	constructor(link: LinkModel,points: {x:number,y: number}){
 		super();
 		this.x = points.x;
 		this.y = points.y;
 		this.link = link;
 	}
-	
+
 	deSerialize(ob){
 		super.deSerialize(ob);
 		this.x = ob.x;
 		this.y = ob.y;
 	}
-	
+
 	serialize(){
 		return _.merge(super.serialize(),{
 			x: this.x,
 			y: this.y
 		});
 	}
-	
+
 	remove(){
 		super.remove();
-		
+
 		//clear references
 		if (this.link){
 			this.link.removePoint(this);
 		}
 	}
-	
+
 	updateLocation(points: {x:number,y: number}){
 		this.x = points.x;
 		this.y = points.y;
 	}
-	
+
 	getX():number{
 		return this.x;
 	}
-	
+
 	getY():number{
 		return this.y;
 	}
-	
+
 	getLink(): LinkModel{
 		return this.link;
 	}
 }
 
 export interface LinkModelListener extends BaseModelListener{
-	
+
 	sourcePortChanged?(item:LinkModel,target: null|PortModel): void;
-	
+
 	targetPortChanged?(item:LinkModel,target: null|PortModel): void;
 }
 
 export class LinkModel extends BaseModel<LinkModelListener>{
-	
+
 	linkType: string;
 	sourcePort: PortModel|null;
 	targetPort: PortModel|null;
 	points: PointModel[];
 	extras: {};
-	
+
 	constructor(){
 		super();
 		this.linkType = 'default';
@@ -137,7 +137,7 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 		this.sourcePort = null;
 		this.targetPort = null;
 	}
-	
+
 	deSerialize(ob){
 		super.deSerialize(ob);
 		this.linkType = ob.type;
@@ -147,7 +147,7 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 			return p;
 		})
 	}
-	
+
 	serialize(){
 		return _.merge(super.serialize(),{
 			type: this.linkType,
@@ -161,7 +161,7 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 			extras: this.extras
 		});
 	}
-	
+
 	remove(){
 		super.remove();
 		if (this.sourcePort){
@@ -171,16 +171,16 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 			this.targetPort.removeLink(this);
 		}
 	}
-	
+
 	isLastPoint(point: PointModel){
 		var index = this.getPointIndex(point);
 		return index === this.points.length-1;
 	}
-	
+
 	getPointIndex(point: PointModel){
 		return this.points.indexOf(point);
 	}
-	
+
 	getPointModel(id: string): PointModel|null{
 		for (var i = 0; i < this.points.length;i++){
 			if (this.points[i].id === id){
@@ -189,15 +189,15 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 		}
 		return null;
 	}
-	
+
 	getFirstPoint(): PointModel{
 		return this.points[0];
 	}
-	
+
 	getLastPoint(): PointModel{
 		return this.points[this.points.length-1];
 	}
-	
+
 	setSourcePort(port: PortModel){
 		port.addLink(this);
 		this.sourcePort = port;
@@ -205,15 +205,15 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 			listener.sourcePortChanged && listener.sourcePortChanged(this, port);
 		});
 	}
-	
+
 	getSourcePort(): PortModel{
 		return this.sourcePort;
 	}
-	
+
 	getTargetPort(): PortModel{
 		return this.targetPort;
 	}
-	
+
 	setTargetPort(port: PortModel){
 		port.addLink(this);
 		this.targetPort = port;
@@ -221,23 +221,23 @@ export class LinkModel extends BaseModel<LinkModelListener>{
 			listener.targetPortChanged && listener.targetPortChanged(this, port);
 		});
 	}
-	
+
 	getPoints(): PointModel[]{
 		return this.points;
 	}
-	
+
 	setPoints(points: PointModel[]){
 		this.points = points;
 	}
-	
+
 	removePoint(pointModel: PointModel){
 		this.points.splice(this.getPointIndex(pointModel),1);
 	}
-	
+
 	addPoint(pointModel:PointModel,index = 1){
 		this.points.splice(index,0,pointModel);
 	}
-	
+
 	getType(): string{
 		return this.linkType;
 	}
@@ -247,12 +247,12 @@ export class PortModel extends BaseModel<BaseModelListener>{
 	name: string;
 	parentNode: NodeModel;
 	links: {[id: string]: LinkModel};
-	
+
 	deSerialize(ob){
 		super.deSerialize(ob);
 		this.name = ob.name;
 	}
-	
+
 	serialize(){
 		return _.merge(super.serialize(),{
 			name: this.name,
@@ -262,47 +262,47 @@ export class PortModel extends BaseModel<BaseModelListener>{
 			})
 		});
 	}
-	
+
 	constructor(name: string, id?:string){
 		super(id);
 		this.name = name;
 		this.links = {};
 		this.parentNode = null;
 	}
-	
+
 	getName(): string{
 		return this.name;
 	}
-	
+
 	getParent(): NodeModel{
 		return this.parentNode;
 	}
-	
+
 	setParentNode(node: NodeModel){
 		this.parentNode = node;
 	}
-	
+
 	removeLink(link: LinkModel){
 		delete this.links[link.getID()];
 	}
-	
+
 	addLink(link: LinkModel){
 		this.links[link.getID()] = link;
 	}
-	
+
 	getLinks(): {[id: string]: LinkModel}{
 		return this.links;
 	}
 }
 
 export class NodeModel extends BaseModel<BaseModelListener>{
-	
+
 	nodeType: string;
 	x: number;
 	y: number;
 	extras: {};
 	ports:  {[s: string]:PortModel};
-	
+
 	constructor(nodeType: string = 'default', id?:string){
 		super(id);
 		this.nodeType = nodeType;
@@ -311,7 +311,7 @@ export class NodeModel extends BaseModel<BaseModelListener>{
 		this.extras = {};
 		this.ports = {};
 	}
-	
+
 	deSerialize(ob){
 		super.deSerialize(ob);
 		this.nodeType = ob.type;
@@ -319,7 +319,7 @@ export class NodeModel extends BaseModel<BaseModelListener>{
 		this.y = ob.y;
 		this.extras = ob.extras;
 	}
-	
+
 	serialize(){
 		return _.merge(super.serialize(),{
 			type: this.nodeType,
@@ -331,7 +331,7 @@ export class NodeModel extends BaseModel<BaseModelListener>{
 			})
 		});
 	}
-	
+
 	remove(){
 		super.remove();
 		for (var i in this.ports){
@@ -340,7 +340,7 @@ export class NodeModel extends BaseModel<BaseModelListener>{
 			});
 		}
 	}
-	
+
 	getPortFromID(id): PortModel | null{
 		for (var i in this.ports){
 			if (this.ports[i].id === id){
@@ -349,15 +349,15 @@ export class NodeModel extends BaseModel<BaseModelListener>{
 		}
 		return null;
 	}
-	
+
 	getPort(name: string): PortModel | null{
 		return this.ports[name];
 	}
-	
+
 	getPorts(): {[s: string]:PortModel}{
 		return this.ports;
 	}
-	
+
 	removePort(port: PortModel){
 		//clear the parent node reference
 		if(this.ports[port.name]){
@@ -365,13 +365,13 @@ export class NodeModel extends BaseModel<BaseModelListener>{
 			delete this.ports[port.name];
 		}
 	}
-	
+
 	addPort(port: PortModel): PortModel{
 		port.setParentNode(this);
 		this.ports[port.name] = port;
 		return port;
 	}
-	
+
 	getType(): string{
 		return this.nodeType;
 	}

@@ -7,41 +7,41 @@ an event on the model itself.
 
 All models will fire these events:
 
-#### lockChanged?(entity: BaseEntity,locked: boolean)
+    lockChanged?(entity: BaseEntity,locked: boolean)
 
 Fires when the lock state of the entity changes. If an element is locked, it cannot be moved or deletes.
 
 ## All Base models excluding DiagramModel
 
 
-#### selectionChanged?(item: BaseModel, isSelected:boolean)
+    selectionChanged?(item: BaseModel, isSelected:boolean)
 
 When the _selected_ property of a model changes
-	
-#### entityRemoved?(item:any)
 
-When the entity is going to be deleted. The DiagramModel listenes for this event to when to remove the model from itself.
+    entityRemoved?(item:any)
+
+When the entity is going to be deleted. The DiagramModel listeners for this event to when to remove the model from itself.
 
 
 ## DiagramModel
 
-#### nodesUpdated(node: any, isCreated:boolean)
+    nodesUpdated(node: any, isCreated:boolean)
 
 When nodes are added or removed
-	
-#### linksUpdated(link: any, isCreated:boolean)
+
+    linksUpdated(link: any, isCreated:boolean)
 
 when links are added or removed
-	
-#### controlsUpdated() [DEPRECIATED]
+
+    controlsUpdated() [DEPRECIATED]
 
 _depreciated, use offsetUpdated and zoomUpdated instead_
-	
-#### offsetUpdated(model: DiagramModel,offsetX: number, offsetY: number)
+
+    offsetUpdated(model: DiagramModel,offsetX: number, offsetY: number)
 
 to know when the canvas was translated in any direction
-	
-#### zoomUpdated(model: DiagramModel,zoom: number)
+
+    zoomUpdated(model: DiagramModel,zoom: number)
 
 to know when the zoom level of the canvas was updated
 
@@ -49,21 +49,21 @@ to know when the zoom level of the canvas was updated
 
 The diagram engine
 
-#### nodeFactoriesUpdated
+    nodeFactoriesUpdated
 
 When node factories have been added or removed from the engine
 
-#### linkFactoriesUpdated
+    linkFactoriesUpdated
 
 When link factories have been added or removed from the engine
 
 ## LinkModel
 
-#### sourcePortChanged?(item:LinkModel,target: null|PortModel)
-	
-#### targetPortChanged?(item:LinkModel,target: null|PortModel)
+    sourcePortChanged?(item:LinkModel,target: null|PortModel)
 
- 
+    targetPortChanged?(item:LinkModel,target: null|PortModel)
+
+
 # Example of usage
 
 ```javascript

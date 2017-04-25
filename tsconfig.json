@@ -9,9 +9,9 @@
 		"skipLibCheck": true
 	},
 	"exclude": [
-        "node_modules",
-        "**/*.spec.ts",
+		"node_modules",
+		"**/*.spec.ts",
 		"webpack.config.js",
 		"./dist"
-    ]
+	]
 }

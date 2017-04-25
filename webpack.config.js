@@ -1,4 +1,22 @@
 var webpack = require("webpack");
+var plugins = [];
+
+//do we minify it all
+if(process.env.NODE_ENV === 'production'){
+	plugins.push(new webpack.optimize.UglifyJsPlugin({
+		mangle: {
+			keep_fnames: true
+		},
+		compress: {
+			keep_fnames: true,
+			warnings: false,
+		}
+	}));
+	new webpack.DefinePlugin({
+		'process.env.NODE_ENV': JSON.stringify('production')
+	})
+}
+
 /**
  * @author Dylan Vorster
  */
@@ -32,20 +50,7 @@ module.exports = [
 				root: '_'
 			}
 		},
-		plugins:[
-			new webpack.optimize.UglifyJsPlugin({
-				mangle: {
-					keep_fnames: true
-				},
-				compress: {
-					keep_fnames: true,
-					warnings: false,
-				}
-			}),
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify('production')
-			})
-		],
+		plugins:plugins,
 		module: {
 			rules: [
 				{
@@ -64,7 +69,7 @@ module.exports = [
 		resolve: {
 			extensions: [".tsx", ".ts", ".js"]
 		},
-//		devtool: 'source-map'
+		devtool: 'eval-cheap-module-source-map'
 	},
 	//for building the demos and tests
 	{
@@ -101,20 +106,7 @@ module.exports = [
 				root: '_'
 			}
 		},
-		plugins:[
-			new webpack.optimize.UglifyJsPlugin({
-				mangle: {
-					keep_fnames: true
-				},
-				compress: {
-					keep_fnames: true,
-					warnings: false,
-				}
-			}),
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify('production')
-			})
-		],
+		plugins:plugins,
 		module: {
 			rules: [
 				{
@@ -146,6 +138,6 @@ module.exports = [
 		resolve: {
 			extensions: [".tsx", ".ts", ".js"]
 		},
-//		devtool: 'source-map'
+		devtool: 'eval-cheap-module-source-map'
 	}
 ];

@@ -16,7 +16,7 @@ export interface DiamonNodeWidgetState {
 export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, DiamonNodeWidgetState> {
 
 	public static defaultProps: DiamonNodeWidgetProps = {
-		size:150,
+		size: 150,
 		node: null
 	};
 
@@ -34,27 +34,27 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 						<g id="Layer_1">
 						</g>
 						<g id="Layer_2">
-							<polygon fill="cyan" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,`+(this.props.size/2)+` `+(this.props.size/2)+`,10 `+(this.props.size-10)+`,`+(this.props.size/2)+` `+(this.props.size/2)+`,`+(this.props.size-10)+` "/>
+							<polygon fill="purple" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,`+(this.props.size/2)+` `+(this.props.size/2)+`,10 `+(this.props.size-10)+`,`+(this.props.size/2)+` `+(this.props.size/2)+`,`+(this.props.size-10)+` "/>
 						</g>
 				`}}),
-				
+
 				//left node
-				React.DOM.div({style: {position: 'absolute', zIndex:10,top:this.props.size/2 - 5}},
+				React.DOM.div({style: {position: 'absolute', zIndex:10,top:this.props.size/2 - 8, left: -8}},
 					React.createElement(SRD.PortWidget,{name: 'left', node: this.props.node})
 				),
-				
+
 				//top node
-				React.DOM.div({style: {position: 'absolute', zIndex:10,left:this.props.size/2-8}},
+				React.DOM.div({style: {position: 'absolute', zIndex:10,left:this.props.size/2-8,top:-8}},
 					React.createElement(SRD.PortWidget,{name: 'top', node: this.props.node})
 				),
-				
+
 				//right
-				React.DOM.div({style: {position: 'absolute', zIndex:10,left:this.props.size-10,top:this.props.size/2}},
+				React.DOM.div({style: {position: 'absolute', zIndex:10,left:this.props.size-8,top:this.props.size/2 - 8}},
 					React.createElement(SRD.PortWidget,{name: 'right', node: this.props.node})
 				),
-				
+
 				//bottom
-				React.DOM.div({style: {position: 'absolute', zIndex:10,left :this.props.size/2 - 8,top:this.props.size-10}},
+				React.DOM.div({style: {position: 'absolute', zIndex:10,left :this.props.size/2 - 8,top:this.props.size-8}},
 					React.createElement(SRD.PortWidget,{name: 'bottom', node: this.props.node})
 				),
 			)
@@ -63,4 +63,3 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 }
 
 export var DiamonNodeWidgetFactory = React.createFactory(DiamonNodeWidget);
-

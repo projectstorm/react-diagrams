@@ -6,11 +6,15 @@ A super simple, no-nonsense diagramming library written in React that just works
 [![NPM](https://img.shields.io/npm/v/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams)
 [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams)
 
-![Demo2](./demo2.png)
+![Demo2](./images/example1.png)
+
+![Demo2](./images/example2.png)
+
+![Demo2](./images/example3.png)
 
 ## Introduction
 
-A no-nonsense diagramming library written entirely in React with the help of Lodash. It aims to be:
+A no-nonsense diagramming library written entirely in React with the help of Lodash, and a single polyfill. It aims to be:
 
 * Simple, and void of any fuss/complications when implementing it into your own application
 * Customizable without having to hack the core (adapters/factories etc..)
@@ -28,22 +32,17 @@ or
 yarn add storm-react-diagrams
 ```
 
-* Its only dependency is Lodash and obviously React so it will install that too.
+## How to build
 
-#### How to build
+Simply run ```webpack``` in the root directory (or ```export NODE_ENV=production && webpack``` if you want a production build) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file. __It will also compile the code for the demos__ .We use webpack for this because TSC cannot compile a single UMD file (TSC can currently only output multiple UMD files).
 
-Simply run ```webpack``` in the root directory (or ```webpack -p``` if you want a production build) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file. __It will also compile the code for the demos__ .We use webpack for this because TSC cannot compile a single UMD file (TSC can currently only output multiple UMD files).
+_NOTE:_ We turn off name mangeling in production builds because we require class names to be left intact when serializing.
 
-#### How to see the examples
-
-1. checkout the project
-2. run ```webpack``` in the root
-3. open up one of the __demos__ folders and load the corresponding index.html file.
+## Make your own nodes
 
 To see how to create your own nodes like the one below, take a look at __demo3__:
 
-![Demo2](./custom-nodes.png)
-
+![Demo2](./images/demo3.png)
 
 ## How does it work
 
@@ -62,57 +61,29 @@ a link can be connected to it.
 
 [Event System](docs/Events.md)
 
-## DiagramWidget props
-
-- onLinkStateChanged (link, isConnected)
-- diagramEngine
-
-
 ## Questions
 
-#### Why didn’t I render the nodes as SVG's?
+[Questions](docs/Questions.md)
 
-Because its vastly better to render nodes as standard HTML so that we can embed input controls and not have
-to deal with the complexities of trying to get SVG to work like we want it to. I also created this primarily to embed into
-enterprise applications where the nodes themselves are highly interactive with buttons and other controls that cave when I try to use SVG.
+##  Usage
 
-#### Why Typescript?
+__Delete__ removes any selected items
+![__Delete__](./images/rjdDelete.gif)
 
-Because it can transpile into any level of ECMA Script, and the library got really complicated, so I ported it to Typescript
-to accommodate the heavy architectural changes I was starting to make. <3 Type Script
+__Shift + Mouse Drag__ triggers a multi-selection box
+![Shift + Mouse Drag](./images/mouseDrag.gif)
 
-#### Why is there no JSX?
+__Shift + Mouse Click__ selects the item (items can be multi-selected)
+![Shift + Mouse Click](./images/shiftClick.gif)
 
-Because most of the library is 95% all logic anyway, and I construct very complex DOM elements with many dynamic properties. JSX
-Would just get in the way, and I personally hate JSX for a multitude of reasons anyway.
+__Mouse Drag__ drags the entire diagram
+![Mouse Drag](./images/canvasDrag.gif)
 
-#### How do I make my own elements?
+__Mouse Wheel__ zooms the diagram in / out
+![Mouse Wheel](./images/mouseWheel.gif)
 
-Take a look at the __defaults__ directory, with specific attention to the __DefaultNodeWidget__
+__Click Link + Drag__ creates a new link point
+![Click Link + Drag](./images/createPoint.gif)
 
-#### How do I use the library?
-
-Take a look at the demo folders, they have simple and complex examples of the complete usage.
-
-## Usage Demo and Guide
-
-This is a demo of the interaction taken directly from the test folder.
-
-![Demo](./demo.gif)
-
-#### Key commands
-
-__del key__ will remove anything selected including links
-
-__shift and drag__ will trigger a multi selection box
-
-__shift and select nodes/links/points__ will select multiple nodes
-
-__drag canvas__ will drag the complete diagram
-
-__mouse wheel__ will zoom in or out the entire diagram
-
-__click link and drag__ will create a new link anchor/point that you can then drag around
-
-__click node-port and drag__ will create a new link that is anchored to the port, allowing you
-to drag the link to another connecting port
+__Click Node Port + Drag__ creates a new link
+![Click Node Port + Drag](./images/createLink.gif)
