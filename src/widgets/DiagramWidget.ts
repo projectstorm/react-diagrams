@@ -264,7 +264,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		var diagramModel = diagramEngine.getDiagramModel();
 		//select items so draw a bounding box
 		if (this.state.action instanceof SelectingAction){
-			var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+			var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 
 			_.forEach(diagramModel.getNodes(),(node) => {
 				if ((this.state.action as SelectingAction).containsElement(node.x, node.y, diagramModel)){
@@ -302,8 +302,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			}
 			_.forEach(this.state.action.selectionModels,(model) => {
 				if (model.model instanceof NodeModel || model.model instanceof PointModel){
-					model.model.x = model.initialX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100));
-					model.model.y = model.initialY + ((event.pageY - this.state.action.mouseY) / (diagramModel.getZoomLevel()/100));
+					model.model.x = model.initialX + ((event.clientX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100));
+					model.model.y = model.initialY + ((event.clientY - this.state.action.mouseY) / (diagramModel.getZoomLevel()/100));
 				}
 			});
 			this.fireAction();
@@ -314,8 +314,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		else if (this.state.action instanceof MoveCanvasAction){
 			if (this.props.allowCanvasTranslation){
 				diagramModel.setOffset(
-					this.state.action.initialOffsetX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100)),
-					this.state.action.initialOffsetY+((event.pageY-this.state.action.mouseY)/(diagramModel.getZoomLevel()/100))
+					this.state.action.initialOffsetX + ((event.clientX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100)),
+					this.state.action.initialOffsetY+((event.clientY-this.state.action.mouseY)/(diagramModel.getZoomLevel()/100))
 				);
 				this.fireAction();
 				this.forceUpdate();
@@ -402,14 +402,14 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						if(model === null){
 							//is it a multiple selection
 							if (event.shiftKey){
-								var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+								var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 								this.startFiringAction(new SelectingAction(relative.x, relative.y));
 							}
 
 							//its a drag the canvas event
 							else{
 								diagramModel.clearSelection();
-								this.startFiringAction(new MoveCanvasAction(event.pageX, event.pageY, diagramModel));
+								this.startFiringAction(new MoveCanvasAction(event.clientX, event.clientY, diagramModel));
 							}
 						}
 
@@ -426,7 +426,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							link.getLastPoint().setSelected(true);
 							diagramModel.addLink(link);
 
-							this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY, diagramEngine));
+							this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 						}
 						//its some or other element, probably want to move it
 						else{
@@ -435,7 +435,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							}
 							model.model.setSelected(true);
 
-							this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY,diagramEngine));
+							this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY,diagramEngine));
 						}
 						this.state.document.addEventListener('mousemove', this.onMouseMove);
 						this.state.document.addEventListener('mouseup', this.onMouseUp);
@@ -449,7 +449,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							event.stopPropagation();
 							diagramModel.clearSelection(point);
 							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
+								action: new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
 							});
 						}}):null,
 					React.createElement(NodeLayerWidget, {diagramEngine: diagramEngine}),
