@@ -376,74 +376,73 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		var diagramModel = diagramEngine.getDiagramModel();
 
 		return (
-			React.DOM.div({
-					ref:'canvas',
-					className:'storm-diagrams-canvas',
-
-					onWheel: (event) => {
-						if (this.props.allowCanvasZoom){
-							event.preventDefault();
-							event.stopPropagation();
-							diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
-							diagramEngine.enableRepaintEntities([]);
+			<div
+				ref="canvas"
+				className="storm-diagrams-canvas"
+				onwheel={(event) => {
+					if (this.props.allowCanvasZoom){
+						event.preventDefault();
+						event.stopPropagation();
+						diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
+						diagramEngine.enableRepaintEntities([]);
+						this.forceUpdate();
+						setTimeout(() => {
 							this.forceUpdate();
-							setTimeout(() => {
-								this.forceUpdate();
-							},100)
-						}
-					},
-
-					onMouseDown: (event) =>{
-						this.setState({...this.state,wasMoved:false});
-
-						diagramEngine.clearRepaintEntities();
-						var model = this.getMouseElement(event);
-						//the canvas was selected
-						if(model === null){
-							//is it a multiple selection
-							if (event.shiftKey){
-								var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
-								this.startFiringAction(new SelectingAction(relative.x, relative.y));
-							}
-
-							//its a drag the canvas event
-							else{
-								diagramModel.clearSelection();
-								this.startFiringAction(new MoveCanvasAction(event.pageX, event.pageY, diagramModel));
-							}
-						}
-
-						//its a port element, we want to drag a link
-						else if (model.model instanceof PortModel){
-							var relative = diagramEngine.getRelativeMousePoint(event);
-							var link = new LinkModel();
-							link.setSourcePort(model.model);
-
-							link.getFirstPoint().updateLocation(relative)
-							link.getLastPoint().updateLocation(relative);
-
-							diagramModel.clearSelection();
-							link.getLastPoint().setSelected(true);
-							diagramModel.addLink(link);
-
-							this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY, diagramEngine));
-						}
-						//its some or other element, probably want to move it
-						else{
-							if (!event.shiftKey && !model.model.isSelected()){
-								diagramModel.clearSelection();
-							}
-							model.model.setSelected(true);
-
-							this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY,diagramEngine));
-						}
-						this.state.document.addEventListener('mousemove', this.onMouseMove);
-						this.state.document.addEventListener('mouseup', this.onMouseUp);
+						},100)
 					}
-				},
-				this.state.renderedNodes?
+				}}
+
+				onmousedown={(event) =>{
+					this.setState({...this.state,wasMoved:false});
+
+					diagramEngine.clearRepaintEntities();
+					var model = this.getMouseElement(event);
+					//the canvas was selected
+					if(model === null){
+						//is it a multiple selection
+						if (event.shiftKey){
+							var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+							this.startFiringAction(new SelectingAction(relative.x, relative.y));
+						}
+
+						//its a drag the canvas event
+						else{
+							diagramModel.clearSelection();
+							this.startFiringAction(new MoveCanvasAction(event.pageX, event.pageY, diagramModel));
+						}
+					}
+
+					//its a port element, we want to drag a link
+					else if (model.model instanceof PortModel){
+						var relative = diagramEngine.getRelativeMousePoint(event);
+						var link = new LinkModel();
+						link.setSourcePort(model.model);
+
+						link.getFirstPoint().updateLocation(relative)
+						link.getLastPoint().updateLocation(relative);
+
+						diagramModel.clearSelection();
+						link.getLastPoint().setSelected(true);
+						diagramModel.addLink(link);
+
+						this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY, diagramEngine));
+					}
+					//its some or other element, probably want to move it
+					else{
+						if (!event.shiftKey && !model.model.isSelected()){
+							diagramModel.clearSelection();
+						}
+						model.model.setSelected(true);
+
+						this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY,diagramEngine));
+					}
+					this.state.document.addEventListener('mousemove', this.onMouseMove);
+					this.state.document.addEventListener('mouseup', this.onMouseUp);
+				}}>
+				{
+					this.state.renderedNodes &&
 					React.createElement(LinkLayerWidget, {
-						diagramEngine: diagramEngine, pointAdded: (point: PointModel,event) => {
+						diagramEngine: diagramEngine, pointAdded: (point: PointModel, event) => {
 							this.state.document.addEventListener('mousemove', this.onMouseMove);
 							this.state.document.addEventListener('mouseup', this.onMouseUp);
 							event.stopPropagation();
@@ -451,19 +450,25 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							this.setState({
 								action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
 							});
-						}}):null,
-					React.createElement(NodeLayerWidget, {diagramEngine: diagramEngine}),
-					this.state.action instanceof SelectingAction?
-						React.DOM.div({
-							className: 'selector',
-							style: {
-								top: this.state.action.mouseY,
-								left: this.state.action.mouseX,
-								width: this.state.action.mouseX2 - this.state.action.mouseX,
-								height: this.state.action.mouseY2 - this.state.action.mouseY,
-							}
-						}):null
-			)
+						}
+					})
+				}
+				<NodeLayerWidget diagramEngine={diagramEngine}>
+					{
+						// draw a box that indicates the selection
+						this.state.action instanceof SelectingAction &&
+							<div
+								className="selector"
+								style={{
+									top: this.state.action.mouseY,
+									left: this.state.action.mouseX,
+									width: this.state.action.mouseX2 - this.state.action.mouseX,
+									height: this.state.action.mouseY2 - this.state.action.mouseY,
+								}}
+							/>
+					}
+				</NodeLayerWidget>
+			</div>
 		);
 	}
 }

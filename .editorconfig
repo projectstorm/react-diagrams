@@ -1,0 +1,9 @@
+[*]
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+
+# Some exceptions
+[{package.json}]
+indent_style = space
+indent_size = 2

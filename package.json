@@ -38,6 +38,7 @@
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.13.1",
     "ts-loader": "^2.0.0",
+    "tslint": "^5.5.0",
     "typescript": "^2.1.6",
     "webpack": "^2.2.1"
   }

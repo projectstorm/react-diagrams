@@ -23,25 +23,27 @@ export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerSt
 	}
 
 	render() {
-		
+
 		var diagramModel = this.props.diagramEngine.getDiagramModel();
-		
+
 		return (
-			React.DOM.div({
-					className:'node-view',
-					style:{
-						transform: 'scale(' + diagramModel.getZoomLevel() / 100.0 + ') translate(' + diagramModel.getOffsetX()+'px,'+diagramModel.getOffsetY()+'px)',
-						width: '100%',
-						height: '100%'
-					}
-				},
-				_.map(diagramModel.getNodes(),(node) => {
-					return(
-						React.createElement(NodeWidget, {diagramEngine: this.props.diagramEngine,key:node.id,node: node},
-							this.props.diagramEngine.generateWidgetForNode(node))
-					);
-				})
-			)
+			<div
+				className="node-view"
+				style={{
+					transform: 'scale(' + diagramModel.getZoomLevel() / 100.0 + ') translate(' + diagramModel.getOffsetX()+'px,'+diagramModel.getOffsetY()+'px)',
+					width: '100%',
+					height: '100%'
+				}}
+			>
+				{
+					_.map(diagramModel.getNodes(),(node) => {
+						return(
+							React.createElement(NodeWidget, {diagramEngine: this.props.diagramEngine,key:node.id,node: node},
+								this.props.diagramEngine.generateWidgetForNode(node))
+						);
+					})
+				}
+			</div>
 		);
 	}
 }

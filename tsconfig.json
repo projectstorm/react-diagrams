@@ -6,7 +6,8 @@
 		"declaration": true,
 		"target": "es5",
 		"sourceMap": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"jsx": "react"
 	},
 	"exclude": [
 		"node_modules",

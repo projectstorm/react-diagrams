@@ -24,17 +24,19 @@ export class PortWidget extends React.Component<PortProps, PortState> {
 
 	render() {
 		return (
-			React.DOM.div({
-				onMouseEnter: () =>{
+			<div
+				onMouseEnter={() =>{
 					this.setState({selected: true});
-				},
-				onMouseLeave: () => {
+				}}
+
+				onMouseLeave={() => {
 					this.setState({selected: false});
-				},
-				className:'port'+(this.state.selected?' selected':''),
-				'data-name':this.props.name,
-				'data-nodeid': this.props.node.getID()
-			})
+				}}
+
+				className={'port'+(this.state.selected?' selected':'')}
+				data-name={this.props.name}
+				data-nodeid={this.props.node.getID()}
+			/>
 		);
 	}
 }
