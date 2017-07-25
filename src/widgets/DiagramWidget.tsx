@@ -2,65 +2,66 @@ import * as React from "react";
 import {DiagramEngine} from "../DiagramEngine";
 import {DiagramModel} from "../DiagramModel";
 import * as _ from "lodash";
-import {PointModel, NodeModel, BaseModel, BaseModelListener, LinkModel,PortModel} from "../Common";
+import {PointModel, NodeModel, BaseModel, BaseModelListener, LinkModel, PortModel} from "../Common";
 import {LinkLayerWidget} from "./LinkLayerWidget";
 import {NodeLayerWidget} from "./NodeLayerWidget";
 import {Toolkit} from "../Toolkit";
 
-export interface SelectionModel{
+export interface SelectionModel {
 	model: BaseModel<BaseModelListener>;
 	initialX: number;
 	initialY: number;
 }
 
-export class BaseAction{
+export class BaseAction {
 	mouseX: number;
 	mouseY: number;
 	ms: number;
 
-	constructor(mouseX: number,mouseY: number){
+	constructor(mouseX: number, mouseY: number) {
 		this.mouseX = mouseX;
 		this.mouseY = mouseY;
 		this.ms = (new Date()).getTime();
 	}
 }
 
-export class SelectingAction extends BaseAction{
+export class SelectingAction extends BaseAction {
 	mouseX2: number;
 	mouseY2: number;
 
-	constructor(mouseX: number,mouseY: number){
-		super(mouseX,mouseY);
+	constructor(mouseX: number, mouseY: number) {
+		super(mouseX, mouseY);
 		this.mouseX2 = mouseX;
 		this.mouseY2 = mouseY;
 	}
 
-	containsElement(x: number, y: number, diagramModel: DiagramModel): boolean{
-		var z = diagramModel.getZoomLevel()/100.0;
+	containsElement(x: number, y: number, diagramModel: DiagramModel): boolean {
+		var z = diagramModel.getZoomLevel() / 100.0;
 		return (
-			(x + diagramModel.getOffsetX())*z > this.mouseX	&&
-			(x + diagramModel.getOffsetX())*z < this.mouseX2&&
-			(y + diagramModel.getOffsetY())*z > this.mouseY	&&
-			(y + diagramModel.getOffsetY())*z < this.mouseY2
+			(x + diagramModel.getOffsetX()) * z > this.mouseX &&
+			(x + diagramModel.getOffsetX()) * z < this.mouseX2 &&
+			(y + diagramModel.getOffsetY()) * z > this.mouseY &&
+			(y + diagramModel.getOffsetY()) * z < this.mouseY2
 		)
 	}
 }
 
-export class MoveCanvasAction extends BaseAction{
+export class MoveCanvasAction extends BaseAction {
 	initialOffsetX: number;
 	initialOffsetY: number;
 
-	constructor(mouseX: number, mouseY: number, diagramModel: DiagramModel){
-		super(mouseX,mouseY);
+	constructor(mouseX: number, mouseY: number, diagramModel: DiagramModel) {
+		super(mouseX, mouseY);
 		this.initialOffsetX = diagramModel.getOffsetX();
 		this.initialOffsetY = diagramModel.getOffsetY();
 	}
 }
 
-export class MoveItemsAction extends BaseAction{
+export class MoveItemsAction extends BaseAction {
 	selectionModels: SelectionModel[];
-	moved:boolean;
-	constructor(mouseX: number, mouseY: number, diagramEngine: DiagramEngine){
+	moved: boolean;
+
+	constructor(mouseX: number, mouseY: number, diagramEngine: DiagramEngine) {
 		super(mouseX, mouseY);
 		this.moved = false;
 		diagramEngine.enableRepaintEntities(diagramEngine.getDiagramModel().getSelectedItems());
@@ -82,7 +83,7 @@ export class MoveItemsAction extends BaseAction{
 }
 
 export interface DiagramProps {
-	diagramEngine:DiagramEngine;
+	diagramEngine: DiagramEngine;
 
 	allowLooseLinks?: boolean;
 	allowCanvasTranslation?: boolean;
@@ -94,7 +95,7 @@ export interface DiagramProps {
 }
 
 export interface DiagramState {
-	action: BaseAction| null;
+	action: BaseAction | null;
 	wasMoved: boolean,
 	renderedNodes: boolean,
 	windowListener: any,
@@ -108,7 +109,7 @@ export interface DiagramState {
 export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 	public static defaultProps: DiagramProps = {
-		diagramEngine:null,
+		diagramEngine: null,
 		allowLooseLinks: true,
 		allowCanvasTranslation: true,
 		allowCanvasZoom: true
@@ -124,11 +125,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			renderedNodes: false,
 			windowListener: null,
 			diagramEngineListener: null,
-			document:null
+			document: null
 		}
 	}
 
-	componentWillMount(){
+	componentWillMount() {
 		this.setState({
 			diagramEngineListener: this.props.diagramEngine.addListener({
 				repaintCanvas: () => {
@@ -138,53 +139,53 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		});
 	}
 
-	componentWillUnmount(){
+	componentWillUnmount() {
 		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
 		this.props.diagramEngine.setCanvas(null);
-		window.removeEventListener('keyup',this.state.windowListener);
-		window.removeEventListener('mouseUp',this.onMouseUp);
-		window.removeEventListener('mouseMove',this.onMouseMove);
+		window.removeEventListener('keyup', this.state.windowListener);
+		window.removeEventListener('mouseUp', this.onMouseUp);
+		window.removeEventListener('mouseMove', this.onMouseMove);
 	}
 
-	componentWillUpdate(nextProps: DiagramProps){
-		if (this.props.diagramEngine.diagramModel.id !== nextProps.diagramEngine.diagramModel.id){
+	componentWillUpdate(nextProps: DiagramProps) {
+		if (this.props.diagramEngine.diagramModel.id !== nextProps.diagramEngine.diagramModel.id) {
 			this.setState({renderedNodes: false});
 			nextProps.diagramEngine.diagramModel.rendered = true;
 		}
-		if (!nextProps.diagramEngine.diagramModel.rendered){
+		if (!nextProps.diagramEngine.diagramModel.rendered) {
 			this.setState({renderedNodes: false});
 			nextProps.diagramEngine.diagramModel.rendered = true;
 		}
 	}
 
-	componentDidUpdate(){
-		if (!this.state.renderedNodes){
+	componentDidUpdate() {
+		if (!this.state.renderedNodes) {
 			this.setState({
 				renderedNodes: true
 			});
 		}
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.props.diagramEngine.setCanvas(this.refs['canvas'] as Element);
 
 		//add a keyboard listener
 		this.setState({
 			document: document,
 			renderedNodes: true,
-			windowListener: window.addEventListener('keyup',(event) => {
+			windowListener: window.addEventListener('keyup', (event) => {
 				//delete all selected
-				if(event.keyCode === 46 || event.keyCode === 8){
-					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(),(element) => {
+				if (event.keyCode === 46 || event.keyCode === 8) {
+					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), (element) => {
 
 						//only delete items which are not locked
-						if (!this.props.diagramEngine.isModelLocked(element)){
+						if (!this.props.diagramEngine.isModelLocked(element)) {
 							element.remove();
 						}
 					});
 					this.forceUpdate();
 				}
-			},false)
+			}, false)
 		});
 		window.focus();
 	}
@@ -192,14 +193,14 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event): {model: BaseModel<BaseModelListener>, element: Element}{
+	getMouseElement(event): { model: BaseModel<BaseModelListener>, element: Element } {
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
 		//is it a port
-		var element = Toolkit.closest(target,'.port[data-name]');
-		if(element){
-			var nodeElement = Toolkit.closest(target,'.node[data-nodeid]') as HTMLElement;
+		var element = Toolkit.closest(target, '.port[data-name]');
+		if (element) {
+			var nodeElement = Toolkit.closest(target, '.node[data-nodeid]') as HTMLElement;
 			return {
 				model: diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-name')),
 				element: element
@@ -207,8 +208,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 
 		//look for a point
-		element = Toolkit.closest(target,'.point[data-id]');
-		if(element){
+		element = Toolkit.closest(target, '.point[data-id]');
+		if (element) {
 			return {
 				model: diagramModel.getLink(element.getAttribute('data-linkid')).getPointModel(element.getAttribute('data-id')),
 				element: element
@@ -216,8 +217,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 
 		//look for a link
-		element = Toolkit.closest(target,'[data-linkid]');
-		if(element){
+		element = Toolkit.closest(target, '[data-linkid]');
+		if (element) {
 			return {
 				model: diagramModel.getLink(element.getAttribute('data-linkid')),
 				element: element
@@ -225,8 +226,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 
 		//look for a node
-		element = Toolkit.closest(target,'.node[data-nodeid]');
-		if(element){
+		element = Toolkit.closest(target, '.node[data-nodeid]');
+		if (element) {
 			return {
 				model: diagramModel.getNode(element.getAttribute('data-nodeid')),
 				element: element
@@ -236,53 +237,53 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		return null;
 	}
 
-	fireAction(){
-		if (this.state.action && this.props.actionStillFiring){
+	fireAction() {
+		if (this.state.action && this.props.actionStillFiring) {
 			this.props.actionStillFiring(this.state.action);
 		}
 	}
 
-	stopFiringAction(shouldSkipEvent?:boolean){
-		if (this.props.actionStoppedFiring && !shouldSkipEvent){
+	stopFiringAction(shouldSkipEvent?: boolean) {
+		if (this.props.actionStoppedFiring && !shouldSkipEvent) {
 			this.props.actionStoppedFiring(this.state.action);
 		}
-		this.setState({action:null});
+		this.setState({action: null});
 	}
 
-	startFiringAction(action: BaseAction){
+	startFiringAction(action: BaseAction) {
 		var setState = true;
-		if(this.props.actionStartedFiring){
+		if (this.props.actionStartedFiring) {
 			setState = this.props.actionStartedFiring(action);
 		}
-		if(setState){
-			this.setState({action:action});
+		if (setState) {
+			this.setState({action: action});
 		}
 	}
 
-	onMouseMove(event){
+	onMouseMove(event) {
 		var diagramEngine = this.props.diagramEngine;
 		var diagramModel = diagramEngine.getDiagramModel();
 		//select items so draw a bounding box
-		if (this.state.action instanceof SelectingAction){
-			var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+		if (this.state.action instanceof SelectingAction) {
+			var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 
-			_.forEach(diagramModel.getNodes(),(node) => {
-				if ((this.state.action as SelectingAction).containsElement(node.x, node.y, diagramModel)){
+			_.forEach(diagramModel.getNodes(), (node) => {
+				if ((this.state.action as SelectingAction).containsElement(node.x, node.y, diagramModel)) {
 					node.setSelected(true);
 				}
 			});
 
-			_.forEach(diagramModel.getLinks(),(link) => {
+			_.forEach(diagramModel.getLinks(), (link) => {
 				var allSelected = true;
-				_.forEach(link.points,(point) => {
-					if ((this.state.action as SelectingAction).containsElement(point.x, point.y, diagramModel)){
+				_.forEach(link.points, (point) => {
+					if ((this.state.action as SelectingAction).containsElement(point.x, point.y, diagramModel)) {
 						point.setSelected(true);
-					}else{
+					} else {
 						allSelected = false;
 					}
 				});
 
-				if (allSelected){
+				if (allSelected) {
 					link.setSelected(true);
 				}
 			})
@@ -296,14 +297,14 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 
 		//translate the items on the canvas
-		else if (this.state.action instanceof MoveItemsAction){
-			if(!this.state.wasMoved){
-				this.setState({...this.state,wasMoved:true});
+		else if (this.state.action instanceof MoveItemsAction) {
+			if (!this.state.wasMoved) {
+				this.setState({...this.state, wasMoved: true});
 			}
-			_.forEach(this.state.action.selectionModels,(model) => {
-				if (model.model instanceof NodeModel || model.model instanceof PointModel){
-					model.model.x = model.initialX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100));
-					model.model.y = model.initialY + ((event.pageY - this.state.action.mouseY) / (diagramModel.getZoomLevel()/100));
+			_.forEach(this.state.action.selectionModels, (model) => {
+				if (model.model instanceof NodeModel || model.model instanceof PointModel) {
+					model.model.x = model.initialX + ((event.clientX - this.state.action.mouseX) / (diagramModel.getZoomLevel() / 100));
+					model.model.y = model.initialY + ((event.clientY - this.state.action.mouseY) / (diagramModel.getZoomLevel() / 100));
 				}
 			});
 			this.fireAction();
@@ -311,11 +312,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 
 		//translate the actual canvas
-		else if (this.state.action instanceof MoveCanvasAction){
-			if (this.props.allowCanvasTranslation){
+		else if (this.state.action instanceof MoveCanvasAction) {
+			if (this.props.allowCanvasTranslation) {
 				diagramModel.setOffset(
-					this.state.action.initialOffsetX + ((event.pageX - this.state.action.mouseX) / (diagramModel.getZoomLevel()/100)),
-					this.state.action.initialOffsetY+((event.pageY-this.state.action.mouseY)/(diagramModel.getZoomLevel()/100))
+					this.state.action.initialOffsetX + ((event.clientX - this.state.action.mouseX) / (diagramModel.getZoomLevel() / 100)),
+					this.state.action.initialOffsetY + ((event.clientY - this.state.action.mouseY) / (diagramModel.getZoomLevel() / 100))
 				);
 				this.fireAction();
 				this.forceUpdate();
@@ -323,21 +324,21 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 	}
 
-	onMouseUp(event){
+	onMouseUp(event) {
 		var diagramEngine = this.props.diagramEngine;
 		var diagramModel = diagramEngine.getDiagramModel();
 		//are we going to connect a link to something?
-		if (this.state.action instanceof MoveItemsAction){
+		if (this.state.action instanceof MoveItemsAction) {
 			var element = this.getMouseElement(event);
 			var linkConnected = false;
-			_.forEach(this.state.action.selectionModels,(model) => {
+			_.forEach(this.state.action.selectionModels, (model) => {
 
 				//only care about points connecting to things
-				if (!(model.model instanceof PointModel)){
+				if (!(model.model instanceof PointModel)) {
 					return;
 				}
 
-				if (element.model instanceof PortModel){
+				if (element.model instanceof PortModel) {
 					linkConnected = true;
 					let link = model.model.getLink();
 					link.setTargetPort(element.model);
@@ -345,16 +346,16 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			});
 
 			//do we want to allow loose links on the diagram model or not
-			if (!linkConnected && !this.props.allowLooseLinks){
-				_.forEach(this.state.action.selectionModels,(model) => {
+			if (!linkConnected && !this.props.allowLooseLinks) {
+				_.forEach(this.state.action.selectionModels, (model) => {
 
 					//only care about points connecting to things
-					if (!(model.model instanceof PointModel)){
+					if (!(model.model instanceof PointModel)) {
 						return;
 					}
 
 					var link = model.model.getLink();
-					if(link.isLastPoint(model.model)){
+					if (link.isLastPoint(model.model)) {
 						link.remove();
 					}
 				});
@@ -377,43 +378,42 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 		return (
 			<div
-				ref="canvas"
+				ref={'canvas'}
 				className="storm-diagrams-canvas"
-				onwheel={(event) => {
-					if (this.props.allowCanvasZoom){
+				onWheel={(event) => {
+					if (this.props.allowCanvasZoom) {
 						event.preventDefault();
 						event.stopPropagation();
-						diagramModel.setZoomLevel(diagramModel.getZoomLevel()+(event.deltaY/60));
+						diagramModel.setZoomLevel(diagramModel.getZoomLevel() + (event.deltaY / 60));
 						diagramEngine.enableRepaintEntities([]);
 						this.forceUpdate();
 						setTimeout(() => {
 							this.forceUpdate();
-						},100)
+						}, 100)
 					}
 				}}
-
-				onmousedown={(event) =>{
-					this.setState({...this.state,wasMoved:false});
+				onMouseDown={(event) => {
+					this.setState({...this.state, wasMoved: false});
 
 					diagramEngine.clearRepaintEntities();
 					var model = this.getMouseElement(event);
 					//the canvas was selected
-					if(model === null){
+					if (model === null) {
 						//is it a multiple selection
-						if (event.shiftKey){
-							var relative = diagramEngine.getRelativePoint(event.pageX, event.pageY);
+						if (event.shiftKey) {
+							var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 							this.startFiringAction(new SelectingAction(relative.x, relative.y));
 						}
 
 						//its a drag the canvas event
-						else{
+						else {
 							diagramModel.clearSelection();
-							this.startFiringAction(new MoveCanvasAction(event.pageX, event.pageY, diagramModel));
+							this.startFiringAction(new MoveCanvasAction(event.clientX, event.clientY, diagramModel));
 						}
 					}
 
 					//its a port element, we want to drag a link
-					else if (model.model instanceof PortModel){
+					else if (model.model instanceof PortModel) {
 						var relative = diagramEngine.getRelativeMousePoint(event);
 						var link = new LinkModel();
 						link.setSourcePort(model.model);
@@ -425,37 +425,36 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						link.getLastPoint().setSelected(true);
 						diagramModel.addLink(link);
 
-						this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY, diagramEngine));
+						this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 					}
 					//its some or other element, probably want to move it
-					else{
-						if (!event.shiftKey && !model.model.isSelected()){
+					else {
+						if (!event.shiftKey && !model.model.isSelected()) {
 							diagramModel.clearSelection();
 						}
 						model.model.setSelected(true);
 
-						this.startFiringAction(new MoveItemsAction(event.pageX, event.pageY,diagramEngine));
+						this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 					}
 					this.state.document.addEventListener('mousemove', this.onMouseMove);
 					this.state.document.addEventListener('mouseup', this.onMouseUp);
-				}}>
+				}}
+			>
 				{
 					this.state.renderedNodes &&
-					React.createElement(LinkLayerWidget, {
-						diagramEngine: diagramEngine, pointAdded: (point: PointModel, event) => {
+						<LinkLayerWidget diagramEngine={diagramEngine} pointAdded={(point: PointModel, event) => {
 							this.state.document.addEventListener('mousemove', this.onMouseMove);
 							this.state.document.addEventListener('mouseup', this.onMouseUp);
 							event.stopPropagation();
 							diagramModel.clearSelection(point);
 							this.setState({
-								action: new MoveItemsAction(event.pageX, event.pageY, diagramEngine)
+								action: new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
 							});
-						}
-					})
+						}}
+					/>
 				}
 				<NodeLayerWidget diagramEngine={diagramEngine}>
 					{
-						// draw a box that indicates the selection
 						this.state.action instanceof SelectingAction &&
 							<div
 								className="selector"
