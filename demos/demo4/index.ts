@@ -47,15 +47,24 @@ window.onload = () => {
 	engine.setDiagramModel(model);
 	
 	//!========================================= <<<<<<<
-	
+
+  console.log('model.setLocked(' + String(true) + ')');
 	model.setLocked(true);
+
 	var props = {
 		diagramEngine: engine,
 		allowLooseLinks: false,
 		allowCanvasTranslation: false,
 		allowCanvasZoom: false
 	} as SRD.DiagramProps;
-	
+
+  setInterval(() => {
+    const isLocked = !model.isLocked();
+    console.log('model.setLocked(' + String(isLocked) + ')');
+    model.setLocked(isLocked);
+    ReactDOM.render(React.createElement(SRD.DiagramWidget,props), document.body);
+  }, 5000);
+
 	//!=========================================  <<<<<<<
 	
 	ReactDOM.render(React.createElement(SRD.DiagramWidget,props), document.body);

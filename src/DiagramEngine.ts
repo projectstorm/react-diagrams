@@ -80,14 +80,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener>{
 		if (this.diagramModel.isLocked()){
 			return true;
 		}
-		
-		//a point is locked, if its model is locked
-		if (model instanceof PointModel){
-			if (model.getLink().isLocked()){
-				return true;
-			}
-		}
-		
+
 		return model.isLocked();
 	}
 	

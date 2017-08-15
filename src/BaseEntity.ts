@@ -63,9 +63,13 @@ export class BaseEntity<T extends BaseListener>{
 	
 	public setLocked(locked: boolean = true){
 		this.locked = locked;
+		this.notifyLockedChanged();
+	}
+
+	protected notifyLockedChanged() {
 		this.iterateListeners((listener) => {
 			if (listener.lockChanged){
-				listener.lockChanged(this, locked);
+				listener.lockChanged(this, this.isLocked());
 			}
 		});
 	}

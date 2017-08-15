@@ -415,6 +415,10 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 						//its a port element, we want to drag a link
 						else if (model.model instanceof PortModel){
+							if (diagramEngine.isModelLocked(model.model)) {
+								return;
+							}
+
 							var relative = diagramEngine.getRelativeMousePoint(event);
 							var link = new LinkModel();
 							link.setSourcePort(model.model);
@@ -430,6 +434,10 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}
 						//its some or other element, probably want to move it
 						else{
+							if (diagramEngine.isModelLocked(model.model)) {
+								return;
+							}
+
 							if (!event.shiftKey && !model.model.isSelected()){
 								diagramModel.clearSelection();
 							}
@@ -444,6 +452,12 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				this.state.renderedNodes?
 					React.createElement(LinkLayerWidget, {
 						diagramEngine: diagramEngine, pointAdded: (point: PointModel,event) => {
+							if (diagramEngine.isModelLocked(point)) {
+								diagramEngine.clearRepaintEntities();
+								this.stopFiringAction();
+								return;
+							}
+
 							this.state.document.addEventListener('mousemove', this.onMouseMove);
 							this.state.document.addEventListener('mouseup', this.onMouseUp);
 							event.stopPropagation();
