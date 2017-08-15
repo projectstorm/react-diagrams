@@ -64,11 +64,25 @@ export class PointModel extends BaseModel<BaseModelListener>{
 	y:number;
 	link: LinkModel;
 
+	private _lockChangedListener: BaseListener;
+	private _lockChangedListenerId: string | null;
+
 	constructor(link: LinkModel,points: {x:number,y: number}){
 		super();
 		this.x = points.x;
 		this.y = points.y;
 		this.link = link;
+
+		this._lockChangedListener = {
+			lockChanged: () => {
+				this.notifyLockedChanged();
+			}
+		};
+		this._lockChangedListenerId = null;
+
+		if (this.link){
+			this._lockChangedListenerId = this.link.addListener(this._lockChangedListener);
+		}
 	}
 
 	deSerialize(ob){
@@ -89,6 +103,9 @@ export class PointModel extends BaseModel<BaseModelListener>{
 
 		//clear references
 		if (this.link){
+			this.link.removeListener(this._lockChangedListenerId);
+			this._lockChangedListenerId = null;
+
 			this.link.removePoint(this);
 		}
 	}
@@ -108,6 +125,14 @@ export class PointModel extends BaseModel<BaseModelListener>{
 
 	getLink(): LinkModel{
 		return this.link;
+	}
+
+	isLocked(): boolean{
+		//a point is locked if its link is locked
+		if (this.link.isLocked()){
+			return true;
+		}
+		return super.isLocked();
 	}
 }
 
@@ -249,6 +274,9 @@ export class PortModel extends BaseModel<BaseModelListener>{
 	parentNode: NodeModel;
 	links: {[id: string]: LinkModel};
 
+	private _lockChangedListener: BaseListener;
+	private _lockChangedListenerId: string | null;
+
 	deSerialize(ob){
 		super.deSerialize(ob);
 		this.name = ob.name;
@@ -269,6 +297,13 @@ export class PortModel extends BaseModel<BaseModelListener>{
 		this.name = name;
 		this.links = {};
 		this.parentNode = null;
+
+		this._lockChangedListener = {
+			lockChanged: () => {
+				this.notifyLockedChanged();
+			}
+		};
+		this._lockChangedListenerId = null;
 	}
 
 	getName(): string{
@@ -280,7 +315,14 @@ export class PortModel extends BaseModel<BaseModelListener>{
 	}
 
 	setParentNode(node: NodeModel){
+		if (this.parentNode){
+			this.parentNode.removeListener(this._lockChangedListenerId);
+			this._lockChangedListenerId = null;
+		}
 		this.parentNode = node;
+		if (this.parentNode){
+			this._lockChangedListenerId = this.parentNode.addListener(this._lockChangedListener);
+		}
 	}
 
 	removeLink(link: LinkModel){
@@ -293,6 +335,14 @@ export class PortModel extends BaseModel<BaseModelListener>{
 
 	getLinks(): {[id: string]: LinkModel}{
 		return this.links;
+	}
+
+	isLocked(): boolean{
+		//a port is locked if its parent node is locked
+		if (this.parentNode && this.parentNode.isLocked()){
+			return true;
+		}
+		return super.isLocked();
 	}
 }
 

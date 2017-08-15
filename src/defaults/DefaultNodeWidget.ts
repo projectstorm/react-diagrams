@@ -25,13 +25,17 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps, Default
 	}
 	
 	render() {
+		const isLocked = this.props.diagramEngine.isModelLocked(this.props.node);
 		return (
 			div({className: 'basic-node', style: {background: this.props.node.color }},
 				div({className:'title'},
 					div({className:'name'},this.props.node.name),
-					div({className: 'fa fa-close', onClick: () => {
-						this.props.node.remove();
-						this.props.diagramEngine.repaintCanvas();
+					div({className: 'fa fa-close', style: {visibility:(isLocked ? 'hidden' : 'inherit')}, onClick: (event) => {
+						event.preventDefault();
+						if (!this.props.diagramEngine.isModelLocked(this.props.node)){
+							this.props.node.remove();
+							this.props.diagramEngine.repaintCanvas();
+						}
 					}})
 				),
 				div({className:'ports'},
