@@ -26,8 +26,6 @@ A no-nonsense diagramming library written entirely in React with the help of Lod
 
 ## Roadmap
 
-* Port everything over to JSX (busy with this)
-* Make keybindings customizable (maybe pluggable)
 * Move path logic associated with links into a base link class so we can easily extend links
 * Add more fault tolerance
 
