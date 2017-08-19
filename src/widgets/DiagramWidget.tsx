@@ -23,6 +23,8 @@ export interface DiagramProps {
 	actionStartedFiring?: (action: BaseAction) => boolean;
 	actionStillFiring?: (action: BaseAction) => void;
 	actionStoppedFiring?: (action: BaseAction) => void;
+
+	deleteKeys?: number[];
 }
 
 export interface DiagramState {
@@ -43,7 +45,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		diagramEngine: null,
 		allowLooseLinks: true,
 		allowCanvasTranslation: true,
-		allowCanvasZoom: true
+		allowCanvasZoom: true,
+		deleteKeys: [46, 8]
 	};
 
 	constructor(props: DiagramProps) {
@@ -244,8 +247,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	}
 
 	onKeyUp(event){
+
 		//delete all selected
-		if (event.keyCode === 46 || event.keyCode === 8) {
+		if (this.props.deleteKeys.indexOf(event.keyCode) !== -1) {
 			_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), (element) => {
 
 				//only delete items which are not locked
@@ -299,7 +303,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction();
 		}
-		console.log("event up");
+
 		this.state.document.removeEventListener('mousemove', this.onMouseMove);
 		this.state.document.removeEventListener('mouseup', this.onMouseUp);
 	}
