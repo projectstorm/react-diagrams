@@ -386,20 +386,19 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}}
 					/>
 				}
-				<NodeLayerWidget diagramEngine={diagramEngine}>
-					{
-						this.state.action instanceof SelectingAction &&
-							<div
-								className="selector"
-								style={{
-									top: this.state.action.mouseY,
-									left: this.state.action.mouseX,
-									width: this.state.action.mouseX2 - this.state.action.mouseX,
-									height: this.state.action.mouseY2 - this.state.action.mouseY,
-								}}
-							/>
-					}
-				</NodeLayerWidget>
+				<NodeLayerWidget diagramEngine={diagramEngine} />
+				{
+					this.state.action instanceof SelectingAction &&
+						<div
+							className="selector"
+							style={{
+								top: this.state.action.mouseY,
+								left: this.state.action.mouseX,
+								width: this.state.action.mouseX2 - this.state.action.mouseX,
+								height: this.state.action.mouseY2 - this.state.action.mouseY,
+							}}
+						/>
+				}
 			</div>
 		);
 	}
