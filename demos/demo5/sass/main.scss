@@ -18,11 +18,28 @@
 	.content{
 		display: flex;
 		flex-grow: 1;
+
+		.diagram-layer{
+			position: relative;
+			flex-grow: 1;
+		}
+
 		.tray{
 			min-width: 200px;
 			background: rgb(20,20,20);
 			flex-grow: 0;
 			flex-shrink: 0;
+
+			.tray-item{
+				color: white;
+				font-family: Helvetica, Arial;
+				padding: 5px;
+				margin: 0px 10px;
+				border: solid 1px;
+				border-radius: 5px;
+				margin-bottom: 2px;
+				cursor: pointer;
+			}
 		}
 	}
 }

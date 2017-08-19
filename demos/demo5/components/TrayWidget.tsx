@@ -22,9 +22,7 @@ export class TrayWidget extends React.Component<TrayWidgetProps, TrayWidgetState
 
 	render() {
 		return (
-			React.DOM.div({className: "tray"},
-				this.props.children
-			)
+			<div className="tray">{this.props.children}</div>
 		)
 	}
 }
