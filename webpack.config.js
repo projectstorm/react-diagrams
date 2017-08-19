@@ -75,11 +75,11 @@ module.exports = [
 	//for building the demos and tests
 	{
 		entry: {
-			'demo1/bundle.js': './demos/demo1/index.ts',
-			'demo2/bundle.js': './demos/demo2/index.ts',
-			'demo3/bundle.js': './demos/demo3/index.ts',
-			'demo4/bundle.js': './demos/demo4/index.ts',
-			'demo5/bundle.js': './demos/demo5/index.ts',
+			'demo1/dist/bundle.js': './demos/demo1/index.tsx',
+			'demo2/dist/bundle.js': './demos/demo2/index.tsx',
+			'demo3/dist/bundle.js': './demos/demo3/index.tsx',
+			'demo4/dist/bundle.js': './demos/demo4/index.tsx',
+			'demo5/dist/bundle.js': './demos/demo5/index.tsx',
 		},
 		output: {
 			filename: '[name]',

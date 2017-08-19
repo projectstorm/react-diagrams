@@ -28,5 +28,3 @@ export class TrayWidget extends React.Component<TrayWidgetProps, TrayWidgetState
 		)
 	}
 }
-
-export var TrayWidgetFactory = React.createFactory(TrayWidget);

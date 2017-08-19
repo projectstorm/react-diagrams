@@ -1,5 +1,5 @@
 import * as React from "react";
-import {TrayWidgetFactory} from "./TrayWidget";
+import {TrayWidget} from "./TrayWidget";
 import {DiagramWidget} from "../../../src/main";
 import {Application} from "../Application";
 
@@ -23,17 +23,15 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 
 	render() {
 		return (
-			React.DOM.div({className: "body"},
-				React.DOM.div({className:'header'},
-					React.DOM.div({className:'title'},"Storm React Diagrams - Demo 5")
-				),
-				React.DOM.div({className:'content'},
-					TrayWidgetFactory(),
-					React.createElement(DiagramWidget, {diagramEngine: this.props.app.getDiagramEngine()})
-				)
-			)
+			<div className="body">
+				<div className="header">
+					<div className="title">Storm React Diagrams - Demo 5</div>
+				</div>
+				<div className="content">
+					<TrayWidget />
+					<DiagramWidget diagramEngine={this.props.app.getDiagramEngine()}/>
+				</div>
+			</div>
 		)
 	}
 }
-
-export var BodyWidgetFactory = React.createFactory(BodyWidget);
