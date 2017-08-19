@@ -308,6 +308,21 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		this.state.document.removeEventListener('mouseup', this.onMouseUp);
 	}
 
+	drawSelectionBox(){
+		let dimensions = (this.state.action as SelectingAction).getBoxDimensions();
+		return (
+			<div
+				className="selector"
+				style={{
+					top: dimensions.top,
+					left: dimensions.left,
+					width: dimensions.width,
+					height: dimensions.height,
+				}}
+			/>
+		);
+	}
+
 	render() {
 		var diagramEngine = this.props.diagramEngine;
 		var diagramModel = diagramEngine.getDiagramModel();
@@ -396,15 +411,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				<NodeLayerWidget diagramEngine={diagramEngine} />
 				{
 					this.state.action instanceof SelectingAction &&
-						<div
-							className="selector"
-							style={{
-								top: this.state.action.mouseY,
-								left: this.state.action.mouseX,
-								width: this.state.action.mouseX2 - this.state.action.mouseX,
-								height: this.state.action.mouseY2 - this.state.action.mouseY,
-							}}
-						/>
+						this.drawSelectionBox()
 				}
 			</div>
 		);
