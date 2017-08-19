@@ -60,20 +60,12 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 	}
 
-	componentWillMount() {
-		this.setState({
-			diagramEngineListener: this.props.diagramEngine.addListener({
-				repaintCanvas: () => {
-					this.forceUpdate();
-				}
-			})
-		});
-	}
+	onKeyUpPointer: null;
 
 	componentWillUnmount() {
 		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
 		this.props.diagramEngine.setCanvas(null);
-		window.removeEventListener('keyup', this.state.windowListener);
+		window.removeEventListener('keyup', this.onKeyUpPointer);
 		window.removeEventListener('mouseUp', this.onMouseUp);
 		window.removeEventListener('mouseMove', this.onMouseMove);
 	}
@@ -99,24 +91,21 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 	componentDidMount() {
 
+		this.onKeyUpPointer = this.onKeyUp.bind(this);
+
 		//add a keyboard listener
 		this.setState({
 			document: document,
 			renderedNodes: true,
-			windowListener: window.addEventListener('keyup', (event) => {
-				//delete all selected
-				if (event.keyCode === 46 || event.keyCode === 8) {
-					_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), (element) => {
-
-						//only delete items which are not locked
-						if (!this.props.diagramEngine.isModelLocked(element)) {
-							element.remove();
-						}
-					});
+			diagramEngineListener: this.props.diagramEngine.addListener({
+				repaintCanvas: () => {
 					this.forceUpdate();
 				}
-			}, false)
+			}),
 		});
+
+		window.addEventListener('keyup', this.onKeyUpPointer, false);
+
 		window.focus();
 	}
 
@@ -233,8 +222,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			}
 			_.forEach(this.state.action.selectionModels, (model) => {
 				if (model.model instanceof NodeModel || model.model instanceof PointModel) {
-					model.model.x = model.initialX + ((event.clientX - this.state.action.mouseX) / (diagramModel.getZoomLevel() / 100));
-					model.model.y = model.initialY + ((event.clientY - this.state.action.mouseY) / (diagramModel.getZoomLevel() / 100));
+					model.model.x = diagramModel.getGridPosition(model.initialX + ((event.clientX - this.state.action.mouseX) / (diagramModel.getZoomLevel() / 100)));
+					model.model.y = diagramModel.getGridPosition(model.initialY + ((event.clientY - this.state.action.mouseY) / (diagramModel.getZoomLevel() / 100)));
 				}
 			});
 			this.fireAction();
@@ -254,6 +243,20 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 	}
 
+	onKeyUp(event){
+		//delete all selected
+		if (event.keyCode === 46 || event.keyCode === 8) {
+			_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), (element) => {
+
+				//only delete items which are not locked
+				if (!this.props.diagramEngine.isModelLocked(element)) {
+					element.remove();
+				}
+			});
+			this.forceUpdate();
+		}
+	}
+
 	onMouseUp(event) {
 		var diagramEngine = this.props.diagramEngine;
 		//are we going to connect a link to something?
@@ -267,7 +270,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					return;
 				}
 
-				if (element.model instanceof PortModel) {
+				if (element && element.model instanceof PortModel) {
 					linkConnected = true;
 					let link = model.model.getLink();
 					link.setTargetPort(element.model);
@@ -296,9 +299,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction();
 		}
+		console.log("event up");
 		this.state.document.removeEventListener('mousemove', this.onMouseMove);
 		this.state.document.removeEventListener('mouseup', this.onMouseUp);
-
 	}
 
 	render() {

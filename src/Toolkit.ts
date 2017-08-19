@@ -16,7 +16,7 @@ export class Toolkit {
 
 	/**
 	 * Finds the closest element as a polyfill
-	 * 
+	 *
 	 * @param  {Element} element  [description]
 	 * @param  {string}  selector [description]
 	 */

@@ -28,13 +28,12 @@ export class NodeWidget extends React.Component<NodeProps, NodeState> {
 
 	render() {
 		return (
-
 			<div
 				data-nodeid={this.props.node.id}
 				className={'node' + (this.props.node.isSelected()?' selected':'')}
 				style={{
-					top: this.props.node.y,
-					left: this.props.node.x,
+					top: this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.node.y),
+					left: this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.node.x),
 				}}
 			>
 				{React.cloneElement(this.props.children,{})}

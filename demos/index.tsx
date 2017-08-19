@@ -7,7 +7,8 @@ import demo2 from "./demo2/index";
 import demo3 from "./demo3/index";
 import demo4 from "./demo4/index";
 import demo5 from "./demo5/index";
-import demo6 from "./demo5/index";
+import demo6 from "./demo6/index";
+import demo7 from "./demo7/index";
 
 require("./test.scss");
 
@@ -29,4 +30,7 @@ storiesOf('React Diagrams', module)
 	})
 	.add('Serializing and Deserializing', () => {
 		return demo6();
+	})
+	.add('Grid Size', () => {
+		return demo7();
 	})

@@ -36,21 +36,25 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			selected: false
 		}
 	}
-	
+
 	generatePoint(pointIndex: number): JSX.Element{
+
+		let x = this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.link.points[pointIndex].x);
+		let y = this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.link.points[pointIndex].y);
+
 		return React.DOM.g({key:'point-'+this.props.link.points[pointIndex].id},
 			React.DOM.circle({
 				className: 'point pointui' + (this.props.link.points[pointIndex].isSelected()?' selected':''),
-				cx:this.props.link.points[pointIndex].x,
-				cy:this.props.link.points[pointIndex].y,
+				cx:x,
+				cy:y,
 				r:5,
 			}),
 			React.DOM.circle({
 				className:'point',
 				'data-linkid':this.props.link.id,
 				'data-id':this.props.link.points[pointIndex].id,
-				cx: this.props.link.points[pointIndex].x,
-				cy:this.props.link.points[pointIndex].y,
+				cx: x,
+				cy: y,
 				r:15,
 				opacity: 0,
 				onMouseLeave:() => {
@@ -62,14 +66,14 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			})
 		);
 	}
-	
+
 	generateLink(extraProps: {id: number}): JSX.Element{
 		var Bottom = React.DOM.path(_.merge({
 			className: (this.state.selected || this.props.link.isSelected())?'selected':'',
 			strokeWidth:this.props.width,
 			stroke: this.props.color
 		},extraProps));
-		
+
 		var Top = React.DOM.path(_.merge({
 			strokeLinecap:'round' as 'round',
 			onMouseLeave:() => {
@@ -87,7 +91,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				this.props.link.remove();
 			},
 		},extraProps));
-		
+
 		return React.DOM.g({key:'link-'+extraProps.id},
 			Bottom,Top
 		);
@@ -97,26 +101,27 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
 		var paths = [];
-        
+		let model = this.props.diagramEngine.getDiagramModel();
+
         //draw the smoothing
 		if(points.length === 2){
-			
+
             //if the points are too close, just draw a straight line
 			var margin = 50;
 			if(Math.abs(points[0].x-points[1].x) < 50){
 				margin = 5;
 			}
-            
+
             var pointLeft = points[0];
             var pointRight = points[1];
-            
+
             //some defensive programming to make sure the smoothing is
             //always in the right direction
             if(pointLeft.x > pointRight.x){
                 pointLeft = points[1];
                 pointRight = points[0];
             }
-			
+
 			paths.push(this.generateLink({
 				id: 0,
 				onMouseDown: (event) =>{
@@ -138,7 +143,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				paths.push(this.generatePoint(1));
 			}
 		}
-        
+
         //draw the multiple anchors and complex line instead
         else{
 			var ds = [];
@@ -151,10 +156,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			}else{
 				var ds = [];
 				for(var i = 0;i < points.length-1;i++){
-					ds.push(" M "+points[i].x+" "+points[i].y+" L "+points[i+1].x+" "+points[i+1].y);
+					if(i === 0){
+						ds.push(" M "+points[i].x+" "+points[i].y+" L "+model.getGridPosition(points[i+1].x)+" "+model.getGridPosition(points[i+1].y));
+					}else if(i === points.length-1){
+						ds.push(" M "+model.getGridPosition(points[i].x)+" "+model.getGridPosition(points[i].y)+" L "+model.getGridPosition(points[i+1].x)+" "+model.getGridPosition(points[i+1].y));
+					}else{
+						ds.push(" M "+model.getGridPosition(points[i].x)+" "+model.getGridPosition(points[i].y)+" L "+points[i+1].x+" "+points[i+1].y);
+					}
 				}
 			}
-			
+
 			paths = ds.map((data,index) => {
 				return this.generateLink({
 					id:index,
@@ -172,17 +183,17 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					d:data
 				});
 			});
-			
+
 			//render the circles
 			for(var i = 1;i < points.length-1;i++){
 				paths.push(this.generatePoint(i));
 			}
-			
+
 			if (this.props.link.targetPort === null){
 				paths.push(this.generatePoint(points.length-1));
 			}
 		}
-		
+
 		return (
 			React.DOM.g(null,paths)
 		);
