@@ -378,7 +378,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 		return (
 			<div
-				ref={'canvas'}
+				ref="canvas"
 				className="storm-diagrams-canvas"
 				onWheel={(event) => {
 					if (this.props.allowCanvasZoom) {

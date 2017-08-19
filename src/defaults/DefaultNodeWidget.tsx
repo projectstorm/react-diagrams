@@ -23,26 +23,30 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps, Default
 		this.state = {
 		}
 	}
-	
+
+	generatePort(port){
+		return <DefaultPortLabel model={port} key={port.id} />
+	}
+
 	render() {
 		return (
-			div({className: 'basic-node', style: {background: this.props.node.color }},
-				div({className:'title'},
-					div({className:'name'},this.props.node.name),
-					div({className: 'fa fa-close', onClick: () => {
+			<div className="basic-node" style={{background: this.props.node.color}}>
+				<div className="title">
+					<div className="name">{this.props.node.name}</div>
+					<div className="fa fa-close" onClick={() => {
 						this.props.node.remove();
 						this.props.diagramEngine.repaintCanvas();
-					}})
-				),
-				div({className:'ports'},
-					div({className: 'in'}, _.map(this.props.node.getInPorts(),(port) => {
-						return React.createElement(DefaultPortLabel,{model: port, key:port.id});
-					})),
-					div({className: 'out'}, _.map(this.props.node.getOutPorts(),(port) => {
-						return React.createElement(DefaultPortLabel,{model: port, key:port.id});
-					})),
-				)
-			)
+					}} />
+				</div>
+				<div className="ports">
+					<div className="in">
+						{ _.map(this.props.node.getInPorts(),this.generatePort.bind(this)) }
+					</div>
+					<div className="out">
+						{ _.map(this.props.node.getOutPorts(),this.generatePort.bind(this)) }
+					</div>
+				</div>
+			</div>
 		);
 	}
 }

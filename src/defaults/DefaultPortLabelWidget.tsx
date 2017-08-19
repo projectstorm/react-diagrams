@@ -22,13 +22,14 @@ export class DefaultPortLabel extends React.Component<DefaultPortLabelProps, Def
 	};
 
 	render() {
-		
-		var port = React.createElement(PortWidget, {name: this.props.model.name, node: this.props.model.getParent()});
-		var label = React.DOM.div({className: 'name'}, this.props.model.label);
-		
-		return React.DOM.div({className: (this.props.model.in?'in':'out')+'-port'},
-			this.props.model.in?port:label,
-			this.props.model.in?label:port,
+		var port = <PortWidget node={this.props.model.getParent()} name={this.props.model.name} />
+		var label = <div className="name">{this.props.model.label}</div>
+
+		return (
+			<div className={(this.props.model.in?'in':'out') + '-port'}>
+				{ this.props.model.in?port:label }
+				{ this.props.model.in?label:port }
+			</div>
 		);
 	}
 }
