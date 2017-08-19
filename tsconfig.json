@@ -4,6 +4,7 @@
 	"compilerOptions": {
 		"suppressExcessPropertyErrors": true,
 		"declaration": true,
+		"outDir": "dist",
 		"target": "es5",
 		"strictNullChecks": false,
 		"sourceMap": true,
@@ -19,5 +20,10 @@
 		"**/*.spec.ts",
 		"webpack.config.js",
 		"./dist"
-	]
+	],
+	"awesomeTypescriptLoaderOptions": {
+		"compilerOptions": {
+			"declaration": false
+		}
+	}
 }

@@ -6,26 +6,11 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DefaultPortModel,
-	DiagramWidget,
-	DefaultNodeInstanceFactory,
-	DefaultPortInstanceFactory,
-	LinkInstanceFactory
+	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 
-require("../test.scss");
-
-
-/**
- *
- * Simple test showing the Object oriented way of using this library.
- * It creates 2 nodes and links them together with a single link
- *
- * @Author Dylan Vorster
- */
-window.onload = () => {
-
+export default function render(){
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
 	engine.registerNodeFactory(new DefaultNodeFactory());
@@ -61,26 +46,26 @@ window.onload = () => {
 	engine.setDiagramModel(model);
 
 	//6) render the diagram!
-	ReactDOM.render(<DiagramWidget diagramEngine={engine} />, document.body);
+	return <DiagramWidget diagramEngine={engine} />;
 
 
-	//!------------- SERIALIZING / DESERIALIZING ------------
-
-	//we need this to help the system know what models to create form the JSON
-	engine.registerInstanceFactory(new DefaultNodeInstanceFactory());
-	engine.registerInstanceFactory(new DefaultPortInstanceFactory());
-	engine.registerInstanceFactory(new LinkInstanceFactory());
-
-	//serialize the model
-	var str = JSON.stringify(model.serializeDiagram());
-	console.log(str);
-
-	//deserialize the model
-	var model2 = new DiagramModel();
-	model2.deSerializeDiagram(JSON.parse(str),engine);
-	engine.setDiagramModel(model2);
-	console.log(model2);
-
-	//re-render the model
-	ReactDOM.render(<DiagramWidget diagramEngine={engine} />, document.body);
-}
+	// //!------------- SERIALIZING / DESERIALIZING ------------
+    //
+	// //we need this to help the system know what models to create form the JSON
+	// engine.registerInstanceFactory(new DefaultNodeInstanceFactory());
+	// engine.registerInstanceFactory(new DefaultPortInstanceFactory());
+	// engine.registerInstanceFactory(new LinkInstanceFactory());
+    //
+	// //serialize the model
+	// var str = JSON.stringify(model.serializeDiagram());
+	// console.log(str);
+    //
+	// //deserialize the model
+	// var model2 = new DiagramModel();
+	// model2.deSerializeDiagram(JSON.parse(str),engine);
+	// engine.setDiagramModel(model2);
+	// console.log(model2);
+    //
+	// //re-render the model
+	// return <DiagramWidget diagramEngine={engine} />;
+};

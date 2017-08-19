@@ -61,78 +61,7 @@ module.exports = [
 				},
 				{
 					test: /\.tsx?$/,
-					loader: 'ts-loader?' + JSON.stringify({
-						configFileName: 'tsconfig.json'
-					})
-				}
-			]
-		},
-		resolve: {
-			extensions: [".tsx", ".ts", ".js"]
-		},
-		devtool: process.env.NODE_ENV === 'production'?false:'eval-cheap-module-source-map'
-	},
-	//for building the demos and tests
-	{
-		entry: {
-			'demo1/dist/bundle.js': './demos/demo1/index.tsx',
-			'demo2/dist/bundle.js': './demos/demo2/index.tsx',
-			'demo3/dist/bundle.js': './demos/demo3/index.tsx',
-			'demo4/dist/bundle.js': './demos/demo4/index.tsx',
-			'demo5/dist/bundle.js': './demos/demo5/index.tsx',
-		},
-		output: {
-			filename: '[name]',
-			path: __dirname + '/demos',
-			libraryTarget: 'umd',
-			library: 'storm-react-diagrams'
-		},
-		externals: {
-			react: {
-				root: 'React',
-				commonjs2: 'react',
-				commonjs: 'react',
-				amd: 'react'
-			},
-			'react-dom': {
-				root: 'ReactDOM',
-				commonjs2: 'react-dom',
-				commonjs: 'react-dom',
-				amd: 'react-dom'
-			},
-			"lodash": {
-				commonjs: 'lodash',
-				commonjs2: 'lodash',
-				amd: '_',
-				root: '_'
-			}
-		},
-		plugins:plugins,
-		module: {
-			rules: [
-				{
-					test: /\.scss$/,
-					use: [{
-						loader: "style-loader" // creates style nodes from JS strings
-					}, {
-						loader: "css-loader" // translates CSS into CommonJS
-					}, {
-						loader: "sass-loader" // compiles Sass to CSS
-					}]
-				},
-				{
-					enforce: 'pre',
-					test: /\.js$/,
-					loader: "source-map-loader"
-				},
-				{
-					test: /\.tsx?$/,
-					loader: 'ts-loader?' + JSON.stringify({
-						configFileName: 'tsconfig.json',
-						compilerOptions: {
-							declaration:false
-						}
-					}),
+					loader: 'awesome-typescript-loader'
 				}
 			]
 		},

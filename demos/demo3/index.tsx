@@ -5,7 +5,7 @@ import {DiamondNodeModel} from "./DiamondNodeModel";
 import {DiamondWidgetFactory} from "./DiamondWidgetFactory";
 import {DiamondNodeFactory, DiamondPortFactory} from "./DiamondInstanceFactories";
 
-require("../test.scss");
+require("../../demos/test.scss");
 
 
 /**

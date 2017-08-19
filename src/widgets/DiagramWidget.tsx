@@ -39,8 +39,6 @@ export interface DiagramState {
  */
 export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
-	canvas: HTMLDivElement;
-
 	public static defaultProps: DiagramProps = {
 		diagramEngine: null,
 		allowLooseLinks: true,
@@ -100,7 +98,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	}
 
 	componentDidMount() {
-		this.props.diagramEngine.setCanvas(this.refs['canvas'] as Element);
 
 		//add a keyboard listener
 		this.setState({
@@ -259,7 +256,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 	onMouseUp(event) {
 		var diagramEngine = this.props.diagramEngine;
-		var diagramModel = diagramEngine.getDiagramModel();
 		//are we going to connect a link to something?
 		if (this.state.action instanceof MoveItemsAction) {
 			var element = this.getMouseElement(event);
@@ -312,7 +308,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		return (
 			<div
 				ref={(ref) => {
-					this.canvas = ref;
+					if(ref){
+						this.props.diagramEngine.setCanvas(ref);
+					}
 				}}
 				className="storm-diagrams-canvas"
 				onWheel={(event) => {

@@ -2,7 +2,7 @@ import * as SRD from "../../src/main";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-require("../test.scss");
+require("../../demos/test.scss");
 
 /**
  *
