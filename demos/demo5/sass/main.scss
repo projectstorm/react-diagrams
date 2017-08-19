@@ -1,17 +1,3 @@
-*{
-	margin: 0;
-	padding: 0;
-}
-
-html,body{
-	height: 100%;
-}
-
-body{
-	display: flex;
-	background: rgb(60,60,60);
-}
-
 .body{
 	flex-grow: 1;
 	display: flex;
@@ -28,7 +14,7 @@ body{
 			align-self:center;
 		}
 	}
-	
+
 	.content{
 		display: flex;
 		flex-grow: 1;
@@ -44,36 +30,34 @@ body{
 .storm-diagrams-canvas{
 	$color: rgba(white, .05);
 	background: rgba(black,0.2);
-	background-image: 
-		linear-gradient(0deg, 
-			transparent 24%, 
-			$color 25%, 
+	background-image:
+		linear-gradient(0deg,
+			transparent 24%,
+			$color 25%,
 			$color 26%,
-			transparent 27%, 
-			transparent 74%, 
-			$color 75%, 
-			$color 76%, 
-			transparent 77%, 
-			transparent), 
-		linear-gradient(90deg, 
-			transparent 24%, 
-			$color 25%, 
-			$color 26%, 
-			transparent 27%, 
-			transparent 74%, 
-			$color 75%, 
-			$color 76%, 
-			transparent 77%, 
+			transparent 27%,
+			transparent 74%,
+			$color 75%,
+			$color 76%,
+			transparent 77%,
+			transparent),
+		linear-gradient(90deg,
+			transparent 24%,
+			$color 25%,
+			$color 26%,
+			transparent 27%,
+			transparent 74%,
+			$color 75%,
+			$color 76%,
+			transparent 77%,
 			transparent);
 	background-size:50px 50px;
-	
+
 	path{
 		stroke: rgba(white,0.5);
 	}
-	
+
 	.pointui{
 		fill: rgba(white,0.5);
 	}
 }
-
-@import "../../../src/sass.scss";

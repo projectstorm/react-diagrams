@@ -6,7 +6,10 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DefaultPortModel,
-	DiagramWidget
+	DiagramWidget,
+	DefaultNodeInstanceFactory,
+	DefaultPortInstanceFactory,
+	LinkInstanceFactory
 } from "../../src/main";
 import * as React from "react";
 
@@ -45,7 +48,23 @@ export default () => {
 	//5) load model into engine
 	engine.setDiagramModel(model);
 
-	//6) render the diagram!
+
+	//!------------- SERIALIZING ------------------
+
+	var str = JSON.stringify(model.serializeDiagram());
+
+	//!------------- DESERIALIZING ----------------
+
+	//we need this to help the system know what models to create form the JSON
+	engine.registerInstanceFactory(new DefaultNodeInstanceFactory());
+	engine.registerInstanceFactory(new DefaultPortInstanceFactory());
+	engine.registerInstanceFactory(new LinkInstanceFactory());
+
+	//deserialize the model
+	var model2 = new DiagramModel();
+	model2.deSerializeDiagram(JSON.parse(str),engine);
+	engine.setDiagramModel(model2);
+
 	return <DiagramWidget diagramEngine={engine} />;
 
 };

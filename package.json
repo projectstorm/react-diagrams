@@ -21,9 +21,12 @@
   "author": "dylanvorster",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook:build": "build-storybook -c .storybook -o .out",
+  	"storybook:github": "storybook-to-ghpages",
     "prepare": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
   },
   "dependencies": {
+    "@storybook/storybook-deployer": "^2.0.0",
     "closest": "^0.0.1",
     "lodash": "^4.17.4",
     "react": "^15.6.1"

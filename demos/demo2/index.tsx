@@ -9,9 +9,6 @@ import {
 	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-
-require("../../demos/test.scss");
 
 /**
  *
@@ -20,7 +17,7 @@ require("../../demos/test.scss");
  *
  * @Author Dylan Vorster
  */
-window.onload = () => {
+export default () => {
 
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
@@ -60,11 +57,10 @@ window.onload = () => {
 		}
 	}
 
-
 	//5) load model into engine
 	engine.setDiagramModel(model);
 
 	//6) render the diagram!
-	ReactDOM.render(<DiagramWidget diagramEngine={engine} />, document.body);
+	return <DiagramWidget diagramEngine={engine} />;
 
 }
