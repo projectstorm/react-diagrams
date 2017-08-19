@@ -5,6 +5,7 @@
 		"suppressExcessPropertyErrors": true,
 		"declaration": true,
 		"target": "es5",
+		"strictNullChecks": false,
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"jsx": "react",

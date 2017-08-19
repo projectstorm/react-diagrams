@@ -14,7 +14,7 @@ import {
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-var data = require("../test.scss");
+require("../test.scss");
 
 
 /**

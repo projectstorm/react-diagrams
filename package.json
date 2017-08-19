@@ -23,15 +23,14 @@
     "prepare": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
   },
   "dependencies": {
-    "@types/node": "^8.0.24",
     "closest": "^0.0.1",
     "lodash": "^4.17.4",
     "react": "^15.6.1"
   },
   "devDependencies": {
+  	"@types/node": "^8.0.24",
     "@types/lodash": "^4.14.73",
     "@types/react": "^16.0.2",
-    "@types/react-dom": "^15.5.3",
     "css-loader": "^0.28.5",
     "node-sass": "^4.5.3",
     "react-dom": "^15.6.1",
