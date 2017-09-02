@@ -88,20 +88,22 @@ export class DiagramModel extends BaseEntity<DiagramListener>{
 			this.addNode(nodeOb);
 		});
 
-		_.forEach(object.links,(link) => {
-			let linkOb = diagramEngine.getInstanceFactory(link._class).getInstance() as LinkModel;
-			linkOb.deSerialize(link);
+		setTimeout(() => {
+			_.forEach(object.links,(link) => {
+				let linkOb = diagramEngine.getInstanceFactory(link._class).getInstance() as LinkModel;
+				linkOb.deSerialize(link);
 
-			if(link.target){
-				linkOb.setTargetPort(this.getNode(link.target).getPortFromID(link.targetPort));
-			}
+				if(link.target){
+					linkOb.setTargetPort(this.getNode(link.target).getPortFromID(link.targetPort));
+				}
 
-			if(link.source){
-				linkOb.setSourcePort(this.getNode(link.source).getPortFromID(link.sourcePort))
-			}
+				if(link.source){
+					linkOb.setSourcePort(this.getNode(link.source).getPortFromID(link.sourcePort))
+				}
 
-			this.addLink(linkOb);
-		});
+				this.addLink(linkOb);
+			});
+		}, 0)
 	}
 
 	serializeDiagram(){
