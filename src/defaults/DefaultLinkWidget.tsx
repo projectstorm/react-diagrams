@@ -87,8 +87,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				strokeOpacity={this.state.selected?0.1:0}
 				strokeWidth={20}
 				onContextMenu={() =>{
-					event.preventDefault();
-					this.props.link.remove();
+					if(!this.props.diagramEngine.isModelLocked(this.props.link)){
+						event.preventDefault();
+						this.props.link.remove();
+					}
 				}}
 				{...extraProps}
 			/>
