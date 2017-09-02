@@ -39,26 +39,18 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 
 							//TODO just improve this vastly x_x
 							if (link.sourcePort !== null){
-								try{
-									//generate a point
+								//generate a point
+								try {
 									link.points[0].updateLocation(this.props.diagramEngine.getPortCenter(link.sourcePort));
-								}
-									//remove the link because its problematic (TODO implement this rather at an engine level)
-								catch(ex){
-									console.log(ex);
-									diagramModel.removeLink(link);
-									return;
+								} catch(ex){
+
 								}
 							}
 							if (link.targetPort !== null){
 								try{
 									_.last(link.points).updateLocation(this.props.diagramEngine.getPortCenter(link.targetPort));
-								}
-									//remove the link because its problematic (TODO implement this rather at an engine level)
-								catch(ex){
-									console.log(ex);
-									diagramModel.removeLink(link);
-									return;
+								} catch(ex){
+
 								}
 							}
 

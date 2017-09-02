@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as _ from "lodash";
-var div = React.DOM.div;
 import {DefaultNodeModel} from "./DefaultNodeModel";
 import {DefaultPortLabel} from "./DefaultPortLabelWidget";
 import {DiagramEngine} from "../DiagramEngine";

@@ -32,20 +32,20 @@
     "react": "^15.6.1"
   },
   "devDependencies": {
-    "@storybook/addon-notes": "^3.2.0",
-    "@storybook/react": "^3.2.5",
-    "@types/lodash": "^4.14.73",
-    "@types/node": "^8.0.24",
-    "@types/react": "^16.0.2",
+    "@storybook/addon-notes": "^3.2.7",
+    "@storybook/react": "^3.2.8",
+    "@types/lodash": "^4.14.74",
+    "@types/node": "^8.0.26",
+    "@types/react": "^16.0.5",
     "awesome-typescript-loader": "^3.2.3",
-    "css-loader": "^0.28.5",
+    "css-loader": "^0.28.7",
     "node-sass": "^4.5.3",
     "react-dom": "^15.6.1",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
-    "tslint": "^5.6.0",
-    "typescript": "^2.4.2",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
     "webpack": "^3.5.5"
   }
 }

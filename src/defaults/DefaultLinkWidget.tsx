@@ -42,58 +42,60 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		let x = this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.link.points[pointIndex].x);
 		let y = this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.link.points[pointIndex].y);
 
-		return React.DOM.g({key:'point-'+this.props.link.points[pointIndex].id},
-			React.DOM.circle({
-				className: 'point pointui' + (this.props.link.points[pointIndex].isSelected()?' selected':''),
-				cx:x,
-				cy:y,
-				r:5,
-			}),
-			React.DOM.circle({
-				className:'point',
-				'data-linkid':this.props.link.id,
-				'data-id':this.props.link.points[pointIndex].id,
-				cx: x,
-				cy: y,
-				r:15,
-				opacity: 0,
-				onMouseLeave:() => {
-					this.setState({selected: false});
-				},
-				onMouseEnter:() => {
-					this.setState({selected: true});
-				},
-			})
+		return (
+			<g key={'point-'+this.props.link.points[pointIndex].id}>
+				<circle
+					cx={x} cy={y} r={5}
+					className={'point pointui' + (this.props.link.points[pointIndex].isSelected()?' selected':'')} />
+				<circle
+					onMouseLeave={() => {
+						this.setState({selected: false});
+					}}
+					onMouseEnter={() => {
+						this.setState({selected: true});
+					}}
+					data-id={this.props.link.points[pointIndex].id}
+					data-linkid={this.props.link.id}
+					cx={x} cy={y} r={15}
+					opacity={0}
+					className={'point'} />
+			</g>
 		);
 	}
 
-	generateLink(extraProps: {id: number}): JSX.Element{
-		var Bottom = React.DOM.path(_.merge({
-			className: (this.state.selected || this.props.link.isSelected())?'selected':'',
-			strokeWidth:this.props.width,
-			stroke: this.props.color
-		},extraProps));
+	generateLink(extraProps: any, id: string|number): JSX.Element{
+		var Bottom = (
+			<path
+				className={(this.state.selected || this.props.link.isSelected())?'selected':''}
+				strokeWidth={this.props.width}
+				stroke={this.props.color}
+				{...extraProps}
+			/>
+		);
 
-		var Top = React.DOM.path(_.merge({
-			strokeLinecap:'round' as 'round',
-			onMouseLeave:() => {
-				this.setState({selected: false});
-			},
-			onMouseEnter:() => {
-				this.setState({selected: true});
-			},
-			'data-linkid': this.props.link.getID(),
-			stroke: this.props.color,
-			strokeOpacity:this.state.selected?0.1:0 ,
-			strokeWidth: 20,
-			onContextMenu: (event) => {
-				event.preventDefault();
-				this.props.link.remove();
-			},
-		},extraProps));
+		var Top = (
+			<path
+				strokeLinecap="round"
+				onMouseLeave={() => {
+					this.setState({selected: false});
+				}}
+				onMouseEnter={() => {
+					this.setState({selected: true});
+				}}
+				data-linkid={this.props.link.getID()}
+				stroke={this.props.color}
+				strokeOpacity={this.state.selected?0.1:0}
+				strokeWidth={20}
+				onContextMenu={() =>{
+					event.preventDefault();
+					this.props.link.remove();
+				}}
+				{...extraProps}
+			/>
+		);
 
-		return React.DOM.g({key:'link-'+extraProps.id},
-			Bottom,Top
+		return (
+			<g key={'link-'+id}>{Bottom}{Top}</g>
 		);
 	}
 
@@ -123,7 +125,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
             }
 
 			paths.push(this.generateLink({
-				id: 0,
 				onMouseDown: (event) =>{
 					if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)){
 						var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
@@ -138,7 +139,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					+" C"+(pointLeft.x+margin)+" "+pointLeft.y
 					+" " +(pointRight.x-margin)+" "+pointRight.y
 					+" " +pointRight.x+" "+pointRight.y
-			}));
+			},"0"));
 			if (this.props.link.targetPort === null){
 				paths.push(this.generatePoint(1));
 			}
@@ -168,7 +169,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 
 			paths = ds.map((data,index) => {
 				return this.generateLink({
-					id:index,
 					'data-linkid':this.props.link.id,
 					'data-point':index,
 					onMouseDown: (event: MouseEvent) => {
@@ -181,7 +181,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 						}
 					},
 					d:data
-				});
+				},index);
 			});
 
 			//render the circles
@@ -195,7 +195,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		}
 
 		return (
-			React.DOM.g(null,paths)
+			<g>{paths}</g>
 		);
 	}
 }
