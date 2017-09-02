@@ -33,8 +33,10 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps, Default
 				<div className="title">
 					<div className="name">{this.props.node.name}</div>
 					<div className="fa fa-close" onClick={() => {
-						this.props.node.remove();
-						this.props.diagramEngine.repaintCanvas();
+						if(!this.props.diagramEngine.isModelLocked(this.props.node)){
+							this.props.node.remove();
+							this.props.diagramEngine.repaintCanvas();
+						}
 					}} />
 				</div>
 				<div className="ports">
