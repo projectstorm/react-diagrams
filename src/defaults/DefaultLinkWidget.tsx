@@ -174,7 +174,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					'data-linkid':this.props.link.id,
 					'data-point':index,
 					onMouseDown: (event: MouseEvent) => {
-						if (!event.shiftKey){
+						if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)){
 							var point = new PointModel(this.props.link,this.props.diagramEngine.getRelativeMousePoint(event));
 							point.setSelected(true);
 							this.forceUpdate();
