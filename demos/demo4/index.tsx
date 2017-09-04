@@ -5,6 +5,7 @@ import {
 	DiagramModel,
 	DefaultNodeModel,
 	LinkModel,
+	PointModel,
 	DiagramWidget
 } from "../../src/main";
 
@@ -23,6 +24,7 @@ export default () => {
 
 	var model = new DiagramModel();
 
+	// sample for link with simple line (no additional points)
 	var node1 = new DefaultNodeModel("Node 1","rgb(0,192,255)");
 	var port1 = node1.addPort(new SRD.DefaultPortModel(false,"out-1","Out"));
 	node1.x = 100;
@@ -40,6 +42,30 @@ export default () => {
 	model.addNode(node1);
 	model.addNode(node2);
 	model.addLink(link1);
+
+	// sample for link with complex line (additional points)
+	var node3 = new DefaultNodeModel("Node 3","rgb(0,192,255)");
+	var port3 = node3.addPort(new SRD.DefaultPortModel(false,"out-2","Out"));
+	node3.x = 100;
+	node3.y = 250;
+
+	var node4 = new DefaultNodeModel("Node 4","rgb(192,255,0)");
+	var port4 = node4.addPort(new SRD.DefaultPortModel(true,"in-2","IN"));
+	node4.x = 400;
+	node4.y = 250;
+
+	var link2 = new LinkModel();
+	link2.setSourcePort(port3);
+	link2.setTargetPort(port4);
+
+	var additionalPoint1 = new PointModel(link2,{x:350,y:225});
+	link2.addPoint(additionalPoint1);
+	var additionalPoint2 = new PointModel(link2,{x:200,y:225});
+	link2.addPoint(additionalPoint2);
+
+	model.addNode(node3);
+	model.addNode(node4);
+	model.addLink(link2);
 
 	engine.setDiagramModel(model);
 
