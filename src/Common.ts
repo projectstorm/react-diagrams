@@ -81,6 +81,10 @@ export class PointModel extends BaseModel<BaseModelListener> {
 		this.link = link;
 	}
 
+	isConnectedToPort(): boolean{
+		return this.link.getPortForPoint(this) !== null;
+	}
+
 	deSerialize(ob) {
 		super.deSerialize(ob);
 		this.x = ob.x;
@@ -195,6 +199,16 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 			if (this.points[i].id === id) {
 				return this.points[i];
 			}
+		}
+		return null;
+	}
+
+	getPortForPoint(point: PointModel): PortModel{
+		if(this.sourcePort !== null && this.getFirstPoint().getID() === point.getID()){
+			return this.sourcePort;
+		}
+		if(this.targetPort !== null && this.getLastPoint().getID() === point.getID()){
+			return this.targetPort;
 		}
 		return null;
 	}

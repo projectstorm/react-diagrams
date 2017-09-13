@@ -40,9 +40,6 @@ export class SelectingAction extends BaseAction {
 		var z = diagramModel.getZoomLevel() / 100.0;
 		let dimensions = this.getBoxDimensions();
 
-		x = diagramModel.getGridPosition(x);
-		y = diagramModel.getGridPosition(y);
-
 		return (
 			(x + diagramModel.getOffsetX()) * z > dimensions.left &&
 			(x + diagramModel.getOffsetX()) * z < dimensions.right &&

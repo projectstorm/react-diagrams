@@ -40,12 +40,8 @@ export class DefaultLinkWidget extends React.Component<
 	}
 
 	generatePoint(pointIndex: number): JSX.Element {
-		let x = this.props.diagramEngine
-			.getDiagramModel()
-			.getGridPosition(this.props.link.points[pointIndex].x);
-		let y = this.props.diagramEngine
-			.getDiagramModel()
-			.getGridPosition(this.props.link.points[pointIndex].y);
+		let x = this.props.link.points[pointIndex].x;
+		let y = this.props.link.points[pointIndex].y;
 
 		return (
 			<g key={"point-" + this.props.link.points[pointIndex].id}>
@@ -244,35 +240,35 @@ export class DefaultLinkWidget extends React.Component<
 					if (i === 0) {
 						ds.push(
 							" M " +
-								points[i].x +
+							points[i].x +
 								" " +
-								points[i].y +
-								" L " +
-								model.getGridPosition(points[i + 1].x) +
-								" " +
-								model.getGridPosition(points[i + 1].y)
-						);
-					} else if (i === points.length - 1) {
-						ds.push(
-							" M " +
-								model.getGridPosition(points[i].x) +
-								" " +
-								model.getGridPosition(points[i].y) +
-								" L " +
-								model.getGridPosition(points[i + 1].x) +
-								" " +
-								model.getGridPosition(points[i + 1].y)
-						);
-					} else {
-						ds.push(
-							" M " +
-								model.getGridPosition(points[i].x) +
-								" " +
-								model.getGridPosition(points[i].y) +
+							points[i].y +
 								" L " +
 								points[i + 1].x +
 								" " +
 								points[i + 1].y
+						);
+					} else if (i === points.length - 1) {
+						ds.push(
+							" M " +
+								points[i].x +
+								" " +
+								points[i].y +
+								" L " +
+								points[i + 1].x +
+								" " +
+								points[i + 1].y
+						);
+					} else {
+						ds.push(
+							" M " +
+								points[i].x +
+								" " +
+								points[i].y +
+								" L " +
+							points[i + 1].x +
+								" " +
+							points[i + 1].y
 						);
 					}
 				}
