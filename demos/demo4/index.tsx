@@ -16,7 +16,6 @@ import {
  * @Author Dylan Vorster
  */
 export default () => {
-
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
 	engine.registerNodeFactory(new SRD.DefaultNodeFactory());
@@ -25,13 +24,13 @@ export default () => {
 	var model = new DiagramModel();
 
 	// sample for link with simple line (no additional points)
-	var node1 = new DefaultNodeModel("Node 1","rgb(0,192,255)");
-	var port1 = node1.addPort(new SRD.DefaultPortModel(false,"out-1","Out"));
+	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
+	var port1 = node1.addPort(new SRD.DefaultPortModel(false, "out-1", "Out"));
 	node1.x = 100;
 	node1.y = 100;
 
-	var node2 = new DefaultNodeModel("Node 2","rgb(192,255,0)");
-	var port2 = node2.addPort(new SRD.DefaultPortModel(true,"in-1","IN"));
+	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
+	var port2 = node2.addPort(new SRD.DefaultPortModel(true, "in-1", "IN"));
 	node2.x = 400;
 	node2.y = 100;
 
@@ -44,13 +43,13 @@ export default () => {
 	model.addLink(link1);
 
 	// sample for link with complex line (additional points)
-	var node3 = new DefaultNodeModel("Node 3","rgb(0,192,255)");
-	var port3 = node3.addPort(new SRD.DefaultPortModel(false,"out-2","Out"));
+	var node3 = new DefaultNodeModel("Node 3", "rgb(0,192,255)");
+	var port3 = node3.addPort(new SRD.DefaultPortModel(false, "out-2", "Out"));
 	node3.x = 100;
 	node3.y = 250;
 
-	var node4 = new DefaultNodeModel("Node 4","rgb(192,255,0)");
-	var port4 = node4.addPort(new SRD.DefaultPortModel(true,"in-2","IN"));
+	var node4 = new DefaultNodeModel("Node 4", "rgb(192,255,0)");
+	var port4 = node4.addPort(new SRD.DefaultPortModel(true, "in-2", "IN"));
 	node4.x = 400;
 	node4.y = 250;
 
@@ -58,9 +57,9 @@ export default () => {
 	link2.setSourcePort(port3);
 	link2.setTargetPort(port4);
 
-	var additionalPoint1 = new PointModel(link2,{x:350,y:225});
+	var additionalPoint1 = new PointModel(link2, { x: 350, y: 225 });
 	link2.addPoint(additionalPoint1);
-	var additionalPoint2 = new PointModel(link2,{x:200,y:225});
+	var additionalPoint2 = new PointModel(link2, { x: 200, y: 225 });
 	link2.addPoint(additionalPoint2);
 
 	model.addNode(node3);
@@ -82,4 +81,4 @@ export default () => {
 	//!=========================================  <<<<<<<
 
 	return <DiagramWidget {...props} />;
-}
+};

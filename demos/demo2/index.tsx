@@ -18,22 +18,25 @@ import * as React from "react";
  * @Author Dylan Vorster
  */
 export default () => {
-
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
 	engine.registerNodeFactory(new DefaultNodeFactory());
 	engine.registerLinkFactory(new DefaultLinkFactory());
 
-	function generateNodes(model: DiagramModel, offsetX: number,offsetY: number){
+	function generateNodes(
+		model: DiagramModel,
+		offsetX: number,
+		offsetY: number
+	) {
 		//3-A) create a default node
-		var node1 = new DefaultNodeModel("Node 1","rgb(0,192,255)");
-		var port1 = node1.addPort(new DefaultPortModel(false,"out-1","Out"));
+		var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
+		var port1 = node1.addPort(new DefaultPortModel(false, "out-1", "Out"));
 		node1.x = 100 + offsetX;
 		node1.y = 100 + offsetY;
 
 		//3-B) create another default node
-		var node2 = new DefaultNodeModel("Node 2","rgb(192,255,0)");
-		var port2 = node2.addPort(new DefaultPortModel(true,"in-1","IN"));
+		var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
+		var port2 = node2.addPort(new DefaultPortModel(true, "in-1", "IN"));
 		node2.x = 200 + offsetX;
 		node2.y = 100 + offsetY;
 
@@ -51,9 +54,9 @@ export default () => {
 	//2) setup the diagram model
 	var model = new DiagramModel();
 
-	for(var i =0;i < 8;i++){
-		for(var j = 0;j < 8;j++){
-			generateNodes(model,i*200,j*100);
+	for (var i = 0; i < 8; i++) {
+		for (var j = 0; j < 8; j++) {
+			generateNodes(model, i * 200, j * 100);
 		}
 	}
 
@@ -62,5 +65,4 @@ export default () => {
 
 	//6) render the diagram!
 	return <DiagramWidget diagramEngine={engine} />;
-
-}
+};

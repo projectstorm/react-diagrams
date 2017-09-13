@@ -1,21 +1,20 @@
 import * as React from "react";
-import {NodeModel} from "../Common";
+import { NodeModel } from "../Common";
 
 export interface PortProps {
 	name: string;
 	node: NodeModel;
 }
 
-export interface PortState{
-	selected: boolean
+export interface PortState {
+	selected: boolean;
 }
 
 /**
  * @author Dylan Vorster
  */
 export class PortWidget extends React.Component<PortProps, PortState> {
-
-	constructor(props: PortProps){
+	constructor(props: PortProps) {
 		super(props);
 		this.state = {
 			selected: false
@@ -25,15 +24,13 @@ export class PortWidget extends React.Component<PortProps, PortState> {
 	render() {
 		return (
 			<div
-				onMouseEnter={() =>{
-					this.setState({selected: true});
+				onMouseEnter={() => {
+					this.setState({ selected: true });
 				}}
-
 				onMouseLeave={() => {
-					this.setState({selected: false});
+					this.setState({ selected: false });
 				}}
-
-				className={'port'+(this.state.selected?' selected':'')}
+				className={"port" + (this.state.selected ? " selected" : "")}
 				data-name={this.props.name}
 				data-nodeid={this.props.node.getID()}
 			/>

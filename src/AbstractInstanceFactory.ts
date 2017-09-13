@@ -1,18 +1,19 @@
-import {BaseEntity, BaseListener} from "./BaseEntity";
+import { BaseEntity, BaseListener } from "./BaseEntity";
 /**
  * @author Dylan Vorster
  */
-export abstract class AbstractInstanceFactory<T extends BaseEntity<BaseListener>>{
-
+export abstract class AbstractInstanceFactory<
+	T extends BaseEntity<BaseListener>
+> {
 	className: string;
 
-	constructor(className: string){
+	constructor(className: string) {
 		this.className = className;
 	}
 
-	getName(){
+	getName() {
 		return this.className;
 	}
 
-	abstract getInstance(initialConfig?:any): T;
+	abstract getInstance(initialConfig?: any): T;
 }

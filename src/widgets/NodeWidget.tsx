@@ -1,28 +1,25 @@
 import * as React from "react";
-import {NodeModel} from "../Common";
-import {DiagramEngine} from "../DiagramEngine";
+import { NodeModel } from "../Common";
+import { DiagramEngine } from "../DiagramEngine";
 
 export interface NodeProps {
-	node:NodeModel;
+	node: NodeModel;
 	children?: any;
-	diagramEngine: DiagramEngine
+	diagramEngine: DiagramEngine;
 }
 
-export interface NodeState {
-}
+export interface NodeState {}
 
 /**
  * @author Dylan Vorster
  */
 export class NodeWidget extends React.Component<NodeProps, NodeState> {
-
 	constructor(props: NodeProps) {
 		super(props);
-		this.state = {
-		}
+		this.state = {};
 	}
 
-	shouldComponentUpdate(){
+	shouldComponentUpdate() {
 		return this.props.diagramEngine.canEntityRepaint(this.props.node);
 	}
 
@@ -30,13 +27,17 @@ export class NodeWidget extends React.Component<NodeProps, NodeState> {
 		return (
 			<div
 				data-nodeid={this.props.node.id}
-				className={'node' + (this.props.node.isSelected()?' selected':'')}
+				className={"node" + (this.props.node.isSelected() ? " selected" : "")}
 				style={{
-					top: this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.node.y),
-					left: this.props.diagramEngine.getDiagramModel().getGridPosition(this.props.node.x),
+					top: this.props.diagramEngine
+						.getDiagramModel()
+						.getGridPosition(this.props.node.y),
+					left: this.props.diagramEngine
+						.getDiagramModel()
+						.getGridPosition(this.props.node.x)
 				}}
 			>
-				{React.cloneElement(this.props.children,{})}
+				{React.cloneElement(this.props.children, {})}
 			</div>
 		);
 	}
