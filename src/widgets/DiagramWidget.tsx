@@ -128,9 +128,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(
-		event
-	): { model: BaseModel<BaseModelListener>; element: Element } {
+	getMouseElement(event): { model: BaseModel<BaseModelListener>; element: Element } {
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 

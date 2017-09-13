@@ -99,12 +99,11 @@ export class PointModel extends BaseModel<BaseModelListener> {
 	}
 
 	remove() {
-		super.remove();
-
 		//clear references
 		if (this.link) {
 			this.link.removePoint(this);
 		}
+		super.remove();
 	}
 
 	updateLocation(points: { x: number; y: number }) {
@@ -176,13 +175,13 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	}
 
 	remove() {
-		super.remove();
 		if (this.sourcePort) {
 			this.sourcePort.removeLink(this);
 		}
 		if (this.targetPort) {
 			this.targetPort.removeLink(this);
 		}
+		super.remove();
 	}
 
 	isLastPoint(point: PointModel) {

@@ -33,7 +33,7 @@ export class NodeWidget extends React.Component<NodeProps, NodeState> {
 					left: this.props.node.x
 				}}
 			>
-				{React.cloneElement(this.props.children, {})}
+				{this.props.children}
 			</div>
 		);
 	}
