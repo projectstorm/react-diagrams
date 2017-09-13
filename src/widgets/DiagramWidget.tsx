@@ -265,6 +265,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 				// this stuff needs to be pixel perfect, dont touch it
 				else if(model.model instanceof PointModel){
+					console.log();
 					model.model.x = model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
 					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
 				}

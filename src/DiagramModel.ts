@@ -67,7 +67,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		if (this.gridSize === 0) {
 			return pos;
 		}
-		return this.gridSize * Math.floor(pos / this.gridSize) + (this.gridSize/2);
+		return this.gridSize * Math.floor((pos +(this.gridSize/2)) / this.gridSize);
 	}
 
 	deSerializeDiagram(object: any, diagramEngine: DiagramEngine) {
