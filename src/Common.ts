@@ -1,5 +1,6 @@
 import { BaseEntity, BaseListener } from "./BaseEntity";
 import * as _ from "lodash";
+import {port} from "_debugger";
 
 export interface BaseModelListener extends BaseListener {
 	selectionChanged?(
@@ -21,6 +22,13 @@ export class BaseModel<T extends BaseModelListener> extends BaseEntity<
 	constructor(id?: string) {
 		super(id);
 		this.selected = false;
+	}
+
+	getSelectedEntities(): BaseModel<T>[]{
+		if(this.isSelected()){
+			return [this];
+		}
+		return [];
 	}
 
 	deSerialize(ob) {
@@ -191,6 +199,16 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		return null;
 	}
 
+	getPointForPort(port: PortModel): PointModel{
+		if(this.sourcePort !== null && this.sourcePort.getID() === port.getID() ){
+			return this.getFirstPoint();
+		}
+		if(this.targetPort !== null && this.targetPort.getID() === port.getID()){
+			return this.getLastPoint();
+		}
+		return null;
+	}
+
 	getFirstPoint(): PointModel {
 		return this.points[0];
 	}
@@ -310,6 +328,20 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		this.y = 0;
 		this.extras = {};
 		this.ports = {};
+	}
+
+	getSelectedEntities(){
+		let entities = super.getSelectedEntities();
+
+		// add the points of each link that are selected here
+		if(this.isSelected()){
+			for(let portName in this.ports){
+				entities = entities.concat(_.map(this.ports[portName].getLinks(),(link) => {
+					return link.getPointForPort(this.ports[portName]);
+				}));
+			}
+		}
+		return entities;
 	}
 
 	deSerialize(ob) {

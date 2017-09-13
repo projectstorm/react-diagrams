@@ -35,6 +35,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	diagramModel: DiagramModel;
 	canvas: Element;
 	paintableWidgets: {};
+	linksThatHaveInitiallyRendered: {};
 
 	constructor() {
 		super();
@@ -44,6 +45,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.instanceFactories = {};
 		this.canvas = null;
 		this.paintableWidgets = null;
+		this.linksThatHaveInitiallyRendered = {};
 	}
 
 	repaintCanvas() {

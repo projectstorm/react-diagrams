@@ -143,31 +143,30 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	getSelectedItems(): BaseModel<BaseModelListener>[] {
 		var items = [];
 
-		//find all nodes
+		// run through nodes
 		items = items.concat(
-			_.filter(this.nodes, node => {
-				return node.isSelected();
+			_.flatMap(this.nodes,(node) => {
+				return node.getSelectedEntities();
+			})
+		);
+
+		// find all the links
+		items = items.concat(
+			_.flatMap(this.links,(link) => {
+				return link.getSelectedEntities();
 			})
 		);
 
 		//find all points
 		items = items.concat(
-			_.filter(
-				_.flatMap(this.links, node => {
-					return node.points;
-				}),
-				port => {
-					return port.isSelected();
-				}
-			)
-		);
-
-		//find all links
-		return items.concat(
-			_.filter(this.links, link => {
-				return link.isSelected();
+			_.flatMap(this.links, link => {
+				return _.flatMap(link.points,(point) => {
+					return point.getSelectedEntities();
+				});
 			})
 		);
+
+		return _.uniq(items);
 	}
 
 	setZoomLevel(zoom: number) {
