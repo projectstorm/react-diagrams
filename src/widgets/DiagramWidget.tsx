@@ -128,7 +128,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event): { model: BaseModel<BaseModelListener>; element: Element } {
+	getMouseElement(
+		event
+	): { model: BaseModel<BaseModelListener>; element: Element } {
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
@@ -207,7 +209,10 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		var diagramModel = diagramEngine.getDiagramModel();
 		//select items so draw a bounding box
 		if (this.state.action instanceof SelectingAction) {
-			var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
+			var relative = diagramEngine.getRelativePoint(
+				event.clientX,
+				event.clientY
+			);
 
 			_.forEach(diagramModel.getNodes(), node => {
 				if (
@@ -249,23 +254,30 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			this.setState({ action: this.state.action });
 			return;
 		} else if (this.state.action instanceof MoveItemsAction) {
-
 			let amountX = event.clientX - this.state.action.mouseX;
 			let amountY = event.clientY - this.state.action.mouseY;
 			let amountZoom = diagramModel.getZoomLevel() / 100;
 
 			_.forEach(this.state.action.selectionModels, model => {
 				// in this case we need to also work out the relative grid position
-				if (model.model instanceof NodeModel || (model.model instanceof PointModel && !model.model.isConnectedToPort())) {
-					model.model.x = diagramModel.getGridPosition(model.initialX + amountX / amountZoom);
-					model.model.y = diagramModel.getGridPosition(model.initialY + amountY / amountZoom);
-				}
-
-				// this stuff needs to be pixel perfect, dont touch it
-				else if(model.model instanceof PointModel){
+				if (
+					model.model instanceof NodeModel ||
+					(model.model instanceof PointModel &&
+						!model.model.isConnectedToPort())
+				) {
+					model.model.x = diagramModel.getGridPosition(
+						model.initialX + amountX / amountZoom
+					);
+					model.model.y = diagramModel.getGridPosition(
+						model.initialY + amountY / amountZoom
+					);
+				} else if (model.model instanceof PointModel) {
+					// this stuff needs to be pixel perfect, dont touch it
 					console.log();
-					model.model.x = model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
-					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
+					model.model.x =
+						model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
+					model.model.y =
+						model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
 				}
 			});
 			this.fireAction();

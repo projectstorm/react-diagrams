@@ -1,6 +1,6 @@
 import { BaseEntity, BaseListener } from "./BaseEntity";
 import * as _ from "lodash";
-import {port} from "_debugger";
+import { port } from "_debugger";
 
 export interface BaseModelListener extends BaseListener {
 	selectionChanged?(
@@ -24,8 +24,8 @@ export class BaseModel<T extends BaseModelListener> extends BaseEntity<
 		this.selected = false;
 	}
 
-	getSelectedEntities(): BaseModel<T>[]{
-		if(this.isSelected()){
+	getSelectedEntities(): BaseModel<T>[] {
+		if (this.isSelected()) {
 			return [this];
 		}
 		return [];
@@ -81,7 +81,7 @@ export class PointModel extends BaseModel<BaseModelListener> {
 		this.link = link;
 	}
 
-	isConnectedToPort(): boolean{
+	isConnectedToPort(): boolean {
 		return this.link.getPortForPoint(this) !== null;
 	}
 
@@ -202,21 +202,27 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		return null;
 	}
 
-	getPortForPoint(point: PointModel): PortModel{
-		if(this.sourcePort !== null && this.getFirstPoint().getID() === point.getID()){
+	getPortForPoint(point: PointModel): PortModel {
+		if (
+			this.sourcePort !== null &&
+			this.getFirstPoint().getID() === point.getID()
+		) {
 			return this.sourcePort;
 		}
-		if(this.targetPort !== null && this.getLastPoint().getID() === point.getID()){
+		if (
+			this.targetPort !== null &&
+			this.getLastPoint().getID() === point.getID()
+		) {
 			return this.targetPort;
 		}
 		return null;
 	}
 
-	getPointForPort(port: PortModel): PointModel{
-		if(this.sourcePort !== null && this.sourcePort.getID() === port.getID() ){
+	getPointForPort(port: PortModel): PointModel {
+		if (this.sourcePort !== null && this.sourcePort.getID() === port.getID()) {
 			return this.getFirstPoint();
 		}
-		if(this.targetPort !== null && this.targetPort.getID() === port.getID()){
+		if (this.targetPort !== null && this.targetPort.getID() === port.getID()) {
 			return this.getLastPoint();
 		}
 		return null;
@@ -343,15 +349,17 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		this.ports = {};
 	}
 
-	getSelectedEntities(){
+	getSelectedEntities() {
 		let entities = super.getSelectedEntities();
 
 		// add the points of each link that are selected here
-		if(this.isSelected()){
-			for(let portName in this.ports){
-				entities = entities.concat(_.map(this.ports[portName].getLinks(),(link) => {
-					return link.getPointForPort(this.ports[portName]);
-				}));
+		if (this.isSelected()) {
+			for (let portName in this.ports) {
+				entities = entities.concat(
+					_.map(this.ports[portName].getLinks(), link => {
+						return link.getPointForPort(this.ports[portName]);
+					})
+				);
 			}
 		}
 		return entities;

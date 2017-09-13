@@ -44,26 +44,29 @@ export class LinkLayerWidget extends React.Component<
 				{//only perform these actions when we have a diagram
 				this.props.diagramEngine.canvas &&
 					_.map(diagramModel.getLinks(), link => {
-
-						if(!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]) {
+						if (
+							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]
+						) {
 							if (link.sourcePort !== null) {
 								//generate a point
 								try {
 									link.points[0].updateLocation(
 										this.props.diagramEngine.getPortCenter(link.sourcePort)
 									);
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
-								} catch (ex) {
-								}
+									this.props.diagramEngine.linksThatHaveInitiallyRendered[
+										link.id
+									] = true;
+								} catch (ex) {}
 							}
 							if (link.targetPort !== null) {
 								try {
 									_.last(link.points).updateLocation(
 										this.props.diagramEngine.getPortCenter(link.targetPort)
 									);
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
-								} catch (ex) {
-								}
+									this.props.diagramEngine.linksThatHaveInitiallyRendered[
+										link.id
+									] = true;
+								} catch (ex) {}
 							}
 						}
 

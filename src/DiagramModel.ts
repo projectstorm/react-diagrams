@@ -67,7 +67,9 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		if (this.gridSize === 0) {
 			return pos;
 		}
-		return this.gridSize * Math.floor((pos +(this.gridSize/2)) / this.gridSize);
+		return (
+			this.gridSize * Math.floor((pos + this.gridSize / 2) / this.gridSize)
+		);
 	}
 
 	deSerializeDiagram(object: any, diagramEngine: DiagramEngine) {
@@ -145,14 +147,14 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// run through nodes
 		items = items.concat(
-			_.flatMap(this.nodes,(node) => {
+			_.flatMap(this.nodes, node => {
 				return node.getSelectedEntities();
 			})
 		);
 
 		// find all the links
 		items = items.concat(
-			_.flatMap(this.links,(link) => {
+			_.flatMap(this.links, link => {
 				return link.getSelectedEntities();
 			})
 		);
@@ -160,7 +162,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		//find all points
 		items = items.concat(
 			_.flatMap(this.links, link => {
-				return _.flatMap(link.points,(point) => {
+				return _.flatMap(link.points, point => {
 					return point.getSelectedEntities();
 				});
 			})

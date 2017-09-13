@@ -240,9 +240,9 @@ export class DefaultLinkWidget extends React.Component<
 					if (i === 0) {
 						ds.push(
 							" M " +
-							points[i].x +
+								points[i].x +
 								" " +
-							points[i].y +
+								points[i].y +
 								" L " +
 								points[i + 1].x +
 								" " +
@@ -266,9 +266,9 @@ export class DefaultLinkWidget extends React.Component<
 								" " +
 								points[i].y +
 								" L " +
-							points[i + 1].x +
+								points[i + 1].x +
 								" " +
-							points[i + 1].y
+								points[i + 1].y
 						);
 					}
 				}
