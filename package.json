@@ -23,7 +23,8 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:build": "build-storybook -c .storybook -o .out",
     "storybook:github": "storybook-to-ghpages",
-    "prepublishOnly": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css"
+    "prepublishOnly": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css",
+    "lintjs": "prettier --single-quote --trailing-comma es5 --write \"src/**/*.js\""
   },
   "dependencies": {
     "@storybook/storybook-deployer": "^2.0.0",
@@ -40,6 +41,7 @@
     "awesome-typescript-loader": "^3.2.3",
     "css-loader": "^0.28.7",
     "node-sass": "^4.5.3",
+    "prettier": "^1.6.1",
     "react-dom": "^15.6.1",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
