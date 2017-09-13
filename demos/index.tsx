@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import * as React from "react";
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 
 import demo1 from "./demo1/index";
 import demo2 from "./demo2/index";
@@ -12,25 +12,25 @@ import demo7 from "./demo7/index";
 
 require("./test.scss");
 
-storiesOf('React Diagrams', module)
-	.add('Simple Example', () => {
+storiesOf("React Diagrams", module)
+	.add("Simple Example", () => {
 		return demo1();
 	})
-	.add('Performance Test', () => {
+	.add("Performance Test", () => {
 		return demo2();
 	})
-	.add('Custom Diamond Widget', () => {
+	.add("Custom Diamond Widget", () => {
 		return demo3();
 	})
-	.add('Locked Widget', () => {
+	.add("Locked Widget", () => {
 		return demo4();
 	})
-	.add('Embedded diagram', () => {
+	.add("Embedded diagram", () => {
 		return demo5();
 	})
-	.add('Serializing and Deserializing', () => {
+	.add("Serializing and Deserializing", () => {
 		return demo6();
 	})
-	.add('Grid Size', () => {
+	.add("Grid Size", () => {
 		return demo7();
-	})
+	});

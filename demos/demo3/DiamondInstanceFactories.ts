@@ -1,25 +1,27 @@
 import * as SRD from "../../src/main";
-import {DiamondNodeModel} from "./DiamondNodeModel";
-import {DiamondPortModel} from "./DiamondPortModel";
+import { DiamondNodeModel } from "./DiamondNodeModel";
+import { DiamondPortModel } from "./DiamondPortModel";
 
-export class DiamondNodeFactory extends SRD.AbstractInstanceFactory<DiamondNodeModel>{
-	
-	constructor(){
+export class DiamondNodeFactory extends SRD.AbstractInstanceFactory<
+	DiamondNodeModel
+> {
+	constructor() {
 		super("DiamondNodeModel");
 	}
-	
-	getInstance(){
+
+	getInstance() {
 		return new DiamondNodeModel();
 	}
 }
 
-export class DiamondPortFactory extends SRD.AbstractInstanceFactory<DiamondPortModel>{
-	
-	constructor(){
+export class DiamondPortFactory extends SRD.AbstractInstanceFactory<
+	DiamondPortModel
+> {
+	constructor() {
 		super("DiamondPortModel");
 	}
-	
-	getInstance(){
+
+	getInstance() {
 		return new DiamondPortModel();
 	}
 }

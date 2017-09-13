@@ -1,3 +1,3 @@
-interface Function{
-	name: string
+interface Function {
+	name: string;
 }

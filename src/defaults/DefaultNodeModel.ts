@@ -1,16 +1,17 @@
-import {NodeModel} from "../Common";
-import {DefaultPortModel} from "./DefaultPortModel";
+import { NodeModel } from "../Common";
+import { DefaultPortModel } from "./DefaultPortModel";
 import * as _ from "lodash";
 
-import {AbstractInstanceFactory} from "../AbstractInstanceFactory";
+import { AbstractInstanceFactory } from "../AbstractInstanceFactory";
 
-export class DefaultNodeInstanceFactory extends AbstractInstanceFactory<DefaultNodeModel>{
-	
-	constructor(){
+export class DefaultNodeInstanceFactory extends AbstractInstanceFactory<
+	DefaultNodeModel
+> {
+	constructor() {
 		super("DefaultNodeModel");
 	}
-	
-	getInstance(){
+
+	getInstance() {
 		return new DefaultNodeModel();
 	}
 }
@@ -18,39 +19,38 @@ export class DefaultNodeInstanceFactory extends AbstractInstanceFactory<DefaultN
 /**
  * @author Dylan Vorster
  */
-export class DefaultNodeModel extends NodeModel{
-	
+export class DefaultNodeModel extends NodeModel {
 	name: string;
 	color: string;
-	ports:  {[s: string]:DefaultPortModel};
-	
-	constructor(name: string = 'Untitled',color: string = 'rgb(0,192,255)'){
+	ports: { [s: string]: DefaultPortModel };
+
+	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)") {
 		super("default");
 		this.name = name;
 		this.color = color;
 	}
-	
-	deSerialize(object){
+
+	deSerialize(object) {
 		super.deSerialize(object);
 		this.name = object.name;
 		this.color = object.color;
 	}
-	
-	serialize(){
-		return _.merge(super.serialize(),{
+
+	serialize() {
+		return _.merge(super.serialize(), {
 			name: this.name,
-			color: this.color,
+			color: this.color
 		});
 	}
-	
-	getInPorts(): DefaultPortModel[]{
-		return _.filter(this.ports,(portModel) => {
+
+	getInPorts(): DefaultPortModel[] {
+		return _.filter(this.ports, portModel => {
 			return portModel.in;
 		});
 	}
-	
-	getOutPorts(): DefaultPortModel[]{
-		return _.filter(this.ports,(portModel) => {
+
+	getOutPorts(): DefaultPortModel[] {
+		return _.filter(this.ports, portModel => {
 			return !portModel.in;
 		});
 	}

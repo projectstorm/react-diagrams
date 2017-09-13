@@ -1,27 +1,27 @@
 import * as React from "react";
 import * as _ from "lodash";
-import {TrayWidget} from "./TrayWidget";
-import {DiagramWidget} from "../../../src/main";
-import {Application} from "../Application";
-import {TrayItemWidget} from "./TrayItemWidget";
-import {DefaultNodeModel,DefaultPortModel} from "../../../src/main";
+import { TrayWidget } from "./TrayWidget";
+import { DiagramWidget } from "../../../src/main";
+import { Application } from "../Application";
+import { TrayItemWidget } from "./TrayItemWidget";
+import { DefaultNodeModel, DefaultPortModel } from "../../../src/main";
 
 export interface BodyWidgetProps {
 	app: Application;
 }
 
-export interface BodyWidgetState {
-}
+export interface BodyWidgetState {}
 
 /**
  * @author Dylan Vorster
  */
-export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState> {
-
+export class BodyWidget extends React.Component<
+	BodyWidgetProps,
+	BodyWidgetState
+> {
 	constructor(props: BodyWidgetProps) {
 		super(props);
-		this.state = {
-		}
+		this.state = {};
 	}
 
 	render() {
@@ -32,39 +32,63 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 				</div>
 				<div className="content">
 					<TrayWidget>
-						<TrayItemWidget model={{type: 'in'}} name="In Node" color="rgb(192,255,0)"/>
-						<TrayItemWidget model={{type: 'out'}} name="Out Node" color="rgb(0,192,255)"/>
+						<TrayItemWidget
+							model={{ type: "in" }}
+							name="In Node"
+							color="rgb(192,255,0)"
+						/>
+						<TrayItemWidget
+							model={{ type: "out" }}
+							name="Out Node"
+							color="rgb(0,192,255)"
+						/>
 					</TrayWidget>
 					<div
 						className="diagram-layer"
-						onDrop={(event) => {
-
-							var data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'));
-							var nodesCount = _.keys(this.props.app.getDiagramEngine().getDiagramModel().getNodes()).length;
+						onDrop={event => {
+							var data = JSON.parse(
+								event.dataTransfer.getData("storm-diagram-node")
+							);
+							var nodesCount = _.keys(
+								this.props.app
+									.getDiagramEngine()
+									.getDiagramModel()
+									.getNodes()
+							).length;
 
 							var node = null;
-							if(data.type === 'in'){
-								node = new DefaultNodeModel("Node "+(nodesCount+1),"rgb(192,255,0)");
-								node.addPort(new DefaultPortModel(true,"in-1","In"));
-							}else{
-								node = new DefaultNodeModel("Node "+(nodesCount+1),"rgb(0,192,255)");
-								node.addPort(new DefaultPortModel(false,"out-1","Out"));
+							if (data.type === "in") {
+								node = new DefaultNodeModel(
+									"Node " + (nodesCount + 1),
+									"rgb(192,255,0)"
+								);
+								node.addPort(new DefaultPortModel(true, "in-1", "In"));
+							} else {
+								node = new DefaultNodeModel(
+									"Node " + (nodesCount + 1),
+									"rgb(0,192,255)"
+								);
+								node.addPort(new DefaultPortModel(false, "out-1", "Out"));
 							}
-							var points = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
+							var points = this.props.app
+								.getDiagramEngine()
+								.getRelativeMousePoint(event);
 							node.x = points.x;
 							node.y = points.y;
-							this.props.app.getDiagramEngine().getDiagramModel().addNode(node);
+							this.props.app
+								.getDiagramEngine()
+								.getDiagramModel()
+								.addNode(node);
 							this.forceUpdate();
-
 						}}
-						onDragOver={(event) => {
+						onDragOver={event => {
 							event.preventDefault();
 						}}
 					>
-						<DiagramWidget diagramEngine={this.props.app.getDiagramEngine()}/>
+						<DiagramWidget diagramEngine={this.props.app.getDiagramEngine()} />
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
