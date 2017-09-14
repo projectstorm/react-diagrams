@@ -60,10 +60,15 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		deleteKeys: [46, 8]
 	};
 
+  previousOffsetX: number;
+  previousOffsetY: number;
+
 	constructor(props: DiagramProps) {
 		super(props);
 		this.onMouseMove = this.onMouseMove.bind(this);
 		this.onMouseUp = this.onMouseUp.bind(this);
+    this.previousOffsetX = 0;
+    this.previousOffsetY = 0;
 		this.state = {
 			action: null,
 			wasMoved: false,
@@ -394,14 +399,43 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					if (this.props.allowCanvasZoom) {
 						event.preventDefault();
 						event.stopPropagation();
-						diagramModel.setZoomLevel(
-							diagramModel.getZoomLevel() + event.deltaY / 60
+
+            const oldZoomFactor = diagramModel.getZoomLevel() / 100;
+
+						if (diagramModel.getZoomLevel() + event.deltaY / 60 > 0) {
+							diagramModel.setZoomLevel(
+								diagramModel.getZoomLevel() + event.deltaY / 60
+							);
+						}
+            //
+						const zoomFactor = diagramModel.getZoomLevel() / 100;
+						const clientWidth = event.currentTarget.clientWidth;
+						const clientHeight = event.currentTarget.clientHeight;
+						const clientWidthDiff = clientWidth - clientWidth * zoomFactor;
+						const clientHeightDiff = clientHeight - clientHeight * zoomFactor;
+            const clientWidthDiff2 = clientWidth * oldZoomFactor - clientWidth * zoomFactor;
+            const clientHeightDiff2 = clientHeight * oldZoomFactor - clientHeight * zoomFactor;
+
+						//const xFactor = (event.clientX + diagramModel.getOffsetX() * oldZoomFactor )/ clientWidth;
+						//const yFactor = (event.clientY + diagramModel.getOffsetY() * oldZoomFactor)/ clientHeight;
+						const xFactor = event.clientX / clientWidth;
+            const yFactor = event.clientY / clientHeight;
+
+						const newOffsetX = clientWidthDiff * xFactor / zoomFactor;
+						const newOffsetY = clientHeightDiff * yFactor / zoomFactor;
+
+
+						diagramModel.setOffset(
+						 	clientWidthDiff * xFactor / zoomFactor, // - diagramModel.getOffsetX() * zoomFactor,
+							clientHeightDiff * yFactor / zoomFactor,
 						);
+
 						diagramEngine.enableRepaintEntities([]);
 						this.forceUpdate();
-						setTimeout(() => {
-							this.forceUpdate();
-						}, 100);
+						// setTimeout(() => {
+						// 	this.forceUpdate();
+						// }, 100);
+            requestAnimationFrame(() => this.forceUpdate());
 					}
 				}}
 				onMouseDown={event => {

@@ -204,7 +204,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 	setOffsetY(offsetY: number) {
-		this.offsetX = offsetY;
+		this.offsetY = offsetY;
 		this.iterateListeners(listener => {
 			if (listener.controlsUpdated) listener.controlsUpdated();
 		});
