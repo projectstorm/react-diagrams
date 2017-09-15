@@ -76,6 +76,13 @@ export class PointModel extends BaseModel<BaseModelListener> {
 		this.link = link;
 	}
 
+	getSelectedEntities(){
+		if(super.isSelected() && !this.isConnectedToPort()){
+			return [this];
+		}
+		return [];
+	}
+
 	isConnectedToPort(): boolean {
 		return this.link.getPortForPoint(this) !== null;
 	}
