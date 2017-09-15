@@ -286,7 +286,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			if (this.props.allowCanvasTranslation) {
 				diagramModel.setOffset(
 					this.state.action.initialOffsetX +
-						(event.clientX - this.state.action.mouseX) ,
+						(event.clientX - this.state.action.mouseX),
 					this.state.action.initialOffsetY +
 						(event.clientY - this.state.action.mouseY)
 				);
@@ -324,7 +324,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					return;
 				}
 
-
 				if (
 					element &&
 					element.model instanceof PortModel &&
@@ -333,7 +332,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					linkConnected = true;
 					let link = model.model.getLink();
 					link.setTargetPort(element.model);
-					delete this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()];
+					delete this.props.diagramEngine.linksThatHaveInitiallyRendered[
+						link.getID()
+					];
 				}
 			});
 
@@ -405,17 +406,24 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						const clientWidth = event.currentTarget.clientWidth;
 						const clientHeight = event.currentTarget.clientHeight;
 
-						const widthDiff = clientWidth * zoomFactor - clientWidth * oldZoomFactor;
-						const heightDiff = clientHeight * zoomFactor - clientHeight * oldZoomFactor;
+						const widthDiff =
+							clientWidth * zoomFactor - clientWidth * oldZoomFactor;
+						const heightDiff =
+							clientHeight * zoomFactor - clientHeight * oldZoomFactor;
 
-						const xFactor = (event.clientX - diagramModel.getOffsetX())  / oldZoomFactor / clientWidth;
-						const yFactor = (event.clientY - diagramModel.getOffsetY()) / oldZoomFactor / clientHeight;
+						const xFactor =
+							(event.clientX - diagramModel.getOffsetX()) /
+							oldZoomFactor /
+							clientWidth;
+						const yFactor =
+							(event.clientY - diagramModel.getOffsetY()) /
+							oldZoomFactor /
+							clientHeight;
 
 						diagramModel.setOffset(
 							diagramModel.getOffsetX() - widthDiff * xFactor,
-							diagramModel.getOffsetY() - heightDiff * yFactor,
-						)
-
+							diagramModel.getOffsetY() - heightDiff * yFactor
+						);
 
 						diagramEngine.enableRepaintEntities([]);
 						this.forceUpdate();
