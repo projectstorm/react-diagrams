@@ -41,10 +41,10 @@ export class SelectingAction extends BaseAction {
 		let dimensions = this.getBoxDimensions();
 
 		return (
-			(x * z + diagramModel.getOffsetX())  > dimensions.left &&
-			(x * z + diagramModel.getOffsetX())  < dimensions.right &&
-			(y * z + diagramModel.getOffsetY())  > dimensions.top &&
-			(y * z + diagramModel.getOffsetY())  < dimensions.bottom
+			x * z + diagramModel.getOffsetX() > dimensions.left &&
+			x * z + diagramModel.getOffsetX() < dimensions.right &&
+			y * z + diagramModel.getOffsetY() > dimensions.top &&
+			y * z + diagramModel.getOffsetY() < dimensions.bottom
 		);
 	}
 }

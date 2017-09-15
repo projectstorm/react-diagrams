@@ -227,10 +227,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				) {
 					model.model.x = diagramModel.getGridPosition(model.initialX + amountX / amountZoom);
 					model.model.y = diagramModel.getGridPosition(model.initialY + amountY / amountZoom);
-				}
-
-				// we want points that are connected to ports, to not neccesarilly snap to grid
-				else if (model.model instanceof PointModel) {
+				} else if (model.model instanceof PointModel) {
+					// we want points that are connected to ports, to not neccesarilly snap to grid
 					// this stuff needs to be pixel perfect, dont touch it
 					model.model.x = model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
 					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
