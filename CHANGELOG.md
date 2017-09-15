@@ -1,5 +1,6 @@
 __3.1.1__ 
 * Hotfix: fix zooming when canvas not in the top left corner
+(https://github.com/projectstorm/react-diagrams/pull/88)
 
 __3.1.0__ http://dylanv.blog/2017/09/15/storm-react-diagrams-3-1-0/
 * Zoom relative to mouse location
