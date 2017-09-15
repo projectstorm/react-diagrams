@@ -345,14 +345,19 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 						const zoomFactor = diagramModel.getZoomLevel() / 100;
 
-						const clientWidth = event.currentTarget.clientWidth;
-						const clientHeight = event.currentTarget.clientHeight;
-
+						const boundingRect = event.currentTarget.getBoundingClientRect();
+						const clientWidth = boundingRect.width;
+						const clientHeight = boundingRect.height;
+						// compute difference between rect before and after scroll
 						const widthDiff = clientWidth * zoomFactor - clientWidth * oldZoomFactor;
 						const heightDiff = clientHeight * zoomFactor - clientHeight * oldZoomFactor;
+						// compute mouse coords relative to canvas
+						const clientX = event.clientX - boundingRect.left;
+						const clientY = event.clientY - boundingRect.top;
 
-						const xFactor = (event.clientX - diagramModel.getOffsetX()) / oldZoomFactor / clientWidth;
-						const yFactor = (event.clientY - diagramModel.getOffsetY()) / oldZoomFactor / clientHeight;
+						// compute width and height increment factor
+						const xFactor = (clientX - diagramModel.getOffsetX()) / oldZoomFactor / clientWidth;
+						const yFactor = (clientY - diagramModel.getOffsetY()) / oldZoomFactor / clientHeight;
 
 						diagramModel.setOffset(
 							diagramModel.getOffsetX() - widthDiff * xFactor,
