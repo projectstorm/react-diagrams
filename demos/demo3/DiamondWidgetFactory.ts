@@ -6,10 +6,7 @@ export class DiamondWidgetFactory extends SRD.NodeWidgetFactory {
 		super("diamond");
 	}
 
-	generateReactWidget(
-		diagramEngine: SRD.DiagramEngine,
-		node: SRD.NodeModel
-	): JSX.Element {
+	generateReactWidget(diagramEngine: SRD.DiagramEngine, node: SRD.NodeModel): JSX.Element {
 		return DiamonNodeWidgetFactory({ node: node });
 	}
 }

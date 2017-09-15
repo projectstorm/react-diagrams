@@ -11,10 +11,7 @@ export class DefaultLinkFactory extends LinkWidgetFactory {
 		super("default");
 	}
 
-	generateReactWidget(
-		diagramEngine: DiagramEngine,
-		link: LinkModel
-	): JSX.Element {
+	generateReactWidget(diagramEngine: DiagramEngine, link: LinkModel): JSX.Element {
 		return React.createElement(DefaultLinkWidget, {
 			link: link,
 			diagramEngine: diagramEngine

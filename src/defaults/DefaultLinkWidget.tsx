@@ -19,10 +19,7 @@ export interface DefaultLinkState {
 /**
  * @author Dylan Vorster
  */
-export class DefaultLinkWidget extends React.Component<
-	DefaultLinkProps,
-	DefaultLinkState
-> {
+export class DefaultLinkWidget extends React.Component<DefaultLinkProps, DefaultLinkState> {
 	public static defaultProps: DefaultLinkProps = {
 		color: "black",
 		width: 3,
@@ -49,10 +46,7 @@ export class DefaultLinkWidget extends React.Component<
 					cx={x}
 					cy={y}
 					r={5}
-					className={
-						"point pointui" +
-						(this.props.link.points[pointIndex].isSelected() ? " selected" : "")
-					}
+					className={"point pointui" + (this.props.link.points[pointIndex].isSelected() ? " selected" : "")}
 				/>
 				<circle
 					onMouseLeave={() => {
@@ -76,9 +70,7 @@ export class DefaultLinkWidget extends React.Component<
 	generateLink(extraProps: any, id: string | number): JSX.Element {
 		var Bottom = (
 			<path
-				className={
-					this.state.selected || this.props.link.isSelected() ? "selected" : ""
-				}
+				className={this.state.selected || this.props.link.isSelected() ? "selected" : ""}
 				strokeWidth={this.props.width}
 				stroke={this.props.color}
 				{...extraProps}
@@ -144,14 +136,8 @@ export class DefaultLinkWidget extends React.Component<
 				this.generateLink(
 					{
 						onMouseDown: event => {
-							if (
-								!event.shiftKey &&
-								!this.props.diagramEngine.isModelLocked(this.props.link)
-							) {
-								var point = new PointModel(
-									this.props.link,
-									this.props.diagramEngine.getRelativeMousePoint(event)
-								);
+							if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)) {
+								var point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
 								point.setSelected(true);
 								this.forceUpdate();
 								this.props.link.addPoint(point, 1);
@@ -205,16 +191,7 @@ export class DefaultLinkWidget extends React.Component<
 						points[1].y
 				);
 				for (var i = 1; i < points.length - 2; i++) {
-					ds.push(
-						" M " +
-							points[i].x +
-							" " +
-							points[i].y +
-							" L " +
-							points[i + 1].x +
-							" " +
-							points[i + 1].y
-					);
+					ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
 				}
 				ds.push(
 					" M" +
@@ -238,38 +215,11 @@ export class DefaultLinkWidget extends React.Component<
 				var ds = [];
 				for (var i = 0; i < points.length - 1; i++) {
 					if (i === 0) {
-						ds.push(
-							" M " +
-								points[i].x +
-								" " +
-								points[i].y +
-								" L " +
-								points[i + 1].x +
-								" " +
-								points[i + 1].y
-						);
+						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
 					} else if (i === points.length - 1) {
-						ds.push(
-							" M " +
-								points[i].x +
-								" " +
-								points[i].y +
-								" L " +
-								points[i + 1].x +
-								" " +
-								points[i + 1].y
-						);
+						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
 					} else {
-						ds.push(
-							" M " +
-								points[i].x +
-								" " +
-								points[i].y +
-								" L " +
-								points[i + 1].x +
-								" " +
-								points[i + 1].y
-						);
+						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
 					}
 				}
 			}
@@ -280,14 +230,8 @@ export class DefaultLinkWidget extends React.Component<
 						"data-linkid": this.props.link.id,
 						"data-point": index,
 						onMouseDown: (event: MouseEvent) => {
-							if (
-								!event.shiftKey &&
-								!this.props.diagramEngine.isModelLocked(this.props.link)
-							) {
-								var point = new PointModel(
-									this.props.link,
-									this.props.diagramEngine.getRelativeMousePoint(event)
-								);
+							if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)) {
+								var point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
 								point.setSelected(true);
 								this.forceUpdate();
 								this.props.link.addPoint(point, index + 1);

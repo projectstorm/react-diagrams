@@ -15,10 +15,7 @@ export interface LinkLayerState {}
 /**
  * @author Dylan Vorster
  */
-export class LinkLayerWidget extends React.Component<
-	LinkLayerProps,
-	LinkLayerState
-> {
+export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerState> {
 	constructor(props: LinkLayerProps) {
 		super(props);
 		this.state = {};
@@ -44,47 +41,31 @@ export class LinkLayerWidget extends React.Component<
 				{//only perform these actions when we have a diagram
 				this.props.diagramEngine.canvas &&
 					_.map(diagramModel.getLinks(), link => {
-						if (
-							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]
-						) {
+						if (!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]) {
 							if (link.sourcePort !== null) {
 								//generate a point
 								try {
-									link.points[0].updateLocation(
-										this.props.diagramEngine.getPortCenter(link.sourcePort)
-									);
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[
-										link.id
-									] = true;
+									link.points[0].updateLocation(this.props.diagramEngine.getPortCenter(link.sourcePort));
+									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
 								} catch (ex) {}
 							}
 							if (link.targetPort !== null) {
 								try {
-									_.last(link.points).updateLocation(
-										this.props.diagramEngine.getPortCenter(link.targetPort)
-									);
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[
-										link.id
-									] = true;
+									_.last(link.points).updateLocation(this.props.diagramEngine.getPortCenter(link.targetPort));
+									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
 								} catch (ex) {}
 							}
 						}
 
 						//generate links
-						var generatedLink = this.props.diagramEngine.generateWidgetForLink(
-							link
-						);
+						var generatedLink = this.props.diagramEngine.generateWidgetForLink(link);
 						if (!generatedLink) {
 							console.log("no link generated for type: " + link.getType());
 							return null;
 						}
 
 						return (
-							<LinkWidget
-								key={link.getID()}
-								link={link}
-								diagramEngine={this.props.diagramEngine}
-							>
+							<LinkWidget key={link.getID()} link={link} diagramEngine={this.props.diagramEngine}>
 								{React.cloneElement(generatedLink, {
 									pointAdded: this.props.pointAdded
 								})}

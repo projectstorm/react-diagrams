@@ -8,10 +8,7 @@ export interface TrayItemWidgetProps {
 
 export interface TrayItemWidgetState {}
 
-export class TrayItemWidget extends React.Component<
-	TrayItemWidgetProps,
-	TrayItemWidgetState
-> {
+export class TrayItemWidget extends React.Component<TrayItemWidgetProps, TrayItemWidgetState> {
 	constructor(props: TrayItemWidgetProps) {
 		super(props);
 		this.state = {};
@@ -23,10 +20,7 @@ export class TrayItemWidget extends React.Component<
 				style={{ borderColor: this.props.color }}
 				draggable={true}
 				onDragStart={event => {
-					event.dataTransfer.setData(
-						"storm-diagram-node",
-						JSON.stringify(this.props.model)
-					);
+					event.dataTransfer.setData("storm-diagram-node", JSON.stringify(this.props.model));
 				}}
 				className="tray-item"
 			>

@@ -2,9 +2,7 @@ import * as SRD from "../../src/main";
 import { DiamondNodeModel } from "./DiamondNodeModel";
 import { DiamondPortModel } from "./DiamondPortModel";
 
-export class DiamondNodeFactory extends SRD.AbstractInstanceFactory<
-	DiamondNodeModel
-> {
+export class DiamondNodeFactory extends SRD.AbstractInstanceFactory<DiamondNodeModel> {
 	constructor() {
 		super("DiamondNodeModel");
 	}
@@ -14,9 +12,7 @@ export class DiamondNodeFactory extends SRD.AbstractInstanceFactory<
 	}
 }
 
-export class DiamondPortFactory extends SRD.AbstractInstanceFactory<
-	DiamondPortModel
-> {
+export class DiamondPortFactory extends SRD.AbstractInstanceFactory<DiamondPortModel> {
 	constructor() {
 		super("DiamondPortModel");
 	}

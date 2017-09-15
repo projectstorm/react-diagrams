@@ -15,10 +15,7 @@ export interface BodyWidgetState {}
 /**
  * @author Dylan Vorster
  */
-export class BodyWidget extends React.Component<
-	BodyWidgetProps,
-	BodyWidgetState
-> {
+export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState> {
 	constructor(props: BodyWidgetProps) {
 		super(props);
 		this.state = {};
@@ -32,23 +29,13 @@ export class BodyWidget extends React.Component<
 				</div>
 				<div className="content">
 					<TrayWidget>
-						<TrayItemWidget
-							model={{ type: "in" }}
-							name="In Node"
-							color="rgb(192,255,0)"
-						/>
-						<TrayItemWidget
-							model={{ type: "out" }}
-							name="Out Node"
-							color="rgb(0,192,255)"
-						/>
+						<TrayItemWidget model={{ type: "in" }} name="In Node" color="rgb(192,255,0)" />
+						<TrayItemWidget model={{ type: "out" }} name="Out Node" color="rgb(0,192,255)" />
 					</TrayWidget>
 					<div
 						className="diagram-layer"
 						onDrop={event => {
-							var data = JSON.parse(
-								event.dataTransfer.getData("storm-diagram-node")
-							);
+							var data = JSON.parse(event.dataTransfer.getData("storm-diagram-node"));
 							var nodesCount = _.keys(
 								this.props.app
 									.getDiagramEngine()
@@ -58,21 +45,13 @@ export class BodyWidget extends React.Component<
 
 							var node = null;
 							if (data.type === "in") {
-								node = new DefaultNodeModel(
-									"Node " + (nodesCount + 1),
-									"rgb(192,255,0)"
-								);
+								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(192,255,0)");
 								node.addPort(new DefaultPortModel(true, "in-1", "In"));
 							} else {
-								node = new DefaultNodeModel(
-									"Node " + (nodesCount + 1),
-									"rgb(0,192,255)"
-								);
+								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(0,192,255)");
 								node.addPort(new DefaultPortModel(false, "out-1", "Out"));
 							}
-							var points = this.props.app
-								.getDiagramEngine()
-								.getRelativeMousePoint(event);
+							var points = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
 							node.x = points.x;
 							node.y = points.y;
 							this.props.app

@@ -23,11 +23,7 @@ export default () => {
 	engine.registerNodeFactory(new DefaultNodeFactory());
 	engine.registerLinkFactory(new DefaultLinkFactory());
 
-	function generateNodes(
-		model: DiagramModel,
-		offsetX: number,
-		offsetY: number
-	) {
+	function generateNodes(model: DiagramModel, offsetX: number, offsetY: number) {
 		//3-A) create a default node
 		var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
 		var port1 = node1.addPort(new DefaultPortModel(false, "out-1", "Out"));

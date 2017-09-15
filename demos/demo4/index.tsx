@@ -1,13 +1,6 @@
 import * as SRD from "../../src/main";
 import * as React from "react";
-import {
-	DiagramEngine,
-	DiagramModel,
-	DefaultNodeModel,
-	LinkModel,
-	PointModel,
-	DiagramWidget
-} from "../../src/main";
+import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, PointModel, DiagramWidget } from "../../src/main";
 
 /**
  *

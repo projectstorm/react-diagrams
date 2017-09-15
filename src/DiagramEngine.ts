@@ -1,12 +1,5 @@
 import { NodeWidgetFactory, LinkWidgetFactory } from "./WidgetFactories";
-import {
-	LinkModel,
-	NodeModel,
-	BaseModel,
-	BaseModelListener,
-	PortModel,
-	PointModel
-} from "./Common";
+import { LinkModel, NodeModel, BaseModel, BaseModelListener, PortModel, PointModel } from "./Common";
 import { BaseEntity, BaseListener } from "./BaseEntity";
 import { DiagramModel } from "./DiagramModel";
 import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
@@ -134,15 +127,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return this.linkFactories;
 	}
 
-	getInstanceFactory(
-		className: string
-	): AbstractInstanceFactory<BaseEntity<BaseListener>> {
+	getInstanceFactory(className: string): AbstractInstanceFactory<BaseEntity<BaseListener>> {
 		return this.instanceFactories[className];
 	}
 
-	registerInstanceFactory(
-		factory: AbstractInstanceFactory<BaseEntity<BaseListener>>
-	) {
+	registerInstanceFactory(factory: AbstractInstanceFactory<BaseEntity<BaseListener>>) {
 		this.instanceFactories[factory.getName()] = factory;
 	}
 
@@ -164,9 +153,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		if (this.nodeFactories[node.getType()]) {
 			return this.nodeFactories[node.getType()];
 		}
-		console.log(
-			"cannot find widget factory for node of type: [" + node.getType() + "]"
-		);
+		console.log("cannot find widget factory for node of type: [" + node.getType() + "]");
 		return null;
 	}
 
@@ -174,9 +161,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		if (this.linkFactories[link.getType()]) {
 			return this.linkFactories[link.getType()];
 		}
-		console.log(
-			"cannot find widget factory for link of type: [" + link.getType() + "]"
-		);
+		console.log("cannot find widget factory for link of type: [" + link.getType() + "]");
 		return null;
 	}
 
@@ -199,12 +184,8 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	getRelativeMousePoint(event): { x: number; y: number } {
 		var point = this.getRelativePoint(event.clientX, event.clientY);
 		return {
-			x:
-				(point.x - this.diagramModel.getOffsetX()) /
-				(this.diagramModel.getZoomLevel() / 100.0),
-			y:
-				(point.y - this.diagramModel.getOffsetY()) /
-				(this.diagramModel.getZoomLevel() / 100.0)
+			x: (point.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
+			y: (point.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
 		};
 	}
 
@@ -215,11 +196,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getNodePortElement(port: PortModel): any {
 		var selector = this.canvas.querySelector(
-			'.port[data-name="' +
-				port.getName() +
-				'"][data-nodeid="' +
-				port.getParent().getID() +
-				'"]'
+			'.port[data-name="' + port.getName() + '"][data-nodeid="' + port.getParent().getID() + '"]'
 		);
 		if (selector === null) {
 			throw "Cannot find Node Port element with nodeID: [" +
@@ -240,12 +217,10 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return {
 			x:
 				sourceElement.offsetWidth / 2 +
-				(rel.x - this.diagramModel.getOffsetX()) /
-					(this.diagramModel.getZoomLevel() / 100.0),
+				(rel.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
 			y:
 				sourceElement.offsetHeight / 2 +
-				(rel.y - this.diagramModel.getOffsetY()) /
-					(this.diagramModel.getZoomLevel() / 100.0)
+				(rel.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
 		};
 	}
 }

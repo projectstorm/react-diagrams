@@ -41,10 +41,10 @@ export class SelectingAction extends BaseAction {
 		let dimensions = this.getBoxDimensions();
 
 		return (
-			(x + diagramModel.getOffsetX()) * z > dimensions.left &&
-			(x + diagramModel.getOffsetX()) * z < dimensions.right &&
-			(y + diagramModel.getOffsetY()) * z > dimensions.top &&
-			(y + diagramModel.getOffsetY()) * z < dimensions.bottom
+			(x * z + diagramModel.getOffsetX())  > dimensions.left &&
+			(x * z + diagramModel.getOffsetX())  < dimensions.right &&
+			(y * z + diagramModel.getOffsetY())  > dimensions.top &&
+			(y * z + diagramModel.getOffsetY())  < dimensions.bottom
 		);
 	}
 }
@@ -67,9 +67,7 @@ export class MoveItemsAction extends BaseAction {
 	constructor(mouseX: number, mouseY: number, diagramEngine: DiagramEngine) {
 		super(mouseX, mouseY);
 		this.moved = false;
-		diagramEngine.enableRepaintEntities(
-			diagramEngine.getDiagramModel().getSelectedItems()
-		);
+		diagramEngine.enableRepaintEntities(diagramEngine.getDiagramModel().getSelectedItems());
 		var selectedItems = diagramEngine.getDiagramModel().getSelectedItems();
 
 		//dont allow items which are locked to move

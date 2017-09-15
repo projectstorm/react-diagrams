@@ -2,9 +2,7 @@ import { BaseEntity, BaseListener } from "./BaseEntity";
 /**
  * @author Dylan Vorster
  */
-export abstract class AbstractInstanceFactory<
-	T extends BaseEntity<BaseListener>
-> {
+export abstract class AbstractInstanceFactory<T extends BaseEntity<BaseListener>> {
 	className: string;
 
 	constructor(className: string) {

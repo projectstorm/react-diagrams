@@ -13,10 +13,7 @@ export interface NodeLayerState {}
 /**
  * @author Dylan Vorster
  */
-export class NodeLayerWidget extends React.Component<
-	NodeLayerProps,
-	NodeLayerState
-> {
+export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerState> {
 	constructor(props: NodeLayerProps) {
 		super(props);
 		this.state = {};

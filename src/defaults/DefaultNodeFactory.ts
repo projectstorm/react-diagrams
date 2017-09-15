@@ -11,10 +11,7 @@ export class DefaultNodeFactory extends NodeWidgetFactory {
 		super("default");
 	}
 
-	generateReactWidget(
-		diagramEngine: DiagramEngine,
-		node: DefaultNodeModel
-	): JSX.Element {
+	generateReactWidget(diagramEngine: DiagramEngine, node: DefaultNodeModel): JSX.Element {
 		return React.createElement(DefaultNodeWidget, {
 			node: node,
 			diagramEngine: diagramEngine

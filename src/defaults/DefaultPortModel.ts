@@ -2,9 +2,7 @@ import { PortModel } from "../Common";
 import * as _ from "lodash";
 import { AbstractInstanceFactory } from "../AbstractInstanceFactory";
 
-export class DefaultPortInstanceFactory extends AbstractInstanceFactory<
-	DefaultPortModel
-> {
+export class DefaultPortInstanceFactory extends AbstractInstanceFactory<DefaultPortModel> {
 	constructor() {
 		super("DefaultPortModel");
 	}
@@ -21,12 +19,7 @@ export class DefaultPortModel extends PortModel {
 	in: boolean;
 	label: string;
 
-	constructor(
-		isInput: boolean,
-		name: string,
-		label: string = null,
-		id?: string
-	) {
+	constructor(isInput: boolean, name: string, label: string = null, id?: string) {
 		super(name, id);
 		this.in = isInput;
 		this.label = label || name;

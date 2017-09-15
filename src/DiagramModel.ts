@@ -1,10 +1,4 @@
-import {
-	LinkModel,
-	NodeModel,
-	BaseModel,
-	BaseModelListener,
-	PortModel
-} from "./Common";
+import { LinkModel, NodeModel, BaseModel, BaseModelListener, PortModel } from "./Common";
 import { BaseListener, BaseEntity } from "./BaseEntity";
 import * as _ from "lodash";
 import { DiagramEngine } from "./DiagramEngine";
@@ -67,9 +61,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		if (this.gridSize === 0) {
 			return pos;
 		}
-		return (
-			this.gridSize * Math.floor((pos + this.gridSize / 2) / this.gridSize)
-		);
+		return this.gridSize * Math.floor((pos + this.gridSize / 2) / this.gridSize);
 	}
 
 	deSerializeDiagram(object: any, diagramEngine: DiagramEngine) {
@@ -81,15 +73,11 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		//deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
-			let nodeOb = diagramEngine
-				.getInstanceFactory(node._class)
-				.getInstance(node) as NodeModel;
+			let nodeOb = diagramEngine.getInstanceFactory(node._class).getInstance(node) as NodeModel;
 			nodeOb.deSerialize(node);
 			//deserialize ports
 			_.forEach(node.ports, (port: any) => {
-				let portOb = diagramEngine
-					.getInstanceFactory(port._class)
-					.getInstance() as PortModel;
+				let portOb = diagramEngine.getInstanceFactory(port._class).getInstance() as PortModel;
 				portOb.deSerialize(port);
 				nodeOb.addPort(portOb);
 			});
@@ -98,21 +86,15 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 
 		_.forEach(object.links, (link: any) => {
-			let linkOb = diagramEngine
-				.getInstanceFactory(link._class)
-				.getInstance() as LinkModel;
+			let linkOb = diagramEngine.getInstanceFactory(link._class).getInstance() as LinkModel;
 			linkOb.deSerialize(link);
 
 			if (link.target) {
-				linkOb.setTargetPort(
-					this.getNode(link.target).getPortFromID(link.targetPort)
-				);
+				linkOb.setTargetPort(this.getNode(link.target).getPortFromID(link.targetPort));
 			}
 
 			if (link.source) {
-				linkOb.setSourcePort(
-					this.getNode(link.source).getPortFromID(link.sourcePort)
-				);
+				linkOb.setSourcePort(this.getNode(link.source).getPortFromID(link.sourcePort));
 			}
 
 			this.addLink(linkOb);
@@ -188,8 +170,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			if (listener.controlsUpdated) listener.controlsUpdated();
 		});
 		this.iterateListeners(listener => {
-			listener.offsetUpdated &&
-				listener.offsetUpdated(this, this.offsetX, this.offsetY);
+			listener.offsetUpdated && listener.offsetUpdated(this, this.offsetX, this.offsetY);
 		});
 	}
 
@@ -199,8 +180,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			if (listener.controlsUpdated) listener.controlsUpdated();
 		});
 		this.iterateListeners(listener => {
-			listener.offsetUpdated &&
-				listener.offsetUpdated(this, this.offsetX, this.offsetY);
+			listener.offsetUpdated && listener.offsetUpdated(this, this.offsetX, this.offsetY);
 		});
 	}
 	setOffsetY(offsetY: number) {
@@ -209,8 +189,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			if (listener.controlsUpdated) listener.controlsUpdated();
 		});
 		this.iterateListeners(listener => {
-			listener.offsetUpdated &&
-				listener.offsetUpdated(this, this.offsetX, this.offsetY);
+			listener.offsetUpdated && listener.offsetUpdated(this, this.offsetX, this.offsetY);
 		});
 	}
 

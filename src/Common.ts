@@ -3,10 +3,7 @@ import * as _ from "lodash";
 import { port } from "_debugger";
 
 export interface BaseModelListener extends BaseListener {
-	selectionChanged?(
-		item: BaseModel<BaseModelListener>,
-		isSelected: boolean
-	): void;
+	selectionChanged?(item: BaseModel<BaseModelListener>, isSelected: boolean): void;
 
 	entityRemoved?(item: any): void;
 }
@@ -14,9 +11,7 @@ export interface BaseModelListener extends BaseListener {
 /**
  * @author Dylan Vorster
  */
-export class BaseModel<T extends BaseModelListener> extends BaseEntity<
-	BaseModelListener
-> {
+export class BaseModel<T extends BaseModelListener> extends BaseEntity<BaseModelListener> {
 	selected: boolean;
 
 	constructor(id?: string) {
@@ -140,10 +135,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	constructor() {
 		super();
 		this.linkType = "default";
-		this.points = [
-			new PointModel(this, { x: 0, y: 0 }),
-			new PointModel(this, { x: 0, y: 0 })
-		];
+		this.points = [new PointModel(this, { x: 0, y: 0 }), new PointModel(this, { x: 0, y: 0 })];
 		this.extras = {};
 		this.sourcePort = null;
 		this.targetPort = null;
@@ -203,16 +195,10 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	}
 
 	getPortForPoint(point: PointModel): PortModel {
-		if (
-			this.sourcePort !== null &&
-			this.getFirstPoint().getID() === point.getID()
-		) {
+		if (this.sourcePort !== null && this.getFirstPoint().getID() === point.getID()) {
 			return this.sourcePort;
 		}
-		if (
-			this.targetPort !== null &&
-			this.getLastPoint().getID() === point.getID()
-		) {
+		if (this.targetPort !== null && this.getLastPoint().getID() === point.getID()) {
 			return this.targetPort;
 		}
 		return null;

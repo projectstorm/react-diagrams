@@ -4,9 +4,7 @@ import * as _ from "lodash";
 
 import { AbstractInstanceFactory } from "../AbstractInstanceFactory";
 
-export class DefaultNodeInstanceFactory extends AbstractInstanceFactory<
-	DefaultNodeModel
-> {
+export class DefaultNodeInstanceFactory extends AbstractInstanceFactory<DefaultNodeModel> {
 	constructor() {
 		super("DefaultNodeModel");
 	}

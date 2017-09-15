@@ -13,22 +13,14 @@ export interface DefaultPortLabelState {}
 /**
  * @author Dylan Vorster
  */
-export class DefaultPortLabel extends React.Component<
-	DefaultPortLabelProps,
-	DefaultPortLabelState
-> {
+export class DefaultPortLabel extends React.Component<DefaultPortLabelProps, DefaultPortLabelState> {
 	public static defaultProps: DefaultPortLabelProps = {
 		in: true,
 		label: "port"
 	};
 
 	render() {
-		var port = (
-			<PortWidget
-				node={this.props.model.getParent()}
-				name={this.props.model.name}
-			/>
-		);
+		var port = <PortWidget node={this.props.model.getParent()} name={this.props.model.name} />;
 		var label = <div className="name">{this.props.model.label}</div>;
 
 		return (

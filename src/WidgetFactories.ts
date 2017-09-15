@@ -16,15 +16,9 @@ export abstract class WidgetFactory {
 }
 
 export abstract class NodeWidgetFactory extends WidgetFactory {
-	abstract generateReactWidget(
-		diagramEngine: DiagramEngine,
-		node: NodeModel
-	): JSX.Element;
+	abstract generateReactWidget(diagramEngine: DiagramEngine, node: NodeModel): JSX.Element;
 }
 
 export abstract class LinkWidgetFactory extends WidgetFactory {
-	abstract generateReactWidget(
-		diagramEngine: DiagramEngine,
-		link: LinkModel
-	): JSX.Element;
+	abstract generateReactWidget(diagramEngine: DiagramEngine, link: LinkModel): JSX.Element;
 }

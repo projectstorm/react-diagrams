@@ -24,7 +24,7 @@
     "storybook:build": "build-storybook -c .storybook -o .out",
     "storybook:github": "storybook-to-ghpages",
     "prepublishOnly": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.css",
-    "lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\""
+    "lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
   },
   "dependencies": {
     "@storybook/storybook-deployer": "^2.0.0",

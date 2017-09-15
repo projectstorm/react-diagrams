@@ -14,10 +14,7 @@ export interface DefaultNodeState {}
 /**
  * @author Dylan Vorster
  */
-export class DefaultNodeWidget extends React.Component<
-	DefaultNodeProps,
-	DefaultNodeState
-> {
+export class DefaultNodeWidget extends React.Component<DefaultNodeProps, DefaultNodeState> {
 	constructor(props: DefaultNodeProps) {
 		super(props);
 		this.state = {};
@@ -34,12 +31,8 @@ export class DefaultNodeWidget extends React.Component<
 					<div className="name">{this.props.node.name}</div>
 				</div>
 				<div className="ports">
-					<div className="in">
-						{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}
-					</div>
-					<div className="out">
-						{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}
-					</div>
+					<div className="in">{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
+					<div className="out">{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
 			</div>
 		);

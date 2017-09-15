@@ -12,10 +12,7 @@ export interface DiamonNodeWidgetState {}
 /**
  * @author Dylan Vorster
  */
-export class DiamonNodeWidget extends React.Component<
-	DiamonNodeWidgetProps,
-	DiamonNodeWidgetState
-> {
+export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, DiamonNodeWidgetState> {
 	public static defaultProps: DiamonNodeWidgetProps = {
 		size: 150,
 		node: null
