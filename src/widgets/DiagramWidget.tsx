@@ -273,7 +273,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					);
 				} else if (model.model instanceof PointModel) {
 					// this stuff needs to be pixel perfect, dont touch it
-					console.log();
 					model.model.x =
 						model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
 					model.model.y =
@@ -287,7 +286,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			if (this.props.allowCanvasTranslation) {
 				diagramModel.setOffset(
 					this.state.action.initialOffsetX +
-						(event.clientX - this.state.action.mouseX),
+						(event.clientX - this.state.action.mouseX) ,
 					this.state.action.initialOffsetY +
 						(event.clientY - this.state.action.mouseY)
 				);
@@ -418,8 +417,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 						diagramEngine.enableRepaintEntities([]);
 						this.forceUpdate();
-
-            requestAnimationFrame(() => this.forceUpdate());
 					}
 				}}
 				onMouseDown={event => {

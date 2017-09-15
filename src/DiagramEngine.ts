@@ -200,11 +200,9 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		var point = this.getRelativePoint(event.clientX, event.clientY);
 		return {
 			x:
-				point.x / (this.diagramModel.getZoomLevel() / 100.0) -
-				this.diagramModel.getOffsetX(),
+				(point.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
 			y:
-				point.y / (this.diagramModel.getZoomLevel() / 100.0) -
-				this.diagramModel.getOffsetY()
+				(point.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
 		};
 	}
 
