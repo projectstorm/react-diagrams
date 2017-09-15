@@ -1,4 +1,4 @@
-__3.1.1__ 
+__3.1.2__ 
 * Hotfix: fix zooming when canvas not in the top left corner
 (https://github.com/projectstorm/react-diagrams/pull/88)
 
