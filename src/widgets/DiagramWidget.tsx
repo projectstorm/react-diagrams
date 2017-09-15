@@ -292,11 +292,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			if (this.props.allowCanvasTranslation) {
 				diagramModel.setOffset(
 					this.state.action.initialOffsetX +
-						(event.clientX - this.state.action.mouseX) /
-							(diagramModel.getZoomLevel() / 100),
+						(event.clientX - this.state.action.mouseX),
 					this.state.action.initialOffsetY +
-						(event.clientY - this.state.action.mouseY) /
-							(diagramModel.getZoomLevel() / 100)
+						(event.clientY - this.state.action.mouseY)
 				);
 				this.fireAction();
 				this.forceUpdate();
@@ -399,42 +397,33 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					if (this.props.allowCanvasZoom) {
 						event.preventDefault();
 						event.stopPropagation();
-
-            const oldZoomFactor = diagramModel.getZoomLevel() / 100;
-
-						if (diagramModel.getZoomLevel() + event.deltaY / 60 > 0) {
+						const oldZoomFactor = diagramModel.getZoomLevel() / 100;
+						if (diagramModel.getZoomLevel() + event.deltaY / 60 > 10) {
 							diagramModel.setZoomLevel(
 								diagramModel.getZoomLevel() + event.deltaY / 60
 							);
 						}
-            //
+
 						const zoomFactor = diagramModel.getZoomLevel() / 100;
+
 						const clientWidth = event.currentTarget.clientWidth;
 						const clientHeight = event.currentTarget.clientHeight;
-						const clientWidthDiff = clientWidth - clientWidth * zoomFactor;
-						const clientHeightDiff = clientHeight - clientHeight * zoomFactor;
-            const clientWidthDiff2 = clientWidth * oldZoomFactor - clientWidth * zoomFactor;
-            const clientHeightDiff2 = clientHeight * oldZoomFactor - clientHeight * zoomFactor;
 
-						//const xFactor = (event.clientX + diagramModel.getOffsetX() * oldZoomFactor )/ clientWidth;
-						//const yFactor = (event.clientY + diagramModel.getOffsetY() * oldZoomFactor)/ clientHeight;
-						const xFactor = event.clientX / clientWidth;
-            const yFactor = event.clientY / clientHeight;
+						const widthDiff = clientWidth * zoomFactor - clientWidth * oldZoomFactor;
+						const heightDiff = clientHeight * zoomFactor - clientHeight * oldZoomFactor;
 
-						const newOffsetX = clientWidthDiff * xFactor / zoomFactor;
-						const newOffsetY = clientHeightDiff * yFactor / zoomFactor;
-
+						const xFactor = (event.clientX - diagramModel.getOffsetX())  / oldZoomFactor / clientWidth;
+						const yFactor = (event.clientY - diagramModel.getOffsetY()) / oldZoomFactor / clientHeight;
 
 						diagramModel.setOffset(
-						 	clientWidthDiff * xFactor / zoomFactor, // - diagramModel.getOffsetX() * zoomFactor,
-							clientHeightDiff * yFactor / zoomFactor,
-						);
+							diagramModel.getOffsetX() - widthDiff * xFactor,
+							diagramModel.getOffsetY() - heightDiff * yFactor,
+						)
+
 
 						diagramEngine.enableRepaintEntities([]);
 						this.forceUpdate();
-						// setTimeout(() => {
-						// 	this.forceUpdate();
-						// }, 100);
+            
             requestAnimationFrame(() => this.forceUpdate());
 					}
 				}}

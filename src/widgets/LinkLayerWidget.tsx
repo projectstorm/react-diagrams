@@ -30,13 +30,13 @@ export class LinkLayerWidget extends React.Component<
 			<svg
 				style={{
 					transform:
-						"scale(" +
-						diagramModel.getZoomLevel() / 100.0 +
-						") translate(" +
+						"translate(" +
 						diagramModel.getOffsetX() +
 						"px," +
 						diagramModel.getOffsetY() +
-						"px)",
+						"px) scale(" +
+						diagramModel.getZoomLevel() / 100.0 +
+						")",
 					width: "100%",
 					height: "100%"
 				}}
