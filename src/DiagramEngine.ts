@@ -238,12 +238,12 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return {
 			x:
 				sourceElement.offsetWidth / 2 +
-				rel.x / (this.diagramModel.getZoomLevel() / 100.0) -
-				this.diagramModel.getOffsetX(),
+				(rel.x -
+				this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
 			y:
 				sourceElement.offsetHeight / 2 +
-				rel.y / (this.diagramModel.getZoomLevel() / 100.0) -
-				this.diagramModel.getOffsetY()
+				(rel.y -
+				this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
 		};
 	}
 }
