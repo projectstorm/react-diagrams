@@ -60,15 +60,10 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		deleteKeys: [46, 8]
 	};
 
-  previousOffsetX: number;
-  previousOffsetY: number;
-
 	constructor(props: DiagramProps) {
 		super(props);
 		this.onMouseMove = this.onMouseMove.bind(this);
 		this.onMouseUp = this.onMouseUp.bind(this);
-    this.previousOffsetX = 0;
-    this.previousOffsetY = 0;
 		this.state = {
 			action: null,
 			wasMoved: false,
@@ -423,7 +418,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 						diagramEngine.enableRepaintEntities([]);
 						this.forceUpdate();
-            
+
             requestAnimationFrame(() => this.forceUpdate());
 					}
 				}}
