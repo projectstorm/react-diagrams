@@ -2,7 +2,7 @@
 
 __DEMO__: http://www.projectstorm.io/react-diagrams
 
-__V3 Changelog__: http://dylanv.blog/2017/09/13/storm-react-diagrams-v3/
+__Latest Release Notes__: http://dylanv.blog/2017/09/15/storm-react-diagrams-3-1-0/
 
 A super simple, no-nonsense diagramming library written in React that just works.
 
