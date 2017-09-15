@@ -324,6 +324,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					return;
 				}
 
+
 				if (
 					element &&
 					element.model instanceof PortModel &&
@@ -332,6 +333,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					linkConnected = true;
 					let link = model.model.getLink();
 					link.setTargetPort(element.model);
+					delete this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()];
 				}
 			});
 
