@@ -16,6 +16,23 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
+interface Point {
+	x: number;
+	y: number;
+}
+
+const linePath = (firstPoint: Point, lastPoint: Point): string =>
+	`M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
+
+const curvePath = (
+	firstPoint: Point,
+	lastPoint: Point,
+	firstPointDelta: number = 0,
+	lastPointDelta: number = 0
+): string =>
+	`M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + firstPointDelta},${firstPoint.y} ${lastPoint.x +
+		lastPointDelta},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
+
 /**
  * @author Dylan Vorster
  */
@@ -144,23 +161,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 								this.props.pointAdded(point, event);
 							}
 						},
-						d:
-							" M" +
-							pointLeft.x +
-							" " +
-							pointLeft.y +
-							" C" +
-							(pointLeft.x + margin) +
-							" " +
-							pointLeft.y +
-							" " +
-							(pointRight.x - margin) +
-							" " +
-							pointRight.y +
-							" " +
-							pointRight.x +
-							" " +
-							pointRight.y
+						d: curvePath(pointLeft, pointRight, margin, -margin)
 					},
 					"0"
 				)
@@ -172,55 +173,15 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			//draw the multiple anchors and complex line instead
 			var ds = [];
 			if (this.props.smooth) {
-				ds.push(
-					" M" +
-						points[0].x +
-						" " +
-						points[0].y +
-						" C " +
-						(points[0].x + 50) +
-						" " +
-						points[0].y +
-						" " +
-						points[1].x +
-						" " +
-						points[1].y +
-						" " +
-						points[1].x +
-						" " +
-						points[1].y
-				);
+				ds.push(curvePath(points[0], points[1], 50, 0));
 				for (var i = 1; i < points.length - 2; i++) {
-					ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
+					ds.push(linePath(points[i], points[i + 1]));
 				}
-				ds.push(
-					" M" +
-						points[i].x +
-						" " +
-						points[i].y +
-						" C " +
-						points[i].x +
-						" " +
-						points[i].y +
-						" " +
-						(points[i + 1].x - 50) +
-						" " +
-						points[i + 1].y +
-						" " +
-						points[i + 1].x +
-						" " +
-						points[i + 1].y
-				);
+				ds.push(curvePath(points[i], points[i + 1], 0, -50));
 			} else {
 				var ds = [];
 				for (var i = 0; i < points.length - 1; i++) {
-					if (i === 0) {
-						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
-					} else if (i === points.length - 1) {
-						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
-					} else {
-						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
-					}
+					ds.push(linePath(points[i], points[i + 1]));
 				}
 			}
 
