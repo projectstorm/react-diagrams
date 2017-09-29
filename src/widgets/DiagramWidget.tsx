@@ -19,6 +19,7 @@ export interface DiagramProps {
 	allowLooseLinks?: boolean;
 	allowCanvasTranslation?: boolean;
 	allowCanvasZoom?: boolean;
+	inverseZoom?: boolean;
 
 	actionStartedFiring?: (action: BaseAction) => boolean;
 	actionStillFiring?: (action: BaseAction) => void;
@@ -45,6 +46,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		allowLooseLinks: true,
 		allowCanvasTranslation: true,
 		allowCanvasZoom: true,
+		inverseZoom: false,
 		deleteKeys: [46, 8]
 	};
 
@@ -339,8 +341,15 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						event.preventDefault();
 						event.stopPropagation();
 						const oldZoomFactor = diagramModel.getZoomLevel() / 100;
-						if (diagramModel.getZoomLevel() + event.deltaY / 60 > 10) {
-							diagramModel.setZoomLevel(diagramModel.getZoomLevel() + event.deltaY / 60);
+						let scrollDelta = this.props.inverseZoom ? -event.deltaY: event.deltaY;
+						//check if it is pinch gesture
+						if (event.ctrlKey && scrollDelta % 1 !== 0) {
+							scrollDelta /= 3;
+						} else {
+							scrollDelta /= 60;
+						}
+						if (diagramModel.getZoomLevel() + scrollDelta > 10) {
+							diagramModel.setZoomLevel(diagramModel.getZoomLevel() + scrollDelta);
 						}
 
 						const zoomFactor = diagramModel.getZoomLevel() / 100;
