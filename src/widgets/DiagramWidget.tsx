@@ -344,6 +344,10 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						let scrollDelta = this.props.inverseZoom ? -event.deltaY: event.deltaY;
 						//check if it is pinch gesture
 						if (event.ctrlKey && scrollDelta % 1 !== 0) {
+							/*Chrome and Firefox sends wheel event with deltaY that
+								have fractional part, also `ctrlKey` prop of the event is true
+								though ctrl isn't pressed
+							*/
 							scrollDelta /= 3;
 						} else {
 							scrollDelta /= 60;
