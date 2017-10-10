@@ -17,6 +17,7 @@ export * from "./Toolkit";
 export * from "./DiagramEngine";
 export * from "./DiagramModel";
 export * from "./BaseEntity";
+export * from "./CanvasActions";
 export * from "./Common";
 export * from "./AbstractInstanceFactory";
 export * from "./LinkInstanceFactory";
