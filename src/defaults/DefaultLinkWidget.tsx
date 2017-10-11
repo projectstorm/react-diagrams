@@ -16,18 +16,6 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
-const linePath = (firstPoint: PointModel, lastPoint: PointModel): string =>
-	`M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
-
-const curvePath = (
-	firstPoint: PointModel,
-	lastPoint: PointModel,
-	firstPointDelta: number = 0,
-	lastPointDelta: number = 0
-): string =>
-	`M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + firstPointDelta},${firstPoint.y} ${lastPoint.x +
-		lastPointDelta},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
-
 /**
  * @author Dylan Vorster
  */
@@ -120,6 +108,20 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
+	generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
+		return `M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
+	}
+
+	generateCurvePath(
+		firstPoint: PointModel,
+		lastPoint: PointModel,
+		firstPointDelta: number = 0,
+		lastPointDelta: number = 0
+	): string {
+		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + firstPointDelta},${firstPoint.y} ${lastPoint.x +
+			lastPointDelta},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
+	}
+
 	render() {
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
@@ -156,7 +158,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 								this.props.pointAdded(point, event);
 							}
 						},
-						d: curvePath(pointLeft, pointRight, margin, -margin)
+						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
 					},
 					"0"
 				)
@@ -168,15 +170,15 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			//draw the multiple anchors and complex line instead
 			var ds = [];
 			if (this.props.smooth) {
-				ds.push(curvePath(points[0], points[1], 50, 0));
+				ds.push(this.generateCurvePath(points[0], points[1], 50, 0));
 				for (var i = 1; i < points.length - 2; i++) {
-					ds.push(linePath(points[i], points[i + 1]));
+					ds.push(this.generateLinePath(points[i], points[i + 1]));
 				}
-				ds.push(curvePath(points[i], points[i + 1], 0, -50));
+				ds.push(this.generateCurvePath(points[i], points[i + 1], 0, -50));
 			} else {
 				var ds = [];
 				for (var i = 0; i < points.length - 1; i++) {
-					ds.push(linePath(points[i], points[i + 1]));
+					ds.push(this.generateLinePath(points[i], points[i + 1]));
 				}
 			}
 
