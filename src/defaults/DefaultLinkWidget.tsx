@@ -16,17 +16,12 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
-interface Point {
-	x: number;
-	y: number;
-}
-
-const linePath = (firstPoint: Point, lastPoint: Point): string =>
+const linePath = (firstPoint: PointModel, lastPoint: PointModel): string =>
 	`M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
 
 const curvePath = (
-	firstPoint: Point,
-	lastPoint: Point,
+	firstPoint: PointModel,
+	lastPoint: PointModel,
 	firstPointDelta: number = 0,
 	lastPointDelta: number = 0
 ): string =>
