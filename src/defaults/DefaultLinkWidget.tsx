@@ -108,6 +108,20 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
+	generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
+		return `M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
+	}
+
+	generateCurvePath(
+		firstPoint: PointModel,
+		lastPoint: PointModel,
+		firstPointDelta: number = 0,
+		lastPointDelta: number = 0
+	): string {
+		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + firstPointDelta},${firstPoint.y} ${lastPoint.x +
+			lastPointDelta},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
+	}
+
 	render() {
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
@@ -144,23 +158,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 								this.props.pointAdded(point, event);
 							}
 						},
-						d:
-							" M" +
-							pointLeft.x +
-							" " +
-							pointLeft.y +
-							" C" +
-							(pointLeft.x + margin) +
-							" " +
-							pointLeft.y +
-							" " +
-							(pointRight.x - margin) +
-							" " +
-							pointRight.y +
-							" " +
-							pointRight.x +
-							" " +
-							pointRight.y
+						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
 					},
 					"0"
 				)
@@ -172,55 +170,15 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			//draw the multiple anchors and complex line instead
 			var ds = [];
 			if (this.props.smooth) {
-				ds.push(
-					" M" +
-						points[0].x +
-						" " +
-						points[0].y +
-						" C " +
-						(points[0].x + 50) +
-						" " +
-						points[0].y +
-						" " +
-						points[1].x +
-						" " +
-						points[1].y +
-						" " +
-						points[1].x +
-						" " +
-						points[1].y
-				);
+				ds.push(this.generateCurvePath(points[0], points[1], 50, 0));
 				for (var i = 1; i < points.length - 2; i++) {
-					ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
+					ds.push(this.generateLinePath(points[i], points[i + 1]));
 				}
-				ds.push(
-					" M" +
-						points[i].x +
-						" " +
-						points[i].y +
-						" C " +
-						points[i].x +
-						" " +
-						points[i].y +
-						" " +
-						(points[i + 1].x - 50) +
-						" " +
-						points[i + 1].y +
-						" " +
-						points[i + 1].x +
-						" " +
-						points[i + 1].y
-				);
+				ds.push(this.generateCurvePath(points[i], points[i + 1], 0, -50));
 			} else {
 				var ds = [];
 				for (var i = 0; i < points.length - 1; i++) {
-					if (i === 0) {
-						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
-					} else if (i === points.length - 1) {
-						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
-					} else {
-						ds.push(" M " + points[i].x + " " + points[i].y + " L " + points[i + 1].x + " " + points[i + 1].y);
-					}
+					ds.push(this.generateLinePath(points[i], points[i + 1]));
 				}
 			}
 
