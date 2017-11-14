@@ -1,6 +1,6 @@
 import * as React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import {storiesOf} from "@storybook/react";
+import {action} from "@storybook/addon-actions";
 
 import demo1 from "./demo1/index";
 import demo2 from "./demo2/index";
@@ -9,6 +9,7 @@ import demo4 from "./demo4/index";
 import demo5 from "./demo5/index";
 import demo6 from "./demo6/index";
 import demo7 from "./demo7/index";
+import demoDagre from "./demo-dagre/index";
 
 require("./test.scss");
 
@@ -33,4 +34,7 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Grid Size", () => {
 		return demo7();
+	})
+	.add("Auto distribute", () => {
+		return demoDagre();
 	});
