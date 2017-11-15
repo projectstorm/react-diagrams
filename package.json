@@ -27,12 +27,12 @@
     "lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
   },
   "dependencies": {
-    "@storybook/storybook-deployer": "^2.0.0",
     "closest": "^0.0.1",
     "lodash": "^4.17.4",
     "react": "^16.1.1"
   },
   "devDependencies": {
+    "@storybook/storybook-deployer": "^2.0.0",
     "@storybook/addon-notes": "^3.2.15",
     "@storybook/react": "^3.2.15",
     "@types/lodash": "^4.14.85",
