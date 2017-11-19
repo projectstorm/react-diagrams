@@ -29,6 +29,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	canvas: Element;
 	paintableWidgets: {};
 	linksThatHaveInitiallyRendered: {};
+	maxNumberPointsPerLink: number;
 
 	constructor() {
 		super();
@@ -42,7 +43,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	}
 
 	repaintCanvas() {
-		this.iterateListeners(listener => {
+		this.iterateListeners((listener) => {
 			listener.repaintCanvas && listener.repaintCanvas();
 		});
 	}
@@ -53,11 +54,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	enableRepaintEntities(entities: BaseModel<BaseModelListener>[]) {
 		this.paintableWidgets = {};
-		entities.forEach(entity => {
+		entities.forEach((entity) => {
 			//if a node is requested to repaint, add all of its links
 			if (entity instanceof NodeModel) {
-				_.forEach(entity.getPorts(), port => {
-					_.forEach(port.getLinks(), link => {
+				_.forEach(entity.getPorts(), (port) => {
+					_.forEach(port.getLinks(), (link) => {
 						this.paintableWidgets[link.getID()] = true;
 					});
 				});
@@ -137,15 +138,15 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	registerNodeFactory(factory: NodeWidgetFactory) {
 		this.nodeFactories[factory.getType()] = factory;
-		this.iterateListeners(listener => {
-			if (listener.nodeFactoriesUpdated) listener.nodeFactoriesUpdated();
+		this.iterateListeners((listener) => {
+			if (listener.nodeFactoriesUpdated) { listener.nodeFactoriesUpdated(); }
 		});
 	}
 
 	registerLinkFactory(factory: LinkWidgetFactory) {
 		this.linkFactories[factory.getType()] = factory;
-		this.iterateListeners(listener => {
-			if (listener.linkFactoriesUpdated) listener.linkFactoriesUpdated();
+		this.iterateListeners((listener) => {
+			if (listener.linkFactoriesUpdated) { listener.linkFactoriesUpdated(); }
 		});
 	}
 
@@ -168,7 +169,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	generateWidgetForLink(link: LinkModel): JSX.Element | null {
 		var linkFactory = this.getFactoryForLink(link);
 		if (!linkFactory) {
-			throw "Cannot find link factory for link: " + link.getType();
+			throw new Error("Cannot find link factory for link: " + link.getType());
 		}
 		return linkFactory.generateReactWidget(this, link);
 	}
@@ -176,7 +177,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	generateWidgetForNode(node: NodeModel): JSX.Element | null {
 		var nodeFactory = this.getFactoryForNode(node);
 		if (!nodeFactory) {
-			throw "Cannot find widget factory for node: " + node.getType();
+			throw new Error("Cannot find widget factory for node: " + node.getType());
 		}
 		return nodeFactory.generateReactWidget(this, node);
 	}
@@ -199,11 +200,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 			'.port[data-name="' + port.getName() + '"][data-nodeid="' + port.getParent().getID() + '"]'
 		);
 		if (selector === null) {
-			throw "Cannot find Node Port element with nodeID: [" +
+			throw new Error("Cannot find Node Port element with nodeID: [" +
 				port.getParent().getID() +
 				"] and name: [" +
 				port.getName() +
-				"]";
+				"]");
 		}
 		return selector;
 	}
@@ -222,5 +223,12 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 				sourceElement.offsetHeight / 2 +
 				(rel.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
 		};
+	}
+
+	getMaxNumberPointsPerLink(): number {
+		return this.maxNumberPointsPerLink;
+	}
+	setMaxNumberPointsPerLink(max: number) {
+		this.maxNumberPointsPerLink = max;
 	}
 }

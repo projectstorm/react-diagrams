@@ -1,3 +1,4 @@
+/* tslint:disable:max-classes-per-file */
 import { NodeModel } from "../Common";
 import { DefaultPortModel } from "./DefaultPortModel";
 import * as _ from "lodash";

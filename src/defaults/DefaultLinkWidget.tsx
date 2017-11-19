@@ -16,6 +16,20 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
+const addPointToLink = (event, widget, index: number) => {
+	if (
+		!event.shiftKey &&
+		!widget.props.diagramEngine.isModelLocked(widget.props.link) &&
+		widget.props.link.points.length - 1 <= widget.props.diagramEngine.getMaxNumberPointsPerLink()
+	) {
+		const point = new PointModel(widget.props.link, widget.props.diagramEngine.getRelativeMousePoint(event));
+		point.setSelected(true);
+		widget.forceUpdate();
+		widget.props.link.addPoint(point, index);
+		widget.props.pointAdded(point, event);
+	}
+};
+
 /**
  * @author Dylan Vorster
  */
@@ -149,14 +163,8 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			paths.push(
 				this.generateLink(
 					{
-						onMouseDown: event => {
-							if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)) {
-								var point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
-								point.setSelected(true);
-								this.forceUpdate();
-								this.props.link.addPoint(point, 1);
-								this.props.pointAdded(point, event);
-							}
+						onMouseDown: (event) => {
+							addPointToLink(event, this, 1);
 						},
 						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
 					},
@@ -187,16 +195,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					{
 						"data-linkid": this.props.link.id,
 						"data-point": index,
-						onMouseDown: (event: MouseEvent) => {
-							if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)) {
-								var point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
-								point.setSelected(true);
-								this.forceUpdate();
-								this.props.link.addPoint(point, index + 1);
-								this.props.pointAdded(point, event);
-							}
+						"onMouseDown": (event: MouseEvent) => {
+							addPointToLink(event, this, index + 1);
 						},
-						d: data
+						"d": data
 					},
 					index
 				);
