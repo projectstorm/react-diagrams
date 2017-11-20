@@ -31,6 +31,7 @@ describe("simple test", async () => {
 		await page.mouse.down();
 		await page.mouse.move(610, 352);
 		await page.mouse.up();
+
 	});
 
 	itShould('should drag a node', async (page) => {

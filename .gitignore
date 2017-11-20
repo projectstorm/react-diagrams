@@ -1,6 +1,7 @@
 dist/
 dist/main.js
 dist/main.js.map
+
 .out
 
 # Created by https://www.gitignore.io/api/net,netbeans,sublimetext,phpstorm,windows,osx,node

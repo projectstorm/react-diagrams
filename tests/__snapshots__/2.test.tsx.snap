@@ -1,0 +1,9287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots React Diagrams Auto distribute 1`] = `
+<div>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-768"
+        style={
+          Object {
+            "left": 52.5,
+            "top": 30,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              from-1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="from-1-out-1"
+                  data-nodeid="test-uid-768"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+              </div>
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="from-1-out-4"
+                  data-nodeid="test-uid-768"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-769"
+        style={
+          Object {
+            "left": 85,
+            "top": 250,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              from-2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="from-2-out-2"
+                  data-nodeid="test-uid-769"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+              </div>
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="from-2-out-6"
+                  data-nodeid="test-uid-769"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+                <div
+                  className="port"
+                  data-name="to-1-to-5"
+                  data-nodeid="test-uid-769"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-770"
+        style={
+          Object {
+            "left": 195,
+            "top": 250,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              from-3
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="from-3-out-3"
+                  data-nodeid="test-uid-770"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-771"
+        style={
+          Object {
+            "left": 85,
+            "top": 140,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              to-1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="to-1-out-5"
+                  data-nodeid="test-uid-771"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+                <div
+                  className="port"
+                  data-name="from-1-to-1"
+                  data-nodeid="test-uid-771"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-772"
+        style={
+          Object {
+            "left": 30,
+            "top": 360,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              to-2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+                <div
+                  className="port"
+                  data-name="from-2-to-2"
+                  data-nodeid="test-uid-772"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+                <div
+                  className="port"
+                  data-name="from-1-to-4"
+                  data-nodeid="test-uid-772"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-773"
+        style={
+          Object {
+            "left": 185,
+            "top": 360,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              to-3
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+                <div
+                  className="port"
+                  data-name="from-3-to-3"
+                  data-nodeid="test-uid-773"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+                <div
+                  className="port"
+                  data-name="from-2-to-6"
+                  data-nodeid="test-uid-773"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    Re-distribute
+  </button>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Custom Diamond Widget 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-663"
+      style={
+        Object {
+          "left": 100,
+          "top": 150,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-663"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-665"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="diamond-node"
+        style={
+          Object {
+            "height": 150,
+            "position": "relative",
+            "width": 150,
+          }
+        }
+      >
+        <svg
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "
+					<g id=\\"Layer_1\\">
+					</g>
+					<g id=\\"Layer_2\\">
+						<polygon fill=\\"purple\\" stroke=\\"#000000\\" stroke-width=\\"3\\" stroke-miterlimit=\\"10\\" points=\\"10,75 75,10 140,75 75,140 \\"/>
+					</g>
+				",
+            }
+          }
+          height={150}
+          width={150}
+        />
+        <div
+          style={
+            Object {
+              "left": -8,
+              "position": "absolute",
+              "top": 67,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="left"
+            data-nodeid="test-uid-665"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 67,
+              "position": "absolute",
+              "top": -8,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="top"
+            data-nodeid="test-uid-665"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 142,
+              "position": "absolute",
+              "top": 67,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="right"
+            data-nodeid="test-uid-665"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 67,
+              "position": "absolute",
+              "top": 142,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="bottom"
+            data-nodeid="test-uid-665"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-670"
+      style={
+        Object {
+          "left": 800,
+          "top": 150,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "red",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 3
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-670"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                In
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Embedded diagram 1`] = `
+<div
+  className="body"
+>
+  <div
+    className="header"
+  >
+    <div
+      className="title"
+    >
+      Storm React Diagrams - Demo 5
+    </div>
+  </div>
+  <div
+    className="content"
+  >
+    <div
+      className="tray"
+    >
+      <div
+        className="tray-item"
+        draggable={true}
+        onDragStart={[Function]}
+        style={
+          Object {
+            "borderColor": "rgb(192,255,0)",
+          }
+        }
+      >
+        In Node
+      </div>
+      <div
+        className="tray-item"
+        draggable={true}
+        onDragStart={[Function]}
+        style={
+          Object {
+            "borderColor": "rgb(0,192,255)",
+          }
+        }
+      >
+        Out Node
+      </div>
+    </div>
+    <div
+      className="diagram-layer"
+      onDragOver={[Function]}
+      onDrop={[Function]}
+    >
+      <div
+        className="storm-diagrams-canvas"
+        onMouseDown={[Function]}
+        onWheel={[Function]}
+      >
+        <svg
+          style={
+            Object {
+              "height": "100%",
+              "transform": "translate(0px,0px) scale(1)",
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          className="node-view"
+          style={
+            Object {
+              "height": "100%",
+              "transform": "translate(0px,0px) scale(1)",
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            className="node"
+            data-nodeid="test-uid-713"
+            style={
+              Object {
+                "left": 100,
+                "top": 100,
+              }
+            }
+          >
+            <div
+              className="basic-node"
+              style={
+                Object {
+                  "background": "rgb(0,192,255)",
+                }
+              }
+            >
+              <div
+                className="title"
+              >
+                <div
+                  className="name"
+                >
+                  Node 1
+                </div>
+              </div>
+              <div
+                className="ports"
+              >
+                <div
+                  className="in"
+                />
+                <div
+                  className="out"
+                >
+                  <div
+                    className="out-port"
+                  >
+                    <div
+                      className="name"
+                    >
+                      Out
+                    </div>
+                    <div
+                      className="port"
+                      data-name="out-1"
+                      data-nodeid="test-uid-713"
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="node"
+            data-nodeid="test-uid-715"
+            style={
+              Object {
+                "left": 400,
+                "top": 100,
+              }
+            }
+          >
+            <div
+              className="basic-node"
+              style={
+                Object {
+                  "background": "rgb(192,255,0)",
+                }
+              }
+            >
+              <div
+                className="title"
+              >
+                <div
+                  className="name"
+                >
+                  Node 2
+                </div>
+              </div>
+              <div
+                className="ports"
+              >
+                <div
+                  className="in"
+                >
+                  <div
+                    className="in-port"
+                  >
+                    <div
+                      className="port"
+                      data-name="in-1"
+                      data-nodeid="test-uid-715"
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                    />
+                    <div
+                      className="name"
+                    >
+                      IN
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="out"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Events 1`] = `
+<div>
+  <p>
+    Click the diagram elements to inspect some of the possible events.
+  </p>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-895"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(255,99,66)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-895"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-897"
+        style={
+          Object {
+            "left": 400,
+            "top": 40,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-897"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-899"
+        style={
+          Object {
+            "left": 300,
+            "top": 160,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(128,99,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 3
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-2"
+                  data-nodeid="test-uid-899"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Grid Size 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-754"
+      style={
+        Object {
+          "left": 100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-754"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-756"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-756"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Limiting number of points 1`] = `
+<div>
+  <p>
+    A maximum of 5 points can be created per link.
+  </p>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-881"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(255,99,66)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-881"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-883"
+        style={
+          Object {
+            "left": 400,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-883"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Locked Widget 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-687"
+      style={
+        Object {
+          "left": 100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-687"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-689"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-689"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-697"
+      style={
+        Object {
+          "left": 100,
+          "top": 250,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 3
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-2"
+                data-nodeid="test-uid-697"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-699"
+      style={
+        Object {
+          "left": 400,
+          "top": 250,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 4
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-2"
+                data-nodeid="test-uid-699"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Performance Test 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-19"
+      style={
+        Object {
+          "left": 100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-19"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-21"
+      style={
+        Object {
+          "left": 200,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-21"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-29"
+      style={
+        Object {
+          "left": 100,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-29"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-31"
+      style={
+        Object {
+          "left": 200,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-31"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-39"
+      style={
+        Object {
+          "left": 100,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-39"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-41"
+      style={
+        Object {
+          "left": 200,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-41"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-49"
+      style={
+        Object {
+          "left": 100,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-49"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-51"
+      style={
+        Object {
+          "left": 200,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-51"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-59"
+      style={
+        Object {
+          "left": 100,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-59"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-61"
+      style={
+        Object {
+          "left": 200,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-61"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-69"
+      style={
+        Object {
+          "left": 100,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-69"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-71"
+      style={
+        Object {
+          "left": 200,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-71"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-79"
+      style={
+        Object {
+          "left": 100,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-79"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-81"
+      style={
+        Object {
+          "left": 200,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-81"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-89"
+      style={
+        Object {
+          "left": 100,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-89"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-91"
+      style={
+        Object {
+          "left": 200,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-91"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-99"
+      style={
+        Object {
+          "left": 300,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-99"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-101"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-101"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-109"
+      style={
+        Object {
+          "left": 300,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-109"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-111"
+      style={
+        Object {
+          "left": 400,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-111"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-119"
+      style={
+        Object {
+          "left": 300,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-119"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-121"
+      style={
+        Object {
+          "left": 400,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-121"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-129"
+      style={
+        Object {
+          "left": 300,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-129"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-131"
+      style={
+        Object {
+          "left": 400,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-131"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-139"
+      style={
+        Object {
+          "left": 300,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-139"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-141"
+      style={
+        Object {
+          "left": 400,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-141"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-149"
+      style={
+        Object {
+          "left": 300,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-149"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-151"
+      style={
+        Object {
+          "left": 400,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-151"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-159"
+      style={
+        Object {
+          "left": 300,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-159"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-161"
+      style={
+        Object {
+          "left": 400,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-161"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-169"
+      style={
+        Object {
+          "left": 300,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-169"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-171"
+      style={
+        Object {
+          "left": 400,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-171"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-179"
+      style={
+        Object {
+          "left": 500,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-179"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-181"
+      style={
+        Object {
+          "left": 600,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-181"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-189"
+      style={
+        Object {
+          "left": 500,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-189"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-191"
+      style={
+        Object {
+          "left": 600,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-191"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-199"
+      style={
+        Object {
+          "left": 500,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-199"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-201"
+      style={
+        Object {
+          "left": 600,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-201"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-209"
+      style={
+        Object {
+          "left": 500,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-209"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-211"
+      style={
+        Object {
+          "left": 600,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-211"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-219"
+      style={
+        Object {
+          "left": 500,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-219"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-221"
+      style={
+        Object {
+          "left": 600,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-221"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-229"
+      style={
+        Object {
+          "left": 500,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-229"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-231"
+      style={
+        Object {
+          "left": 600,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-231"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-239"
+      style={
+        Object {
+          "left": 500,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-239"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-241"
+      style={
+        Object {
+          "left": 600,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-241"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-249"
+      style={
+        Object {
+          "left": 500,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-249"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-251"
+      style={
+        Object {
+          "left": 600,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-251"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-259"
+      style={
+        Object {
+          "left": 700,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-259"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-261"
+      style={
+        Object {
+          "left": 800,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-261"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-269"
+      style={
+        Object {
+          "left": 700,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-269"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-271"
+      style={
+        Object {
+          "left": 800,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-271"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-279"
+      style={
+        Object {
+          "left": 700,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-279"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-281"
+      style={
+        Object {
+          "left": 800,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-281"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-289"
+      style={
+        Object {
+          "left": 700,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-289"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-291"
+      style={
+        Object {
+          "left": 800,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-291"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-299"
+      style={
+        Object {
+          "left": 700,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-299"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-301"
+      style={
+        Object {
+          "left": 800,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-301"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-309"
+      style={
+        Object {
+          "left": 700,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-309"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-311"
+      style={
+        Object {
+          "left": 800,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-311"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-319"
+      style={
+        Object {
+          "left": 700,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-319"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-321"
+      style={
+        Object {
+          "left": 800,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-321"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-329"
+      style={
+        Object {
+          "left": 700,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-329"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-331"
+      style={
+        Object {
+          "left": 800,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-331"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-339"
+      style={
+        Object {
+          "left": 900,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-339"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-341"
+      style={
+        Object {
+          "left": 1000,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-341"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-349"
+      style={
+        Object {
+          "left": 900,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-349"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-351"
+      style={
+        Object {
+          "left": 1000,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-351"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-359"
+      style={
+        Object {
+          "left": 900,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-359"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-361"
+      style={
+        Object {
+          "left": 1000,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-361"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-369"
+      style={
+        Object {
+          "left": 900,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-369"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-371"
+      style={
+        Object {
+          "left": 1000,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-371"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-379"
+      style={
+        Object {
+          "left": 900,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-379"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-381"
+      style={
+        Object {
+          "left": 1000,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-381"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-389"
+      style={
+        Object {
+          "left": 900,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-389"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-391"
+      style={
+        Object {
+          "left": 1000,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-391"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-399"
+      style={
+        Object {
+          "left": 900,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-399"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-401"
+      style={
+        Object {
+          "left": 1000,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-401"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-409"
+      style={
+        Object {
+          "left": 900,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-409"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-411"
+      style={
+        Object {
+          "left": 1000,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-411"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-419"
+      style={
+        Object {
+          "left": 1100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-419"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-421"
+      style={
+        Object {
+          "left": 1200,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-421"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-429"
+      style={
+        Object {
+          "left": 1100,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-429"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-431"
+      style={
+        Object {
+          "left": 1200,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-431"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-439"
+      style={
+        Object {
+          "left": 1100,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-439"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-441"
+      style={
+        Object {
+          "left": 1200,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-441"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-449"
+      style={
+        Object {
+          "left": 1100,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-449"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-451"
+      style={
+        Object {
+          "left": 1200,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-451"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-459"
+      style={
+        Object {
+          "left": 1100,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-459"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-461"
+      style={
+        Object {
+          "left": 1200,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-461"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-469"
+      style={
+        Object {
+          "left": 1100,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-469"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-471"
+      style={
+        Object {
+          "left": 1200,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-471"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-479"
+      style={
+        Object {
+          "left": 1100,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-479"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-481"
+      style={
+        Object {
+          "left": 1200,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-481"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-489"
+      style={
+        Object {
+          "left": 1100,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-489"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-491"
+      style={
+        Object {
+          "left": 1200,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-491"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-499"
+      style={
+        Object {
+          "left": 1300,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-499"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-501"
+      style={
+        Object {
+          "left": 1400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-501"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-509"
+      style={
+        Object {
+          "left": 1300,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-509"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-511"
+      style={
+        Object {
+          "left": 1400,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-511"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-519"
+      style={
+        Object {
+          "left": 1300,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-519"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-521"
+      style={
+        Object {
+          "left": 1400,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-521"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-529"
+      style={
+        Object {
+          "left": 1300,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-529"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-531"
+      style={
+        Object {
+          "left": 1400,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-531"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-539"
+      style={
+        Object {
+          "left": 1300,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-539"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-541"
+      style={
+        Object {
+          "left": 1400,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-541"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-549"
+      style={
+        Object {
+          "left": 1300,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-549"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-551"
+      style={
+        Object {
+          "left": 1400,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-551"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-559"
+      style={
+        Object {
+          "left": 1300,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-559"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-561"
+      style={
+        Object {
+          "left": 1400,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-561"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-569"
+      style={
+        Object {
+          "left": 1300,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-569"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-571"
+      style={
+        Object {
+          "left": 1400,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-571"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-579"
+      style={
+        Object {
+          "left": 1500,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-579"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-581"
+      style={
+        Object {
+          "left": 1600,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-581"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-589"
+      style={
+        Object {
+          "left": 1500,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-589"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-591"
+      style={
+        Object {
+          "left": 1600,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-591"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-599"
+      style={
+        Object {
+          "left": 1500,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-599"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-601"
+      style={
+        Object {
+          "left": 1600,
+          "top": 300,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-601"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-609"
+      style={
+        Object {
+          "left": 1500,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-609"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-611"
+      style={
+        Object {
+          "left": 1600,
+          "top": 400,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-611"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-619"
+      style={
+        Object {
+          "left": 1500,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-619"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-621"
+      style={
+        Object {
+          "left": 1600,
+          "top": 500,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-621"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-629"
+      style={
+        Object {
+          "left": 1500,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-629"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-631"
+      style={
+        Object {
+          "left": 1600,
+          "top": 600,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-631"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-639"
+      style={
+        Object {
+          "left": 1500,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-639"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-641"
+      style={
+        Object {
+          "left": 1600,
+          "top": 700,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-641"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-649"
+      style={
+        Object {
+          "left": 1500,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-649"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-651"
+      style={
+        Object {
+          "left": 1600,
+          "top": 800,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-651"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Programatically move nodes 1`] = `
+<div>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-920"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-920"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-922"
+        style={
+          Object {
+            "left": 400,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-922"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    Update position
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    Update position via serialize
+  </button>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Serializing and Deserializing 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-727"
+      style={
+        Object {
+          "left": 100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-727"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-729"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-729"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots React Diagrams Simple Example 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-5"
+      style={
+        Object {
+          "left": 100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-5"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-7"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-7"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

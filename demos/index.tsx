@@ -13,6 +13,10 @@ import demo8 from "./demo8/index";
 import demo9 from "./demo9/index";
 import demo10 from "./demo10/index";
 import demoDagre from "./demo-dagre/index";
+import {Toolkit} from "../src/Toolkit";
+
+//make tests deterministic
+Toolkit.TESTING_MODE = true;
 
 require("./test.scss");
 
