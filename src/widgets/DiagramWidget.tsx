@@ -20,6 +20,7 @@ export interface DiagramProps {
 	allowCanvasTranslation?: boolean;
 	allowCanvasZoom?: boolean;
 	inverseZoom?: boolean;
+	maxNumberPointsPerLink?: number;
 
 	actionStartedFiring?: (action: BaseAction) => boolean;
 	actionStillFiring?: (action: BaseAction) => void;
@@ -47,6 +48,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		allowCanvasTranslation: true,
 		allowCanvasZoom: true,
 		inverseZoom: false,
+		maxNumberPointsPerLink: Infinity, // backwards compatible default
 		deleteKeys: [46, 8]
 	};
 
@@ -189,15 +191,15 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		if (this.state.action instanceof SelectingAction) {
 			var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 
-			_.forEach(diagramModel.getNodes(), node => {
+			_.forEach(diagramModel.getNodes(), (node) => {
 				if ((this.state.action as SelectingAction).containsElement(node.x, node.y, diagramModel)) {
 					node.setSelected(true);
 				}
 			});
 
-			_.forEach(diagramModel.getLinks(), link => {
+			_.forEach(diagramModel.getLinks(), (link) => {
 				var allSelected = true;
-				_.forEach(link.points, point => {
+				_.forEach(link.points, (point) => {
 					if ((this.state.action as SelectingAction).containsElement(point.x, point.y, diagramModel)) {
 						point.setSelected(true);
 					} else {
@@ -221,7 +223,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			let amountY = event.clientY - this.state.action.mouseY;
 			let amountZoom = diagramModel.getZoomLevel() / 100;
 
-			_.forEach(this.state.action.selectionModels, model => {
+			_.forEach(this.state.action.selectionModels, (model) => {
 				// in this case we need to also work out the relative grid position
 				if (
 					model.model instanceof NodeModel ||
@@ -254,7 +256,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	onKeyUp(event) {
 		//delete all selected
 		if (this.props.deleteKeys.indexOf(event.keyCode) !== -1) {
-			_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), element => {
+			_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), (element) => {
 				//only delete items which are not locked
 				if (!this.props.diagramEngine.isModelLocked(element)) {
 					element.remove();
@@ -270,7 +272,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		if (this.state.action instanceof MoveItemsAction) {
 			var element = this.getMouseElement(event);
 			var linkConnected = false;
-			_.forEach(this.state.action.selectionModels, model => {
+			_.forEach(this.state.action.selectionModels, (model) => {
 				//only care about points connecting to things
 				if (!(model.model instanceof PointModel)) {
 					return;
@@ -286,7 +288,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 			//do we want to allow loose links on the diagram model or not
 			if (!linkConnected && !this.props.allowLooseLinks) {
-				_.forEach(this.state.action.selectionModels, model => {
+				_.forEach(this.state.action.selectionModels, (model) => {
 					//only care about points connecting to things
 					if (!(model.model instanceof PointModel)) {
 						return;
@@ -326,22 +328,23 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 	render() {
 		var diagramEngine = this.props.diagramEngine;
+		diagramEngine.setMaxNumberPointsPerLink(this.props.maxNumberPointsPerLink);
 		var diagramModel = diagramEngine.getDiagramModel();
 
 		return (
 			<div
-				ref={ref => {
+				ref={(ref) => {
 					if (ref) {
 						this.props.diagramEngine.setCanvas(ref);
 					}
 				}}
 				className="storm-diagrams-canvas"
-				onWheel={event => {
+				onWheel={(event) => {
 					if (this.props.allowCanvasZoom) {
 						event.preventDefault();
 						event.stopPropagation();
 						const oldZoomFactor = diagramModel.getZoomLevel() / 100;
-						let scrollDelta = this.props.inverseZoom ? -event.deltaY: event.deltaY;
+						let scrollDelta = this.props.inverseZoom ? -event.deltaY : event.deltaY;
 						//check if it is pinch gesture
 						if (event.ctrlKey && scrollDelta % 1 !== 0) {
 							/*Chrome and Firefox sends wheel event with deltaY that
@@ -381,7 +384,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						this.forceUpdate();
 					}
 				}}
-				onMouseDown={event => {
+				onMouseDown={(event) => {
 					this.setState({ ...this.state, wasMoved: false });
 
 					diagramEngine.clearRepaintEntities();
