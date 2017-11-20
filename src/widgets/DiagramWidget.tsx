@@ -171,10 +171,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		return null;
 	}
 
-  repaintCanvasListener() {
-
-  }
-
 	fireAction() {
 		if (this.state.action && this.props.actionStillFiring) {
 			this.props.actionStillFiring(this.state.action);
