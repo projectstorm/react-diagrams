@@ -32,14 +32,15 @@
     "react": "^16.1.1"
   },
   "devDependencies": {
-    "@storybook/storybook-deployer": "^2.0.0",
     "@storybook/addon-notes": "^3.2.15",
     "@storybook/react": "^3.2.15",
+    "@storybook/storybook-deployer": "^2.0.0",
     "@types/lodash": "^4.14.85",
     "@types/node": "^8.0.52",
     "@types/react": "^16.0.22",
     "awesome-typescript-loader": "^3.3.0",
     "css-loader": "^0.28.7",
+    "dagre": "^0.7.4",
     "node-sass": "^4.6.1",
     "prettier": "^1.8.2",
     "react-dom": "^16.1.1",
