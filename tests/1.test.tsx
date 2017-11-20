@@ -1,8 +1,7 @@
 import "jest";
 import * as puppeteer from "puppeteer"
-import 'raf/polyfill';
 
-var browser;;
+var browser;
 
 async function itShould(directive, test: (page: puppeteer.Page) => any){
 	it(directive, async () => {

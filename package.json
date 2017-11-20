@@ -28,7 +28,6 @@
 		"lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
 	},
 	"dependencies": {
-		"@types/puppeteer": "^0.13.0",
 		"closest": "^0.0.1",
 		"lodash": "^4.17.4",
 		"react": "^16.1.1"
@@ -43,6 +42,7 @@
 		"@types/lodash": "^4.14.85",
 		"@types/node": "^8.0.53",
 		"@types/react": "^16.0.25",
+		"@types/puppeteer": "^0.13.0",
 		"awesome-typescript-loader": "^3.4.0",
 		"css-loader": "^0.28.7",
 		"dagre": "^0.7.4",
@@ -51,7 +51,6 @@
 		"node-sass": "^4.7.2",
 		"prettier": "^1.8.2",
 		"puppeteer": "^0.13.0",
-		"raf": "^3.4.0",
 		"react-dom": "^16.1.1",
 		"react-test-renderer": "^16.1.1",
 		"sass-loader": "^6.0.6",
