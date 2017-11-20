@@ -9,6 +9,8 @@ import demo4 from "./demo4/index";
 import demo5 from "./demo5/index";
 import demo6 from "./demo6/index";
 import demo7 from "./demo7/index";
+import demo8 from "./demo8/index";
+import demo9 from "./demo9/index";
 import demoDagre from "./demo-dagre/index";
 
 require("./test.scss");
@@ -37,4 +39,10 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Auto distribute", () => {
 		return demoDagre();
+  })
+	.add("Limiting number of points", () => {
+		return demo8();
+	})
+	.add("Events", () => {
+		return demo9();
 	});

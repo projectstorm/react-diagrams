@@ -36,6 +36,20 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		};
 	}
 
+	addPointToLink = (event, index: number): void => {
+		if (
+			!event.shiftKey &&
+			!this.props.diagramEngine.isModelLocked(this.props.link) &&
+			this.props.link.points.length - 1 <= this.props.diagramEngine.getMaxNumberPointsPerLink()
+		) {
+			const point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
+			point.setSelected(true);
+			this.forceUpdate();
+			this.props.link.addPoint(point, index);
+			this.props.pointAdded(point, event);
+		}
+	}
+
 	generatePoint(pointIndex: number): JSX.Element {
 		let x = this.props.link.points[pointIndex].x;
 		let y = this.props.link.points[pointIndex].y;
@@ -149,14 +163,8 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			paths.push(
 				this.generateLink(
 					{
-						onMouseDown: event => {
-							if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)) {
-								var point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
-								point.setSelected(true);
-								this.forceUpdate();
-								this.props.link.addPoint(point, 1);
-								this.props.pointAdded(point, event);
-							}
+						onMouseDown: (event) => {
+							this.addPointToLink(event, 1);
 						},
 						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
 					},
@@ -187,16 +195,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					{
 						"data-linkid": this.props.link.id,
 						"data-point": index,
-						onMouseDown: (event: MouseEvent) => {
-							if (!event.shiftKey && !this.props.diagramEngine.isModelLocked(this.props.link)) {
-								var point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
-								point.setSelected(true);
-								this.forceUpdate();
-								this.props.link.addPoint(point, index + 1);
-								this.props.pointAdded(point, event);
-							}
+						"onMouseDown": (event: MouseEvent) => {
+							this.addPointToLink(event, index + 1);
 						},
-						d: data
+						"d": data
 					},
 					index
 				);
