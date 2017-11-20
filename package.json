@@ -1,6 +1,6 @@
 {
   "name": "storm-react-diagrams",
-  "version": "3.1.2",
+  "version": "3.1.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/projectstorm/react-diagrams.git"
@@ -27,28 +27,27 @@
     "lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
   },
   "dependencies": {
-    "@storybook/storybook-deployer": "^2.0.0",
     "closest": "^0.0.1",
     "lodash": "^4.17.4",
-    "react": "^15.6.1"
+    "react": "^16.1.1"
   },
   "devDependencies": {
-    "@storybook/addon-notes": "^3.2.7",
-    "@storybook/react": "^3.2.8",
-    "@types/lodash": "^4.14.74",
-    "@types/node": "^8.0.28",
-    "@types/react": "^16.0.5",
-    "awesome-typescript-loader": "^3.2.3",
+    "@storybook/storybook-deployer": "^2.0.0",
+    "@storybook/addon-notes": "^3.2.15",
+    "@storybook/react": "^3.2.15",
+    "@types/lodash": "^4.14.85",
+    "@types/node": "^8.0.52",
+    "@types/react": "^16.0.22",
+    "awesome-typescript-loader": "^3.3.0",
     "css-loader": "^0.28.7",
-    "dagre": "^0.7.4",
-    "node-sass": "^4.5.3",
-    "prettier": "^1.6.1",
-    "react-dom": "^15.6.1",
+    "node-sass": "^4.6.1",
+    "prettier": "^1.8.2",
+    "react-dom": "^16.1.1",
     "sass-loader": "^6.0.6",
-    "source-map-loader": "^0.2.1",
-    "style-loader": "^0.18.2",
-    "tslint": "^5.7.0",
-    "typescript": "^2.5.2",
-    "webpack": "^3.5.6"
+    "source-map-loader": "^0.2.3",
+    "style-loader": "^0.19.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1",
+    "webpack": "^3.8.1"
   }
 }

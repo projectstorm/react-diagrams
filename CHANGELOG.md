@@ -1,3 +1,9 @@
+__3.1.3__ 
+* Refactor links slightly
+* use min extension for css
+* bump package versions
+* export more classes
+
 __3.1.2__ 
 * Hotfix: fix zooming when canvas not in the top left corner
 (https://github.com/projectstorm/react-diagrams/pull/88)
