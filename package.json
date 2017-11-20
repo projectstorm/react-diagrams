@@ -36,6 +36,7 @@
 	"devDependencies": {
 		"@storybook/addon-actions": "^3.2.16",
 		"@storybook/addon-notes": "^3.2.16",
+		"@storybook/addon-storyshots": "^3.2.16",
 		"@storybook/react": "^3.2.16",
 		"@storybook/storybook-deployer": "^2.0.0",
 		"@types/jest": "^21.1.6",
