@@ -1,5 +1,6 @@
 import * as SRD from "../../src/main";
 import * as React from "react";
+import { action } from "@storybook/addon-actions";
 import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
 
 /**
@@ -45,8 +46,8 @@ export default () => {
 	[node1, node2, link1, link2].forEach((item) => {
 		item.addListener({
 			selectionChanged: (node, isSelected) => {
-				console.info('node', node);
-				console.info('isSelected', isSelected);
+				action('node', node);
+				action('isSelected', isSelected);
 			}
 		});
 	});
@@ -60,7 +61,7 @@ export default () => {
 
 	return (
 		<div>
-			<p>Open your browser's console to inspect events fired as you click the diagram elements.</p>
+			<p>Click the diagram elements to inspect some of the possible events.</p>
 			<DiagramWidget {...props} />
 		</div>
 	);

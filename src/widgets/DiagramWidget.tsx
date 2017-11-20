@@ -48,7 +48,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		allowCanvasTranslation: true,
 		allowCanvasZoom: true,
 		inverseZoom: false,
-		maxNumberPointsPerLink: 3, // a sane default
+		maxNumberPointsPerLink: Infinity, // backwards compatible default
 		deleteKeys: [46, 8]
 	};
 

@@ -16,20 +16,6 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
-const addPointToLink = (event, widget, index: number) => {
-	if (
-		!event.shiftKey &&
-		!widget.props.diagramEngine.isModelLocked(widget.props.link) &&
-		widget.props.link.points.length - 1 <= widget.props.diagramEngine.getMaxNumberPointsPerLink()
-	) {
-		const point = new PointModel(widget.props.link, widget.props.diagramEngine.getRelativeMousePoint(event));
-		point.setSelected(true);
-		widget.forceUpdate();
-		widget.props.link.addPoint(point, index);
-		widget.props.pointAdded(point, event);
-	}
-};
-
 /**
  * @author Dylan Vorster
  */
@@ -48,6 +34,20 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		this.state = {
 			selected: false
 		};
+	}
+
+	addPointToLink = (event, index: number): void => {
+		if (
+			!event.shiftKey &&
+			!this.props.diagramEngine.isModelLocked(this.props.link) &&
+			this.props.link.points.length - 1 <= this.props.diagramEngine.getMaxNumberPointsPerLink()
+		) {
+			const point = new PointModel(this.props.link, this.props.diagramEngine.getRelativeMousePoint(event));
+			point.setSelected(true);
+			this.forceUpdate();
+			this.props.link.addPoint(point, index);
+			this.props.pointAdded(point, event);
+		}
 	}
 
 	generatePoint(pointIndex: number): JSX.Element {
@@ -164,7 +164,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				this.generateLink(
 					{
 						onMouseDown: (event) => {
-							addPointToLink(event, this, 1);
+							this.addPointToLink(event, 1);
 						},
 						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
 					},
@@ -196,7 +196,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 						"data-linkid": this.props.link.id,
 						"data-point": index,
 						"onMouseDown": (event: MouseEvent) => {
-							addPointToLink(event, this, index + 1);
+							this.addPointToLink(event, index + 1);
 						},
 						"d": data
 					},
