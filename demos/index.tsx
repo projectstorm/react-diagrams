@@ -39,7 +39,7 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Auto distribute", () => {
 		return demoDagre();
-  })
+  	})
 	.add("Limiting number of points", () => {
 		return demo8();
 	})

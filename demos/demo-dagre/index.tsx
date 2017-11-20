@@ -48,11 +48,7 @@ class Demo8Widget extends React.Component<any, any> {
 		const model = engine.getDiagramModel();
 		let distributedModel = getDistributedModel(engine, model);
 		engine.setDiagramModel(distributedModel);
-		// Small hack forcing to re-render whole diagram with links. Quite heavy.
-		// could be also engine.linksThatHaveInitiallyRendered = {};
-		// decided to keep keys there
-		Object.keys(engine.linksThatHaveInitiallyRendered)
-			.forEach(key => engine.linksThatHaveInitiallyRendered[key] = false);
+		engine.recalculatePortsVisually();
 		this.forceUpdate();
 	}
 

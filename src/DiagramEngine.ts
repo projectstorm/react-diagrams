@@ -29,6 +29,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	canvas: Element;
 	paintableWidgets: {};
 	linksThatHaveInitiallyRendered: {};
+	nodesRendered: boolean;
 	maxNumberPointsPerLink: number;
 
 	constructor() {
@@ -99,6 +100,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return model.isLocked();
 	}
 
+	recalculatePortsVisually(){
+		this.nodesRendered = false;
+		this.linksThatHaveInitiallyRendered = {};
+	}
+
 	canEntityRepaint(baseModel: BaseModel<BaseModelListener>) {
 		//no rules applied, allow repaint
 		if (this.paintableWidgets === null) {
@@ -114,6 +120,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	setDiagramModel(model: DiagramModel) {
 		this.diagramModel = model;
+		this.linksThatHaveInitiallyRendered = {};
 	}
 
 	getDiagramModel(): DiagramModel {
