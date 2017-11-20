@@ -76,6 +76,16 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		window.removeEventListener("mouseMove", this.onMouseMove);
 	}
 
+  componentWillReceiveProps(nextProps: DiagramProps) {
+    if (this.props.diagramEngine !== nextProps.diagramEngine) {
+      this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
+      const diagramEngineListener = nextProps.diagramEngine.addListener({
+        repaintCanvas: () => this.forceUpdate()
+      });
+      this.setState({diagramEngineListener});
+    }
+  }
+
 	componentWillUpdate(nextProps: DiagramProps) {
 		if (this.props.diagramEngine.diagramModel.id !== nextProps.diagramEngine.diagramModel.id) {
 			this.setState({ renderedNodes: false });
@@ -160,6 +170,10 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 		return null;
 	}
+
+  repaintCanvasListener() {
+
+  }
 
 	fireAction() {
 		if (this.state.action && this.props.actionStillFiring) {
