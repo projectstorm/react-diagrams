@@ -171,9 +171,19 @@
   version "4.14.85"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.85.tgz#a16fbf942422f6eca5622b6910492c496c35069b"
 
+"@types/node@*":
+  version "8.0.53"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
+
 "@types/node@^8.0.52":
   version "8.0.52"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.52.tgz#8e7f47747868e7687f2cd4922966e2d6af78d22d"
+
+"@types/puppeteer@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-0.13.0.tgz#a12e791f15ab92f6160e1e8a295fd35dbf9cb90d"
+  dependencies:
+    "@types/node" "*"
 
 "@types/react@^16.0.18", "@types/react@^16.0.20", "@types/react@^16.0.22":
   version "16.0.22"

@@ -28,7 +28,7 @@
 		"lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
 	},
 	"dependencies": {
-		"@types/jest": "^21.1.6",
+		"@types/puppeteer": "^0.13.0",
 		"closest": "^0.0.1",
 		"lodash": "^4.17.4",
 		"react": "^16.1.1"
@@ -38,6 +38,7 @@
 		"@storybook/addon-notes": "^3.2.15",
 		"@storybook/react": "^3.2.15",
 		"@storybook/storybook-deployer": "^2.0.0",
+		"@types/jest": "^21.1.6",
 		"@types/lodash": "^4.14.85",
 		"@types/node": "^8.0.52",
 		"@types/react": "^16.0.22",
