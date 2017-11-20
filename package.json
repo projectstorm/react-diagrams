@@ -1,55 +1,56 @@
 {
-  "name": "storm-react-diagrams",
-  "version": "3.1.4",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/projectstorm/react-diagrams.git"
-  },
-  "keywords": [
-    "web",
-    "diagram",
-    "diagrams",
-    "react",
-    "typescript",
-    "flowchart",
-    "simple",
-    "links",
-    "nodes"
-  ],
-  "main": "./dist/main.js",
-  "typings": "./dist/src/main",
-  "author": "dylanvorster",
-  "scripts": {
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook:build": "build-storybook -c .storybook -o .out",
-    "storybook:github": "storybook-to-ghpages",
-    "prepublishOnly": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.min.css",
-    "lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
-  },
-  "dependencies": {
-    "closest": "^0.0.1",
-    "lodash": "^4.17.4",
-    "react": "^16.1.1"
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^3.2.15",
-    "@storybook/addon-notes": "^3.2.15",
-    "@storybook/react": "^3.2.15",
-    "@storybook/storybook-deployer": "^2.0.0",
-    "@types/lodash": "^4.14.85",
-    "@types/node": "^8.0.52",
-    "@types/react": "^16.0.22",
-    "awesome-typescript-loader": "^3.3.0",
-    "css-loader": "^0.28.7",
-    "dagre": "^0.7.4",
-    "node-sass": "^4.6.1",
-    "prettier": "^1.8.2",
-    "react-dom": "^16.1.1",
-    "sass-loader": "^6.0.6",
-    "source-map-loader": "^0.2.3",
-    "style-loader": "^0.19.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.1",
-    "webpack": "^3.8.1"
-  }
+	"name": "storm-react-diagrams",
+	"version": "3.1.4",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/projectstorm/react-diagrams.git"
+	},
+	"keywords": [
+		"web",
+		"diagram",
+		"diagrams",
+		"react",
+		"typescript",
+		"flowchart",
+		"simple",
+		"links",
+		"nodes"
+	],
+	"main": "./dist/main.js",
+	"typings": "./dist/src/main",
+	"author": "dylanvorster",
+	"scripts": {
+		"test": "echo 'ok!'",
+		"storybook": "start-storybook -p 9001 -c .storybook",
+		"storybook:build": "build-storybook -c .storybook -o .out",
+		"storybook:github": "storybook-to-ghpages",
+		"prepublishOnly": "export NODE_ENV=production && webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass.scss > ./dist/style.min.css",
+		"lintjs": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
+	},
+	"dependencies": {
+		"closest": "^0.0.1",
+		"lodash": "^4.17.4",
+		"react": "^16.1.1"
+	},
+	"devDependencies": {
+		"@storybook/addon-actions": "^3.2.15",
+		"@storybook/addon-notes": "^3.2.15",
+		"@storybook/react": "^3.2.15",
+		"@storybook/storybook-deployer": "^2.0.0",
+		"@types/lodash": "^4.14.85",
+		"@types/node": "^8.0.52",
+		"@types/react": "^16.0.22",
+		"awesome-typescript-loader": "^3.3.0",
+		"css-loader": "^0.28.7",
+		"dagre": "^0.7.4",
+		"node-sass": "^4.6.1",
+		"prettier": "^1.8.2",
+		"react-dom": "^16.1.1",
+		"sass-loader": "^6.0.6",
+		"source-map-loader": "^0.2.3",
+		"style-loader": "^0.19.0",
+		"tslint": "^5.8.0",
+		"typescript": "^2.6.1",
+		"webpack": "^3.8.1"
+	}
 }
