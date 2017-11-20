@@ -1,8 +1,8 @@
 import "jest";
 import * as puppeteer from "puppeteer"
+import 'raf/polyfill';
 
-var browser;
-let index = 0;
+var browser;;
 
 async function itShould(directive, test: (page: puppeteer.Page) => any){
 	it(directive, async () => {
@@ -16,6 +16,7 @@ async function itShould(directive, test: (page: puppeteer.Page) => any){
 beforeAll(async () => {
 	if(process.env.CIRCLECI){
 		console.log("using CircleCI");
+
 		browser = await puppeteer.launch({
 			args: ['--no-sandbox', '--disable-setuid-sandbox']
 		});
