@@ -120,7 +120,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	setDiagramModel(model: DiagramModel) {
 		this.diagramModel = model;
-		this.linksThatHaveInitiallyRendered = {};
+		this.recalculatePortsVisually();
 	}
 
 	getDiagramModel(): DiagramModel {

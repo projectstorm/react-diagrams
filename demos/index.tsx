@@ -11,6 +11,7 @@ import demo6 from "./demo6/index";
 import demo7 from "./demo7/index";
 import demo8 from "./demo8/index";
 import demo9 from "./demo9/index";
+import demo10 from "./demo10/index";
 import demoDagre from "./demo-dagre/index";
 
 require("./test.scss");
@@ -45,4 +46,7 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Events", () => {
 		return demo9();
+	})
+	.add("Programatically move nodes", () => {
+		return demo10();
 	});

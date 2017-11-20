@@ -48,7 +48,6 @@ class Demo8Widget extends React.Component<any, any> {
 		const model = engine.getDiagramModel();
 		let distributedModel = getDistributedModel(engine, model);
 		engine.setDiagramModel(distributedModel);
-		engine.recalculatePortsVisually();
 		this.forceUpdate();
 	}
 
