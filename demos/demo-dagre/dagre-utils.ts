@@ -18,7 +18,6 @@ export function distributeElements(model) {
 }
 
 function distributeGraph(model) {
-	console.log(model);
 	let nodes = mapElements(model);
 	let edges = mapEdges(model);
 	let graph = new dagre.graphlib.Graph();
@@ -28,12 +27,10 @@ function distributeGraph(model) {
 	});
 	//add elements to dagre graph
 	nodes.forEach(node => {
-		console.log(node);
 		graph.setNode(node.id, node.metadata);
 	});
 	edges.forEach(edge => {
 		if (edge.from && edge.to) {
-			console.log(edge.from, edge.to);
 			graph.setEdge(edge.from, edge.to);
 		}
 	});
@@ -48,7 +45,8 @@ function mapElements(model) {
 }
 
 function mapEdges(model) {
-	//returns links which connects nodes
+	// returns links which connects nodes
+	// we check are there both from and to nodes in the model. Sometimes links can be detached
 	return model.links.map(link => ({
 		from: link.source,
 		to: link.target

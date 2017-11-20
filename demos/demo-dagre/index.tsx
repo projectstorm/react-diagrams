@@ -22,6 +22,7 @@ function createNode(name) {
 let count = 0;
 
 function connectNodes(nodeFrom, nodeTo) {
+	//just to get id-like structure
 	count++;
 	const portOut = nodeFrom.addPort(new DefaultPortModel(true, `${nodeFrom.name}-out-${count}`, "Out"));
 	const portTo = nodeTo.addPort(new DefaultPortModel(false, `${nodeFrom.name}-to-${count}`, "IN"));
@@ -39,8 +40,21 @@ class Demo8Widget extends React.Component<any, any> {
 	constructor(props) {
 		super(props);
 		this.state = {};
+		this.autoDistribute = this.autoDistribute.bind(this);
 	}
 
+	autoDistribute() {
+		const {engine} = this.props;
+		const model = engine.getDiagramModel();
+		let distributedModel = getDistributedModel(engine, model);
+		engine.setDiagramModel(distributedModel);
+		// Small hack forcing to re-render whole diagram with links. Quite heavy.
+		// could be also engine.linksThatHaveInitiallyRendered = {};
+		// decided to keep keys there
+		Object.keys(engine.linksThatHaveInitiallyRendered)
+			.forEach(key => engine.linksThatHaveInitiallyRendered[key] = false);
+		this.forceUpdate();
+	}
 
 	render() {
 		const {engine} = this.props;
@@ -48,18 +62,21 @@ class Demo8Widget extends React.Component<any, any> {
 		return (
 			<div>
 				<DiagramWidget diagramEngine={engine}/>
+				<button onClick={this.autoDistribute}>Re-distribute</button>
 			</div>
 		);
 	}
 }
-function getDistributedModel(engine, model){
+
+function getDistributedModel(engine, model) {
 	const serialized = model.serializeDiagram();
 	const distributedSerializedDiagram = distributeElements(serialized);
 	//deserialize the model
-	var model2 = new DiagramModel();
-	model2.deSerializeDiagram(distributedSerializedDiagram, engine);
-	return model2
+	let deSerializedModel = new DiagramModel();
+	deSerializedModel.deSerializeDiagram(distributedSerializedDiagram, engine);
+	return deSerializedModel;
 }
+
 export default () => {
 	//1) setup the diagram engine
 	let engine = new DiagramEngine();
@@ -86,9 +103,11 @@ export default () => {
 	let links = nodesFrom.map((node, index) => {
 		return connectNodes(node, nodesTo[index]);
 	});
+	// more links for more complicated diagram
 	links.push(connectNodes(nodesFrom[0], nodesTo[1]));
 	links.push(connectNodes(nodesTo[0], nodesFrom[1]));
 	links.push(connectNodes(nodesFrom[1], nodesTo[2]));
+	// initial random position
 	nodesFrom.forEach((node, index) => {
 		node.x = index * 70;
 		model.addNode(node);
