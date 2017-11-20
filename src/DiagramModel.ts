@@ -70,6 +70,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.offsetX = object.offsetX;
 		this.offsetY = object.offsetY;
 		this.zoom = object.zoom;
+		this.gridSize = object.gridSize;
 
 		//deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
@@ -106,6 +107,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			offsetX: this.offsetX,
 			offsetY: this.offsetY,
 			zoom: this.zoom,
+			gridSize: this.gridSize,
 			links: _.map(this.links, link => {
 				return link.serialize();
 			}),
