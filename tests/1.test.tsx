@@ -14,9 +14,16 @@ async function itShould(directive, test: (page: puppeteer.Page) => any){
 }
 
 beforeAll(async () => {
-	browser = await puppeteer.launch({
-		headless: false
-	});
+	if(process.env.CIRCLECI){
+		console.log("using CircleCI");
+		browser = await puppeteer.launch({
+			args: ['--no-sandbox', '--disable-setuid-sandbox']
+		});
+	}else{
+		browser = await puppeteer.launch({
+			headless: false
+		});
+	}
 });
 
 afterAll(() => {
