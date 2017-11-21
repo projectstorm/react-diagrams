@@ -45,10 +45,7 @@ export default () => {
 
 	[node1, node2, link1, link2].forEach((item) => {
 		item.addListener({
-			selectionChanged: (node, isSelected) => {
-				action('node')(node);
-				action('isSelected')(isSelected);
-			}
+			selectionChanged: action('selectionChanged')
 		});
 	});
 
