@@ -12,8 +12,7 @@ import * as React from "react";
 
 /**
  *
- * Simple stress test of the system, shows that it can handle many nodes, and
- * retain good performance
+ * Simple stress test of the system plus zoom to fit function
  *
  * @Author Dylan Vorster
  */
