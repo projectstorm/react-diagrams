@@ -238,4 +238,14 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	setMaxNumberPointsPerLink(max: number) {
 		this.maxNumberPointsPerLink = max;
 	}
+
+	zoomToFit() {
+		const xFactor = this.canvas.clientWidth / this.canvas.scrollWidth;
+		const yFactor = this.canvas.clientHeight / this.canvas.scrollHeight;
+		const zoomFactor = xFactor < yFactor ? xFactor: yFactor;
+
+		this.diagramModel.setZoomLevel(this.diagramModel.getZoomLevel() * zoomFactor);
+		this.diagramModel.setOffset(0, 0);
+		this.repaintCanvas();
+	}
 }

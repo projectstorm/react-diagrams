@@ -12,6 +12,7 @@ import demo7 from "./demo7/index";
 import demo8 from "./demo8/index";
 import demo9 from "./demo9/index";
 import demo10 from "./demo10/index";
+import demo11 from "./demo11/index";
 import demoDagre from "./demo-dagre/index";
 import {Toolkit} from "../src/Toolkit";
 
@@ -71,4 +72,7 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Programatically move nodes", () => {
 		return demo10();
+	})
+	.add("Zoom to fit", () => {
+		return demo11();
 	});
