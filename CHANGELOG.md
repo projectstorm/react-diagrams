@@ -1,4 +1,4 @@
-__3.2.0__
+__3.2.0__ http://dylanv.blog/2017/11/22/storm-react-diagrams-3-2-0/
 * [feature] zoom to fit
 * added Circle CI tests
 * [demo] dagre automatic layouts
