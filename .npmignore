@@ -1,7 +1,10 @@
 demos
 images
-docs/
+docs
+.out
 .storybook
+.circleci
+tests
 
 # Created by https://www.gitignore.io/api/net,netbeans,sublimetext,phpstorm,windows,osx,node
 

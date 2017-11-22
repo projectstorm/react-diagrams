@@ -1,3 +1,16 @@
+__3.2.0__
+* [feature] zoom to fit
+* added Circle CI tests
+* [demo] dagre automatic layouts
+* [demo] zoom to fit
+* [demo] selection events
+* [demo] limit number of points
+* [demo] programmatic node updating
+* updated dependencies
+* [bugs] swapping diagram models in engines
+* [bugs] issues with the rendering pipeline #107
+* added ci badge to Readme
+
 __3.1.3__ 
 * Refactor links slightly
 * use min extension for css
