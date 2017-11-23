@@ -1,7 +1,8 @@
-import { DiagramModel } from "./DiagramModel";
+import { DiagramModel } from "./models/DiagramModel";
 import { DiagramEngine } from "./DiagramEngine";
-import { NodeModel, PointModel } from "./Common";
 import { SelectionModel } from "./widgets/DiagramWidget";
+import {PointModel} from "./models/PointModel";
+import {NodeModel} from "./models/NodeModel";
 
 export class BaseAction {
 	mouseX: number;

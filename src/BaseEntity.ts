@@ -1,12 +1,24 @@
 import { Toolkit } from "./Toolkit";
+
+
 /**
  * @author Dylan Vorster
  */
-export class BaseListener {
-	lockChanged?(entity: BaseEntity<BaseListener>, locked: boolean): void;
+export interface BaseEvent<T extends BaseEntity = any> {
+	entity: BaseEntity<BaseListener>;
+	stopPropagation: () => any;
+	firing: boolean;
+	id: string;
 }
 
-export class BaseEntity<T extends BaseListener> {
+
+export interface BaseListener<T extends BaseEntity = any> {
+
+	lockChanged?(event: BaseEvent<T> & {locked: boolean} ): void;
+
+}
+
+export class BaseEntity<T extends BaseListener = {}> {
 	public listeners: { [s: string]: T };
 	public id: string;
 	public locked: boolean;
@@ -35,9 +47,21 @@ export class BaseEntity<T extends BaseListener> {
 		};
 	}
 
-	public iterateListeners(cb: (t: T) => any) {
+	public iterateListeners(cb: (t: T, event: BaseEvent) => any) {
+		let event: BaseEvent = {
+			id: Toolkit.UID(),
+			firing: true,
+			entity: this,
+			stopPropagation: () => {
+				event.firing = false;
+			}
+		};
 		for (var i in this.listeners) {
-			cb(this.listeners[i]);
+			// propagation stopped
+			if(!event.firing){
+				return;
+			}
+			cb(this.listeners[i], event);
 		}
 	}
 
@@ -61,9 +85,9 @@ export class BaseEntity<T extends BaseListener> {
 
 	public setLocked(locked: boolean = true) {
 		this.locked = locked;
-		this.iterateListeners(listener => {
+		this.iterateListeners((listener, event) => {
 			if (listener.lockChanged) {
-				listener.lockChanged(this, locked);
+				listener.lockChanged({...event, locked: locked});
 			}
 		});
 	}

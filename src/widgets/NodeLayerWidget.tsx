@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DiagramModel } from "../DiagramModel";
+import { DiagramModel } from "../models/DiagramModel";
 import { DiagramEngine } from "../DiagramEngine";
 import * as _ from "lodash";
 import { NodeWidget } from "./NodeWidget";

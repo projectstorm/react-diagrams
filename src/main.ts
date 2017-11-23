@@ -15,12 +15,18 @@ export * from "./WidgetFactories";
 export * from "./Toolkit";
 
 export * from "./DiagramEngine";
-export * from "./DiagramModel";
+export * from "./models/DiagramModel";
 export * from "./BaseEntity";
 export * from "./CanvasActions";
-export * from "./Common";
 export * from "./AbstractInstanceFactory";
 export * from "./LinkInstanceFactory";
+
+export * from "./models/BaseModel";
+export * from "./models/DiagramModel";
+export * from "./models/LinkModel";
+export * from "./models/NodeModel";
+export * from "./models/PointModel";
+export * from "./models/PortModel";
 
 export * from "./widgets/DiagramWidget";
 export * from "./widgets/LinkLayerWidget";

@@ -1,3 +1,0 @@
-interface Function {
-	name: string;
-}

@@ -1,11 +1,15 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
 import * as _ from "lodash";
-import { PointModel, NodeModel, BaseModel, BaseModelListener, LinkModel, PortModel } from "../Common";
 import { LinkLayerWidget } from "./LinkLayerWidget";
 import { NodeLayerWidget } from "./NodeLayerWidget";
 import { Toolkit } from "../Toolkit";
 import { BaseAction, MoveCanvasAction, MoveItemsAction, SelectingAction } from "../CanvasActions";
+import {NodeModel} from "../models/NodeModel";
+import {PointModel} from "../models/PointModel";
+import {PortModel} from "../models/PortModel";
+import {LinkModel} from "../models/LinkModel";
+import {BaseModel, BaseModelListener} from "../models/BaseModel";
 
 export interface SelectionModel {
 	model: BaseModel<BaseModelListener>;

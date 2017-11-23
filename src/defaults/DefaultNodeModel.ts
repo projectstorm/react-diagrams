@@ -1,8 +1,8 @@
-import { NodeModel } from "../Common";
 import { DefaultPortModel } from "./DefaultPortModel";
 import * as _ from "lodash";
 
 import { AbstractInstanceFactory } from "../AbstractInstanceFactory";
+import {NodeModel} from "../models/NodeModel";
 
 export class DefaultNodeInstanceFactory extends AbstractInstanceFactory<DefaultNodeModel> {
 	constructor() {

@@ -1,9 +1,13 @@
 import { NodeWidgetFactory, LinkWidgetFactory } from "./WidgetFactories";
-import { LinkModel, NodeModel, BaseModel, BaseModelListener, PortModel, PointModel } from "./Common";
 import { BaseEntity, BaseListener } from "./BaseEntity";
-import { DiagramModel } from "./DiagramModel";
+import { DiagramModel } from "./models/DiagramModel";
 import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
 import * as _ from "lodash";
+import {BaseModel, BaseModelListener} from "./models/BaseModel";
+import {NodeModel} from "./models/NodeModel";
+import {PointModel} from "./models/PointModel";
+import {PortModel} from "./models/PortModel";
+import {LinkModel} from "./models/LinkModel";
 /**
  * @author Dylan Vorster
  */

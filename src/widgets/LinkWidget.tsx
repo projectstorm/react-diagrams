@@ -1,6 +1,6 @@
 import * as React from "react";
-import { LinkModel } from "../Common";
 import { DiagramEngine } from "../DiagramEngine";
+import {LinkModel} from "../models/LinkModel";
 
 export interface LinkProps {
 	link: LinkModel;

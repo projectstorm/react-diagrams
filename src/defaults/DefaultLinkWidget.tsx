@@ -1,7 +1,7 @@
 import * as React from "react";
-import { LinkModel, PointModel } from "../Common";
-import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
+import {LinkModel} from "../models/LinkModel";
+import {PointModel} from "../models/PointModel";
 
 export interface DefaultLinkProps {
 	color?: string;
