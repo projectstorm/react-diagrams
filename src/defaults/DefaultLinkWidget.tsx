@@ -3,11 +3,14 @@ import { LinkModel, PointModel } from "../Common";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 
-export interface DefaultLinkProps {
+export interface CustomizableLinkProps {
 	color?: string;
 	width?: number;
+	smooth?: boolean;	
+}
+
+export interface DefaultLinkProps extends CustomizableLinkProps {
 	link: LinkModel;
-	smooth?: boolean;
 	diagramEngine: DiagramEngine;
 	pointAdded?: (point: PointModel, event) => any;
 }
@@ -81,12 +84,22 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
+	beforeLinkGenerated(props: CustomizableLinkProps): CustomizableLinkProps {
+		return props;
+	}
+
 	generateLink(extraProps: any, id: string | number): JSX.Element {
+		var props = this.beforeLinkGenerated({
+			color: this.props.color,
+			smooth: this.props.smooth,
+			width: this.props.width
+		});
+
 		var Bottom = (
 			<path
 				className={this.state.selected || this.props.link.isSelected() ? "selected" : ""}
-				strokeWidth={this.props.width}
-				stroke={this.props.color}
+				strokeWidth={props.width}
+				stroke={props.color}
 				{...extraProps}
 			/>
 		);
@@ -101,7 +114,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					this.setState({ selected: true });
 				}}
 				data-linkid={this.props.link.getID()}
-				stroke={this.props.color}
+				stroke={props.color}
 				strokeOpacity={this.state.selected ? 0.1 : 0}
 				strokeWidth={20}
 				onContextMenu={() => {

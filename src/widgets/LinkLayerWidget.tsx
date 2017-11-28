@@ -4,6 +4,7 @@ import { DiagramEngine } from "../DiagramEngine";
 import { PointModel } from "../Common";
 import { LinkWidget } from "./LinkWidget";
 import * as _ from "lodash";
+import { LinkModel } from "../main";
 
 export interface LinkLayerProps {
 	diagramEngine: DiagramEngine;
@@ -57,7 +58,7 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 						}
 
 						//generate links
-						var generatedLink = this.props.diagramEngine.generateWidgetForLink(link);
+						var generatedLink = link.generateLinkWidget(this.props.diagramEngine);
 						if (!generatedLink) {
 							console.log("no link generated for type: " + link.getType());
 							return null;
