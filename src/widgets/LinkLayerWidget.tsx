@@ -58,7 +58,7 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 						}
 
 						//generate links
-						var generatedLink = link.generateLinkWidget(this.props.diagramEngine);
+						var generatedLink = this.props.diagramEngine.generateWidgetForLink(link);
 						if (!generatedLink) {
 							console.log("no link generated for type: " + link.getType());
 							return null;
