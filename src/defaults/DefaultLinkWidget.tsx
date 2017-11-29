@@ -3,13 +3,10 @@ import { LinkModel, PointModel } from "../Common";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 
-export interface CustomizableLinkProps {
+export interface DefaultLinkProps {
 	color?: string;
 	width?: number;
 	smooth?: boolean;	
-}
-
-export interface DefaultLinkProps extends CustomizableLinkProps {
 	link: LinkModel;
 	diagramEngine: DiagramEngine;
 	pointAdded?: (point: PointModel, event) => any;
@@ -84,16 +81,8 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
-	beforeLinkGenerated(props: CustomizableLinkProps): CustomizableLinkProps {
-		return props;
-	}
-
 	generateLink(extraProps: any, id: string | number): JSX.Element {
-		var props = this.beforeLinkGenerated({
-			color: this.props.color,
-			smooth: this.props.smooth,
-			width: this.props.width
-		});
+		var props = this.props;
 
 		var Bottom = (
 			<path

@@ -8,18 +8,22 @@ import {
 	DefaultPortModel,
 	DiagramWidget,
 	LinkWidget,
-	LinkProps,
-	DefaultLinkWidget,
-	CustomizableLinkProps
+	LinkProps,	
+	DefaultLinkWidget
 } from "../../src/main";
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
 import { LinkWidgetFactory } from "../../src/WidgetFactories";
 
 export class AdvancedLinkModel extends LinkModel {
+	size: number;
+	color: string;
+
     constructor() {
         super();
-        this.linkType = "advanced";
+		this.linkType = "advanced";
+		this.color = 'green';
+		this.size = 6;
     }
 }
 
@@ -36,29 +40,17 @@ export class AdvancedPortModel extends DefaultPortModel
 	}
 }
 
-export class AdvancedLinkWidget extends DefaultLinkWidget {
-	constructor(props: LinkProps) {
-		super(props);
-	}
-
-	beforeLinkGenerated(props: CustomizableLinkProps): CustomizableLinkProps {
-		return {
-			color: 'green',
-			width: 6,
-			smooth: props.smooth
-		};
-	}
-}
-
 export class AdvancedLinkWidgetFactory extends LinkWidgetFactory {
 	constructor() {
 		super("advanced");
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, link: LinkModel): JSX.Element {
-		return React.createElement(AdvancedLinkWidget, {
-			link: link,
-			diagramEngine: diagramEngine
+	generateReactWidget(diagramEngine: DiagramEngine, link: AdvancedLinkModel): JSX.Element {
+		return React.createElement(DefaultLinkWidget, {
+			color: link.color,
+			width: link.size,
+			link,
+			diagramEngine
 		});
 	}
 }

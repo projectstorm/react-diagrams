@@ -273,10 +273,6 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	getType(): string {
 		return this.linkType;
 	}
-
-	generateLinkWidget(diagramEngine: DiagramEngine): JSX.Element | null {
-		return diagramEngine.generateWidgetForLink(this);
-	}
 }
 
 export class PortModel extends BaseModel<BaseModelListener> {
