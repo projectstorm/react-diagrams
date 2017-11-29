@@ -30,7 +30,9 @@ export class AdvancedPortModel extends DefaultPortModel
     }
 
     createLinkModel(): LinkModel | null {
-        return new AdvancedLinkModel();
+		var link = new AdvancedLinkModel();		
+		link.setSourcePort(this);
+		return link;
 	}
 }
 
@@ -42,7 +44,7 @@ export class AdvancedLinkWidget extends DefaultLinkWidget {
 	beforeLinkGenerated(props: CustomizableLinkProps): CustomizableLinkProps {
 		return {
 			color: 'green',
-			width: 4,
+			width: 6,
 			smooth: props.smooth
 		};
 	}
@@ -74,54 +76,47 @@ export default () => {
 	engine.registerLinkFactory(new DefaultLinkFactory());
 
 	var node1 = new DefaultNodeModel("Source", "rgb(0,192,255)");
-	var port1 = node1.addPort(new AdvancedPortModel(false, "out-1", "Out solid"));
-	var port2 = node1.addPort(new AdvancedPortModel(false, "out-2", "Out dashed"));
-	var port3 = node1.addPort(new DefaultPortModel(false, "out-3", "Out default"));
+	var port1 = node1.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
+	var port2 = node1.addPort(new DefaultPortModel(false, "out-2", "Out default"));
 	node1.x = 100;
 	node1.y = 100;
 
 	var node2 = new DefaultNodeModel("Target", "rgb(192,255,0)");
-	var port4 = node2.addPort(new AdvancedPortModel(true, "in-1", "In solid"));
-	var port5 = node2.addPort(new AdvancedPortModel(true, "in-2", "In dashed"));
-	var port6 = node2.addPort(new DefaultPortModel(true, "in-3", "In default"));
+	var port3 = node2.addPort(new AdvancedPortModel(true, "in-1", "In thick"));
+	var port4 = node2.addPort(new DefaultPortModel(true, "in-2", "In default"));
 	node2.x = 300;
 	node2.y = 100;
 
-	[node1, node2].forEach((item) => {
-		item.addListener({
-			selectionChanged: action('selectionChanged')
-		});
-	});
+	var node3 = new DefaultNodeModel("Source", "rgb(0,192,255)");
+	var port5 = node3.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
+	var port6 = node3.addPort(new DefaultPortModel(false, "out-2", "Out default"));
+	node3.x = 100;
+	node3.y = 200;
 
-	/*function generateNodes(model: DiagramModel, offsetX: number, offsetY: number) {
-		//3-A) create a default node
-		
-		
-
-		//3-B) create another default node
-		
-
-		//3-C) link the 2 nodes together
-		var link1 = new LinkModel();
-		link1.setSourcePort(port1);
-		link1.setTargetPort(port2);
-
-		//4) add the models to the root graph
-		model.addNode(node1);
-		model.addNode(node2);
-		model.addLink(link1);
-	}*/
-
-	//2) setup the diagram model
+	var node4 = new DefaultNodeModel("Target", "rgb(192,255,0)");
+	var port7 = node4.addPort(new AdvancedPortModel(true, "in-1", "In thick"));
+	var port8 = node4.addPort(new DefaultPortModel(true, "in-2", "In default"));
+	node4.x = 300;
+	node4.y = 200;
 	var model = new DiagramModel();
 
 	model.addNode(node1);
 	model.addNode(node2); 
+	model.addNode(node3); 
+	model.addNode(node4); 
 
-	//5) load model into engine
+	var link1 = node1.getOutPorts()[0].createLinkModel();
+	link1.setTargetPort(port3);
+	model.addLink(link1);
+
+	var link2 = node1.getOutPorts()[1].createLinkModel();
+	link2.setTargetPort(port4);
+	model.addLink(link2);
+
+	// load model into engine
 	engine.setDiagramModel(model);
 
-	//6) render the diagram!
+	// render the diagram!
 	return (
 		<div>
 			<DiagramWidget diagramEngine={engine} />

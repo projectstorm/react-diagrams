@@ -415,8 +415,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						if (!this.props.diagramEngine.isModelLocked(model.model)) {
 							var relative = diagramEngine.getRelativeMousePoint(event);
 							var sourcePort = model.model;
-							var link = sourcePort.createLinkModel() || new LinkModel();
-							link.setSourcePort(sourcePort);
+							var link = sourcePort.createLinkModel();
 
 							link.getFirstPoint().updateLocation(relative);
 							link.getLastPoint().updateLocation(relative);
