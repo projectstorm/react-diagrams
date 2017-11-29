@@ -414,8 +414,8 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						//its a port element, we want to drag a link
 						if (!this.props.diagramEngine.isModelLocked(model.model)) {
 							var relative = diagramEngine.getRelativeMousePoint(event);
-							var link = new LinkModel();
-							link.setSourcePort(model.model);
+							var sourcePort = model.model;
+							var link = sourcePort.createLinkModel();
 
 							link.getFirstPoint().updateLocation(relative);
 							link.getLastPoint().updateLocation(relative);

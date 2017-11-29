@@ -1,6 +1,7 @@
 import { BaseEntity, BaseListener } from "./BaseEntity";
 import * as _ from "lodash";
 import { port } from "_debugger";
+import { DiagramEngine } from "./DiagramEngine";
 
 export interface BaseModelListener extends BaseListener {
 	selectionChanged?(item: BaseModel<BaseModelListener>, isSelected: boolean): void;
@@ -74,8 +75,8 @@ export class PointModel extends BaseModel<BaseModelListener> {
 		this.x = points.x;
 		this.y = points.y;
 		this.link = link;
-	}
-
+	}	
+	
 	getSelectedEntities() {
 		if (super.isSelected() && !this.isConnectedToPort()) {
 			return [this];
@@ -323,6 +324,12 @@ export class PortModel extends BaseModel<BaseModelListener> {
 
 	getLinks(): { [id: string]: LinkModel } {
 		return this.links;
+	}
+
+	createLinkModel(): LinkModel | null {
+		var linkModel = new LinkModel();
+		linkModel.setSourcePort(this);
+		return linkModel;
 	}
 }
 

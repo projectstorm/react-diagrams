@@ -6,8 +6,8 @@ import { DiagramEngine } from "../DiagramEngine";
 export interface DefaultLinkProps {
 	color?: string;
 	width?: number;
+	smooth?: boolean;	
 	link: LinkModel;
-	smooth?: boolean;
 	diagramEngine: DiagramEngine;
 	pointAdded?: (point: PointModel, event) => any;
 }
@@ -82,11 +82,13 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	}
 
 	generateLink(extraProps: any, id: string | number): JSX.Element {
+		var props = this.props;
+
 		var Bottom = (
 			<path
 				className={this.state.selected || this.props.link.isSelected() ? "selected" : ""}
-				strokeWidth={this.props.width}
-				stroke={this.props.color}
+				strokeWidth={props.width}
+				stroke={props.color}
 				{...extraProps}
 			/>
 		);
@@ -101,7 +103,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					this.setState({ selected: true });
 				}}
 				data-linkid={this.props.link.getID()}
-				stroke={this.props.color}
+				stroke={props.color}
 				strokeOpacity={this.state.selected ? 0.1 : 0}
 				strokeWidth={20}
 				onContextMenu={() => {
