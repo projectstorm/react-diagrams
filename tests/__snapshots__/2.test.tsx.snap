@@ -1401,6 +1401,325 @@ exports[`Storyshots React Diagrams Limiting number of points 1`] = `
 </div>
 `;
 
+exports[`Storyshots React Diagrams Link types 1`] = `
+<div>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-1577"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Source
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out thick
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1577"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out default
+                </div>
+                <div
+                  className="port"
+                  data-name="out-2"
+                  data-nodeid="test-uid-1577"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1580"
+        style={
+          Object {
+            "left": 300,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Target
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1580"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In thick
+                </div>
+              </div>
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-2"
+                  data-nodeid="test-uid-1580"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In default
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1583"
+        style={
+          Object {
+            "left": 100,
+            "top": 200,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Source
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out thick
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1583"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out default
+                </div>
+                <div
+                  className="port"
+                  data-name="out-2"
+                  data-nodeid="test-uid-1583"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1586"
+        style={
+          Object {
+            "left": 300,
+            "top": 200,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Target
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1586"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In thick
+                </div>
+              </div>
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-2"
+                  data-nodeid="test-uid-1586"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In default
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots React Diagrams Locked Widget 1`] = `
 <div
   className="storm-diagrams-canvas"

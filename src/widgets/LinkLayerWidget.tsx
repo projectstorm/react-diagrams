@@ -1,15 +1,17 @@
 import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
-import { LinkWidget } from "./LinkWidget";
+import {DiagramEngine} from "../DiagramEngine";
+import {LinkWidget} from "./LinkWidget";
 import * as _ from "lodash";
 import {PointModel} from "../models/PointModel";
+
 
 export interface LinkLayerProps {
 	diagramEngine: DiagramEngine;
 	pointAdded: (point: PointModel, event) => any;
 }
 
-export interface LinkLayerState {}
+export interface LinkLayerState {
+}
 
 /**
  * @author Dylan Vorster
@@ -26,32 +28,34 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 			<svg
 				style={{
 					transform:
-						"translate(" +
-						diagramModel.getOffsetX() +
-						"px," +
-						diagramModel.getOffsetY() +
-						"px) scale(" +
-						diagramModel.getZoomLevel() / 100.0 +
-						")",
+					"translate(" +
+					diagramModel.getOffsetX() +
+					"px," +
+					diagramModel.getOffsetY() +
+					"px) scale(" +
+					diagramModel.getZoomLevel() / 100.0 +
+					")",
 					width: "100%",
 					height: "100%"
 				}}
 			>
 				{//only perform these actions when we have a diagram
-				this.props.diagramEngine.canvas &&
+					this.props.diagramEngine.canvas &&
 					_.map(diagramModel.getLinks(), link => {
 						if (this.props.diagramEngine.nodesRendered && !this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]) {
 							if (link.sourcePort !== null) {
 								try {
 									link.points[0].updateLocation(this.props.diagramEngine.getPortCenter(link.sourcePort));
 									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
-								} catch (ex) {}
+								} catch (ex) {
+								}
 							}
 							if (link.targetPort !== null) {
 								try {
 									_.last(link.points).updateLocation(this.props.diagramEngine.getPortCenter(link.targetPort));
 									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
-								} catch (ex) {}
+								} catch (ex) {
+								}
 							}
 						}
 

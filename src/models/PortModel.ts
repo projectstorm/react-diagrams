@@ -53,4 +53,10 @@ export class PortModel extends BaseModel<BaseModelListener> {
 	getLinks(): { [id: string]: LinkModel } {
 		return this.links;
 	}
+
+	createLinkModel(): LinkModel | null {
+		var linkModel = new LinkModel();
+		linkModel.setSourcePort(this);
+		return linkModel;
+	}
 }

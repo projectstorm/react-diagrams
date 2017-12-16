@@ -1,6 +1,7 @@
 import * as React from "react";
 import {storiesOf} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
+import {Toolkit} from "../src/Toolkit";
 
 import demo1 from "./demo1/index";
 import demo2 from "./demo2/index";
@@ -13,31 +14,15 @@ import demo8 from "./demo8/index";
 import demo9 from "./demo9/index";
 import demo10 from "./demo10/index";
 import demo11 from "./demo11/index";
+import demo12 from "./demo12/index";
 import demoDagre from "./demo-dagre/index";
-import {Toolkit} from "../src/Toolkit";
-
-//make tests deterministic
-Toolkit.TESTING_MODE = true;
+import {Helper} from "./Helper";
 
 require("./test.scss");
 
-//!--------- USE THIS FOR FIGURING OUT THE MOUSE POSITIONS -------
 
-// let element = window.parent.document.createElement('mouse-position');
-// element.style.position = 'absolute';
-// element.style.top = '0px';
-// element.style.left = '0px';
-// element.style.bottom = '0px';
-// element.style.right = '0px';
-// element.style.zIndex = '10';
-// window.parent.document.body.appendChild(element);
-//
-// window.parent.window.addEventListener('mousemove', (event) => {
-// 	console.clear();
-// 	console.log(event.clientX, event.clientY);
-// });
-
-//!---------------------------------------------------
+// make tests deterministic
+Toolkit.TESTING_MODE = true;
 
 storiesOf("React Diagrams", module)
 	.add("Simple Example", () => {
@@ -75,4 +60,10 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Zoom to fit", () => {
 		return demo11();
+	})
+	.add("Link types", () => {
+		return demo12();
 	});
+
+// enable this to log mouse location when writing new puppeteer tests
+//Helper.logMousePosition()
