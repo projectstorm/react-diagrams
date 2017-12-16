@@ -24,16 +24,16 @@ class NodeDelayedPosition extends React.Component<any, any> {
 	}
 
 	updatePosition() {
-		const {engine} = this.props;
+		const { engine } = this.props;
 		let model = engine.getDiagramModel();
 		const nodes = model.getNodes();
-        let node = nodes[Object.keys(nodes)[0]];
-        node.setPosition(node.x + 30, node.y + 30);
+		let node = nodes[Object.keys(nodes)[0]];
+		node.setPosition(node.x + 30, node.y + 30);
 		this.forceUpdate();
 	}
 
 	updatePositionViaSerialize() {
-		let {engine} = this.props;
+		let { engine } = this.props;
 		let model = engine.getDiagramModel();
 		let str = JSON.stringify(model.serializeDiagram());
 		let model2 = new DiagramModel();
@@ -42,15 +42,15 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		node.x += 30;
 		node.y += 30;
 		model2.deSerializeDiagram(obj, engine);
-        engine.setDiagramModel(model2);
+		engine.setDiagramModel(model2);
 		this.forceUpdate();
 	}
 
 	render() {
-		const {engine} = this.props;
+		const { engine } = this.props;
 		return (
 			<div>
-				<DiagramWidget diagramEngine={engine}/>
+				<DiagramWidget diagramEngine={engine} />
 				<button onClick={this.updatePosition}>Update position</button>
 				<button onClick={this.updatePositionViaSerialize}>Update position via serialize</button>
 			</div>
@@ -98,5 +98,5 @@ export default () => {
 	engine.registerInstanceFactory(new LinkInstanceFactory());
 
 	//6) render the diagram!
-	return <NodeDelayedPosition engine={engine} model={model}/>;
+	return <NodeDelayedPosition engine={engine} model={model} />;
 };

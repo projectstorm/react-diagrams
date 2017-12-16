@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
-import {NodeModel} from "../models/NodeModel";
+import { NodeModel } from "../models/NodeModel";
 
 export interface NodeProps {
 	node: NodeModel;

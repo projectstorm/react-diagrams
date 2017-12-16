@@ -1,6 +1,6 @@
 import { DiagramEngine } from "./DiagramEngine";
-import {NodeModel} from "./models/NodeModel";
-import {LinkModel} from "./models/LinkModel";
+import { NodeModel } from "./models/NodeModel";
+import { LinkModel } from "./models/LinkModel";
 /**
  * @author Dylan Vorster
  */

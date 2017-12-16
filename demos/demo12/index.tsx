@@ -8,7 +8,7 @@ import {
 	DefaultPortModel,
 	DiagramWidget,
 	LinkWidget,
-	LinkProps,	
+	LinkProps,
 	DefaultLinkWidget
 } from "../../src/main";
 import { action } from "@storybook/addon-actions";
@@ -19,22 +19,21 @@ export class AdvancedLinkModel extends LinkModel {
 	size: number;
 	color: string;
 
-    constructor() {
-        super();
+	constructor() {
+		super();
 		this.linkType = "advanced";
-		this.color = 'green';
+		this.color = "green";
 		this.size = 6;
-    }
+	}
 }
 
-export class AdvancedPortModel extends DefaultPortModel
-{
-    constructor(isInput: boolean, name: string, label: string = null, id?: string) {
-        super(isInput, name, label, id);
-    }
+export class AdvancedPortModel extends DefaultPortModel {
+	constructor(isInput: boolean, name: string, label: string = null, id?: string) {
+		super(isInput, name, label, id);
+	}
 
-    createLinkModel(): LinkModel | null {
-		var link = new AdvancedLinkModel();		
+	createLinkModel(): LinkModel | null {
+		var link = new AdvancedLinkModel();
 		link.setSourcePort(this);
 		return link;
 	}
@@ -93,9 +92,9 @@ export default () => {
 	var model = new DiagramModel();
 
 	model.addNode(node1);
-	model.addNode(node2); 
-	model.addNode(node3); 
-	model.addNode(node4); 
+	model.addNode(node2);
+	model.addNode(node3);
+	model.addNode(node4);
 
 	var link1 = node1.getOutPorts()[0].createLinkModel();
 	link1.setTargetPort(port3);

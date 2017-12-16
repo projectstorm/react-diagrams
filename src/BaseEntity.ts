@@ -1,6 +1,5 @@
 import { Toolkit } from "./Toolkit";
 
-
 /**
  * @author Dylan Vorster
  */
@@ -11,11 +10,8 @@ export interface BaseEvent<T extends BaseEntity = any> {
 	id: string;
 }
 
-
 export interface BaseListener<T extends BaseEntity = any> {
-
-	lockChanged?(event: BaseEvent<T> & {locked: boolean} ): void;
-
+	lockChanged?(event: BaseEvent<T> & { locked: boolean }): void;
 }
 
 export class BaseEntity<T extends BaseListener = {}> {
@@ -58,7 +54,7 @@ export class BaseEntity<T extends BaseListener = {}> {
 		};
 		for (var i in this.listeners) {
 			// propagation stopped
-			if(!event.firing){
+			if (!event.firing) {
 				return;
 			}
 			cb(this.listeners[i], event);
@@ -87,7 +83,7 @@ export class BaseEntity<T extends BaseListener = {}> {
 		this.locked = locked;
 		this.iterateListeners((listener, event) => {
 			if (listener.lockChanged) {
-				listener.lockChanged({...event, locked: locked});
+				listener.lockChanged({ ...event, locked: locked });
 			}
 		});
 	}

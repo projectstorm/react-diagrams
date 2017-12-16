@@ -19,7 +19,7 @@ export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerSt
 		this.state = {};
 	}
 
-	componentDidUpdate(){
+	componentDidUpdate() {
 		this.props.diagramEngine.nodesRendered = true;
 	}
 

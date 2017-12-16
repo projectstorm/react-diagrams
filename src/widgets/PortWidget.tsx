@@ -1,5 +1,5 @@
 import * as React from "react";
-import {NodeModel} from "../models/NodeModel";
+import { NodeModel } from "../models/NodeModel";
 
 export interface PortProps {
 	name: string;

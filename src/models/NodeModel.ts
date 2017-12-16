@@ -1,5 +1,5 @@
-import {BaseModel, BaseModelListener} from "./BaseModel";
-import {PortModel} from "./PortModel";
+import { BaseModel, BaseModelListener } from "./BaseModel";
+import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 
 export class NodeModel extends BaseModel<BaseModelListener> {
@@ -18,17 +18,17 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		this.ports = {};
 	}
 
-	setPosition(x, y){
+	setPosition(x, y) {
 		//store position
 		let oldX = this.x;
 		let oldY = this.y;
 
-		for(let port in this.ports){
-			_.forEach(this.ports[port].getLinks(), (link) => {
+		for (let port in this.ports) {
+			_.forEach(this.ports[port].getLinks(), link => {
 				let point = link.getPointForPort(this.ports[port]);
 				point.x = point.x + x - oldX;
 				point.y = point.y + y - oldY;
-			})
+			});
 		}
 
 		this.x = x;

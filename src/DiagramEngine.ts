@@ -3,11 +3,11 @@ import { BaseEntity, BaseListener } from "./BaseEntity";
 import { DiagramModel } from "./models/DiagramModel";
 import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
 import * as _ from "lodash";
-import {BaseModel, BaseModelListener} from "./models/BaseModel";
-import {NodeModel} from "./models/NodeModel";
-import {PointModel} from "./models/PointModel";
-import {PortModel} from "./models/PortModel";
-import {LinkModel} from "./models/LinkModel";
+import { BaseModel, BaseModelListener } from "./models/BaseModel";
+import { NodeModel } from "./models/NodeModel";
+import { PointModel } from "./models/PointModel";
+import { PortModel } from "./models/PortModel";
+import { LinkModel } from "./models/LinkModel";
 /**
  * @author Dylan Vorster
  */
@@ -48,7 +48,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	}
 
 	repaintCanvas() {
-		this.iterateListeners((listener) => {
+		this.iterateListeners(listener => {
 			listener.repaintCanvas && listener.repaintCanvas();
 		});
 	}
@@ -59,11 +59,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	enableRepaintEntities(entities: BaseModel<BaseModelListener>[]) {
 		this.paintableWidgets = {};
-		entities.forEach((entity) => {
+		entities.forEach(entity => {
 			//if a node is requested to repaint, add all of its links
 			if (entity instanceof NodeModel) {
-				_.forEach(entity.getPorts(), (port) => {
-					_.forEach(port.getLinks(), (link) => {
+				_.forEach(entity.getPorts(), port => {
+					_.forEach(port.getLinks(), link => {
 						this.paintableWidgets[link.getID()] = true;
 					});
 				});
@@ -104,7 +104,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return model.isLocked();
 	}
 
-	recalculatePortsVisually(){
+	recalculatePortsVisually() {
 		this.nodesRendered = false;
 		this.linksThatHaveInitiallyRendered = {};
 	}
@@ -149,15 +149,19 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	registerNodeFactory(factory: NodeWidgetFactory) {
 		this.nodeFactories[factory.getType()] = factory;
-		this.iterateListeners((listener) => {
-			if (listener.nodeFactoriesUpdated) { listener.nodeFactoriesUpdated(); }
+		this.iterateListeners(listener => {
+			if (listener.nodeFactoriesUpdated) {
+				listener.nodeFactoriesUpdated();
+			}
 		});
 	}
 
 	registerLinkFactory(factory: LinkWidgetFactory) {
 		this.linkFactories[factory.getType()] = factory;
-		this.iterateListeners((listener) => {
-			if (listener.linkFactoriesUpdated) { listener.linkFactoriesUpdated(); }
+		this.iterateListeners(listener => {
+			if (listener.linkFactoriesUpdated) {
+				listener.linkFactoriesUpdated();
+			}
 		});
 	}
 
@@ -211,11 +215,13 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 			'.port[data-name="' + port.getName() + '"][data-nodeid="' + port.getParent().getID() + '"]'
 		);
 		if (selector === null) {
-			throw new Error("Cannot find Node Port element with nodeID: [" +
-				port.getParent().getID() +
-				"] and name: [" +
-				port.getName() +
-				"]");
+			throw new Error(
+				"Cannot find Node Port element with nodeID: [" +
+					port.getParent().getID() +
+					"] and name: [" +
+					port.getName() +
+					"]"
+			);
 		}
 		return selector;
 	}
@@ -246,7 +252,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	zoomToFit() {
 		const xFactor = this.canvas.clientWidth / this.canvas.scrollWidth;
 		const yFactor = this.canvas.clientHeight / this.canvas.scrollHeight;
-		const zoomFactor = xFactor < yFactor ? xFactor: yFactor;
+		const zoomFactor = xFactor < yFactor ? xFactor : yFactor;
 
 		this.diagramModel.setZoomLevel(this.diagramModel.getZoomLevel() * zoomFactor);
 		this.diagramModel.setOffset(0, 0);

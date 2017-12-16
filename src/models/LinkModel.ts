@@ -1,14 +1,13 @@
-import {BaseModel, BaseModelListener} from "./BaseModel";
-import {PortModel} from "./PortModel";
-import {PointModel} from "./PointModel";
+import { BaseModel, BaseModelListener } from "./BaseModel";
+import { PortModel } from "./PortModel";
+import { PointModel } from "./PointModel";
 import * as _ from "lodash";
-import {BaseEvent} from "../BaseEntity";
+import { BaseEvent } from "../BaseEntity";
 
 export interface LinkModelListener extends BaseModelListener {
+	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
 
-	sourcePortChanged?(event: BaseEvent<LinkModel> & {port: null | PortModel}): void;
-
-	targetPortChanged?(event: BaseEvent<LinkModel> & {port: null | PortModel}): void;
+	targetPortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
 }
 
 export class LinkModel extends BaseModel<LinkModelListener> {
@@ -112,7 +111,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		port.addLink(this);
 		this.sourcePort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
-			listener.sourcePortChanged && listener.sourcePortChanged({...event, port: port});
+			listener.sourcePortChanged && listener.sourcePortChanged({ ...event, port: port });
 		});
 	}
 
@@ -128,7 +127,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		port.addLink(this);
 		this.targetPort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
-			listener.targetPortChanged && listener.targetPortChanged({...event, port: port});
+			listener.targetPortChanged && listener.targetPortChanged({ ...event, port: port });
 		});
 	}
 

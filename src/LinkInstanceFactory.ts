@@ -1,5 +1,5 @@
 import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
-import {LinkModel} from "./models/LinkModel";
+import { LinkModel } from "./models/LinkModel";
 /**
  * @author Dylan Vorster
  */

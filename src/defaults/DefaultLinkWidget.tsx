@@ -1,12 +1,12 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
-import {LinkModel} from "../models/LinkModel";
-import {PointModel} from "../models/PointModel";
+import { LinkModel } from "../models/LinkModel";
+import { PointModel } from "../models/PointModel";
 
 export interface DefaultLinkProps {
 	color?: string;
 	width?: number;
-	smooth?: boolean;	
+	smooth?: boolean;
 	link: LinkModel;
 	diagramEngine: DiagramEngine;
 	pointAdded?: (point: PointModel, event) => any;
@@ -48,7 +48,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			this.props.link.addPoint(point, index);
 			this.props.pointAdded(point, event);
 		}
-	}
+	};
 
 	generatePoint(pointIndex: number): JSX.Element {
 		let x = this.props.link.points[pointIndex].x;
@@ -165,7 +165,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			paths.push(
 				this.generateLink(
 					{
-						onMouseDown: (event) => {
+						onMouseDown: event => {
 							this.addPointToLink(event, 1);
 						},
 						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
@@ -197,10 +197,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					{
 						"data-linkid": this.props.link.id,
 						"data-point": index,
-						"onMouseDown": (event: MouseEvent) => {
+						onMouseDown: (event: MouseEvent) => {
 							this.addPointToLink(event, index + 1);
 						},
-						"d": data
+						d: data
 					},
 					index
 				);

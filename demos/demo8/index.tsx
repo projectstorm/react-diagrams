@@ -36,7 +36,7 @@ export default () => {
 
 	var props = {
 		diagramEngine: engine,
-		maxNumberPointsPerLink: 5,
+		maxNumberPointsPerLink: 5
 	} as SRD.DiagramProps;
 
 	return (

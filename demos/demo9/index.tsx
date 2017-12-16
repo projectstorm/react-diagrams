@@ -43,9 +43,9 @@ export default () => {
 	model.addLink(link1);
 	model.addLink(link2);
 
-	[node1, node2, link1, link2].forEach((item) => {
+	[node1, node2, link1, link2].forEach(item => {
 		item.addListener({
-			selectionChanged: action('selectionChanged')
+			selectionChanged: action("selectionChanged")
 		});
 	});
 
@@ -53,7 +53,7 @@ export default () => {
 
 	var props = {
 		diagramEngine: engine,
-		maxNumberPointsPerLink: 0, // no extra points so link selection is fired straight away
+		maxNumberPointsPerLink: 0 // no extra points so link selection is fired straight away
 	} as SRD.DiagramProps;
 
 	return (

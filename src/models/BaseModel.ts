@@ -1,10 +1,9 @@
 import { BaseEntity, BaseListener } from "../BaseEntity";
 import * as _ from "lodash";
-import {BaseEvent} from "../BaseEntity";
+import { BaseEvent } from "../BaseEntity";
 
 export interface BaseModelListener extends BaseListener {
-
-	selectionChanged?(event: BaseEvent<BaseModel> & {isSelected: boolean}): void;
+	selectionChanged?(event: BaseEvent<BaseModel> & { isSelected: boolean }): void;
 
 	entityRemoved?(event: BaseEvent<BaseModel>): void;
 }
@@ -13,7 +12,6 @@ export interface BaseModelListener extends BaseListener {
  * @author Dylan Vorster
  */
 export class BaseModel<T extends BaseModelListener = BaseModelListener> extends BaseEntity<BaseModelListener> {
-
 	selected: boolean;
 	class: string;
 
@@ -54,7 +52,7 @@ export class BaseModel<T extends BaseModelListener = BaseModelListener> extends 
 		this.selected = selected;
 		this.iterateListeners((listener, event) => {
 			if (listener.selectionChanged) {
-				listener.selectionChanged({...event, isSelected: selected});
+				listener.selectionChanged({ ...event, isSelected: selected });
 			}
 		});
 	}

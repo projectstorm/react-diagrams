@@ -1,27 +1,24 @@
-import {BaseListener, BaseEntity, BaseEvent} from "../BaseEntity";
+import { BaseListener, BaseEntity, BaseEvent } from "../BaseEntity";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
-import {LinkModel} from "./LinkModel";
-import {NodeModel} from "./NodeModel";
-import {PortModel} from "./PortModel";
-import {BaseModel, BaseModelListener} from "./BaseModel";
+import { LinkModel } from "./LinkModel";
+import { NodeModel } from "./NodeModel";
+import { PortModel } from "./PortModel";
+import { BaseModel, BaseModelListener } from "./BaseModel";
 /**
  * @author Dylan Vorster
  *
  */
 export interface DiagramListener extends BaseListener {
+	nodesUpdated?(event: BaseEvent & { node: NodeModel; isCreated: boolean }): void;
 
-	nodesUpdated?(event: BaseEvent & { node: NodeModel, isCreated: boolean }): void;
+	linksUpdated?(event: BaseEvent & { link: LinkModel; isCreated: boolean }): void;
 
-	linksUpdated?(event: BaseEvent & { link: LinkModel, isCreated: boolean }): void;
-
-	offsetUpdated?(event: BaseEvent<DiagramModel> & { offsetX: number, offsetY: number}): void;
+	offsetUpdated?(event: BaseEvent<DiagramModel> & { offsetX: number; offsetY: number }): void;
 
 	zoomUpdated?(event: BaseEvent<DiagramModel> & { zoom: number }): void;
 
 	gridUpdated?(event: BaseEvent<DiagramModel> & { size: number }): void;
-
-
 }
 /**
  *
@@ -54,7 +51,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	setGridSize(size: number = 0) {
 		this.gridSize = size;
 		this.iterateListeners((listener, event) => {
-			listener.gridUpdated && listener.gridUpdated({...event, size: size});
+			listener.gridUpdated && listener.gridUpdated({ ...event, size: size });
 		});
 	}
 
@@ -160,7 +157,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.zoom = zoom;
 
 		this.iterateListeners((listener, event) => {
-			listener.zoomUpdated && listener.zoomUpdated({...event, zoom: zoom});
+			listener.zoomUpdated && listener.zoomUpdated({ ...event, zoom: zoom });
 		});
 	}
 
@@ -168,21 +165,22 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
 		this.iterateListeners((listener, event) => {
-			listener.offsetUpdated && listener.offsetUpdated({...event, offsetX: offsetX, offsetY: offsetY});
+			listener.offsetUpdated && listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: offsetY });
 		});
 	}
 
 	setOffsetX(offsetX: number) {
 		this.offsetX = offsetX;
 		this.iterateListeners((listener, event) => {
-			listener.offsetUpdated && listener.offsetUpdated({...event, offsetX: offsetX, offsetY: this.offsetY});
+			listener.offsetUpdated && listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: this.offsetY });
 		});
 	}
 	setOffsetY(offsetY: number) {
 		this.offsetY = offsetY;
 
 		this.iterateListeners((listener, event) => {
-			listener.offsetUpdated && listener.offsetUpdated({...event, offsetX: this.offsetX, offsetY: this.offsetY});
+			listener.offsetUpdated &&
+				listener.offsetUpdated({ ...event, offsetX: this.offsetX, offsetY: this.offsetY });
 		});
 	}
 
@@ -226,7 +224,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 		this.links[link.getID()] = link;
 		this.iterateListeners((listener, event) => {
-			listener.linksUpdated && listener.linksUpdated({...event,link: link, isCreated: true});
+			listener.linksUpdated && listener.linksUpdated({ ...event, link: link, isCreated: true });
 		});
 		return link;
 	}
@@ -239,7 +237,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 		this.nodes[node.getID()] = node;
 		this.iterateListeners((listener, event) => {
-			listener.nodesUpdated && listener.nodesUpdated({...event,node: node, isCreated: true});
+			listener.nodesUpdated && listener.nodesUpdated({ ...event, node: node, isCreated: true });
 		});
 		return node;
 	}
@@ -248,7 +246,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		link = this.getLink(link);
 		delete this.links[link.getID()];
 		this.iterateListeners((listener, event) => {
-			listener.linksUpdated && listener.linksUpdated({...event, link: link as LinkModel, isCreated: false});
+			listener.linksUpdated && listener.linksUpdated({ ...event, link: link as LinkModel, isCreated: false });
 		});
 	}
 
@@ -256,7 +254,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		node = this.getNode(node);
 		delete this.nodes[node.getID()];
 		this.iterateListeners((listener, event) => {
-			listener.nodesUpdated && listener.nodesUpdated({...event, node: node as NodeModel, isCreated: false});
+			listener.nodesUpdated && listener.nodesUpdated({ ...event, node: node as NodeModel, isCreated: false });
 		});
 	}
 

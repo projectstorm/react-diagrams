@@ -2,7 +2,7 @@ import { LinkWidgetFactory } from "../WidgetFactories";
 import * as React from "react";
 import { DefaultLinkWidget } from "./DefaultLinkWidget";
 import { DiagramEngine } from "../DiagramEngine";
-import {LinkModel} from "../models/LinkModel";
+import { LinkModel } from "../models/LinkModel";
 /**
  * @author Dylan Vorster
  */

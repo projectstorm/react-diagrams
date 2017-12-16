@@ -1,7 +1,7 @@
 import * as React from "react";
-import {storiesOf} from "@storybook/react";
-import {action} from "@storybook/addon-actions";
-import {Toolkit} from "../src/Toolkit";
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { Toolkit } from "../src/Toolkit";
 
 import demo1 from "./demo1/index";
 import demo2 from "./demo2/index";
@@ -16,10 +16,9 @@ import demo10 from "./demo10/index";
 import demo11 from "./demo11/index";
 import demo12 from "./demo12/index";
 import demoDagre from "./demo-dagre/index";
-import {Helper} from "./Helper";
+import { Helper } from "./Helper";
 
 require("./test.scss");
-
 
 // make tests deterministic
 Toolkit.TESTING_MODE = true;
@@ -48,7 +47,7 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Auto distribute", () => {
 		return demoDagre();
-  	})
+	})
 	.add("Limiting number of points", () => {
 		return demo8();
 	})

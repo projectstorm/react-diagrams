@@ -1,5 +1,5 @@
-import {BaseModel, BaseModelListener} from "./BaseModel";
-import {LinkModel} from "./LinkModel";
+import { BaseModel, BaseModelListener } from "./BaseModel";
+import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
 
 export class PointModel extends BaseModel<BaseModelListener> {

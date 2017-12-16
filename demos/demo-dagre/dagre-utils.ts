@@ -1,5 +1,5 @@
-import * as dagre from 'dagre';
-import * as _ from 'lodash';
+import * as dagre from "dagre";
+import * as _ from "lodash";
 
 const size = {
 	width: 60,
@@ -22,7 +22,7 @@ function distributeGraph(model) {
 	let edges = mapEdges(model);
 	let graph = new dagre.graphlib.Graph();
 	graph.setGraph({});
-	graph.setDefaultEdgeLabel(function () {
+	graph.setDefaultEdgeLabel(function() {
 		return {};
 	});
 	//add elements to dagre graph
@@ -41,15 +41,18 @@ function distributeGraph(model) {
 
 function mapElements(model) {
 	// dagre compatible format
-	return model.nodes.map(node => ({id: node.id, metadata: {...size, id: node.id}}));
+	return model.nodes.map(node => ({ id: node.id, metadata: { ...size, id: node.id } }));
 }
 
 function mapEdges(model) {
 	// returns links which connects nodes
 	// we check are there both from and to nodes in the model. Sometimes links can be detached
-	return model.links.map(link => ({
-		from: link.source,
-		to: link.target
-	}))
-		.filter(item => model.nodes.find(node => node.id === item.from) && model.nodes.find(node => node.id === item.to));
+	return model.links
+		.map(link => ({
+			from: link.source,
+			to: link.target
+		}))
+		.filter(
+			item => model.nodes.find(node => node.id === item.from) && model.nodes.find(node => node.id === item.to)
+		);
 }

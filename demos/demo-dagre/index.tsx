@@ -11,9 +11,8 @@ import {
 	DefaultPortInstanceFactory,
 	LinkInstanceFactory
 } from "../../src/main";
-import {distributeElements} from './dagre-utils';
+import { distributeElements } from "./dagre-utils";
 import * as React from "react";
-
 
 function createNode(name) {
 	return new DefaultNodeModel(name, "rgb(0,192,255)");
@@ -36,7 +35,6 @@ function connectNodes(nodeFrom, nodeTo) {
  * Tests auto distribution
  */
 class Demo8Widget extends React.Component<any, any> {
-
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -44,7 +42,7 @@ class Demo8Widget extends React.Component<any, any> {
 	}
 
 	autoDistribute() {
-		const {engine} = this.props;
+		const { engine } = this.props;
 		const model = engine.getDiagramModel();
 		let distributedModel = getDistributedModel(engine, model);
 		engine.setDiagramModel(distributedModel);
@@ -52,11 +50,11 @@ class Demo8Widget extends React.Component<any, any> {
 	}
 
 	render() {
-		const {engine} = this.props;
+		const { engine } = this.props;
 
 		return (
 			<div>
-				<DiagramWidget diagramEngine={engine}/>
+				<DiagramWidget diagramEngine={engine} />
 				<button onClick={this.autoDistribute}>Re-distribute</button>
 			</div>
 		);
@@ -78,7 +76,6 @@ export default () => {
 	engine.registerNodeFactory(new DefaultNodeFactory());
 	engine.registerLinkFactory(new DefaultLinkFactory());
 
-
 	//2) setup the diagram model
 	let model = new DiagramModel();
 
@@ -87,13 +84,13 @@ export default () => {
 	let nodesFrom = [];
 	let nodesTo = [];
 
-	nodesFrom.push(createNode('from-1'));
-	nodesFrom.push(createNode('from-2'));
-	nodesFrom.push(createNode('from-3'));
+	nodesFrom.push(createNode("from-1"));
+	nodesFrom.push(createNode("from-2"));
+	nodesFrom.push(createNode("from-3"));
 
-	nodesTo.push(createNode('to-1'));
-	nodesTo.push(createNode('to-2'));
-	nodesTo.push(createNode('to-3'));
+	nodesTo.push(createNode("to-1"));
+	nodesTo.push(createNode("to-2"));
+	nodesTo.push(createNode("to-3"));
 	//4) link nodes together
 	let links = nodesFrom.map((node, index) => {
 		return connectNodes(node, nodesTo[index]);
@@ -112,7 +109,7 @@ export default () => {
 		node.y = 100;
 		model.addNode(node);
 	});
-	links.forEach((link) => {
+	links.forEach(link => {
 		model.addLink(link);
 	});
 	//5) load model into engine
@@ -123,5 +120,5 @@ export default () => {
 	let model2 = getDistributedModel(engine, model);
 	engine.setDiagramModel(model2);
 
-	return <Demo8Widget engine={engine}/>
+	return <Demo8Widget engine={engine} />;
 };
