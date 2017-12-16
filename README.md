@@ -27,28 +27,22 @@ A no-nonsense diagramming library written entirely in React with the help of Lod
 * Fast and optimized to handle large diagrams with hundreds of nodes/links
 * Super easy to use, and should work as you expect it to
 
-## Roadmap
 
-* Move path logic associated with links into a base link class so we can easily extend links
-* Add more fault tolerance
+## Developer Usage
 
-## How to install
+`npm install storm-react-diagrams` or `yarn add storm-react-diagrams`
 
-```
-npm install storm-react-diagrams
-```
-or
-```
-yarn add storm-react-diagrams
-```
+### How to run demos
 
-## How to build
+After running `yarn install` you must then run:  `yarn run storybook`
+
+### How to build
 
 Simply run ```webpack``` in the root directory (or ```export NODE_ENV=production && webpack``` if you want a production build) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file. __It will also compile the code for the demos__ .We use webpack for this because TSC cannot compile a single UMD file (TSC can currently only output multiple UMD files).
 
 _NOTE:_ We turn off name mangeling in production builds because we require class names to be left intact when serializing.
 
-## Make your own nodes
+### Make your own nodes
 
 To see how to create your own nodes like the one below, take a look at __demo3__:
 
@@ -75,7 +69,7 @@ a link can be connected to it.
 
 [Questions](docs/Questions.md)
 
-##  Usage
+## User Usage
 
 __Delete__ removes any selected items
 ![__Delete__](./images/rjdDelete.gif)
