@@ -1429,7 +1429,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
     >
       <div
         className="node"
-        data-nodeid="test-uid-1577"
+        data-nodeid="test-uid-2358"
         style={
           Object {
             "left": 100,
@@ -1474,7 +1474,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1577"
+                  data-nodeid="test-uid-2358"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1490,7 +1490,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="out-2"
-                  data-nodeid="test-uid-1577"
+                  data-nodeid="test-uid-2358"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1501,7 +1501,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1580"
+        data-nodeid="test-uid-2361"
         style={
           Object {
             "left": 300,
@@ -1538,7 +1538,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1580"
+                  data-nodeid="test-uid-2361"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1554,7 +1554,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="in-2"
-                  data-nodeid="test-uid-1580"
+                  data-nodeid="test-uid-2361"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1573,7 +1573,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1583"
+        data-nodeid="test-uid-2364"
         style={
           Object {
             "left": 100,
@@ -1618,7 +1618,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1583"
+                  data-nodeid="test-uid-2364"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1634,7 +1634,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="out-2"
-                  data-nodeid="test-uid-1583"
+                  data-nodeid="test-uid-2364"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1645,7 +1645,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1586"
+        data-nodeid="test-uid-2367"
         style={
           Object {
             "left": 300,
@@ -1682,7 +1682,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1586"
+                  data-nodeid="test-uid-2367"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1698,7 +1698,7 @@ exports[`Storyshots React Diagrams Link types 1`] = `
                 <div
                   className="port"
                   data-name="in-2"
-                  data-nodeid="test-uid-1586"
+                  data-nodeid="test-uid-2367"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
