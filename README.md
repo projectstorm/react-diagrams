@@ -61,10 +61,6 @@ Therefore, to create custom nodes and links, register your own factories that re
 As long as a node contains at least one port and the corresponding NodeWidget contains at least one PortWidget,
 a link can be connected to it.
 
-## Events
-
-[Event System](docs/Events.md)
-
 ## Questions
 
 [Questions](docs/Questions.md)
