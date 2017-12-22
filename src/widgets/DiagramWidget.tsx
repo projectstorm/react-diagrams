@@ -240,7 +240,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			let amountX = event.clientX - this.state.action.mouseX;
 			let amountY = event.clientY - this.state.action.mouseY;
 			let amountZoom = diagramModel.getZoomLevel() / 100;
-
+			
 			_.forEach(this.state.action.selectionModels, model => {
 				// in this case we need to also work out the relative grid position
 				if (
@@ -257,7 +257,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				}
 			});
 			this.fireAction();
-			this.forceUpdate();
+			if(!this.state.wasMoved){
+				this.setState({...this.state,wasMoved:true});
+			} else {
+				this.forceUpdate();
+			}
 		} else if (this.state.action instanceof MoveCanvasAction) {
 			//translate the actual canvas
 			if (this.props.allowCanvasTranslation) {
