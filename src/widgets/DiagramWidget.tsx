@@ -240,7 +240,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			let amountX = event.clientX - this.state.action.mouseX;
 			let amountY = event.clientY - this.state.action.mouseY;
 			let amountZoom = diagramModel.getZoomLevel() / 100;
-			
+
 			_.forEach(this.state.action.selectionModels, model => {
 				// in this case we need to also work out the relative grid position
 				if (
@@ -299,12 +299,44 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				if (!(model.model instanceof PointModel)) {
 					return;
 				}
-
 				if (element && element.model instanceof PortModel && !diagramEngine.isModelLocked(element.model)) {
 					linkConnected = true;
 					let link = model.model.getLink();
+					//if this was a valid link already and we are adding a node in the middle, create 2 links from one
+					if(link.getTargetPort() !== undefined) 
+					{
+						var newLink = link.clone();
+						newLink.setSourcePort(element.model);
+						newLink.setTargetPort(link.getTargetPort());
+						var prePoints = []
+						var postPoints = []
+						var found = false
+						_.forEach(link.getPoints(), point => {
+							if(point.id === model.model.id)
+							{
+								found = true;
+								prePoints.push(point);
+								postPoints.push(point);
+							} else {
+								if(found) 
+								{
+									prePoints.push(point);
+								} else {
+									postPoints.push(point);
+								}
+							}
+						})
+						link.setPoints(prePoints);
+						newLink.setPoints(postPoints);
+						diagramEngine.getDiagramModel().addLink(newLink)
+					}
 					link.setTargetPort(element.model);
 					delete this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()];
+				}
+				//if we moved a NodeModel and allowLooseLinks is false, we know that any links involved were valid
+				if ((!this.props.allowLooseLinks && element.model instanceof NodeModel) || !this.state.wasMoved)
+				{
+					linkConnected=true;
 				}
 			});
 

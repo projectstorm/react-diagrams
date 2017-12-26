@@ -1,5 +1,5 @@
 import { Toolkit } from "./Toolkit";
-
+import * as _ from "lodash";
 /**
  * @author Dylan Vorster
  */
@@ -27,6 +27,16 @@ export class BaseEntity<T extends BaseListener = {}> {
 
 	getID() {
 		return this.id;
+	}
+
+	clone() {
+		var clone=_.clone(this);
+		clone.id = Toolkit.UID();
+		clone.clearListeners();
+		this.iterateListeners(l => {
+			clone.addListener(_.clone(l));
+		})
+		return clone;
 	}
 
 	clearListeners() {
