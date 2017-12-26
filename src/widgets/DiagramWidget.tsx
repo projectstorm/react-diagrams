@@ -258,7 +258,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			});
 			this.fireAction();
 			if(!this.state.wasMoved){
-				this.setState({...this.state,wasMoved:true});
+				this.setState({wasMoved:true});
 			} else {
 				this.forceUpdate();
 			}
