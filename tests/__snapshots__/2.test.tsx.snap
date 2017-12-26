@@ -470,6 +470,154 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
 </div>
 `;
 
+exports[`Storyshots React Diagrams Clone selected 1`] = `
+<div>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-2399"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-2399"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-2401"
+        style={
+          Object {
+            "left": 400,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-2401"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    Clone Selected
+  </button>
+</div>
+`;
+
 exports[`Storyshots React Diagrams Custom Diamond Widget 1`] = `
 <div
   className="storm-diagrams-canvas"

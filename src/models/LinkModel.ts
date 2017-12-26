@@ -51,6 +51,19 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		});
 	}
 
+	clone(lookupTable) {
+		if(((lookupTable||{})[this.class]||{}).hasOwnProperty(this.id)) return lookupTable[this.class][this.id];
+		let clone = super.clone(lookupTable);
+		clone.setPoints(_.map(clone.getPoints(),(point:PointModel) => {
+			let newPoint = point.clone(lookupTable);
+			newPoint.link = clone;
+			return newPoint;
+		}));
+		if(this.sourcePort) clone.setSourcePort(this.sourcePort.clone(lookupTable));
+		if(this.targetPort) clone.setTargetPort(this.targetPort.clone(lookupTable));
+		return clone
+	}
+
 	remove() {
 		if (this.sourcePort) {
 			this.sourcePort.removeLink(this);
@@ -141,6 +154,15 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 
 	removePoint(pointModel: PointModel) {
 		this.points.splice(this.getPointIndex(pointModel), 1);
+	}
+
+	removePointsBefore(pointModel: PointModel) {
+		this.points.splice(0,this.getPointIndex(pointModel))
+	}
+
+	removePointsAfter(pointModel: PointModel) {
+
+		this.points.splice(this.getPointIndex(pointModel)+1)
 	}
 
 	addPoint(pointModel: PointModel, index = 1) {

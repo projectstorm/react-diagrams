@@ -40,6 +40,16 @@ export class BaseModel<T extends BaseModelListener = BaseModelListener> extends 
 		});
 	}
 
+	public clone(lookupTable) {
+		if(((lookupTable||{})[this.class]||{}).hasOwnProperty(this.id)) return lookupTable[this.class][this.id];
+
+		console.log('clone',this.class,this.getID())
+		let clone = super.clone(lookupTable);
+		if(!lookupTable[this.class]) lookupTable[this.class] = {};
+		lookupTable[this.class][this.id] = clone;
+		return clone;
+	}
+
 	public getID(): string {
 		return this.id;
 	}

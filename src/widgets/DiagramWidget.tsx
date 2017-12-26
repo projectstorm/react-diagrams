@@ -302,35 +302,29 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				if (element && element.model instanceof PortModel && !diagramEngine.isModelLocked(element.model)) {
 					linkConnected = true;
 					let link = model.model.getLink();
-					//if this was a valid link already and we are adding a node in the middle, create 2 links from one
-					if(link.getTargetPort() !== undefined) 
+					if(link.getTargetPort() !== null) 
 					{
-						var newLink = link.clone();
-						newLink.setSourcePort(element.model);
-						newLink.setTargetPort(link.getTargetPort());
-						var prePoints = []
-						var postPoints = []
-						var found = false
-						_.forEach(link.getPoints(), point => {
-							if(point.id === model.model.id)
-							{
-								found = true;
-								prePoints.push(point);
-								postPoints.push(point);
-							} else {
-								if(found) 
-								{
-									prePoints.push(point);
-								} else {
-									postPoints.push(point);
-								}
-							}
-						})
-						link.setPoints(prePoints);
-						newLink.setPoints(postPoints);
-						diagramEngine.getDiagramModel().addLink(newLink)
+						//if this was a valid link already and we are adding a node in the middle, create 2 links from the original
+						if(link.getTargetPort() !== element.model && link.getSourcePort() !== element.model)
+						{
+							const targetPort = link.getTargetPort();
+							let newLink = link.clone({});
+							newLink.setSourcePort(element.model);
+							newLink.setTargetPort(targetPort);
+							link.setTargetPort(element.model);
+							targetPort.removeLink(link);
+							newLink.removePointsBefore(newLink.getPoints()[link.getPointIndex(model.model)]);
+							link.removePointsAfter(model.model);
+							diagramEngine.getDiagramModel().addLink(newLink)
+						//if we are connecting to the same target or source, remove tweener points
+						} else if(link.getTargetPort() === element.model) {
+							link.removePointsAfter(model.model);
+						} else if(link.getSourcePort() === element.model){
+							link.removePointsBefore(model.model);
+						}
+					} else {
+						link.setTargetPort(element.model);
 					}
-					link.setTargetPort(element.model);
 					delete this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()];
 				}
 				//if we moved a NodeModel and allowLooseLinks is false, we know that any links involved were valid
@@ -360,7 +354,6 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction();
 		}
-
 		this.state.document.removeEventListener("mousemove", this.onMouseMove);
 		this.state.document.removeEventListener("mouseup", this.onMouseUp);
 	}

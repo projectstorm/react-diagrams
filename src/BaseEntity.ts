@@ -29,13 +29,10 @@ export class BaseEntity<T extends BaseListener = {}> {
 		return this.id;
 	}
 
-	clone() {
-		var clone=_.clone(this);
-		clone.id = Toolkit.UID();
+	clone(lookupTable) {
+		let clone = _.clone(this);
 		clone.clearListeners();
-		this.iterateListeners(l => {
-			clone.addListener(_.clone(l));
-		})
+		clone.id = Toolkit.UID();
 		return clone;
 	}
 

@@ -23,6 +23,15 @@ export class PortModel extends BaseModel<BaseModelListener> {
 		});
 	}
 
+	clone(lookupTable) {
+		if(((lookupTable||{})[this.class]||{}).hasOwnProperty(this.id)) return lookupTable[this.class][this.id];
+		let clone = super.clone(lookupTable);
+		//we are merely a referenced object. The links/nodes should be in charge of handling our connections
+		clone.links = {};  
+		clone.parentNode = null;
+		return clone
+	}
+
 	constructor(name: string, id?: string) {
 		super(id);
 		this.name = name;
