@@ -70,14 +70,16 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		});
 	}
 
-	clone(lookupTable) {
-		if(((lookupTable||{})[this.class]||{}).hasOwnProperty(this.id)) return lookupTable[this.class][this.id];
+	clone(lookupTable = {}) {
+		if (this.getClone(lookupTable)) {
+			return this.getClone(lookupTable);
+		}
 		let clone = super.clone(lookupTable);
-		clone.ports = {}
-		_.values(this.ports).map(port => {
+		clone.ports = {};
+		_.values(this.ports).map((port) => {
 			clone.addPort(port.clone(lookupTable));
-		})
-		return clone
+		});
+		return clone;
 	}
 
 	remove() {

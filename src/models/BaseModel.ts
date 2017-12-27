@@ -40,12 +40,20 @@ export class BaseModel<T extends BaseModelListener = BaseModelListener> extends 
 		});
 	}
 
-	public clone(lookupTable) {
-		if(((lookupTable||{})[this.class]||{}).hasOwnProperty(this.id)) return lookupTable[this.class][this.id];
+	public clone(lookupTable = {}) {
+		if (this.getClone(lookupTable)) {
+			return this.getClone(lookupTable);
+		}
 		let clone = super.clone(lookupTable);
-		if(!lookupTable[this.class]) lookupTable[this.class] = {};
+		if (!lookupTable[this.class]) {
+			lookupTable[this.class] = {};
+		}
 		lookupTable[this.class][this.id] = clone;
 		return clone;
+	}
+
+	public getClone(lookupTable = {}) {
+		return (lookupTable[this.class] || {})[this.id];
 	}
 
 	public getID(): string {

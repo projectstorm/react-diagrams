@@ -15,55 +15,47 @@ import {
 import * as React from "react";
 
 /**
- * Tests the grid size
+ * Tests cloning
  */
-class NodeDelayedPosition extends React.Component<any, any> {
+class CloneSelected extends React.Component<any, any> {
 	constructor(props) {
 		super(props);
-		this.cloneSelected = this.cloneSelected.bind(this)
+		this.cloneSelected = this.cloneSelected.bind(this);
 	}
-
-	updatePosition() {
-		const { engine } = this.props;
-		let model = engine.getDiagramModel();
-		const nodes = model.getNodes();
-		let node = nodes[Object.keys(nodes)[0]];
-		node.setPosition(node.x + 30, node.y + 30);
-		this.forceUpdate();
-	}
-
 	cloneSelected() {
 		const {engine} = this.props;
-		const offset = {x:100,y:100};
+		const offset = {x: 100, y: 100};
 		const model = engine.getDiagramModel();
 		const originalItems = model.getSelectedItems();
-		const selectedItems = originalItems.reduce((res,i) => {
-			if(i instanceof NodeModel) res.nodes.push(i);
-			else if(i instanceof LinkModel) res.links.push(i);
+		const selectedItems = originalItems.reduce((res, i) => {
+			if (i instanceof NodeModel) {
+				res.nodes.push(i);
+			} else if (i instanceof LinkModel) {
+				res.links.push(i);
+			}
 			return res;
-		},{nodes:[],links:[]});
+		}, {nodes: [], links: []});
 		let lookupTable = {};
-		selectedItems.nodes.forEach(i => {
+		selectedItems.nodes.forEach( (i) => {
 
 				let node = i.clone(lookupTable);
 				model.addNode(node);
-				node.setPosition(node.x+offset.x,node.y+offset.y)
+				node.setPosition(node.x + offset.x, node.y + offset.y);
 		});
-		selectedItems.links.forEach(i => {
+		selectedItems.links.forEach( (i) => {
 				let link = i.clone(lookupTable);
-				link.getPoints().forEach(p => p.updateLocation({x:p.getX()+offset.x,y:p.getY()+offset.y}));
+				link.getPoints().forEach((p) => p.updateLocation({x: p.getX() + offset.x, y: p.getY() + offset.y}));
 				model.addLink(link);
 		});
-		originalItems.forEach(i => i.selected = false);
+		originalItems.forEach((i) => i.selected = false);
 		this.forceUpdate();
 	}
-
 
 	render() {
 		const { engine } = this.props;
 		return (
 			<div>
-				<DiagramWidget diagramEngine={engine} allowLooseLinks={false} />
+				<DiagramWidget diagramEngine={engine} />
 				<button onClick={this.cloneSelected}>Clone Selected</button>
 			</div>
 		);
@@ -110,5 +102,5 @@ export default () => {
 	engine.registerInstanceFactory(new LinkInstanceFactory());
 
 	//6) render the diagram!
-	return <NodeDelayedPosition engine={engine} model={model} />;
+	return <CloneSelected engine={engine} model={model} />;
 };

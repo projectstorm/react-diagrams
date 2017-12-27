@@ -51,17 +51,23 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		});
 	}
 
-	clone(lookupTable) {
-		if(((lookupTable||{})[this.class]||{}).hasOwnProperty(this.id)) return lookupTable[this.class][this.id];
+	clone(lookupTable = {}) {
+		if (this.getClone(lookupTable)) {
+			return this.getClone(lookupTable);
+		}
 		let clone = super.clone(lookupTable);
-		clone.setPoints(_.map(clone.getPoints(),(point:PointModel) => {
+		clone.setPoints(_.map(clone.getPoints(), (point: PointModel) => {
 			let newPoint = point.clone(lookupTable);
 			newPoint.link = clone;
 			return newPoint;
 		}));
-		if(this.sourcePort) clone.setSourcePort(this.sourcePort.clone(lookupTable));
-		if(this.targetPort) clone.setTargetPort(this.targetPort.clone(lookupTable));
-		return clone
+		if (this.sourcePort) {
+			clone.setSourcePort(this.sourcePort.clone(lookupTable));
+		}
+		if (this.targetPort) {
+			clone.setTargetPort(this.targetPort.clone(lookupTable));
+		}
+		return clone;
 	}
 
 	remove() {
@@ -157,12 +163,12 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	}
 
 	removePointsBefore(pointModel: PointModel) {
-		this.points.splice(0,this.getPointIndex(pointModel))
+		this.points.splice(0, this.getPointIndex(pointModel));
 	}
 
 	removePointsAfter(pointModel: PointModel) {
 
-		this.points.splice(this.getPointIndex(pointModel)+1)
+		this.points.splice(this.getPointIndex(pointModel) + 1);
 	}
 
 	addPoint(pointModel: PointModel, index = 1) {
