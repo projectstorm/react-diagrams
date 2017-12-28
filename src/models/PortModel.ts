@@ -1,6 +1,6 @@
-import { BaseModel, BaseModelListener } from "./BaseModel";
-import { NodeModel } from "./NodeModel";
-import { LinkModel } from "./LinkModel";
+import {BaseModel, BaseModelListener} from "./BaseModel";
+import {NodeModel} from "./NodeModel";
+import {LinkModel} from "./LinkModel";
 import * as _ from "lodash";
 
 export class PortModel extends BaseModel<BaseModelListener> {
@@ -23,15 +23,9 @@ export class PortModel extends BaseModel<BaseModelListener> {
 		});
 	}
 
-	clone(lookupTable = {}) {
-		if (this.getClone(lookupTable)) {
-			return this.getClone(lookupTable);
-		}
-		let clone = super.clone(lookupTable);
-		//we are merely a referenced object. The links/nodes should be in charge of handling our connections
+	doClone(lookupTable = {}, clone) {
 		clone.links = {};
-		clone.parentNode = null;
-		return clone;
+		clone.parentNode = this.parentNode.clone(lookupTable);
 	}
 
 	constructor(name: string, id?: string) {

@@ -12,7 +12,9 @@ import {
 	DefaultPortInstanceFactory,
 	LinkInstanceFactory
 } from "../../src/main";
+import * as _ from "lodash";
 import * as React from "react";
+import {BaseModel} from "../../dist/src/Common";
 
 /**
  * Tests cloning
@@ -22,40 +24,41 @@ class CloneSelected extends React.Component<any, any> {
 		super(props);
 		this.cloneSelected = this.cloneSelected.bind(this);
 	}
-	cloneSelected() {
-		const {engine} = this.props;
-		const offset = {x: 100, y: 100};
-		const model = engine.getDiagramModel();
-		const originalItems = model.getSelectedItems();
-		const selectedItems = originalItems.reduce((res, i) => {
-			if (i instanceof NodeModel) {
-				res.nodes.push(i);
-			} else if (i instanceof LinkModel) {
-				res.links.push(i);
-			}
-			return res;
-		}, {nodes: [], links: []});
-		let lookupTable = {};
-		selectedItems.nodes.forEach( (i) => {
 
-				let node = i.clone(lookupTable);
-				model.addNode(node);
-				node.setPosition(node.x + offset.x, node.y + offset.y);
+	cloneSelected() {
+		let {engine} = this.props;
+		let offset = {x: 100, y: 100};
+		let model = engine.getDiagramModel();
+		let originalItems = model.getSelectedItems('link', 'node');
+
+		let itemMap = {};
+		_.forEach(model.getSelectedItems(), (item: BaseModel<any>) => {
+			let newItem = item.clone(itemMap);
+
+			// offset the nodes slightly
+			if (newItem instanceof NodeModel) {
+				newItem.setPosition(newItem.x + offset.x, newItem.y + offset.y);
+				model.addNode(newItem);
+			}
+
+			// offset the link points
+			else if (newItem instanceof LinkModel) {
+				newItem.getPoints().forEach((p) => {
+					p.updateLocation({ x: p.getX() + offset.x, y: p.getY() + offset.y })
+				});
+				model.addLink(newItem);
+			}
+			newItem.selected = false;
 		});
-		selectedItems.links.forEach( (i) => {
-				let link = i.clone(lookupTable);
-				link.getPoints().forEach((p) => p.updateLocation({x: p.getX() + offset.x, y: p.getY() + offset.y}));
-				model.addLink(link);
-		});
-		originalItems.forEach((i) => i.selected = false);
+
 		this.forceUpdate();
 	}
 
 	render() {
-		const { engine } = this.props;
+		const {engine} = this.props;
 		return (
 			<div>
-				<DiagramWidget diagramEngine={engine} />
+				<DiagramWidget diagramEngine={engine}/>
 				<button onClick={this.cloneSelected}>Clone Selected</button>
 			</div>
 		);
@@ -102,5 +105,5 @@ export default () => {
 	engine.registerInstanceFactory(new LinkInstanceFactory());
 
 	//6) render the diagram!
-	return <CloneSelected engine={engine} model={model} />;
+	return <CloneSelected engine={engine} model={model}/>;
 };
