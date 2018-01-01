@@ -70,10 +70,10 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		});
 	}
 
-	doClone(lookupTable = {}, clone){
+	doClone(lookupTable = {}, clone) {
 		// also clone the ports
 		clone.ports = {};
-		_.values(this.ports).forEach((port) => {
+		_.values(this.ports).forEach(port => {
 			clone.addPort(port.clone(lookupTable));
 		});
 	}

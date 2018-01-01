@@ -51,10 +51,12 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		});
 	}
 
-	doClone(lookupTable = {}, clone){
-		clone.setPoints(_.map(this.getPoints(), (point: PointModel) => {
-			return point.clone(lookupTable);
-		}));
+	doClone(lookupTable = {}, clone) {
+		clone.setPoints(
+			_.map(this.getPoints(), (point: PointModel) => {
+				return point.clone(lookupTable);
+			})
+		);
 		if (this.sourcePort) {
 			clone.setSourcePort(this.sourcePort.clone(lookupTable));
 		}
@@ -148,7 +150,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	}
 
 	setPoints(points: PointModel[]) {
-		_.forEach(points, (point) => {
+		_.forEach(points, point => {
 			point.link = this;
 		});
 		this.points = points;

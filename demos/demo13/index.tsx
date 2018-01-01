@@ -14,7 +14,7 @@ import {
 } from "../../src/main";
 import * as _ from "lodash";
 import * as React from "react";
-import {BaseModel} from "../../dist/src/Common";
+import { BaseModel } from "../../dist/src/Common";
 
 /**
  * Tests cloning
@@ -26,10 +26,10 @@ class CloneSelected extends React.Component<any, any> {
 	}
 
 	cloneSelected() {
-		let {engine} = this.props;
-		let offset = {x: 100, y: 100};
+		let { engine } = this.props;
+		let offset = { x: 100, y: 100 };
 		let model = engine.getDiagramModel();
-		let originalItems = model.getSelectedItems('link', 'node');
+		let originalItems = model.getSelectedItems("link", "node");
 
 		let itemMap = {};
 		_.forEach(model.getSelectedItems(), (item: BaseModel<any>) => {
@@ -39,12 +39,10 @@ class CloneSelected extends React.Component<any, any> {
 			if (newItem instanceof NodeModel) {
 				newItem.setPosition(newItem.x + offset.x, newItem.y + offset.y);
 				model.addNode(newItem);
-			}
-
-			// offset the link points
-			else if (newItem instanceof LinkModel) {
-				newItem.getPoints().forEach((p) => {
-					p.updateLocation({ x: p.getX() + offset.x, y: p.getY() + offset.y })
+			} else if (newItem instanceof LinkModel) {
+				// offset the link points
+				newItem.getPoints().forEach(p => {
+					p.updateLocation({ x: p.getX() + offset.x, y: p.getY() + offset.y });
 				});
 				model.addLink(newItem);
 			}
@@ -55,10 +53,10 @@ class CloneSelected extends React.Component<any, any> {
 	}
 
 	render() {
-		const {engine} = this.props;
+		const { engine } = this.props;
 		return (
 			<div>
-				<DiagramWidget diagramEngine={engine}/>
+				<DiagramWidget diagramEngine={engine} />
 				<button onClick={this.cloneSelected}>Clone Selected</button>
 			</div>
 		);
@@ -105,5 +103,5 @@ export default () => {
 	engine.registerInstanceFactory(new LinkInstanceFactory());
 
 	//6) render the diagram!
-	return <CloneSelected engine={engine} model={model}/>;
+	return <CloneSelected engine={engine} model={model} />;
 };

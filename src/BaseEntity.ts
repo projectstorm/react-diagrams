@@ -14,7 +14,7 @@ export interface BaseListener<T extends BaseEntity = any> {
 	lockChanged?(event: BaseEvent<T> & { locked: boolean }): void;
 }
 
-export type BaseEntityType = 'node'|'link'|'port'|'point';
+export type BaseEntityType = "node" | "link" | "port" | "point";
 
 export class BaseEntity<T extends BaseListener = {}> {
 	public listeners: { [s: string]: T };
@@ -31,12 +31,11 @@ export class BaseEntity<T extends BaseListener = {}> {
 		return this.id;
 	}
 
-	doClone(lookupTable = {}, clone){
-	}
+	doClone(lookupTable = {}, clone) {}
 
 	clone(lookupTable = {}) {
 		// try and use an existing clone first
-		if(lookupTable[this.id]){
+		if (lookupTable[this.id]) {
 			return lookupTable[this.id];
 		}
 		let clone = _.clone(this);
