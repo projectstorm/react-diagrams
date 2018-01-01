@@ -1,5 +1,5 @@
 import { Toolkit } from "./Toolkit";
-
+import * as _ from "lodash";
 /**
  * @author Dylan Vorster
  */
@@ -14,6 +14,8 @@ export interface BaseListener<T extends BaseEntity = any> {
 	lockChanged?(event: BaseEvent<T> & { locked: boolean }): void;
 }
 
+export type BaseEntityType = "node" | "link" | "port" | "point";
+
 export class BaseEntity<T extends BaseListener = {}> {
 	public listeners: { [s: string]: T };
 	public id: string;
@@ -27,6 +29,22 @@ export class BaseEntity<T extends BaseListener = {}> {
 
 	getID() {
 		return this.id;
+	}
+
+	doClone(lookupTable = {}, clone) {}
+
+	clone(lookupTable = {}) {
+		// try and use an existing clone first
+		if (lookupTable[this.id]) {
+			return lookupTable[this.id];
+		}
+		let clone = _.clone(this);
+		clone.id = Toolkit.UID();
+		clone.clearListeners();
+		lookupTable[this.id] = clone;
+
+		this.doClone(lookupTable, clone);
+		return clone;
 	}
 
 	clearListeners() {

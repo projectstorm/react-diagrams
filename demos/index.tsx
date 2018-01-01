@@ -15,6 +15,7 @@ import demo9 from "./demo9/index";
 import demo10 from "./demo10/index";
 import demo11 from "./demo11/index";
 import demo12 from "./demo12/index";
+import demo13 from "./demo13/index";
 import demoDagre from "./demo-dagre/index";
 import { Helper } from "./Helper";
 
@@ -62,6 +63,9 @@ storiesOf("React Diagrams", module)
 	})
 	.add("Link types", () => {
 		return demo12();
+	})
+	.add("Clone selected", () => {
+		return demo13();
 	});
 
 // enable this to log mouse location when writing new puppeteer tests

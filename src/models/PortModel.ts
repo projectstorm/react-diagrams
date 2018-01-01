@@ -23,6 +23,11 @@ export class PortModel extends BaseModel<BaseModelListener> {
 		});
 	}
 
+	doClone(lookupTable = {}, clone) {
+		clone.links = {};
+		clone.parentNode = this.parentNode.clone(lookupTable);
+	}
+
 	constructor(name: string, id?: string) {
 		super(id);
 		this.name = name;

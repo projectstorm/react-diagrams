@@ -1,10 +1,11 @@
-import { BaseListener, BaseEntity, BaseEvent } from "../BaseEntity";
+import { BaseListener, BaseEntity, BaseEvent, BaseEntityType } from "../BaseEntity";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 import { LinkModel } from "./LinkModel";
 import { NodeModel } from "./NodeModel";
 import { PortModel } from "./PortModel";
 import { BaseModel, BaseModelListener } from "./BaseModel";
+import { PointModel } from "./PointModel";
 /**
  * @author Dylan Vorster
  *
@@ -20,6 +21,7 @@ export interface DiagramListener extends BaseListener {
 
 	gridUpdated?(event: BaseEvent<DiagramModel> & { size: number }): void;
 }
+
 /**
  *
  */
@@ -124,7 +126,10 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	getSelectedItems(): BaseModel<BaseModelListener>[] {
+	getSelectedItems(...filters: BaseEntityType[]): BaseModel<BaseModelListener>[] {
+		if (!Array.isArray(filters)) {
+			filters = [filters];
+		}
 		var items = [];
 
 		// run through nodes
@@ -150,7 +155,27 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			})
 		);
 
-		return _.uniq(items);
+		items = _.uniq(items);
+
+		if (filters.length > 0) {
+			items = _.filter(_.uniq(items), (item: BaseModel<any>) => {
+				if (_.includes(filters, "node") && item instanceof NodeModel) {
+					return true;
+				}
+				if (_.includes(filters, "link") && item instanceof LinkModel) {
+					return true;
+				}
+				if (_.includes(filters, "port") && item instanceof PortModel) {
+					return true;
+				}
+				if (_.includes(filters, "point") && item instanceof PointModel) {
+					return true;
+				}
+				return false;
+			});
+		}
+
+		return items;
 	}
 
 	setZoomLevel(zoom: number) {

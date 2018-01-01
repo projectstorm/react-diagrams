@@ -22,7 +22,6 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		//store position
 		let oldX = this.x;
 		let oldY = this.y;
-
 		for (let port in this.ports) {
 			_.forEach(this.ports[port].getLinks(), link => {
 				let point = link.getPointForPort(this.ports[port]);
@@ -68,6 +67,14 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 			ports: _.map(this.ports, port => {
 				return port.serialize();
 			})
+		});
+	}
+
+	doClone(lookupTable = {}, clone) {
+		// also clone the ports
+		clone.ports = {};
+		_.values(this.ports).forEach(port => {
+			clone.addPort(port.clone(lookupTable));
 		});
 	}
 
