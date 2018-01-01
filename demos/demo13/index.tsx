@@ -10,11 +10,11 @@ import {
 	DiagramWidget,
 	DefaultNodeInstanceFactory,
 	DefaultPortInstanceFactory,
-	LinkInstanceFactory
+	LinkInstanceFactory,
+	BaseModel
 } from "../../src/main";
 import * as _ from "lodash";
 import * as React from "react";
-import { BaseModel } from "../../dist/src/Common";
 
 /**
  * Tests cloning
