@@ -43,14 +43,16 @@ const withCustomPreview = withDocs({
 })
 
 storiesOf("Simple Usage", module)
+	.addDecorator(host({
+		cropMarks: false,
+		height: '100%',
+		width: '100%',
+		padding: 20
+	}))
 	.add("Simple example", withCustomPreview(
 		require("./demo-simple/docs.md"),
 		() => demo_simple()
 	))
-	// .addDecorator(host({
-	// 	height: '100%',
-	// 	width: '100%'
-	// }))
 	.add("Performance demo", () => {
 		return demo_performance();
 	})
@@ -71,6 +73,12 @@ storiesOf("Simple Usage", module)
 	})
 
 storiesOf("Advanced Techniques", module)
+	.addDecorator(host({
+		cropMarks: false,
+		height: '100%',
+		width: '100%',
+		padding: 20
+	}))
 	.add("Clone selected", () => {
 		return demo_cloning();
 	})
@@ -85,6 +93,12 @@ storiesOf("Advanced Techniques", module)
 	})
 
 storiesOf("Custom Models", module)
+	.addDecorator(host({
+		cropMarks: false,
+		height: '100%',
+		width: '100%',
+		padding: 20
+	}))
 	.add("Custom diamond node", () => {
 		return demo_custom_node1();
 	})
@@ -93,6 +107,12 @@ storiesOf("Custom Models", module)
 	})
 
 storiesOf("3rd party libraries", module)
+	.addDecorator(host({
+		cropMarks: false,
+		height: '100%',
+		width: '100%',
+		padding: 20
+	}))
 	.add("Auto distribute - Dagre", () => {
 		return demo_dagre();
 	})

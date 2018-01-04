@@ -12,6 +12,7 @@ import {
 	LinkInstanceFactory
 } from "../../src/main";
 import * as React from "react";
+import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
 
 /**
  * Tests the grid size
@@ -49,11 +50,12 @@ class NodeDelayedPosition extends React.Component<any, any> {
 	render() {
 		const { engine } = this.props;
 		return (
-			<div>
-				<DiagramWidget diagramEngine={engine} />
-				<button onClick={this.updatePosition}>Update position</button>
+			<DemoWorkspaceWidget buttons={[
+				<button onClick={this.updatePosition}>Update position</button>,
 				<button onClick={this.updatePositionViaSerialize}>Update position via serialize</button>
-			</div>
+			]}>
+				<DiagramWidget diagramEngine={engine} />
+			</DemoWorkspaceWidget>
 		);
 	}
 }
