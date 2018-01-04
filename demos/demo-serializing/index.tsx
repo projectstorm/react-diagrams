@@ -12,6 +12,9 @@ import {
 	LinkInstanceFactory
 } from "../../src/main";
 import * as React from "react";
+import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
+import { action } from '@storybook/addon-actions';
+var beautify = require("json-beautify");
 
 export default () => {
 	//1) setup the diagram engine
@@ -63,5 +66,13 @@ export default () => {
 	model2.deSerializeDiagram(JSON.parse(str), engine);
 	engine.setDiagramModel(model2);
 
-	return <DiagramWidget diagramEngine={engine} />;
+	return (
+		<DemoWorkspaceWidget buttons={
+			<button onClick={() => {
+				action("Serialized Graph")(beautify(model2.serializeDiagram(), null, 2, 80))
+			}} >Serialize Graph</button>
+		}>
+			<DiagramWidget diagramEngine={engine} />
+		</DemoWorkspaceWidget>
+	);
 };

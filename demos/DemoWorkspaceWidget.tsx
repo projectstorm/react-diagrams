@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export interface DemoWorkspaceWidgetProps {
-	buttons: any;
+	buttons?: any;
 }
 
 export interface DemoWorkspaceWidgetState {

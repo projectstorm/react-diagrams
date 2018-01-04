@@ -109,8 +109,6 @@ export default () => {
 
 	// render the diagram!
 	return (
-		<div>
-			<DiagramWidget diagramEngine={engine} />
-		</div>
+		<DiagramWidget diagramEngine={engine} />
 	);
 };

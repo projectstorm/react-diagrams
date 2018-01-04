@@ -50,6 +50,7 @@
 		"file-loader": "^1.1.6",
 		"jest": "^22.0.4",
 		"jest-cli": "^22.0.4",
+		"json-beautify": "^1.0.1",
 		"node-sass": "^4.7.2",
 		"prettier": "^1.9.2",
 		"puppeteer": "^0.13.0",

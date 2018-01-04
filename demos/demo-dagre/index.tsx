@@ -13,6 +13,7 @@ import {
 } from "../../src/main";
 import { distributeElements } from "./dagre-utils";
 import * as React from "react";
+import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
 
 function createNode(name) {
 	return new DefaultNodeModel(name, "rgb(0,192,255)");
@@ -53,10 +54,9 @@ class Demo8Widget extends React.Component<any, any> {
 		const { engine } = this.props;
 
 		return (
-			<div>
+			<DemoWorkspaceWidget buttons={<button onClick={this.autoDistribute}>Re-distribute</button>}>
 				<DiagramWidget diagramEngine={engine} />
-				<button onClick={this.autoDistribute}>Re-distribute</button>
-			</div>
+			</DemoWorkspaceWidget>
 		);
 	}
 }

@@ -15,6 +15,7 @@ import {
 } from "../../src/main";
 import * as _ from "lodash";
 import * as React from "react";
+import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
 
 /**
  * Tests cloning
@@ -55,10 +56,9 @@ class CloneSelected extends React.Component<any, any> {
 	render() {
 		const { engine } = this.props;
 		return (
-			<div>
+			<DemoWorkspaceWidget buttons={<button onClick={this.cloneSelected}>Clone Selected</button>}>
 				<DiagramWidget diagramEngine={engine} />
-				<button onClick={this.cloneSelected}>Clone Selected</button>
-			</div>
+			</DemoWorkspaceWidget>
 		);
 	}
 }
