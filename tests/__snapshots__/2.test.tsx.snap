@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots React Diagrams Auto distribute 1`] = `
+exports[`Storyshots 3rd party libraries Auto distribute - Dagre 1`] = `
 <div>
   <div
     className="storm-diagrams-canvas"
@@ -28,7 +28,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
     >
       <div
         className="node"
-        data-nodeid="test-uid-1151"
+        data-nodeid="test-uid-2257"
         style={
           Object {
             "left": 52.5,
@@ -65,7 +65,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-1-out-1"
-                  data-nodeid="test-uid-1151"
+                  data-nodeid="test-uid-2257"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -81,7 +81,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-1-out-4"
-                  data-nodeid="test-uid-1151"
+                  data-nodeid="test-uid-2257"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -100,7 +100,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1152"
+        data-nodeid="test-uid-2258"
         style={
           Object {
             "left": 85,
@@ -137,7 +137,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-2-out-2"
-                  data-nodeid="test-uid-1152"
+                  data-nodeid="test-uid-2258"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -153,7 +153,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-2-out-6"
-                  data-nodeid="test-uid-1152"
+                  data-nodeid="test-uid-2258"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -178,7 +178,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="to-1-to-5"
-                  data-nodeid="test-uid-1152"
+                  data-nodeid="test-uid-2258"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -189,7 +189,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1153"
+        data-nodeid="test-uid-2259"
         style={
           Object {
             "left": 195,
@@ -226,7 +226,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-3-out-3"
-                  data-nodeid="test-uid-1153"
+                  data-nodeid="test-uid-2259"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -245,7 +245,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1154"
+        data-nodeid="test-uid-2260"
         style={
           Object {
             "left": 85,
@@ -282,7 +282,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="to-1-out-5"
-                  data-nodeid="test-uid-1154"
+                  data-nodeid="test-uid-2260"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -307,7 +307,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-1-to-1"
-                  data-nodeid="test-uid-1154"
+                  data-nodeid="test-uid-2260"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -318,7 +318,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1155"
+        data-nodeid="test-uid-2261"
         style={
           Object {
             "left": 30,
@@ -363,7 +363,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-2-to-2"
-                  data-nodeid="test-uid-1155"
+                  data-nodeid="test-uid-2261"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -379,7 +379,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-1-to-4"
-                  data-nodeid="test-uid-1155"
+                  data-nodeid="test-uid-2261"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -390,7 +390,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1156"
+        data-nodeid="test-uid-2262"
         style={
           Object {
             "left": 185,
@@ -435,7 +435,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-3-to-3"
-                  data-nodeid="test-uid-1156"
+                  data-nodeid="test-uid-2262"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -451,7 +451,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
                 <div
                   className="port"
                   data-name="from-2-to-6"
-                  data-nodeid="test-uid-1156"
+                  data-nodeid="test-uid-2262"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -470,7 +470,7 @@ exports[`Storyshots React Diagrams Auto distribute 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Clone selected 1`] = `
+exports[`Storyshots Advanced Techniques Clone selected 1`] = `
 <div>
   <div
     className="storm-diagrams-canvas"
@@ -498,7 +498,7 @@ exports[`Storyshots React Diagrams Clone selected 1`] = `
     >
       <div
         className="node"
-        data-nodeid="test-uid-2399"
+        data-nodeid="test-uid-2078"
         style={
           Object {
             "left": 100,
@@ -543,7 +543,7 @@ exports[`Storyshots React Diagrams Clone selected 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2399"
+                  data-nodeid="test-uid-2078"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -554,7 +554,7 @@ exports[`Storyshots React Diagrams Clone selected 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2401"
+        data-nodeid="test-uid-2080"
         style={
           Object {
             "left": 400,
@@ -591,7 +591,7 @@ exports[`Storyshots React Diagrams Clone selected 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2401"
+                  data-nodeid="test-uid-2080"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -618,257 +618,7 @@ exports[`Storyshots React Diagrams Clone selected 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Custom Diamond Widget 1`] = `
-<div
-  className="storm-diagrams-canvas"
-  onMouseDown={[Function]}
-  onWheel={[Function]}
->
-  <svg
-    style={
-      Object {
-        "height": "100%",
-        "transform": "translate(0px,0px) scale(1)",
-        "width": "100%",
-      }
-    }
-  />
-  <div
-    className="node-view"
-    style={
-      Object {
-        "height": "100%",
-        "transform": "translate(0px,0px) scale(1)",
-        "width": "100%",
-      }
-    }
-  >
-    <div
-      className="node"
-      data-nodeid="test-uid-995"
-      style={
-        Object {
-          "left": 100,
-          "top": 150,
-        }
-      }
-    >
-      <div
-        className="basic-node"
-        style={
-          Object {
-            "background": "rgb(0,192,255)",
-          }
-        }
-      >
-        <div
-          className="title"
-        >
-          <div
-            className="name"
-          >
-            Node 1
-          </div>
-        </div>
-        <div
-          className="ports"
-        >
-          <div
-            className="in"
-          />
-          <div
-            className="out"
-          >
-            <div
-              className="out-port"
-            >
-              <div
-                className="name"
-              >
-                Out
-              </div>
-              <div
-                className="port"
-                data-name="out-1"
-                data-nodeid="test-uid-995"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="node"
-      data-nodeid="test-uid-997"
-      style={
-        Object {
-          "left": 400,
-          "top": 100,
-        }
-      }
-    >
-      <div
-        className="diamond-node"
-        style={
-          Object {
-            "height": 150,
-            "position": "relative",
-            "width": 150,
-          }
-        }
-      >
-        <svg
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "
-					<g id=\\"Layer_1\\">
-					</g>
-					<g id=\\"Layer_2\\">
-						<polygon fill=\\"purple\\" stroke=\\"#000000\\" stroke-width=\\"3\\" stroke-miterlimit=\\"10\\" points=\\"10,75 75,10 140,75 75,140 \\"/>
-					</g>
-				",
-            }
-          }
-          height={150}
-          width={150}
-        />
-        <div
-          style={
-            Object {
-              "left": -8,
-              "position": "absolute",
-              "top": 67,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port"
-            data-name="left"
-            data-nodeid="test-uid-997"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-        <div
-          style={
-            Object {
-              "left": 67,
-              "position": "absolute",
-              "top": -8,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port"
-            data-name="top"
-            data-nodeid="test-uid-997"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-        <div
-          style={
-            Object {
-              "left": 142,
-              "position": "absolute",
-              "top": 67,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port"
-            data-name="right"
-            data-nodeid="test-uid-997"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-        <div
-          style={
-            Object {
-              "left": 67,
-              "position": "absolute",
-              "top": 142,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port"
-            data-name="bottom"
-            data-nodeid="test-uid-997"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      className="node"
-      data-nodeid="test-uid-1002"
-      style={
-        Object {
-          "left": 800,
-          "top": 150,
-        }
-      }
-    >
-      <div
-        className="basic-node"
-        style={
-          Object {
-            "background": "red",
-          }
-        }
-      >
-        <div
-          className="title"
-        >
-          <div
-            className="name"
-          >
-            Node 3
-          </div>
-        </div>
-        <div
-          className="ports"
-        >
-          <div
-            className="in"
-          >
-            <div
-              className="in-port"
-            >
-              <div
-                className="port"
-                data-name="in-1"
-                data-nodeid="test-uid-1002"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-              <div
-                className="name"
-              >
-                In
-              </div>
-            </div>
-          </div>
-          <div
-            className="out"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots React Diagrams Embedded diagram 1`] = `
+exports[`Storyshots Advanced Techniques Large application example 1`] = `
 <div
   className="body"
 >
@@ -943,7 +693,7 @@ exports[`Storyshots React Diagrams Embedded diagram 1`] = `
         >
           <div
             className="node"
-            data-nodeid="test-uid-1069"
+            data-nodeid="test-uid-2159"
             style={
               Object {
                 "left": 100,
@@ -988,7 +738,7 @@ exports[`Storyshots React Diagrams Embedded diagram 1`] = `
                     <div
                       className="port"
                       data-name="out-1"
-                      data-nodeid="test-uid-1069"
+                      data-nodeid="test-uid-2159"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
                     />
@@ -999,7 +749,7 @@ exports[`Storyshots React Diagrams Embedded diagram 1`] = `
           </div>
           <div
             className="node"
-            data-nodeid="test-uid-1071"
+            data-nodeid="test-uid-2161"
             style={
               Object {
                 "left": 400,
@@ -1036,7 +786,7 @@ exports[`Storyshots React Diagrams Embedded diagram 1`] = `
                     <div
                       className="port"
                       data-name="in-1"
-                      data-nodeid="test-uid-1071"
+                      data-nodeid="test-uid-2161"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
                     />
@@ -1060,7 +810,870 @@ exports[`Storyshots React Diagrams Embedded diagram 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Events 1`] = `
+exports[`Storyshots Advanced Techniques Programatically modify graph 1`] = `
+<div>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-2138"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-2138"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-2140"
+        style={
+          Object {
+            "left": 400,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-2140"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    Update position
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    Update position via serialize
+  </button>
+</div>
+`;
+
+exports[`Storyshots Advanced Techniques Serializing and deserializing 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-2099"
+      style={
+        Object {
+          "left": 100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-2099"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-2101"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 2
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-2101"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                IN
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Custom Models Custom diamond node 1`] = `
+<div
+  className="storm-diagrams-canvas"
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="node-view"
+    style={
+      Object {
+        "height": "100%",
+        "transform": "translate(0px,0px) scale(1)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="node"
+      data-nodeid="test-uid-2181"
+      style={
+        Object {
+          "left": 100,
+          "top": 150,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          />
+          <div
+            className="out"
+          >
+            <div
+              className="out-port"
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port"
+                data-name="out-1"
+                data-nodeid="test-uid-2181"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-2183"
+      style={
+        Object {
+          "left": 400,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="diamond-node"
+        style={
+          Object {
+            "height": 150,
+            "position": "relative",
+            "width": 150,
+          }
+        }
+      >
+        <svg
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "
+					<g id=\\"Layer_1\\">
+					</g>
+					<g id=\\"Layer_2\\">
+						<polygon fill=\\"purple\\" stroke=\\"#000000\\" stroke-width=\\"3\\" stroke-miterlimit=\\"10\\" points=\\"10,75 75,10 140,75 75,140 \\"/>
+					</g>
+				",
+            }
+          }
+          height={150}
+          width={150}
+        />
+        <div
+          style={
+            Object {
+              "left": -8,
+              "position": "absolute",
+              "top": 67,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="left"
+            data-nodeid="test-uid-2183"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 67,
+              "position": "absolute",
+              "top": -8,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="top"
+            data-nodeid="test-uid-2183"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 142,
+              "position": "absolute",
+              "top": 67,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="right"
+            data-nodeid="test-uid-2183"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 67,
+              "position": "absolute",
+              "top": 142,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port"
+            data-name="bottom"
+            data-nodeid="test-uid-2183"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node"
+      data-nodeid="test-uid-2188"
+      style={
+        Object {
+          "left": 800,
+          "top": 150,
+        }
+      }
+    >
+      <div
+        className="basic-node"
+        style={
+          Object {
+            "background": "red",
+          }
+        }
+      >
+        <div
+          className="title"
+        >
+          <div
+            className="name"
+          >
+            Node 3
+          </div>
+        </div>
+        <div
+          className="ports"
+        >
+          <div
+            className="in"
+          >
+            <div
+              className="in-port"
+            >
+              <div
+                className="port"
+                data-name="in-1"
+                data-nodeid="test-uid-2188"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                In
+              </div>
+            </div>
+          </div>
+          <div
+            className="out"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Custom Models Custom links 1`] = `
+<div>
+  <div
+    className="storm-diagrams-canvas"
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      className="node-view"
+      style={
+        Object {
+          "height": "100%",
+          "transform": "translate(0px,0px) scale(1)",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="node"
+        data-nodeid="test-uid-2216"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Source
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out thick
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-2216"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out default
+                </div>
+                <div
+                  className="port"
+                  data-name="out-2"
+                  data-nodeid="test-uid-2216"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-2219"
+        style={
+          Object {
+            "left": 300,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Target
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-2219"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In thick
+                </div>
+              </div>
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-2"
+                  data-nodeid="test-uid-2219"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In default
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-2222"
+        style={
+          Object {
+            "left": 100,
+            "top": 200,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Source
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out thick
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-2222"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out default
+                </div>
+                <div
+                  className="port"
+                  data-name="out-2"
+                  data-nodeid="test-uid-2222"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-2225"
+        style={
+          Object {
+            "left": 300,
+            "top": 200,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Target
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-2225"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In thick
+                </div>
+              </div>
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-2"
+                  data-nodeid="test-uid-2225"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In default
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Simple Usage Events and listeners 1`] = `
 <div>
   <p>
     Click the diagram elements to inspect some of the possible events.
@@ -1091,7 +1704,7 @@ exports[`Storyshots React Diagrams Events 1`] = `
     >
       <div
         className="node"
-        data-nodeid="test-uid-1335"
+        data-nodeid="test-uid-1076"
         style={
           Object {
             "left": 100,
@@ -1136,7 +1749,7 @@ exports[`Storyshots React Diagrams Events 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1335"
+                  data-nodeid="test-uid-1076"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1147,7 +1760,7 @@ exports[`Storyshots React Diagrams Events 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1337"
+        data-nodeid="test-uid-1078"
         style={
           Object {
             "left": 400,
@@ -1184,7 +1797,7 @@ exports[`Storyshots React Diagrams Events 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1337"
+                  data-nodeid="test-uid-1078"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1203,7 +1816,7 @@ exports[`Storyshots React Diagrams Events 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1339"
+        data-nodeid="test-uid-1080"
         style={
           Object {
             "left": 300,
@@ -1240,7 +1853,7 @@ exports[`Storyshots React Diagrams Events 1`] = `
                 <div
                   className="port"
                   data-name="in-2"
-                  data-nodeid="test-uid-1339"
+                  data-nodeid="test-uid-1080"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1262,7 +1875,7 @@ exports[`Storyshots React Diagrams Events 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Grid Size 1`] = `
+exports[`Storyshots Simple Usage Grid size 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -1289,7 +1902,7 @@ exports[`Storyshots React Diagrams Grid Size 1`] = `
   >
     <div
       className="node"
-      data-nodeid="test-uid-1130"
+      data-nodeid="test-uid-1034"
       style={
         Object {
           "left": 100,
@@ -1334,7 +1947,7 @@ exports[`Storyshots React Diagrams Grid Size 1`] = `
               <div
                 className="port"
                 data-name="out-1"
-                data-nodeid="test-uid-1130"
+                data-nodeid="test-uid-1034"
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
               />
@@ -1345,7 +1958,7 @@ exports[`Storyshots React Diagrams Grid Size 1`] = `
     </div>
     <div
       className="node"
-      data-nodeid="test-uid-1132"
+      data-nodeid="test-uid-1036"
       style={
         Object {
           "left": 400,
@@ -1382,7 +1995,7 @@ exports[`Storyshots React Diagrams Grid Size 1`] = `
               <div
                 className="port"
                 data-name="in-1"
-                data-nodeid="test-uid-1132"
+                data-nodeid="test-uid-1036"
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
               />
@@ -1403,7 +2016,7 @@ exports[`Storyshots React Diagrams Grid Size 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Limiting number of points 1`] = `
+exports[`Storyshots Simple Usage Limiting number of points 1`] = `
 <div>
   <p>
     A maximum of 5 points can be created per link.
@@ -1434,7 +2047,7 @@ exports[`Storyshots React Diagrams Limiting number of points 1`] = `
     >
       <div
         className="node"
-        data-nodeid="test-uid-1314"
+        data-nodeid="test-uid-1055"
         style={
           Object {
             "left": 100,
@@ -1479,7 +2092,7 @@ exports[`Storyshots React Diagrams Limiting number of points 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1314"
+                  data-nodeid="test-uid-1055"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1490,7 +2103,7 @@ exports[`Storyshots React Diagrams Limiting number of points 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1316"
+        data-nodeid="test-uid-1057"
         style={
           Object {
             "left": 400,
@@ -1527,7 +2140,7 @@ exports[`Storyshots React Diagrams Limiting number of points 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1316"
+                  data-nodeid="test-uid-1057"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -1549,326 +2162,7 @@ exports[`Storyshots React Diagrams Limiting number of points 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Link types 1`] = `
-<div>
-  <div
-    className="storm-diagrams-canvas"
-    onMouseDown={[Function]}
-    onWheel={[Function]}
-  >
-    <svg
-      style={
-        Object {
-          "height": "100%",
-          "transform": "translate(0px,0px) scale(1)",
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      className="node-view"
-      style={
-        Object {
-          "height": "100%",
-          "transform": "translate(0px,0px) scale(1)",
-          "width": "100%",
-        }
-      }
-    >
-      <div
-        className="node"
-        data-nodeid="test-uid-2358"
-        style={
-          Object {
-            "left": 100,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Source
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out thick
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2358"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out default
-                </div>
-                <div
-                  className="port"
-                  data-name="out-2"
-                  data-nodeid="test-uid-2358"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2361"
-        style={
-          Object {
-            "left": 300,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Target
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2361"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  In thick
-                </div>
-              </div>
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-2"
-                  data-nodeid="test-uid-2361"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  In default
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2364"
-        style={
-          Object {
-            "left": 100,
-            "top": 200,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Source
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out thick
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2364"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out default
-                </div>
-                <div
-                  className="port"
-                  data-name="out-2"
-                  data-nodeid="test-uid-2364"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2367"
-        style={
-          Object {
-            "left": 300,
-            "top": 200,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Target
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2367"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  In thick
-                </div>
-              </div>
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-2"
-                  data-nodeid="test-uid-2367"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  In default
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots React Diagrams Locked Widget 1`] = `
+exports[`Storyshots Simple Usage Locked widget 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -1895,7 +2189,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
   >
     <div
       className="node"
-      data-nodeid="test-uid-1030"
+      data-nodeid="test-uid-994"
       style={
         Object {
           "left": 100,
@@ -1940,7 +2234,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
               <div
                 className="port"
                 data-name="out-1"
-                data-nodeid="test-uid-1030"
+                data-nodeid="test-uid-994"
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
               />
@@ -1951,7 +2245,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
     </div>
     <div
       className="node"
-      data-nodeid="test-uid-1032"
+      data-nodeid="test-uid-996"
       style={
         Object {
           "left": 400,
@@ -1988,7 +2282,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
               <div
                 className="port"
                 data-name="in-1"
-                data-nodeid="test-uid-1032"
+                data-nodeid="test-uid-996"
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
               />
@@ -2007,7 +2301,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
     </div>
     <div
       className="node"
-      data-nodeid="test-uid-1045"
+      data-nodeid="test-uid-1009"
       style={
         Object {
           "left": 100,
@@ -2052,7 +2346,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
               <div
                 className="port"
                 data-name="out-2"
-                data-nodeid="test-uid-1045"
+                data-nodeid="test-uid-1009"
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
               />
@@ -2063,7 +2357,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
     </div>
     <div
       className="node"
-      data-nodeid="test-uid-1047"
+      data-nodeid="test-uid-1011"
       style={
         Object {
           "left": 400,
@@ -2100,7 +2394,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
               <div
                 className="port"
                 data-name="in-2"
-                data-nodeid="test-uid-1047"
+                data-nodeid="test-uid-1011"
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
               />
@@ -2121,7 +2415,7 @@ exports[`Storyshots React Diagrams Locked Widget 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Performance Test 1`] = `
+exports[`Storyshots Simple Usage Performance demo 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -9318,301 +9612,7 @@ exports[`Storyshots React Diagrams Performance Test 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Programatically move nodes 1`] = `
-<div>
-  <div
-    className="storm-diagrams-canvas"
-    onMouseDown={[Function]}
-    onWheel={[Function]}
-  >
-    <svg
-      style={
-        Object {
-          "height": "100%",
-          "transform": "translate(0px,0px) scale(1)",
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      className="node-view"
-      style={
-        Object {
-          "height": "100%",
-          "transform": "translate(0px,0px) scale(1)",
-          "width": "100%",
-        }
-      }
-    >
-      <div
-        className="node"
-        data-nodeid="test-uid-1371"
-        style={
-          Object {
-            "left": 100,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-1371"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-1373"
-        style={
-          Object {
-            "left": 400,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-1373"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <button
-    onClick={[Function]}
-  >
-    Update position
-  </button>
-  <button
-    onClick={[Function]}
-  >
-    Update position via serialize
-  </button>
-</div>
-`;
-
-exports[`Storyshots React Diagrams Serializing and Deserializing 1`] = `
-<div
-  className="storm-diagrams-canvas"
-  onMouseDown={[Function]}
-  onWheel={[Function]}
->
-  <svg
-    style={
-      Object {
-        "height": "100%",
-        "transform": "translate(0px,0px) scale(1)",
-        "width": "100%",
-      }
-    }
-  />
-  <div
-    className="node-view"
-    style={
-      Object {
-        "height": "100%",
-        "transform": "translate(0px,0px) scale(1)",
-        "width": "100%",
-      }
-    }
-  >
-    <div
-      className="node"
-      data-nodeid="test-uid-1090"
-      style={
-        Object {
-          "left": 100,
-          "top": 100,
-        }
-      }
-    >
-      <div
-        className="basic-node"
-        style={
-          Object {
-            "background": "rgb(0,192,255)",
-          }
-        }
-      >
-        <div
-          className="title"
-        >
-          <div
-            className="name"
-          >
-            Node 1
-          </div>
-        </div>
-        <div
-          className="ports"
-        >
-          <div
-            className="in"
-          />
-          <div
-            className="out"
-          >
-            <div
-              className="out-port"
-            >
-              <div
-                className="name"
-              >
-                Out
-              </div>
-              <div
-                className="port"
-                data-name="out-1"
-                data-nodeid="test-uid-1090"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="node"
-      data-nodeid="test-uid-1092"
-      style={
-        Object {
-          "left": 400,
-          "top": 100,
-        }
-      }
-    >
-      <div
-        className="basic-node"
-        style={
-          Object {
-            "background": "rgb(192,255,0)",
-          }
-        }
-      >
-        <div
-          className="title"
-        >
-          <div
-            className="name"
-          >
-            Node 2
-          </div>
-        </div>
-        <div
-          className="ports"
-        >
-          <div
-            className="in"
-          >
-            <div
-              className="in-port"
-            >
-              <div
-                className="port"
-                data-name="in-1"
-                data-nodeid="test-uid-1092"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-              <div
-                className="name"
-              >
-                IN
-              </div>
-            </div>
-          </div>
-          <div
-            className="out"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots React Diagrams Simple Example 1`] = `
+exports[`Storyshots Simple Usage Simple example 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -9753,7 +9753,7 @@ exports[`Storyshots React Diagrams Simple Example 1`] = `
 </div>
 `;
 
-exports[`Storyshots React Diagrams Zoom to fit 1`] = `
+exports[`Storyshots Simple Usage Zoom to fit 1`] = `
 <div>
   <div
     className="storm-diagrams-canvas"
@@ -9781,7 +9781,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
     >
       <div
         className="node"
-        data-nodeid="test-uid-1392"
+        data-nodeid="test-uid-1112"
         style={
           Object {
             "left": 100,
@@ -9826,7 +9826,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1392"
+                  data-nodeid="test-uid-1112"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -9837,7 +9837,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1394"
+        data-nodeid="test-uid-1114"
         style={
           Object {
             "left": 200,
@@ -9874,7 +9874,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1394"
+                  data-nodeid="test-uid-1114"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -9893,7 +9893,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1407"
+        data-nodeid="test-uid-1127"
         style={
           Object {
             "left": 100,
@@ -9938,7 +9938,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1407"
+                  data-nodeid="test-uid-1127"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -9949,7 +9949,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1409"
+        data-nodeid="test-uid-1129"
         style={
           Object {
             "left": 200,
@@ -9986,7 +9986,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1409"
+                  data-nodeid="test-uid-1129"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10005,7 +10005,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1422"
+        data-nodeid="test-uid-1142"
         style={
           Object {
             "left": 100,
@@ -10050,7 +10050,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1422"
+                  data-nodeid="test-uid-1142"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10061,7 +10061,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1424"
+        data-nodeid="test-uid-1144"
         style={
           Object {
             "left": 200,
@@ -10098,7 +10098,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1424"
+                  data-nodeid="test-uid-1144"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10117,7 +10117,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1437"
+        data-nodeid="test-uid-1157"
         style={
           Object {
             "left": 100,
@@ -10162,7 +10162,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1437"
+                  data-nodeid="test-uid-1157"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10173,7 +10173,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1439"
+        data-nodeid="test-uid-1159"
         style={
           Object {
             "left": 200,
@@ -10210,7 +10210,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1439"
+                  data-nodeid="test-uid-1159"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10229,7 +10229,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1452"
+        data-nodeid="test-uid-1172"
         style={
           Object {
             "left": 100,
@@ -10274,7 +10274,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1452"
+                  data-nodeid="test-uid-1172"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10285,7 +10285,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1454"
+        data-nodeid="test-uid-1174"
         style={
           Object {
             "left": 200,
@@ -10322,7 +10322,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1454"
+                  data-nodeid="test-uid-1174"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10341,7 +10341,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1467"
+        data-nodeid="test-uid-1187"
         style={
           Object {
             "left": 100,
@@ -10386,7 +10386,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1467"
+                  data-nodeid="test-uid-1187"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10397,7 +10397,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1469"
+        data-nodeid="test-uid-1189"
         style={
           Object {
             "left": 200,
@@ -10434,7 +10434,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1469"
+                  data-nodeid="test-uid-1189"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10453,7 +10453,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1482"
+        data-nodeid="test-uid-1202"
         style={
           Object {
             "left": 100,
@@ -10498,7 +10498,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1482"
+                  data-nodeid="test-uid-1202"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10509,7 +10509,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1484"
+        data-nodeid="test-uid-1204"
         style={
           Object {
             "left": 200,
@@ -10546,7 +10546,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1484"
+                  data-nodeid="test-uid-1204"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10565,7 +10565,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1497"
+        data-nodeid="test-uid-1217"
         style={
           Object {
             "left": 100,
@@ -10610,7 +10610,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1497"
+                  data-nodeid="test-uid-1217"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10621,7 +10621,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1499"
+        data-nodeid="test-uid-1219"
         style={
           Object {
             "left": 200,
@@ -10658,7 +10658,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1499"
+                  data-nodeid="test-uid-1219"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10677,7 +10677,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1512"
+        data-nodeid="test-uid-1232"
         style={
           Object {
             "left": 300,
@@ -10722,7 +10722,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1512"
+                  data-nodeid="test-uid-1232"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10733,7 +10733,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1514"
+        data-nodeid="test-uid-1234"
         style={
           Object {
             "left": 400,
@@ -10770,7 +10770,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1514"
+                  data-nodeid="test-uid-1234"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10789,7 +10789,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1527"
+        data-nodeid="test-uid-1247"
         style={
           Object {
             "left": 300,
@@ -10834,7 +10834,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1527"
+                  data-nodeid="test-uid-1247"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10845,7 +10845,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1529"
+        data-nodeid="test-uid-1249"
         style={
           Object {
             "left": 400,
@@ -10882,7 +10882,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1529"
+                  data-nodeid="test-uid-1249"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10901,7 +10901,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1542"
+        data-nodeid="test-uid-1262"
         style={
           Object {
             "left": 300,
@@ -10946,7 +10946,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1542"
+                  data-nodeid="test-uid-1262"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -10957,7 +10957,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1544"
+        data-nodeid="test-uid-1264"
         style={
           Object {
             "left": 400,
@@ -10994,7 +10994,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1544"
+                  data-nodeid="test-uid-1264"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11013,7 +11013,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1557"
+        data-nodeid="test-uid-1277"
         style={
           Object {
             "left": 300,
@@ -11058,7 +11058,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1557"
+                  data-nodeid="test-uid-1277"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11069,7 +11069,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1559"
+        data-nodeid="test-uid-1279"
         style={
           Object {
             "left": 400,
@@ -11106,7 +11106,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1559"
+                  data-nodeid="test-uid-1279"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11125,7 +11125,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1572"
+        data-nodeid="test-uid-1292"
         style={
           Object {
             "left": 300,
@@ -11170,7 +11170,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1572"
+                  data-nodeid="test-uid-1292"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11181,7 +11181,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1574"
+        data-nodeid="test-uid-1294"
         style={
           Object {
             "left": 400,
@@ -11218,7 +11218,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1574"
+                  data-nodeid="test-uid-1294"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11237,7 +11237,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1587"
+        data-nodeid="test-uid-1307"
         style={
           Object {
             "left": 300,
@@ -11282,7 +11282,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1587"
+                  data-nodeid="test-uid-1307"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11293,7 +11293,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1589"
+        data-nodeid="test-uid-1309"
         style={
           Object {
             "left": 400,
@@ -11330,7 +11330,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1589"
+                  data-nodeid="test-uid-1309"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11349,7 +11349,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1602"
+        data-nodeid="test-uid-1322"
         style={
           Object {
             "left": 300,
@@ -11394,7 +11394,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1602"
+                  data-nodeid="test-uid-1322"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11405,7 +11405,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1604"
+        data-nodeid="test-uid-1324"
         style={
           Object {
             "left": 400,
@@ -11442,7 +11442,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1604"
+                  data-nodeid="test-uid-1324"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11461,7 +11461,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1617"
+        data-nodeid="test-uid-1337"
         style={
           Object {
             "left": 300,
@@ -11506,7 +11506,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1617"
+                  data-nodeid="test-uid-1337"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11517,7 +11517,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1619"
+        data-nodeid="test-uid-1339"
         style={
           Object {
             "left": 400,
@@ -11554,7 +11554,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1619"
+                  data-nodeid="test-uid-1339"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11573,7 +11573,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1632"
+        data-nodeid="test-uid-1352"
         style={
           Object {
             "left": 500,
@@ -11618,7 +11618,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1632"
+                  data-nodeid="test-uid-1352"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11629,7 +11629,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1634"
+        data-nodeid="test-uid-1354"
         style={
           Object {
             "left": 600,
@@ -11666,7 +11666,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1634"
+                  data-nodeid="test-uid-1354"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11685,7 +11685,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1647"
+        data-nodeid="test-uid-1367"
         style={
           Object {
             "left": 500,
@@ -11730,7 +11730,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1647"
+                  data-nodeid="test-uid-1367"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11741,7 +11741,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1649"
+        data-nodeid="test-uid-1369"
         style={
           Object {
             "left": 600,
@@ -11778,7 +11778,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1649"
+                  data-nodeid="test-uid-1369"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11797,7 +11797,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1662"
+        data-nodeid="test-uid-1382"
         style={
           Object {
             "left": 500,
@@ -11842,7 +11842,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1662"
+                  data-nodeid="test-uid-1382"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11853,7 +11853,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1664"
+        data-nodeid="test-uid-1384"
         style={
           Object {
             "left": 600,
@@ -11890,7 +11890,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1664"
+                  data-nodeid="test-uid-1384"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11909,7 +11909,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1677"
+        data-nodeid="test-uid-1397"
         style={
           Object {
             "left": 500,
@@ -11954,7 +11954,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1677"
+                  data-nodeid="test-uid-1397"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -11965,7 +11965,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1679"
+        data-nodeid="test-uid-1399"
         style={
           Object {
             "left": 600,
@@ -12002,7 +12002,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1679"
+                  data-nodeid="test-uid-1399"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12021,7 +12021,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1692"
+        data-nodeid="test-uid-1412"
         style={
           Object {
             "left": 500,
@@ -12066,7 +12066,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1692"
+                  data-nodeid="test-uid-1412"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12077,7 +12077,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1694"
+        data-nodeid="test-uid-1414"
         style={
           Object {
             "left": 600,
@@ -12114,7 +12114,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1694"
+                  data-nodeid="test-uid-1414"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12133,7 +12133,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1707"
+        data-nodeid="test-uid-1427"
         style={
           Object {
             "left": 500,
@@ -12178,7 +12178,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1707"
+                  data-nodeid="test-uid-1427"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12189,7 +12189,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1709"
+        data-nodeid="test-uid-1429"
         style={
           Object {
             "left": 600,
@@ -12226,7 +12226,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1709"
+                  data-nodeid="test-uid-1429"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12245,7 +12245,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1722"
+        data-nodeid="test-uid-1442"
         style={
           Object {
             "left": 500,
@@ -12290,7 +12290,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1722"
+                  data-nodeid="test-uid-1442"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12301,7 +12301,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1724"
+        data-nodeid="test-uid-1444"
         style={
           Object {
             "left": 600,
@@ -12338,7 +12338,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1724"
+                  data-nodeid="test-uid-1444"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12357,7 +12357,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1737"
+        data-nodeid="test-uid-1457"
         style={
           Object {
             "left": 500,
@@ -12402,7 +12402,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1737"
+                  data-nodeid="test-uid-1457"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12413,7 +12413,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1739"
+        data-nodeid="test-uid-1459"
         style={
           Object {
             "left": 600,
@@ -12450,7 +12450,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1739"
+                  data-nodeid="test-uid-1459"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12469,7 +12469,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1752"
+        data-nodeid="test-uid-1472"
         style={
           Object {
             "left": 700,
@@ -12514,7 +12514,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1752"
+                  data-nodeid="test-uid-1472"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12525,7 +12525,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1754"
+        data-nodeid="test-uid-1474"
         style={
           Object {
             "left": 800,
@@ -12562,7 +12562,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1754"
+                  data-nodeid="test-uid-1474"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12581,7 +12581,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1767"
+        data-nodeid="test-uid-1487"
         style={
           Object {
             "left": 700,
@@ -12626,7 +12626,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1767"
+                  data-nodeid="test-uid-1487"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12637,7 +12637,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1769"
+        data-nodeid="test-uid-1489"
         style={
           Object {
             "left": 800,
@@ -12674,7 +12674,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1769"
+                  data-nodeid="test-uid-1489"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12693,7 +12693,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1782"
+        data-nodeid="test-uid-1502"
         style={
           Object {
             "left": 700,
@@ -12738,7 +12738,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1782"
+                  data-nodeid="test-uid-1502"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12749,7 +12749,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1784"
+        data-nodeid="test-uid-1504"
         style={
           Object {
             "left": 800,
@@ -12786,7 +12786,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1784"
+                  data-nodeid="test-uid-1504"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12805,7 +12805,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1797"
+        data-nodeid="test-uid-1517"
         style={
           Object {
             "left": 700,
@@ -12850,7 +12850,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1797"
+                  data-nodeid="test-uid-1517"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12861,7 +12861,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1799"
+        data-nodeid="test-uid-1519"
         style={
           Object {
             "left": 800,
@@ -12898,7 +12898,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1799"
+                  data-nodeid="test-uid-1519"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12917,7 +12917,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1812"
+        data-nodeid="test-uid-1532"
         style={
           Object {
             "left": 700,
@@ -12962,7 +12962,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1812"
+                  data-nodeid="test-uid-1532"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -12973,7 +12973,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1814"
+        data-nodeid="test-uid-1534"
         style={
           Object {
             "left": 800,
@@ -13010,7 +13010,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1814"
+                  data-nodeid="test-uid-1534"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13029,7 +13029,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1827"
+        data-nodeid="test-uid-1547"
         style={
           Object {
             "left": 700,
@@ -13074,7 +13074,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1827"
+                  data-nodeid="test-uid-1547"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13085,7 +13085,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1829"
+        data-nodeid="test-uid-1549"
         style={
           Object {
             "left": 800,
@@ -13122,7 +13122,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1829"
+                  data-nodeid="test-uid-1549"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13141,7 +13141,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1842"
+        data-nodeid="test-uid-1562"
         style={
           Object {
             "left": 700,
@@ -13186,7 +13186,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1842"
+                  data-nodeid="test-uid-1562"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13197,7 +13197,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1844"
+        data-nodeid="test-uid-1564"
         style={
           Object {
             "left": 800,
@@ -13234,7 +13234,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1844"
+                  data-nodeid="test-uid-1564"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13253,7 +13253,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1857"
+        data-nodeid="test-uid-1577"
         style={
           Object {
             "left": 700,
@@ -13298,7 +13298,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1857"
+                  data-nodeid="test-uid-1577"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13309,7 +13309,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1859"
+        data-nodeid="test-uid-1579"
         style={
           Object {
             "left": 800,
@@ -13346,7 +13346,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1859"
+                  data-nodeid="test-uid-1579"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13365,7 +13365,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1872"
+        data-nodeid="test-uid-1592"
         style={
           Object {
             "left": 900,
@@ -13410,7 +13410,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1872"
+                  data-nodeid="test-uid-1592"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13421,7 +13421,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1874"
+        data-nodeid="test-uid-1594"
         style={
           Object {
             "left": 1000,
@@ -13458,7 +13458,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1874"
+                  data-nodeid="test-uid-1594"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13477,7 +13477,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1887"
+        data-nodeid="test-uid-1607"
         style={
           Object {
             "left": 900,
@@ -13522,7 +13522,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1887"
+                  data-nodeid="test-uid-1607"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13533,7 +13533,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1889"
+        data-nodeid="test-uid-1609"
         style={
           Object {
             "left": 1000,
@@ -13570,7 +13570,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1889"
+                  data-nodeid="test-uid-1609"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13589,7 +13589,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1902"
+        data-nodeid="test-uid-1622"
         style={
           Object {
             "left": 900,
@@ -13634,7 +13634,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1902"
+                  data-nodeid="test-uid-1622"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13645,7 +13645,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1904"
+        data-nodeid="test-uid-1624"
         style={
           Object {
             "left": 1000,
@@ -13682,7 +13682,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1904"
+                  data-nodeid="test-uid-1624"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13701,7 +13701,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1917"
+        data-nodeid="test-uid-1637"
         style={
           Object {
             "left": 900,
@@ -13746,7 +13746,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1917"
+                  data-nodeid="test-uid-1637"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13757,7 +13757,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1919"
+        data-nodeid="test-uid-1639"
         style={
           Object {
             "left": 1000,
@@ -13794,7 +13794,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1919"
+                  data-nodeid="test-uid-1639"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13813,7 +13813,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1932"
+        data-nodeid="test-uid-1652"
         style={
           Object {
             "left": 900,
@@ -13858,7 +13858,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1932"
+                  data-nodeid="test-uid-1652"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13869,7 +13869,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1934"
+        data-nodeid="test-uid-1654"
         style={
           Object {
             "left": 1000,
@@ -13906,7 +13906,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1934"
+                  data-nodeid="test-uid-1654"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13925,7 +13925,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1947"
+        data-nodeid="test-uid-1667"
         style={
           Object {
             "left": 900,
@@ -13970,7 +13970,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1947"
+                  data-nodeid="test-uid-1667"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -13981,7 +13981,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1949"
+        data-nodeid="test-uid-1669"
         style={
           Object {
             "left": 1000,
@@ -14018,7 +14018,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1949"
+                  data-nodeid="test-uid-1669"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14037,7 +14037,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1962"
+        data-nodeid="test-uid-1682"
         style={
           Object {
             "left": 900,
@@ -14082,7 +14082,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1962"
+                  data-nodeid="test-uid-1682"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14093,7 +14093,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1964"
+        data-nodeid="test-uid-1684"
         style={
           Object {
             "left": 1000,
@@ -14130,7 +14130,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1964"
+                  data-nodeid="test-uid-1684"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14149,7 +14149,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1977"
+        data-nodeid="test-uid-1697"
         style={
           Object {
             "left": 900,
@@ -14194,7 +14194,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1977"
+                  data-nodeid="test-uid-1697"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14205,7 +14205,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1979"
+        data-nodeid="test-uid-1699"
         style={
           Object {
             "left": 1000,
@@ -14242,7 +14242,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1979"
+                  data-nodeid="test-uid-1699"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14261,7 +14261,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1992"
+        data-nodeid="test-uid-1712"
         style={
           Object {
             "left": 1100,
@@ -14306,7 +14306,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-1992"
+                  data-nodeid="test-uid-1712"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14317,7 +14317,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-1994"
+        data-nodeid="test-uid-1714"
         style={
           Object {
             "left": 1200,
@@ -14354,7 +14354,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-1994"
+                  data-nodeid="test-uid-1714"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14373,7 +14373,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2007"
+        data-nodeid="test-uid-1727"
         style={
           Object {
             "left": 1100,
@@ -14418,7 +14418,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2007"
+                  data-nodeid="test-uid-1727"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14429,7 +14429,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2009"
+        data-nodeid="test-uid-1729"
         style={
           Object {
             "left": 1200,
@@ -14466,7 +14466,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2009"
+                  data-nodeid="test-uid-1729"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14485,7 +14485,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2022"
+        data-nodeid="test-uid-1742"
         style={
           Object {
             "left": 1100,
@@ -14530,7 +14530,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2022"
+                  data-nodeid="test-uid-1742"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14541,7 +14541,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2024"
+        data-nodeid="test-uid-1744"
         style={
           Object {
             "left": 1200,
@@ -14578,7 +14578,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2024"
+                  data-nodeid="test-uid-1744"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14597,7 +14597,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2037"
+        data-nodeid="test-uid-1757"
         style={
           Object {
             "left": 1100,
@@ -14642,7 +14642,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2037"
+                  data-nodeid="test-uid-1757"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14653,7 +14653,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2039"
+        data-nodeid="test-uid-1759"
         style={
           Object {
             "left": 1200,
@@ -14690,7 +14690,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2039"
+                  data-nodeid="test-uid-1759"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14709,7 +14709,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2052"
+        data-nodeid="test-uid-1772"
         style={
           Object {
             "left": 1100,
@@ -14754,7 +14754,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2052"
+                  data-nodeid="test-uid-1772"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14765,7 +14765,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2054"
+        data-nodeid="test-uid-1774"
         style={
           Object {
             "left": 1200,
@@ -14802,7 +14802,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2054"
+                  data-nodeid="test-uid-1774"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14821,7 +14821,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2067"
+        data-nodeid="test-uid-1787"
         style={
           Object {
             "left": 1100,
@@ -14866,7 +14866,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2067"
+                  data-nodeid="test-uid-1787"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14877,7 +14877,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2069"
+        data-nodeid="test-uid-1789"
         style={
           Object {
             "left": 1200,
@@ -14914,7 +14914,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2069"
+                  data-nodeid="test-uid-1789"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14933,7 +14933,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2082"
+        data-nodeid="test-uid-1802"
         style={
           Object {
             "left": 1100,
@@ -14978,7 +14978,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2082"
+                  data-nodeid="test-uid-1802"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -14989,7 +14989,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2084"
+        data-nodeid="test-uid-1804"
         style={
           Object {
             "left": 1200,
@@ -15026,7 +15026,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2084"
+                  data-nodeid="test-uid-1804"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -15045,7 +15045,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2097"
+        data-nodeid="test-uid-1817"
         style={
           Object {
             "left": 1100,
@@ -15090,7 +15090,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2097"
+                  data-nodeid="test-uid-1817"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -15101,7 +15101,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2099"
+        data-nodeid="test-uid-1819"
         style={
           Object {
             "left": 1200,
@@ -15138,7 +15138,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2099"
+                  data-nodeid="test-uid-1819"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -15157,906 +15157,10 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2112"
+        data-nodeid="test-uid-1832"
         style={
           Object {
             "left": 1300,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2112"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2114"
-        style={
-          Object {
-            "left": 1400,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2114"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2127"
-        style={
-          Object {
-            "left": 1300,
-            "top": 200,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2127"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2129"
-        style={
-          Object {
-            "left": 1400,
-            "top": 200,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2129"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2142"
-        style={
-          Object {
-            "left": 1300,
-            "top": 300,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2142"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2144"
-        style={
-          Object {
-            "left": 1400,
-            "top": 300,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2144"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2157"
-        style={
-          Object {
-            "left": 1300,
-            "top": 400,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2157"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2159"
-        style={
-          Object {
-            "left": 1400,
-            "top": 400,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2159"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2172"
-        style={
-          Object {
-            "left": 1300,
-            "top": 500,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2172"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2174"
-        style={
-          Object {
-            "left": 1400,
-            "top": 500,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2174"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2187"
-        style={
-          Object {
-            "left": 1300,
-            "top": 600,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2187"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2189"
-        style={
-          Object {
-            "left": 1400,
-            "top": 600,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2189"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2202"
-        style={
-          Object {
-            "left": 1300,
-            "top": 700,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2202"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2204"
-        style={
-          Object {
-            "left": 1400,
-            "top": 700,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2204"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2217"
-        style={
-          Object {
-            "left": 1300,
-            "top": 800,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            />
-            <div
-              className="out"
-            >
-              <div
-                className="out-port"
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port"
-                  data-name="out-1"
-                  data-nodeid="test-uid-2217"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2219"
-        style={
-          Object {
-            "left": 1400,
-            "top": 800,
-          }
-        }
-      >
-        <div
-          className="basic-node"
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="title"
-          >
-            <div
-              className="name"
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="ports"
-          >
-            <div
-              className="in"
-            >
-              <div
-                className="in-port"
-              >
-                <div
-                  className="port"
-                  data-name="in-1"
-                  data-nodeid="test-uid-2219"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  IN
-                </div>
-              </div>
-            </div>
-            <div
-              className="out"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node"
-        data-nodeid="test-uid-2232"
-        style={
-          Object {
-            "left": 1500,
             "top": 100,
           }
         }
@@ -16098,7 +15202,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2232"
+                  data-nodeid="test-uid-1832"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16109,7 +15213,903 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2234"
+        data-nodeid="test-uid-1834"
+        style={
+          Object {
+            "left": 1400,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1834"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1847"
+        style={
+          Object {
+            "left": 1300,
+            "top": 200,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1847"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1849"
+        style={
+          Object {
+            "left": 1400,
+            "top": 200,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1849"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1862"
+        style={
+          Object {
+            "left": 1300,
+            "top": 300,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1862"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1864"
+        style={
+          Object {
+            "left": 1400,
+            "top": 300,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1864"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1877"
+        style={
+          Object {
+            "left": 1300,
+            "top": 400,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1877"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1879"
+        style={
+          Object {
+            "left": 1400,
+            "top": 400,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1879"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1892"
+        style={
+          Object {
+            "left": 1300,
+            "top": 500,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1892"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1894"
+        style={
+          Object {
+            "left": 1400,
+            "top": 500,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1894"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1907"
+        style={
+          Object {
+            "left": 1300,
+            "top": 600,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1907"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1909"
+        style={
+          Object {
+            "left": 1400,
+            "top": 600,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1909"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1922"
+        style={
+          Object {
+            "left": 1300,
+            "top": 700,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1922"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1924"
+        style={
+          Object {
+            "left": 1400,
+            "top": 700,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1924"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1937"
+        style={
+          Object {
+            "left": 1300,
+            "top": 800,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1937"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1939"
+        style={
+          Object {
+            "left": 1400,
+            "top": 800,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            >
+              <div
+                className="in-port"
+              >
+                <div
+                  className="port"
+                  data-name="in-1"
+                  data-nodeid="test-uid-1939"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  IN
+                </div>
+              </div>
+            </div>
+            <div
+              className="out"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1952"
+        style={
+          Object {
+            "left": 1500,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="basic-node"
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="title"
+          >
+            <div
+              className="name"
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="ports"
+          >
+            <div
+              className="in"
+            />
+            <div
+              className="out"
+            >
+              <div
+                className="out-port"
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port"
+                  data-name="out-1"
+                  data-nodeid="test-uid-1952"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node"
+        data-nodeid="test-uid-1954"
         style={
           Object {
             "left": 1600,
@@ -16146,7 +16146,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2234"
+                  data-nodeid="test-uid-1954"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16165,7 +16165,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2247"
+        data-nodeid="test-uid-1967"
         style={
           Object {
             "left": 1500,
@@ -16210,7 +16210,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2247"
+                  data-nodeid="test-uid-1967"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16221,7 +16221,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2249"
+        data-nodeid="test-uid-1969"
         style={
           Object {
             "left": 1600,
@@ -16258,7 +16258,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2249"
+                  data-nodeid="test-uid-1969"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16277,7 +16277,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2262"
+        data-nodeid="test-uid-1982"
         style={
           Object {
             "left": 1500,
@@ -16322,7 +16322,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2262"
+                  data-nodeid="test-uid-1982"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16333,7 +16333,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2264"
+        data-nodeid="test-uid-1984"
         style={
           Object {
             "left": 1600,
@@ -16370,7 +16370,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2264"
+                  data-nodeid="test-uid-1984"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16389,7 +16389,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2277"
+        data-nodeid="test-uid-1997"
         style={
           Object {
             "left": 1500,
@@ -16434,7 +16434,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2277"
+                  data-nodeid="test-uid-1997"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16445,7 +16445,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2279"
+        data-nodeid="test-uid-1999"
         style={
           Object {
             "left": 1600,
@@ -16482,7 +16482,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2279"
+                  data-nodeid="test-uid-1999"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16501,7 +16501,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2292"
+        data-nodeid="test-uid-2012"
         style={
           Object {
             "left": 1500,
@@ -16546,7 +16546,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2292"
+                  data-nodeid="test-uid-2012"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16557,7 +16557,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2294"
+        data-nodeid="test-uid-2014"
         style={
           Object {
             "left": 1600,
@@ -16594,7 +16594,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2294"
+                  data-nodeid="test-uid-2014"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16613,7 +16613,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2307"
+        data-nodeid="test-uid-2027"
         style={
           Object {
             "left": 1500,
@@ -16658,7 +16658,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2307"
+                  data-nodeid="test-uid-2027"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16669,7 +16669,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2309"
+        data-nodeid="test-uid-2029"
         style={
           Object {
             "left": 1600,
@@ -16706,7 +16706,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2309"
+                  data-nodeid="test-uid-2029"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16725,7 +16725,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2322"
+        data-nodeid="test-uid-2042"
         style={
           Object {
             "left": 1500,
@@ -16770,7 +16770,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2322"
+                  data-nodeid="test-uid-2042"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16781,7 +16781,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2324"
+        data-nodeid="test-uid-2044"
         style={
           Object {
             "left": 1600,
@@ -16818,7 +16818,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2324"
+                  data-nodeid="test-uid-2044"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16837,7 +16837,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2337"
+        data-nodeid="test-uid-2057"
         style={
           Object {
             "left": 1500,
@@ -16882,7 +16882,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="out-1"
-                  data-nodeid="test-uid-2337"
+                  data-nodeid="test-uid-2057"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
@@ -16893,7 +16893,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
       </div>
       <div
         className="node"
-        data-nodeid="test-uid-2339"
+        data-nodeid="test-uid-2059"
         style={
           Object {
             "left": 1600,
@@ -16930,7 +16930,7 @@ exports[`Storyshots React Diagrams Zoom to fit 1`] = `
                 <div
                   className="port"
                   data-name="in-1"
-                  data-nodeid="test-uid-2339"
+                  data-nodeid="test-uid-2059"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
                 />
