@@ -15,6 +15,9 @@ import demo_zoom_to_fit from "../demos/demo-zoom-to-fit/index";
 import demo_custom_link1 from "../demos/demo-custom-link1/index";
 import demo_cloning from "../demos/demo-cloning/index";
 import demo_dagre from "../demos/demo-dagre/index";
+import {Toolkit} from "../src/Toolkit";
+
+Toolkit.TESTING_MODE = true;
 
 storiesOf("Tests", module)
 	.add("Simple example", () => {
