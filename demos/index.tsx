@@ -3,20 +3,21 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Toolkit } from "../src/Toolkit";
 
-import demo1 from "./demo1/index";
-import demo2 from "./demo2/index";
-import demo3 from "./demo3/index";
-import demo4 from "./demo4/index";
-import demo5 from "./demo5/index";
-import demo6 from "./demo6/index";
-import demo7 from "./demo7/index";
-import demo8 from "./demo8/index";
-import demo9 from "./demo9/index";
-import demo10 from "./demo10/index";
-import demo11 from "./demo11/index";
-import demo12 from "./demo12/index";
-import demo13 from "./demo13/index";
-import demoDagre from "./demo-dagre/index";
+import demo_simple from "./demo-simple/index";
+import demo_performance from "./demo-performance/index";
+import demo_custom_node1 from "./demo-custom-node1/index";
+import demo_locks from "./demo-locks/index";
+import demo_drag_and_drop from "./demo-drag-and-drop/index";
+import demo_serializing from "./demo-serializing/index";
+import demo_grid from "./demo-grid/index";
+import demo_limit_points from "./demo-limit-points/index";
+import demo_listeners from "./demo-listeners/index";
+import demo_mutate_graph from "./demo-mutate-graph/index";
+import demo_zoom_to_fit from "./demo-zoom-to-fit/index";
+import demo_custom_link1 from "./demo-custom-link1/index";
+import demo_cloning from "./demo-cloning/index";
+import demo_dagre from "./demo-dagre/index";
+
 import { Helper } from "./Helper";
 
 require("./test.scss");
@@ -24,49 +25,55 @@ require("./test.scss");
 // make tests deterministic
 Toolkit.TESTING_MODE = true;
 
-storiesOf("React Diagrams", module)
-	.add("Simple Example", () => {
-		return demo1();
+storiesOf("Simple Usage", module)
+	.add("Simple example", () => {
+		return demo_simple();
 	})
-	.add("Performance Test", () => {
-		return demo2();
+	.add("Performance demo", () => {
+		return demo_performance();
 	})
-	.add("Custom Diamond Widget", () => {
-		return demo3();
+	.add("Locked widget", () => {
+		return demo_locks();
 	})
-	.add("Locked Widget", () => {
-		return demo4();
-	})
-	.add("Embedded diagram", () => {
-		return demo5();
-	})
-	.add("Serializing and Deserializing", () => {
-		return demo6();
-	})
-	.add("Grid Size", () => {
-		return demo7();
-	})
-	.add("Auto distribute", () => {
-		return demoDagre();
+	.add("Grid size", () => {
+		return demo_grid();
 	})
 	.add("Limiting number of points", () => {
-		return demo8();
+		return demo_limit_points();
 	})
-	.add("Events", () => {
-		return demo9();
-	})
-	.add("Programatically move nodes", () => {
-		return demo10();
+	.add("Events and listeners", () => {
+		return demo_listeners();
 	})
 	.add("Zoom to fit", () => {
-		return demo11();
+		return demo_zoom_to_fit();
 	})
-	.add("Link types", () => {
-		return demo12();
-	})
+
+storiesOf("Advanced Techniques", module)
 	.add("Clone selected", () => {
-		return demo13();
-	});
+		return demo_cloning();
+	})
+	.add("Serializing and deserializing", () => {
+		return demo_serializing();
+	})
+	.add("Programatically modify graph", () => {
+		return demo_mutate_graph();
+	})
+	.add("Large application example", () => {
+		return demo_drag_and_drop();
+	})
+
+storiesOf("Custom Models", module)
+	.add("Custom diamond node", () => {
+		return demo_custom_node1();
+	})
+	.add("Custom links", () => {
+		return demo_custom_link1();
+	})
+
+storiesOf("3rd party libraries", module)
+	.add("Auto distribute - Dagre", () => {
+		return demo_dagre();
+	})
 
 // enable this to log mouse location when writing new puppeteer tests
 //Helper.logMousePosition()
