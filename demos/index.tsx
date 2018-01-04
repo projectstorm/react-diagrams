@@ -1,7 +1,11 @@
 import * as React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { Toolkit } from "../src/Toolkit";
+import {storiesOf} from "@storybook/react";
+import * as storybook from '@storybook/react';
+import {action} from "@storybook/addon-actions";
+import {setOptions} from '@storybook/addon-options';
+import {Toolkit} from "../src/Toolkit";
+import { host } from 'storybook-host';
+import { withReadme, withDocs }  from 'storybook-readme';
 
 import demo_simple from "./demo-simple/index";
 import demo_performance from "./demo-performance/index";
@@ -18,17 +22,35 @@ import demo_custom_link1 from "./demo-custom-link1/index";
 import demo_cloning from "./demo-cloning/index";
 import demo_dagre from "./demo-dagre/index";
 
-import { Helper } from "./Helper";
+import {Helper} from "./Helper";
 
-require("./test.scss");
+require("./demo.scss");
 
 // make tests deterministic
 Toolkit.TESTING_MODE = true;
 
+// Option defaults:
+setOptions({
+	name: 'STORM React Diagrams',
+	url: 'https://github.com/projectstorm/react-diagrams',
+	addonPanelInRight: true
+});
+
+const withCustomPreview = withDocs({
+	PreviewComponent: ({ children }) => {
+		return <div className="docs-preview-wrapper">{children}</div>
+	}
+})
+
 storiesOf("Simple Usage", module)
-	.add("Simple example", () => {
-		return demo_simple();
-	})
+	.add("Simple example", withCustomPreview(
+		require("./demo-simple/docs.md"),
+		() => demo_simple()
+	))
+	// .addDecorator(host({
+	// 	height: '100%',
+	// 	width: '100%'
+	// }))
 	.add("Performance demo", () => {
 		return demo_performance();
 	})
@@ -74,6 +96,7 @@ storiesOf("3rd party libraries", module)
 	.add("Auto distribute - Dagre", () => {
 		return demo_dagre();
 	})
+
 
 // enable this to log mouse location when writing new puppeteer tests
 //Helper.logMousePosition()
