@@ -1,6 +1,8 @@
 # Checklist
 
 - [ ] The code has been run through pretty `yarn run pretty`
+- [ ] The tests pass on CircleCI
+- [ ] You have referenced the issue(s) or other PR(s) this fixes/relates-to
 - [ ] The PR Template has been filled out (see below)
 - [ ] Had a beer because you are awesome
 
