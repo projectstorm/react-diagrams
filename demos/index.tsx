@@ -6,8 +6,8 @@ import {setOptions} from '@storybook/addon-options';
 import {Toolkit} from "../src/Toolkit";
 import { host } from 'storybook-host';
 import { withReadme, withDocs }  from 'storybook-readme';
+import {WithCode} from "../.storybook/addon-code/react.js";
 
-import demo_simple from "./demo-simple/index";
 import demo_performance from "./demo-performance/index";
 import demo_custom_node1 from "./demo-custom-node1/index";
 import demo_locks from "./demo-locks/index";
@@ -42,6 +42,15 @@ const withCustomPreview = withDocs({
 	}
 })
 
+function getDemo(widget, code, markdown?){
+	let container = () => <WithCode code={code}>{widget}</WithCode>;
+	if(markdown){
+		return withCustomPreview(markdown, container);
+	}
+	return container;
+}
+
+
 storiesOf("Simple Usage", module)
 	.addDecorator(host({
 		cropMarks: false,
@@ -49,13 +58,15 @@ storiesOf("Simple Usage", module)
 		width: '100%',
 		padding: 20
 	}))
-	.add("Simple example", withCustomPreview(
-		require("./demo-simple/docs.md"),
-		() => demo_simple()
+	.add("Simple example", getDemo(
+		require("./demo-simple/index").default(),
+		require('!!raw-loader!./demo-simple/index'),
+		require("./demo-simple/docs.md")
 	))
-	.add("Performance demo", () => {
-		return demo_performance();
-	})
+	.add("Performance demo", getDemo(
+		demo_performance(),
+		require('!!raw-loader!./demo-performance/index')
+	))
 	.add("Locked widget", () => {
 		return demo_locks();
 	})
