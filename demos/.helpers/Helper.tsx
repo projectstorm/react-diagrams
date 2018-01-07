@@ -1,3 +1,7 @@
+import * as React from "react";
+import {withDocs} from 'storybook-readme';
+import {WithCode} from "../../.storybook/addon-code/react.js";
+
 export class Helper {
 	/**
 	 * Logs the mouse position in the console, but overlays a div that consumes all events
@@ -17,5 +21,17 @@ export class Helper {
 			console.clear();
 			console.log(event.clientX, event.clientY);
 		});
+	}
+
+	static makeDemo(widget, code, markdown?) {
+		let container = () => <WithCode code={code}>{widget}</WithCode>;
+		if (markdown) {
+			return withDocs({
+				PreviewComponent: ({children}) => {
+					return <div className="docs-preview-wrapper">{children}</div>
+				}
+			})(markdown, container);
+		}
+		return container;
 	}
 }

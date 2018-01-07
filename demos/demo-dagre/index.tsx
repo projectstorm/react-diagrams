@@ -13,7 +13,7 @@ import {
 } from "../../src/main";
 import { distributeElements } from "./dagre-utils";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
+import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
 
 function createNode(name) {
 	return new DefaultNodeModel(name, "rgb(0,192,255)");

@@ -12,7 +12,7 @@ import {
 	LinkInstanceFactory
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
+import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
 import { action } from '@storybook/addon-actions';
 var beautify = require("json-beautify");
 

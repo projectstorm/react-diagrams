@@ -9,7 +9,7 @@ import {
 	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
+import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
 
 /**
  *

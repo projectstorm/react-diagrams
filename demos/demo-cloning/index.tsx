@@ -15,7 +15,7 @@ import {
 } from "../../src/main";
 import * as _ from "lodash";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../DemoWorkspaceWidget";
+import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
 
 /**
  * Tests cloning
