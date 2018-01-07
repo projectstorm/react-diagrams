@@ -18,8 +18,8 @@
 
 ## Feel-Good "programming lol" image:
 
-(Add your own one below)
+(Add your own one below :])
 
-![](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
+![LOL](https://media.giphy.com/media/mpsWzGvZJG4X6/giphy.gif)
 
 
