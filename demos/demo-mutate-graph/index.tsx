@@ -51,8 +51,8 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		const { engine } = this.props;
 		return (
 			<DemoWorkspaceWidget buttons={[
-				<button onClick={this.updatePosition}>Update position</button>,
-				<button onClick={this.updatePositionViaSerialize}>Update position via serialize</button>
+				<button key={1} onClick={this.updatePosition}>Update position</button>,
+				<button key={2} onClick={this.updatePositionViaSerialize}>Update position via serialize</button>
 			]}>
 				<DiagramWidget diagramEngine={engine} />
 			</DemoWorkspaceWidget>

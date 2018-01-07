@@ -20,7 +20,7 @@
 	"typings": "./dist/src/main",
 	"author": "dylanvorster",
 	"scripts": {
-		"test": "jest",
+		"test": "jest --no-cache",
 		"storybook": "start-storybook -p 9001 -c .storybook",
 		"storybook:build": "build-storybook -c .storybook -o .out",
 		"storybook:github": "storybook-to-ghpages",

@@ -2,4 +2,4 @@ import initStoryshots from '@storybook/addon-storyshots';
 
 import 'raf/polyfill';
 
-initStoryshots({ /* configuration options */ });
+initStoryshots({ configPath: '.storybook-jest' });
