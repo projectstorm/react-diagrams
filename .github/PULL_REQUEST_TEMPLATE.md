@@ -1,8 +1,8 @@
 # Checklist
 
-- [] The code has been run through pretty `yarn run pretty`
-- [] The PR Template has been filled out (see below)
-- [] Had a beer because you are awesome
+- [ ] The code has been run through pretty `yarn run pretty`
+- [ ] The PR Template has been filled out (see below)
+- [ ] Had a beer because you are awesome
 
 ## What?
 
@@ -18,8 +18,8 @@
 
 ## Feel-Good "programming lol" image:
 
-(Add your own one below)
+(Add your own one below :])
 
-![](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
+![LOL](https://i.pinimg.com/originals/7f/1b/c3/7f1bc3fb2e123dd3255a85c04db22f19.jpg)
 
 
