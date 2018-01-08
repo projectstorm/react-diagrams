@@ -6,13 +6,10 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DefaultPortModel,
-	DiagramWidget,
-	DefaultNodeInstanceFactory,
-	DefaultPortInstanceFactory,
-	LinkInstanceFactory
+	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 
 /**
  * Tests the grid size
@@ -50,10 +47,16 @@ class NodeDelayedPosition extends React.Component<any, any> {
 	render() {
 		const { engine } = this.props;
 		return (
-			<DemoWorkspaceWidget buttons={[
-				<button key={1} onClick={this.updatePosition}>Update position</button>,
-				<button key={2} onClick={this.updatePositionViaSerialize}>Update position via serialize</button>
-			]}>
+			<DemoWorkspaceWidget
+				buttons={[
+					<button key={1} onClick={this.updatePosition}>
+						Update position
+					</button>,
+					<button key={2} onClick={this.updatePositionViaSerialize}>
+						Update position via serialize
+					</button>
+				]}
+			>
 				<DiagramWidget diagramEngine={engine} />
 			</DemoWorkspaceWidget>
 		);
@@ -63,8 +66,7 @@ class NodeDelayedPosition extends React.Component<any, any> {
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
+	engine.installDefaultFactories();
 
 	//2) setup the diagram model
 	var model = new DiagramModel();
@@ -93,11 +95,6 @@ export default () => {
 
 	//5) load model into engine
 	engine.setDiagramModel(model);
-
-	//we need this to help the system know what models to create form the JSON
-	engine.registerInstanceFactory(new DefaultNodeInstanceFactory());
-	engine.registerInstanceFactory(new DefaultPortInstanceFactory());
-	engine.registerInstanceFactory(new LinkInstanceFactory());
 
 	//6) render the diagram!
 	return <NodeDelayedPosition engine={engine} model={model} />;

@@ -3,15 +3,13 @@ import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 
 export class NodeModel extends BaseModel<BaseModelListener> {
-	nodeType: string;
 	x: number;
 	y: number;
 	extras: {};
 	ports: { [s: string]: PortModel };
 
 	constructor(nodeType: string = "default", id?: string) {
-		super(id);
-		this.nodeType = nodeType;
+		super(nodeType, id);
 		this.x = 0;
 		this.y = 0;
 		this.extras = {};
@@ -52,7 +50,6 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 
 	deSerialize(ob) {
 		super.deSerialize(ob);
-		this.nodeType = ob.type;
 		this.x = ob.x;
 		this.y = ob.y;
 		this.extras = ob.extras;
@@ -60,7 +57,6 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			type: this.nodeType,
 			x: this.x,
 			y: this.y,
 			extras: this.extras,
@@ -116,9 +112,5 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		port.setParentNode(this);
 		this.ports[port.name] = port;
 		return port;
-	}
-
-	getType(): string {
-		return this.nodeType;
 	}
 }

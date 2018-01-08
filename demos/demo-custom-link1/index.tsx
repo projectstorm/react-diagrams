@@ -13,15 +13,14 @@ import {
 } from "../../src/main";
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
-import { LinkWidgetFactory } from "../../src/WidgetFactories";
+import { LinkFactory } from "../../src/AbstractFactory";
 
 export class AdvancedLinkModel extends LinkModel {
 	size: number;
 	color: string;
 
 	constructor() {
-		super();
-		this.linkType = "advanced";
+		super("advanced");
 		this.color = "green";
 		this.size = 6;
 	}
@@ -39,7 +38,11 @@ export class AdvancedPortModel extends DefaultPortModel {
 	}
 }
 
-export class AdvancedLinkWidgetFactory extends LinkWidgetFactory {
+export class AdvancedLinkWidgetFactory extends LinkFactory<AdvancedLinkModel> {
+	getNewInstance(initialConfig?: any): AdvancedLinkModel {
+		return new AdvancedLinkModel();
+	}
+
 	constructor() {
 		super("advanced");
 	}
@@ -62,9 +65,8 @@ export class AdvancedLinkWidgetFactory extends LinkWidgetFactory {
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
+	engine.installDefaultFactories();
 	engine.registerLinkFactory(new AdvancedLinkWidgetFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
 
 	var node1 = new DefaultNodeModel("Source", "rgb(0,192,255)");
 	var port1 = node1.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
@@ -108,7 +110,5 @@ export default () => {
 	engine.setDiagramModel(model);
 
 	// render the diagram!
-	return (
-		<DiagramWidget diagramEngine={engine} />
-	);
+	return <DiagramWidget diagramEngine={engine} />;
 };

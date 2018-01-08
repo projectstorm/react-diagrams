@@ -6,21 +6,17 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DefaultPortModel,
-	DiagramWidget,
-	DefaultNodeInstanceFactory,
-	DefaultPortInstanceFactory,
-	LinkInstanceFactory
+	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
-import { action } from '@storybook/addon-actions';
+import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { action } from "@storybook/addon-actions";
 var beautify = require("json-beautify");
 
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
+	engine.installDefaultFactories();
 
 	//2) setup the diagram model
 	var model = new DiagramModel();
@@ -56,22 +52,22 @@ export default () => {
 
 	//!------------- DESERIALIZING ----------------
 
-	//we need this to help the system know what models to create form the JSON
-	engine.registerInstanceFactory(new DefaultNodeInstanceFactory());
-	engine.registerInstanceFactory(new DefaultPortInstanceFactory());
-	engine.registerInstanceFactory(new LinkInstanceFactory());
-
-	//deserialize the model
 	var model2 = new DiagramModel();
 	model2.deSerializeDiagram(JSON.parse(str), engine);
 	engine.setDiagramModel(model2);
 
 	return (
-		<DemoWorkspaceWidget buttons={
-			<button onClick={() => {
-				action("Serialized Graph")(beautify(model2.serializeDiagram(), null, 2, 80))
-			}} >Serialize Graph</button>
-		}>
+		<DemoWorkspaceWidget
+			buttons={
+				<button
+					onClick={() => {
+						action("Serialized Graph")(beautify(model2.serializeDiagram(), null, 2, 80));
+					}}
+				>
+					Serialize Graph
+				</button>
+			}
+		>
 			<DiagramWidget diagramEngine={engine} />
 		</DemoWorkspaceWidget>
 	);

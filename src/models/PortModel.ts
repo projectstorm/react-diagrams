@@ -8,6 +8,13 @@ export class PortModel extends BaseModel<BaseModelListener> {
 	parentNode: NodeModel;
 	links: { [id: string]: LinkModel };
 
+	constructor(name: string, type?: string, id?: string) {
+		super(type, id);
+		this.name = name;
+		this.links = {};
+		this.parentNode = null;
+	}
+
 	deSerialize(ob) {
 		super.deSerialize(ob);
 		this.name = ob.name;
@@ -26,13 +33,6 @@ export class PortModel extends BaseModel<BaseModelListener> {
 	doClone(lookupTable = {}, clone) {
 		clone.links = {};
 		clone.parentNode = this.parentNode.clone(lookupTable);
-	}
-
-	constructor(name: string, id?: string) {
-		super(id);
-		this.name = name;
-		this.links = {};
-		this.parentNode = null;
 	}
 
 	getName(): string {

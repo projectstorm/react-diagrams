@@ -10,7 +10,9 @@ import {
 } from "../../src/main";
 import * as React from "react";
 import { DiamondNodeModel } from "./DiamondNodeModel";
-import { DiamondWidgetFactory } from "./DiamondWidgetFactory";
+import { DiamondNodeFactory } from "./DiamondNodeFactory";
+import { SimplePortFactory } from "../../src/AbstractFactory";
+import { DiamondPortModel } from "./DiamondPortModel";
 
 /**
  * @Author Dylan Vorster
@@ -18,9 +20,9 @@ import { DiamondWidgetFactory } from "./DiamondWidgetFactory";
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
-	engine.registerNodeFactory(new DiamondWidgetFactory());
+	engine.installDefaultFactories();
+	engine.registerPortFactory(new SimplePortFactory("diamond", config => new DiamondPortModel()));
+	engine.registerNodeFactory(new DiamondNodeFactory());
 
 	//2) setup the diagram model
 	var model = new DiagramModel();

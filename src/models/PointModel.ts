@@ -62,7 +62,7 @@ export class PointModel extends BaseModel<BaseModelListener> {
 	getLink(): LinkModel {
 		return this.link;
 	}
-	
+
 	isLocked() {
 		return super.isLocked() || this.getLink().isLocked();
 	}

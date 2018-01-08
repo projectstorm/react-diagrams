@@ -11,15 +11,13 @@ export interface LinkModelListener extends BaseModelListener {
 }
 
 export class LinkModel extends BaseModel<LinkModelListener> {
-	linkType: string;
 	sourcePort: PortModel | null;
 	targetPort: PortModel | null;
 	points: PointModel[];
 	extras: {};
 
-	constructor() {
-		super();
-		this.linkType = "default";
+	constructor(linkType: string = "default", id?: string) {
+		super(linkType, id);
 		this.points = [new PointModel(this, { x: 0, y: 0 }), new PointModel(this, { x: 0, y: 0 })];
 		this.extras = {};
 		this.sourcePort = null;
@@ -28,7 +26,6 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 
 	deSerialize(ob) {
 		super.deSerialize(ob);
-		this.linkType = ob.type;
 		this.extras = ob.extras;
 		this.points = _.map(ob.points, (point: { x; y }) => {
 			var p = new PointModel(this, { x: point.x, y: point.y });
@@ -39,7 +36,6 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			type: this.linkType,
 			source: this.sourcePort ? this.sourcePort.getParent().id : null,
 			sourcePort: this.sourcePort ? this.sourcePort.id : null,
 			target: this.targetPort ? this.targetPort.getParent().id : null,
@@ -171,9 +167,5 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	addPoint(pointModel: PointModel, index = 1) {
 		pointModel.link = this;
 		this.points.splice(index, 0, pointModel);
-	}
-
-	getType(): string {
-		return this.linkType;
 	}
 }

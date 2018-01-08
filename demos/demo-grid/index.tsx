@@ -16,8 +16,7 @@ import * as React from "react";
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
+	engine.installDefaultFactories();
 
 	//2) setup the diagram model
 	var model = new DiagramModel();
