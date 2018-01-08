@@ -12,13 +12,14 @@ export interface BaseModelListener extends BaseListener {
  * @author Dylan Vorster
  */
 export class BaseModel<T extends BaseModelListener = BaseModelListener> extends BaseEntity<BaseModelListener> {
-	selected: boolean;
-	class: string;
 
-	constructor(id?: string) {
+	type: string;
+	selected: boolean;
+
+	constructor(type?: string, id?: string) {
 		super(id);
+		this.type = type;
 		this.selected = false;
-		this.class = this.constructor.name;
 	}
 
 	public getSelectedEntities(): BaseModel<T>[] {
@@ -30,14 +31,19 @@ export class BaseModel<T extends BaseModelListener = BaseModelListener> extends 
 
 	public deSerialize(ob) {
 		super.deSerialize(ob);
+		this.type = ob.type;
 		this.selected = ob.selected;
 	}
 
 	public serialize() {
 		return _.merge(super.serialize(), {
-			_class: this.class,
+			type: this.type,
 			selected: this.selected
 		});
+	}
+
+	public getType(): string{
+		return this.type;
 	}
 
 	public getID(): string {

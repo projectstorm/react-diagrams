@@ -8,9 +8,7 @@ export class Application {
 
 	constructor() {
 		this.diagramEngine = new SRD.DiagramEngine();
-
-		this.diagramEngine.registerNodeFactory(new SRD.DefaultNodeFactory());
-		this.diagramEngine.registerLinkFactory(new SRD.DefaultLinkFactory());
+		this.diagramEngine.installDefaultFactories();
 
 		this.newModel();
 	}

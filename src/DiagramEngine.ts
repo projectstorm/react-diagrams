@@ -1,17 +1,21 @@
-import { NodeWidgetFactory, LinkWidgetFactory } from "./WidgetFactories";
 import { BaseEntity, BaseListener } from "./BaseEntity";
 import { DiagramModel } from "./models/DiagramModel";
-import { AbstractInstanceFactory } from "./AbstractInstanceFactory";
 import * as _ from "lodash";
 import { BaseModel, BaseModelListener } from "./models/BaseModel";
 import { NodeModel } from "./models/NodeModel";
 import { PointModel } from "./models/PointModel";
 import { PortModel } from "./models/PortModel";
 import { LinkModel } from "./models/LinkModel";
+import {LinkFactory, NodeFactory, PortFactory} from "./AbstractFactory";
+import {DefaultLinkFactory, DefaultNodeFactory} from "./main";
+import {DefaultPortFactory} from "./defaults/DefaultPortFactory";
 /**
  * @author Dylan Vorster
  */
 export interface DiagramEngineListener extends BaseListener {
+
+	portFactoriesUpdated?(): void;
+
 	nodeFactoriesUpdated?(): void;
 
 	linkFactoriesUpdated?(): void;
@@ -23,11 +27,10 @@ export interface DiagramEngineListener extends BaseListener {
  * Passed as a parameter to the DiagramWidget
  */
 export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
-	nodeFactories: { [s: string]: NodeWidgetFactory };
-	linkFactories: { [s: string]: LinkWidgetFactory };
-	instanceFactories: {
-		[s: string]: AbstractInstanceFactory<BaseEntity<BaseListener>>;
-	};
+
+	nodeFactories: { [s: string]: NodeFactory };
+	linkFactories: { [s: string]: LinkFactory };
+	portFactories: { [s: string]: PortFactory };
 
 	diagramModel: DiagramModel;
 	canvas: Element;
@@ -41,10 +44,16 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.diagramModel = new DiagramModel();
 		this.nodeFactories = {};
 		this.linkFactories = {};
-		this.instanceFactories = {};
+		this.portFactories = {};
 		this.canvas = null;
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
+	}
+
+	installDefaultFactories(){
+		this.registerNodeFactory(new DefaultNodeFactory());
+		this.registerLinkFactory(new DefaultLinkFactory());
+		this.registerPortFactory(new DefaultPortFactory());
 	}
 
 	repaintCanvas() {
@@ -131,23 +140,24 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return this.diagramModel;
 	}
 
-	getNodeFactories(): { [s: string]: NodeWidgetFactory } {
+	getNodeFactories(): { [s: string]: NodeFactory } {
 		return this.nodeFactories;
 	}
 
-	getLinkFactories(): { [s: string]: LinkWidgetFactory } {
+	getLinkFactories(): { [s: string]: LinkFactory } {
 		return this.linkFactories;
 	}
 
-	getInstanceFactory(className: string): AbstractInstanceFactory<BaseEntity<BaseListener>> {
-		return this.instanceFactories[className];
+	registerPortFactory(factory: PortFactory) {
+		this.portFactories[factory.getType()] = factory;
+		this.iterateListeners(listener => {
+			if (listener.portFactoriesUpdated) {
+				listener.portFactoriesUpdated();
+			}
+		});
 	}
 
-	registerInstanceFactory(factory: AbstractInstanceFactory<BaseEntity<BaseListener>>) {
-		this.instanceFactories[factory.getName()] = factory;
-	}
-
-	registerNodeFactory(factory: NodeWidgetFactory) {
+	registerNodeFactory(factory: NodeFactory) {
 		this.nodeFactories[factory.getType()] = factory;
 		this.iterateListeners(listener => {
 			if (listener.nodeFactoriesUpdated) {
@@ -156,7 +166,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		});
 	}
 
-	registerLinkFactory(factory: LinkWidgetFactory) {
+	registerLinkFactory(factory: LinkFactory) {
 		this.linkFactories[factory.getType()] = factory;
 		this.iterateListeners(listener => {
 			if (listener.linkFactoriesUpdated) {
@@ -165,20 +175,36 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		});
 	}
 
-	getFactoryForNode(node: NodeModel): NodeWidgetFactory | null {
-		if (this.nodeFactories[node.getType()]) {
-			return this.nodeFactories[node.getType()];
+	getPortFactory(type: string): PortFactory{
+		if (this.portFactories[type]) {
+			return this.portFactories[type];
 		}
-		console.log("cannot find widget factory for node of type: [" + node.getType() + "]");
+		console.log("cannot find factory for port of type: [" + type + "]");
 		return null;
 	}
 
-	getFactoryForLink(link: LinkModel): LinkWidgetFactory | null {
-		if (this.linkFactories[link.getType()]) {
-			return this.linkFactories[link.getType()];
+	getNodeFactory(type: string): NodeFactory{
+		if (this.nodeFactories[type]) {
+			return this.nodeFactories[type];
 		}
-		console.log("cannot find widget factory for link of type: [" + link.getType() + "]");
+		console.log("cannot find factory for node of type: [" + type + "]");
 		return null;
+	}
+
+	getLinkFactory(type: string): LinkFactory{
+		if (this.linkFactories[type]) {
+			return this.linkFactories[type];
+		}
+		console.log("cannot find factory for link of type: [" + type + "]");
+		return null;
+	}
+
+	getFactoryForNode(node: NodeModel): NodeFactory | null {
+		return this.getNodeFactory(node.getType());
+	}
+
+	getFactoryForLink(link: LinkModel): LinkFactory | null {
+		return this.getLinkFactory(link.getType());
 	}
 
 	generateWidgetForLink(link: LinkModel): JSX.Element | null {

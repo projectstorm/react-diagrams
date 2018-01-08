@@ -7,9 +7,6 @@ import {
 	LinkModel,
 	DefaultPortModel,
 	DiagramWidget,
-	DefaultNodeInstanceFactory,
-	DefaultPortInstanceFactory,
-	LinkInstanceFactory
 } from "../../src/main";
 import { distributeElements } from "./dagre-utils";
 import * as React from "react";
@@ -73,8 +70,7 @@ function getDistributedModel(engine, model) {
 export default () => {
 	//1) setup the diagram engine
 	let engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
+	engine.installDefaultFactories();
 
 	//2) setup the diagram model
 	let model = new DiagramModel();
@@ -113,10 +109,6 @@ export default () => {
 		model.addLink(link);
 	});
 	//5) load model into engine
-	//we need this to help the system know what models to create form the JSON
-	engine.registerInstanceFactory(new DefaultNodeInstanceFactory());
-	engine.registerInstanceFactory(new DefaultPortInstanceFactory());
-	engine.registerInstanceFactory(new LinkInstanceFactory());
 	let model2 = getDistributedModel(engine, model);
 	engine.setDiagramModel(model2);
 

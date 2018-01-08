@@ -8,14 +8,12 @@ import {
 	NodeModel,
 	DefaultPortModel,
 	DiagramWidget,
-	DefaultNodeInstanceFactory,
-	DefaultPortInstanceFactory,
-	LinkInstanceFactory,
 	BaseModel
 } from "../../src/main";
 import * as _ from "lodash";
 import * as React from "react";
 import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
+import {DefaultPortFactory} from "../../src/defaults/DefaultPortFactory";
 
 /**
  * Tests cloning
@@ -66,8 +64,7 @@ class CloneSelected extends React.Component<any, any> {
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
+	engine.installDefaultFactories();
 
 	//2) setup the diagram model
 	var model = new DiagramModel();
@@ -96,11 +93,6 @@ export default () => {
 
 	//5) load model into engine
 	engine.setDiagramModel(model);
-
-	//we need this to help the system know what models to create form the JSON
-	engine.registerInstanceFactory(new DefaultNodeInstanceFactory());
-	engine.registerInstanceFactory(new DefaultPortInstanceFactory());
-	engine.registerInstanceFactory(new LinkInstanceFactory());
 
 	//6) render the diagram!
 	return <CloneSelected engine={engine} model={model} />;

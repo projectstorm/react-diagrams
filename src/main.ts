@@ -11,15 +11,13 @@ export * from "./defaults/DefaultNodeModel";
 export * from "./defaults/DefaultPortModel";
 export * from "./defaults/DefaultPortLabelWidget";
 
-export * from "./WidgetFactories";
+export * from "./AbstractFactory";
 export * from "./Toolkit";
 
 export * from "./DiagramEngine";
 export * from "./models/DiagramModel";
 export * from "./BaseEntity";
 export * from "./CanvasActions";
-export * from "./AbstractInstanceFactory";
-export * from "./LinkInstanceFactory";
 
 export * from "./models/BaseModel";
 export * from "./models/DiagramModel";

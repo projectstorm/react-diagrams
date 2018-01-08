@@ -8,8 +8,7 @@ import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget
 export default () => {
 	// setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new SRD.DefaultNodeFactory());
-	engine.registerLinkFactory(new SRD.DefaultLinkFactory());
+	engine.installDefaultFactories();
 
 	var model = new DiagramModel();
 

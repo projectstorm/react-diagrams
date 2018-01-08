@@ -20,8 +20,7 @@ import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
+	engine.installDefaultFactories();
 
 	function generateNodes(model: DiagramModel, offsetX: number, offsetY: number) {
 		//3-A) create a default node

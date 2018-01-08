@@ -1,12 +1,13 @@
-import { LinkWidgetFactory } from "../WidgetFactories";
 import * as React from "react";
 import { DefaultLinkWidget } from "./DefaultLinkWidget";
 import { DiagramEngine } from "../DiagramEngine";
 import { LinkModel } from "../models/LinkModel";
+import {LinkFactory} from "../AbstractFactory";
 /**
  * @author Dylan Vorster
  */
-export class DefaultLinkFactory extends LinkWidgetFactory {
+export class DefaultLinkFactory extends LinkFactory {
+
 	constructor() {
 		super("default");
 	}
@@ -16,5 +17,9 @@ export class DefaultLinkFactory extends LinkWidgetFactory {
 			link: link,
 			diagramEngine: diagramEngine
 		});
+	}
+
+	getNewInstance(initialConfig?: any): LinkModel {
+		return new LinkModel();
 	}
 }
