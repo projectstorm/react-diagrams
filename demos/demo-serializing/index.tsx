@@ -6,11 +6,11 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DefaultPortModel,
-	DiagramWidget,
+	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
-import { action } from '@storybook/addon-actions';
+import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { action } from "@storybook/addon-actions";
 var beautify = require("json-beautify");
 
 export default () => {
@@ -57,11 +57,17 @@ export default () => {
 	engine.setDiagramModel(model2);
 
 	return (
-		<DemoWorkspaceWidget buttons={
-			<button onClick={() => {
-				action("Serialized Graph")(beautify(model2.serializeDiagram(), null, 2, 80))
-			}} >Serialize Graph</button>
-		}>
+		<DemoWorkspaceWidget
+			buttons={
+				<button
+					onClick={() => {
+						action("Serialized Graph")(beautify(model2.serializeDiagram(), null, 2, 80));
+					}}
+				>
+					Serialize Graph
+				</button>
+			}
+		>
 			<DiagramWidget diagramEngine={engine} />
 		</DemoWorkspaceWidget>
 	);

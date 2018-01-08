@@ -1,15 +1,15 @@
 import * as React from "react";
-import {DiagramEngine} from "../DiagramEngine";
+import { DiagramEngine } from "../DiagramEngine";
 import * as _ from "lodash";
-import {LinkLayerWidget} from "./LinkLayerWidget";
-import {NodeLayerWidget} from "./NodeLayerWidget";
-import {Toolkit} from "../Toolkit";
-import {BaseAction, MoveCanvasAction, MoveItemsAction, SelectingAction} from "../CanvasActions";
-import {NodeModel} from "../models/NodeModel";
-import {PointModel} from "../models/PointModel";
-import {PortModel} from "../models/PortModel";
-import {LinkModel} from "../models/LinkModel";
-import {BaseModel, BaseModelListener} from "../models/BaseModel";
+import { LinkLayerWidget } from "./LinkLayerWidget";
+import { NodeLayerWidget } from "./NodeLayerWidget";
+import { Toolkit } from "../Toolkit";
+import { BaseAction, MoveCanvasAction, MoveItemsAction, SelectingAction } from "../CanvasActions";
+import { NodeModel } from "../models/NodeModel";
+import { PointModel } from "../models/PointModel";
+import { PortModel } from "../models/PortModel";
+import { LinkModel } from "../models/LinkModel";
+import { BaseModel, BaseModelListener } from "../models/BaseModel";
 
 export interface SelectionModel {
 	model: BaseModel<BaseModelListener>;
@@ -86,17 +86,17 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			const diagramEngineListener = nextProps.diagramEngine.addListener({
 				repaintCanvas: () => this.forceUpdate()
 			});
-			this.setState({diagramEngineListener});
+			this.setState({ diagramEngineListener });
 		}
 	}
 
 	componentWillUpdate(nextProps: DiagramProps) {
 		if (this.props.diagramEngine.diagramModel.id !== nextProps.diagramEngine.diagramModel.id) {
-			this.setState({renderedNodes: false});
+			this.setState({ renderedNodes: false });
 			nextProps.diagramEngine.diagramModel.rendered = true;
 		}
 		if (!nextProps.diagramEngine.diagramModel.rendered) {
-			this.setState({renderedNodes: false});
+			this.setState({ renderedNodes: false });
 			nextProps.diagramEngine.diagramModel.rendered = true;
 		}
 	}
@@ -126,7 +126,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		window.addEventListener("keyup", this.onKeyUpPointer, false);
 
 		// dont focus the window when in test mode - jsdom fails
-		if(process.env.NODE_ENV !== 'test'){
+		if (process.env.NODE_ENV !== "test") {
 			window.focus();
 		}
 	}
@@ -192,7 +192,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		if (this.props.actionStoppedFiring && !shouldSkipEvent) {
 			this.props.actionStoppedFiring(this.state.action);
 		}
-		this.setState({action: null});
+		this.setState({ action: null });
 	}
 
 	startFiringAction(action: BaseAction) {
@@ -201,7 +201,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			setState = this.props.actionStartedFiring(action);
 		}
 		if (setState) {
-			this.setState({action: action});
+			this.setState({ action: action });
 		}
 	}
 
@@ -237,7 +237,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			this.state.action.mouseY2 = relative.y;
 
 			this.fireAction();
-			this.setState({action: this.state.action});
+			this.setState({ action: this.state.action });
 			return;
 		} else if (this.state.action instanceof MoveItemsAction) {
 			let amountX = event.clientX - this.state.action.mouseX;
@@ -261,7 +261,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 			});
 			this.fireAction();
 			if (!this.state.wasMoved) {
-				this.setState({wasMoved: true});
+				this.setState({ wasMoved: true });
 			} else {
 				this.forceUpdate();
 			}
@@ -432,7 +432,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					}
 				}}
 				onMouseDown={event => {
-					this.setState({...this.state, wasMoved: false});
+					this.setState({ ...this.state, wasMoved: false });
 
 					diagramEngine.clearRepaintEntities();
 					var model = this.getMouseElement(event);
@@ -492,7 +492,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 						}}
 					/>
 				)}
-				<NodeLayerWidget diagramEngine={diagramEngine}/>
+				<NodeLayerWidget diagramEngine={diagramEngine} />
 				{this.state.action instanceof SelectingAction && this.drawSelectionBox()}
 			</div>
 		);

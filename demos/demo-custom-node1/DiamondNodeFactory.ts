@@ -1,9 +1,8 @@
 import * as SRD from "../../src/main";
 import { DiamonNodeWidgetFactory } from "./DiamondNodeWidget";
-import {DiamondNodeModel} from "./DiamondNodeModel";
+import { DiamondNodeModel } from "./DiamondNodeModel";
 
 export class DiamondNodeFactory extends SRD.NodeFactory {
-
 	constructor() {
 		super("diamond");
 	}

@@ -6,14 +6,13 @@ import { NodeModel } from "./models/NodeModel";
 import { PointModel } from "./models/PointModel";
 import { PortModel } from "./models/PortModel";
 import { LinkModel } from "./models/LinkModel";
-import {LinkFactory, NodeFactory, PortFactory} from "./AbstractFactory";
-import {DefaultLinkFactory, DefaultNodeFactory} from "./main";
-import {DefaultPortFactory} from "./defaults/DefaultPortFactory";
+import { LinkFactory, NodeFactory, PortFactory } from "./AbstractFactory";
+import { DefaultLinkFactory, DefaultNodeFactory } from "./main";
+import { DefaultPortFactory } from "./defaults/DefaultPortFactory";
 /**
  * @author Dylan Vorster
  */
 export interface DiagramEngineListener extends BaseListener {
-
 	portFactoriesUpdated?(): void;
 
 	nodeFactoriesUpdated?(): void;
@@ -27,7 +26,6 @@ export interface DiagramEngineListener extends BaseListener {
  * Passed as a parameter to the DiagramWidget
  */
 export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
-
 	nodeFactories: { [s: string]: NodeFactory };
 	linkFactories: { [s: string]: LinkFactory };
 	portFactories: { [s: string]: PortFactory };
@@ -50,7 +48,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.linksThatHaveInitiallyRendered = {};
 	}
 
-	installDefaultFactories(){
+	installDefaultFactories() {
 		this.registerNodeFactory(new DefaultNodeFactory());
 		this.registerLinkFactory(new DefaultLinkFactory());
 		this.registerPortFactory(new DefaultPortFactory());
@@ -161,7 +159,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		});
 	}
 
-	getPortFactory(type: string): PortFactory{
+	getPortFactory(type: string): PortFactory {
 		if (this.portFactories[type]) {
 			return this.portFactories[type];
 		}
@@ -169,7 +167,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return null;
 	}
 
-	getNodeFactory(type: string): NodeFactory{
+	getNodeFactory(type: string): NodeFactory {
 		if (this.nodeFactories[type]) {
 			return this.nodeFactories[type];
 		}
@@ -177,7 +175,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return null;
 	}
 
-	getLinkFactory(type: string): LinkFactory{
+	getLinkFactory(type: string): LinkFactory {
 		if (this.linkFactories[type]) {
 			return this.linkFactories[type];
 		}

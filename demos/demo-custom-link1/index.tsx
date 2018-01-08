@@ -13,7 +13,7 @@ import {
 } from "../../src/main";
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
-import {LinkFactory} from "../../src/AbstractFactory";
+import { LinkFactory } from "../../src/AbstractFactory";
 
 export class AdvancedLinkModel extends LinkModel {
 	size: number;
@@ -39,7 +39,6 @@ export class AdvancedPortModel extends DefaultPortModel {
 }
 
 export class AdvancedLinkWidgetFactory extends LinkFactory<AdvancedLinkModel> {
-
 	getNewInstance(initialConfig?: any): AdvancedLinkModel {
 		return new AdvancedLinkModel();
 	}
@@ -111,7 +110,5 @@ export default () => {
 	engine.setDiagramModel(model);
 
 	// render the diagram!
-	return (
-		<DiagramWidget diagramEngine={engine} />
-	);
+	return <DiagramWidget diagramEngine={engine} />;
 };

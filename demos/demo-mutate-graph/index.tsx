@@ -6,10 +6,10 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DefaultPortModel,
-	DiagramWidget,
+	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 
 /**
  * Tests the grid size
@@ -47,10 +47,16 @@ class NodeDelayedPosition extends React.Component<any, any> {
 	render() {
 		const { engine } = this.props;
 		return (
-			<DemoWorkspaceWidget buttons={[
-				<button key={1} onClick={this.updatePosition}>Update position</button>,
-				<button key={2} onClick={this.updatePositionViaSerialize}>Update position via serialize</button>
-			]}>
+			<DemoWorkspaceWidget
+				buttons={[
+					<button key={1} onClick={this.updatePosition}>
+						Update position
+					</button>,
+					<button key={2} onClick={this.updatePositionViaSerialize}>
+						Update position via serialize
+					</button>
+				]}
+			>
 				<DiagramWidget diagramEngine={engine} />
 			</DemoWorkspaceWidget>
 		);

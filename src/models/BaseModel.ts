@@ -12,7 +12,6 @@ export interface BaseModelListener extends BaseListener {
  * @author Dylan Vorster
  */
 export class BaseModel<T extends BaseModelListener = BaseModelListener> extends BaseEntity<BaseModelListener> {
-
 	type: string;
 	selected: boolean;
 
@@ -42,7 +41,7 @@ export class BaseModel<T extends BaseModelListener = BaseModelListener> extends 
 		});
 	}
 
-	public getType(): string{
+	public getType(): string {
 		return this.type;
 	}
 

@@ -1,6 +1,6 @@
 import * as React from "react";
-import {withDocs} from 'storybook-readme';
-import {WithCode} from "../../.storybook/addon-code/react.js";
+import { withDocs } from "storybook-readme";
+import { WithCode } from "../../.storybook/addon-code/react.js";
 
 export class Helper {
 	/**
@@ -27,8 +27,8 @@ export class Helper {
 		let container = () => <WithCode code={code}>{widget}</WithCode>;
 		if (markdown) {
 			return withDocs({
-				PreviewComponent: ({children}) => {
-					return <div className="docs-preview-wrapper">{children}</div>
+				PreviewComponent: ({ children }) => {
+					return <div className="docs-preview-wrapper">{children}</div>;
 				}
 			})(markdown, container);
 		}

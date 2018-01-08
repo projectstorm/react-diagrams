@@ -12,8 +12,8 @@ import {
 } from "../../src/main";
 import * as _ from "lodash";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
-import {DefaultPortFactory} from "../../src/defaults/DefaultPortFactory";
+import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { DefaultPortFactory } from "../../src/defaults/DefaultPortFactory";
 
 /**
  * Tests cloning
