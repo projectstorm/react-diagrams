@@ -64,4 +64,8 @@ export class PortModel extends BaseModel<BaseModelListener> {
 		linkModel.setSourcePort(this);
 		return linkModel;
 	}
+
+	isLocked() {
+		return super.isLocked() || this.getParent().isLocked();
+	}
 }
