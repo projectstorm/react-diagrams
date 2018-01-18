@@ -124,6 +124,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
+	generateLabel() {
+		// TODO fix type
+		const canvas: any = this.props.diagramEngine.canvas;
+		return (
+			<foreignObject className='link-label' width={canvas.offsetWidth} height={canvas.offsetHeight}>
+				<div style={{'left': '200px', 'top': '200px'}}>{this.props.link.label}</div>
+			</foreignObject>
+		)
+	}
+
 	generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
 		return `M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
 	}
@@ -216,6 +226,11 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			}
 		}
 
-		return <g>{paths}</g>;
+		return (
+			<g>
+				{paths}
+				{this.props.link.label && this.generateLabel()}
+			</g>
+		);
 	}
 }

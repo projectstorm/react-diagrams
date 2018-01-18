@@ -81,6 +81,21 @@
 		}
 	}
 
+	.link-label {
+		pointer-events: none;
+
+		> div {
+			background: rgba(70, 70, 70, 0.8);
+			border: 1px solid #333;
+			border-radius: 4px;
+			color: #fff;
+			display: inline-block;
+			font-size: smaller;
+			padding: 5px;
+			position: absolute;
+		}
+	}
+
 	.basic-node{
 		background-color: rgb(30,30,30);
 		border-radius: 5px;
