@@ -12,6 +12,7 @@ import demo_limit_points from "../demos/demo-limit-points/index";
 import demo_listeners from "../demos/demo-listeners/index";
 import demo_mutate_graph from "../demos/demo-mutate-graph/index";
 import demo_zoom_to_fit from "../demos/demo-zoom-to-fit/index";
+import demo_labelled_links from "../demos/demo-labelled-links/index";
 import demo_custom_link1 from "../demos/demo-custom-link1/index";
 import demo_cloning from "../demos/demo-cloning/index";
 import demo_dagre from "../demos/demo-dagre/index";
@@ -40,6 +41,9 @@ storiesOf("Tests", module)
 	})
 	.add("Zoom to fit", () => {
 		return demo_zoom_to_fit();
+	})
+	.add("Links with labels", () => {
+		return demo_labelled_links();
 	})
 	.add("Clone selected", () => {
 		return demo_cloning();
