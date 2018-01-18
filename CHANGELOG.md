@@ -1,3 +1,17 @@
+__4.0.0__ http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/
+
+* [refactor] Events system was completely overhauled
+* [demo] Custom Link Sizes
+* [refactor] Demos are now much more verbose and better managed
+* [update] node packages
+* [bug] Fix #129
+* [feature] Control link creation through ports
+* [refactor] Models are now in seperate files
+* [refactor] Merged the concept of instance factories and widget factories into one
+* [feature] Models can now be cloned at various parts of the model graph
+* [demo] Cloning
+* [feature] models control isLocked 
+
 __3.2.0__ http://dylanv.blog/2017/11/22/storm-react-diagrams-3-2-0/
 * [feature] zoom to fit
 * added Circle CI tests
