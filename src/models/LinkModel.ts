@@ -11,9 +11,9 @@ export interface LinkModelListener extends BaseModelListener {
 }
 
 export class LinkModel extends BaseModel<LinkModelListener> {
-	sourcePort: PortModel | null = null;
-	targetPort: PortModel | null = null;
-	label: string = null;
+	sourcePort: PortModel | null;
+	targetPort: PortModel | null;
+	label: string;
 	points: PointModel[];
 	extras: {};
 
@@ -21,6 +21,9 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		super(linkType, id);
 		this.points = [new PointModel(this, { x: 0, y: 0 }), new PointModel(this, { x: 0, y: 0 })];
 		this.extras = {};
+		this.sourcePort = null;
+		this.targetPort = null;
+		this.label = null;
 	}
 
 	deSerialize(ob) {
