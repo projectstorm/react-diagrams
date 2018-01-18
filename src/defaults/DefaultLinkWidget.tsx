@@ -28,11 +28,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		smooth: false,
 		diagramEngine: null
 	};
-	
+
 	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
-	// TODO proper type
-	refLabel: any;
-	refPaths: any[];
+	refLabel: HTMLElement;
+	refPaths: SVGPathElement[];
 
 	constructor(props: DefaultLinkProps) {
 		super(props);
@@ -131,21 +130,17 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	}
 
 	generateLabel() {
-		// TODO fix type
-		const canvas: any = this.props.diagramEngine.canvas;
+		const canvas = this.props.diagramEngine.canvas as HTMLElement;
 		return (
-			<foreignObject className='link-label' width={canvas.offsetWidth} height={canvas.offsetHeight}>
-				<div ref={label => this.refLabel = label}>{this.props.link.label}</div>
+			<foreignObject className="link-label" width={canvas.offsetWidth} height={canvas.offsetHeight}>
+				<div ref={label => (this.refLabel = label)}>{this.props.link.label}</div>
 			</foreignObject>
-		)
+		);
 	}
 
-	/**
-	 * TODO: Document this method
-	 */
 	findPathAndRelativePositionToRenderLabel = (): {
-		path?: any,
-		position?: number,
+		path: any;
+		position: number;
 	} => {
 		// an array to hold all path lengths, making sure we hit the DOM only once to fetch this information
 		const lengths = this.refPaths.map(path => path.getTotalLength());
@@ -159,16 +154,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			if (labelPosition - lengths[pathIndex] < 0) {
 				return {
 					path: this.refPaths[pathIndex],
-					position: labelPosition,
-				}
+					position: labelPosition
+				};
 			}
 
 			// keep searching
 			labelPosition -= lengths[pathIndex];
 			pathIndex++;
 		}
-	}
-	
+	};
+
 	calculateLabelPosition = () => {
 		if (!this.refLabel) {
 			// no label? nothing to do here
@@ -183,16 +178,19 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		};
 
 		const pathCentre = path.getPointAtLength(position);
-		
+
 		const labelCoordinates = {
 			x: pathCentre.x - labelDimensions.width / 2,
 			y: pathCentre.y - labelDimensions.height / 2
-		}
+		};
 
-		this.refLabel.style = `
+		this.refLabel.setAttribute(
+			"style",
+			`
 			transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);
-		`;
-	}
+		`
+		);
+	};
 
 	componentDidUpdate() {
 		window.requestAnimationFrame(this.calculateLabelPosition);
@@ -217,10 +215,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	}
 
 	render() {
-		// TODO revisit this
-		this.refLabel = null;
-		this.refPaths = [];
-
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
 		var paths = [];
@@ -297,6 +291,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				paths.push(this.generatePoint(points.length - 1));
 			}
 		}
+
+		// ensure we have the right references when a redraw occurs
+		this.refLabel = null;
+		this.refPaths = [];
 
 		return (
 			<g>

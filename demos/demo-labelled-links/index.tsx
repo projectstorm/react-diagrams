@@ -40,7 +40,7 @@ export default () => {
 	const link1 = new LinkModel();
 	link1.setSourcePort(port1);
 	link1.setTargetPort(port2);
-	link1.setLabel('Custom label');
+	link1.setLabel("Custom label");
 
 	// no label for A and C
 	const link2 = new LinkModel();
@@ -51,7 +51,7 @@ export default () => {
 	const link3 = new LinkModel();
 	link3.setSourcePort(port1);
 	link3.setTargetPort(port4);
-	link3.setLabel('Emoji label: 🎉');
+	link3.setLabel("Emoji label: 🎉");
 
 	// add all to the main model
 	model.addNode(node1);

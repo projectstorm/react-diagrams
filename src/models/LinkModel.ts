@@ -47,7 +47,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 				return point.serialize();
 			}),
 			extras: this.extras,
-			label: this.label || undefined,
+			label: this.label || undefined
 		});
 	}
 
