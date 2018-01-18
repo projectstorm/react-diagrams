@@ -1,4 +1,4 @@
-__4.0.0__
+__4.0.0__ http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/
 
 * [refactor] Events system was completely overhauled
 * [demo] Custom Link Sizes
