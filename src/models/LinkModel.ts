@@ -34,7 +34,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 			p.deSerialize(point);
 			return p;
 		});
-		this.label = ob.label;
+		this.label = ob.label || null;
 	}
 
 	serialize() {
@@ -47,7 +47,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 				return point.serialize();
 			}),
 			extras: this.extras,
-			label: this.label || null,
+			label: this.label || undefined,
 		});
 	}
 
