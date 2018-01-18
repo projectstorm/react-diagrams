@@ -18,7 +18,7 @@ export default () => {
 	// setup the diagram model
 	const model = new DiagramModel();
 
-	// create two nodes
+	// create four nodes
 	const node1 = new DefaultNodeModel("Node A", "rgb(0,192,255)");
 	const port1 = node1.addPort(new DefaultPortModel(false, "out-1", "Out"));
 	node1.x = 100;
@@ -42,7 +42,7 @@ export default () => {
 	link1.setTargetPort(port2);
 	link1.setLabel("Custom label");
 
-	// no label for A and C
+	// no label for A and C, just a link
 	const link2 = new LinkModel();
 	link2.setSourcePort(port1);
 	link2.setTargetPort(port3);

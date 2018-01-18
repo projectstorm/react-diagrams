@@ -184,12 +184,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			y: pathCentre.y - labelDimensions.height / 2
 		};
 
-		this.refLabel.setAttribute(
-			"style",
-			`
-			transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);
-		`
-		);
+		this.refLabel.setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
 	};
 
 	componentDidUpdate() {
