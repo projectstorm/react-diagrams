@@ -3,7 +3,6 @@ import {
 	DiagramModel,
 	DefaultNodeModel,
 	LinkModel,
-	DefaultPortModel,
 	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
@@ -18,25 +17,23 @@ export default () => {
 
 	//3-A) create a default node
 	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-	var port1 = node1.addPort(new DefaultPortModel(false, "out-1", "Out"));
+	let port = node1.addOutPort("Out");
 	node1.x = 100;
 	node1.y = 100;
 
 	//3-B) create another default node
 	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	var port2 = node2.addPort(new DefaultPortModel(true, "in-1", "IN"));
+	let port2 = node2.addOutPort("In");
 	node2.x = 400;
 	node2.y = 100;
 
-	//3-C) link the 2 nodes together
-	var link1 = new LinkModel();
-	link1.setSourcePort(port1);
-	link1.setTargetPort(port2);
+	// link the ports
+	let link = port.link(port2);
 
 	//4) add the models to the root graph
 	model.addNode(node1);
 	model.addNode(node2);
-	model.addLink(link1);
+	model.addLink(link);
 
 	//5) load model into engine
 	engine.setDiagramModel(model);

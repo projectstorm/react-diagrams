@@ -2,6 +2,7 @@ import { BaseModel, BaseModelListener } from "./BaseModel";
 import { NodeModel } from "./NodeModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
+import {DefaultLinkModel} from "../defaults/DefaultLinkModel";
 
 export class PortModel extends BaseModel<BaseModelListener> {
 	name: string;
@@ -60,7 +61,7 @@ export class PortModel extends BaseModel<BaseModelListener> {
 	}
 
 	createLinkModel(): LinkModel | null {
-		var linkModel = new LinkModel();
+		var linkModel = new DefaultLinkModel();
 		linkModel.setSourcePort(this);
 		return linkModel;
 	}

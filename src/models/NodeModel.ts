@@ -108,7 +108,7 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		}
 	}
 
-	addPort(port: PortModel): PortModel {
+	addPort<T extends PortModel>(port: T): T {
 		port.setParentNode(this);
 		this.ports[port.name] = port;
 		return port;

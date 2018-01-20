@@ -1,13 +1,16 @@
 import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
-import { LinkModel } from "../models/LinkModel";
-import { PointModel } from "../models/PointModel";
+import {DiagramEngine} from "../DiagramEngine";
+import {LinkModel} from "../models/LinkModel";
+import {PointModel} from "../models/PointModel";
+import {Toolkit} from "../Toolkit";
+import {DefaultLinkFactory} from "./DefaultLinkFactory";
+import {DefaultLinkModel} from "./DefaultLinkModel";
 
 export interface DefaultLinkProps {
 	color?: string;
 	width?: number;
 	smooth?: boolean;
-	link: LinkModel;
+	link: DefaultLinkModel;
 	diagramEngine: DiagramEngine;
 	pointAdded?: (point: PointModel, event) => any;
 }
@@ -26,7 +29,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		link: null,
 		engine: null,
 		smooth: false,
-		diagramEngine: null
+		diagramEngine: null,
 	};
 
 	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
@@ -68,10 +71,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				/>
 				<circle
 					onMouseLeave={() => {
-						this.setState({ selected: false });
+						this.setState({selected: false});
 					}}
 					onMouseEnter={() => {
-						this.setState({ selected: true });
+						this.setState({selected: true});
 					}}
 					data-id={this.props.link.points[pointIndex].id}
 					data-linkid={this.props.link.id}
@@ -85,27 +88,20 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
-	generateLink(extraProps: any, id: string | number): JSX.Element {
+	generateLink(smooth: boolean, extraProps: any, id: string | number, firstPoint: PointModel, lastPoint: PointModel): JSX.Element {
 		var props = this.props;
 
-		var Bottom = (
-			<path
-				className={this.state.selected || this.props.link.isSelected() ? "selected" : ""}
-				strokeWidth={props.width}
-				stroke={props.color}
-				ref={path => path && this.refPaths.push(path)}
-				{...extraProps}
-			/>
-		);
+		var Bottom = (props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory)
+			.generateLinkSegment(this.props.diagramEngine, this.props.link, this.state.selected || this.props.link.isSelected(), firstPoint, lastPoint, smooth);
 
 		var Top = (
 			<path
 				strokeLinecap="round"
 				onMouseLeave={() => {
-					this.setState({ selected: false });
+					this.setState({selected: false});
 				}}
 				onMouseEnter={() => {
-					this.setState({ selected: true });
+					this.setState({selected: true});
 				}}
 				data-linkid={this.props.link.getID()}
 				stroke={props.color}
@@ -117,6 +113,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 						this.props.link.remove();
 					}
 				}}
+				d={smooth ? Toolkit.generateCurvePath(firstPoint, lastPoint, this.props.link.curvyness) : Toolkit.generateLinePath(firstPoint, lastPoint)}
 				{...extraProps}
 			/>
 		);
@@ -170,7 +167,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			return;
 		}
 
-		const { path, position } = this.findPathAndRelativePositionToRenderLabel();
+		const {path, position} = this.findPathAndRelativePositionToRenderLabel();
 
 		const labelDimensions = {
 			width: this.refLabel.offsetWidth,
@@ -195,34 +192,13 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		window.requestAnimationFrame(this.calculateLabelPosition);
 	}
 
-	generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
-		return `M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
-	}
-
-	generateCurvePath(
-		firstPoint: PointModel,
-		lastPoint: PointModel,
-		firstPointDelta: number = 0,
-		lastPointDelta: number = 0
-	): string {
-		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + firstPointDelta},${firstPoint.y} ${lastPoint.x +
-			lastPointDelta},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
-	}
-
 	render() {
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
 		var paths = [];
-		let model = this.props.diagramEngine.getDiagramModel();
 
 		//draw the smoothing
 		if (points.length === 2) {
-			//if the points are too close, just draw a straight line
-			var margin = 50;
-			if (Math.abs(points[0].x - points[1].x) < 50) {
-				margin = 5;
-			}
-
 			var pointLeft = points[0];
 			var pointRight = points[1];
 
@@ -235,47 +211,39 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 
 			paths.push(
 				this.generateLink(
+					true,
 					{
 						onMouseDown: event => {
 							this.addPointToLink(event, 1);
 						},
-						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
 					},
-					"0"
+					"0",
+					pointLeft, pointRight
 				)
 			);
+
+			// draw the link as dangeling
 			if (this.props.link.targetPort === null) {
 				paths.push(this.generatePoint(1));
 			}
 		} else {
 			//draw the multiple anchors and complex line instead
-			var ds = [];
-			if (this.props.smooth) {
-				ds.push(this.generateCurvePath(points[0], points[1], 50, 0));
-				for (var i = 1; i < points.length - 2; i++) {
-					ds.push(this.generateLinePath(points[i], points[i + 1]));
-				}
-				ds.push(this.generateCurvePath(points[i], points[i + 1], 0, -50));
-			} else {
-				var ds = [];
-				for (var i = 0; i < points.length - 1; i++) {
-					ds.push(this.generateLinePath(points[i], points[i + 1]));
-				}
-			}
-
-			paths = ds.map((data, index) => {
-				return this.generateLink(
+			for (let i = 0; i < points.length - 1; i++) {
+				paths.push(this.generateLink(
+					false,
 					{
 						"data-linkid": this.props.link.id,
-						"data-point": index,
+						"data-point": i,
 						onMouseDown: (event: MouseEvent) => {
-							this.addPointToLink(event, index + 1);
+							this.addPointToLink(event, i + 1);
 						},
-						d: data
 					},
-					index
-				);
-			});
+					i,
+					points[i],
+					points[i + 1]
+				));
+			}
+
 
 			//render the circles
 			for (var i = 1; i < points.length - 1; i++) {

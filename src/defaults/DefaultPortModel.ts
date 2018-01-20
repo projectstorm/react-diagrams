@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import { PortModel } from "../models/PortModel";
+import {LinkModel} from "../models/LinkModel";
 
 /**
  * @author Dylan Vorster
@@ -25,5 +26,12 @@ export class DefaultPortModel extends PortModel {
 			in: this.in,
 			label: this.label
 		});
+	}
+
+	link(port: PortModel): LinkModel{
+		let link = this.createLinkModel();
+		link.setSourcePort(this);
+		link.setTargetPort(port);
+		return link;
 	}
 }

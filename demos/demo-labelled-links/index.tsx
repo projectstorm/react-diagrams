@@ -77,7 +77,7 @@ export default () => {
 				</button>
 			}
 		>
-			<DiagramWidget diagramEngine={engine} maxNumberPointsPerLink={0} />
+			<DiagramWidget diagramEngine={engine} />
 		</DemoWorkspaceWidget>
 	);
 };

@@ -1,4 +1,5 @@
 import closest = require("closest");
+import {PointModel} from "./models/PointModel";
 /**
  * @author Dylan Vorster
  */
@@ -33,5 +34,18 @@ export class Toolkit {
 			return element.closest(selector);
 		}
 		return closest(element, selector);
+	}
+
+	public static generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
+		return `M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
+	}
+
+	public static generateCurvePath(
+		firstPoint: PointModel,
+		lastPoint: PointModel,
+		curvy: number = 0,
+	): string {
+		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvy},${firstPoint.y} ${lastPoint.x +
+		-curvy},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
 	}
 }

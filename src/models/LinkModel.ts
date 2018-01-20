@@ -10,7 +10,7 @@ export interface LinkModelListener extends BaseModelListener {
 	targetPortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
 }
 
-export class LinkModel extends BaseModel<LinkModelListener> {
+export class LinkModel<T extends LinkModelListener = LinkModelListener> extends BaseModel<T> {
 	sourcePort: PortModel | null;
 	targetPort: PortModel | null;
 	label: string;

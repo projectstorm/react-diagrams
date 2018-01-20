@@ -14,15 +14,12 @@ import {
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
 import { LinkFactory } from "../../src/AbstractFactory";
+import {DefaultLinkModel} from "../../src/defaults/DefaultLinkModel";
 
-export class AdvancedLinkModel extends LinkModel {
-	size: number;
-	color: string;
+export class AdvancedLinkModel extends DefaultLinkModel {
 
 	constructor() {
 		super("advanced");
-		this.color = "green";
-		this.size = 6;
 	}
 }
 
@@ -49,8 +46,6 @@ export class AdvancedLinkWidgetFactory extends LinkFactory<AdvancedLinkModel> {
 
 	generateReactWidget(diagramEngine: DiagramEngine, link: AdvancedLinkModel): JSX.Element {
 		return React.createElement(DefaultLinkWidget, {
-			color: link.color,
-			width: link.size,
 			link,
 			diagramEngine
 		});
