@@ -61,6 +61,13 @@ storiesOf("Simple Usage", module)
 	.add(
 		"Zoom to fit",
 		Helper.makeDemo(require("./demo-zoom-to-fit/index").default(), require("!!raw-loader!./demo-zoom-to-fit/index"))
+	)
+	.add(
+		"Links with labels",
+		Helper.makeDemo(
+			require("./demo-labelled-links/index").default(),
+			require("!!raw-loader!./demo-labelled-links/index")
+		)
 	);
 
 storiesOf("Advanced Techniques", module)

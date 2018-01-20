@@ -29,6 +29,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		diagramEngine: null
 	};
 
+	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
+	refLabel: HTMLElement;
+	refPaths: SVGPathElement[];
+
 	constructor(props: DefaultLinkProps) {
 		super(props);
 		this.state = {
@@ -89,6 +93,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				className={this.state.selected || this.props.link.isSelected() ? "selected" : ""}
 				strokeWidth={props.width}
 				stroke={props.color}
+				ref={path => path && this.refPaths.push(path)}
 				{...extraProps}
 			/>
 		);
@@ -122,6 +127,72 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				{Top}
 			</g>
 		);
+	}
+
+	generateLabel() {
+		const canvas = this.props.diagramEngine.canvas as HTMLElement;
+		return (
+			<foreignObject className="link-label" width={canvas.offsetWidth} height={canvas.offsetHeight}>
+				<div ref={label => (this.refLabel = label)}>{this.props.link.label}</div>
+			</foreignObject>
+		);
+	}
+
+	findPathAndRelativePositionToRenderLabel = (): {
+		path: any;
+		position: number;
+	} => {
+		// an array to hold all path lengths, making sure we hit the DOM only once to fetch this information
+		const lengths = this.refPaths.map(path => path.getTotalLength());
+
+		// calculate the point where we want to display the label
+		let labelPosition = lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / 2;
+
+		// find the path where the label will be rendered and calculate the relative position
+		let pathIndex = 0;
+		while (pathIndex < this.refPaths.length) {
+			if (labelPosition - lengths[pathIndex] < 0) {
+				return {
+					path: this.refPaths[pathIndex],
+					position: labelPosition
+				};
+			}
+
+			// keep searching
+			labelPosition -= lengths[pathIndex];
+			pathIndex++;
+		}
+	};
+
+	calculateLabelPosition = () => {
+		if (!this.refLabel) {
+			// no label? nothing to do here
+			return;
+		}
+
+		const { path, position } = this.findPathAndRelativePositionToRenderLabel();
+
+		const labelDimensions = {
+			width: this.refLabel.offsetWidth,
+			height: this.refLabel.offsetHeight
+		};
+
+		const pathCentre = path.getPointAtLength(position);
+
+		const labelCoordinates = {
+			x: pathCentre.x - labelDimensions.width / 2,
+			y: pathCentre.y - labelDimensions.height / 2
+		};
+
+		this.refLabel.setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
+	};
+
+	componentDidUpdate() {
+		window.requestAnimationFrame(this.calculateLabelPosition);
+	}
+
+	componentDidMount() {
+		window.requestAnimationFrame(this.calculateLabelPosition);
 	}
 
 	generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
@@ -216,6 +287,15 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			}
 		}
 
-		return <g>{paths}</g>;
+		// ensure we have the right references when a redraw occurs
+		this.refLabel = null;
+		this.refPaths = [];
+
+		return (
+			<g>
+				{paths}
+				{this.props.link.label && this.generateLabel()}
+			</g>
+		);
 	}
 }

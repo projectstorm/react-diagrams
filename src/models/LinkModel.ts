@@ -13,6 +13,7 @@ export interface LinkModelListener extends BaseModelListener {
 export class LinkModel extends BaseModel<LinkModelListener> {
 	sourcePort: PortModel | null;
 	targetPort: PortModel | null;
+	label: string;
 	points: PointModel[];
 	extras: {};
 
@@ -22,6 +23,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		this.extras = {};
 		this.sourcePort = null;
 		this.targetPort = null;
+		this.label = null;
 	}
 
 	deSerialize(ob) {
@@ -32,6 +34,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 			p.deSerialize(point);
 			return p;
 		});
+		this.label = ob.label || null;
 	}
 
 	serialize() {
@@ -43,7 +46,8 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 			points: _.map(this.points, point => {
 				return point.serialize();
 			}),
-			extras: this.extras
+			extras: this.extras,
+			label: this.label || undefined
 		});
 	}
 
@@ -139,6 +143,14 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		this.iterateListeners((listener: LinkModelListener, event) => {
 			listener.targetPortChanged && listener.targetPortChanged({ ...event, port: port });
 		});
+	}
+
+	getLabel(): string {
+		return this.label;
+	}
+
+	setLabel(label: string) {
+		this.label = label;
 	}
 
 	getPoints(): PointModel[] {
