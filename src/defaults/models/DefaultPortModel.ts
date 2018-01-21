@@ -1,6 +1,7 @@
 import * as _ from "lodash";
-import { PortModel } from "../models/PortModel";
-import {LinkModel} from "../models/LinkModel";
+import { PortModel } from "../../models/PortModel";
+import {LinkModel} from "../../models/LinkModel";
+import {DefaultLinkModel} from "./DefaultLinkModel";
 
 /**
  * @author Dylan Vorster

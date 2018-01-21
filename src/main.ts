@@ -3,13 +3,13 @@
  */
 
 //export defaults
-export * from "./defaults/DefaultLinkFactory";
-export * from "./defaults/DefaultLinkWidget";
-export * from "./defaults/DefaultNodeFactory";
-export * from "./defaults/DefaultNodeWidget";
-export * from "./defaults/DefaultNodeModel";
-export * from "./defaults/DefaultPortModel";
-export * from "./defaults/DefaultPortLabelWidget";
+export * from "./defaults/factories/DefaultLinkFactory";
+export * from "./defaults/widgets/DefaultLinkWidget";
+export * from "./defaults/factories/DefaultNodeFactory";
+export * from "./defaults/widgets/DefaultNodeWidget";
+export * from "./defaults/models/DefaultNodeModel";
+export * from "./defaults/models/DefaultPortModel";
+export * from "./defaults/widgets/DefaultPortLabelWidget";
 
 export * from "./AbstractFactory";
 export * from "./Toolkit";

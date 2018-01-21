@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as _ from "lodash";
-import { DefaultNodeModel } from "./DefaultNodeModel";
+import { DefaultNodeModel } from "../models/DefaultNodeModel";
 import { DefaultPortLabel } from "./DefaultPortLabelWidget";
-import { DiagramEngine } from "../DiagramEngine";
+import { DiagramEngine } from "../../DiagramEngine";
 
 export interface DefaultNodeProps {
 	node: DefaultNodeModel;

@@ -1,4 +1,5 @@
 import * as SRD from "../../src/main";
+
 /**
  * @author Dylan Vorster
  */
@@ -17,23 +18,20 @@ export class Application {
 		this.activeModel = new SRD.DiagramModel();
 		this.diagramEngine.setDiagramModel(this.activeModel);
 
+		//3-A) create a default node
 		var node1 = new SRD.DefaultNodeModel("Node 1", "rgb(0,192,255)");
-		var port1 = node1.addPort(new SRD.DefaultPortModel(false, "out-1", "Out"));
-		node1.x = 100;
-		node1.y = 100;
+		let port = node1.addOutPort("Out");
+		node1.setPosition(100, 100);
 
+		//3-B) create another default node
 		var node2 = new SRD.DefaultNodeModel("Node 2", "rgb(192,255,0)");
-		var port2 = node2.addPort(new SRD.DefaultPortModel(true, "in-1", "IN"));
-		node2.x = 400;
-		node2.y = 100;
+		let port2 = node2.addOutPort("In");
+		node2.setPosition(400, 100);
 
-		var link1 = new SRD.LinkModel();
-		link1.setSourcePort(port1);
-		link1.setTargetPort(port2);
+		// link the ports
+		let link1 = port.link(port2);
 
-		this.activeModel.addNode(node1);
-		this.activeModel.addNode(node2);
-		this.activeModel.addLink(link1);
+		this.activeModel.addAll(node1, node2, link1);
 	}
 
 	public getActiveDiagram(): SRD.DiagramModel {

@@ -1,11 +1,11 @@
 import * as React from "react";
-import {DefaultLinkWidget} from "./DefaultLinkWidget";
-import {DiagramEngine} from "../DiagramEngine";
-import {LinkModel} from "../models/LinkModel";
-import {LinkFactory} from "../AbstractFactory";
-import {PointModel} from "../models/PointModel";
-import {DefaultLinkModel} from "./DefaultLinkModel";
-import {Toolkit} from "../Toolkit";
+import {DefaultLinkWidget} from "../widgets/DefaultLinkWidget";
+import {DiagramEngine} from "../../DiagramEngine";
+import {LinkModel} from "../../models/LinkModel";
+import {LinkFactory} from "../../AbstractFactory";
+import {PointModel} from "../../models/PointModel";
+import {DefaultLinkModel} from "../models/DefaultLinkModel";
+import {Toolkit} from "../../Toolkit";
 
 /**
  * @author Dylan Vorster

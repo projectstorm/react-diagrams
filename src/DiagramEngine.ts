@@ -8,7 +8,7 @@ import { PortModel } from "./models/PortModel";
 import { LinkModel } from "./models/LinkModel";
 import { LinkFactory, NodeFactory, PortFactory } from "./AbstractFactory";
 import { DefaultLinkFactory, DefaultNodeFactory } from "./main";
-import { DefaultPortFactory } from "./defaults/DefaultPortFactory";
+import { DefaultPortFactory } from "./defaults/factories/DefaultPortFactory";
 /**
  * @author Dylan Vorster
  */

@@ -241,6 +241,17 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		return this.links[link];
 	}
 
+	addAll(...models: BaseModel[]): BaseModel[]{
+		_.forEach(models, (model) =>{
+			if(model instanceof LinkModel){
+				this.addLink(model);
+			}else if(model instanceof NodeModel){
+				this.addNode(model);
+			}
+		});
+		return models;
+	}
+
 	addLink(link: LinkModel): LinkModel {
 		link.addListener({
 			entityRemoved: () => {

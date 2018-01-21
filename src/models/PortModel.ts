@@ -2,7 +2,7 @@ import { BaseModel, BaseModelListener } from "./BaseModel";
 import { NodeModel } from "./NodeModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
-import {DefaultLinkModel} from "../defaults/DefaultLinkModel";
+import {DefaultLinkModel} from "../defaults/models/DefaultLinkModel";
 
 export class PortModel extends BaseModel<BaseModelListener> {
 	name: string;

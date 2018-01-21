@@ -1,9 +1,10 @@
 /**
  * @author Dylan Vorster
  */
-import {LinkModel, LinkModelListener} from "../models/LinkModel";
-import {BaseEvent} from "../BaseEntity";
+import {LinkModel, LinkModelListener} from "../../models/LinkModel";
+import {BaseEvent} from "../../BaseEntity";
 import * as _ from "lodash";
+import {PointModel} from "../../models/PointModel";
 
 export interface DefaultLinkModelListener extends LinkModelListener{
 

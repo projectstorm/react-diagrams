@@ -1,6 +1,6 @@
 import * as React from "react";
-import { DefaultPortModel } from "./DefaultPortModel";
-import { PortWidget } from "../widgets/PortWidget";
+import { DefaultPortModel } from "../models/DefaultPortModel";
+import { PortWidget } from "../../widgets/PortWidget";
 
 export interface DefaultPortLabelProps {
 	model?: DefaultPortModel;

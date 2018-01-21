@@ -1,10 +1,10 @@
 import * as React from "react";
-import {DiagramEngine} from "../DiagramEngine";
-import {LinkModel} from "../models/LinkModel";
-import {PointModel} from "../models/PointModel";
-import {Toolkit} from "../Toolkit";
-import {DefaultLinkFactory} from "./DefaultLinkFactory";
-import {DefaultLinkModel} from "./DefaultLinkModel";
+import {DiagramEngine} from "../../DiagramEngine";
+import {LinkModel} from "../../models/LinkModel";
+import {PointModel} from "../../models/PointModel";
+import {Toolkit} from "../../Toolkit";
+import {DefaultLinkFactory} from "../factories/DefaultLinkFactory";
+import {DefaultLinkModel} from "../models/DefaultLinkModel";
 
 export interface DefaultLinkProps {
 	color?: string;

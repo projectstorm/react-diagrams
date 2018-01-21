@@ -1,7 +1,5 @@
 import {
 	DiagramEngine,
-	DefaultNodeFactory,
-	DefaultLinkFactory,
 	DiagramModel,
 	DefaultNodeModel,
 	LinkModel,
@@ -14,7 +12,7 @@ import {
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
 import { LinkFactory } from "../../src/AbstractFactory";
-import {DefaultLinkModel} from "../../src/defaults/DefaultLinkModel";
+import {DefaultLinkModel} from "../../src/defaults/models/DefaultLinkModel";
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 
@@ -63,43 +61,37 @@ export default () => {
 	engine.installDefaultFactories();
 	engine.registerLinkFactory(new AdvancedLinkWidgetFactory());
 
+	// create some nodes
 	var node1 = new DefaultNodeModel("Source", "rgb(0,192,255)");
-	var port1 = node1.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
-	var port2 = node1.addPort(new DefaultPortModel(false, "out-2", "Out default"));
-	node1.x = 100;
-	node1.y = 100;
+	node1.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
+	node1.addPort(new DefaultPortModel(false, "out-2", "Out default"));
+	node1.setPosition(100, 100);
 
 	var node2 = new DefaultNodeModel("Target", "rgb(192,255,0)");
 	var port3 = node2.addPort(new AdvancedPortModel(true, "in-1", "In thick"));
 	var port4 = node2.addPort(new DefaultPortModel(true, "in-2", "In default"));
-	node2.x = 300;
-	node2.y = 100;
+	node2.setPosition(300, 100);
 
 	var node3 = new DefaultNodeModel("Source", "rgb(0,192,255)");
-	var port5 = node3.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
-	var port6 = node3.addPort(new DefaultPortModel(false, "out-2", "Out default"));
-	node3.x = 100;
-	node3.y = 200;
+	node3.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
+	node3.addPort(new DefaultPortModel(false, "out-2", "Out default"));
+	node3.setPosition(100, 200);
 
 	var node4 = new DefaultNodeModel("Target", "rgb(192,255,0)");
-	var port7 = node4.addPort(new AdvancedPortModel(true, "in-1", "In thick"));
-	var port8 = node4.addPort(new DefaultPortModel(true, "in-2", "In default"));
-	node4.x = 300;
-	node4.y = 200;
-	var model = new DiagramModel();
+	node4.addPort(new AdvancedPortModel(true, "in-1", "In thick"));
+	node4.addPort(new DefaultPortModel(true, "in-2", "In default"));
+	node4.setPosition(300, 200);
 
-	model.addNode(node1);
-	model.addNode(node2);
-	model.addNode(node3);
-	model.addNode(node4);
+	var model = new DiagramModel();
 
 	var link1 = node1.getOutPorts()[0].createLinkModel();
 	link1.setTargetPort(port3);
-	model.addLink(link1);
 
 	var link2 = node1.getOutPorts()[1].createLinkModel();
 	link2.setTargetPort(port4);
-	model.addLink(link2);
+
+	// add everything
+	model.addAll(node1, node2, node3, node4, link1, link2);
 
 	// load model into engine
 	engine.setDiagramModel(model);

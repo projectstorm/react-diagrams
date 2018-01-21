@@ -1,8 +1,8 @@
-import { DefaultNodeModel } from "./DefaultNodeModel";
+import { DefaultNodeModel } from "../models/DefaultNodeModel";
 import * as React from "react";
-import { DefaultNodeWidget } from "./DefaultNodeWidget";
-import { DiagramEngine } from "../DiagramEngine";
-import { NodeFactory } from "../AbstractFactory";
+import { DefaultNodeWidget } from "../widgets/DefaultNodeWidget";
+import { DiagramEngine } from "../../DiagramEngine";
+import { NodeFactory } from "../../AbstractFactory";
 /**
  * @author Dylan Vorster
  */

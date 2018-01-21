@@ -1,8 +1,8 @@
 import { DefaultPortModel } from "./DefaultPortModel";
 import * as _ from "lodash";
 
-import { NodeModel } from "../models/NodeModel";
-import {Toolkit} from "../Toolkit";
+import { NodeModel } from "../../models/NodeModel";
+import {Toolkit} from "../../Toolkit";
 
 /**
  * @author Dylan Vorster

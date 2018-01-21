@@ -12,24 +12,20 @@ export default () => {
 
 	var model = new DiagramModel();
 
-	// sample for link with simple line (no additional points created by default)
-	var node1 = new DefaultNodeModel("Node 1", "rgb(255,99,66)");
-	var port1 = node1.addPort(new SRD.DefaultPortModel(false, "out-1", "Out"));
-	node1.x = 100;
-	node1.y = 100;
+	//3-A) create a default node
+	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
+	let port = node1.addOutPort("Out");
+	node1.setPosition(100, 100);
 
+	//3-B) create another default node
 	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	var port2 = node2.addPort(new SRD.DefaultPortModel(true, "in-1", "IN"));
-	node2.x = 400;
-	node2.y = 100;
+	let port2 = node2.addOutPort("In");
+	node2.setPosition(400, 100);
 
-	var link1 = new LinkModel();
-	link1.setSourcePort(port1);
-	link1.setTargetPort(port2);
+	// link the ports
+	let link1 = port.link(port2);
 
-	model.addNode(node1);
-	model.addNode(node2);
-	model.addLink(link1);
+	model.addAll(node1, node2, link1);
 
 	engine.setDiagramModel(model);
 
