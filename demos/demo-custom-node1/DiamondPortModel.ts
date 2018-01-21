@@ -1,5 +1,6 @@
 import * as SRD from "../../src/main";
 import * as _ from "lodash";
+import {LinkModel} from "../../src/models/LinkModel";
 
 export class DiamondPortModel extends SRD.PortModel {
 	position: string | "top" | "bottom" | "left" | "right";
@@ -18,5 +19,9 @@ export class DiamondPortModel extends SRD.PortModel {
 	deSerialize(data: any) {
 		super.deSerialize(data);
 		this.position = data.position;
+	}
+
+	createLinkModel(): LinkModel{
+		return new SRD.DefaultLinkModel();
 	}
 }

@@ -20,7 +20,7 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener>{
 	curvyness: number;
 
 	constructor(type: string = 'default'){
-		super();
+		super(type);
 		this.color = "rgb(0,192,255)";
 		this.width = 3;
 		this.curvyness = 50;

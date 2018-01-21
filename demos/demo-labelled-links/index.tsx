@@ -25,11 +25,11 @@ export default () => {
 
 	const node2 = new DefaultNodeModel("Node B", "rgb(255,255,0)");
 	const port2 = node2.addInPort("In");
-	node1.setPosition(400,50);
+	node2.setPosition(400,50);
 
 	const node3 = new DefaultNodeModel("Node C (no label)", "rgb(192,255,255)");
 	const port3 = node3.addInPort("In");
-	node1.setPosition(450,180);
+	node3.setPosition(450,180);
 
 	const node4 = new DefaultNodeModel("Node D", "rgb(192,0,255)");
 	const port4 = node4.addInPort("In");
