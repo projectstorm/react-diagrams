@@ -363,8 +363,13 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					if (!sourcePort.canLinkToPort(targetPort)) {
 						//link not allowed
 						link.remove();
-					}
-					else if (_.some(_.values(targetPort.getLinks()), (l: LinkModel) => l !== link && (l.getSourcePort() === sourcePort || l.getTargetPort() === sourcePort))) {
+					} else if (
+						_.some(
+							_.values(targetPort.getLinks()),
+							(l: LinkModel) =>
+								l !== link && (l.getSourcePort() === sourcePort || l.getTargetPort() === sourcePort)
+						)
+					) {
 						//link is a duplicate
 						link.remove();
 					}
@@ -491,7 +496,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 								link.getLastPoint().setSelected(true);
 								diagramModel.addLink(link);
 
-								this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
+								this.startFiringAction(
+									new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
+								);
 							}
 						} else {
 							diagramModel.clearSelection();
