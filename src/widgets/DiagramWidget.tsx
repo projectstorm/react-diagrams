@@ -348,6 +348,29 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					}
 				});
 			}
+
+			//remove any invalid links
+			_.forEach(this.state.action.selectionModels, model => {
+				//only care about points connecting to things
+				if (!(model.model instanceof PointModel)) {
+					return;
+				}
+
+				var link = model.model.getLink();
+				var sourcePort: PortModel = link.getSourcePort();
+				var targetPort: PortModel = link.getTargetPort();
+				if (sourcePort !== null && targetPort !== null) {
+					if (!sourcePort.canLinkToPort(targetPort)) {
+						//link not allowed
+						link.remove();
+					}
+					else if (_.some(_.values(targetPort.getLinks()), (l: LinkModel) => l !== link && (l.getSourcePort() === sourcePort || l.getTargetPort() === sourcePort))) {
+						//link is a duplicate
+						link.remove();
+					}
+				}
+			});
+
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction(!this.state.wasMoved);
 		} else {
@@ -454,14 +477,22 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							var sourcePort = model.model;
 							var link = sourcePort.createLinkModel();
 
-							link.getFirstPoint().updateLocation(relative);
-							link.getLastPoint().updateLocation(relative);
+							if (link) {
+								link.removeMiddlePoints();
+								if (link.getSourcePort() !== sourcePort) {
+									link.setSourcePort(sourcePort);
+								}
+								link.setTargetPort(null);
 
-							diagramModel.clearSelection();
-							link.getLastPoint().setSelected(true);
-							diagramModel.addLink(link);
+								link.getFirstPoint().updateLocation(relative);
+								link.getLastPoint().updateLocation(relative);
 
-							this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
+								diagramModel.clearSelection();
+								link.getLastPoint().setSelected(true);
+								diagramModel.addLink(link);
+
+								this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
+							}
 						} else {
 							diagramModel.clearSelection();
 						}

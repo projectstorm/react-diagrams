@@ -36,6 +36,10 @@ storiesOf("Simple Usage", module)
 		)
 	)
 	.add(
+		"Simple flow example",
+		Helper.makeDemo(require("./demo-simple-flow/index").default(), require("!!raw-loader!./demo-simple-flow/index"))
+	)
+	.add(
 		"Performance demo",
 		Helper.makeDemo(require("./demo-performance/index").default(), require("!!raw-loader!./demo-performance/index"))
 	)

@@ -9,7 +9,7 @@ export class DefaultPortModel extends PortModel {
 	label: string;
 
 	constructor(isInput: boolean, name: string, label: string = null, id?: string) {
-		super(name, "default", id);
+		super(name, "default", id, isInput ? null : 1);
 		this.in = isInput;
 		this.label = label || name;
 	}
@@ -25,5 +25,9 @@ export class DefaultPortModel extends PortModel {
 			in: this.in,
 			label: this.label
 		});
+	}
+
+	canLinkToPort(port: PortModel): boolean {
+		return port instanceof DefaultPortModel && this.in !== port.in;
 	}
 }
