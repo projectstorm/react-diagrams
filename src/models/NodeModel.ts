@@ -5,7 +5,7 @@ import * as _ from "lodash";
 export class NodeModel extends BaseModel<BaseModelListener> {
 	x: number;
 	y: number;
-	extras: {};
+	extras: any;
 	ports: { [s: string]: PortModel };
 
 	constructor(nodeType: string = "default", id?: string) {
