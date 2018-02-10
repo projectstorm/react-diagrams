@@ -27,6 +27,25 @@ A no-nonsense diagramming library written entirely in React with the help of Lod
 * Fast and optimized to handle large diagrams with hundreds of nodes/links
 * Super easy to use, and should work as you expect it to
 
+## Quick start
+
+`npm install storm-react-diagrams` or `yarn add storm-react-diagrams`  
+
+Setup a simple diagram (e.g. [Simple Demo](https://github.com/projectstorm/react-diagrams/blob/master/demos/demo-simple/index.tsx))
+
+Import css `import 'storm-react-diagrams/dist/style.min.css';`
+
+Setup canvas height / width
+``` css
+.storm-diagrams-canvas {
+  max-height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
+  max-width: 100vw;
+}
+```
+Some additional canvas options can be seen [here](`https://github.com/gmpersons/react-diagrams/blob/master/demos/.helpers/demo.scss#L48`)
+
 
 ## Developer Usage
 
