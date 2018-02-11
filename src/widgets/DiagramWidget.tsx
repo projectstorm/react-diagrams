@@ -1,8 +1,8 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
 import * as _ from "lodash";
-import { LinkLayerWidget } from "./LinkLayerWidget";
-import { NodeLayerWidget } from "./NodeLayerWidget";
+import { LinkLayerWidget } from "./layers/LinkLayerWidget";
+import { NodeLayerWidget } from "./layers/NodeLayerWidget";
 import { Toolkit } from "../Toolkit";
 import { BaseAction, MoveCanvasAction, MoveItemsAction, SelectingAction } from "../CanvasActions";
 import { NodeModel } from "../models/NodeModel";
@@ -10,9 +10,10 @@ import { PointModel } from "../models/PointModel";
 import { PortModel } from "../models/PortModel";
 import { LinkModel } from "../models/LinkModel";
 import { BaseModel, BaseModelListener } from "../models/BaseModel";
+import {BaseEntity} from "../BaseEntity";
 
 export interface SelectionModel {
-	model: BaseModel<BaseModelListener>;
+	model: BaseModel<BaseEntity,BaseModelListener>;
 	initialX: number;
 	initialY: number;
 }
@@ -134,7 +135,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event): { model: BaseModel<BaseModelListener>; element: Element } {
+	getMouseElement(event): { model: BaseModel<BaseEntity,BaseModelListener>; element: Element } {
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
@@ -453,6 +454,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							var relative = diagramEngine.getRelativeMousePoint(event);
 							var sourcePort = model.model;
 							var link = sourcePort.createLinkModel();
+							link.setSourcePort(sourcePort);
 
 							link.getFirstPoint().updateLocation(relative);
 							link.getLastPoint().updateLocation(relative);

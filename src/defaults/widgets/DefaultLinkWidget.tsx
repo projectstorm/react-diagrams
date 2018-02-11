@@ -19,9 +19,6 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
-/**
- * @author Dylan Vorster
- */
 export class DefaultLinkWidget extends React.Component<DefaultLinkProps, DefaultLinkState> {
 	public static defaultProps: DefaultLinkProps = {
 		color: "black",
@@ -126,19 +123,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
-	generateLabel() {
-		const canvas = this.props.diagramEngine.canvas as HTMLElement;
-		return (
-			<foreignObject className="link-label" width={canvas.offsetWidth} height={canvas.offsetHeight}>
-				<div ref={label => (this.refLabel = label)}>{this.props.link.label}</div>
-			</foreignObject>
-		);
-	}
-
-	findPathAndRelativePositionToRenderLabel = (): {
-		path: any;
-		position: number;
-	} => {
+	findPathAndRelativePositionToRenderLabel = (): {  path: any; position: number; } => {
 		// an array to hold all path lengths, making sure we hit the DOM only once to fetch this information
 		const lengths = this.refPaths.map(path => path.getTotalLength());
 
@@ -180,7 +165,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			x: pathCentre.x - labelDimensions.width / 2,
 			y: pathCentre.y - labelDimensions.height / 2
 		};
-
+		console.log('render label');
 		this.refLabel.setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
 	};
 
@@ -262,7 +247,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		return (
 			<g>
 				{paths}
-				{this.props.link.label && this.generateLabel()}
 			</g>
 		);
 	}

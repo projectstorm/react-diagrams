@@ -3,6 +3,7 @@ import * as _ from "lodash";
 
 import { NodeModel } from "../../models/NodeModel";
 import {Toolkit} from "../../Toolkit";
+import {DiagramEngine} from "../../DiagramEngine";
 
 /**
  * @author Dylan Vorster
@@ -26,8 +27,8 @@ export class DefaultNodeModel extends NodeModel {
 		return this.addPort(new DefaultPortModel(false, Toolkit.UID(), label));
 	}
 
-	deSerialize(object) {
-		super.deSerialize(object);
+	deSerialize(object, engine: DiagramEngine) {
+		super.deSerialize(object, engine);
 		this.name = object.name;
 		this.color = object.color;
 	}

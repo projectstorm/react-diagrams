@@ -1,8 +1,8 @@
 import * as React from "react";
-import { DiagramModel } from "../models/DiagramModel";
-import { DiagramEngine } from "../DiagramEngine";
+import { DiagramEngine } from "../../DiagramEngine";
 import * as _ from "lodash";
-import { NodeWidget } from "./NodeWidget";
+import { NodeWidget } from "../NodeWidget";
+import {NodeModel} from "../../models/NodeModel";
 
 export interface NodeLayerProps {
 	diagramEngine: DiagramEngine;
@@ -10,9 +10,6 @@ export interface NodeLayerProps {
 
 export interface NodeLayerState {}
 
-/**
- * @author Dylan Vorster
- */
 export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerState> {
 	constructor(props: NodeLayerProps) {
 		super(props);
@@ -41,7 +38,7 @@ export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerSt
 					height: "100%"
 				}}
 			>
-				{_.map(diagramModel.getNodes(), node => {
+				{_.map(diagramModel.getNodes(), (node: NodeModel) => {
 					return React.createElement(
 						NodeWidget,
 						{

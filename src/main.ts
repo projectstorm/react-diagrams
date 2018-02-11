@@ -31,8 +31,8 @@ export * from "./models/PointModel";
 export * from "./models/PortModel";
 
 export * from "./widgets/DiagramWidget";
-export * from "./widgets/LinkLayerWidget";
+export * from "./widgets/layers/LinkLayerWidget";
 export * from "./widgets/LinkWidget";
-export * from "./widgets/NodeLayerWidget";
+export * from "./widgets/layers/NodeLayerWidget";
 export * from "./widgets/NodeWidget";
 export * from "./widgets/PortWidget";

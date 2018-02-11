@@ -1,8 +1,8 @@
 import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
-import { LinkWidget } from "./LinkWidget";
+import { DiagramEngine } from "../../DiagramEngine";
+import { LinkWidget } from "../LinkWidget";
 import * as _ from "lodash";
-import { PointModel } from "../models/PointModel";
+import { PointModel } from "../../models/PointModel";
 
 export interface LinkLayerProps {
 	diagramEngine: DiagramEngine;

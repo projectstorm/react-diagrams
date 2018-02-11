@@ -5,6 +5,8 @@ import {LinkModel, LinkModelListener} from "../../models/LinkModel";
 import {BaseEvent} from "../../BaseEntity";
 import * as _ from "lodash";
 import {PointModel} from "../../models/PointModel";
+import {DiagramEngine} from "../../DiagramEngine";
+import {DefaultLabelModel} from "./DefaultLabelModel";
 
 export interface DefaultLinkModelListener extends LinkModelListener{
 
@@ -34,11 +36,17 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener>{
 		});
 	}
 
-	deSerialize(ob) {
-		super.deSerialize(ob);
+	deSerialize(ob, engine: DiagramEngine) {
+		super.deSerialize(ob, engine);
 		this.color = ob.color;
 		this.width = ob.width;
 		this.curvyness = ob.curvyness;
+	}
+
+	setLabel(label: string){
+		let labelOb = new DefaultLabelModel();
+		labelOb.setLabel(label);
+		this.addLabel(labelOb);
 	}
 
 	setWidth(width: number){

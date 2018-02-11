@@ -1,14 +1,15 @@
-import { BaseEntity, BaseListener } from "./BaseEntity";
-import { DiagramModel } from "./models/DiagramModel";
+import {BaseEntity, BaseListener} from "./BaseEntity";
+import {DiagramModel} from "./models/DiagramModel";
 import * as _ from "lodash";
-import { BaseModel, BaseModelListener } from "./models/BaseModel";
-import { NodeModel } from "./models/NodeModel";
-import { PointModel } from "./models/PointModel";
-import { PortModel } from "./models/PortModel";
-import { LinkModel } from "./models/LinkModel";
-import { LinkFactory, NodeFactory, PortFactory } from "./AbstractFactory";
-import { DefaultLinkFactory, DefaultNodeFactory } from "./main";
-import { DefaultPortFactory } from "./defaults/factories/DefaultPortFactory";
+import {BaseModel, BaseModelListener} from "./models/BaseModel";
+import {NodeModel} from "./models/NodeModel";
+import {PointModel} from "./models/PointModel";
+import {PortModel} from "./models/PortModel";
+import {LinkModel} from "./models/LinkModel";
+import {LabelFactory, LinkFactory, NodeFactory, PortFactory} from "./AbstractFactory";
+import {DefaultLinkFactory, DefaultNodeFactory} from "./main";
+import {DefaultPortFactory} from "./defaults/factories/DefaultPortFactory";
+
 /**
  * @author Dylan Vorster
  */
@@ -18,6 +19,8 @@ export interface DiagramEngineListener extends BaseListener {
 	nodeFactoriesUpdated?(): void;
 
 	linkFactoriesUpdated?(): void;
+
+	labelFactoriesUpdated?(): void;
 
 	repaintCanvas?(): void;
 }
@@ -29,6 +32,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	nodeFactories: { [s: string]: NodeFactory };
 	linkFactories: { [s: string]: LinkFactory };
 	portFactories: { [s: string]: PortFactory };
+	labelFactories: { [s: string]: LabelFactory };
 
 	diagramModel: DiagramModel;
 	canvas: Element;
@@ -43,6 +47,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.nodeFactories = {};
 		this.linkFactories = {};
 		this.portFactories = {};
+		this.labelFactories = {};
 		this.canvas = null;
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
@@ -64,7 +69,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.paintableWidgets = null;
 	}
 
-	enableRepaintEntities(entities: BaseModel<BaseModelListener>[]) {
+	enableRepaintEntities(entities: BaseModel<BaseEntity, BaseModelListener>[]) {
 		this.paintableWidgets = {};
 		entities.forEach(entity => {
 			//if a node is requested to repaint, add all of its links
@@ -102,7 +107,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.linksThatHaveInitiallyRendered = {};
 	}
 
-	canEntityRepaint(baseModel: BaseModel<BaseModelListener>) {
+	canEntityRepaint(baseModel: BaseModel<BaseEntity,BaseModelListener>) {
 		//no rules applied, allow repaint
 		if (this.paintableWidgets === null) {
 			return true;
@@ -130,6 +135,19 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getLinkFactories(): { [s: string]: LinkFactory } {
 		return this.linkFactories;
+	}
+
+	getLabelFactories(): { [s: string]: LabelFactory } {
+		return this.labelFactories;
+	}
+
+	registerLabelFactory(factory: LabelFactory) {
+		this.labelFactories[factory.getType()] = factory;
+		this.iterateListeners(listener => {
+			if (listener.labelFactoriesUpdated) {
+				listener.labelFactoriesUpdated();
+			}
+		});
 	}
 
 	registerPortFactory(factory: PortFactory) {
@@ -217,7 +235,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getRelativePoint(x, y) {
 		var canvasRect = this.canvas.getBoundingClientRect();
-		return { x: x - canvasRect.left, y: y - canvasRect.top };
+		return {x: x - canvasRect.left, y: y - canvasRect.top};
 	}
 
 	getNodePortElement(port: PortModel): any {
@@ -227,10 +245,10 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		if (selector === null) {
 			throw new Error(
 				"Cannot find Node Port element with nodeID: [" +
-					port.getParent().getID() +
-					"] and name: [" +
-					port.getName() +
-					"]"
+				port.getParent().getID() +
+				"] and name: [" +
+				port.getName() +
+				"]"
 			);
 		}
 		return selector;
@@ -244,17 +262,18 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 		return {
 			x:
-				sourceElement.offsetWidth / 2 +
-				(rel.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
+			sourceElement.offsetWidth / 2 +
+			(rel.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
 			y:
-				sourceElement.offsetHeight / 2 +
-				(rel.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
+			sourceElement.offsetHeight / 2 +
+			(rel.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
 		};
 	}
 
 	getMaxNumberPointsPerLink(): number {
 		return this.maxNumberPointsPerLink;
 	}
+
 	setMaxNumberPointsPerLink(max: number) {
 		this.maxNumberPointsPerLink = max;
 	}

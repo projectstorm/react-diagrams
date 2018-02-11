@@ -1,12 +1,10 @@
 import * as _ from "lodash";
 import { PortModel } from "../../models/PortModel";
-import {LinkModel} from "../../models/LinkModel";
+import {DiagramEngine} from "../../DiagramEngine";
 import {DefaultLinkModel} from "./DefaultLinkModel";
 
-/**
- * @author Dylan Vorster
- */
 export class DefaultPortModel extends PortModel {
+
 	in: boolean;
 	label: string;
 
@@ -16,8 +14,8 @@ export class DefaultPortModel extends PortModel {
 		this.label = label || name;
 	}
 
-	deSerialize(object) {
-		super.deSerialize(object);
+	deSerialize(object, engine: DiagramEngine) {
+		super.deSerialize(object, engine);
 		this.in = object.in;
 		this.label = object.label;
 	}
@@ -29,10 +27,14 @@ export class DefaultPortModel extends PortModel {
 		});
 	}
 
-	link(port: PortModel): LinkModel{
+	link(port: PortModel){
 		let link = this.createLinkModel();
 		link.setSourcePort(this);
 		link.setTargetPort(port);
 		return link;
+	}
+
+	createLinkModel(): DefaultLinkModel {
+		return new DefaultLinkModel();
 	}
 }

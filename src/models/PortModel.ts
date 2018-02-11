@@ -3,28 +3,27 @@ import { NodeModel } from "./NodeModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
 import {DefaultLinkModel} from "../defaults/models/DefaultLinkModel";
+import {DiagramEngine} from "../DiagramEngine";
 
-export class PortModel extends BaseModel<BaseModelListener> {
+export abstract class PortModel extends BaseModel<NodeModel,BaseModelListener> {
 	name: string;
-	parentNode: NodeModel;
 	links: { [id: string]: LinkModel };
 
 	constructor(name: string, type?: string, id?: string) {
 		super(type, id);
 		this.name = name;
 		this.links = {};
-		this.parentNode = null;
 	}
 
-	deSerialize(ob) {
-		super.deSerialize(ob);
+	deSerialize(ob, engine: DiagramEngine) {
+		super.deSerialize(ob, engine);
 		this.name = ob.name;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
 			name: this.name,
-			parentNode: this.parentNode.id,
+			parentNode: this.parent.id,
 			links: _.map(this.links, link => {
 				return link.id;
 			})
@@ -33,19 +32,15 @@ export class PortModel extends BaseModel<BaseModelListener> {
 
 	doClone(lookupTable = {}, clone) {
 		clone.links = {};
-		clone.parentNode = this.parentNode.clone(lookupTable);
+		clone.parentNode = this.getParent().clone(lookupTable);
+	}
+
+	getNode(): NodeModel{
+		return this.getParent();
 	}
 
 	getName(): string {
 		return this.name;
-	}
-
-	getParent(): NodeModel {
-		return this.parentNode;
-	}
-
-	setParentNode(node: NodeModel) {
-		this.parentNode = node;
 	}
 
 	removeLink(link: LinkModel) {
@@ -60,11 +55,7 @@ export class PortModel extends BaseModel<BaseModelListener> {
 		return this.links;
 	}
 
-	createLinkModel(): LinkModel | null {
-		var linkModel = new DefaultLinkModel();
-		linkModel.setSourcePort(this);
-		return linkModel;
-	}
+	abstract createLinkModel(): LinkModel;
 
 	isLocked() {
 		return super.isLocked() || this.getParent().isLocked();

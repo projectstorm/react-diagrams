@@ -22,11 +22,8 @@ export class AdvancedLinkModel extends DefaultLinkModel {
 }
 
 export class AdvancedPortModel extends DefaultPortModel {
-	constructor(isInput: boolean, name: string, label: string = null, id?: string) {
-		super(isInput, name, label, id);
-	}
 
-	createLinkModel(): LinkModel | null {
+	createLinkModel(): AdvancedLinkModel | null {
 		var link = new AdvancedLinkModel();
 		link.setSourcePort(this);
 		return link;
