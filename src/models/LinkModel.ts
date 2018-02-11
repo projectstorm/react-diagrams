@@ -138,7 +138,13 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	setSourcePort(port: PortModel) {
-		port.addLink(this);
+		if (port !== null) {
+			port.addLink(this);
+		} else if (this.sourcePort !== null) {
+			this.sourcePort.removeLink(this);
+		} else {
+			return;
+		}
 		this.sourcePort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
 			listener.sourcePortChanged && listener.sourcePortChanged({...event, port: port});
@@ -154,7 +160,13 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	setTargetPort(port: PortModel) {
-		port.addLink(this);
+		if (port !== null) {
+			port.addLink(this);
+		} else if (this.targetPort !== null) {
+			this.targetPort.removeLink(this);
+		} else {
+			return;
+		}
 		this.targetPort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
 			listener.targetPortChanged && listener.targetPortChanged({...event, port: port});
@@ -191,6 +203,12 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	removePointsAfter(pointModel: PointModel) {
 		this.points.splice(this.getPointIndex(pointModel) + 1);
+	}
+
+	removeMiddlePoints() {
+		if (this.points.length > 2) {
+			this.points.splice(0, this.points.length - 2);
+		}
 	}
 
 	addPoint<T extends PointModel>(pointModel: T, index = 1): T {

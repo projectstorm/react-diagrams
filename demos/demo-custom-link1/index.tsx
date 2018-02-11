@@ -82,13 +82,20 @@ export default () => {
 	var model = new DiagramModel();
 
 	var link1 = node1.getOutPorts()[0].createLinkModel();
-	link1.setTargetPort(port3);
-
 	var link2 = node1.getOutPorts()[1].createLinkModel();
-	link2.setTargetPort(port4);
+
+	if (link1) {
+		link1.setTargetPort(port3);
+		model.addLink(link1);
+	}
+
+	if (link2) {
+		link2.setTargetPort(port4);
+		model.addLink(link2);
+	}
 
 	// add everything
-	model.addAll(node1, node2, node3, node4, link1, link2);
+	model.addAll(node1, node2, node3, node4);
 
 	// load model into engine
 	engine.setDiagramModel(model);

@@ -5,19 +5,22 @@ import * as _ from "lodash";
 import {DefaultLinkModel} from "../defaults/models/DefaultLinkModel";
 import {DiagramEngine} from "../DiagramEngine";
 
-export abstract class PortModel extends BaseModel<NodeModel,BaseModelListener> {
+export class PortModel extends BaseModel<NodeModel,BaseModelListener> {
 	name: string;
 	links: { [id: string]: LinkModel };
+	maximumLinks: number;
 
-	constructor(name: string, type?: string, id?: string) {
+	constructor(name: string, type?: string, id?: string, maximumLinks?: number) {
 		super(type, id);
 		this.name = name;
 		this.links = {};
+		this.maximumLinks = maximumLinks;
 	}
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
 		this.name = ob.name;
+		this.maximumLinks = ob.maximumLinks;
 	}
 
 	serialize() {
@@ -26,7 +29,8 @@ export abstract class PortModel extends BaseModel<NodeModel,BaseModelListener> {
 			parentNode: this.parent.id,
 			links: _.map(this.links, link => {
 				return link.id;
-			})
+			}),
+			maximumLinks: this.maximumLinks
 		});
 	}
 
@@ -43,6 +47,14 @@ export abstract class PortModel extends BaseModel<NodeModel,BaseModelListener> {
 		return this.name;
 	}
 
+	getMaximumLinks(): number {
+		return this.maximumLinks;
+	}
+
+	setMaximumLinks(maximumLinks: number) {
+		this.maximumLinks = maximumLinks;
+	}
+
 	removeLink(link: LinkModel) {
 		delete this.links[link.getID()];
 	}
@@ -55,7 +67,21 @@ export abstract class PortModel extends BaseModel<NodeModel,BaseModelListener> {
 		return this.links;
 	}
 
-	abstract createLinkModel(): LinkModel;
+	public createLinkModel(): LinkModel | null{
+		if (_.isFinite(this.maximumLinks)) {
+			var numberOfLinks: number = _.size(this.links);
+			if (this.maximumLinks === 1 && numberOfLinks >= 1) {
+				return _.values(this.links)[0];
+			} else if (numberOfLinks >= this.maximumLinks) {
+				return null;
+			}
+		}
+		return null;
+	}
+
+	canLinkToPort(port: PortModel): boolean {
+		return true;
+	}
 
 	isLocked() {
 		return super.isLocked() || this.getParent().isLocked();

@@ -2,6 +2,7 @@ import * as React from "react";
 import {storiesOf} from "@storybook/react";
 
 import demo_simple from "../demos/demo-simple/index";
+import demo_simple_flow from "../demos/demo-simple-flow/index";
 import demo_performance from "../demos/demo-performance/index";
 import demo_custom_node1 from "../demos/demo-custom-node1/index";
 import demo_locks from "../demos/demo-locks/index";
@@ -23,6 +24,9 @@ Toolkit.TESTING_MODE = true;
 storiesOf("Tests", module)
 	.add("Simple example", () => {
 		return demo_simple();
+	})
+	.add("Simple flow example", () => {
+		return demo_simple_flow();
 	})
 	.add("Performance demo", () => {
 		return demo_performance();

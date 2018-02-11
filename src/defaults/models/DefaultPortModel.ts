@@ -2,11 +2,13 @@ import * as _ from "lodash";
 import { PortModel } from "../../models/PortModel";
 import {DiagramEngine} from "../../DiagramEngine";
 import {DefaultLinkModel} from "./DefaultLinkModel";
+import {LinkModel} from "../../models/LinkModel";
 
 export class DefaultPortModel extends PortModel {
 
 	in: boolean;
 	label: string;
+	links: { [id: string]: DefaultLinkModel };
 
 	constructor(isInput: boolean, name: string, label: string = null, id?: string) {
 		super(name, "default", id);
@@ -27,14 +29,19 @@ export class DefaultPortModel extends PortModel {
 		});
 	}
 
-	link(port: PortModel){
+	link(port: PortModel): LinkModel{
 		let link = this.createLinkModel();
 		link.setSourcePort(this);
 		link.setTargetPort(port);
 		return link;
 	}
 
-	createLinkModel(): DefaultLinkModel {
-		return new DefaultLinkModel();
+	canLinkToPort(port: PortModel): boolean {
+		return port instanceof DefaultPortModel && this.in !== port.in;
+	}
+
+	createLinkModel(): LinkModel {
+		let link = super.createLinkModel();
+		return link || new DefaultLinkModel();
 	}
 }
