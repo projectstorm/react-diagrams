@@ -6,7 +6,7 @@ import { PointModel } from "../../models/PointModel";
 
 export interface LinkLayerProps {
 	diagramEngine: DiagramEngine;
-	pointAdded: (point: PointModel, event) => any;
+	pointAdded: (point: PointModel, event: MouseEvent) => any;
 }
 
 export interface LinkLayerState {}

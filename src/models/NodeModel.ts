@@ -7,7 +7,7 @@ import {DiagramModel} from "./DiagramModel";
 export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	x: number;
 	y: number;
-	extras: {};
+	extras: any;
 	ports: { [s: string]: PortModel };
 
 	constructor(nodeType: string = "default", id?: string) {

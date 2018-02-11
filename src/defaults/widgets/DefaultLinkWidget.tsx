@@ -12,7 +12,7 @@ export interface DefaultLinkProps {
 	smooth?: boolean;
 	link: DefaultLinkModel;
 	diagramEngine: DiagramEngine;
-	pointAdded?: (point: PointModel, event) => any;
+	pointAdded?: (point: PointModel, event: MouseEvent) => any;
 }
 
 export interface DefaultLinkState {
@@ -40,7 +40,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		};
 	}
 
-	addPointToLink = (event, index: number): void => {
+	addPointToLink = (event: MouseEvent, index: number): void => {
 		if (
 			!event.shiftKey &&
 			!this.props.diagramEngine.isModelLocked(this.props.link) &&
