@@ -298,6 +298,30 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		};
 	}
 
+	/**
+	 * Smart routing is only applicable when all conditions below are true:
+	 * - smart routing is set to true on the engine
+	 * - current link is between two nodes (not between a node and an empty point)
+	 * - no custom points exist along the line
+	 */
+	isSmartRoutingApplicable(): boolean {
+		const { diagramEngine, link } = this.props;
+		
+		if (!diagramEngine.isSmartRoutingEnabled()) {
+			return false;
+		}
+		
+		if (link.points.length !== 2) {
+			return false;
+		}
+		
+		if (link.sourcePort === null || link.targetPort === null) {
+			return false;
+		}
+
+		return true;
+	}
+
 	render() {
 		const { diagramEngine } = this.props;
 		if (!diagramEngine.nodesRendered) {
@@ -310,7 +334,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		var paths = [];
 		let model = diagramEngine.getDiagramModel();
 
-		if (diagramEngine.isSmartRoutingEnabled()) {
+		if (this.isSmartRoutingApplicable()) {
 			// first step: calculate a direct path between the points being linked
 			const directPathCoords = this.calculateDirectPath(_.first(points), _.last(points));
 
@@ -349,8 +373,8 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			}
 		}
 
-		// can be true when either smart routing is not enabled
-		// or when the smart path is only along restricted points
+		// true when smart routing was skipped or not enabled.
+		// See @link{#isSmartRoutingApplicable()}.
 		if (paths.length === 0) {
 			if (points.length === 2) {
 				//draw the smoothing
