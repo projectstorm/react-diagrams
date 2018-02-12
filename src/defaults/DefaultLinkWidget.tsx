@@ -306,15 +306,15 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	 */
 	isSmartRoutingApplicable(): boolean {
 		const { diagramEngine, link } = this.props;
-		
+
 		if (!diagramEngine.isSmartRoutingEnabled()) {
 			return false;
 		}
-		
+
 		if (link.points.length !== 2) {
 			return false;
 		}
-		
+
 		if (link.sourcePort === null || link.targetPort === null) {
 			return false;
 		}

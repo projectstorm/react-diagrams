@@ -426,19 +426,22 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x).x, 0) /
 					ROUTING_SCALING_FACTOR
 			) * ROUTING_SCALING_FACTOR;
-		const maxX = Math.max(
-			_.maxBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x + item.width).x,
-			canvas.offsetWidth
+		const maxXElement = _.maxBy(
+			_.concat(allNodesCoords, allPortsCoords, allPointsCoords),
+			item => item.x + item.width
 		);
+		const maxX = Math.max(maxXElement.x + maxXElement.width, canvas.offsetWidth);
+
 		const minY =
 			Math.floor(
 				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.y).y, 0) /
 					ROUTING_SCALING_FACTOR
 			) * ROUTING_SCALING_FACTOR;
-		const maxY = Math.max(
-			_.maxBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.y + item.height).y,
-			canvas.offsetHeight
+		const maxYElement = _.maxBy(
+			_.concat(allNodesCoords, allPortsCoords, allPointsCoords),
+			item => item.y + item.height
 		);
+		const maxY = Math.max(maxYElement.y + maxYElement.height, canvas.offsetHeight);
 
 		return {
 			width: Math.ceil(Math.abs(minX) + maxX),
