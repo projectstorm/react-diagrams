@@ -111,8 +111,8 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			links: _.map(this.links, link => {
 				return link.serialize();
 			}),
-			nodes: _.map(this.nodes, link => {
-				return link.serialize();
+			nodes: _.map(this.nodes, node => {
+				return node.serialize();
 			})
 		});
 	}

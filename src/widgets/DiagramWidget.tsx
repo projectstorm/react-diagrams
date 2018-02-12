@@ -25,6 +25,7 @@ export interface DiagramProps {
 	allowCanvasZoom?: boolean;
 	inverseZoom?: boolean;
 	maxNumberPointsPerLink?: number;
+	smartRouting?: boolean;
 
 	actionStartedFiring?: (action: BaseAction) => boolean;
 	actionStillFiring?: (action: BaseAction) => void;
@@ -53,6 +54,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		allowCanvasZoom: true,
 		inverseZoom: false,
 		maxNumberPointsPerLink: Infinity, // backwards compatible default
+		smartRouting: false,
 		deleteKeys: [46, 8]
 	};
 
@@ -252,6 +254,18 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				) {
 					model.model.x = diagramModel.getGridPosition(model.initialX + amountX / amountZoom);
 					model.model.y = diagramModel.getGridPosition(model.initialY + amountY / amountZoom);
+
+					// update port coordinates as well
+					if (model.model instanceof NodeModel) {
+						_.forEach(model.model.getPorts(), port => {
+							const portCoords = this.props.diagramEngine.getPortCoords(port);
+							port.updateCoords(portCoords);
+						});
+					}
+
+					if (diagramEngine.isSmartRoutingEnabled()) {
+						diagramEngine.calculateRoutingMatrix();
+					}
 				} else if (model.model instanceof PointModel) {
 					// we want points that are connected to ports, to not neccesarilly snap to grid
 					// this stuff needs to be pixel perfect, dont touch it
@@ -259,6 +273,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
 				}
 			});
+
+			if (diagramEngine.isSmartRoutingEnabled()) {
+				diagramEngine.calculateCanvasMatrix();
+			}
+
 			this.fireAction();
 			if (!this.state.wasMoved) {
 				this.setState({ wasMoved: true });
@@ -376,6 +395,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	render() {
 		var diagramEngine = this.props.diagramEngine;
 		diagramEngine.setMaxNumberPointsPerLink(this.props.maxNumberPointsPerLink);
+		diagramEngine.setSmartRoutingStatus(this.props.smartRouting);
 		var diagramModel = diagramEngine.getDiagramModel();
 
 		return (

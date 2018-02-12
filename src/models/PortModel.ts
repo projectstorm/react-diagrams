@@ -8,6 +8,12 @@ export class PortModel extends BaseModel<BaseModelListener> {
 	parentNode: NodeModel;
 	links: { [id: string]: LinkModel };
 
+	// calculated post rendering so routing can be done correctly
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+
 	constructor(name: string, type?: string, id?: string) {
 		super(type, id);
 		this.name = name;
@@ -57,6 +63,13 @@ export class PortModel extends BaseModel<BaseModelListener> {
 
 	getLinks(): { [id: string]: LinkModel } {
 		return this.links;
+	}
+
+	updateCoords({ x, y, width, height }: { x: number; y: number; width: number; height: number }) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 
 	createLinkModel(): LinkModel | null {

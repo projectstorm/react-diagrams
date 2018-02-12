@@ -22,6 +22,13 @@ export interface DiagramEngineListener extends BaseListener {
 	repaintCanvas?(): void;
 }
 
+/*
+it can be very expensive to calculate routes when every single pixel on the canvas
+is individually represented. Using the factor below, we combine values in order
+to achieve the best trade-off between accuracy and performance.
+*/
+export const ROUTING_SCALING_FACTOR = 5;
+
 /**
  * Passed as a parameter to the DiagramWidget
  */
@@ -36,6 +43,14 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	linksThatHaveInitiallyRendered: {};
 	nodesRendered: boolean;
 	maxNumberPointsPerLink: number;
+	smartRouting: boolean;
+
+	// calculated only when smart routing is active
+	canvasMatrix: number[][] = [];
+	routingMatrix: number[][] = [];
+	// used when at least one element has negative coordinates
+	hAdjustmentFactor: number = 0;
+	vAdjustmentFactor: number = 0;
 
 	constructor() {
 		super();
@@ -252,11 +267,235 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		};
 	}
 
+	getPortCoords(
+		port: PortModel
+	): {
+		x: number;
+		y: number;
+		width: number;
+		height: number;
+	} {
+		const sourceElement = this.getNodePortElement(port);
+		const sourceRect = sourceElement.getBoundingClientRect();
+		const canvasRect = this.canvas.getBoundingClientRect() as ClientRect;
+
+		return {
+			x:
+				(sourceRect.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0) -
+				canvasRect.left,
+			y:
+				(sourceRect.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0) -
+				canvasRect.top,
+			width: sourceRect.width,
+			height: sourceRect.height
+		};
+	}
+
+	getNodeElement(node: NodeModel): any {
+		const selector = this.canvas.querySelector('.node[data-nodeid="' + node.getID() + '"]');
+		if (selector === null) {
+			throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
+		}
+		return selector;
+	}
+
+	getNodeDimensions(
+		node: NodeModel
+	): {
+		width: number;
+		height: number;
+	} {
+		const nodeElement = this.getNodeElement(node);
+		const nodeRect = nodeElement.getBoundingClientRect();
+
+		return {
+			width: nodeRect.width,
+			height: nodeRect.height
+		};
+	}
+
 	getMaxNumberPointsPerLink(): number {
 		return this.maxNumberPointsPerLink;
 	}
 	setMaxNumberPointsPerLink(max: number) {
 		this.maxNumberPointsPerLink = max;
+	}
+
+	isSmartRoutingEnabled() {
+		return !!this.smartRouting;
+	}
+	setSmartRoutingStatus(status: boolean) {
+		this.smartRouting = status;
+	}
+
+	getCanvasMatrix(): number[][] {
+		if (this.canvasMatrix.length === 0) {
+			this.calculateCanvasMatrix();
+		}
+
+		return this.canvasMatrix;
+	}
+	calculateCanvasMatrix() {
+		const {
+			width: canvasWidth,
+			hAdjustmentFactor,
+			height: canvasHeight,
+			vAdjustmentFactor
+		} = this.calculateMatrixDimensions();
+
+		this.hAdjustmentFactor = hAdjustmentFactor;
+		this.vAdjustmentFactor = vAdjustmentFactor;
+
+		const matrixWidth = Math.ceil(canvasWidth / ROUTING_SCALING_FACTOR);
+		const matrixHeight = Math.ceil(canvasHeight / ROUTING_SCALING_FACTOR);
+
+		this.canvasMatrix = _.range(0, matrixHeight).map(() => {
+			return new Array(matrixWidth).fill(0);
+		});
+	}
+
+	/**
+	 * A representation of the canvas in the following format:
+	 *
+	 * +-----------------+
+	 * | 0 0 1 1 0 0 0 0 |
+	 * | 0 0 1 1 0 0 1 1 |
+	 * | 0 0 0 0 0 0 1 1 |
+	 * | 1 1 0 0 0 0 0 0 |
+	 * | 1 1 0 0 0 0 0 0 |
+	 * +-----------------+
+	 *
+	 * In which all points blocked by a node (and its ports) are
+	 * marked as 1; points were there is nothing (ie, free) receive 0.
+	 */
+	getRoutingMatrix(): number[][] {
+		if (this.routingMatrix.length === 0) {
+			this.calculateRoutingMatrix();
+		}
+
+		return this.routingMatrix;
+	}
+	calculateRoutingMatrix(): void {
+		const matrix = _.cloneDeep(this.getCanvasMatrix());
+
+		// nodes need to be marked as blocked points
+		this.markNodes(matrix);
+		// but we need to unblock those who intersect with ports and points
+		this.markPorts(matrix);
+
+		this.routingMatrix = matrix;
+	}
+
+	/**
+	 * Despite being a long method, we simply iterate over all three collections (nodes, ports and points)
+	 * to find the highest X and Y dimensions, so we can build the matrix large enough to encompass all elements.
+	 */
+	calculateMatrixDimensions = (): {
+		width: number;
+		hAdjustmentFactor: number;
+		height: number;
+		vAdjustmentFactor: number;
+	} => {
+		const allNodesCoords = _.values(this.diagramModel.nodes).map(item => ({
+			x: item.x,
+			width: item.width,
+			y: item.y,
+			height: item.height
+		}));
+
+		const allLinks = _.values(this.diagramModel.links);
+		const allPortsCoords = _.flatMap(allLinks.map(link => [link.sourcePort, link.targetPort])).map(item => ({
+			x: item.x,
+			width: item.width,
+			y: item.y,
+			height: item.height
+		}));
+		const allPointsCoords = _.flatMap(allLinks.map(link => link.points)).map(item => ({
+			// points don't have width/height, so let's just use 0
+			x: item.x,
+			width: 0,
+			y: item.y,
+			height: 0
+		}));
+
+		const canvas = this.canvas as HTMLDivElement;
+		const minX =
+			Math.floor(
+				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x).x, 0) /
+					ROUTING_SCALING_FACTOR
+			) * ROUTING_SCALING_FACTOR;
+		const maxX = Math.max(
+			_.maxBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x + item.width).x,
+			canvas.offsetWidth
+		);
+		const minY =
+			Math.floor(
+				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.y).y, 0) /
+					ROUTING_SCALING_FACTOR
+			) * ROUTING_SCALING_FACTOR;
+		const maxY = Math.max(
+			_.maxBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.y + item.height).y,
+			canvas.offsetHeight
+		);
+
+		return {
+			width: Math.ceil(Math.abs(minX) + maxX),
+			hAdjustmentFactor: Math.abs(minX) / ROUTING_SCALING_FACTOR + 1,
+			height: Math.ceil(Math.abs(minY) + maxY),
+			vAdjustmentFactor: Math.abs(minY) / ROUTING_SCALING_FACTOR + 1
+		};
+	};
+
+	/**
+	 * Updates (by reference) where nodes will be drawn on the matrix passed in.
+	 */
+	markNodes = (matrix: number[][]): void => {
+		_.values(this.diagramModel.nodes).forEach(node => {
+			const startX = Math.floor(node.x / ROUTING_SCALING_FACTOR);
+			const endX = Math.ceil((node.x + node.width) / ROUTING_SCALING_FACTOR);
+			const startY = Math.floor(node.y / ROUTING_SCALING_FACTOR);
+			const endY = Math.ceil((node.y + node.height) / ROUTING_SCALING_FACTOR);
+
+			for (let x = startX - 1; x <= endX + 1; x++) {
+				for (let y = startY - 1; y < endY + 1; y++) {
+					this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+				}
+			}
+		});
+	};
+
+	/**
+	 * Updates (by reference) where ports will be drawn on the matrix passed in.
+	 */
+	markPorts = (matrix: number[][]): void => {
+		const allElements = _.flatMap(
+			_.values(this.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
+		);
+		allElements.forEach(port => {
+			const startX = Math.floor(port.x / ROUTING_SCALING_FACTOR);
+			const endX = Math.ceil((port.x + port.width) / ROUTING_SCALING_FACTOR);
+			const startY = Math.floor(port.y / ROUTING_SCALING_FACTOR);
+			const endY = Math.ceil((port.y + port.height) / ROUTING_SCALING_FACTOR);
+
+			for (let x = startX - 1; x <= endX + 1; x++) {
+				for (let y = startY - 1; y < endY + 1; y++) {
+					this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+				}
+			}
+		});
+	};
+
+	markMatrixPoint = (matrix: number[][], x: number, y: number) => {
+		if (matrix[y] !== undefined && matrix[y][x] !== undefined) {
+			matrix[y][x] = 1;
+		}
+	};
+
+	translateRoutingX(x: number, reverse: boolean = false) {
+		return x + this.hAdjustmentFactor * (reverse ? -1 : 1);
+	}
+	translateRoutingY(y: number, reverse: boolean = false) {
+		return y + this.vAdjustmentFactor * (reverse ? -1 : 1);
 	}
 
 	zoomToFit() {

@@ -1,7 +1,11 @@
 import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
+import * as _ from "lodash";
+import * as PF from "pathfinding";
+import * as Path from "paths-js/path";
+import { DiagramEngine, ROUTING_SCALING_FACTOR } from "../DiagramEngine";
 import { LinkModel } from "../models/LinkModel";
 import { PointModel } from "../models/PointModel";
+import { NodeModel } from "../models/NodeModel";
 
 export interface DefaultLinkProps {
 	color?: string;
@@ -15,6 +19,11 @@ export interface DefaultLinkProps {
 export interface DefaultLinkState {
 	selected: boolean;
 }
+
+const pathFinderInstance = new PF.JumpPointFinder({
+	heuristic: PF.Heuristic.manhattan,
+	diagonalMovement: PF.DiagonalMovement.Never
+});
 
 /**
  * @author Dylan Vorster
@@ -209,14 +218,130 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			lastPointDelta},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
 	}
 
+	generateDynamicPath(pathCoords: number[][]) {
+		let path = Path();
+		path = path.moveto(pathCoords[0][0] * ROUTING_SCALING_FACTOR, pathCoords[0][1] * ROUTING_SCALING_FACTOR);
+		pathCoords.slice(1).forEach(coords => {
+			path = path.lineto(coords[0] * ROUTING_SCALING_FACTOR, coords[1] * ROUTING_SCALING_FACTOR);
+		});
+		return path.print();
+	}
+
+	calculateDirectPath(
+		from: {
+			x: number;
+			y: number;
+		},
+		to: {
+			x: number;
+			y: number;
+		}
+	): number[][] {
+		const { diagramEngine } = this.props;
+		const matrix = diagramEngine.getCanvasMatrix();
+
+		const grid = new PF.Grid(matrix);
+
+		return pathFinderInstance.findPath(
+			diagramEngine.translateRoutingX(Math.floor(from.x / ROUTING_SCALING_FACTOR)),
+			diagramEngine.translateRoutingY(Math.floor(from.y / ROUTING_SCALING_FACTOR)),
+			diagramEngine.translateRoutingX(Math.floor(to.x / ROUTING_SCALING_FACTOR)),
+			diagramEngine.translateRoutingY(Math.floor(to.y / ROUTING_SCALING_FACTOR)),
+			grid
+		);
+	}
+
+	calculateLinkStartEndCoords(
+		matrix: number[][],
+		path: number[][]
+	): {
+		start: {
+			x: number;
+			y: number;
+		};
+		end: {
+			x: number;
+			y: number;
+		};
+		pathToStart: number[][];
+		pathToEnd: number[][];
+	} {
+		const startIndex = path.findIndex(point => matrix[point[1]][point[0]] === 0);
+		const pathToStart = path.slice(0, startIndex);
+		const endIndex =
+			path.length -
+			path
+				.slice()
+				.reverse()
+				.findIndex(point => matrix[point[1]][point[0]] === 0) -
+			1;
+		const pathToEnd = path.slice(endIndex);
+
+		return {
+			start: {
+				x: path[startIndex][0],
+				y: path[startIndex][1]
+			},
+			end: {
+				x: path[endIndex][0],
+				y: path[endIndex][1]
+			},
+			pathToStart,
+			pathToEnd
+		};
+	}
+
 	render() {
+		const { diagramEngine } = this.props;
+		if (!diagramEngine.nodesRendered) {
+			return null;
+		}
+
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
-		var paths = [];
-		let model = this.props.diagramEngine.getDiagramModel();
 
-		//draw the smoothing
-		if (points.length === 2) {
+		var paths = [];
+		let model = diagramEngine.getDiagramModel();
+
+		if (diagramEngine.isSmartRoutingEnabled()) {
+			// first step: calculate a direct path between the points being linked
+			const directPathCoords = this.calculateDirectPath(_.first(points), _.last(points));
+
+			const routingMatrix = diagramEngine.getRoutingMatrix();
+			// now we need to extract, from the routing matrix, the very first walkable points
+			// so they can be used as origin and destination of the link to be created
+			const { start, end, pathToStart, pathToEnd } = this.calculateLinkStartEndCoords(
+				routingMatrix,
+				directPathCoords
+			);
+
+			// second step: calculate a path avoiding hitting other elements
+			const grid = new PF.Grid(routingMatrix);
+			const dynamicPath = pathFinderInstance.findPath(start.x, start.y, end.x, end.y, grid);
+
+			// third step: aggregate everything to have the calculated path ready for render
+			const pathCoords = pathToStart
+				.concat(dynamicPath, pathToEnd)
+				.map(coords => [
+					diagramEngine.translateRoutingX(coords[0], true),
+					diagramEngine.translateRoutingY(coords[1], true)
+				]);
+			// const svgPath = this.generateDynamicPath(PF.Util.smoothenPath(grid, pathCoords));
+			const svgPath = this.generateDynamicPath(PF.Util.compressPath(pathCoords));
+
+			paths.push(
+				this.generateLink(
+					{
+						onMouseDown: event => {
+							this.addPointToLink(event, 1);
+						},
+						d: svgPath
+					},
+					"0"
+				)
+			);
+		} else if (points.length === 2) {
+			//draw the smoothing
 			//if the points are too close, just draw a straight line
 			var margin = 50;
 			if (Math.abs(points[0].x - points[1].x) < 50) {

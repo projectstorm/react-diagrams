@@ -30,6 +30,8 @@
 	"dependencies": {
 		"closest": "^0.0.1",
 		"lodash": "^4.17.4",
+		"pathfinding": "^0.4.18",
+		"paths-js": "^0.4.5",
 		"react": "^16.2.0"
 	},
 	"devDependencies": {
