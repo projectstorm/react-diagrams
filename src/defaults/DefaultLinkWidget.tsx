@@ -267,14 +267,21 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		pathToEnd: number[][];
 	} {
 		const startIndex = path.findIndex(point => matrix[point[1]][point[0]] === 0);
-		const pathToStart = path.slice(0, startIndex);
 		const endIndex =
 			path.length -
+			1 -
 			path
 				.slice()
 				.reverse()
-				.findIndex(point => matrix[point[1]][point[0]] === 0) -
-			1;
+				.findIndex(point => matrix[point[1]][point[0]] === 0);
+
+		// are we trying to create a path exclusively through blocked areas?
+		// if so, let's fallback to the linear routing
+		if (startIndex === -1 || endIndex === -1) {
+			return undefined;
+		}
+
+		const pathToStart = path.slice(0, startIndex);
 		const pathToEnd = path.slice(endIndex);
 
 		return {
@@ -310,105 +317,111 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			const routingMatrix = diagramEngine.getRoutingMatrix();
 			// now we need to extract, from the routing matrix, the very first walkable points
 			// so they can be used as origin and destination of the link to be created
-			const { start, end, pathToStart, pathToEnd } = this.calculateLinkStartEndCoords(
-				routingMatrix,
-				directPathCoords
-			);
+			const smartLink = this.calculateLinkStartEndCoords(routingMatrix, directPathCoords);
 
-			// second step: calculate a path avoiding hitting other elements
-			const grid = new PF.Grid(routingMatrix);
-			const dynamicPath = pathFinderInstance.findPath(start.x, start.y, end.x, end.y, grid);
+			if (smartLink) {
+				const { start, end, pathToStart, pathToEnd } = smartLink;
+				// second step: calculate a path avoiding hitting other elements
+				const grid = new PF.Grid(routingMatrix);
+				const dynamicPath = pathFinderInstance.findPath(start.x, start.y, end.x, end.y, grid);
 
-			// third step: aggregate everything to have the calculated path ready for render
-			const pathCoords = pathToStart
-				.concat(dynamicPath, pathToEnd)
-				.map(coords => [
-					diagramEngine.translateRoutingX(coords[0], true),
-					diagramEngine.translateRoutingY(coords[1], true)
-				]);
-			// const svgPath = this.generateDynamicPath(PF.Util.smoothenPath(grid, pathCoords));
-			const svgPath = this.generateDynamicPath(PF.Util.compressPath(pathCoords));
+				// third step: aggregate everything to have the calculated path ready for render
+				const pathCoords = pathToStart
+					.concat(dynamicPath, pathToEnd)
+					.map(coords => [
+						diagramEngine.translateRoutingX(coords[0], true),
+						diagramEngine.translateRoutingY(coords[1], true)
+					]);
+				// const svgPath = this.generateDynamicPath(PF.Util.smoothenPath(grid, pathCoords));
+				const svgPath = this.generateDynamicPath(PF.Util.compressPath(pathCoords));
 
-			paths.push(
-				this.generateLink(
-					{
-						onMouseDown: event => {
-							this.addPointToLink(event, 1);
+				paths.push(
+					this.generateLink(
+						{
+							onMouseDown: event => {
+								this.addPointToLink(event, 1);
+							},
+							d: svgPath
 						},
-						d: svgPath
-					},
-					"0"
-				)
-			);
-		} else if (points.length === 2) {
-			//draw the smoothing
-			//if the points are too close, just draw a straight line
-			var margin = 50;
-			if (Math.abs(points[0].x - points[1].x) < 50) {
-				margin = 5;
-			}
-
-			var pointLeft = points[0];
-			var pointRight = points[1];
-
-			//some defensive programming to make sure the smoothing is
-			//always in the right direction
-			if (pointLeft.x > pointRight.x) {
-				pointLeft = points[1];
-				pointRight = points[0];
-			}
-
-			paths.push(
-				this.generateLink(
-					{
-						onMouseDown: event => {
-							this.addPointToLink(event, 1);
-						},
-						d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
-					},
-					"0"
-				)
-			);
-			if (this.props.link.targetPort === null) {
-				paths.push(this.generatePoint(1));
-			}
-		} else {
-			//draw the multiple anchors and complex line instead
-			var ds = [];
-			if (this.props.smooth) {
-				ds.push(this.generateCurvePath(points[0], points[1], 50, 0));
-				for (var i = 1; i < points.length - 2; i++) {
-					ds.push(this.generateLinePath(points[i], points[i + 1]));
-				}
-				ds.push(this.generateCurvePath(points[i], points[i + 1], 0, -50));
-			} else {
-				var ds = [];
-				for (var i = 0; i < points.length - 1; i++) {
-					ds.push(this.generateLinePath(points[i], points[i + 1]));
-				}
-			}
-
-			paths = ds.map((data, index) => {
-				return this.generateLink(
-					{
-						"data-linkid": this.props.link.id,
-						"data-point": index,
-						onMouseDown: (event: MouseEvent) => {
-							this.addPointToLink(event, index + 1);
-						},
-						d: data
-					},
-					index
+						"0"
+					)
 				);
-			});
-
-			//render the circles
-			for (var i = 1; i < points.length - 1; i++) {
-				paths.push(this.generatePoint(i));
 			}
+		}
 
-			if (this.props.link.targetPort === null) {
-				paths.push(this.generatePoint(points.length - 1));
+		// can be true when either smart routing is not enabled
+		// or when the smart path is only along restricted points
+		if (paths.length === 0) {
+			if (points.length === 2) {
+				//draw the smoothing
+				//if the points are too close, just draw a straight line
+				var margin = 50;
+				if (Math.abs(points[0].x - points[1].x) < 50) {
+					margin = 5;
+				}
+
+				var pointLeft = points[0];
+				var pointRight = points[1];
+
+				//some defensive programming to make sure the smoothing is
+				//always in the right direction
+				if (pointLeft.x > pointRight.x) {
+					pointLeft = points[1];
+					pointRight = points[0];
+				}
+
+				paths.push(
+					this.generateLink(
+						{
+							onMouseDown: event => {
+								this.addPointToLink(event, 1);
+							},
+							d: this.generateCurvePath(pointLeft, pointRight, margin, -margin)
+						},
+						"0"
+					)
+				);
+				if (this.props.link.targetPort === null) {
+					paths.push(this.generatePoint(1));
+				}
+			} else {
+				//draw the multiple anchors and complex line instead
+				var ds = [];
+				if (this.props.smooth) {
+					ds.push(this.generateCurvePath(points[0], points[1], 50, 0));
+					for (var i = 1; i < points.length - 2; i++) {
+						ds.push(this.generateLinePath(points[i], points[i + 1]));
+					}
+					ds.push(this.generateCurvePath(points[i], points[i + 1], 0, -50));
+				} else {
+					var ds = [];
+					for (var i = 0; i < points.length - 1; i++) {
+						ds.push(this.generateLinePath(points[i], points[i + 1]));
+					}
+				}
+
+				paths = ds.map((data, index) => {
+					return this.generateLink(
+						{
+							"data-linkid": this.props.link.id,
+							"data-point": index,
+							onMouseDown: (event: MouseEvent) => {
+								this.addPointToLink(event, index + 1);
+							},
+							d: data
+						},
+						index
+					);
+				});
+
+				//render the circles
+				for (var i = 1; i < points.length - 1; i++) {
+					paths.push(this.generatePoint(i));
+				}
+
+				if (this.props.link.targetPort === null) {
+					paths.push(this.generatePoint(points.length - 1));
+				}
 			}
 		}
 

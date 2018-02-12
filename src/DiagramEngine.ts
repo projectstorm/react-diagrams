@@ -404,12 +404,14 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		}));
 
 		const allLinks = _.values(this.diagramModel.links);
-		const allPortsCoords = _.flatMap(allLinks.map(link => [link.sourcePort, link.targetPort])).map(item => ({
-			x: item.x,
-			width: item.width,
-			y: item.y,
-			height: item.height
-		}));
+		const allPortsCoords = _.flatMap(allLinks.map(link => [link.sourcePort, link.targetPort]))
+			.filter(port => port !== null)
+			.map(item => ({
+				x: item.x,
+				width: item.width,
+				y: item.y,
+				height: item.height
+			}));
 		const allPointsCoords = _.flatMap(allLinks.map(link => link.points)).map(item => ({
 			// points don't have width/height, so let's just use 0
 			x: item.x,
@@ -471,7 +473,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		const allElements = _.flatMap(
 			_.values(this.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
 		);
-		allElements.forEach(port => {
+		allElements.filter(port => port !== null).forEach(port => {
 			const startX = Math.floor(port.x / ROUTING_SCALING_FACTOR);
 			const endX = Math.ceil((port.x + port.width) / ROUTING_SCALING_FACTOR);
 			const startY = Math.floor(port.y / ROUTING_SCALING_FACTOR);
