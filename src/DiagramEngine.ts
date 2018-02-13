@@ -8,6 +8,7 @@ import { PortModel } from "./models/PortModel";
 import { LinkModel } from "./models/LinkModel";
 import { LinkFactory, NodeFactory, PortFactory } from "./AbstractFactory";
 import { DefaultLinkFactory, DefaultNodeFactory } from "./main";
+import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
 import { DefaultPortFactory } from "./defaults/DefaultPortFactory";
 /**
  * @author Dylan Vorster
@@ -21,13 +22,6 @@ export interface DiagramEngineListener extends BaseListener {
 
 	repaintCanvas?(): void;
 }
-
-/*
-it can be very expensive to calculate routes when every single pixel on the canvas
-is individually represented. Using the factor below, we combine values in order
-to achieve the best trade-off between accuracy and performance.
-*/
-export const ROUTING_SCALING_FACTOR = 5;
 
 /**
  * Passed as a parameter to the DiagramWidget
@@ -235,6 +229,14 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return { x: x - canvasRect.left, y: y - canvasRect.top };
 	}
 
+	getNodeElement(node: NodeModel): any {
+		const selector = this.canvas.querySelector('.node[data-nodeid="' + node.getID() + '"]');
+		if (selector === null) {
+			throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
+		}
+		return selector;
+	}
+
 	getNodePortElement(port: PortModel): any {
 		var selector = this.canvas.querySelector(
 			'.port[data-name="' + port.getName() + '"][data-nodeid="' + port.getParent().getID() + '"]'
@@ -267,6 +269,9 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		};
 	}
 
+	/**
+	 * Calculate rectangular coordinates of the port passed in.
+	 */
 	getPortCoords(
 		port: PortModel
 	): {
@@ -291,14 +296,10 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		};
 	}
 
-	getNodeElement(node: NodeModel): any {
-		const selector = this.canvas.querySelector('.node[data-nodeid="' + node.getID() + '"]');
-		if (selector === null) {
-			throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
-		}
-		return selector;
-	}
-
+	/**
+	 * Determine the width and height of the node passed in.
+	 * It currently assumes nodes have a rectangular shape, can be overriden for customised shapes.
+	 */
 	getNodeDimensions(
 		node: NodeModel
 	): {
@@ -328,6 +329,20 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.smartRouting = status;
 	}
 
+	/**
+	 * A representation of the canvas in the following format:
+	 *
+	 * +-----------------+
+	 * | 0 0 0 0 0 0 0 0 |
+	 * | 0 0 0 0 0 0 0 0 |
+	 * | 0 0 0 0 0 0 0 0 |
+	 * | 0 0 0 0 0 0 0 0 |
+	 * | 0 0 0 0 0 0 0 0 |
+	 * +-----------------+
+	 *
+	 * In which all walkable points are marked by zeros.
+	 * It uses @link{#ROUTING_SCALING_FACTOR} to reduce the matrix dimensions and improve performance.
+	 */
 	getCanvasMatrix(): number[][] {
 		if (this.canvasMatrix.length === 0) {
 			this.calculateCanvasMatrix();
@@ -384,6 +399,18 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.markPorts(matrix);
 
 		this.routingMatrix = matrix;
+	}
+
+	/**
+	 * The routing matrix does not have negative indexes, but elements could be negatively positioned.
+	 * We use the functions below to translate back and forth between these coordinates, relying on the
+	 * calculated values of hAdjustmentFactor and vAdjustmentFactor.
+	 */
+	translateRoutingX(x: number, reverse: boolean = false) {
+		return x + this.hAdjustmentFactor * (reverse ? -1 : 1);
+	}
+	translateRoutingY(y: number, reverse: boolean = false) {
+		return y + this.vAdjustmentFactor * (reverse ? -1 : 1);
 	}
 
 	/**
@@ -495,13 +522,6 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 			matrix[y][x] = 1;
 		}
 	};
-
-	translateRoutingX(x: number, reverse: boolean = false) {
-		return x + this.hAdjustmentFactor * (reverse ? -1 : 1);
-	}
-	translateRoutingY(y: number, reverse: boolean = false) {
-		return y + this.vAdjustmentFactor * (reverse ? -1 : 1);
-	}
 
 	zoomToFit() {
 		const xFactor = this.canvas.clientWidth / this.canvas.scrollWidth;
