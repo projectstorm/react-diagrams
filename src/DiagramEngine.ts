@@ -402,7 +402,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 		// nodes need to be marked as blocked points
 		this.markNodes(matrix);
-		// but we need to unblock those who intersect with ports and points
+		// same thing for ports
 		this.markPorts(matrix);
 
 		this.routingMatrix = matrix;
@@ -422,7 +422,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	/**
 	 * Despite being a long method, we simply iterate over all three collections (nodes, ports and points)
-	 * to find the highest X and Y dimensions, so we can build the matrix large enough to encompass all elements.
+	 * to find the highest X and Y dimensions, so we can build the matrix large enough to contain all elements.
 	 */
 	calculateMatrixDimensions = (): {
 		width: number;
