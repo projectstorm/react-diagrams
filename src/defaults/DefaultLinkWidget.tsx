@@ -280,7 +280,13 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				const { start, end, pathToStart, pathToEnd } = smartLink;
 
 				// second step: calculate a path avoiding hitting other elements
-				const simplifiedPath = this.pathFinding.calculateDynamicPath(routingMatrix, start, end, pathToStart, pathToEnd);
+				const simplifiedPath = this.pathFinding.calculateDynamicPath(
+					routingMatrix,
+					start,
+					end,
+					pathToStart,
+					pathToEnd
+				);
 				const svgPath = this.generateDynamicPath(simplifiedPath);
 
 				paths.push(

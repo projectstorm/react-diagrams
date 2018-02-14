@@ -9,18 +9,18 @@ to achieve the best trade-off between accuracy and performance.
 export const ROUTING_SCALING_FACTOR = 5;
 
 const pathFinderInstance = new PF.JumpPointFinder({
-    heuristic: PF.Heuristic.manhattan,
-    diagonalMovement: PF.DiagonalMovement.Never
+	heuristic: PF.Heuristic.manhattan,
+	diagonalMovement: PF.DiagonalMovement.Never
 });
 
 export default class PathFinding {
-    instance: any;
-    diagramEngine: DiagramEngine;
+	instance: any;
+	diagramEngine: DiagramEngine;
 
-    constructor(diagramEngine: DiagramEngine) {
-        this.instance = pathFinderInstance;
+	constructor(diagramEngine: DiagramEngine) {
+		this.instance = pathFinderInstance;
 		this.diagramEngine = diagramEngine;
-    }
+	}
 
 	/**
 	 * Taking as argument a fully unblocked walking matrix, this method
@@ -51,7 +51,7 @@ export default class PathFinding {
 	/**
 	 * Using @link{#calculateDirectPath}'s result as input, we here
 	 * determine the first walkable point found in the matrix that includes
-	 * blocked paths. 
+	 * blocked paths.
 	 */
 	calculateLinkStartEndCoords(
 		matrix: number[][],
@@ -115,7 +115,7 @@ export default class PathFinding {
 			y: number;
 		},
 		pathToStart: number[][],
-		pathToEnd: number[][],
+		pathToEnd: number[][]
 	) {
 		// generate the path based on the matrix with obstacles
 		const grid = new PF.Grid(routingMatrix);

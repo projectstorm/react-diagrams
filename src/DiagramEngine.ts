@@ -229,7 +229,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return { x: x - canvasRect.left, y: y - canvasRect.top };
 	}
 
-	getNodeElement(node: NodeModel): any {
+	getNodeElement(node: NodeModel): Element {
 		const selector = this.canvas.querySelector('.node[data-nodeid="' + node.getID() + '"]');
 		if (selector === null) {
 			throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
@@ -306,6 +306,13 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		width: number;
 		height: number;
 	} {
+		if (!this.canvas) {
+			return {
+				width: 0,
+				height: 0
+			};
+		}
+
 		const nodeElement = this.getNodeElement(node);
 		const nodeRect = nodeElement.getBoundingClientRect();
 

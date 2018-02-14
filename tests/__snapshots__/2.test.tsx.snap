@@ -10068,6 +10068,332 @@ exports[`Storyshots Tests Simple example 1`] = `
 </div>
 `;
 
+exports[`Storyshots Tests Smart rouing 1`] = `
+<div
+  className="srd-demo-workspace"
+>
+  <div
+    className="srd-demo-workspace__toolbar"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Serialize Graph
+    </button>
+  </div>
+  <div
+    className="srd-demo-workspace__content"
+  >
+    <div
+      className="storm-diagrams-canvas"
+      onMouseDown={[Function]}
+      onWheel={[Function]}
+    >
+      <svg
+        style={
+          Object {
+            "height": "100%",
+            "transform": "translate(0px,0px) scale(1)",
+            "width": "100%",
+          }
+        }
+      />
+      <div
+        className="node-view"
+        style={
+          Object {
+            "height": "100%",
+            "transform": "translate(0px,0px) scale(1)",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="node"
+          data-nodeid="test-uid-2480"
+          style={
+            Object {
+              "left": 340,
+              "top": 350,
+            }
+          }
+        >
+          <div
+            className="basic-node"
+            style={
+              Object {
+                "background": "rgb(0,192,255)",
+              }
+            }
+          >
+            <div
+              className="title"
+            >
+              <div
+                className="name"
+              >
+                Node A
+              </div>
+            </div>
+            <div
+              className="ports"
+            >
+              <div
+                className="in"
+              />
+              <div
+                className="out"
+              >
+                <div
+                  className="out-port"
+                >
+                  <div
+                    className="name"
+                  >
+                    Out
+                  </div>
+                  <div
+                    className="port"
+                    data-name="out-1"
+                    data-nodeid="test-uid-2480"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="node"
+          data-nodeid="test-uid-2482"
+          style={
+            Object {
+              "left": 240,
+              "top": 80,
+            }
+          }
+        >
+          <div
+            className="basic-node"
+            style={
+              Object {
+                "background": "rgb(255,255,0)",
+              }
+            }
+          >
+            <div
+              className="title"
+            >
+              <div
+                className="name"
+              >
+                Node B
+              </div>
+            </div>
+            <div
+              className="ports"
+            >
+              <div
+                className="in"
+              />
+              <div
+                className="out"
+              >
+                <div
+                  className="out-port"
+                >
+                  <div
+                    className="name"
+                  >
+                    Out
+                  </div>
+                  <div
+                    className="port"
+                    data-name="out-1"
+                    data-nodeid="test-uid-2482"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="node"
+          data-nodeid="test-uid-2484"
+          style={
+            Object {
+              "left": 540,
+              "top": 180,
+            }
+          }
+        >
+          <div
+            className="basic-node"
+            style={
+              Object {
+                "background": "rgb(192,255,255)",
+              }
+            }
+          >
+            <div
+              className="title"
+            >
+              <div
+                className="name"
+              >
+                Node C
+              </div>
+            </div>
+            <div
+              className="ports"
+            >
+              <div
+                className="in"
+              >
+                <div
+                  className="in-port"
+                >
+                  <div
+                    className="port"
+                    data-name="in-1"
+                    data-nodeid="test-uid-2484"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="out"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="node"
+          data-nodeid="test-uid-2486"
+          style={
+            Object {
+              "left": 95,
+              "top": 185,
+            }
+          }
+        >
+          <div
+            className="basic-node"
+            style={
+              Object {
+                "background": "rgb(192,0,255)",
+              }
+            }
+          >
+            <div
+              className="title"
+            >
+              <div
+                className="name"
+              >
+                Node D
+              </div>
+            </div>
+            <div
+              className="ports"
+            >
+              <div
+                className="in"
+              >
+                <div
+                  className="in-port"
+                >
+                  <div
+                    className="port"
+                    data-name="in-1"
+                    data-nodeid="test-uid-2486"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="out"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="node"
+          data-nodeid="test-uid-2488"
+          style={
+            Object {
+              "left": 250,
+              "top": 180,
+            }
+          }
+        >
+          <div
+            className="basic-node"
+            style={
+              Object {
+                "background": "rgb(192,255,0)",
+              }
+            }
+          >
+            <div
+              className="title"
+            >
+              <div
+                className="name"
+              >
+                Node E
+              </div>
+            </div>
+            <div
+              className="ports"
+            >
+              <div
+                className="in"
+              >
+                <div
+                  className="in-port"
+                >
+                  <div
+                    className="port"
+                    data-name="in-1"
+                    data-nodeid="test-uid-2488"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="out"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Tests Zoom to fit 1`] = `
 <div
   className="srd-demo-workspace"
