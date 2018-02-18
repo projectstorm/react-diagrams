@@ -17,6 +17,7 @@ import demo_labelled_links from "../demos/demo-labelled-links/index";
 import demo_custom_link1 from "../demos/demo-custom-link1/index";
 import demo_cloning from "../demos/demo-cloning/index";
 import demo_dagre from "../demos/demo-dagre/index";
+import demo_smart_routing from "../demos/demo-smart-routing/index";
 import {Toolkit} from "../src/Toolkit";
 
 Toolkit.TESTING_MODE = true;
@@ -70,3 +71,6 @@ storiesOf("Tests", module)
 	.add("Auto distribute - Dagre", () => {
 		return demo_dagre();
 	})
+	.add("Smart rouing", () => {
+		return demo_smart_routing();
+	});

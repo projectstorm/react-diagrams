@@ -10,6 +10,10 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	extras: any;
 	ports: { [s: string]: PortModel };
 
+	// calculated post rendering so routing can be done correctly
+	width: number;
+	height: number;
+
 	constructor(nodeType: string = "default", id?: string) {
 		super(nodeType, id);
 		this.x = 0;
@@ -121,5 +125,10 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 		port.setParent(this);
 		this.ports[port.name] = port;
 		return port;
+	}
+
+	updateDimensions({ width, height }: { width: number; height: number }) {
+		this.width = width;
+		this.height = height;
 	}
 }

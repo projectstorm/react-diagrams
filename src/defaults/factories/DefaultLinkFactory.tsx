@@ -1,11 +1,8 @@
 import * as React from "react";
 import {DefaultLinkWidget} from "../widgets/DefaultLinkWidget";
 import {DiagramEngine} from "../../DiagramEngine";
-import {LinkModel} from "../../models/LinkModel";
 import {LinkFactory} from "../../AbstractFactory";
-import {PointModel} from "../../models/PointModel";
 import {DefaultLinkModel} from "../models/DefaultLinkModel";
-import {Toolkit} from "../../Toolkit";
 
 /**
  * @author Dylan Vorster
@@ -27,13 +24,13 @@ export class DefaultLinkFactory extends LinkFactory<DefaultLinkModel> {
 	}
 
 
-	generateLinkSegment(diagramEngine: DiagramEngine, model: DefaultLinkModel, selected: boolean, firstPoint: PointModel, lastPoint: PointModel, smooth: boolean) {
+	generateLinkSegment(model: DefaultLinkModel, selected: boolean, path: string) {
 		return (
 			<path
 				className={selected ? "selected" : ''}
 				strokeWidth={model.width}
 				stroke={model.color}
-				d={smooth ? Toolkit.generateCurvePath(firstPoint, lastPoint, model.curvyness) : Toolkit.generateLinePath(firstPoint, lastPoint)}
+				d={path}
 			/>
 		);
 	}

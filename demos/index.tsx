@@ -96,6 +96,13 @@ storiesOf("Advanced Techniques", module)
 			require("./demo-drag-and-drop/index").default(),
 			require("!!raw-loader!./demo-drag-and-drop/components/BodyWidget")
 		)
+	)
+	.add(
+		"Smart routing",
+		Helper.makeDemo(
+			require("./demo-smart-routing/index").default(),
+			require("!!raw-loader!./demo-smart-routing/index")
+		)
 	);
 
 storiesOf("Custom Models", module)

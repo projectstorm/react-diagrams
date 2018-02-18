@@ -16,7 +16,17 @@ export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerSt
 		this.state = {};
 	}
 
+	updateNodeDimensions = () => {
+		if (!this.props.diagramEngine.nodesRendered) {
+			const diagramModel = this.props.diagramEngine.getDiagramModel();
+			_.map(diagramModel.getNodes(), node => {
+				node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
+			});
+		}
+	};
+
 	componentDidUpdate() {
+		this.updateNodeDimensions();
 		this.props.diagramEngine.nodesRendered = true;
 	}
 

@@ -7,6 +7,6 @@ module.exports = {
 		"^.+\\.(scss)$": "./tests/helpers/scss-preprocessor.js"
 	},
 	"testMatch": [
-		"**/tests/*\.test\.*"
+		"**/tests/**/*\.test\.tsx"
 	]
 };

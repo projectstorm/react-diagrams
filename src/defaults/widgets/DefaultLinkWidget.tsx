@@ -1,10 +1,11 @@
 import * as React from "react";
 import {DiagramEngine} from "../../DiagramEngine";
-import {LinkModel} from "../../models/LinkModel";
 import {PointModel} from "../../models/PointModel";
 import {Toolkit} from "../../Toolkit";
 import {DefaultLinkFactory} from "../factories/DefaultLinkFactory";
 import {DefaultLinkModel} from "../models/DefaultLinkModel";
+import PathFinding from "../../routing/PathFinding";
+import * as _ from "lodash";
 
 export interface DefaultLinkProps {
 	color?: string;
@@ -33,11 +34,17 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	refLabel: HTMLElement;
 	refPaths: SVGPathElement[];
 
+	pathFinding: PathFinding; // only set when smart routing is active
+
 	constructor(props: DefaultLinkProps) {
 		super(props);
 		this.state = {
 			selected: false
 		};
+
+		if (props.diagramEngine.isSmartRoutingEnabled()) {
+			this.pathFinding = new PathFinding(this.props.diagramEngine);
+		}
 	}
 
 	addPointToLink = (event: MouseEvent, index: number): void => {
@@ -85,35 +92,31 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
-	generateLink(smooth: boolean, extraProps: any, id: string | number, firstPoint: PointModel, lastPoint: PointModel): JSX.Element {
+	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
 		var props = this.props;
 
 		var Bottom = (props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory)
-			.generateLinkSegment(this.props.diagramEngine, this.props.link, this.state.selected || this.props.link.isSelected(), firstPoint, lastPoint, smooth);
+			.generateLinkSegment(this.props.link, this.state.selected || this.props.link.isSelected(), path);
 
-		var Top = (
-			<path
-				strokeLinecap="round"
-				onMouseLeave={() => {
-					this.setState({selected: false});
-				}}
-				onMouseEnter={() => {
-					this.setState({selected: true});
-				}}
-				data-linkid={this.props.link.getID()}
-				stroke={props.color}
-				strokeOpacity={this.state.selected ? 0.1 : 0}
-				strokeWidth={20}
-				onContextMenu={() => {
-					if (!this.props.diagramEngine.isModelLocked(this.props.link)) {
-						event.preventDefault();
-						this.props.link.remove();
-					}
-				}}
-				d={smooth ? Toolkit.generateCurvePath(firstPoint, lastPoint, this.props.link.curvyness) : Toolkit.generateLinePath(firstPoint, lastPoint)}
-				{...extraProps}
-			/>
-		);
+
+		var Top = React.cloneElement(Bottom, {
+			...extraProps,
+			strokeLinecap: "round",
+			onMouseLeave: () => {
+				this.setState({selected: false});
+			},
+			onMouseEnter: () => {
+				this.setState({selected: true});
+			},
+			'data-linkid': this.props.link.getID(),
+			strokeOpacity: this.state.selected ? 0.1 : 0,
+			onContextMenu: () => {
+				if (!this.props.diagramEngine.isModelLocked(this.props.link)) {
+					event.preventDefault();
+					this.props.link.remove();
+				}
+			}
+		});
 
 		return (
 			<g key={"link-" + id}>
@@ -123,7 +126,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
-	findPathAndRelativePositionToRenderLabel = (): {  path: any; position: number; } => {
+	findPathAndRelativePositionToRenderLabel = (): { path: any; position: number; } => {
 		// an array to hold all path lengths, making sure we hit the DOM only once to fetch this information
 		const lengths = this.refPaths.map(path => path.getTotalLength());
 
@@ -177,66 +180,143 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		window.requestAnimationFrame(this.calculateLabelPosition);
 	}
 
+
+	//HERE
+
+	/**
+	 * Smart routing is only applicable when all conditions below are true:
+	 * - smart routing is set to true on the engine
+	 * - current link is between two nodes (not between a node and an empty point)
+	 * - no custom points exist along the line
+	 */
+	isSmartRoutingApplicable(): boolean {
+		const {diagramEngine, link} = this.props;
+
+		if (!diagramEngine.isSmartRoutingEnabled()) {
+			return false;
+		}
+
+		if (link.points.length !== 2) {
+			return false;
+		}
+
+		if (link.sourcePort === null || link.targetPort === null) {
+			return false;
+		}
+
+		return true;
+	}
+
 	render() {
+		const {diagramEngine} = this.props;
+		if (!diagramEngine.nodesRendered) {
+			return null;
+		}
+
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
+
 		var paths = [];
+		let model = diagramEngine.getDiagramModel();
 
-		//draw the smoothing
-		if (points.length === 2) {
-			var pointLeft = points[0];
-			var pointRight = points[1];
+		if (this.isSmartRoutingApplicable()) {
+			// first step: calculate a direct path between the points being linked
+			const directPathCoords = this.pathFinding.calculateDirectPath(_.first(points), _.last(points));
 
-			//some defensive programming to make sure the smoothing is
-			//always in the right direction
-			if (pointLeft.x > pointRight.x) {
-				pointLeft = points[1];
-				pointRight = points[0];
-			}
+			const routingMatrix = diagramEngine.getRoutingMatrix();
+			// now we need to extract, from the routing matrix, the very first walkable points
+			// so they can be used as origin and destination of the link to be created
+			const smartLink = this.pathFinding.calculateLinkStartEndCoords(routingMatrix, directPathCoords);
 
-			paths.push(
-				this.generateLink(
-					true,
-					{
-						onMouseDown: event => {
-							this.addPointToLink(event, 1);
+			if (smartLink) {
+				const {start, end, pathToStart, pathToEnd} = smartLink;
+
+				// second step: calculate a path avoiding hitting other elements
+				const simplifiedPath = this.pathFinding.calculateDynamicPath(
+					routingMatrix,
+					start,
+					end,
+					pathToStart,
+					pathToEnd
+				);
+
+				paths.push(
+					//smooth: boolean, extraProps: any, id: string | number, firstPoint: PointModel, lastPoint: PointModel
+					this.generateLink(
+						Toolkit.generateDynamicPath(simplifiedPath),
+						{
+							onMouseDown: event => {
+								this.addPointToLink(event, 1);
+							},
 						},
-					},
-					"0",
-					pointLeft, pointRight
-				)
-			);
-
-			// draw the link as dangeling
-			if (this.props.link.targetPort === null) {
-				paths.push(this.generatePoint(1));
+						"0"
+					)
+				);
 			}
-		} else {
-			//draw the multiple anchors and complex line instead
-			for (let i = 0; i < points.length - 1; i++) {
-				paths.push(this.generateLink(
-					false,
-					{
-						"data-linkid": this.props.link.id,
-						"data-point": i,
-						onMouseDown: (event: MouseEvent) => {
-							this.addPointToLink(event, i + 1);
+		}
+
+		// true when smart routing was skipped or not enabled.
+		// See @link{#isSmartRoutingApplicable()}.
+		if (paths.length === 0) {
+			if (points.length === 2) {
+				//draw the smoothing
+				//if the points are too close, just draw a straight line
+				var margin = 50;
+				if (Math.abs(points[0].x - points[1].x) < 50) {
+					margin = 5;
+				}
+
+				var pointLeft = points[0];
+				var pointRight = points[1];
+
+				//some defensive programming to make sure the smoothing is
+				//always in the right direction
+				if (pointLeft.x > pointRight.x) {
+					pointLeft = points[1];
+					pointRight = points[0];
+				}
+
+				paths.push(
+					this.generateLink(
+						Toolkit.generateCurvePath(pointLeft, pointRight, this.props.link.curvyness),
+						{
+							onMouseDown: event => {
+								this.addPointToLink(event, 1);
+							},
 						},
-					},
-					i,
-					points[i],
-					points[i + 1]
-				));
-			}
+						"0",
+					)
+				);
+
+				// draw the link as dangeling
+				if (this.props.link.targetPort === null) {
+					paths.push(this.generatePoint(1));
+				}
+			} else {
+				//draw the multiple anchors and complex line instead
+				for (let i = 0; i < points.length - 1; i++) {
+					paths.push(this.generateLink(
+						Toolkit.generateLinePath(points[i], points[i + 1]),
+						{
+							"data-linkid": this.props.link.id,
+							"data-point": i,
+							onMouseDown: (event: MouseEvent) => {
+								this.addPointToLink(event, i + 1);
+							},
+						},
+						i,
+					));
+				}
 
 
-			//render the circles
-			for (var i = 1; i < points.length - 1; i++) {
-				paths.push(this.generatePoint(i));
-			}
+				//render the circles
+				for (var i = 1; i < points.length - 1; i++) {
+					paths.push(this.generatePoint(i));
+				}
 
-			if (this.props.link.targetPort === null) {
-				paths.push(this.generatePoint(points.length - 1));
+				if (this.props.link.targetPort === null) {
+					paths.push(this.generatePoint(points.length - 1));
+				}
 			}
 		}
 
