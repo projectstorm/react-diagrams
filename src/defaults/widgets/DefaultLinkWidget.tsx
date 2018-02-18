@@ -47,6 +47,14 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		}
 	}
 
+	componentDidUpdate() {
+		window.requestAnimationFrame(this.calculateLabelPosition);
+	}
+
+	componentDidMount() {
+		window.requestAnimationFrame(this.calculateLabelPosition);
+	}
+
 	addPointToLink = (event: MouseEvent, index: number): void => {
 		if (
 			!event.shiftKey &&
@@ -110,6 +118,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			},
 			'data-linkid': this.props.link.getID(),
 			strokeOpacity: this.state.selected ? 0.1 : 0,
+			strokeWidth: 20,
 			onContextMenu: () => {
 				if (!this.props.diagramEngine.isModelLocked(this.props.link)) {
 					event.preventDefault();
@@ -172,16 +181,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		this.refLabel.setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
 	};
 
-	componentDidUpdate() {
-		window.requestAnimationFrame(this.calculateLabelPosition);
-	}
-
-	componentDidMount() {
-		window.requestAnimationFrame(this.calculateLabelPosition);
-	}
-
-
-	//HERE
 
 	/**
 	 * Smart routing is only applicable when all conditions below are true:
@@ -215,9 +214,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
-
 		var paths = [];
-		let model = diagramEngine.getDiagramModel();
 
 		if (this.isSmartRoutingApplicable()) {
 			// first step: calculate a direct path between the points being linked
