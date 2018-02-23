@@ -41,13 +41,19 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 		return new AdvancedLinkModel();
 	}
 
-
-	generateReactWidget(diagramEngine: DiagramEngine, link: AdvancedLinkModel): JSX.Element {
-		return React.createElement(DefaultLinkWidget, {
-			link,
-			diagramEngine
-		});
+	generateLinkSegment(model: DefaultLinkModel, selected: boolean, path: string) {
+		return (
+			<g>
+				<path
+					className={selected ? "selected" : ''}
+					strokeWidth={model.width}
+					stroke="red"
+					d={path}
+				/>
+			</g>
+		);
 	}
+
 }
 /**
  *

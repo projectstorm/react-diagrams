@@ -1,13 +1,14 @@
-import * as SRD from "../../src/main";
 import * as _ from "lodash";
 import {LinkModel} from "../../src/models/LinkModel";
 import {DiagramEngine} from "../../src/DiagramEngine";
+import {PortModel} from "../../src/models/PortModel";
+import {DefaultLinkModel} from "../../src/defaults/models/DefaultLinkModel";
 
-export class DiamondPortModel extends SRD.PortModel {
+export class DiamondPortModel extends PortModel {
 	position: string | "top" | "bottom" | "left" | "right";
 
 	constructor(pos: string = "top") {
-		super(pos);
+		super(pos, "diamond");
 		this.position = pos;
 	}
 
@@ -23,6 +24,6 @@ export class DiamondPortModel extends SRD.PortModel {
 	}
 
 	createLinkModel(): LinkModel{
-		return new SRD.DefaultLinkModel();
+		return new DefaultLinkModel();
 	}
 }
