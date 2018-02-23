@@ -113,13 +113,13 @@ storiesOf("Custom Models", module)
 			require("!!raw-loader!./demo-custom-node1/index")
 		)
 	)
-	// .add(
-	// 	"Custom link sizes",
-	// 	Helper.makeDemo(
-	// 		require("./demo-custom-link1/index").default(),
-	// 		require("!!raw-loader!./demo-custom-link1/index")
-	// 	)
-	// );
+	.add(
+		"Custom link sizes",
+		Helper.makeDemo(
+			require("./demo-custom-link1/index").default(),
+			require("!!raw-loader!./demo-custom-link1/index")
+		)
+	);
 
 storiesOf("3rd party libraries", module).add(
 	"Auto Distribute (Dagre)",

@@ -13,31 +13,34 @@ import { action } from "@storybook/addon-actions";
 import * as React from "react";
 import { LinkFactory } from "../../src/AbstractFactory";
 import {DefaultLinkModel} from "../../src/defaults/models/DefaultLinkModel";
+import {DefaultLinkFactory} from "../../src/defaults/factories/DefaultLinkFactory";
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 
 	constructor() {
 		super("advanced");
+		this.width = 10;
 	}
 }
 
 export class AdvancedPortModel extends DefaultPortModel {
 
 	createLinkModel(): AdvancedLinkModel | null {
-		var link = new AdvancedLinkModel();
-		link.setSourcePort(this);
-		return link;
+		return new AdvancedLinkModel();
 	}
 }
 
-export class AdvancedLinkWidgetFactory extends LinkFactory<AdvancedLinkModel> {
+export class AdvancedLinkFactory extends DefaultLinkFactory {
+
+	constructor() {
+		super();
+		this.type = "advanced"
+	}
+
 	getNewInstance(initialConfig?: any): AdvancedLinkModel {
 		return new AdvancedLinkModel();
 	}
 
-	constructor() {
-		super("advanced");
-	}
 
 	generateReactWidget(diagramEngine: DiagramEngine, link: AdvancedLinkModel): JSX.Element {
 		return React.createElement(DefaultLinkWidget, {
@@ -56,12 +59,12 @@ export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
 	engine.installDefaultFactories();
-	engine.registerLinkFactory(new AdvancedLinkWidgetFactory());
+	engine.registerLinkFactory(new AdvancedLinkFactory());
 
 	// create some nodes
 	var node1 = new DefaultNodeModel("Source", "rgb(0,192,255)");
-	node1.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
-	node1.addPort(new DefaultPortModel(false, "out-2", "Out default"));
+	let port1 = node1.addPort(new AdvancedPortModel(false, "out-1", "Out thick"));
+	let port2 = node1.addPort(new DefaultPortModel(false, "out-2", "Out default"));
 	node1.setPosition(100, 100);
 
 	var node2 = new DefaultNodeModel("Target", "rgb(192,255,0)");
@@ -81,20 +84,9 @@ export default () => {
 
 	var model = new DiagramModel();
 
-	var link1 = node1.getOutPorts()[0].createLinkModel();
-	var link2 = node1.getOutPorts()[1].createLinkModel();
+	model.addAll(port1.link(port3), port2.link(port4));
 
-	if (link1) {
-		link1.setTargetPort(port3);
-		model.addLink(link1);
-	}
-
-	if (link2) {
-		link2.setTargetPort(port4);
-		model.addLink(link2);
-	}
-
-	// add everything
+	// add everything else
 	model.addAll(node1, node2, node3, node4);
 
 	// load model into engine
