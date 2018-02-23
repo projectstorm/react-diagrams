@@ -113,7 +113,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	generateLabel(label: LabelModel) {
 		const canvas = this.props.diagramEngine.canvas as HTMLElement;
 		return (
-			<foreignObject className="link-label" width={canvas.offsetWidth} height={canvas.offsetHeight}>
+			<foreignObject key={label.id} className="link-label" width={canvas.offsetWidth} height={canvas.offsetHeight}>
 				<div ref={ref => (this.refLabels[label.id] = ref)}>
 					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget(this.props.diagramEngine, label)}
 				</div>
