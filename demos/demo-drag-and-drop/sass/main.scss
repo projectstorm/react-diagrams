@@ -45,38 +45,3 @@
 		}
 	}
 }
-
-.storm-diagrams-canvas{
-	$color: rgba(white, .05);
-	background: rgba(black,0.2);
-	background-image:
-		linear-gradient(0deg,
-			transparent 24%,
-			$color 25%,
-			$color 26%,
-			transparent 27%,
-			transparent 74%,
-			$color 75%,
-			$color 76%,
-			transparent 77%,
-			transparent),
-		linear-gradient(90deg,
-			transparent 24%,
-			$color 25%,
-			$color 26%,
-			transparent 27%,
-			transparent 74%,
-			$color 75%,
-			$color 76%,
-			transparent 77%,
-			transparent);
-	background-size:50px 50px;
-
-	g path{
-		stroke: rgba(white,0.5);
-	}
-
-	.pointui{
-		fill: rgba(white,0.5);
-	}
-}
