@@ -5,6 +5,7 @@ export class DefaultLabelModel extends LabelModel {
 
 	constructor(){
 		super("default");
+		this.offsetY = -23;
 	}
 
 	setLabel(label: string){

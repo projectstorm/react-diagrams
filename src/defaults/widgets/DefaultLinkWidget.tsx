@@ -198,8 +198,8 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		const pathCentre = path.getPointAtLength(position);
 
 		const labelCoordinates = {
-			x: pathCentre.x - labelDimensions.width / 2,
-			y: pathCentre.y - labelDimensions.height / 2
+			x: (pathCentre.x - labelDimensions.width / 2) + label.offsetX,
+			y: (pathCentre.y - labelDimensions.height / 2) + label.offsetY
 		};
 		this.refLabels[label.id].setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
 	};

@@ -7,6 +7,7 @@ import * as _ from "lodash";
 import {PointModel} from "../../models/PointModel";
 import {DiagramEngine} from "../../DiagramEngine";
 import {DefaultLabelModel} from "./DefaultLabelModel";
+import {LabelModel} from "../../models/LabelModel";
 
 export interface DefaultLinkModelListener extends LinkModelListener{
 
@@ -43,10 +44,13 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener>{
 		this.curvyness = ob.curvyness;
 	}
 
-	setLabel(label: string){
+	addLabel(label: LabelModel | string){
+		if(label instanceof LabelModel){
+			return super.addLabel(label);
+		}
 		let labelOb = new DefaultLabelModel();
 		labelOb.setLabel(label);
-		this.addLabel(labelOb);
+		return super.addLabel(labelOb);
 	}
 
 	setWidth(width: number){
