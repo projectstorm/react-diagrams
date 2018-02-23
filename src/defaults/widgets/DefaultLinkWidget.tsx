@@ -126,7 +126,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 
 		var Bottom = React.cloneElement((props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory)
 			.generateLinkSegment(this.props.link, this.state.selected || this.props.link.isSelected(), path), {
-			ref:ref => ref && this.refPaths.push(ref)
+			ref:ref => ref && this.refPaths.push(ref),
 		});
 
 

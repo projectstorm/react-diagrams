@@ -2,6 +2,7 @@ import * as React from "react";
 import {DiagramEngine} from "../../DiagramEngine";
 import {LabelFactory} from "../../AbstractFactory";
 import {DefaultLabelModel} from "../models/DefaultLabelModel";
+import {DefaultLabelWidget} from "../widgets/DefaultLabelWidget";
 
 /**
  * @author Dylan Vorster
@@ -12,7 +13,7 @@ export class DefaultLabelFactory extends LabelFactory<DefaultLabelModel> {
 	}
 
 	generateReactWidget(diagramEngine: DiagramEngine, label: DefaultLabelModel): JSX.Element {
-		return <div>{label.label}</div>;
+		return <DefaultLabelWidget model={label} />;
 	}
 
 	getNewInstance(initialConfig?: any): DefaultLabelModel {

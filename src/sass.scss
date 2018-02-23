@@ -84,16 +84,20 @@
 	.link-label {
 		pointer-events: none;
 
-		> div {
-			background: rgba(70, 70, 70, 0.8);
-			border: 1px solid #333;
-			border-radius: 4px;
-			color: #fff;
+		> div{
 			display: inline-block;
-			font-size: smaller;
-			padding: 5px;
 			position: absolute;
 		}
+	}
+
+	.default-label{
+		background: rgba(70, 70, 70, 0.8);
+		border: 1px solid #333;
+		border-radius: 4px;
+		color: #fff;
+		display: inline-block;
+		font-size: smaller;
+		padding: 5px;
 	}
 
 	.basic-node{
