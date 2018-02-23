@@ -114,7 +114,7 @@ storiesOf("Custom Models", module)
 		)
 	)
 	.add(
-		"Custom link sizes",
+		"Custom animated links",
 		Helper.makeDemo(
 			require("./demo-custom-link1/index").default(),
 			require("!!raw-loader!./demo-custom-link1/index")

@@ -19,7 +19,7 @@ export default () => {
 
 	//3-B) create another default node
 	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	let port2 = node2.addOutPort("In");
+	let port2 = node2.addInPort("In");
 	node2.setPosition(400, 100);
 
 	// link the ports
