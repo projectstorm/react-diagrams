@@ -6,6 +6,7 @@ import {DefaultLinkFactory} from "../factories/DefaultLinkFactory";
 import {DefaultLinkModel} from "../models/DefaultLinkModel";
 import PathFinding from "../../routing/PathFinding";
 import * as _ from "lodash";
+import {LabelModel} from "../../models/LabelModel";
 
 export interface DefaultLinkProps {
 	color?: string;
@@ -31,13 +32,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	};
 
 	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
-	refLabel: HTMLElement;
+	refLabels: { [id: string]: HTMLElement };
 	refPaths: SVGPathElement[];
 
 	pathFinding: PathFinding; // only set when smart routing is active
 
 	constructor(props: DefaultLinkProps) {
 		super(props);
+
+		this.refLabels = {};
+		this.refPaths = [];
 		this.state = {
 			selected: false
 		};
@@ -47,12 +51,18 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		}
 	}
 
+	calculateAllLabelPosition(){
+		_.forEach(this.props.link.labels, (label, index) => {
+			this.calculateLabelPosition(label, index+1);
+		})
+	}
+
 	componentDidUpdate() {
-		window.requestAnimationFrame(this.calculateLabelPosition);
+		window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
 	}
 
 	componentDidMount() {
-		window.requestAnimationFrame(this.calculateLabelPosition);
+		window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
 	}
 
 	addPointToLink = (event: MouseEvent, index: number): void => {
@@ -100,11 +110,24 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
+	generateLabel(label: LabelModel) {
+		const canvas = this.props.diagramEngine.canvas as HTMLElement;
+		return (
+			<foreignObject className="link-label" width={canvas.offsetWidth} height={canvas.offsetHeight}>
+				<div ref={ref => (this.refLabels[label.id] = ref)}>
+					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget(this.props.diagramEngine, label)}
+				</div>
+			</foreignObject>
+		);
+	}
+
 	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
 		var props = this.props;
 
-		var Bottom = (props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory)
-			.generateLinkSegment(this.props.link, this.state.selected || this.props.link.isSelected(), path);
+		var Bottom = React.cloneElement((props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory)
+			.generateLinkSegment(this.props.link, this.state.selected || this.props.link.isSelected(), path), {
+			ref:ref => ref && this.refPaths.push(ref)
+		});
 
 
 		var Top = React.cloneElement(Bottom, {
@@ -116,6 +139,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			onMouseEnter: () => {
 				this.setState({selected: true});
 			},
+			ref: null,
 			'data-linkid': this.props.link.getID(),
 			strokeOpacity: this.state.selected ? 0.1 : 0,
 			strokeWidth: 20,
@@ -135,12 +159,12 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
-	findPathAndRelativePositionToRenderLabel = (): { path: any; position: number; } => {
+	findPathAndRelativePositionToRenderLabel = (index: number): { path: any; position: number; } => {
 		// an array to hold all path lengths, making sure we hit the DOM only once to fetch this information
 		const lengths = this.refPaths.map(path => path.getTotalLength());
 
 		// calculate the point where we want to display the label
-		let labelPosition = lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / 2;
+		let labelPosition = lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / (index + 1);
 
 		// find the path where the label will be rendered and calculate the relative position
 		let pathIndex = 0;
@@ -158,17 +182,17 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		}
 	};
 
-	calculateLabelPosition = () => {
-		if (!this.refLabel) {
+	calculateLabelPosition = (label, index:number) => {
+		if (!this.refLabels[label.id]) {
 			// no label? nothing to do here
 			return;
 		}
 
-		const {path, position} = this.findPathAndRelativePositionToRenderLabel();
+		const {path, position} = this.findPathAndRelativePositionToRenderLabel(index);
 
 		const labelDimensions = {
-			width: this.refLabel.offsetWidth,
-			height: this.refLabel.offsetHeight
+			width: this.refLabels[label.id].offsetWidth,
+			height: this.refLabels[label.id].offsetHeight
 		};
 
 		const pathCentre = path.getPointAtLength(position);
@@ -177,8 +201,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			x: pathCentre.x - labelDimensions.width / 2,
 			y: pathCentre.y - labelDimensions.height / 2
 		};
-		console.log('render label');
-		this.refLabel.setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
+		this.refLabels[label.id].setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
 	};
 
 
@@ -317,13 +340,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			}
 		}
 
-		// ensure we have the right references when a redraw occurs
-		this.refLabel = null;
 		this.refPaths = [];
 
 		return (
 			<g>
 				{paths}
+				{
+					_.map(this.props.link.labels, (labelModel) => {
+						return this.generateLabel(labelModel);
+					})
+				}
 			</g>
 		);
 	}

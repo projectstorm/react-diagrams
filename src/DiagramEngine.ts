@@ -10,6 +10,8 @@ import {LabelFactory, LinkFactory, NodeFactory, PortFactory} from "./AbstractFac
 import {DefaultLinkFactory, DefaultNodeFactory} from "./main";
 import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
 import {DefaultPortFactory} from "./defaults/factories/DefaultPortFactory";
+import {LabelModel} from "./models/LabelModel";
+import {DefaultLabelFactory} from "./defaults/factories/DefaultLabelFactory";
 /**
  * @author Dylan Vorster
  */
@@ -65,6 +67,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.registerNodeFactory(new DefaultNodeFactory());
 		this.registerLinkFactory(new DefaultLinkFactory());
 		this.registerPortFactory(new DefaultPortFactory());
+		this.registerLabelFactory(new DefaultLabelFactory());
 	}
 
 	repaintCanvas() {
@@ -136,6 +139,9 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	getDiagramModel(): DiagramModel {
 		return this.diagramModel;
 	}
+
+
+	//!-------------- FACTORIES ------------
 
 	getNodeFactories(): { [s: string]: NodeFactory } {
 		return this.nodeFactories;
@@ -209,12 +215,24 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return null;
 	}
 
+	getLabelFactory(type: string): LabelFactory {
+		if (this.labelFactories[type]) {
+			return this.labelFactories[type];
+		}
+		console.log("cannot find factory for label of type: [" + type + "]");
+		return null;
+	}
+
 	getFactoryForNode(node: NodeModel): NodeFactory | null {
 		return this.getNodeFactory(node.getType());
 	}
 
 	getFactoryForLink(link: LinkModel): LinkFactory | null {
 		return this.getLinkFactory(link.getType());
+	}
+
+	getFactoryForLabel(label: LabelModel): LabelFactory | null {
+		return this.getLabelFactory(label.getType());
 	}
 
 	generateWidgetForLink(link: LinkModel): JSX.Element | null {
@@ -317,12 +335,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	 * Determine the width and height of the node passed in.
 	 * It currently assumes nodes have a rectangular shape, can be overriden for customised shapes.
 	 */
-	getNodeDimensions(
-		node: NodeModel
-	): {
-		width: number;
-		height: number;
-	} {
+	getNodeDimensions(node: NodeModel): { width: number; height: number; } {
 		if (!this.canvas) {
 			return {
 				width: 0,

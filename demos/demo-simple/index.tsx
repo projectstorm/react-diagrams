@@ -6,6 +6,7 @@ import {
 	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
+import {DefaultLinkModel} from "../../src/defaults/models/DefaultLinkModel";
 
 export default () => {
 	//1) setup the diagram engine
@@ -27,6 +28,7 @@ export default () => {
 
 	// link the ports
 	let link1 = port1.link(port2);
+	(link1 as DefaultLinkModel).setLabel("Test");
 
 	//4) add the models to the root graph
 	model.addAll(node1, node2, link1);
