@@ -38,7 +38,8 @@ export default () => {
 
 	// link node A and B together and give it a label
 	const link1 = port1.link(port2);
-	(link1 as DefaultLinkModel).addLabel("Custom label");
+	(link1 as DefaultLinkModel).addLabel("Custom label 1");
+	(link1 as DefaultLinkModel).addLabel("Custom label 2");
 
 	// no label for A and C, just a link
 	const link2 = port1.link(port3);

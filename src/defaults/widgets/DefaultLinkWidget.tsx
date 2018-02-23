@@ -164,7 +164,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		const lengths = this.refPaths.map(path => path.getTotalLength());
 
 		// calculate the point where we want to display the label
-		let labelPosition = lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / (index + 1);
+		let labelPosition = lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) * (index / (this.props.link.labels.length + 1));
 
 		// find the path where the label will be rendered and calculate the relative position
 		let pathIndex = 0;
