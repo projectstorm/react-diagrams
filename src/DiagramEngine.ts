@@ -62,7 +62,15 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.canvas = null;
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
-		Toolkit.TESTING_UID = 0;
+
+		if(Toolkit.TESTING){
+			Toolkit.TESTING_UID = 0;
+
+			//pop it onto the window so our E2E helpers can find it
+			if(window){
+				(window as any)['diagram_instance'] = this;
+			}
+		}
 	}
 
 	installDefaultFactories() {

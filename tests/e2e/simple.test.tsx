@@ -4,10 +4,10 @@ import {E2EHelper} from "./E2EHelper";
 
 var browser;
 
-async function itShould(directive, test: (page: puppeteer.Page, helper: E2EHelper) => any) {
+async function itShould(demo: string, directive, test: (page: puppeteer.Page, helper: E2EHelper) => any) {
 	it(directive, async () => {
 		let page = await browser.newPage();
-		await page.goto('file://' + __dirname + '/../../.out/index.html');
+		await page.goto('file://' + __dirname + '/../../dist/e2e/' + demo + "/index.html");
 		let helper = new E2EHelper(page);
 		await test(page, helper);
 		await page.close();
@@ -35,21 +35,23 @@ afterAll(() => {
 
 describe("simple test", async () => {
 
-	itShould('should drag a new link', async (page, helper) => {
+	itShould("demo-simple", 'should delete a link and create a new one', async (page, helper) => {
 
-		let node = await helper.node('6');
-		console.log(node);
-		await page.mouse.move(410, 152);
-		await page.mouse.down();
-		await page.mouse.move(610, 352);
-		await page.mouse.up();
 
-	});
+		// get the existing link
+		let link = await helper.link('12');
 
-	itShould('should drag a node', async (page, helper) => {
-		await page.mouse.move(390, 145);
-		await page.mouse.down();
-		await page.mouse.move(300, 300);
-		await page.mouse.up();
+		// remove it
+		await link.select();
+		await page.keyboard.press('Backspace');
+
+		// create a new link
+		let node1 = await helper.node('6');
+		let node2 = await helper.node('9');
+
+		let port1 = await node1.port('7');
+		let port2 = await node2.port('10');
+
+		port1.link(port2);
 	});
 })
