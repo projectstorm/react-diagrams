@@ -12,8 +12,7 @@
 		"jsx": "react",
 		"lib": [
 			"dom",
-			"es2015",
-			"es6"
+			"es2015"
 		]
 	},
 	"exclude": [
@@ -21,10 +20,5 @@
 		"**/*.spec.ts",
 		"webpack.config.js",
 		"./dist"
-	],
-	"awesomeTypescriptLoaderOptions": {
-		"compilerOptions": {
-			"declaration": false
-		}
-	}
+	]
 }
