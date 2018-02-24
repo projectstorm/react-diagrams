@@ -6,22 +6,17 @@ import * as Path from "paths-js/path";
  * @author Dylan Vorster
  */
 export class Toolkit {
-	static UID_PREFIX: boolean | string = false;
-	static TESTING_MODE_ID = 1;
-
-	public static makeTestsDeterministic(prefix: string){
-		Toolkit.UID_PREFIX = prefix;
-		Toolkit.TESTING_MODE_ID = 1;
-	}
+	static TESTING: boolean = false;
+	static TESTING_UID = 0;
 
 	/**
 	 * Generats a unique ID (thanks Stack overflow :3)
 	 * @returns {String}
 	 */
 	public static UID(): string {
-		if (Toolkit.UID_PREFIX) {
-			Toolkit.TESTING_MODE_ID++;
-			return Toolkit.UID_PREFIX+"-" + Toolkit.TESTING_MODE_ID;
+		if (Toolkit.TESTING) {
+			Toolkit.TESTING_UID++;
+			return ''+Toolkit.TESTING_UID;
 		}
 		return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
 			var r = (Math.random() * 16) | 0,

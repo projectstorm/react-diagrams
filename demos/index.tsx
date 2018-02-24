@@ -3,9 +3,12 @@ import {storiesOf, addDecorator} from "@storybook/react";
 import {setOptions} from "@storybook/addon-options";
 import {host} from "storybook-host";
 import {Helper} from "./.helpers/Helper";
+import {Toolkit} from "../src/Toolkit";
 
 //include the SCSS for the demo
 require("./.helpers/demo.scss");
+
+Toolkit.TESTING = true;
 
 addDecorator(
 	host({

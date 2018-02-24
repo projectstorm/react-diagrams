@@ -36,6 +36,7 @@ export default () => {
 	//5) load model into engine
 	engine.setDiagramModel(model);
 
+
 	//6) render the diagram!
 	return <DiagramWidget diagramEngine={engine} />;
 };

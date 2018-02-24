@@ -1,7 +1,6 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
 import { LinkModel } from "../models/LinkModel";
-import {PointModel} from "../models/PointModel";
 
 export interface LinkProps {
 	link: LinkModel;

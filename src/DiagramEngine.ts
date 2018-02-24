@@ -12,6 +12,7 @@ import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
 import {DefaultPortFactory} from "./defaults/factories/DefaultPortFactory";
 import {LabelModel} from "./models/LabelModel";
 import {DefaultLabelFactory} from "./defaults/factories/DefaultLabelFactory";
+import {Toolkit} from "./Toolkit";
 /**
  * @author Dylan Vorster
  */
@@ -61,6 +62,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.canvas = null;
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
+		Toolkit.TESTING_UID = 0;
 	}
 
 	installDefaultFactories() {

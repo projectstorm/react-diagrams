@@ -6,7 +6,8 @@ module.exports = {
 	process(src, path) {
 
 		src += `
-			storiesOf("Tests", module)`;
+			storiesOf("Tests", module)
+		`;
 		let files = glob.sync(__dirname + '/../../demos/demo-*/index.tsx');
 
 
