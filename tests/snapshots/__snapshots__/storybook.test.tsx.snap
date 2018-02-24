@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-cloning/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-cloning/index.tsx 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -158,7 +158,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-custom-link1/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-custom-link1/index.tsx 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -475,7 +475,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-custom-node1/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-custom-node1/index.tsx 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -725,7 +725,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-dagre/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-dagre/index.tsx 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -1205,7 +1205,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-drag-and-drop/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-drag-and-drop/index.tsx 1`] = `
 <div
   className="body"
 >
@@ -1397,7 +1397,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-grid/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-grid/index.tsx 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -1538,7 +1538,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-labelled-links/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-labelled-links/index.tsx 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -1808,7 +1808,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-limit-points/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-limit-points/index.tsx 1`] = `
 <div>
   <p>
     A maximum of 5 points can be created per link.
@@ -1954,7 +1954,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-listeners/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-listeners/index.tsx 1`] = `
 <div>
   <p>
     Click the diagram elements to inspect some of the possible events.
@@ -2156,7 +2156,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-locks/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-locks/index.tsx 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -2409,7 +2409,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-mutate-graph/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-mutate-graph/index.tsx 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -2572,7 +2572,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-performance/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-performance/index.tsx 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -9769,7 +9769,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-serializing/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-serializing/index.tsx 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -9927,7 +9927,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-simple/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-simple/index.tsx 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -10068,7 +10068,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-simple-flow/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-simple-flow/index.tsx 1`] = `
 <div
   className="storm-diagrams-canvas"
   onMouseDown={[Function]}
@@ -10265,7 +10265,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-smart-routing/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-smart-routing/index.tsx 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -10574,7 +10574,7 @@ exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/de
 </div>
 `;
 
-exports[`Storyshots Tests /Users/dylanvorster/Desktop/Personal/React Diagrams/demos/demo-zoom-to-fit/index.tsx 1`] = `
+exports[`Storyshots Tests demos/demo-zoom-to-fit/index.tsx 1`] = `
 <div
   className="srd-demo-workspace"
 >
