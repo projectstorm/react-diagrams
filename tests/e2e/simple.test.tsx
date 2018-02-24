@@ -39,11 +39,15 @@ describe("simple test", async () => {
 
 
 		// get the existing link
+
 		let link = await helper.link('12');
+		await expect(await link.exists()).toBeTruthy();
 
 		// remove it
 		await link.select();
 		await page.keyboard.press('Backspace');
+
+		await expect(await link.exists()).toBeFalsy();
 
 		// create a new link
 		let node1 = await helper.node('6');
@@ -52,6 +56,7 @@ describe("simple test", async () => {
 		let port1 = await node1.port('7');
 		let port2 = await node2.port('10');
 
-		port1.link(port2);
+		let newlink = await port1.link(port2);
+		await expect(await newlink.exists()).toBeTruthy();
 	});
 })
