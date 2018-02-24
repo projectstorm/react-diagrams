@@ -1,35 +1,33 @@
 /**
  * @author Dylan Vorster
  */
-import {LinkModel, LinkModelListener} from "../../models/LinkModel";
-import {BaseEvent} from "../../BaseEntity";
+import { LinkModel, LinkModelListener } from "../../models/LinkModel";
+import { BaseEvent } from "../../BaseEntity";
 import * as _ from "lodash";
-import {PointModel} from "../../models/PointModel";
-import {DiagramEngine} from "../../DiagramEngine";
-import {DefaultLabelModel} from "./DefaultLabelModel";
-import {LabelModel} from "../../models/LabelModel";
+import { PointModel } from "../../models/PointModel";
+import { DiagramEngine } from "../../DiagramEngine";
+import { DefaultLabelModel } from "./DefaultLabelModel";
+import { LabelModel } from "../../models/LabelModel";
 
-export interface DefaultLinkModelListener extends LinkModelListener{
-
+export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string });
 
 	widthChanged?(event: BaseEvent<DefaultLinkModel> & { width: 0 | number });
 }
 
-export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener>{
-
+export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 	width: number;
 	color: string;
 	curvyness: number;
 
-	constructor(type: string = 'default'){
+	constructor(type: string = "default") {
 		super(type);
 		this.color = "rgba(255,255,255,0.5)";
 		this.width = 3;
 		this.curvyness = 50;
 	}
 
-	serialize(){
+	serialize() {
 		return _.merge(super.serialize(), {
 			width: this.width,
 			color: this.color,
@@ -44,8 +42,8 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener>{
 		this.curvyness = ob.curvyness;
 	}
 
-	addLabel(label: LabelModel | string){
-		if(label instanceof LabelModel){
+	addLabel(label: LabelModel | string) {
+		if (label instanceof LabelModel) {
 			return super.addLabel(label);
 		}
 		let labelOb = new DefaultLabelModel();
@@ -53,18 +51,17 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener>{
 		return super.addLabel(labelOb);
 	}
 
-	setWidth(width: number){
+	setWidth(width: number) {
 		this.width = width;
 		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
 			listener.widthChanged && listener.widthChanged({ ...event, width: width });
 		});
 	}
 
-	setColor(color: string){
+	setColor(color: string) {
 		this.color = color;
 		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
 			listener.colorChanged && listener.colorChanged({ ...event, color: color });
 		});
 	}
-
 }

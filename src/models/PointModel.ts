@@ -1,9 +1,9 @@
 import { BaseModel, BaseModelListener } from "./BaseModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
-import {DiagramEngine} from "../DiagramEngine";
+import { DiagramEngine } from "../DiagramEngine";
 
-export class PointModel extends BaseModel<LinkModel,BaseModelListener> {
+export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 	x: number;
 	y: number;
 
@@ -25,7 +25,7 @@ export class PointModel extends BaseModel<LinkModel,BaseModelListener> {
 		return this.parent.getPortForPoint(this) !== null;
 	}
 
-	getLink(): LinkModel{
+	getLink(): LinkModel {
 		return this.getParent();
 	}
 

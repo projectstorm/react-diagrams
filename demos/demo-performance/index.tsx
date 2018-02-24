@@ -1,10 +1,4 @@
-import {
-	DiagramEngine,
-	DiagramModel,
-	DefaultNodeModel,
-	LinkModel,
-	DiagramWidget
-} from "../../src/main";
+import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
 import * as React from "react";
 
 /**
@@ -23,7 +17,7 @@ export default () => {
 		//3-A) create a default node
 		var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
 		var port1 = node1.addOutPort("Out");
-		node1.setPosition(100 + offsetX, 100 + offsetY)
+		node1.setPosition(100 + offsetX, 100 + offsetY);
 
 		//3-B) create another default node
 		var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");

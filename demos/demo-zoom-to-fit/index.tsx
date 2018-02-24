@@ -7,7 +7,7 @@ import {
 	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 
 /**
  *
@@ -53,7 +53,7 @@ export default () => {
 	//6) render the diagram!
 	return (
 		<DemoWorkspaceWidget buttons={<button onClick={() => engine.zoomToFit()}>Zoom to fit</button>}>
-			<DiagramWidget diagramEngine={engine}/>
+			<DiagramWidget diagramEngine={engine} />
 		</DemoWorkspaceWidget>
 	);
 };

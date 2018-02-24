@@ -1,18 +1,18 @@
-import {BaseEntity, BaseListener} from "./BaseEntity";
-import {DiagramModel} from "./models/DiagramModel";
+import { BaseEntity, BaseListener } from "./BaseEntity";
+import { DiagramModel } from "./models/DiagramModel";
 import * as _ from "lodash";
-import {BaseModel, BaseModelListener} from "./models/BaseModel";
-import {NodeModel} from "./models/NodeModel";
-import {PointModel} from "./models/PointModel";
-import {PortModel} from "./models/PortModel";
-import {LinkModel} from "./models/LinkModel";
-import {LabelFactory, LinkFactory, NodeFactory, PortFactory} from "./AbstractFactory";
-import {DefaultLinkFactory, DefaultNodeFactory} from "./main";
+import { BaseModel, BaseModelListener } from "./models/BaseModel";
+import { NodeModel } from "./models/NodeModel";
+import { PointModel } from "./models/PointModel";
+import { PortModel } from "./models/PortModel";
+import { LinkModel } from "./models/LinkModel";
+import { LabelFactory, LinkFactory, NodeFactory, PortFactory } from "./AbstractFactory";
+import { DefaultLinkFactory, DefaultNodeFactory } from "./main";
 import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
-import {DefaultPortFactory} from "./defaults/factories/DefaultPortFactory";
-import {LabelModel} from "./models/LabelModel";
-import {DefaultLabelFactory} from "./defaults/factories/DefaultLabelFactory";
-import {Toolkit} from "./Toolkit";
+import { DefaultPortFactory } from "./defaults/factories/DefaultPortFactory";
+import { LabelModel } from "./models/LabelModel";
+import { DefaultLabelFactory } from "./defaults/factories/DefaultLabelFactory";
+import { Toolkit } from "./Toolkit";
 /**
  * @author Dylan Vorster
  */
@@ -63,12 +63,12 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
 
-		if(Toolkit.TESTING){
+		if (Toolkit.TESTING) {
 			Toolkit.TESTING_UID = 0;
 
 			//pop it onto the window so our E2E helpers can find it
-			if(window){
-				(window as any)['diagram_instance'] = this;
+			if (window) {
+				(window as any)["diagram_instance"] = this;
 			}
 		}
 	}
@@ -128,7 +128,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.linksThatHaveInitiallyRendered = {};
 	}
 
-	canEntityRepaint(baseModel: BaseModel<BaseEntity,BaseModelListener>) {
+	canEntityRepaint(baseModel: BaseModel<BaseEntity, BaseModelListener>) {
 		//no rules applied, allow repaint
 		if (this.paintableWidgets === null) {
 			return true;
@@ -149,7 +149,6 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	getDiagramModel(): DiagramModel {
 		return this.diagramModel;
 	}
-
 
 	//!-------------- FACTORIES ------------
 
@@ -271,7 +270,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getRelativePoint(x, y) {
 		var canvasRect = this.canvas.getBoundingClientRect();
-		return {x: x - canvasRect.left, y: y - canvasRect.top};
+		return { x: x - canvasRect.left, y: y - canvasRect.top };
 	}
 
 	getNodeElement(node: NodeModel): Element {
@@ -289,10 +288,10 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		if (selector === null) {
 			throw new Error(
 				"Cannot find Node Port element with nodeID: [" +
-				port.getParent().getID() +
-				"] and name: [" +
-				port.getName() +
-				"]"
+					port.getParent().getID() +
+					"] and name: [" +
+					port.getName() +
+					"]"
 			);
 		}
 		return selector;
@@ -306,11 +305,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 		return {
 			x:
-			sourceElement.offsetWidth / 2 +
-			(rel.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
+				sourceElement.offsetWidth / 2 +
+				(rel.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
 			y:
-			sourceElement.offsetHeight / 2 +
-			(rel.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
+				sourceElement.offsetHeight / 2 +
+				(rel.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
 		};
 	}
 
@@ -345,7 +344,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	 * Determine the width and height of the node passed in.
 	 * It currently assumes nodes have a rectangular shape, can be overriden for customised shapes.
 	 */
-	getNodeDimensions(node: NodeModel): { width: number; height: number; } {
+	getNodeDimensions(node: NodeModel): { width: number; height: number } {
 		if (!this.canvas) {
 			return {
 				width: 0,

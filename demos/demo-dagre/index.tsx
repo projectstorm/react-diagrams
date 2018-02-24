@@ -30,7 +30,6 @@ function connectNodes(nodeFrom, nodeTo) {
  * Tests auto distribution
  */
 class Demo8Widget extends React.Component<any, any> {
-
 	constructor(props) {
 		super(props);
 		this.state = {};

@@ -12,11 +12,10 @@ import {
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
 import { LinkFactory } from "../../src/AbstractFactory";
-import {DefaultLinkModel} from "../../src/defaults/models/DefaultLinkModel";
-import {DefaultLinkFactory} from "../../src/defaults/factories/DefaultLinkFactory";
+import { DefaultLinkModel } from "../../src/defaults/models/DefaultLinkModel";
+import { DefaultLinkFactory } from "../../src/defaults/factories/DefaultLinkFactory";
 
 export class AdvancedLinkModel extends DefaultLinkModel {
-
 	constructor() {
 		super("advanced");
 		this.width = 10;
@@ -24,61 +23,57 @@ export class AdvancedLinkModel extends DefaultLinkModel {
 }
 
 export class AdvancedPortModel extends DefaultPortModel {
-
 	createLinkModel(): AdvancedLinkModel | null {
 		return new AdvancedLinkModel();
 	}
 }
 
-export class AdvancedLinkSegment extends React.Component<{model: AdvancedLinkModel, path: string}>{
-
+export class AdvancedLinkSegment extends React.Component<{ model: AdvancedLinkModel; path: string }> {
 	path: SVGPathElement;
 	circle: SVGCircleElement;
-	callback : () => any;
+	callback: () => any;
 	percent: number;
 	handle: any;
 	mounted: boolean;
 
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.percent = 0;
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.mounted = true;
 		this.callback = () => {
-			if(!this.circle || !this.path){
+			if (!this.circle || !this.path) {
 				return;
 			}
 
-			this.percent+=2;
-			if(this.percent > 100){
+			this.percent += 2;
+			if (this.percent > 100) {
 				this.percent = 0;
 			}
 
+			let point = this.path.getPointAtLength(this.path.getTotalLength() * (this.percent / 100.0));
 
-			let point = this.path.getPointAtLength(this.path.getTotalLength()*(this.percent/100.0));
+			this.circle.setAttribute("cx", "" + point.x);
+			this.circle.setAttribute("cy", "" + point.y);
 
-			this.circle.setAttribute('cx', ""+point.x);
-			this.circle.setAttribute('cy', ""+point.y);
-
-			if(this.mounted){
+			if (this.mounted) {
 				requestAnimationFrame(this.callback);
 			}
-		}
+		};
 		requestAnimationFrame(this.callback);
 	}
 
-	componentWillUnmount(){
+	componentWillUnmount() {
 		this.mounted = false;
 	}
 
-
-	render(){
+	render() {
 		return (
 			<>
 				<path
-					ref={(ref) => {
+					ref={ref => {
 						this.path = ref;
 					}}
 					strokeWidth={this.props.model.width}
@@ -86,10 +81,11 @@ export class AdvancedLinkSegment extends React.Component<{model: AdvancedLinkMod
 					d={this.props.path}
 				/>
 				<circle
-					ref={(ref) => {
+					ref={ref => {
 						this.circle = ref;
 					}}
-					r={10} fill="orange"
+					r={10}
+					fill="orange"
 				/>
 			</>
 		);
@@ -97,10 +93,9 @@ export class AdvancedLinkSegment extends React.Component<{model: AdvancedLinkMod
 }
 
 export class AdvancedLinkFactory extends DefaultLinkFactory {
-
 	constructor() {
 		super();
-		this.type = "advanced"
+		this.type = "advanced";
 	}
 
 	getNewInstance(initialConfig?: any): AdvancedLinkModel {
@@ -108,9 +103,12 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 	}
 
 	generateLinkSegment(model: AdvancedLinkModel, selected: boolean, path: string) {
-		return <g><AdvancedLinkSegment model={model} path={path} /></g>;
+		return (
+			<g>
+				<AdvancedLinkSegment model={model} path={path} />
+			</g>
+		);
 	}
-
 }
 /**
  *

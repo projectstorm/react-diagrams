@@ -1,10 +1,4 @@
-import {
-	DiagramEngine,
-	DiagramModel,
-	DefaultNodeModel,
-	LinkModel,
-	DiagramWidget
-} from "../../src/main";
+import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 import { action } from "@storybook/addon-actions";

@@ -104,7 +104,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	clearSelection(ignore: BaseModel<BaseEntity,BaseModelListener> | null = null) {
+	clearSelection(ignore: BaseModel<BaseEntity, BaseModelListener> | null = null) {
 		_.forEach(this.getSelectedItems(), element => {
 			if (ignore && ignore.getID() === element.getID()) {
 				return;
@@ -113,7 +113,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	getSelectedItems(...filters: BaseEntityType[]): BaseModel<BaseEntity,BaseModelListener>[] {
+	getSelectedItems(...filters: BaseEntityType[]): BaseModel<BaseEntity, BaseModelListener>[] {
 		if (!Array.isArray(filters)) {
 			filters = [filters];
 		}
@@ -228,11 +228,11 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		return this.links[link];
 	}
 
-	addAll(...models: BaseModel[]): BaseModel[]{
-		_.forEach(models, (model) =>{
-			if(model instanceof LinkModel){
+	addAll(...models: BaseModel[]): BaseModel[] {
+		_.forEach(models, model => {
+			if (model instanceof LinkModel) {
 				this.addLink(model);
-			}else if(model instanceof NodeModel){
+			} else if (model instanceof NodeModel) {
 				this.addNode(model);
 			}
 		});

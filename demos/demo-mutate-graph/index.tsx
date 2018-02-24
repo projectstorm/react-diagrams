@@ -1,10 +1,4 @@
-import {
-	DiagramEngine,
-	DiagramModel,
-	DefaultNodeModel,
-	LinkModel,
-	DiagramWidget
-} from "../../src/main";
+import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 
@@ -46,8 +40,12 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		return (
 			<DemoWorkspaceWidget
 				buttons={[
-					<button key={1} onClick={this.updatePosition}>Update position</button>,
-					<button key={2} onClick={this.updatePositionViaSerialize}>Update position via serialize</button>
+					<button key={1} onClick={this.updatePosition}>
+						Update position
+					</button>,
+					<button key={2} onClick={this.updatePositionViaSerialize}>
+						Update position via serialize
+					</button>
 				]}
 			>
 				<DiagramWidget diagramEngine={engine} />

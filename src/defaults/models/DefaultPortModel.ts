@@ -1,11 +1,10 @@
 import * as _ from "lodash";
 import { PortModel } from "../../models/PortModel";
-import {DiagramEngine} from "../../DiagramEngine";
-import {DefaultLinkModel} from "./DefaultLinkModel";
-import {LinkModel} from "../../models/LinkModel";
+import { DiagramEngine } from "../../DiagramEngine";
+import { DefaultLinkModel } from "./DefaultLinkModel";
+import { LinkModel } from "../../models/LinkModel";
 
 export class DefaultPortModel extends PortModel {
-
 	in: boolean;
 	label: string;
 	links: { [id: string]: DefaultLinkModel };
@@ -29,7 +28,7 @@ export class DefaultPortModel extends PortModel {
 		});
 	}
 
-	link(port: PortModel): LinkModel{
+	link(port: PortModel): LinkModel {
 		let link = this.createLinkModel();
 		link.setSourcePort(this);
 		link.setTargetPort(port);
@@ -37,7 +36,7 @@ export class DefaultPortModel extends PortModel {
 	}
 
 	canLinkToPort(port: PortModel): boolean {
-		if(port instanceof DefaultPortModel){
+		if (port instanceof DefaultPortModel) {
 			return this.in !== port.in;
 		}
 		return true;

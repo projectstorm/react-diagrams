@@ -10,10 +10,10 @@ import { PointModel } from "../models/PointModel";
 import { PortModel } from "../models/PortModel";
 import { LinkModel } from "../models/LinkModel";
 import { BaseModel, BaseModelListener } from "../models/BaseModel";
-import {BaseEntity} from "../BaseEntity";
+import { BaseEntity } from "../BaseEntity";
 
 export interface SelectionModel {
-	model: BaseModel<BaseEntity,BaseModelListener>;
+	model: BaseModel<BaseEntity, BaseModelListener>;
 	initialX: number;
 	initialY: number;
 }
@@ -137,7 +137,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event): { model: BaseModel<BaseEntity,BaseModelListener>; element: Element } {
+	getMouseElement(event): { model: BaseModel<BaseEntity, BaseModelListener>; element: Element } {
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 

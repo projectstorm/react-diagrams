@@ -19,11 +19,11 @@ export default () => {
 	node1.setPosition(100, 100);
 
 	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	var port2 = node2.addInPort('In');
+	var port2 = node2.addInPort("In");
 	node2.setPosition(400, 40);
 
 	var node3 = new DefaultNodeModel("Node 3", "rgb(128,99,255)");
-	var port3 = node3.addInPort('In');
+	var port3 = node3.addInPort("In");
 	node3.setPosition(300, 160);
 
 	//link the nodes

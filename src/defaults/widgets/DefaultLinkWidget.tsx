@@ -1,12 +1,12 @@
 import * as React from "react";
-import {DiagramEngine} from "../../DiagramEngine";
-import {PointModel} from "../../models/PointModel";
-import {Toolkit} from "../../Toolkit";
-import {DefaultLinkFactory} from "../factories/DefaultLinkFactory";
-import {DefaultLinkModel} from "../models/DefaultLinkModel";
+import { DiagramEngine } from "../../DiagramEngine";
+import { PointModel } from "../../models/PointModel";
+import { Toolkit } from "../../Toolkit";
+import { DefaultLinkFactory } from "../factories/DefaultLinkFactory";
+import { DefaultLinkModel } from "../models/DefaultLinkModel";
 import PathFinding from "../../routing/PathFinding";
 import * as _ from "lodash";
-import {LabelModel} from "../../models/LabelModel";
+import { LabelModel } from "../../models/LabelModel";
 
 export interface DefaultLinkProps {
 	color?: string;
@@ -28,7 +28,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		link: null,
 		engine: null,
 		smooth: false,
-		diagramEngine: null,
+		diagramEngine: null
 	};
 
 	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
@@ -51,10 +51,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		}
 	}
 
-	calculateAllLabelPosition(){
+	calculateAllLabelPosition() {
 		_.forEach(this.props.link.labels, (label, index) => {
-			this.calculateLabelPosition(label, index+1);
-		})
+			this.calculateLabelPosition(label, index + 1);
+		});
 	}
 
 	componentDidUpdate() {
@@ -93,10 +93,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				/>
 				<circle
 					onMouseLeave={() => {
-						this.setState({selected: false});
+						this.setState({ selected: false });
 					}}
 					onMouseEnter={() => {
-						this.setState({selected: true});
+						this.setState({ selected: true });
 					}}
 					data-id={this.props.link.points[pointIndex].id}
 					data-linkid={this.props.link.id}
@@ -113,9 +113,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	generateLabel(label: LabelModel) {
 		const canvas = this.props.diagramEngine.canvas as HTMLElement;
 		return (
-			<foreignObject key={label.id} className="link-label" width={canvas.offsetWidth} height={canvas.offsetHeight}>
+			<foreignObject
+				key={label.id}
+				className="link-label"
+				width={canvas.offsetWidth}
+				height={canvas.offsetHeight}
+			>
 				<div ref={ref => (this.refLabels[label.id] = ref)}>
-					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget(this.props.diagramEngine, label)}
+					{this.props.diagramEngine
+						.getFactoryForLabel(label)
+						.generateReactWidget(this.props.diagramEngine, label)}
 				</div>
 			</foreignObject>
 		);
@@ -124,23 +131,28 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
 		var props = this.props;
 
-		var Bottom = React.cloneElement((props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory)
-			.generateLinkSegment(this.props.link, this.state.selected || this.props.link.isSelected(), path), {
-			ref:ref => ref && this.refPaths.push(ref),
-		});
-
+		var Bottom = React.cloneElement(
+			(props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory).generateLinkSegment(
+				this.props.link,
+				this.state.selected || this.props.link.isSelected(),
+				path
+			),
+			{
+				ref: ref => ref && this.refPaths.push(ref)
+			}
+		);
 
 		var Top = React.cloneElement(Bottom, {
 			...extraProps,
 			strokeLinecap: "round",
 			onMouseLeave: () => {
-				this.setState({selected: false});
+				this.setState({ selected: false });
 			},
 			onMouseEnter: () => {
-				this.setState({selected: true});
+				this.setState({ selected: true });
 			},
 			ref: null,
-			'data-linkid': this.props.link.getID(),
+			"data-linkid": this.props.link.getID(),
 			strokeOpacity: this.state.selected ? 0.1 : 0,
 			strokeWidth: 20,
 			onContextMenu: () => {
@@ -159,12 +171,14 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		);
 	}
 
-	findPathAndRelativePositionToRenderLabel = (index: number): { path: any; position: number; } => {
+	findPathAndRelativePositionToRenderLabel = (index: number): { path: any; position: number } => {
 		// an array to hold all path lengths, making sure we hit the DOM only once to fetch this information
 		const lengths = this.refPaths.map(path => path.getTotalLength());
 
 		// calculate the point where we want to display the label
-		let labelPosition = lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) * (index / (this.props.link.labels.length + 1));
+		let labelPosition =
+			lengths.reduce((previousValue, currentValue) => previousValue + currentValue, 0) *
+			(index / (this.props.link.labels.length + 1));
 
 		// find the path where the label will be rendered and calculate the relative position
 		let pathIndex = 0;
@@ -182,13 +196,13 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		}
 	};
 
-	calculateLabelPosition = (label, index:number) => {
+	calculateLabelPosition = (label, index: number) => {
 		if (!this.refLabels[label.id]) {
 			// no label? nothing to do here
 			return;
 		}
 
-		const {path, position} = this.findPathAndRelativePositionToRenderLabel(index);
+		const { path, position } = this.findPathAndRelativePositionToRenderLabel(index);
 
 		const labelDimensions = {
 			width: this.refLabels[label.id].offsetWidth,
@@ -198,12 +212,14 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		const pathCentre = path.getPointAtLength(position);
 
 		const labelCoordinates = {
-			x: (pathCentre.x - labelDimensions.width / 2) + label.offsetX,
-			y: (pathCentre.y - labelDimensions.height / 2) + label.offsetY
+			x: pathCentre.x - labelDimensions.width / 2 + label.offsetX,
+			y: pathCentre.y - labelDimensions.height / 2 + label.offsetY
 		};
-		this.refLabels[label.id].setAttribute("style", `transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`);
+		this.refLabels[label.id].setAttribute(
+			"style",
+			`transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`
+		);
 	};
-
 
 	/**
 	 * Smart routing is only applicable when all conditions below are true:
@@ -212,7 +228,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	 * - no custom points exist along the line
 	 */
 	isSmartRoutingApplicable(): boolean {
-		const {diagramEngine, link} = this.props;
+		const { diagramEngine, link } = this.props;
 
 		if (!diagramEngine.isSmartRoutingEnabled()) {
 			return false;
@@ -230,7 +246,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	}
 
 	render() {
-		const {diagramEngine} = this.props;
+		const { diagramEngine } = this.props;
 		if (!diagramEngine.nodesRendered) {
 			return null;
 		}
@@ -249,7 +265,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			const smartLink = this.pathFinding.calculateLinkStartEndCoords(routingMatrix, directPathCoords);
 
 			if (smartLink) {
-				const {start, end, pathToStart, pathToEnd} = smartLink;
+				const { start, end, pathToStart, pathToEnd } = smartLink;
 
 				// second step: calculate a path avoiding hitting other elements
 				const simplifiedPath = this.pathFinding.calculateDynamicPath(
@@ -267,7 +283,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 						{
 							onMouseDown: event => {
 								this.addPointToLink(event, 1);
-							},
+							}
 						},
 						"0"
 					)
@@ -302,9 +318,9 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 						{
 							onMouseDown: event => {
 								this.addPointToLink(event, 1);
-							},
+							}
 						},
-						"0",
+						"0"
 					)
 				);
 
@@ -315,19 +331,20 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			} else {
 				//draw the multiple anchors and complex line instead
 				for (let i = 0; i < points.length - 1; i++) {
-					paths.push(this.generateLink(
-						Toolkit.generateLinePath(points[i], points[i + 1]),
-						{
-							"data-linkid": this.props.link.id,
-							"data-point": i,
-							onMouseDown: (event: MouseEvent) => {
-								this.addPointToLink(event, i + 1);
+					paths.push(
+						this.generateLink(
+							Toolkit.generateLinePath(points[i], points[i + 1]),
+							{
+								"data-linkid": this.props.link.id,
+								"data-point": i,
+								onMouseDown: (event: MouseEvent) => {
+									this.addPointToLink(event, i + 1);
+								}
 							},
-						},
-						i,
-					));
+							i
+						)
+					);
 				}
-
 
 				//render the circles
 				for (var i = 1; i < points.length - 1; i++) {
@@ -345,11 +362,9 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		return (
 			<g>
 				{paths}
-				{
-					_.map(this.props.link.labels, (labelModel) => {
-						return this.generateLabel(labelModel);
-					})
-				}
+				{_.map(this.props.link.labels, labelModel => {
+					return this.generateLabel(labelModel);
+				})}
 			</g>
 		);
 	}

@@ -2,8 +2,8 @@ import { DefaultPortModel } from "./DefaultPortModel";
 import * as _ from "lodash";
 
 import { NodeModel } from "../../models/NodeModel";
-import {Toolkit} from "../../Toolkit";
-import {DiagramEngine} from "../../DiagramEngine";
+import { Toolkit } from "../../Toolkit";
+import { DiagramEngine } from "../../DiagramEngine";
 
 /**
  * @author Dylan Vorster
@@ -19,11 +19,11 @@ export class DefaultNodeModel extends NodeModel {
 		this.color = color;
 	}
 
-	addInPort(label: string): DefaultPortModel{
+	addInPort(label: string): DefaultPortModel {
 		return this.addPort(new DefaultPortModel(true, Toolkit.UID(), label));
 	}
 
-	addOutPort(label: string): DefaultPortModel{
+	addOutPort(label: string): DefaultPortModel {
 		return this.addPort(new DefaultPortModel(false, Toolkit.UID(), label));
 	}
 

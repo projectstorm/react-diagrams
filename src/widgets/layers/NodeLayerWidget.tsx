@@ -2,7 +2,7 @@ import * as React from "react";
 import { DiagramEngine } from "../../DiagramEngine";
 import * as _ from "lodash";
 import { NodeWidget } from "../NodeWidget";
-import {NodeModel} from "../../models/NodeModel";
+import { NodeModel } from "../../models/NodeModel";
 
 export interface NodeLayerProps {
 	diagramEngine: DiagramEngine;

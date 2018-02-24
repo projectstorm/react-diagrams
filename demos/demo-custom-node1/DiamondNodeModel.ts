@@ -2,7 +2,6 @@ import * as SRD from "../../src/main";
 import { DiamondPortModel } from "./DiamondPortModel";
 
 export class DiamondNodeModel extends SRD.NodeModel {
-
 	constructor() {
 		super("diamond");
 		this.addPort(new DiamondPortModel("top"));

@@ -7,8 +7,8 @@ import {
 	DiagramWidget
 } from "../../src/main";
 import * as React from "react";
-import {DemoWorkspaceWidget} from "../.helpers/DemoWorkspaceWidget";
-import {action} from "@storybook/addon-actions";
+import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { action } from "@storybook/addon-actions";
 
 export default () => {
 	// setup the diagram engine
@@ -35,7 +35,6 @@ export default () => {
 	const node5 = new DefaultNodeModel("Node E", "rgb(192,255,0)");
 	node5.setPosition(250, 180);
 
-
 	// linking things together
 	const link1 = port1.link(port4);
 	const link2 = port2.link(port3);
@@ -58,11 +57,7 @@ export default () => {
 				</button>
 			}
 		>
-			<DiagramWidget
-				diagramEngine={engine}
-				smartRouting={true}
-				maxNumberPointsPerLink={0}
-			/>
+			<DiagramWidget diagramEngine={engine} smartRouting={true} maxNumberPointsPerLink={0} />
 		</DemoWorkspaceWidget>
 	);
 };

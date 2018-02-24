@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
 import { NodeModel } from "../models/NodeModel";
-import {Toolkit} from "../Toolkit";
+import { Toolkit } from "../Toolkit";
 
 export interface NodeProps {
 	node: NodeModel;
@@ -25,7 +25,6 @@ export class NodeWidget extends React.Component<NodeProps, NodeState> {
 	}
 
 	render() {
-
 		return (
 			<div
 				data-nodeid={this.props.node.id}

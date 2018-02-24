@@ -1,10 +1,4 @@
-import {
-	DiagramEngine,
-	DiagramModel,
-	DefaultNodeModel,
-	LinkModel,
-	DiagramWidget
-} from "../../src/main";
+import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
 import * as React from "react";
 
 export default () => {
@@ -17,12 +11,12 @@ export default () => {
 
 	//3-A) create a default node
 	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-	var port1 = node1.addOutPort('Out')
-	node1.setPosition(100,100);
+	var port1 = node1.addOutPort("Out");
+	node1.setPosition(100, 100);
 
 	//3-B) create another default node
 	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	var port2 = node2.addInPort('In')
+	var port2 = node2.addInPort("In");
 	node2.setPosition(400, 100);
 
 	//3-C) link the 2 nodes together
@@ -30,8 +24,8 @@ export default () => {
 
 	//3-D) create an orphaned node
 	var node3 = new DefaultNodeModel("Node 3", "rgb(0,192,255)");
-	node3.addOutPort('Out');
-	node3.setPosition(100,200);
+	node3.addOutPort("Out");
+	node3.setPosition(100, 200);
 
 	//4) add the models to the root graph
 	model.addAll(node1, node2, node3, link1);

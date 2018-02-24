@@ -1,7 +1,7 @@
 import { BaseEntity, BaseListener } from "../BaseEntity";
 import * as _ from "lodash";
 import { BaseEvent } from "../BaseEntity";
-import {DiagramEngine} from "../DiagramEngine";
+import { DiagramEngine } from "../DiagramEngine";
 
 export interface BaseModelListener extends BaseListener {
 	selectionChanged?(event: BaseEvent<BaseModel> & { isSelected: boolean }): void;
@@ -12,7 +12,10 @@ export interface BaseModelListener extends BaseListener {
 /**
  * @author Dylan Vorster
  */
-export class BaseModel<X extends BaseEntity = BaseEntity,T extends BaseModelListener = BaseModelListener> extends BaseEntity<BaseModelListener> {
+export class BaseModel<
+	X extends BaseEntity = BaseEntity,
+	T extends BaseModelListener = BaseModelListener
+> extends BaseEntity<BaseModelListener> {
 	type: string;
 	selected: boolean;
 	parent: X;
@@ -23,15 +26,15 @@ export class BaseModel<X extends BaseEntity = BaseEntity,T extends BaseModelList
 		this.selected = false;
 	}
 
-	public getParent(): X{
+	public getParent(): X {
 		return this.parent;
 	}
 
-	public setParent(parent: X){
+	public setParent(parent: X) {
 		this.parent = parent;
 	}
 
-	public getSelectedEntities(): BaseModel<any,T>[] {
+	public getSelectedEntities(): BaseModel<any, T>[] {
 		if (this.isSelected()) {
 			return [this];
 		}

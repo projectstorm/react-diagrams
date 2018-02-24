@@ -3,10 +3,7 @@ import * as _ from "lodash";
 import { TrayWidget } from "./TrayWidget";
 import { Application } from "../Application";
 import { TrayItemWidget } from "./TrayItemWidget";
-import {
-	DefaultNodeModel,
-	DiagramWidget
-} from "../../../src/main";
+import { DefaultNodeModel, DiagramWidget } from "../../../src/main";
 
 export interface BodyWidgetProps {
 	app: Application;
@@ -48,10 +45,10 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 							var node = null;
 							if (data.type === "in") {
 								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(192,255,0)");
-								node.addInPort('In');
+								node.addInPort("In");
 							} else {
 								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(0,192,255)");
-								node.addOutPort('Out')
+								node.addOutPort("Out");
 							}
 							var points = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
 							node.x = points.x;

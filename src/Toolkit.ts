@@ -1,5 +1,5 @@
 import closest = require("closest");
-import {PointModel} from "./models/PointModel";
+import { PointModel } from "./models/PointModel";
 import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
 import * as Path from "paths-js/path";
 /**
@@ -16,7 +16,7 @@ export class Toolkit {
 	public static UID(): string {
 		if (Toolkit.TESTING) {
 			Toolkit.TESTING_UID++;
-			return ''+Toolkit.TESTING_UID;
+			return "" + Toolkit.TESTING_UID;
 		}
 		return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
 			var r = (Math.random() * 16) | 0,
@@ -42,13 +42,10 @@ export class Toolkit {
 		return `M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
 	}
 
-	public static generateCurvePath(
-		firstPoint: PointModel,
-		lastPoint: PointModel,
-		curvy: number = 0,
-	): string {
-		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvy},${firstPoint.y} ${lastPoint.x +
-		-curvy},${lastPoint.y} ${lastPoint.x},${lastPoint.y}`;
+	public static generateCurvePath(firstPoint: PointModel, lastPoint: PointModel, curvy: number = 0): string {
+		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvy},${firstPoint.y} ${lastPoint.x + -curvy},${
+			lastPoint.y
+		} ${lastPoint.x},${lastPoint.y}`;
 	}
 
 	public static generateDynamicPath(pathCoords: number[][]) {

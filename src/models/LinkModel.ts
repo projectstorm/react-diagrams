@@ -1,11 +1,11 @@
-import {BaseModel, BaseModelListener} from "./BaseModel";
-import {PortModel} from "./PortModel";
-import {PointModel} from "./PointModel";
+import { BaseModel, BaseModelListener } from "./BaseModel";
+import { PortModel } from "./PortModel";
+import { PointModel } from "./PointModel";
 import * as _ from "lodash";
-import {BaseEvent} from "../BaseEntity";
-import {LabelModel} from "./LabelModel";
-import {DiagramEngine} from "../DiagramEngine";
-import {DiagramModel} from "./DiagramModel";
+import { BaseEvent } from "../BaseEntity";
+import { LabelModel } from "./LabelModel";
+import { DiagramEngine } from "../DiagramEngine";
+import { DiagramModel } from "./DiagramModel";
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
@@ -13,8 +13,7 @@ export interface LinkModelListener extends BaseModelListener {
 	targetPortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
 }
 
-export class LinkModel<T extends LinkModelListener = LinkModelListener> extends BaseModel<DiagramModel,T> {
-
+export class LinkModel<T extends LinkModelListener = LinkModelListener> extends BaseModel<DiagramModel, T> {
 	sourcePort: PortModel | null;
 	targetPort: PortModel | null;
 	labels: LabelModel[];
@@ -23,7 +22,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	constructor(linkType: string = "default", id?: string) {
 		super(linkType, id);
-		this.points = [new PointModel(this, {x: 0, y: 0}), new PointModel(this, {x: 0, y: 0})];
+		this.points = [new PointModel(this, { x: 0, y: 0 }), new PointModel(this, { x: 0, y: 0 })];
 		this.extras = {};
 		this.sourcePort = null;
 		this.targetPort = null;
@@ -34,7 +33,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		super.deSerialize(ob, engine);
 		this.extras = ob.extras;
 		this.points = _.map(ob.points || [], (point: { x; y }) => {
-			var p = new PointModel(this, {x: point.x, y: point.y});
+			var p = new PointModel(this, { x: point.x, y: point.y });
 			p.deSerialize(point, engine);
 			return p;
 		});
@@ -42,13 +41,20 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		this.labels = ob.label || null;
 
 		if (ob.target) {
-			this.setTargetPort(this.getParent().getNode(ob.target).getPortFromID(ob.targetPort));
+			this.setTargetPort(
+				this.getParent()
+					.getNode(ob.target)
+					.getPortFromID(ob.targetPort)
+			);
 		}
 
 		if (ob.source) {
-			this.setSourcePort(this.getParent().getNode(ob.source).getPortFromID(ob.sourcePort));
+			this.setSourcePort(
+				this.getParent()
+					.getNode(ob.source)
+					.getPortFromID(ob.sourcePort)
+			);
 		}
-
 	}
 
 	serialize() {
@@ -63,7 +69,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			extras: this.extras,
 			labels: _.map(this.labels, label => {
 				return label.serialize();
-			}),
+			})
 		});
 	}
 
@@ -147,7 +153,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		}
 		this.sourcePort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
-			listener.sourcePortChanged && listener.sourcePortChanged({...event, port: port});
+			listener.sourcePortChanged && listener.sourcePortChanged({ ...event, port: port });
 		});
 	}
 
@@ -169,15 +175,15 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		}
 		this.targetPort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
-			listener.targetPortChanged && listener.targetPortChanged({...event, port: port});
+			listener.targetPortChanged && listener.targetPortChanged({ ...event, port: port });
 		});
 	}
 
-	point(x: number, y: number): PointModel{
+	point(x: number, y: number): PointModel {
 		return this.addPoint(this.generatePoint(x, y));
 	}
 
-	addLabel(label: LabelModel){
+	addLabel(label: LabelModel) {
 		label.setParent(this);
 		this.labels.push(label);
 	}
@@ -218,6 +224,6 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	generatePoint(x: number = 0, y: number = 0): PointModel {
-		return new PointModel(this, {x: x, y: y});
+		return new PointModel(this, { x: x, y: y });
 	}
 }

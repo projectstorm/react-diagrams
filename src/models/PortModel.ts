@@ -1,8 +1,8 @@
-import {BaseModel, BaseModelListener} from "./BaseModel";
-import {NodeModel} from "./NodeModel";
-import {LinkModel} from "./LinkModel";
+import { BaseModel, BaseModelListener } from "./BaseModel";
+import { NodeModel } from "./NodeModel";
+import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
-import {DiagramEngine} from "../DiagramEngine";
+import { DiagramEngine } from "../DiagramEngine";
 
 export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	name: string;
@@ -84,7 +84,7 @@ export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 		return null;
 	}
 
-	updateCoords({x, y, width, height}: { x: number; y: number; width: number; height: number }) {
+	updateCoords({ x, y, width, height }: { x: number; y: number; width: number; height: number }) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -94,7 +94,6 @@ export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	canLinkToPort(port: PortModel): boolean {
 		return true;
 	}
-
 
 	isLocked() {
 		return super.isLocked() || this.getParent().isLocked();

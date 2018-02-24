@@ -1,12 +1,6 @@
-import {
-	DiagramEngine,
-	DiagramModel,
-	DefaultNodeModel,
-	LinkModel,
-	DiagramWidget
-} from "../../src/main";
+import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
 import * as React from "react";
-import {DefaultLinkModel} from "../../src/defaults/models/DefaultLinkModel";
+import { DefaultLinkModel } from "../../src/defaults/models/DefaultLinkModel";
 
 export default () => {
 	//1) setup the diagram engine
@@ -35,7 +29,6 @@ export default () => {
 
 	//5) load model into engine
 	engine.setDiagramModel(model);
-
 
 	//6) render the diagram!
 	return <DiagramWidget diagramEngine={engine} />;

@@ -1,8 +1,8 @@
 import * as _ from "lodash";
-import {LinkModel} from "../../src/models/LinkModel";
-import {DiagramEngine} from "../../src/DiagramEngine";
-import {PortModel} from "../../src/models/PortModel";
-import {DefaultLinkModel} from "../../src/defaults/models/DefaultLinkModel";
+import { LinkModel } from "../../src/models/LinkModel";
+import { DiagramEngine } from "../../src/DiagramEngine";
+import { PortModel } from "../../src/models/PortModel";
+import { DefaultLinkModel } from "../../src/defaults/models/DefaultLinkModel";
 
 export class DiamondPortModel extends PortModel {
 	position: string | "top" | "bottom" | "left" | "right";
@@ -23,7 +23,7 @@ export class DiamondPortModel extends PortModel {
 		this.position = data.position;
 	}
 
-	createLinkModel(): LinkModel{
+	createLinkModel(): LinkModel {
 		return new DefaultLinkModel();
 	}
 }

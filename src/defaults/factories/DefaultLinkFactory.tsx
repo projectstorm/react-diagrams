@@ -1,8 +1,8 @@
 import * as React from "react";
-import {DefaultLinkWidget} from "../widgets/DefaultLinkWidget";
-import {DiagramEngine} from "../../DiagramEngine";
-import {LinkFactory} from "../../AbstractFactory";
-import {DefaultLinkModel} from "../models/DefaultLinkModel";
+import { DefaultLinkWidget } from "../widgets/DefaultLinkWidget";
+import { DiagramEngine } from "../../DiagramEngine";
+import { LinkFactory } from "../../AbstractFactory";
+import { DefaultLinkModel } from "../models/DefaultLinkModel";
 
 /**
  * @author Dylan Vorster
@@ -23,16 +23,7 @@ export class DefaultLinkFactory extends LinkFactory<DefaultLinkModel> {
 		return new DefaultLinkModel();
 	}
 
-
 	generateLinkSegment(model: DefaultLinkModel, selected: boolean, path: string) {
-		return (
-			<path
-				className={selected ? "selected" : ''}
-				strokeWidth={model.width}
-				stroke={model.color}
-				d={path}
-			/>
-		);
+		return <path className={selected ? "selected" : ""} strokeWidth={model.width} stroke={model.color} d={path} />;
 	}
-
 }

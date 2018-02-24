@@ -31,7 +31,7 @@ export default () => {
 
 	//3-A) create a default node
 	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-	var port1 = node1.addOutPort("Out")
+	var port1 = node1.addOutPort("Out");
 	node1.setPosition(100, 150);
 
 	//3-B) create our new custom node
@@ -39,12 +39,12 @@ export default () => {
 	node2.setPosition(250, 108);
 
 	var node3 = new DefaultNodeModel("Node 3", "red");
-	var port3 = node3.addInPort("In")
+	var port3 = node3.addInPort("In");
 	node3.setPosition(500, 150);
 
 	//3-C) link the 2 nodes together
-	var link1 = port1.link(node2.getPort('left'));
-	var link2 = port3.link(node2.getPort('right'));
+	var link1 = port1.link(node2.getPort("left"));
+	var link2 = port3.link(node2.getPort("right"));
 
 	//4) add the models to the root graph
 	model.addAll(node1, node2, node3, link1, link2);

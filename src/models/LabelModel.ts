@@ -1,8 +1,7 @@
-import {BaseModel} from "./BaseModel";
-import {LinkModel} from "./LinkModel";
+import { BaseModel } from "./BaseModel";
+import { LinkModel } from "./LinkModel";
 
 export class LabelModel extends BaseModel<LinkModel> {
-
 	offsetX: number;
 	offsetY: number;
 
