@@ -1,25 +1,27 @@
 import "jest";
 import * as puppeteer from "puppeteer"
+import {E2EHelper} from "./E2EHelper";
 
 var browser;
 
-async function itShould(directive, test: (page: puppeteer.Page) => any){
+async function itShould(directive, test: (page: puppeteer.Page, helper: E2EHelper) => any) {
 	it(directive, async () => {
 		let page = await browser.newPage();
 		await page.goto('file://' + __dirname + '/../../.out/index.html');
-		await test(page);
+		let helper = new E2EHelper(page);
+		await test(page, helper);
 		await page.close();
 	});
 }
 
 beforeAll(async () => {
-	if(process.env.CIRCLECI){
+	if (process.env.CIRCLECI) {
 		console.log("using CircleCI");
 
 		browser = await puppeteer.launch({
 			args: ['--no-sandbox', '--disable-setuid-sandbox']
 		});
-	}else{
+	} else {
 		browser = await puppeteer.launch({
 			headless: false
 		});
@@ -33,7 +35,10 @@ afterAll(() => {
 
 describe("simple test", async () => {
 
-	itShould('should drag a new link', async (page) => {
+	itShould('should drag a new link', async (page, helper) => {
+
+		let node = await helper.node('6');
+		console.log(node);
 		await page.mouse.move(410, 152);
 		await page.mouse.down();
 		await page.mouse.move(610, 352);
@@ -41,7 +46,7 @@ describe("simple test", async () => {
 
 	});
 
-	itShould('should drag a node', async (page) => {
+	itShould('should drag a node', async (page, helper) => {
 		await page.mouse.move(390, 145);
 		await page.mouse.down();
 		await page.mouse.move(300, 300);

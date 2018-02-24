@@ -13,7 +13,9 @@ module.exports = {
 
 		src += files.map((file) => {
 			return `
-				.add("`+file+`",require("` + file + `").default)
+				.add("`+file+`",() => {
+					return require("` + file + `").default();
+				})
 			`
 		}).join('\n');
 
