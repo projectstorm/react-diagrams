@@ -1,12 +1,22 @@
 // jest.config.js
 module.exports = {
 	verbose: true,
-	moduleFileExtensions: ["ts", "tsx", "js", "json"],
+	moduleFileExtensions: [
+		"ts",
+		"tsx",
+		"js",
+		"jsx",
+		"json",
+		"node"
+	],
 	transform: {
-		"^.+\\.(ts|tsx)$": "./tests/helpers/tsx-preprocessor.js",
-		"^.+\\.(scss)$": "./tests/helpers/scss-preprocessor.js"
+		".*test_loader.*": __dirname+"/tests/helpers/storybook-loader.js",
+		"^.+\\.tsx?$": "ts-jest",
 	},
-	"testMatch": [
+	moduleNameMapper:{
+		"\\.(scss|css|png)$": __dirname+"/tests/helpers/css-mock.js"
+	},
+	testMatch: [
 		"**/tests/**/*\.test\.tsx"
 	]
 };

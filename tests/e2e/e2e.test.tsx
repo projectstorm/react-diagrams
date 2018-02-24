@@ -6,7 +6,7 @@ var browser;
 async function itShould(directive, test: (page: puppeteer.Page) => any){
 	it(directive, async () => {
 		let page = await browser.newPage();
-		await page.goto('file://' + __dirname + '/../.out/index.html');
+		await page.goto('file://' + __dirname + '/../../.out/index.html');
 		await test(page);
 		await page.close();
 	});
