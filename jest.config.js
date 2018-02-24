@@ -1,6 +1,6 @@
 // jest.config.js
 module.exports = {
-	verbose: false,
+	verbose: true,
 	moduleFileExtensions: [
 		"ts",
 		"tsx",
