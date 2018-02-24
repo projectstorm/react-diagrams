@@ -6598,9 +6598,9 @@ react-style-proptype@^3.0.0:
   dependencies:
     prop-types "^15.5.4"
 
-react-syntax-highlighter@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-7.0.0.tgz#a522ccf95f272178b8f25de2184383e9bf647155"
+react-syntax-highlighter@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-7.0.1.tgz#14eb6e669da6c4e4da3b2f86ff5e3b9b522aa473"
   dependencies:
     babel-runtime "^6.18.0"
     highlight.js "~9.12.0"

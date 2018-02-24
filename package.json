@@ -63,7 +63,7 @@
 		"raf": "^3.4.0",
 		"raw-loader": "^0.5.1",
 		"react-dom": "^16.2.0",
-		"react-syntax-highlighter": "^7.0.0",
+		"react-syntax-highlighter": "^7.0.1",
 		"react-test-renderer": "^16.2.0",
 		"sass-loader": "^6.0.6",
 		"source-map-loader": "^0.2.3",
