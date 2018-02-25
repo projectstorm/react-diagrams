@@ -35,7 +35,7 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> 
 		var diagramModel = this.props.diagramEngine.getDiagramModel();
 		return (
 			<div
-				{...this.getProps("diagramEngine")}
+				{...this.getProps()}
 				style={{
 					transform:
 						"translate(" +

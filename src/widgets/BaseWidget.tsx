@@ -10,6 +10,11 @@ export interface BaseWidgetProps {
 	 * append additional classes
 	 */
 	className?: string;
+
+	/**
+	 * Additional props to add
+	 */
+	extraProps?: any;
 }
 
 export class BaseWidget<P extends BaseWidgetProps = BaseWidgetProps, S = any> extends React.Component<P, S> {
@@ -30,9 +35,9 @@ export class BaseWidget<P extends BaseWidgetProps = BaseWidgetProps, S = any> ex
 		);
 	}
 
-	getProps(...omit: string[]): any {
+	getProps(): any {
 		return {
-			..._.omit(this.props, omit.concat(["children", "baseClass"])),
+			...((this.props.extraProps as any) || {}),
 			className: this.getClassName()
 		};
 	}

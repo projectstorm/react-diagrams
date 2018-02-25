@@ -143,9 +143,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
 		//is it a port
-		var element = Toolkit.closest(target, ".srd-port[data-name]");
+		var element = Toolkit.closest(target, ".port[data-name]");
 		if (element) {
-			var nodeElement = Toolkit.closest(target, ".srd-node[data-nodeid]") as HTMLElement;
+			var nodeElement = Toolkit.closest(target, ".node[data-nodeid]") as HTMLElement;
 			return {
 				model: diagramModel
 					.getNode(nodeElement.getAttribute("data-nodeid"))
@@ -155,7 +155,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		}
 
 		//look for a point
-		element = Toolkit.closest(target, ".srd-node[data-id]");
+		element = Toolkit.closest(target, ".point[data-id]");
 		if (element) {
 			return {
 				model: diagramModel
@@ -430,19 +430,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 		return (
 			<div
-				{...this.getProps(
-					"diagramEngine",
-					"allowLooseLinks",
-					"allowCanvasTranslation",
-					"allowCanvasZoom",
-					"inverseZoom",
-					"maxNumberPointsPerLink",
-					"smartRouting",
-					"actionStartedFiring",
-					"actionStillFiring",
-					"actionStoppedFiring",
-					"deleteKeys"
-				)}
+				{...this.getProps()}
 				ref={ref => {
 					if (ref) {
 						this.props.diagramEngine.setCanvas(ref);

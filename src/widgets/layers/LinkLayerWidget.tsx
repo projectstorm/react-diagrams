@@ -25,7 +25,7 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 		var diagramModel = this.props.diagramEngine.getDiagramModel();
 		return (
 			<svg
-				{...this.getProps("diagramEngine", "pointAdded")}
+				{...this.getProps()}
 				style={{
 					transform:
 						"translate(" +
@@ -34,9 +34,7 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 						diagramModel.getOffsetY() +
 						"px) scale(" +
 						diagramModel.getZoomLevel() / 100.0 +
-						")",
-					width: "100%",
-					height: "100%"
+						")"
 				}}
 			>
 				{//only perform these actions when we have a diagram

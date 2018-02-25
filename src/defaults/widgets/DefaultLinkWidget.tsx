@@ -369,7 +369,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 
 		this.refPaths = [];
 		return (
-			<g {...this.getProps("color", "width", "smooth", "link", "diagramEngine", "pointAdded")}>
+			<g {...this.getProps()}>
 				{paths}
 				{_.map(this.props.link.labels, labelModel => {
 					return this.generateLabel(labelModel);

@@ -32,7 +32,7 @@ export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
 	render() {
 		return (
 			<div
-				{...this.getProps("node", "diagramEngine")}
+				{...this.getProps()}
 				data-nodeid={this.props.node.id}
 				style={{
 					top: this.props.node.y,

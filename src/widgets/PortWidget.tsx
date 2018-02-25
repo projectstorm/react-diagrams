@@ -29,7 +29,7 @@ export class PortWidget extends BaseWidget<PortProps, PortState> {
 	render() {
 		return (
 			<div
-				{...this.getProps("name, node")}
+				{...this.getProps()}
 				onMouseEnter={() => {
 					this.setState({ selected: true });
 				}}

@@ -3,5 +3,9 @@
 	height: 100%;
 	width: 100%;
 	transform-origin: 0 0;
-	overflow: visible;
+	overflow: visible !important;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }

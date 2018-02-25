@@ -26,7 +26,7 @@ export class DefaultPortLabel extends BaseWidget<DefaultPortLabelProps, DefaultP
 		var label = <div className="name">{this.props.model.label}</div>;
 
 		return (
-			<div {...this.getProps("model")}>
+			<div {...this.getProps()}>
 				{this.props.model.in ? port : label}
 				{this.props.model.in ? label : port}
 			</div>
