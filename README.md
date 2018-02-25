@@ -13,79 +13,56 @@ A super simple, no-nonsense diagramming library written in React that just works
 [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams)
 [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master)
 
-![Demo2](./images/example1.png)
+![Personal Project](./images/example1.png)
 
-![Demo2](./images/example2.png)
+![](./images/example2.png)
 
-![Demo2](./images/example3.png)
+![](./images/example3.png)
 
 ## Introduction
 
-A no-nonsense diagramming library written entirely in React with the help of Lodash, and a single polyfill. It aims to be:
+A no-nonsense diagramming library written entirely in React with the help of a few small libraries. It aims to be:
 
 * Simple, and void of any fuss/complications when implementing it into your own application
 * Customizable without having to hack the core (adapters/factories etc..)
 * Simple to operate and understand without sugar and magic
 * Fast and optimized to handle large diagrams with hundreds of nodes/links
 * Super easy to use, and should work as you expect it to
+* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages 
 
+## Usage
 
-## Developer Usage
+#### Installing
 
 `npm install storm-react-diagrams` or `yarn add storm-react-diagrams`
 
-### How to run demos
+#### Getting started
+
+The best place to start is by looking at the simple demos `demos/demo-simple` and going from there.
+
+#### Run the demos
 
 After running `yarn install` you must then run:  `yarn run storybook`
 
-### How to build
+#### Building from source
 
-Simply run ```webpack``` in the root directory (or ```export NODE_ENV=production && webpack``` if you want a production build) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file. __It will also compile the code for the demos__ .We use webpack for this because TSC cannot compile a single UMD file (TSC can currently only output multiple UMD files).
+Simply run ```webpack``` in the root directory (or ```export NODE_ENV=production && webpack``` if you want a production build) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file. 
+We use webpack for this because TSC cannot compile a single UMD file (TSC can currently only output multiple UMD files).
 
-_NOTE:_ We turn off name mangeling in production builds because we require class names to be left intact when serializing.
 
-### Make your own nodes
+## Make your own nodes
 
-To see how to create your own nodes like the one below, take a look at __demo3__:
+To see how to create your own nodes like the one below, take a look at __demos/demo-custom-link1__:
 
 ![Demo2](./images/demo3.png)
 
-## How does it work
+## Learn More
 
-The library uses a Model Graph to represent the virtual diagram and then renders the diagram using
-2 layers:
-* Node Layer -> which is responsible for rendering nodes as HTML components
-* Link Layer -> which renders the links as SVG paths
+[Architecture Questions](docs/Architecture%20Questions.md)
 
-Each node and link is fed into a factory that then generates the corresponding node or link react widget.
-Therefore, to create custom nodes and links, register your own factories that return your own widgets.
+[Interactive Questions](docs/Interactive%20Usage.md)
 
-As long as a node contains at least one port and the corresponding NodeWidget contains at least one PortWidget,
-a link can be connected to it.
+[Testing the Library](docs/Testing.md)
 
-## Questions
 
-[Questions](docs/Questions.md)
 
-## User Usage
-
-__Delete__ removes any selected items
-![__Delete__](./images/rjdDelete.gif)
-
-__Shift + Mouse Drag__ triggers a multi-selection box
-![Shift + Mouse Drag](./images/mouseDrag.gif)
-
-__Shift + Mouse Click__ selects the item (items can be multi-selected)
-![Shift + Mouse Click](./images/shiftClick.gif)
-
-__Mouse Drag__ drags the entire diagram
-![Mouse Drag](./images/canvasDrag.gif)
-
-__Mouse Wheel__ zooms the diagram in / out
-![Mouse Wheel](./images/mouseWheel.gif)
-
-__Click Link + Drag__ creates a new link point
-![Click Link + Drag](./images/createPoint.gif)
-
-__Click Node Port + Drag__ creates a new link
-![Click Node Port + Drag](./images/createLink.gif)

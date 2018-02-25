@@ -1,15 +1,14 @@
 import * as React from "react";
 import { storiesOf, addDecorator } from "@storybook/react";
 import { setOptions } from "@storybook/addon-options";
-import { Toolkit } from "../src/Toolkit";
 import { host } from "storybook-host";
 import { Helper } from "./.helpers/Helper";
+import { Toolkit } from "../src/Toolkit";
 
 //include the SCSS for the demo
 require("./.helpers/demo.scss");
 
-// make tests deterministic
-Toolkit.TESTING_MODE = true;
+Toolkit.TESTING = true;
 
 addDecorator(
 	host({
@@ -34,6 +33,10 @@ storiesOf("Simple Usage", module)
 			require("!!raw-loader!./demo-simple/index"),
 			require("./demo-simple/docs.md")
 		)
+	)
+	.add(
+		"Simple flow example",
+		Helper.makeDemo(require("./demo-simple-flow/index").default(), require("!!raw-loader!./demo-simple-flow/index"))
 	)
 	.add(
 		"Performance demo",
@@ -92,6 +95,13 @@ storiesOf("Advanced Techniques", module)
 			require("./demo-drag-and-drop/index").default(),
 			require("!!raw-loader!./demo-drag-and-drop/components/BodyWidget")
 		)
+	)
+	.add(
+		"Smart routing",
+		Helper.makeDemo(
+			require("./demo-smart-routing/index").default(),
+			require("!!raw-loader!./demo-smart-routing/index")
+		)
 	);
 
 storiesOf("Custom Models", module)
@@ -103,7 +113,7 @@ storiesOf("Custom Models", module)
 		)
 	)
 	.add(
-		"Custom link sizes",
+		"Custom animated links",
 		Helper.makeDemo(
 			require("./demo-custom-link1/index").default(),
 			require("!!raw-loader!./demo-custom-link1/index")

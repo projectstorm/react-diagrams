@@ -1,5 +1,7 @@
 import { Toolkit } from "./Toolkit";
 import * as _ from "lodash";
+import { DiagramEngine } from "./DiagramEngine";
+
 /**
  * @author Dylan Vorster
  */
@@ -16,7 +18,7 @@ export interface BaseListener<T extends BaseEntity = any> {
 
 export type BaseEntityType = "node" | "link" | "port" | "point";
 
-export class BaseEntity<T extends BaseListener = {}> {
+export class BaseEntity<T extends BaseListener = BaseListener> {
 	public listeners: { [s: string]: T };
 	public id: string;
 	public locked: boolean;
@@ -51,7 +53,7 @@ export class BaseEntity<T extends BaseListener = {}> {
 		this.listeners = {};
 	}
 
-	public deSerialize(data) {
+	public deSerialize(data, engine: DiagramEngine) {
 		this.id = data.id;
 	}
 

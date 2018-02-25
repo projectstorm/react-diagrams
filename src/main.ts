@@ -3,13 +3,17 @@
  */
 
 //export defaults
-export * from "./defaults/DefaultLinkFactory";
-export * from "./defaults/DefaultLinkWidget";
-export * from "./defaults/DefaultNodeFactory";
-export * from "./defaults/DefaultNodeWidget";
-export * from "./defaults/DefaultNodeModel";
-export * from "./defaults/DefaultPortModel";
-export * from "./defaults/DefaultPortLabelWidget";
+export * from "./defaults/models/DefaultNodeModel";
+export * from "./defaults/models/DefaultPortModel";
+export * from "./defaults/models/DefaultLinkModel";
+
+export * from "./defaults/factories/DefaultLinkFactory";
+export * from "./defaults/factories/DefaultNodeFactory";
+export * from "./defaults/factories/DefaultPortFactory";
+
+export * from "./defaults/widgets/DefaultLinkWidget";
+export * from "./defaults/widgets/DefaultNodeWidget";
+export * from "./defaults/widgets/DefaultPortLabelWidget";
 
 export * from "./AbstractFactory";
 export * from "./Toolkit";
@@ -27,8 +31,8 @@ export * from "./models/PointModel";
 export * from "./models/PortModel";
 
 export * from "./widgets/DiagramWidget";
-export * from "./widgets/LinkLayerWidget";
+export * from "./widgets/layers/LinkLayerWidget";
 export * from "./widgets/LinkWidget";
-export * from "./widgets/NodeLayerWidget";
+export * from "./widgets/layers/NodeLayerWidget";
 export * from "./widgets/NodeWidget";
 export * from "./widgets/PortWidget";

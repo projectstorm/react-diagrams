@@ -1,17 +1,17 @@
 import { BaseModel, BaseModelListener } from "./BaseModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
+import { DiagramEngine } from "../DiagramEngine";
 
-export class PointModel extends BaseModel<BaseModelListener> {
+export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 	x: number;
 	y: number;
-	link: LinkModel;
 
 	constructor(link: LinkModel, points: { x: number; y: number }) {
 		super();
 		this.x = points.x;
 		this.y = points.y;
-		this.link = link;
+		this.parent = link;
 	}
 
 	getSelectedEntities() {
@@ -22,11 +22,15 @@ export class PointModel extends BaseModel<BaseModelListener> {
 	}
 
 	isConnectedToPort(): boolean {
-		return this.link.getPortForPoint(this) !== null;
+		return this.parent.getPortForPoint(this) !== null;
 	}
 
-	deSerialize(ob) {
-		super.deSerialize(ob);
+	getLink(): LinkModel {
+		return this.getParent();
+	}
+
+	deSerialize(ob, engine: DiagramEngine) {
+		super.deSerialize(ob, engine);
 		this.x = ob.x;
 		this.y = ob.y;
 	}
@@ -40,8 +44,8 @@ export class PointModel extends BaseModel<BaseModelListener> {
 
 	remove() {
 		//clear references
-		if (this.link) {
-			this.link.removePoint(this);
+		if (this.parent) {
+			this.parent.removePoint(this);
 		}
 		super.remove();
 	}
@@ -59,11 +63,7 @@ export class PointModel extends BaseModel<BaseModelListener> {
 		return this.y;
 	}
 
-	getLink(): LinkModel {
-		return this.link;
-	}
-
 	isLocked() {
-		return super.isLocked() || this.getLink().isLocked();
+		return super.isLocked() || this.getParent().isLocked();
 	}
 }

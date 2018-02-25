@@ -21,7 +21,7 @@ if(process.env.NODE_ENV === 'production'){
 /**
  * @author Dylan Vorster
  */
-module.exports = [
+module.exports =
 	//for building the umd distribution
 	{
 		entry: './src/main.ts',
@@ -61,7 +61,7 @@ module.exports = [
 				},
 				{
 					test: /\.tsx?$/,
-					loader: 'awesome-typescript-loader'
+					loader: 'ts-loader'
 				}
 			]
 		},
@@ -70,4 +70,4 @@ module.exports = [
 		},
 		devtool: process.env.NODE_ENV === 'production'?false:'eval-cheap-module-source-map'
 	}
-];
+;

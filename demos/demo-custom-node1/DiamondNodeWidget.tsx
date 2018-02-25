@@ -103,5 +103,3 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 		);
 	}
 }
-
-export var DiamonNodeWidgetFactory = React.createFactory(DiamonNodeWidget);

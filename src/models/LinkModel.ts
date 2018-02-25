@@ -3,6 +3,9 @@ import { PortModel } from "./PortModel";
 import { PointModel } from "./PointModel";
 import * as _ from "lodash";
 import { BaseEvent } from "../BaseEntity";
+import { LabelModel } from "./LabelModel";
+import { DiagramEngine } from "../DiagramEngine";
+import { DiagramModel } from "./DiagramModel";
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
@@ -10,10 +13,10 @@ export interface LinkModelListener extends BaseModelListener {
 	targetPortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
 }
 
-export class LinkModel extends BaseModel<LinkModelListener> {
+export class LinkModel<T extends LinkModelListener = LinkModelListener> extends BaseModel<DiagramModel, T> {
 	sourcePort: PortModel | null;
 	targetPort: PortModel | null;
-	label: string;
+	labels: LabelModel[];
 	points: PointModel[];
 	extras: {};
 
@@ -23,18 +26,40 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		this.extras = {};
 		this.sourcePort = null;
 		this.targetPort = null;
-		this.label = null;
+		this.labels = [];
 	}
 
-	deSerialize(ob) {
-		super.deSerialize(ob);
+	deSerialize(ob, engine: DiagramEngine) {
+		super.deSerialize(ob, engine);
 		this.extras = ob.extras;
-		this.points = _.map(ob.points, (point: { x; y }) => {
+		this.points = _.map(ob.points || [], (point: { x; y }) => {
 			var p = new PointModel(this, { x: point.x, y: point.y });
-			p.deSerialize(point);
+			p.deSerialize(point, engine);
 			return p;
 		});
-		this.label = ob.label || null;
+
+		//deserialize labels
+		_.forEach(ob.labels || [], (label: any) => {
+			let labelOb = engine.getLabelFactory(label.type).getNewInstance();
+			labelOb.deSerialize(label, engine);
+			this.addLabel(labelOb);
+		});
+
+		if (ob.target) {
+			this.setTargetPort(
+				this.getParent()
+					.getNode(ob.target)
+					.getPortFromID(ob.targetPort)
+			);
+		}
+
+		if (ob.source) {
+			this.setSourcePort(
+				this.getParent()
+					.getNode(ob.source)
+					.getPortFromID(ob.sourcePort)
+			);
+		}
 	}
 
 	serialize() {
@@ -47,7 +72,9 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 				return point.serialize();
 			}),
 			extras: this.extras,
-			label: this.label || undefined
+			labels: _.map(this.labels, label => {
+				return label.serialize();
+			})
 		});
 	}
 
@@ -122,7 +149,13 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	}
 
 	setSourcePort(port: PortModel) {
-		port.addLink(this);
+		if (port !== null) {
+			port.addLink(this);
+		} else if (this.sourcePort !== null) {
+			this.sourcePort.removeLink(this);
+		} else {
+			return;
+		}
 		this.sourcePort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
 			listener.sourcePortChanged && listener.sourcePortChanged({ ...event, port: port });
@@ -138,19 +171,26 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 	}
 
 	setTargetPort(port: PortModel) {
-		port.addLink(this);
+		if (port !== null) {
+			port.addLink(this);
+		} else if (this.targetPort !== null) {
+			this.targetPort.removeLink(this);
+		} else {
+			return;
+		}
 		this.targetPort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
 			listener.targetPortChanged && listener.targetPortChanged({ ...event, port: port });
 		});
 	}
 
-	getLabel(): string {
-		return this.label;
+	point(x: number, y: number): PointModel {
+		return this.addPoint(this.generatePoint(x, y));
 	}
 
-	setLabel(label: string) {
-		this.label = label;
+	addLabel(label: LabelModel) {
+		label.setParent(this);
+		this.labels.push(label);
 	}
 
 	getPoints(): PointModel[] {
@@ -159,7 +199,7 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 
 	setPoints(points: PointModel[]) {
 		_.forEach(points, point => {
-			point.link = this;
+			point.setParent(this);
 		});
 		this.points = points;
 	}
@@ -176,8 +216,19 @@ export class LinkModel extends BaseModel<LinkModelListener> {
 		this.points.splice(this.getPointIndex(pointModel) + 1);
 	}
 
-	addPoint(pointModel: PointModel, index = 1) {
-		pointModel.link = this;
+	removeMiddlePoints() {
+		if (this.points.length > 2) {
+			this.points.splice(0, this.points.length - 2);
+		}
+	}
+
+	addPoint<T extends PointModel>(pointModel: T, index = 1): T {
+		pointModel.setParent(this);
 		this.points.splice(index, 0, pointModel);
+		return pointModel;
+	}
+
+	generatePoint(x: number = 0, y: number = 0): PointModel {
+		return new PointModel(this, { x: x, y: y });
 	}
 }

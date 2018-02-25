@@ -1,7 +1,3 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
@@ -25,6 +21,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
+      # test building project
+      - run: yarn run prepublishOnly
+
+      # test building storybook
       - run: yarn run storybook:build
-      - run: yarn test
+
+      # test e2e tests and jest snapshots
+      - run: yarn run test:ci

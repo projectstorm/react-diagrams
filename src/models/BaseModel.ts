@@ -1,6 +1,7 @@
 import { BaseEntity, BaseListener } from "../BaseEntity";
 import * as _ from "lodash";
 import { BaseEvent } from "../BaseEntity";
+import { DiagramEngine } from "../DiagramEngine";
 
 export interface BaseModelListener extends BaseListener {
 	selectionChanged?(event: BaseEvent<BaseModel> & { isSelected: boolean }): void;
@@ -11,9 +12,13 @@ export interface BaseModelListener extends BaseListener {
 /**
  * @author Dylan Vorster
  */
-export class BaseModel<T extends BaseModelListener = BaseModelListener> extends BaseEntity<BaseModelListener> {
+export class BaseModel<
+	X extends BaseEntity = BaseEntity,
+	T extends BaseModelListener = BaseModelListener
+> extends BaseEntity<BaseModelListener> {
 	type: string;
 	selected: boolean;
+	parent: X;
 
 	constructor(type?: string, id?: string) {
 		super(id);
@@ -21,15 +26,23 @@ export class BaseModel<T extends BaseModelListener = BaseModelListener> extends 
 		this.selected = false;
 	}
 
-	public getSelectedEntities(): BaseModel<T>[] {
+	public getParent(): X {
+		return this.parent;
+	}
+
+	public setParent(parent: X) {
+		this.parent = parent;
+	}
+
+	public getSelectedEntities(): BaseModel<any, T>[] {
 		if (this.isSelected()) {
 			return [this];
 		}
 		return [];
 	}
 
-	public deSerialize(ob) {
-		super.deSerialize(ob);
+	public deSerialize(ob, engine: DiagramEngine) {
+		super.deSerialize(ob, engine);
 		this.type = ob.type;
 		this.selected = ob.selected;
 	}

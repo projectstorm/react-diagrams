@@ -1,8 +1,8 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
 import * as _ from "lodash";
-import { LinkLayerWidget } from "./LinkLayerWidget";
-import { NodeLayerWidget } from "./NodeLayerWidget";
+import { LinkLayerWidget } from "./layers/LinkLayerWidget";
+import { NodeLayerWidget } from "./layers/NodeLayerWidget";
 import { Toolkit } from "../Toolkit";
 import { BaseAction, MoveCanvasAction, MoveItemsAction, SelectingAction } from "../CanvasActions";
 import { NodeModel } from "../models/NodeModel";
@@ -10,14 +10,16 @@ import { PointModel } from "../models/PointModel";
 import { PortModel } from "../models/PortModel";
 import { LinkModel } from "../models/LinkModel";
 import { BaseModel, BaseModelListener } from "../models/BaseModel";
+import { BaseEntity } from "../BaseEntity";
+import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
 
 export interface SelectionModel {
-	model: BaseModel<BaseModelListener>;
+	model: BaseModel<BaseEntity, BaseModelListener>;
 	initialX: number;
 	initialY: number;
 }
 
-export interface DiagramProps {
+export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
 
 	allowLooseLinks?: boolean;
@@ -25,6 +27,7 @@ export interface DiagramProps {
 	allowCanvasZoom?: boolean;
 	inverseZoom?: boolean;
 	maxNumberPointsPerLink?: number;
+	smartRouting?: boolean;
 
 	actionStartedFiring?: (action: BaseAction) => boolean;
 	actionStillFiring?: (action: BaseAction) => void;
@@ -45,7 +48,7 @@ export interface DiagramState {
 /**
  * @author Dylan Vorster
  */
-export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
+export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	public static defaultProps: DiagramProps = {
 		diagramEngine: null,
 		allowLooseLinks: true,
@@ -53,11 +56,12 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		allowCanvasZoom: true,
 		inverseZoom: false,
 		maxNumberPointsPerLink: Infinity, // backwards compatible default
+		smartRouting: false,
 		deleteKeys: [46, 8]
 	};
 
 	constructor(props: DiagramProps) {
-		super(props);
+		super("srd-diagram", props);
 		this.onMouseMove = this.onMouseMove.bind(this);
 		this.onMouseUp = this.onMouseUp.bind(this);
 		this.state = {
@@ -134,7 +138,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event): { model: BaseModel<BaseModelListener>; element: Element } {
+	getMouseElement(event): { model: BaseModel<BaseEntity, BaseModelListener>; element: Element } {
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
@@ -252,6 +256,18 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 				) {
 					model.model.x = diagramModel.getGridPosition(model.initialX + amountX / amountZoom);
 					model.model.y = diagramModel.getGridPosition(model.initialY + amountY / amountZoom);
+
+					// update port coordinates as well
+					if (model.model instanceof NodeModel) {
+						_.forEach(model.model.getPorts(), port => {
+							const portCoords = this.props.diagramEngine.getPortCoords(port);
+							port.updateCoords(portCoords);
+						});
+					}
+
+					if (diagramEngine.isSmartRoutingEnabled()) {
+						diagramEngine.calculateRoutingMatrix();
+					}
 				} else if (model.model instanceof PointModel) {
 					// we want points that are connected to ports, to not neccesarilly snap to grid
 					// this stuff needs to be pixel perfect, dont touch it
@@ -259,6 +275,11 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
 				}
 			});
+
+			if (diagramEngine.isSmartRoutingEnabled()) {
+				diagramEngine.calculateCanvasMatrix();
+			}
+
 			this.fireAction();
 			if (!this.state.wasMoved) {
 				this.setState({ wasMoved: true });
@@ -348,6 +369,34 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 					}
 				});
 			}
+
+			//remove any invalid links
+			_.forEach(this.state.action.selectionModels, model => {
+				//only care about points connecting to things
+				if (!(model.model instanceof PointModel)) {
+					return;
+				}
+
+				var link = model.model.getLink();
+				var sourcePort: PortModel = link.getSourcePort();
+				var targetPort: PortModel = link.getTargetPort();
+				if (sourcePort !== null && targetPort !== null) {
+					if (!sourcePort.canLinkToPort(targetPort)) {
+						//link not allowed
+						link.remove();
+					} else if (
+						_.some(
+							_.values(targetPort.getLinks()),
+							(l: LinkModel) =>
+								l !== link && (l.getSourcePort() === sourcePort || l.getTargetPort() === sourcePort)
+						)
+					) {
+						//link is a duplicate
+						link.remove();
+					}
+				}
+			});
+
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction(!this.state.wasMoved);
 		} else {
@@ -362,7 +411,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		let dimensions = (this.state.action as SelectingAction).getBoxDimensions();
 		return (
 			<div
-				className="selector"
+				className={this.bem("__selector")}
 				style={{
 					top: dimensions.top,
 					left: dimensions.left,
@@ -376,16 +425,17 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	render() {
 		var diagramEngine = this.props.diagramEngine;
 		diagramEngine.setMaxNumberPointsPerLink(this.props.maxNumberPointsPerLink);
+		diagramEngine.setSmartRoutingStatus(this.props.smartRouting);
 		var diagramModel = diagramEngine.getDiagramModel();
 
 		return (
 			<div
+				{...this.getProps()}
 				ref={ref => {
 					if (ref) {
 						this.props.diagramEngine.setCanvas(ref);
 					}
 				}}
-				className="storm-diagrams-canvas"
 				onWheel={event => {
 					if (this.props.allowCanvasZoom) {
 						event.preventDefault();
@@ -453,15 +503,26 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 							var relative = diagramEngine.getRelativeMousePoint(event);
 							var sourcePort = model.model;
 							var link = sourcePort.createLinkModel();
+							link.setSourcePort(sourcePort);
 
-							link.getFirstPoint().updateLocation(relative);
-							link.getLastPoint().updateLocation(relative);
+							if (link) {
+								link.removeMiddlePoints();
+								if (link.getSourcePort() !== sourcePort) {
+									link.setSourcePort(sourcePort);
+								}
+								link.setTargetPort(null);
 
-							diagramModel.clearSelection();
-							link.getLastPoint().setSelected(true);
-							diagramModel.addLink(link);
+								link.getFirstPoint().updateLocation(relative);
+								link.getLastPoint().updateLocation(relative);
 
-							this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
+								diagramModel.clearSelection();
+								link.getLastPoint().setSelected(true);
+								diagramModel.addLink(link);
+
+								this.startFiringAction(
+									new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
+								);
+							}
 						} else {
 							diagramModel.clearSelection();
 						}

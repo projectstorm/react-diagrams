@@ -1,3 +1,20 @@
+__5.0.0__ 
+
+PR: https://github.com/projectstorm/react-diagrams/pull/145
+
+* [refactor] Links completely overhauled
+* [feature] Smart Routing
+* [feature] Flow support
+* [demo] Smart Routing
+* [demo] Animated links
+* [api] Bootstrapping Improvements
+* [feature] add custom properties to all widgets
+* [refactor] use BEM for all css
+* [feature] Default Link factory hooks
+* [tests] e2e tests + helper framework
+* [tests] automatically load JEST Snapshots
+* [feature] Link labels!
+
 __4.0.0__ http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/
 
 * [refactor] Events system was completely overhauled

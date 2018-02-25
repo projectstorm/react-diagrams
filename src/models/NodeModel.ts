@@ -1,12 +1,18 @@
 import { BaseModel, BaseModelListener } from "./BaseModel";
 import { PortModel } from "./PortModel";
 import * as _ from "lodash";
+import { DiagramEngine } from "../DiagramEngine";
+import { DiagramModel } from "./DiagramModel";
 
-export class NodeModel extends BaseModel<BaseModelListener> {
+export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	x: number;
 	y: number;
 	extras: any;
 	ports: { [s: string]: PortModel };
+
+	// calculated post rendering so routing can be done correctly
+	width: number;
+	height: number;
 
 	constructor(nodeType: string = "default", id?: string) {
 		super(nodeType, id);
@@ -48,11 +54,18 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 		return entities;
 	}
 
-	deSerialize(ob) {
-		super.deSerialize(ob);
+	deSerialize(ob, engine: DiagramEngine) {
+		super.deSerialize(ob, engine);
 		this.x = ob.x;
 		this.y = ob.y;
 		this.extras = ob.extras;
+
+		//deserialize ports
+		_.forEach(ob.ports, (port: any) => {
+			let portOb = engine.getPortFactory(port.type).getNewInstance();
+			portOb.deSerialize(port, engine);
+			this.addPort(portOb);
+		});
 	}
 
 	serialize() {
@@ -103,14 +116,19 @@ export class NodeModel extends BaseModel<BaseModelListener> {
 	removePort(port: PortModel) {
 		//clear the parent node reference
 		if (this.ports[port.name]) {
-			this.ports[port.name].setParentNode(null);
+			this.ports[port.name].setParent(null);
 			delete this.ports[port.name];
 		}
 	}
 
-	addPort(port: PortModel): PortModel {
-		port.setParentNode(this);
+	addPort<T extends PortModel>(port: T): T {
+		port.setParent(this);
 		this.ports[port.name] = port;
 		return port;
+	}
+
+	updateDimensions({ width, height }: { width: number; height: number }) {
+		this.width = width;
+		this.height = height;
 	}
 }

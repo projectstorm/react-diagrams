@@ -65,39 +65,26 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	}
 
 	deSerializeDiagram(object: any, diagramEngine: DiagramEngine) {
-		this.deSerialize(object);
+		this.deSerialize(object, diagramEngine);
 
 		this.offsetX = object.offsetX;
 		this.offsetY = object.offsetY;
 		this.zoom = object.zoom;
 		this.gridSize = object.gridSize;
 
-		//deserialize nodes
+		// deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
 			let nodeOb = diagramEngine.getNodeFactory(node.type).getNewInstance(node);
-			nodeOb.deSerialize(node);
-			//deserialize ports
-			_.forEach(node.ports, (port: any) => {
-				let portOb = diagramEngine.getPortFactory(port.type).getNewInstance();
-				portOb.deSerialize(port);
-				nodeOb.addPort(portOb);
-			});
-
+			nodeOb.setParent(this);
+			nodeOb.deSerialize(node, diagramEngine);
 			this.addNode(nodeOb);
 		});
 
+		// deserialze links
 		_.forEach(object.links, (link: any) => {
 			let linkOb = diagramEngine.getLinkFactory(link.type).getNewInstance();
-			linkOb.deSerialize(link);
-
-			if (link.target) {
-				linkOb.setTargetPort(this.getNode(link.target).getPortFromID(link.targetPort));
-			}
-
-			if (link.source) {
-				linkOb.setSourcePort(this.getNode(link.source).getPortFromID(link.sourcePort));
-			}
-
+			linkOb.setParent(this);
+			linkOb.deSerialize(link, diagramEngine);
 			this.addLink(linkOb);
 		});
 	}
@@ -111,13 +98,13 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			links: _.map(this.links, link => {
 				return link.serialize();
 			}),
-			nodes: _.map(this.nodes, link => {
-				return link.serialize();
+			nodes: _.map(this.nodes, node => {
+				return node.serialize();
 			})
 		});
 	}
 
-	clearSelection(ignore: BaseModel<BaseModelListener> | null = null) {
+	clearSelection(ignore: BaseModel<BaseEntity, BaseModelListener> | null = null) {
 		_.forEach(this.getSelectedItems(), element => {
 			if (ignore && ignore.getID() === element.getID()) {
 				return;
@@ -126,7 +113,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	getSelectedItems(...filters: BaseEntityType[]): BaseModel<BaseModelListener>[] {
+	getSelectedItems(...filters: BaseEntityType[]): BaseModel<BaseEntity, BaseModelListener>[] {
 		if (!Array.isArray(filters)) {
 			filters = [filters];
 		}
@@ -239,6 +226,17 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			return null;
 		}
 		return this.links[link];
+	}
+
+	addAll(...models: BaseModel[]): BaseModel[] {
+		_.forEach(models, model => {
+			if (model instanceof LinkModel) {
+				this.addLink(model);
+			} else if (model instanceof NodeModel) {
+				this.addNode(model);
+			}
+		});
+		return models;
 	}
 
 	addLink(link: LinkModel): LinkModel {

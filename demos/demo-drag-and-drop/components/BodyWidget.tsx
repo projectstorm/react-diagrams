@@ -1,10 +1,9 @@
 import * as React from "react";
 import * as _ from "lodash";
 import { TrayWidget } from "./TrayWidget";
-import { DiagramWidget } from "../../../src/main";
 import { Application } from "../Application";
 import { TrayItemWidget } from "./TrayItemWidget";
-import { DefaultNodeModel, DefaultPortModel } from "../../../src/main";
+import { DefaultNodeModel, DiagramWidget } from "../../../src/main";
 
 export interface BodyWidgetProps {
 	app: Application;
@@ -46,10 +45,10 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 							var node = null;
 							if (data.type === "in") {
 								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(192,255,0)");
-								node.addPort(new DefaultPortModel(true, "in-1", "In"));
+								node.addInPort("In");
 							} else {
 								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(0,192,255)");
-								node.addPort(new DefaultPortModel(false, "out-1", "Out"));
+								node.addOutPort("Out");
 							}
 							var points = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
 							node.x = points.x;
@@ -64,7 +63,7 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 							event.preventDefault();
 						}}
 					>
-						<DiagramWidget diagramEngine={this.props.app.getDiagramEngine()} />
+						<DiagramWidget className="srd-demo-canvas" diagramEngine={this.props.app.getDiagramEngine()} />
 					</div>
 				</div>
 			</div>

@@ -2,49 +2,62 @@ import { BaseModel, BaseModelListener } from "./BaseModel";
 import { NodeModel } from "./NodeModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
+import { DiagramEngine } from "../DiagramEngine";
 
-export class PortModel extends BaseModel<BaseModelListener> {
+export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	name: string;
-	parentNode: NodeModel;
 	links: { [id: string]: LinkModel };
+	maximumLinks: number;
 
-	constructor(name: string, type?: string, id?: string) {
+	// calculated post rendering so routing can be done correctly
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+
+	constructor(name: string, type?: string, id?: string, maximumLinks?: number) {
 		super(type, id);
 		this.name = name;
 		this.links = {};
-		this.parentNode = null;
+		this.maximumLinks = maximumLinks;
 	}
 
-	deSerialize(ob) {
-		super.deSerialize(ob);
+	deSerialize(ob, engine: DiagramEngine) {
+		super.deSerialize(ob, engine);
 		this.name = ob.name;
+		this.maximumLinks = ob.maximumLinks;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
 			name: this.name,
-			parentNode: this.parentNode.id,
+			parentNode: this.parent.id,
 			links: _.map(this.links, link => {
 				return link.id;
-			})
+			}),
+			maximumLinks: this.maximumLinks
 		});
 	}
 
 	doClone(lookupTable = {}, clone) {
 		clone.links = {};
-		clone.parentNode = this.parentNode.clone(lookupTable);
+		clone.parentNode = this.getParent().clone(lookupTable);
+	}
+
+	getNode(): NodeModel {
+		return this.getParent();
 	}
 
 	getName(): string {
 		return this.name;
 	}
 
-	getParent(): NodeModel {
-		return this.parentNode;
+	getMaximumLinks(): number {
+		return this.maximumLinks;
 	}
 
-	setParentNode(node: NodeModel) {
-		this.parentNode = node;
+	setMaximumLinks(maximumLinks: number) {
+		this.maximumLinks = maximumLinks;
 	}
 
 	removeLink(link: LinkModel) {
@@ -59,10 +72,27 @@ export class PortModel extends BaseModel<BaseModelListener> {
 		return this.links;
 	}
 
-	createLinkModel(): LinkModel | null {
-		var linkModel = new LinkModel();
-		linkModel.setSourcePort(this);
-		return linkModel;
+	public createLinkModel(): LinkModel | null {
+		if (_.isFinite(this.maximumLinks)) {
+			var numberOfLinks: number = _.size(this.links);
+			if (this.maximumLinks === 1 && numberOfLinks >= 1) {
+				return _.values(this.links)[0];
+			} else if (numberOfLinks >= this.maximumLinks) {
+				return null;
+			}
+		}
+		return null;
+	}
+
+	updateCoords({ x, y, width, height }: { x: number; y: number; width: number; height: number }) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
+
+	canLinkToPort(port: PortModel): boolean {
+		return true;
 	}
 
 	isLocked() {
