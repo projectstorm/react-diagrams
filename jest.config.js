@@ -16,7 +16,10 @@ module.exports = {
 	moduleNameMapper:{
 		"\\.(scss|css|png)$": __dirname+"/tests/helpers/css-mock.js"
 	},
+	roots:[
+		__dirname+'/tests'
+	],
 	testMatch: [
-		"**/tests/**/*\.test\.tsx"
+		"**/*\.test\.tsx"
 	]
 };
