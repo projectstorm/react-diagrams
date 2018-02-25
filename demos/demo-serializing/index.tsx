@@ -53,7 +53,7 @@ export default () => {
 				</button>
 			}
 		>
-			<DiagramWidget diagramEngine={engine} />
+			<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
 		</DemoWorkspaceWidget>
 	);
 };

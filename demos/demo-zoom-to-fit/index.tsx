@@ -53,7 +53,7 @@ export default () => {
 	//6) render the diagram!
 	return (
 		<DemoWorkspaceWidget buttons={<button onClick={() => engine.zoomToFit()}>Zoom to fit</button>}>
-			<DiagramWidget diagramEngine={engine} />
+			<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
 		</DemoWorkspaceWidget>
 	);
 };

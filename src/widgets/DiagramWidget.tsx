@@ -11,6 +11,7 @@ import { PortModel } from "../models/PortModel";
 import { LinkModel } from "../models/LinkModel";
 import { BaseModel, BaseModelListener } from "../models/BaseModel";
 import { BaseEntity } from "../BaseEntity";
+import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
 
 export interface SelectionModel {
 	model: BaseModel<BaseEntity, BaseModelListener>;
@@ -18,7 +19,7 @@ export interface SelectionModel {
 	initialY: number;
 }
 
-export interface DiagramProps {
+export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
 
 	allowLooseLinks?: boolean;
@@ -47,7 +48,7 @@ export interface DiagramState {
 /**
  * @author Dylan Vorster
  */
-export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
+export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	public static defaultProps: DiagramProps = {
 		diagramEngine: null,
 		allowLooseLinks: true,
@@ -60,7 +61,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 	};
 
 	constructor(props: DiagramProps) {
-		super(props);
+		super("srd-diagram", props);
 		this.onMouseMove = this.onMouseMove.bind(this);
 		this.onMouseUp = this.onMouseUp.bind(this);
 		this.state = {
@@ -142,9 +143,9 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
 		//is it a port
-		var element = Toolkit.closest(target, ".port[data-name]");
+		var element = Toolkit.closest(target, ".srd-port[data-name]");
 		if (element) {
-			var nodeElement = Toolkit.closest(target, ".node[data-nodeid]") as HTMLElement;
+			var nodeElement = Toolkit.closest(target, ".srd-node[data-nodeid]") as HTMLElement;
 			return {
 				model: diagramModel
 					.getNode(nodeElement.getAttribute("data-nodeid"))
@@ -154,7 +155,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		}
 
 		//look for a point
-		element = Toolkit.closest(target, ".point[data-id]");
+		element = Toolkit.closest(target, ".srd-node[data-id]");
 		if (element) {
 			return {
 				model: diagramModel
@@ -410,7 +411,7 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 		let dimensions = (this.state.action as SelectingAction).getBoxDimensions();
 		return (
 			<div
-				className="selector"
+				className={this.bem("__selector")}
 				style={{
 					top: dimensions.top,
 					left: dimensions.left,
@@ -429,12 +430,24 @@ export class DiagramWidget extends React.Component<DiagramProps, DiagramState> {
 
 		return (
 			<div
+				{...this.getProps(
+					"diagramEngine",
+					"allowLooseLinks",
+					"allowCanvasTranslation",
+					"allowCanvasZoom",
+					"inverseZoom",
+					"maxNumberPointsPerLink",
+					"smartRouting",
+					"actionStartedFiring",
+					"actionStillFiring",
+					"actionStoppedFiring",
+					"deleteKeys"
+				)}
 				ref={ref => {
 					if (ref) {
 						this.props.diagramEngine.setCanvas(ref);
 					}
 				}}
-				className="storm-diagrams-canvas"
 				onWheel={event => {
 					if (this.props.allowCanvasZoom) {
 						event.preventDefault();

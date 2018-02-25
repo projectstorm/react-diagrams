@@ -23,7 +23,14 @@ export class DefaultLinkFactory extends LinkFactory<DefaultLinkModel> {
 		return new DefaultLinkModel();
 	}
 
-	generateLinkSegment(model: DefaultLinkModel, selected: boolean, path: string) {
-		return <path className={selected ? "selected" : ""} strokeWidth={model.width} stroke={model.color} d={path} />;
+	generateLinkSegment(model: DefaultLinkModel, widget: DefaultLinkWidget, selected: boolean, path: string) {
+		return (
+			<path
+				className={selected ? widget.bem("--path-selected") : ""}
+				strokeWidth={model.width}
+				stroke={model.color}
+				d={path}
+			/>
+		);
 	}
 }

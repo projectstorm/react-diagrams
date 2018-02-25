@@ -50,7 +50,7 @@ export default () => {
 	return (
 		<div>
 			<p>Click the diagram elements to inspect some of the possible events.</p>
-			<DiagramWidget {...props} />
+			<DiagramWidget className="srd-demo-canvas" {...props} />
 		</div>
 	);
 };

@@ -1,7 +1,8 @@
 import * as React from "react";
 import { NodeModel } from "../models/NodeModel";
+import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
 
-export interface PortProps {
+export interface PortProps extends BaseWidgetProps {
 	name: string;
 	node: NodeModel;
 }
@@ -13,24 +14,28 @@ export interface PortState {
 /**
  * @author Dylan Vorster
  */
-export class PortWidget extends React.Component<PortProps, PortState> {
+export class PortWidget extends BaseWidget<PortProps, PortState> {
 	constructor(props: PortProps) {
-		super(props);
+		super("srd-port", props);
 		this.state = {
 			selected: false
 		};
 	}
 
+	getClassName() {
+		return "port " + super.getClassName() + (this.state.selected ? this.bem("--selected") : "");
+	}
+
 	render() {
 		return (
 			<div
+				{...this.getProps("name, node")}
 				onMouseEnter={() => {
 					this.setState({ selected: true });
 				}}
 				onMouseLeave={() => {
 					this.setState({ selected: false });
 				}}
-				className={"port" + (this.state.selected ? " selected" : "")}
 				data-name={this.props.name}
 				data-nodeid={this.props.node.getID()}
 			/>

@@ -1,12 +1,17 @@
 import * as React from "react";
 import { DefaultLabelModel } from "../models/DefaultLabelModel";
+import { BaseWidget, BaseWidgetProps } from "../../widgets/BaseWidget";
 
-export interface DefaultLabelWidgetProps {
+export interface DefaultLabelWidgetProps extends BaseWidgetProps {
 	model: DefaultLabelModel;
 }
 
-export class DefaultLabelWidget extends React.Component<DefaultLabelWidgetProps> {
+export class DefaultLabelWidget extends BaseWidget<DefaultLabelWidgetProps> {
+	constructor(props) {
+		super("srd-default-label", props);
+	}
+
 	render() {
-		return <div className="default-label">{this.props.model.label}</div>;
+		return <div {...this.getProps("model")}>{this.props.model.label}</div>;
 	}
 }

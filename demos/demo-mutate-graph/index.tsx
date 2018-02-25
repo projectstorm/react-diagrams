@@ -48,7 +48,7 @@ class NodeDelayedPosition extends React.Component<any, any> {
 					</button>
 				]}
 			>
-				<DiagramWidget diagramEngine={engine} />
+				<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
 			</DemoWorkspaceWidget>
 		);
 	}

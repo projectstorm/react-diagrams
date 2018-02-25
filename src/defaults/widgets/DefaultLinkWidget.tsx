@@ -7,8 +7,9 @@ import { DefaultLinkModel } from "../models/DefaultLinkModel";
 import PathFinding from "../../routing/PathFinding";
 import * as _ from "lodash";
 import { LabelModel } from "../../models/LabelModel";
+import { BaseWidget, BaseWidgetProps } from "../../widgets/BaseWidget";
 
-export interface DefaultLinkProps {
+export interface DefaultLinkProps extends BaseWidgetProps {
 	color?: string;
 	width?: number;
 	smooth?: boolean;
@@ -21,7 +22,7 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
-export class DefaultLinkWidget extends React.Component<DefaultLinkProps, DefaultLinkState> {
+export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkState> {
 	public static defaultProps: DefaultLinkProps = {
 		color: "black",
 		width: 3,
@@ -38,7 +39,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	pathFinding: PathFinding; // only set when smart routing is active
 
 	constructor(props: DefaultLinkProps) {
-		super(props);
+		super("srd-default-link", props);
 
 		this.refLabels = {};
 		this.refPaths = [];
@@ -58,13 +59,13 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	}
 
 	componentDidUpdate() {
-		if(this.props.link.labels.length > 0){
+		if (this.props.link.labels.length > 0) {
 			window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
 		}
 	}
 
 	componentDidMount() {
-		if(this.props.link.labels.length > 0) {
+		if (this.props.link.labels.length > 0) {
 			window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
 		}
 	}
@@ -93,7 +94,11 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					cx={x}
 					cy={y}
 					r={5}
-					className={"point pointui" + (this.props.link.points[pointIndex].isSelected() ? " selected" : "")}
+					className={
+						"point " +
+						this.bem("__point") +
+						(this.props.link.points[pointIndex].isSelected() ? this.bem("--point-selected") : "")
+					}
 				/>
 				<circle
 					onMouseLeave={() => {
@@ -108,7 +113,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					cy={y}
 					r={15}
 					opacity={0}
-					className={"point"}
+					className={"point " + this.bem("__point")}
 				/>
 			</g>
 		);
@@ -119,7 +124,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		return (
 			<foreignObject
 				key={label.id}
-				className="link-label"
+				className={this.bem("__label")}
 				width={canvas.offsetWidth}
 				height={canvas.offsetHeight}
 			>
@@ -138,6 +143,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		var Bottom = React.cloneElement(
 			(props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory).generateLinkSegment(
 				this.props.link,
+				this,
 				this.state.selected || this.props.link.isSelected(),
 				path
 			),
@@ -362,9 +368,8 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		}
 
 		this.refPaths = [];
-
 		return (
-			<g>
+			<g {...this.getProps("color", "width", "smooth", "link", "diagramEngine", "pointAdded")}>
 				{paths}
 				{_.map(this.props.link.labels, labelModel => {
 					return this.generateLabel(labelModel);

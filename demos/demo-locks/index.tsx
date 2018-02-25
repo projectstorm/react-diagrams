@@ -58,5 +58,5 @@ export default () => {
 
 	//!=========================================  <<<<<<<
 
-	return <DiagramWidget {...props} />;
+	return <DiagramWidget className="srd-demo-canvas" {...props} />;
 };

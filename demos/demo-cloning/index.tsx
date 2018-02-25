@@ -50,7 +50,7 @@ class CloneSelected extends React.Component<any, any> {
 		const { engine } = this.props;
 		return (
 			<DemoWorkspaceWidget buttons={<button onClick={this.cloneSelected}>Clone Selected</button>}>
-				<DiagramWidget diagramEngine={engine} />
+				<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
 			</DemoWorkspaceWidget>
 		);
 	}

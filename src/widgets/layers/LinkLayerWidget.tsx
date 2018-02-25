@@ -3,8 +3,9 @@ import { DiagramEngine } from "../../DiagramEngine";
 import { LinkWidget } from "../LinkWidget";
 import * as _ from "lodash";
 import { PointModel } from "../../models/PointModel";
+import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
 
-export interface LinkLayerProps {
+export interface LinkLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
 	pointAdded: (point: PointModel, event: MouseEvent) => any;
 }
@@ -14,9 +15,9 @@ export interface LinkLayerState {}
 /**
  * @author Dylan Vorster
  */
-export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerState> {
+export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> {
 	constructor(props: LinkLayerProps) {
-		super(props);
+		super("srd-link-layer", props);
 		this.state = {};
 	}
 
@@ -24,6 +25,7 @@ export class LinkLayerWidget extends React.Component<LinkLayerProps, LinkLayerSt
 		var diagramModel = this.props.diagramEngine.getDiagramModel();
 		return (
 			<svg
+				{...this.getProps("diagramEngine", "pointAdded")}
 				style={{
 					transform:
 						"translate(" +

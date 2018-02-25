@@ -63,7 +63,7 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 							event.preventDefault();
 						}}
 					>
-						<DiagramWidget diagramEngine={this.props.app.getDiagramEngine()} />
+						<DiagramWidget className="srd-demo-canvas" diagramEngine={this.props.app.getDiagramEngine()} />
 					</div>
 				</div>
 			</div>

@@ -3,16 +3,17 @@ import { DiagramEngine } from "../../DiagramEngine";
 import * as _ from "lodash";
 import { NodeWidget } from "../NodeWidget";
 import { NodeModel } from "../../models/NodeModel";
+import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
 
-export interface NodeLayerProps {
+export interface NodeLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
 }
 
 export interface NodeLayerState {}
 
-export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerState> {
+export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> {
 	constructor(props: NodeLayerProps) {
-		super(props);
+		super("srd-node-layer", props);
 		this.state = {};
 	}
 
@@ -34,7 +35,7 @@ export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerSt
 		var diagramModel = this.props.diagramEngine.getDiagramModel();
 		return (
 			<div
-				className="node-view"
+				{...this.getProps("diagramEngine")}
 				style={{
 					transform:
 						"translate(" +
@@ -43,9 +44,7 @@ export class NodeLayerWidget extends React.Component<NodeLayerProps, NodeLayerSt
 						diagramModel.getOffsetY() +
 						"px) scale(" +
 						diagramModel.getZoomLevel() / 100.0 +
-						")",
-					width: "100%",
-					height: "100%"
+						")"
 				}}
 			>
 				{_.map(diagramModel.getNodes(), (node: NodeModel) => {

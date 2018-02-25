@@ -57,7 +57,12 @@ export default () => {
 				</button>
 			}
 		>
-			<DiagramWidget diagramEngine={engine} smartRouting={true} maxNumberPointsPerLink={0} />
+			<DiagramWidget
+				className="srd-demo-canvas"
+				diagramEngine={engine}
+				smartRouting={true}
+				maxNumberPointsPerLink={0}
+			/>
 		</DemoWorkspaceWidget>
 	);
 };

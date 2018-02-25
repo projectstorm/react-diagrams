@@ -102,7 +102,7 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 		return new AdvancedLinkModel();
 	}
 
-	generateLinkSegment(model: AdvancedLinkModel, selected: boolean, path: string) {
+	generateLinkSegment(model: AdvancedLinkModel, widget: DefaultLinkWidget, selected: boolean, path: string) {
 		return (
 			<g>
 				<AdvancedLinkSegment model={model} path={path} />
@@ -154,5 +154,5 @@ export default () => {
 	engine.setDiagramModel(model);
 
 	// render the diagram!
-	return <DiagramWidget diagramEngine={engine} />;
+	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />;
 };

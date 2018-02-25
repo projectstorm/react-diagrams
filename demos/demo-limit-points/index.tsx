@@ -37,7 +37,7 @@ export default () => {
 	return (
 		<div>
 			<p>A maximum of 5 points can be created per link.</p>
-			<DiagramWidget {...props} />
+			<DiagramWidget className="srd-demo-canvas" {...props} />
 		</div>
 	);
 };

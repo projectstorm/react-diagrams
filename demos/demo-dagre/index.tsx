@@ -49,7 +49,7 @@ class Demo8Widget extends React.Component<any, any> {
 
 		return (
 			<DemoWorkspaceWidget buttons={<button onClick={this.autoDistribute}>Re-distribute</button>}>
-				<DiagramWidget diagramEngine={engine} />
+				<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
 			</DemoWorkspaceWidget>
 		);
 	}
