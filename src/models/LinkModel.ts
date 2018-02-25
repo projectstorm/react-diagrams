@@ -38,7 +38,12 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			return p;
 		});
 
-		this.labels = ob.label || null;
+		//deserialize labels
+		_.forEach(ob.labels || [], (label: any) => {
+			let labelOb = engine.getLabelFactory(label.type).getNewInstance();
+			labelOb.deSerialize(label, engine);
+			this.addLabel(labelOb);
+		});
 
 		if (ob.target) {
 			this.setTargetPort(

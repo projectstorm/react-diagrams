@@ -58,11 +58,15 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	}
 
 	componentDidUpdate() {
-		window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
+		if(this.props.link.labels.length > 0){
+			window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
+		}
 	}
 
 	componentDidMount() {
-		window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
+		if(this.props.link.labels.length > 0) {
+			window.requestAnimationFrame(this.calculateAllLabelPosition.bind(this));
+		}
 	}
 
 	addPointToLink = (event: MouseEvent, index: number): void => {
