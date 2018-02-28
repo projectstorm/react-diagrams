@@ -15,7 +15,7 @@ export interface BaseModelListener extends BaseListener {
 export class BaseModel<
 	X extends BaseEntity = BaseEntity,
 	T extends BaseModelListener = BaseModelListener
-> extends BaseEntity<BaseModelListener> {
+> extends BaseEntity<T> {
 	type: string;
 	selected: boolean;
 	parent: X;
