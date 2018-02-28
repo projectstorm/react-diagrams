@@ -305,10 +305,13 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		// See @link{#isSmartRoutingApplicable()}.
 		if (paths.length === 0) {
 			if (points.length === 2) {
+				var isHorizontal = Math.abs(points[0].x - points[1].x) > Math.abs(points[0].y - points[1].y);
+				var xOrY = isHorizontal ? "x" : "y";
+
 				//draw the smoothing
 				//if the points are too close, just draw a straight line
 				var margin = 50;
-				if (Math.abs(points[0].x - points[1].x) < 50) {
+				if (Math.abs(points[0][xOrY] - points[1][xOrY]) < 50) {
 					margin = 5;
 				}
 
@@ -317,7 +320,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 
 				//some defensive programming to make sure the smoothing is
 				//always in the right direction
-				if (pointLeft.x > pointRight.x) {
+				if (pointLeft[xOrY] > pointRight[xOrY]) {
 					pointLeft = points[1];
 					pointRight = points[0];
 				}
