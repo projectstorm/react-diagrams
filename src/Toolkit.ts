@@ -43,9 +43,12 @@ export class Toolkit {
 	}
 
 	public static generateCurvePath(firstPoint: PointModel, lastPoint: PointModel, curvy: number = 0): string {
-		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvy},${firstPoint.y} ${lastPoint.x + -curvy},${
-			lastPoint.y
-		} ${lastPoint.x},${lastPoint.y}`;
+		var isHorizontal = Math.abs(firstPoint.x - lastPoint.x) > Math.abs(firstPoint.y - lastPoint.y);
+		var curvyX = isHorizontal ? curvy : 0;
+		var curvyY = isHorizontal ? 0 : curvy;
+
+		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvyX},${firstPoint.y + curvyY}
+		${lastPoint.x - curvyX},${lastPoint.y - curvyY} ${lastPoint.x},${lastPoint.y}`;
 	}
 
 	public static generateDynamicPath(pathCoords: number[][]) {
