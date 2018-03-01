@@ -257,8 +257,10 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					model.model.x = diagramModel.getGridPosition(model.initialX + amountX / amountZoom);
 					model.model.y = diagramModel.getGridPosition(model.initialY + amountY / amountZoom);
 
-					// update port coordinates as well
 					if (model.model instanceof NodeModel) {
+						model.model.positionChanged();
+
+						// update port coordinates as well
 						_.forEach(model.model.getPorts(), port => {
 							const portCoords = this.props.diagramEngine.getPortCoords(port);
 							port.updateCoords(portCoords);

@@ -1,14 +1,14 @@
 import { DefaultPortModel } from "./DefaultPortModel";
 import * as _ from "lodash";
 
-import { NodeModel } from "../../models/NodeModel";
+import { NodeModel, NodeModelListener } from "../../models/NodeModel";
 import { Toolkit } from "../../Toolkit";
 import { DiagramEngine } from "../../DiagramEngine";
 
 /**
  * @author Dylan Vorster
  */
-export class DefaultNodeModel extends NodeModel {
+export class DefaultNodeModel extends NodeModel<NodeModelListener> {
 	name: string;
 	color: string;
 	ports: { [s: string]: DefaultPortModel };
