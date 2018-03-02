@@ -10,9 +10,9 @@ import { DefaultLabelModel } from "./DefaultLabelModel";
 import { LabelModel } from "../../models/LabelModel";
 
 export interface DefaultLinkModelListener extends LinkModelListener {
-	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string });
+	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string }): void;
 
-	widthChanged?(event: BaseEvent<DefaultLinkModel> & { width: 0 | number });
+	widthChanged?(event: BaseEvent<DefaultLinkModel> & { width: 0 | number }): void;
 }
 
 export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
@@ -54,14 +54,18 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 	setWidth(width: number) {
 		this.width = width;
 		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
-			listener.widthChanged && listener.widthChanged({ ...event, width: width });
+			if (listener.widthChanged) {
+				listener.widthChanged({ ...event, width: width });
+			}
 		});
 	}
 
 	setColor(color: string) {
 		this.color = color;
 		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
-			listener.colorChanged && listener.colorChanged({ ...event, color: color });
+			if (listener.colorChanged) {
+				listener.colorChanged({ ...event, color: color });
+			}
 		});
 	}
 }

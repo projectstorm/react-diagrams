@@ -26,14 +26,13 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 		//store position
 		let oldX = this.x;
 		let oldY = this.y;
-		for (let port in this.ports) {
-			_.forEach(this.ports[port].getLinks(), link => {
-				let point = link.getPointForPort(this.ports[port]);
+		_.forEach(this.ports, port => {
+			_.forEach(port.getLinks(), link => {
+				let point = link.getPointForPort(port);
 				point.x = point.x + x - oldX;
 				point.y = point.y + y - oldY;
 			});
-		}
-
+		});
 		this.x = x;
 		this.y = y;
 	}
@@ -43,13 +42,13 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 
 		// add the points of each link that are selected here
 		if (this.isSelected()) {
-			for (let portName in this.ports) {
+			_.forEach(this.ports, port => {
 				entities = entities.concat(
-					_.map(this.ports[portName].getLinks(), link => {
-						return link.getPointForPort(this.ports[portName]);
+					_.map(port.getLinks(), link => {
+						return link.getPointForPort(port);
 					})
 				);
-			}
+			});
 		}
 		return entities;
 	}
@@ -82,18 +81,18 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	doClone(lookupTable = {}, clone) {
 		// also clone the ports
 		clone.ports = {};
-		_.values(this.ports).forEach(port => {
+		_.forEach(this.ports, port => {
 			clone.addPort(port.clone(lookupTable));
 		});
 	}
 
 	remove() {
 		super.remove();
-		for (var i in this.ports) {
-			_.forEach(this.ports[i].getLinks(), link => {
+		_.forEach(this.ports, port => {
+			_.forEach(port.getLinks(), link => {
 				link.remove();
 			});
-		}
+		});
 	}
 
 	getPortFromID(id): PortModel | null {

@@ -1,13 +1,13 @@
 import * as React from "react";
 import { DefaultLinkWidget } from "../widgets/DefaultLinkWidget";
 import { DiagramEngine } from "../../DiagramEngine";
-import { LinkFactory } from "../../AbstractFactory";
+import { AbstractLinkFactory } from "../../factories/AbstractLinkFactory";
 import { DefaultLinkModel } from "../models/DefaultLinkModel";
 
 /**
  * @author Dylan Vorster
  */
-export class DefaultLinkFactory extends LinkFactory<DefaultLinkModel> {
+export class DefaultLinkFactory extends AbstractLinkFactory<DefaultLinkModel> {
 	constructor() {
 		super("default");
 	}

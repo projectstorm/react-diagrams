@@ -20,13 +20,21 @@
 	"typings": "./dist/@types/src/main",
 	"author": "dylanvorster",
 	"scripts": {
-		"test:ci": "rm -rf ./dist && node ./tests/e2e/generate-e2e.js && jest --no-cache",
-		"test": "jest --no-cache",
+		"build:ts": "webpack",
+		"build:ts:prod": "cross-env NODE_ENV=production webpack",
+		"build:sass:prod": "node-sass --output-style compressed ./src/sass/main.scss > ./dist/style.min.css",
+
 		"storybook": "start-storybook -p 9001 -c .storybook",
 		"storybook:build": "build-storybook -c .storybook -o .out",
 		"storybook:github": "storybook-to-ghpages",
-		"prepublishOnly": "rm -rf ./dist && cross-env NODE_ENV=production webpack && ./node_modules/node-sass/bin/node-sass --output-style compressed ./src/sass/main.scss > ./dist/style.min.css",
-		"pretty": "prettier --use-tabs --write \"{src,demos}/**/*.{ts,tsx}\" --print-width 120"
+
+		"pretty": "prettier --use-tabs --write \"{src,demos,tests}/**/*.{ts,tsx}\" --print-width 120",
+		"lint": "tslint -p .",
+
+		"test:ci": "rm -rf ./dist && node ./tests/e2e/generate-e2e.js && jest --no-cache",
+		"test": "jest --no-cache",
+
+		"prepublishOnly": "yarn run build:ts:prod && yarn run build:sass:prod"
 	},
 	"dependencies": {
 		"closest": "^0.0.1",

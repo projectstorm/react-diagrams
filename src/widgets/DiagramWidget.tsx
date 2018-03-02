@@ -4,20 +4,18 @@ import * as _ from "lodash";
 import { LinkLayerWidget } from "./layers/LinkLayerWidget";
 import { NodeLayerWidget } from "./layers/NodeLayerWidget";
 import { Toolkit } from "../Toolkit";
-import { BaseAction, MoveCanvasAction, MoveItemsAction, SelectingAction } from "../CanvasActions";
+import { BaseAction } from "../actions/BaseAction";
+import { MoveCanvasAction } from "../actions/MoveCanvasAction";
+import { MoveItemsAction } from "../actions/MoveItemsAction";
+import { SelectingAction } from "../actions/SelectingAction";
 import { NodeModel } from "../models/NodeModel";
 import { PointModel } from "../models/PointModel";
 import { PortModel } from "../models/PortModel";
 import { LinkModel } from "../models/LinkModel";
+import { SelectionModel } from "../models/SelectionModel";
 import { BaseModel, BaseModelListener } from "../models/BaseModel";
 import { BaseEntity } from "../BaseEntity";
 import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
-
-export interface SelectionModel {
-	model: BaseModel<BaseEntity, BaseModelListener>;
-	initialX: number;
-	initialY: number;
-}
 
 export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -60,6 +58,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		deleteKeys: [46, 8]
 	};
 
+	onKeyUpPointer: (this: Window, ev: KeyboardEvent) => void = null;
+
 	constructor(props: DiagramProps) {
 		super("srd-diagram", props);
 		this.onMouseMove = this.onMouseMove.bind(this);
@@ -73,8 +73,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			document: null
 		};
 	}
-
-	onKeyUpPointer: null;
 
 	componentWillUnmount() {
 		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
@@ -445,9 +443,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						//check if it is pinch gesture
 						if (event.ctrlKey && scrollDelta % 1 !== 0) {
 							/*Chrome and Firefox sends wheel event with deltaY that
-								have fractional part, also `ctrlKey` prop of the event is true
-								though ctrl isn't pressed
-							*/
+                have fractional part, also `ctrlKey` prop of the event is true
+                though ctrl isn't pressed
+              */
 							scrollDelta /= 3;
 						} else {
 							scrollDelta /= 60;

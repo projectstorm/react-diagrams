@@ -1,14 +1,14 @@
 .srd-node{
-	position: absolute;
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none;   /* Chrome/Safari/Opera */
-	user-select: none;
-	cursor: move;
-	pointer-events: all;
+  position: absolute;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  user-select: none;
+  cursor: move;
+  pointer-events: all;
 
-	&--selected{
-		> * {
-			border-color:rgb(0,192,255) !important;
-		}
-	}
+  &--selected{
+    > * {
+      border-color:rgb(0,192,255) !important;
+    }
+  }
 }

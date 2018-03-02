@@ -2,11 +2,11 @@ import { DefaultNodeModel } from "../models/DefaultNodeModel";
 import * as React from "react";
 import { DefaultNodeWidget } from "../widgets/DefaultNodeWidget";
 import { DiagramEngine } from "../../DiagramEngine";
-import { NodeFactory } from "../../AbstractFactory";
+import { AbstractNodeFactory } from "../../factories/AbstractNodeFactory";
 /**
  * @author Dylan Vorster
  */
-export class DefaultNodeFactory extends NodeFactory<DefaultNodeModel> {
+export class DefaultNodeFactory extends AbstractNodeFactory<DefaultNodeModel> {
 	constructor() {
 		super("default");
 	}

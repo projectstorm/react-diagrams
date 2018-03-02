@@ -11,7 +11,6 @@ import {
 } from "../../src/main";
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
-import { LinkFactory } from "../../src/AbstractFactory";
 import { DefaultLinkModel } from "../../src/defaults/models/DefaultLinkModel";
 import { DefaultLinkFactory } from "../../src/defaults/factories/DefaultLinkFactory";
 

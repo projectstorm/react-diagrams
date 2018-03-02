@@ -1,13 +1,13 @@
 import * as React from "react";
 import { DiagramEngine } from "../../DiagramEngine";
-import { LabelFactory } from "../../AbstractFactory";
+import { AbstractLabelFactory } from "../../factories/AbstractLabelFactory";
 import { DefaultLabelModel } from "../models/DefaultLabelModel";
 import { DefaultLabelWidget } from "../widgets/DefaultLabelWidget";
 
 /**
  * @author Dylan Vorster
  */
-export class DefaultLabelFactory extends LabelFactory<DefaultLabelModel> {
+export class DefaultLabelFactory extends AbstractLabelFactory<DefaultLabelModel> {
 	constructor() {
 		super("default");
 	}
