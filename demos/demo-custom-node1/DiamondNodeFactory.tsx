@@ -3,7 +3,7 @@ import { DiamonNodeWidget } from "./DiamondNodeWidget";
 import { DiamondNodeModel } from "./DiamondNodeModel";
 import * as React from "react";
 
-export class DiamondNodeFactory extends SRD.NodeFactory {
+export class DiamondNodeFactory extends SRD.AbstractNodeFactory {
 	constructor() {
 		super("diamond");
 	}

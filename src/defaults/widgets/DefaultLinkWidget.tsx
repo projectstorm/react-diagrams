@@ -343,18 +343,18 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 				}
 			} else {
 				//draw the multiple anchors and complex line instead
-				for (let i = 0; i < points.length - 1; i++) {
+				for (let j = 0; j < points.length - 1; j++) {
 					paths.push(
 						this.generateLink(
-							Toolkit.generateLinePath(points[i], points[i + 1]),
+							Toolkit.generateLinePath(points[j], points[j + 1]),
 							{
 								"data-linkid": this.props.link.id,
-								"data-point": i,
+								"data-point": j,
 								onMouseDown: (event: MouseEvent) => {
-									this.addPointToLink(event, i + 1);
+									this.addPointToLink(event, j + 1);
 								}
 							},
-							i
+							j
 						)
 					);
 				}

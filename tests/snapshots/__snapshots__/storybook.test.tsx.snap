@@ -571,12 +571,12 @@ exports[`Storyshots Tests demos/demo-custom-node1/index.tsx 1`] = `
           dangerouslySetInnerHTML={
             Object {
               "__html": "
-					<g id=\\"Layer_1\\">
-					</g>
-					<g id=\\"Layer_2\\">
-						<polygon fill=\\"purple\\" stroke=\\"#000000\\" stroke-width=\\"3\\" stroke-miterlimit=\\"10\\" points=\\"10,75 75,10 140,75 75,140 \\"/>
-					</g>
-				",
+          <g id=\\"Layer_1\\">
+          </g>
+          <g id=\\"Layer_2\\">
+            <polygon fill=\\"purple\\" stroke=\\"#000000\\" stroke-width=\\"3\\" stroke-miterlimit=\\"10\\" points=\\"10,75 75,10 140,75 75,140 \\"/>
+          </g>
+        ",
             }
           }
           height={150}

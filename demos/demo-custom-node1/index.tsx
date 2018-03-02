@@ -11,7 +11,7 @@ import * as React from "react";
 // import the custom models
 import { DiamondNodeModel } from "./DiamondNodeModel";
 import { DiamondNodeFactory } from "./DiamondNodeFactory";
-import { SimplePortFactory } from "../../src/AbstractFactory";
+import { SimplePortFactory } from "./SimplePortFactory";
 import { DiamondPortModel } from "./DiamondPortModel";
 
 /**

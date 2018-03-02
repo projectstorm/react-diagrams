@@ -2,7 +2,7 @@ import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 import { action } from "@storybook/addon-actions";
-var beautify = require("json-beautify");
+import * as beautify from "json-beautify";
 
 export default () => {
 	//1) setup the diagram engine

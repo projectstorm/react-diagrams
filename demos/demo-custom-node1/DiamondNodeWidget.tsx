@@ -39,10 +39,10 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 					dangerouslySetInnerHTML={{
 						__html:
 							`
-					<g id="Layer_1">
-					</g>
-					<g id="Layer_2">
-						<polygon fill="purple" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,` +
+          <g id="Layer_1">
+          </g>
+          <g id="Layer_2">
+            <polygon fill="purple" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,` +
 							this.props.size / 2 +
 							` ` +
 							this.props.size / 2 +
@@ -55,8 +55,8 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 							`,` +
 							(this.props.size - 10) +
 							` "/>
-					</g>
-				`
+          </g>
+        `
 					}}
 				/>
 				<div

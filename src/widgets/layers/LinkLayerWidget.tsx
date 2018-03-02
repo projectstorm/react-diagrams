@@ -53,7 +53,9 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 									link.sourcePort.updateCoords(portCoords);
 
 									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
-								} catch (ex) {}
+								} catch (ignore) {
+									/*noop*/
+								}
 							}
 							if (link.targetPort !== null) {
 								try {
@@ -64,15 +66,16 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 									link.targetPort.updateCoords(portCoords);
 
 									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
-								} catch (ex) {}
+								} catch (ignore) {
+									/*noop*/
+								}
 							}
 						}
 
 						//generate links
 						var generatedLink = this.props.diagramEngine.generateWidgetForLink(link);
 						if (!generatedLink) {
-							console.log("no link generated for type: " + link.getType());
-							return null;
+							throw new Error(`no link generated for type: ${link.getType()}`);
 						}
 
 						return (

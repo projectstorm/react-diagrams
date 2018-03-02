@@ -22,9 +22,7 @@ function distributeGraph(model) {
 	let edges = mapEdges(model);
 	let graph = new dagre.graphlib.Graph();
 	graph.setGraph({});
-	graph.setDefaultEdgeLabel(function() {
-		return {};
-	});
+	graph.setDefaultEdgeLabel(() => ({}));
 	//add elements to dagre graph
 	nodes.forEach(node => {
 		graph.setNode(node.id, node.metadata);

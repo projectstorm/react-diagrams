@@ -1,7 +1,7 @@
 import { DefaultPortModel } from "../models/DefaultPortModel";
-import { PortFactory } from "../../AbstractFactory";
+import { AbstractPortFactory } from "../../factories/AbstractPortFactory";
 
-export class DefaultPortFactory extends PortFactory<DefaultPortModel> {
+export class DefaultPortFactory extends AbstractPortFactory<DefaultPortModel> {
 	constructor() {
 		super("default");
 	}

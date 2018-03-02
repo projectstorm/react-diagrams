@@ -53,7 +53,9 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	setGridSize(size: number = 0) {
 		this.gridSize = size;
 		this.iterateListeners((listener, event) => {
-			listener.gridUpdated && listener.gridUpdated({ ...event, size: size });
+			if (listener.gridUpdated) {
+				listener.gridUpdated({ ...event, size: size });
+			}
 		});
 	}
 
@@ -169,7 +171,9 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.zoom = zoom;
 
 		this.iterateListeners((listener, event) => {
-			listener.zoomUpdated && listener.zoomUpdated({ ...event, zoom: zoom });
+			if (listener.zoomUpdated) {
+				listener.zoomUpdated({ ...event, zoom: zoom });
+			}
 		});
 	}
 
@@ -177,22 +181,27 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
 		this.iterateListeners((listener, event) => {
-			listener.offsetUpdated && listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: offsetY });
+			if (listener.offsetUpdated) {
+				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: offsetY });
+			}
 		});
 	}
 
 	setOffsetX(offsetX: number) {
 		this.offsetX = offsetX;
 		this.iterateListeners((listener, event) => {
-			listener.offsetUpdated && listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: this.offsetY });
+			if (listener.offsetUpdated) {
+				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: this.offsetY });
+			}
 		});
 	}
 	setOffsetY(offsetY: number) {
 		this.offsetY = offsetY;
 
 		this.iterateListeners((listener, event) => {
-			listener.offsetUpdated &&
+			if (listener.offsetUpdated) {
 				listener.offsetUpdated({ ...event, offsetX: this.offsetX, offsetY: this.offsetY });
+			}
 		});
 	}
 
@@ -247,7 +256,9 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 		this.links[link.getID()] = link;
 		this.iterateListeners((listener, event) => {
-			listener.linksUpdated && listener.linksUpdated({ ...event, link: link, isCreated: true });
+			if (listener.linksUpdated) {
+				listener.linksUpdated({ ...event, link: link, isCreated: true });
+			}
 		});
 		return link;
 	}
@@ -260,7 +271,9 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 		this.nodes[node.getID()] = node;
 		this.iterateListeners((listener, event) => {
-			listener.nodesUpdated && listener.nodesUpdated({ ...event, node: node, isCreated: true });
+			if (listener.nodesUpdated) {
+				listener.nodesUpdated({ ...event, node: node, isCreated: true });
+			}
 		});
 		return node;
 	}
@@ -269,7 +282,9 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		link = this.getLink(link);
 		delete this.links[link.getID()];
 		this.iterateListeners((listener, event) => {
-			listener.linksUpdated && listener.linksUpdated({ ...event, link: link as LinkModel, isCreated: false });
+			if (listener.linksUpdated) {
+				listener.linksUpdated({ ...event, link: link as LinkModel, isCreated: false });
+			}
 		});
 	}
 
@@ -277,7 +292,9 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		node = this.getNode(node);
 		delete this.nodes[node.getID()];
 		this.iterateListeners((listener, event) => {
-			listener.nodesUpdated && listener.nodesUpdated({ ...event, node: node as NodeModel, isCreated: false });
+			if (listener.nodesUpdated) {
+				listener.nodesUpdated({ ...event, node: node as NodeModel, isCreated: false });
+			}
 		});
 	}
 

@@ -158,7 +158,9 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		}
 		this.sourcePort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
-			listener.sourcePortChanged && listener.sourcePortChanged({ ...event, port: port });
+			if (listener.sourcePortChanged) {
+				listener.sourcePortChanged({ ...event, port: port });
+			}
 		});
 	}
 
@@ -180,7 +182,9 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		}
 		this.targetPort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
-			listener.targetPortChanged && listener.targetPortChanged({ ...event, port: port });
+			if (listener.targetPortChanged) {
+				listener.targetPortChanged({ ...event, port: port });
+			}
 		});
 	}
 
@@ -222,7 +226,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		}
 	}
 
-	addPoint<T extends PointModel>(pointModel: T, index = 1): T {
+	addPoint<P extends PointModel>(pointModel: P, index = 1): P {
 		pointModel.setParent(this);
 		this.points.splice(index, 0, pointModel);
 		return pointModel;

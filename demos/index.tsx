@@ -6,7 +6,7 @@ import { Helper } from "./.helpers/Helper";
 import { Toolkit } from "../src/Toolkit";
 
 //include the SCSS for the demo
-require("./.helpers/demo.scss");
+import "./.helpers/demo.scss";
 
 Toolkit.TESTING = true;
 

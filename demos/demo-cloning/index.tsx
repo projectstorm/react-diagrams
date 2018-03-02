@@ -15,7 +15,7 @@ import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
  * Tests cloning
  */
 class CloneSelected extends React.Component<any, any> {
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.cloneSelected = this.cloneSelected.bind(this);
 	}

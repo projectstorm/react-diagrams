@@ -50,7 +50,7 @@ export class CodePreview extends React.Component {
 			<SyntaxHighlighter
 				customStyle={{width: '100%', overflowX:'hidden', tabSize: 4}}
 				showLineNumbers={true}
-				language='typescript'
+				language='language-tsx'
 				style={github}
 			>
 				{this.state.code}

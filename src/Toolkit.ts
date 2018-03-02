@@ -1,3 +1,4 @@
+// tslint:disable no-bitwise
 import closest = require("closest");
 import { PointModel } from "./models/PointModel";
 import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
@@ -18,9 +19,9 @@ export class Toolkit {
 			Toolkit.TESTING_UID++;
 			return "" + Toolkit.TESTING_UID;
 		}
-		return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
-			var r = (Math.random() * 16) | 0,
-				v = c == "x" ? r : (r & 0x3) | 0x8;
+		return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+			const r = (Math.random() * 16) | 0;
+			const v = c === "x" ? r : (r & 0x3) | 0x8;
 			return v.toString(16);
 		});
 	}
@@ -48,7 +49,7 @@ export class Toolkit {
 		var curvyY = isHorizontal ? 0 : curvy;
 
 		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvyX},${firstPoint.y + curvyY}
-		${lastPoint.x - curvyX},${lastPoint.y - curvyY} ${lastPoint.x},${lastPoint.y}`;
+    ${lastPoint.x - curvyX},${lastPoint.y - curvyY} ${lastPoint.x},${lastPoint.y}`;
 	}
 
 	public static generateDynamicPath(pathCoords: number[][]) {

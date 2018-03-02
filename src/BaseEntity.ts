@@ -33,9 +33,11 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 		return this.id;
 	}
 
-	doClone(lookupTable = {}, clone) {}
+	doClone(lookupTable: { [s: string]: any } = {}, clone: any) {
+		/*noop*/
+	}
 
-	clone(lookupTable = {}) {
+	clone(lookupTable: { [s: string]: any } = {}) {
 		// try and use an existing clone first
 		if (lookupTable[this.id]) {
 			return lookupTable[this.id];
@@ -53,7 +55,7 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 		this.listeners = {};
 	}
 
-	public deSerialize(data, engine: DiagramEngine) {
+	public deSerialize(data: { [s: string]: any }, engine: DiagramEngine) {
 		this.id = data.id;
 	}
 
@@ -72,12 +74,15 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 				event.firing = false;
 			}
 		};
+
 		for (var i in this.listeners) {
-			// propagation stopped
-			if (!event.firing) {
-				return;
+			if (this.listeners.hasOwnProperty(i)) {
+				// propagation stopped
+				if (!event.firing) {
+					return;
+				}
+				cb(this.listeners[i], event);
 			}
-			cb(this.listeners[i], event);
 		}
 	}
 

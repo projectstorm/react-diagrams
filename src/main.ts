@@ -15,14 +15,24 @@ export * from "./defaults/widgets/DefaultLinkWidget";
 export * from "./defaults/widgets/DefaultNodeWidget";
 export * from "./defaults/widgets/DefaultPortLabelWidget";
 
-export * from "./AbstractFactory";
+export * from "./factories/AbstractFactory";
+export * from "./factories/AbstractLabelFactory";
+export * from "./factories/AbstractLinkFactory";
+export * from "./factories/AbstractNodeFactory";
+export * from "./factories/AbstractPortFactory";
+
 export * from "./Toolkit";
 
 export * from "./DiagramEngine";
-export * from "./models/DiagramModel";
 export * from "./BaseEntity";
-export * from "./CanvasActions";
 
+export * from "./actions/BaseAction";
+export * from "./actions/MoveCanvasAction";
+export * from "./actions/MoveItemsAction";
+export * from "./actions/SelectingAction";
+
+export * from "./models/SelectionModel";
+export * from "./models/DiagramModel";
 export * from "./models/BaseModel";
 export * from "./models/DiagramModel";
 export * from "./models/LinkModel";
