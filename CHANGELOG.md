@@ -1,4 +1,4 @@
-__5.0.0__ 
+__5.0.0__ http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/
 
 PR: https://github.com/projectstorm/react-diagrams/pull/145
 
