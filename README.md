@@ -2,6 +2,8 @@
 
 __DEMO__: http://www.projectstorm.io/react-diagrams
 
+__RELEASE NOTES__ : http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/
+
 A super simple, no-nonsense diagramming library written in React that just works.
 
 [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
