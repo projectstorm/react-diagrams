@@ -1,18 +1,10 @@
-var webpack = require("webpack");
+const webpack = require("webpack");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var plugins = [];
 
 //do we minify it all
 if(process.env.NODE_ENV === 'production'){
 	console.log("creating production build");
-	plugins.push(new webpack.optimize.UglifyJsPlugin({
-		mangle: {
-			keep_fnames: true
-		},
-		compress: {
-			keep_fnames: true,
-			warnings: false,
-		}
-	}));
 	plugins.push(new webpack.DefinePlugin({
 		'process.env.NODE_ENV': 'production',
 	}));
@@ -69,6 +61,19 @@ module.exports =
 			extensions: [".tsx", ".ts", ".js"]
 		},
 		devtool: 'cheap-module-source-map',
-		mode: process.env.NODE_ENV || 'development'
+		mode: process.env.NODE_ENV || 'development',
+		optimization: {
+			minimizer: [
+				// we specify a custom UglifyJsPlugin here to get source maps in production
+				new UglifyJsPlugin({
+					uglifyOptions: {
+						compress: false,
+						ecma: 6,
+						mangle: false
+					},
+					sourceMap: true
+				})
+			]
+		},
 	}
 ;
