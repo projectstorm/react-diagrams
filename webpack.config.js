@@ -68,6 +68,7 @@ module.exports =
 		resolve: {
 			extensions: [".tsx", ".ts", ".js"]
 		},
-		devtool: process.env.NODE_ENV === 'production'?false:'eval-cheap-module-source-map'
+		devtool: 'cheap-module-source-map',
+		mode: process.env.NODE_ENV || 'development'
 	}
 ;
