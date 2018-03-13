@@ -4,7 +4,7 @@
 	"compilerOptions": {
 		"suppressExcessPropertyErrors": true,
 		"declaration": true,
-		"outDir": "@types",
+		"outDir": "dist/@types",
 		"target": "es5",
 		"strictNullChecks": false,
 		"sourceMap": true,
