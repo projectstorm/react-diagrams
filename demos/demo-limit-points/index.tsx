@@ -1,6 +1,12 @@
-import * as SRD from "../../src/main";
 import * as React from "react";
-import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
+import {
+	DiagramEngine,
+	DiagramModel,
+	DefaultNodeModel,
+	LinkModel,
+	DiagramWidget,
+	DiagramProps
+} from "storm-react-diagrams";
 
 /**
  * Shows that a limit of points can be set for links
@@ -32,7 +38,7 @@ export default () => {
 	var props = {
 		diagramEngine: engine,
 		maxNumberPointsPerLink: 5
-	} as SRD.DiagramProps;
+	} as DiagramProps;
 
 	return (
 		<div>

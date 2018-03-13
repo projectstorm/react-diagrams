@@ -1,6 +1,13 @@
-import * as SRD from "../../src/main";
 import * as React from "react";
-import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, PointModel, DiagramWidget } from "../../src/main";
+import {
+	DiagramEngine,
+	DiagramModel,
+	DefaultNodeModel,
+	LinkModel,
+	PointModel,
+	DiagramWidget,
+	DiagramProps
+} from "storm-react-diagrams";
 
 /**
  *
@@ -54,7 +61,7 @@ export default () => {
 		allowLooseLinks: false,
 		allowCanvasTranslation: false,
 		allowCanvasZoom: false
-	} as SRD.DiagramProps;
+	} as DiagramProps;
 
 	//!=========================================  <<<<<<<
 

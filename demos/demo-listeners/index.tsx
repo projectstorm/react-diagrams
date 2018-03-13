@@ -1,7 +1,13 @@
-import * as SRD from "../../src/main";
 import * as React from "react";
 import { action } from "@storybook/addon-actions";
-import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
+import {
+	DiagramEngine,
+	DiagramModel,
+	DiagramProps,
+	DefaultNodeModel,
+	LinkModel,
+	DiagramWidget
+} from "storm-react-diagrams";
 
 /**
  * Shows some of the events triggered when elements are selected
@@ -45,7 +51,7 @@ export default () => {
 	var props = {
 		diagramEngine: engine,
 		maxNumberPointsPerLink: 0 // no extra points so link selection is fired straight away
-	} as SRD.DiagramProps;
+	} as DiagramProps;
 
 	return (
 		<div>

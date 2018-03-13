@@ -1,4 +1,4 @@
-import * as SRD from "../../src/main";
+import * as SRD from "storm-react-diagrams";
 import { DiamonNodeWidget } from "./DiamondNodeWidget";
 import { DiamondNodeModel } from "./DiamondNodeModel";
 import * as React from "react";

@@ -31,6 +31,9 @@ module.exports = {
 		]
 	},
 	resolve: {
+		alias: {
+			'storm-react-diagrams': path.join(__dirname, "..", "src", "main")
+		},
 		extensions: [".tsx", ".ts", ".js"]
 	}
 };

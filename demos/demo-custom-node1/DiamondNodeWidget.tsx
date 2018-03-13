@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DiamondNodeModel } from "./DiamondNodeModel";
-import { PortWidget } from "../../src/main";
+import { PortWidget } from "storm-react-diagrams";
 
 export interface DiamonNodeWidgetProps {
 	node: DiamondNodeModel;

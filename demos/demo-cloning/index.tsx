@@ -6,7 +6,7 @@ import {
 	NodeModel,
 	DiagramWidget,
 	BaseModel
-} from "../../src/main";
+} from "storm-react-diagrams";
 import * as _ from "lodash";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";

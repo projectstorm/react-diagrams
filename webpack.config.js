@@ -1,5 +1,6 @@
 const webpack = require("webpack");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var path = require("path");
 var plugins = [];
 const production = process.env.NODE_ENV === 'production';
 

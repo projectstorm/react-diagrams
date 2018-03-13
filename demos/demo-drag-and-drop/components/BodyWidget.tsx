@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import { TrayWidget } from "./TrayWidget";
 import { Application } from "../Application";
 import { TrayItemWidget } from "./TrayItemWidget";
-import { DefaultNodeModel, DiagramWidget } from "../../../src/main";
+import { DefaultNodeModel, DiagramWidget } from "storm-react-diagrams";
 
 export interface BodyWidgetProps {
 	app: Application;

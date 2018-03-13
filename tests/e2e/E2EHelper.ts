@@ -1,6 +1,4 @@
 import { ElementHandle, Page } from "puppeteer";
-import { NodeModel } from "../../src/models/NodeModel";
-import { LinkModel } from "../../src/models/LinkModel";
 import * as _ from "lodash";
 
 export class E2EElement {

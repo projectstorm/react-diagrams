@@ -10,6 +10,10 @@
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"jsx": "react",
+		"baseUrl": ".",
+		"paths": {
+			"storm-react-diagrams": ["src/main.ts"]
+		},
 		"lib": [
 			"dom",
 			"es2015"

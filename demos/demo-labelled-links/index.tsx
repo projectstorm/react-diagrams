@@ -4,12 +4,12 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DefaultPortModel,
-	DiagramWidget
-} from "../../src/main";
+	DiagramWidget,
+	DefaultLinkModel
+} from "storm-react-diagrams";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 import { action } from "@storybook/addon-actions";
-import { DefaultLinkModel } from "../../src/defaults/models/DefaultLinkModel";
 
 export default () => {
 	// setup the diagram engine

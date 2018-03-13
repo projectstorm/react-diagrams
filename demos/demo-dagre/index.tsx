@@ -7,7 +7,7 @@ import {
 	LinkModel,
 	DefaultPortModel,
 	DiagramWidget
-} from "../../src/main";
+} from "storm-react-diagrams";
 import { distributeElements } from "./dagre-utils";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";

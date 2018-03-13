@@ -1,4 +1,4 @@
-import * as SRD from "../../src/main";
+import * as SRD from "storm-react-diagrams";
 
 /**
  * @author Dylan Vorster

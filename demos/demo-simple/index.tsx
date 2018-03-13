@@ -1,6 +1,12 @@
-import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "../../src/main";
+import {
+	DiagramEngine,
+	DiagramModel,
+	DefaultNodeModel,
+	LinkModel,
+	DiagramWidget,
+	DefaultLinkModel
+} from "storm-react-diagrams";
 import * as React from "react";
-import { DefaultLinkModel } from "../../src/defaults/models/DefaultLinkModel";
 
 export default () => {
 	//1) setup the diagram engine

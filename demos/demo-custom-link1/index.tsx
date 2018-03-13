@@ -7,12 +7,12 @@ import {
 	DiagramWidget,
 	LinkWidget,
 	LinkProps,
-	DefaultLinkWidget
-} from "../../src/main";
+	DefaultLinkWidget,
+	DefaultLinkModel,
+	DefaultLinkFactory
+} from "storm-react-diagrams";
 import { action } from "@storybook/addon-actions";
 import * as React from "react";
-import { DefaultLinkModel } from "../../src/defaults/models/DefaultLinkModel";
-import { DefaultLinkFactory } from "../../src/defaults/factories/DefaultLinkFactory";
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 	constructor() {

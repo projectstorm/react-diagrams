@@ -14,7 +14,7 @@ glob.glob(__dirname + "/../../demos/demo-*/index.tsx", {}, (err, files) => {
 		copy.push({to: path.basename(path.dirname(entryFile)), from: __dirname+"/index.html"});
 	});
 
-	webpack({
+	config = {
 		entry: entry,
 		plugins: [
 			new CopyWebpackPlugin(copy)
@@ -29,8 +29,17 @@ glob.glob(__dirname + "/../../demos/demo-*/index.tsx", {}, (err, files) => {
 				use: ['style-loader','css-loader', 'sass-loader']
 			}].concat(config.module.rules)
 		},
-		resolve: config.resolve,
-	}, (err, stats) => {
+		resolve: {
+			...config.resolve,
+			alias: {
+				'storm-react-diagrams': path.join(__dirname, "..", "..", "src", "main")
+			}
+		},
+	};
+
+	console.log(config);
+
+	webpack(config, (err, stats) => {
 		if (err || stats.hasErrors()) {
 			// Handle errors here
 			return;
