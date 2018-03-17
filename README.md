@@ -11,11 +11,11 @@ A super simple, no-nonsense diagramming library written in React that just works
 [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams)
 [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master)
 
-![Personal Project](./images/example1.png)
+![Personal Project](./images/example1.jpg)
 
-![](./images/example2.png)
+![](./images/example2.jpg)
 
-![](./images/example3.png)
+![](./images/example3.jpg)
 
 ## Introduction
 
