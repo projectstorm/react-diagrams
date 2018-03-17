@@ -1,3 +1,14 @@
+__5.1.0__ 
+
+* [api] Rename XXXFactory into AbstractXXXFactory
+* [refactor] tslint and prettier are now the same
+* [refactor] Each class now explicitely has its own class file (consistency)
+* [feature] Smooth vertical links (no longer limited to horizontal)
+* [feature] Dedicated documentation via gitbook
+* [bug] forgot to export some
+* [refactor] consistently use lodash where possible
+* [maintenance] upgrade node modules
+
 __5.0.0__ http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/
 
 PR: https://github.com/projectstorm/react-diagrams/pull/145

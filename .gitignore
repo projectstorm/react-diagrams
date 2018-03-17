@@ -1,6 +1,8 @@
 dist/
 dist/main.js
 dist/main.js.map
+/package
+*.tgz
 
 .out
 

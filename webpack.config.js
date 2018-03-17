@@ -8,7 +8,7 @@ const production = process.env.NODE_ENV === 'production';
 if (production) {
 	console.log("creating production build");
 	plugins.push(new webpack.DefinePlugin({
-		'process.env.NODE_ENV': 'production',
+		'process.env.NODE_ENV': '"production"',
 	}));
 }
 
