@@ -1,5 +1,10 @@
 # Summary
 
 * [Introduction](README.md)
-* [Test](test.md)
+* [Interacting with diagrams](/docs/Interactive Usage.md)
+* About the project
+  * [Testing](/docs/Testing.md)
+  * [Architecture Questions](/docs/Architecture Questions.md)
+
+
 
