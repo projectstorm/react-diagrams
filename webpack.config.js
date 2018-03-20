@@ -72,7 +72,7 @@ module.exports =
 				new UglifyJsPlugin({
 					uglifyOptions: {
 						compress: false,
-						ecma: 6,
+						ecma: 5,
 						mangle: false
 					},
 					sourceMap: true
