@@ -1,7 +1,7 @@
-import { BaseAction } from "./BaseAction";
 import { DiagramModel } from "../models/DiagramModel";
+import { MouseAction } from "./MouseAction";
 
-export class MoveCanvasAction extends BaseAction {
+export class MoveCanvasAction extends MouseAction {
 	initialOffsetX: number;
 	initialOffsetY: number;
 

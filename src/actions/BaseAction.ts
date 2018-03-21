@@ -1,11 +1,13 @@
+import { DiagramEngine } from "../DiagramEngine";
+
 export class BaseAction {
-	mouseX: number;
-	mouseY: number;
 	ms: number;
 
-	constructor(mouseX: number, mouseY: number) {
-		this.mouseX = mouseX;
-		this.mouseY = mouseY;
+	constructor() {
 		this.ms = new Date().getTime();
 	}
+
+	actionWillFire(engine: DiagramEngine) {}
+
+	actionDidFire(engine: DiagramEngine) {}
 }

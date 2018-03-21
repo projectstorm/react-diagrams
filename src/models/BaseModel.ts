@@ -2,6 +2,7 @@ import { BaseEntity, BaseListener } from "../BaseEntity";
 import * as _ from "lodash";
 import { BaseEvent } from "../BaseEntity";
 import { DiagramEngine } from "../DiagramEngine";
+import { BaseAction } from "../actions/BaseAction";
 
 export interface BaseModelListener extends BaseListener {
 	selectionChanged?(event: BaseEvent<BaseModel> & { isSelected: boolean }): void;
@@ -33,6 +34,8 @@ export class BaseModel<
 	public setParent(parent: X) {
 		this.parent = parent;
 	}
+
+	public canvasActionFired(action: BaseAction, engine: DiagramEngine) {}
 
 	public getSelectedEntities(): BaseModel<any, T>[] {
 		if (this.isSelected()) {

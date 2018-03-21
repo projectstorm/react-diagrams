@@ -1,10 +1,10 @@
-import { BaseAction } from "./BaseAction";
 import { SelectionModel } from "../models/SelectionModel";
 import { PointModel } from "../models/PointModel";
 import { NodeModel } from "../models/NodeModel";
 import { DiagramEngine } from "../DiagramEngine";
+import { MouseAction } from "./MouseAction";
 
-export class MoveItemsAction extends BaseAction {
+export class MoveItemsAction extends MouseAction {
 	selectionModels: SelectionModel[];
 	moved: boolean;
 
