@@ -37,8 +37,7 @@
 		"lodash": "^4.17.5",
 		"pathfinding": "^0.4.18",
 		"paths-js": "^0.4.7",
-		"react": "^16.2.0",
-		"ts-loader": "^4.1.0"
+		"react": "^16.2.0"
 	},
 	"devDependencies": {
 		"@storybook/addon-actions": "^3.3.15",
@@ -79,6 +78,7 @@
 		"style-loader": "^0.20.3",
 		"ts-jest": "^22.4.1",
 		"tslint": "^5.9.1",
+		"ts-loader": "^4.1.0",
 		"typescript": "^2.7.2",
 		"uglifyjs-webpack-plugin": "^1.2.3",
 		"val-loader": "^1.1.0",
