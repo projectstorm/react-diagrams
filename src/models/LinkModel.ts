@@ -151,10 +151,9 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	setSourcePort(port: PortModel) {
 		if (port !== null) {
 			port.addLink(this);
-		} else if (this.sourcePort !== null) {
+		}
+		if (this.sourcePort !== null) {
 			this.sourcePort.removeLink(this);
-		} else {
-			return;
 		}
 		this.sourcePort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
@@ -175,10 +174,9 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	setTargetPort(port: PortModel) {
 		if (port !== null) {
 			port.addLink(this);
-		} else if (this.targetPort !== null) {
+		}
+		if (this.targetPort !== null) {
 			this.targetPort.removeLink(this);
-		} else {
-			return;
 		}
 		this.targetPort = port;
 		this.iterateListeners((listener: LinkModelListener, event) => {
