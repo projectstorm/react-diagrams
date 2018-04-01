@@ -375,9 +375,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					return;
 				}
 
-				var link = model.model.getLink();
-				var sourcePort: PortModel = link.getSourcePort();
-				var targetPort: PortModel = link.getTargetPort();
+				let link: LinkModel = model.model.getLink();
+				let sourcePort: PortModel = link.getSourcePort();
+				let targetPort: PortModel = link.getTargetPort();
 				if (sourcePort !== null && targetPort !== null) {
 					if (!sourcePort.canLinkToPort(targetPort)) {
 						//link not allowed
