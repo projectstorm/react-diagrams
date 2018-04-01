@@ -267,7 +267,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						diagramEngine.calculateRoutingMatrix();
 					}
 				} else if (model.model instanceof PointModel) {
-					// we want points that are connected to ports, to not neccesarilly snap to grid
+					// we want points that are connected to ports, to not necessarily snap to grid
 					// this stuff needs to be pixel perfect, dont touch it
 					model.model.x = model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
 					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
