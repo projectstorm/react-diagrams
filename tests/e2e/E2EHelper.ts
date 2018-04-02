@@ -58,6 +58,25 @@ export class E2EPort extends E2EElement {
 			_.difference(_.flatMap((await this.parent.model()).ports, "links"), currentLinks)[0]
 		);
 	}
+
+	async linkToPoint(x: number, y: number): Promise<E2ELink> {
+		let currentLinks = _.flatMap((await this.parent.model()).ports, "links");
+
+		let bounds = await this.element.boundingBox();
+
+		// click on this port
+		this.page.mouse.move(bounds.x, bounds.y);
+		this.page.mouse.down();
+
+		// drag to point
+		this.page.mouse.move(x, y);
+		this.page.mouse.up();
+
+		// get the parent to get the link
+		return await this.helper.link(
+			_.difference(_.flatMap((await this.parent.model()).ports, "links"), currentLinks)[0]
+		);
+	}
 }
 
 export class E2ELink extends E2EElement {

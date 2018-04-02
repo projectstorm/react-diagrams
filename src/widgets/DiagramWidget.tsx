@@ -267,7 +267,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						diagramEngine.calculateRoutingMatrix();
 					}
 				} else if (model.model instanceof PointModel) {
-					// we want points that are connected to ports, to not neccesarilly snap to grid
+					// we want points that are connected to ports, to not necessarily snap to grid
 					// this stuff needs to be pixel perfect, dont touch it
 					model.model.x = model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
 					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
@@ -315,14 +315,12 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		//are we going to connect a link to something?
 		if (this.state.action instanceof MoveItemsAction) {
 			var element = this.getMouseElement(event);
-			var linkConnected = false;
 			_.forEach(this.state.action.selectionModels, model => {
 				//only care about points connecting to things
 				if (!(model.model instanceof PointModel)) {
 					return;
 				}
 				if (element && element.model instanceof PortModel && !diagramEngine.isModelLocked(element.model)) {
-					linkConnected = true;
 					let link = model.model.getLink();
 					if (link.getTargetPort() !== null) {
 						//if this was a valid link already and we are adding a node in the middle, create 2 links from the original
@@ -347,22 +345,19 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					}
 					delete this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()];
 				}
-				//if we moved a NodeModel and allowLooseLinks is false, we know that any links involved were valid
-				if ((!this.props.allowLooseLinks && element.model instanceof NodeModel) || !this.state.wasMoved) {
-					linkConnected = true;
-				}
 			});
 
-			//do we want to allow loose links on the diagram model or not
-			if (!linkConnected && !this.props.allowLooseLinks) {
+			//check for / remove any loose links in any models which have been moved
+			if (!this.props.allowLooseLinks && this.state.wasMoved) {
 				_.forEach(this.state.action.selectionModels, model => {
 					//only care about points connecting to things
 					if (!(model.model instanceof PointModel)) {
 						return;
 					}
 
-					var link = model.model.getLink();
-					if (link.isLastPoint(model.model)) {
+					let selectedPoint: PointModel = model.model;
+					let link: LinkModel = selectedPoint.getLink();
+					if (link.getSourcePort() === null || link.getTargetPort() === null) {
 						link.remove();
 					}
 				});
@@ -375,9 +370,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					return;
 				}
 
-				var link = model.model.getLink();
-				var sourcePort: PortModel = link.getSourcePort();
-				var targetPort: PortModel = link.getTargetPort();
+				let link: LinkModel = model.model.getLink();
+				let sourcePort: PortModel = link.getSourcePort();
+				let targetPort: PortModel = link.getTargetPort();
 				if (sourcePort !== null && targetPort !== null) {
 					if (!sourcePort.canLinkToPort(targetPort)) {
 						//link not allowed
