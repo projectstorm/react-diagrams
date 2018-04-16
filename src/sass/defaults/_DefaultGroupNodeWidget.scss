@@ -1,0 +1,36 @@
+.srd-default-group-node{
+	border: solid black 1px;
+	pointer-events: none;
+
+	&__title {
+		background: rgba(black, 0.3);
+		display: flex;
+		white-space: nowrap;
+		pointer-events: all;
+
+		> * {
+			align-self: center;
+		}
+
+		.fa {
+			padding: 5px;
+			opacity: 0.2;
+			cursor: pointer;
+
+			&:hover {
+				opacity: 1.0;
+			}
+		}
+	}
+
+	&__name {
+		flex-grow: 1;
+		padding: 5px 5px;
+	}
+
+	&__container{
+		min-height: 100px;
+		min-width: 100px;
+
+	}
+}

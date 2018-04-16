@@ -194,10 +194,12 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		if (this.props.actionStoppedFiring && !shouldSkipEvent) {
 			this.props.actionStoppedFiring(this.state.action);
 		}
+		this.state.action && this.state.action.actionDidFire(this.props.diagramEngine);
 		this.setState({ action: null });
 	}
 
 	startFiringAction(action: BaseAction) {
+		action.actionWillFire(this.props.diagramEngine);
 		var setState = true;
 		if (this.props.actionStartedFiring) {
 			setState = this.props.actionStartedFiring(action);

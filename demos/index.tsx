@@ -39,6 +39,13 @@ storiesOf("Simple Usage", module)
 		Helper.makeDemo(require("./demo-simple-flow/index").default(), require("!!raw-loader!./demo-simple-flow/index"))
 	)
 	.add(
+		"Group Nodes",
+		Helper.makeDemo(
+			require("./demo-grouped-nodes/index").default(),
+			require("!!raw-loader!./demo-grouped-nodes/index")
+		)
+	)
+	.add(
 		"Performance demo",
 		Helper.makeDemo(require("./demo-performance/index").default(), require("!!raw-loader!./demo-performance/index"))
 	)

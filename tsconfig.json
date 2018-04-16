@@ -12,6 +12,7 @@
 		"jsx": "react",
 		"baseUrl": ".",
 		"paths": {
+			"./src":["./src"],
 			"storm-react-diagrams": ["src/main.ts"]
 		},
 		"lib": [

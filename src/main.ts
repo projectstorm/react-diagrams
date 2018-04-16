@@ -10,16 +10,19 @@ export * from "./defaults/models/DefaultNodeModel";
 export * from "./defaults/models/DefaultPortModel";
 export * from "./defaults/models/DefaultLinkModel";
 export * from "./defaults/models/DefaultLabelModel";
+export * from "./defaults/models/DefaultGroupNodeModel";
 
 export * from "./defaults/factories/DefaultLinkFactory";
 export * from "./defaults/factories/DefaultNodeFactory";
 export * from "./defaults/factories/DefaultPortFactory";
 export * from "./defaults/factories/DefaultLabelFactory";
+export * from "./defaults/factories/DefaultGroupNodeFactory";
 
 export * from "./defaults/widgets/DefaultLinkWidget";
 export * from "./defaults/widgets/DefaultLabelWidget";
 export * from "./defaults/widgets/DefaultNodeWidget";
 export * from "./defaults/widgets/DefaultPortLabelWidget";
+export * from "./defaults/widgets/DefaultGroupNodeWidget";
 
 export * from "./factories/AbstractFactory";
 export * from "./factories/AbstractLabelFactory";
@@ -30,6 +33,7 @@ export * from "./factories/AbstractPortFactory";
 export * from "./routing/PathFinding";
 
 export * from "./actions/BaseAction";
+export * from "./actions/MouseAction";
 export * from "./actions/MoveCanvasAction";
 export * from "./actions/MoveItemsAction";
 export * from "./actions/SelectingAction";

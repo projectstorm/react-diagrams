@@ -16,6 +16,7 @@ import { DefaultPortFactory } from "./defaults/factories/DefaultPortFactory";
 import { LabelModel } from "./models/LabelModel";
 import { DefaultLabelFactory } from "./defaults/factories/DefaultLabelFactory";
 import { Toolkit } from "./Toolkit";
+import { DefaultGroupNodeFactory } from "./defaults/factories/DefaultGroupNodeFactory";
 /**
  * @author Dylan Vorster
  */
@@ -81,6 +82,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.registerLinkFactory(new DefaultLinkFactory());
 		this.registerPortFactory(new DefaultPortFactory());
 		this.registerLabelFactory(new DefaultLabelFactory());
+		this.registerNodeFactory(new DefaultGroupNodeFactory());
 	}
 
 	repaintCanvas() {

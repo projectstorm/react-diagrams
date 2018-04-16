@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import { NodeWidget } from "../NodeWidget";
 import { NodeModel } from "../../models/NodeModel";
 import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
+import { RenderAction } from "../../actions/RenderAction";
 
 export interface NodeLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -17,18 +18,13 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> 
 		this.state = {};
 	}
 
-	updateNodeDimensions = () => {
-		if (!this.props.diagramEngine.nodesRendered) {
-			const diagramModel = this.props.diagramEngine.getDiagramModel();
-			_.map(diagramModel.getNodes(), node => {
-				node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
-			});
-		}
-	};
-
 	componentDidUpdate() {
-		this.updateNodeDimensions();
 		this.props.diagramEngine.nodesRendered = true;
+		let model = this.props.diagramEngine.getDiagramModel();
+		let action = new RenderAction();
+		_.map(model.getNodes(), node => {
+			node.canvasActionFired(action, this.props.diagramEngine);
+		});
 	}
 
 	render() {

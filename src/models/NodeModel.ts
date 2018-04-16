@@ -3,6 +3,8 @@ import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 import { DiagramModel } from "./DiagramModel";
+import { BaseAction } from "../actions/BaseAction";
+import { RenderAction } from "../actions/RenderAction";
 
 export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	x: number;
@@ -37,7 +39,7 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 		this.y = y;
 	}
 
-	getSelectedEntities() {
+	getSelectedEntities(): BaseModel[] {
 		let entities = super.getSelectedEntities();
 
 		// add the points of each link that are selected here
@@ -124,6 +126,13 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 		port.setParent(this);
 		this.ports[port.name] = port;
 		return port;
+	}
+
+	canvasActionFired(action: BaseAction, diagramEngine: DiagramEngine) {
+		super.canvasActionFired(action, diagramEngine);
+		if (action instanceof RenderAction) {
+			this.updateDimensions(diagramEngine.getNodeDimensions(this));
+		}
 	}
 
 	updateDimensions({ width, height }: { width: number; height: number }) {
