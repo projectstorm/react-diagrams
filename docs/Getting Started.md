@@ -138,5 +138,11 @@ function SimpleDiagramWidget(props) {
 }
 ```
 
+Make sure you also give the diagram widget a height for it to render properly.
+```css
+.srd-demo-canvas {
+    height: 100vh;
+}
+```
 
 
