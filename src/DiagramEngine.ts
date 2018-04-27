@@ -1,53 +1,27 @@
-import { BaseEntity, BaseListener } from "./BaseEntity";
 import { DiagramModel } from "./models/DiagramModel";
-import * as _ from "lodash";
-import { NodeModel } from "./models/NodeModel";
-import { PointModel } from "./models/PointModel";
-import { PortModel } from "./models/PortModel";
-import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
-import { Toolkit } from "./Toolkit";
 import { CanvasEngine } from "@projectstorm/react-canvas";
-/**
- * @author Dylan Vorster
- */
-export interface DiagramEngineListener extends BaseListener {
-	portFactoriesUpdated?(): void;
+import {DefaultLabelFactory, DefaultLinkFactory, DefaultNodeFactory, DefaultPortFactory} from "storm-react-diagrams";
 
-	nodeFactoriesUpdated?(): void;
-
-	linkFactoriesUpdated?(): void;
-
-	labelFactoriesUpdated?(): void;
-
-	repaintCanvas?(): void;
-}
-
-/**
- * Passed as a parameter to the DiagramWidget
- */
-export class DiagramEngine extends CanvasEngine {
+export class DiagramEngine extends CanvasEngine<DiagramModel> {
 	paintableWidgets: {};
 	linksThatHaveInitiallyRendered: {};
 	nodesRendered: boolean;
 	maxNumberPointsPerLink: number;
 	smartRouting: boolean;
-	model: DiagramModel;
-
-	// calculated only when smart routing is active
-	canvasMatrix: number[][] = [];
-	routingMatrix: number[][] = [];
-	// used when at least one element has negative coordinates
-	hAdjustmentFactor: number = 0;
-	vAdjustmentFactor: number = 0;
 
 	constructor() {
 		super();
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
+		this.smartRouting = false;
 	}
 
 	installDefaults() {
 		super.installDefaults();
+		this.registerElementFactory(new DefaultLabelFactory());
+		this.registerElementFactory(new DefaultLinkFactory());
+		this.registerElementFactory(new DefaultNodeFactory());
+		this.registerElementFactory(new DefaultPortFactory());
 	}
 
 	clearRepaintEntities() {
@@ -68,7 +42,7 @@ export class DiagramEngine extends CanvasEngine {
 	}
 
 	isSmartRoutingEnabled() {
-		return !!this.smartRouting;
+		return this.smartRouting;
 	}
 
 	setSmartRoutingStatus(status: boolean) {

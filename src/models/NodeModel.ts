@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 import { Rectangle, CanvasElementModel, GraphModel } from "@projectstorm/react-canvas";
 
-export class NodeModel<T extends PortModel> extends CanvasElementModel {
+export class NodeModel<T extends PortModel = PortModel> extends CanvasElementModel {
 	protected dimensions: Rectangle;
 	protected ports: GraphModel<null, T>;
 
