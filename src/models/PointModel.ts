@@ -1,11 +1,9 @@
-import { BaseModel, BaseModelListener } from "./BaseModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
+import {Rectangle, CanvasElementModel, CanvasElementModelListener} from "@projectstorm/react-canvas";
 
-export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
-	x: number;
-	y: number;
+export class PointModel extends CanvasElementModel<CanvasElementModelListener> {
 
 	constructor(link: LinkModel, points: { x: number; y: number }) {
 		super();

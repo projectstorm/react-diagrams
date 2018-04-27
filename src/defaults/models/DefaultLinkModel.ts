@@ -1,13 +1,9 @@
-/**
- * @author Dylan Vorster
- */
 import { LinkModel, LinkModelListener } from "../../models/LinkModel";
-import { BaseEvent } from "../../BaseEntity";
 import * as _ from "lodash";
-import { PointModel } from "../../models/PointModel";
 import { DiagramEngine } from "../../DiagramEngine";
 import { DefaultLabelModel } from "./DefaultLabelModel";
 import { LabelModel } from "../../models/LabelModel";
+import {BaseEvent} from "@projectstorm/react-canvas";
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string }): void;
@@ -35,8 +31,8 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 		});
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deSerialize(ob, engine: DiagramEngine, cache) {
+		super.deSerialize(ob, engine, cache);
 		this.color = ob.color;
 		this.width = ob.width;
 		this.curvyness = ob.curvyness;

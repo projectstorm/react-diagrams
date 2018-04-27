@@ -1,6 +1,5 @@
-import { DefaultPortModel } from "./DefaultPortModel";
 import * as _ from "lodash";
-
+import { DefaultPortModel } from "./DefaultPortModel";
 import { NodeModel } from "../../models/NodeModel";
 import { Toolkit } from "../../Toolkit";
 import { DiagramEngine } from "../../DiagramEngine";
@@ -27,8 +26,8 @@ export class DefaultNodeModel extends NodeModel {
 		return this.addPort(new DefaultPortModel(false, Toolkit.UID(), label));
 	}
 
-	deSerialize(object, engine: DiagramEngine) {
-		super.deSerialize(object, engine);
+	deSerialize(object, engine: DiagramEngine, cache) {
+		super.deSerialize(object, engine, cache);
 		this.name = object.name;
 		this.color = object.color;
 	}

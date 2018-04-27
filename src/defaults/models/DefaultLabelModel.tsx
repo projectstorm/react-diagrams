@@ -14,8 +14,8 @@ export class DefaultLabelModel extends LabelModel {
 		this.label = label;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deSerialize(ob, engine: DiagramEngine, cache) {
+		super.deSerialize(ob, engine, cache);
 		this.label = ob.label;
 	}
 

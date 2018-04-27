@@ -1,44 +1,34 @@
 import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
-import { DiagramModel } from "./DiagramModel";
-import {BaseModel, BaseListener} from "@projectstorm/react-canvas";
+import {Rectangle, CanvasElementModel} from "@projectstorm/react-canvas";
 
-export class NodeModel extends BaseModel<DiagramModel, BaseListener> {
-	x: number;
-	y: number;
+export class NodeModel extends CanvasElementModel {
+
+	dimensions: Rectangle;
 	extras: any;
 	ports: { [s: string]: PortModel };
 
-	// calculated post rendering so routing can be done correctly
-	width: number;
-	height: number;
-
 	constructor(nodeType: string = "default") {
 		super(nodeType);
-		this.x = 0;
-		this.y = 0;
+		this.dimensions = new Rectangle(0,0,0,0);
 		this.extras = {};
 		this.ports = {};
 	}
 
-	setPosition(x, y) {
-		//store position
-		let oldX = this.x;
-		let oldY = this.y;
-		_.forEach(this.ports, port => {
-			_.forEach(port.getLinks(), link => {
-				let point = link.getPointForPort(port);
-				point.x = point.x + x - oldX;
-				point.y = point.y + y - oldY;
-			});
-		});
-		this.x = x;
-		this.y = y;
+	setDimensions(dimensions: Rectangle) {
+		this.dimensions = dimensions;
+	}
+
+	getDimensions(): Rectangle {
+		return this.dimensions;
 	}
 
 	getSelectedEntities() {
-		let entities = super.getSelectedEntities();
+		let entities = [];
+		if(this.isSelected()){
+			entities.push(this);
+		}
 
 		// add the points of each link that are selected here
 		if (this.isSelected()) {
@@ -61,8 +51,8 @@ export class NodeModel extends BaseModel<DiagramModel, BaseListener> {
 
 		//deserialize ports
 		_.forEach(ob.ports, (port: any) => {
-			let portOb = engine.getFactory(port.type).getNewInstance();
-			portOb.deSerialize(port, engine);
+			let portOb = engine.getFactory(port.type).generateModel() as PortModel;
+			portOb.deSerialize(port, engine, cache);
 			this.addPort(portOb);
 		});
 	}
@@ -95,8 +85,8 @@ export class NodeModel extends BaseModel<DiagramModel, BaseListener> {
 	}
 
 	getPortFromID(id): PortModel | null {
-		for (var i in this.ports) {
-			if (this.ports[i].id === id) {
+		for (let i in this.ports) {
+			if (this.ports[i].getID() === id) {
 				return this.ports[i];
 			}
 		}
