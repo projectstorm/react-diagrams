@@ -36,10 +36,6 @@ export interface DiagramEngineListener extends BaseListener {
  * Passed as a parameter to the DiagramWidget
  */
 export class DiagramEngine extends CanvasEngine {
-	nodeFactories: { [s: string]: AbstractNodeFactory };
-	linkFactories: { [s: string]: AbstractLinkFactory };
-	portFactories: { [s: string]: AbstractPortFactory };
-	labelFactories: { [s: string]: AbstractLabelFactory };
 
 	diagramModel: DiagramModel;
 	canvas: Element;
@@ -59,10 +55,6 @@ export class DiagramEngine extends CanvasEngine {
 	constructor() {
 		super();
 		this.diagramModel = new DiagramModel();
-		this.nodeFactories = {};
-		this.linkFactories = {};
-		this.portFactories = {};
-		this.labelFactories = {};
 		this.canvas = null;
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
@@ -77,11 +69,8 @@ export class DiagramEngine extends CanvasEngine {
 		}
 	}
 
-	installDefaultFactories() {
-		this.registerNodeFactory(new DefaultNodeFactory());
-		this.registerLinkFactory(new DefaultLinkFactory());
-		this.registerPortFactory(new DefaultPortFactory());
-		this.registerLabelFactory(new DefaultLabelFactory());
+	installDefaults(){
+		super.installDefaults();
 	}
 
 	clearRepaintEntities() {
@@ -148,91 +137,6 @@ export class DiagramEngine extends CanvasEngine {
 		return this.diagramModel;
 	}
 
-	//!-------------- FACTORIES ------------
-
-	getNodeFactories(): { [s: string]: AbstractNodeFactory } {
-		return this.nodeFactories;
-	}
-
-	getLinkFactories(): { [s: string]: AbstractLinkFactory } {
-		return this.linkFactories;
-	}
-
-	getLabelFactories(): { [s: string]: AbstractLabelFactory } {
-		return this.labelFactories;
-	}
-
-	registerLabelFactory(factory: AbstractLabelFactory) {
-		this.labelFactories[factory.getType()] = factory;
-	}
-
-	registerPortFactory(factory: AbstractPortFactory) {
-		this.portFactories[factory.getType()] = factory;
-	}
-
-	registerNodeFactory(factory: AbstractNodeFactory) {
-		this.nodeFactories[factory.getType()] = factory;
-	}
-
-	registerLinkFactory(factory: AbstractLinkFactory) {
-		this.linkFactories[factory.getType()] = factory;
-	}
-
-	getPortFactory(type: string): AbstractPortFactory {
-		if (this.portFactories[type]) {
-			return this.portFactories[type];
-		}
-		throw new Error(`cannot find factory for port of type: [${type}]`);
-	}
-
-	getNodeFactory(type: string): AbstractNodeFactory {
-		if (this.nodeFactories[type]) {
-			return this.nodeFactories[type];
-		}
-		throw new Error(`cannot find factory for node of type: [${type}]`);
-	}
-
-	getLinkFactory(type: string): AbstractLinkFactory {
-		if (this.linkFactories[type]) {
-			return this.linkFactories[type];
-		}
-		throw new Error(`cannot find factory for link of type: [${type}]`);
-	}
-
-	getLabelFactory(type: string): AbstractLabelFactory {
-		if (this.labelFactories[type]) {
-			return this.labelFactories[type];
-		}
-		throw new Error(`cannot find factory for label of type: [${type}]`);
-	}
-
-	getFactoryForNode(node: NodeModel): AbstractNodeFactory | null {
-		return this.getNodeFactory(node.getType());
-	}
-
-	getFactoryForLink(link: LinkModel): AbstractLinkFactory | null {
-		return this.getLinkFactory(link.getType());
-	}
-
-	getFactoryForLabel(label: LabelModel): AbstractLabelFactory | null {
-		return this.getLabelFactory(label.getType());
-	}
-
-	generateWidgetForLink(link: LinkModel): JSX.Element | null {
-		var linkFactory = this.getFactoryForLink(link);
-		if (!linkFactory) {
-			throw new Error("Cannot find link factory for link: " + link.getType());
-		}
-		return linkFactory.generateReactWidget(this, link);
-	}
-
-	generateWidgetForNode(node: NodeModel): JSX.Element | null {
-		var nodeFactory = this.getFactoryForNode(node);
-		if (!nodeFactory) {
-			throw new Error("Cannot find widget factory for node: " + node.getType());
-		}
-		return nodeFactory.generateReactWidget(this, node);
-	}
 
 	getRelativeMousePoint(event): { x: number; y: number } {
 		var point = this.getRelativePoint(event.clientX, event.clientY);

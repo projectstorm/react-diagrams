@@ -1,10 +1,10 @@
-import { BaseModel, BaseModelListener } from "./BaseModel";
+import {BaseModel, BaseListener} from "@projectstorm/react-canvas";
 import { NodeModel } from "./NodeModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 
-export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
+export class PortModel extends BaseModel<NodeModel, BaseListener> {
 	name: string;
 	links: { [id: string]: LinkModel };
 	maximumLinks: number;
@@ -15,15 +15,15 @@ export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	width: number;
 	height: number;
 
-	constructor(name: string, type?: string, id?: string, maximumLinks?: number) {
-		super(type, id);
+	constructor(name: string, type?: string, maximumLinks?: number) {
+		super(type);
 		this.name = name;
 		this.links = {};
 		this.maximumLinks = maximumLinks;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deSerialize(ob, engine: DiagramEngine, cache) {
+		super.deSerialize(ob, engine, cache);
 		this.name = ob.name;
 		this.maximumLinks = ob.maximumLinks;
 	}

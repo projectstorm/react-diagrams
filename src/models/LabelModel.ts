@@ -1,20 +1,20 @@
-import { BaseModel } from "./BaseModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
+import {BaseModel} from "@projectstorm/react-canvas";
 
 export class LabelModel extends BaseModel<LinkModel> {
 	offsetX: number;
 	offsetY: number;
 
-	constructor(type?: string, id?: string) {
-		super(type, id);
+	constructor(type?: string) {
+		super(type);
 		this.offsetX = 0;
 		this.offsetY = 0;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deSerialize(ob, engine: DiagramEngine, cache: { [id: string]: BaseModel; }) {
+		super.deSerialize(ob, engine, cache);
 		this.offsetX = ob.offsetX;
 		this.offsetY = ob.offsetY;
 	}

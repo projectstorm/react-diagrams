@@ -18,7 +18,7 @@ import {
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	engine.installDefaults();
 
 	var model = new DiagramModel();
 

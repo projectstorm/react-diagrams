@@ -1,22 +1,20 @@
 import * as React from "react";
 import { DiagramEngine } from "../../DiagramEngine";
-import { AbstractLabelFactory } from "../../factories/AbstractLabelFactory";
 import { DefaultLabelModel } from "../models/DefaultLabelModel";
 import { DefaultLabelWidget } from "../widgets/DefaultLabelWidget";
+import {AbstractElementFactory} from "@projectstorm/react-canvas";
 
-/**
- * @author Dylan Vorster
- */
-export class DefaultLabelFactory extends AbstractLabelFactory<DefaultLabelModel> {
+export class DefaultLabelFactory extends AbstractElementFactory<DefaultLabelModel> {
+
 	constructor() {
 		super("default");
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, label: DefaultLabelModel): JSX.Element {
-		return <DefaultLabelWidget model={label} />;
+	generateWidget(engine: DiagramEngine, model: DefaultLabelModel): JSX.Element {
+		return <DefaultLabelWidget model={model} />;
 	}
 
-	getNewInstance(initialConfig?: any): DefaultLabelModel {
+	generateModel(): DefaultLabelModel {
 		return new DefaultLabelModel();
-	}
+    }
 }

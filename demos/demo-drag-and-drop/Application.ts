@@ -9,7 +9,7 @@ export class Application {
 
 	constructor() {
 		this.diagramEngine = new SRD.DiagramEngine();
-		this.diagramEngine.installDefaultFactories();
+		this.diagramEngine.installDefaults();
 
 		this.newModel();
 	}

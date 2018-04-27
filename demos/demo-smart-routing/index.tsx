@@ -13,7 +13,7 @@ import { action } from "@storybook/addon-actions";
 export default () => {
 	// setup the diagram engine
 	const engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	engine.installDefaults();
 
 	// setup the diagram model
 	const model = new DiagramModel();

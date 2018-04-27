@@ -118,7 +118,7 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	engine.installDefaults();
 	engine.registerLinkFactory(new AdvancedLinkFactory());
 
 	// create some nodes

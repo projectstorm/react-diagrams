@@ -1,10 +1,10 @@
-import { BaseModel, BaseModelListener } from "./BaseModel";
 import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 import { DiagramModel } from "./DiagramModel";
+import {BaseModel, BaseListener} from "@projectstorm/react-canvas";
 
-export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
+export class NodeModel extends BaseModel<DiagramModel, BaseListener> {
 	x: number;
 	y: number;
 	extras: any;
@@ -14,8 +14,8 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	width: number;
 	height: number;
 
-	constructor(nodeType: string = "default", id?: string) {
-		super(nodeType, id);
+	constructor(nodeType: string = "default") {
+		super(nodeType);
 		this.x = 0;
 		this.y = 0;
 		this.extras = {};
@@ -53,15 +53,15 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 		return entities;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deSerialize(ob, engine: DiagramEngine, cache) {
+		super.deSerialize(ob, engine, cache);
 		this.x = ob.x;
 		this.y = ob.y;
 		this.extras = ob.extras;
 
 		//deserialize ports
 		_.forEach(ob.ports, (port: any) => {
-			let portOb = engine.getPortFactory(port.type).getNewInstance();
+			let portOb = engine.getFactory(port.type).getNewInstance();
 			portOb.deSerialize(port, engine);
 			this.addPort(portOb);
 		});
@@ -87,7 +87,6 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 	}
 
 	remove() {
-		super.remove();
 		_.forEach(this.ports, port => {
 			_.forEach(port.getLinks(), link => {
 				link.remove();

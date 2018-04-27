@@ -1,23 +1,18 @@
-import { BaseListener, BaseEntity, BaseEvent, BaseEntityType } from "../BaseEntity";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 import { LinkModel } from "./LinkModel";
 import { NodeModel } from "./NodeModel";
 import { PortModel } from "./PortModel";
-import { BaseModel, BaseModelListener } from "./BaseModel";
 import { PointModel } from "./PointModel";
+import {BaseModel, BaseEvent, CanvasModel, CanvasModelListener} from "@projectstorm/react-canvas";
 /**
  * @author Dylan Vorster
  *
  */
-export interface DiagramListener extends BaseListener {
+export interface DiagramListener extends CanvasModelListener {
 	nodesUpdated?(event: BaseEvent & { node: NodeModel; isCreated: boolean }): void;
 
 	linksUpdated?(event: BaseEvent & { link: LinkModel; isCreated: boolean }): void;
-
-	offsetUpdated?(event: BaseEvent<DiagramModel> & { offsetX: number; offsetY: number }): void;
-
-	zoomUpdated?(event: BaseEvent<DiagramModel> & { zoom: number }): void;
 
 	gridUpdated?(event: BaseEvent<DiagramModel> & { size: number }): void;
 }
@@ -25,15 +20,12 @@ export interface DiagramListener extends BaseListener {
 /**
  *
  */
-export class DiagramModel extends BaseEntity<DiagramListener> {
+export class DiagramModel extends CanvasModel<DiagramListener> {
 	//models
 	links: { [s: string]: LinkModel };
 	nodes: { [s: string]: NodeModel };
 
 	//control variables
-	offsetX: number;
-	offsetY: number;
-	zoom: number;
 	rendered: boolean;
 	gridSize: number;
 
@@ -43,8 +35,6 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.links = {};
 		this.nodes = {};
 
-		this.offsetX = 0;
-		this.offsetY = 0;
 		this.zoom = 100;
 		this.rendered = false;
 		this.gridSize = 0;
@@ -66,8 +56,8 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		return this.gridSize * Math.floor((pos + this.gridSize / 2) / this.gridSize);
 	}
 
-	deSerializeDiagram(object: any, diagramEngine: DiagramEngine) {
-		this.deSerialize(object, diagramEngine);
+	deSerializeDiagram(object: any, diagramEngine: DiagramEngine, cache) {
+		this.deSerialize(object, diagramEngine, cache);
 
 		this.offsetX = object.offsetX;
 		this.offsetY = object.offsetY;
@@ -76,7 +66,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
-			let nodeOb = diagramEngine.getNodeFactory(node.type).getNewInstance(node);
+			let nodeOb = diagramEngine.getFactory(node.type).getNewInstance(node);
 			nodeOb.setParent(this);
 			nodeOb.deSerialize(node, diagramEngine);
 			this.addNode(nodeOb);
@@ -84,7 +74,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialze links
 		_.forEach(object.links, (link: any) => {
-			let linkOb = diagramEngine.getLinkFactory(link.type).getNewInstance();
+			let linkOb = diagramEngine.getFactory(link.type).getNewInstance();
 			linkOb.setParent(this);
 			linkOb.deSerialize(link, diagramEngine);
 			this.addLink(linkOb);
@@ -165,56 +155,6 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		}
 
 		return items;
-	}
-
-	setZoomLevel(zoom: number) {
-		this.zoom = zoom;
-
-		this.iterateListeners((listener, event) => {
-			if (listener.zoomUpdated) {
-				listener.zoomUpdated({ ...event, zoom: zoom });
-			}
-		});
-	}
-
-	setOffset(offsetX: number, offsetY: number) {
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: offsetY });
-			}
-		});
-	}
-
-	setOffsetX(offsetX: number) {
-		this.offsetX = offsetX;
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: this.offsetY });
-			}
-		});
-	}
-	setOffsetY(offsetY: number) {
-		this.offsetY = offsetY;
-
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: this.offsetX, offsetY: this.offsetY });
-			}
-		});
-	}
-
-	getOffsetY() {
-		return this.offsetY;
-	}
-
-	getOffsetX() {
-		return this.offsetX;
-	}
-
-	getZoomLevel() {
-		return this.zoom;
 	}
 
 	getNode(node: string | NodeModel): NodeModel | null {

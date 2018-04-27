@@ -1,13 +1,12 @@
-import { BaseModel, BaseModelListener } from "./BaseModel";
 import { PortModel } from "./PortModel";
 import { PointModel } from "./PointModel";
 import * as _ from "lodash";
-import { BaseEvent } from "../BaseEntity";
 import { LabelModel } from "./LabelModel";
 import { DiagramEngine } from "../DiagramEngine";
 import { DiagramModel } from "./DiagramModel";
+import {BaseModel, BaseListener, BaseEvent} from "@projectstorm/react-canvas";
 
-export interface LinkModelListener extends BaseModelListener {
+export interface LinkModelListener extends BaseListener<LinkModel> {
 	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
 
 	targetPortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
@@ -20,8 +19,8 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	points: PointModel[];
 	extras: {};
 
-	constructor(linkType: string = "default", id?: string) {
-		super(linkType, id);
+	constructor(linkType: string = "default") {
+		super(linkType);
 		this.points = [new PointModel(this, { x: 0, y: 0 }), new PointModel(this, { x: 0, y: 0 })];
 		this.extras = {};
 		this.sourcePort = null;
@@ -29,8 +28,8 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		this.labels = [];
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deSerialize(ob, engine: DiagramEngine, cache) {
+		super.deSerialize(ob, engine,cache);
 		this.extras = ob.extras;
 		this.points = _.map(ob.points || [], (point: { x; y }) => {
 			var p = new PointModel(this, { x: point.x, y: point.y });
@@ -40,8 +39,8 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 		//deserialize labels
 		_.forEach(ob.labels || [], (label: any) => {
-			let labelOb = engine.getLabelFactory(label.type).getNewInstance();
-			labelOb.deSerialize(label, engine);
+			let labelOb = engine.getFactory(label.type).generateModel();
+			labelOb.deSerialize(label, engine, cache);
 			this.addLabel(labelOb);
 		});
 
@@ -99,7 +98,6 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		if (this.targetPort) {
 			this.targetPort.removeLink(this);
 		}
-		super.remove();
 	}
 
 	isLastPoint(point: PointModel) {

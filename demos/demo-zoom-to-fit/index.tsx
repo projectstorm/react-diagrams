@@ -18,7 +18,7 @@ import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	engine.installDefaults();
 
 	//2) setup the diagram model
 	var model = new DiagramModel();

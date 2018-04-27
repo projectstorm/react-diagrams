@@ -68,7 +68,7 @@ function getDistributedModel(engine, model) {
 export default () => {
 	//1) setup the diagram engine
 	let engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	engine.installDefaults();
 
 	//2) setup the diagram model
 	let model = new DiagramModel();

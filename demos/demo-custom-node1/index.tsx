@@ -20,7 +20,7 @@ import { DiamondPortModel } from "./DiamondPortModel";
 export default () => {
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	engine.installDefaults();
 
 	// register some other factories as well
 	engine.registerPortFactory(new SimplePortFactory("diamond", config => new DiamondPortModel()));
