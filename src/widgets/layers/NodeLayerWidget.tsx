@@ -3,7 +3,7 @@ import { DiagramEngine } from "../../DiagramEngine";
 import * as _ from "lodash";
 import { NodeWidget } from "../NodeWidget";
 import { NodeModel } from "../../models/NodeModel";
-import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
+import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
 
 export interface NodeLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;

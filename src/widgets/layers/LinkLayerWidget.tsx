@@ -3,7 +3,7 @@ import { DiagramEngine } from "../../DiagramEngine";
 import { LinkWidget } from "../LinkWidget";
 import * as _ from "lodash";
 import { PointModel } from "../../models/PointModel";
-import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
+import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
 
 export interface LinkLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
 import { LinkModel } from "../models/LinkModel";
-import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
 
 export interface LinkProps extends BaseWidgetProps {
 	link: LinkModel;

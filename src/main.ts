@@ -47,7 +47,6 @@ export * from "./widgets/DiagramWidget";
 export * from "./widgets/LinkWidget";
 export * from "./widgets/NodeWidget";
 export * from "./widgets/PortWidget";
-export * from "./widgets/BaseWidget";
 
 export * from "./widgets/layers/LinkLayerWidget";
 export * from "./widgets/layers/NodeLayerWidget";

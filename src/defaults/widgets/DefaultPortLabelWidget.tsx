@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DefaultPortModel } from "../models/DefaultPortModel";
 import { PortWidget } from "../../widgets/PortWidget";
-import { BaseWidget, BaseWidgetProps } from "../../widgets/BaseWidget";
+import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
 
 export interface DefaultPortLabelProps extends BaseWidgetProps {
 	model: DefaultPortModel;

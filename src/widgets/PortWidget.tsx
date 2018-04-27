@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NodeModel } from "../models/NodeModel";
-import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
 
 export interface PortProps extends BaseWidgetProps {
 	name: string;

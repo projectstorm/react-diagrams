@@ -12,10 +12,9 @@ import { NodeModel } from "../models/NodeModel";
 import { PointModel } from "../models/PointModel";
 import { PortModel } from "../models/PortModel";
 import { LinkModel } from "../models/LinkModel";
-import { SelectionModel } from "../models/SelectionModel";
 import { BaseModel, BaseModelListener } from "../models/BaseModel";
 import { BaseEntity } from "../BaseEntity";
-import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
 
 export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
