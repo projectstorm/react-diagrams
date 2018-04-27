@@ -11,17 +11,10 @@ export interface LinkProps extends BaseWidgetProps {
 
 export interface LinkState {}
 
-/**
- * @author Dylan Vorster
- */
 export class LinkWidget extends BaseWidget<LinkProps, LinkState> {
 	constructor(props: LinkProps) {
 		super("srd-link", props);
 		this.state = {};
-	}
-
-	shouldComponentUpdate() {
-		return this.props.diagramEngine.canEntityRepaint(this.props.link);
 	}
 
 	render() {

@@ -11,17 +11,10 @@ export interface NodeProps extends BaseWidgetProps {
 
 export interface NodeState {}
 
-/**
- * @author Dylan Vorster
- */
 export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
 	constructor(props: NodeProps) {
 		super("srd-node", props);
 		this.state = {};
-	}
-
-	shouldComponentUpdate() {
-		return this.props.diagramEngine.canEntityRepaint(this.props.node);
 	}
 
 	getClassName() {
@@ -32,10 +25,10 @@ export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
 		return (
 			<div
 				{...this.getProps()}
-				data-nodeid={this.props.node.id}
+				data-nodeid={this.props.node.getID()}
 				style={{
-					top: this.props.node.y,
-					left: this.props.node.x
+					top: this.props.node.getDimensions().getTopLeft().y,
+					left: this.props.node.getDimensions().getTopLeft().x
 				}}
 			>
 				{this.props.children}

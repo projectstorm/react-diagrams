@@ -70,7 +70,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		}
 	}
 
-	addPointToLink = (event: MouseEvent, index: number): void => {
+	addPointToLink(event: MouseEvent, index: number) {
 		if (
 			!event.shiftKey &&
 			!this.props.diagramEngine.isModelLocked(this.props.link) &&
@@ -82,7 +82,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 			this.props.link.addPoint(point, index);
 			this.props.pointAdded(point, event);
 		}
-	};
+	}
 
 	generatePoint(pointIndex: number): JSX.Element {
 		let x = this.props.link.points[pointIndex].getPoint().x;

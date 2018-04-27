@@ -1,16 +1,16 @@
 import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
-import { Rectangle, CanvasElementModel } from "@projectstorm/react-canvas";
+import { Rectangle, CanvasElementModel, GraphModel } from "@projectstorm/react-canvas";
 
-export class NodeModel extends CanvasElementModel {
+export class NodeModel<T extends PortModel> extends CanvasElementModel {
 	protected dimensions: Rectangle;
-	protected ports: { [s: string]: PortModel };
+	protected ports: GraphModel<null, T>;
 
 	constructor(nodeType: string = "default") {
 		super(nodeType);
 		this.dimensions = new Rectangle(0, 0, 0, 0);
-		this.ports = {};
+		this.ports = new GraphModel("ports");
 	}
 
 	setDimensions(dimensions: Rectangle) {
@@ -19,25 +19,6 @@ export class NodeModel extends CanvasElementModel {
 
 	getDimensions(): Rectangle {
 		return this.dimensions;
-	}
-
-	getSelectedEntities() {
-		let entities = [];
-		if (this.isSelected()) {
-			entities.push(this);
-		}
-
-		// add the points of each link that are selected here
-		if (this.isSelected()) {
-			_.forEach(this.ports, port => {
-				entities = entities.concat(
-					_.map(port.getLinks(), link => {
-						return link.getPointForPort(port);
-					})
-				);
-			});
-		}
-		return entities;
 	}
 
 	deSerialize(ob, engine: DiagramEngine, cache) {
@@ -55,17 +36,7 @@ export class NodeModel extends CanvasElementModel {
 	serialize() {
 		return _.merge(super.serialize(), {
 			dimensions: this.dimensions.serialize(),
-			ports: _.map(this.ports, port => {
-				return port.serialize();
-			})
-		});
-	}
-
-	remove() {
-		_.forEach(this.ports, port => {
-			_.forEach(port.getLinks(), link => {
-				link.remove();
-			});
+			ports: this.ports.serialize()
 		});
 	}
 
@@ -79,11 +50,11 @@ export class NodeModel extends CanvasElementModel {
 	}
 
 	getPort(name: string): PortModel | null {
-		return this.ports[name];
+		return this.ports.getEntities()[name];
 	}
 
 	getPorts(): { [s: string]: PortModel } {
-		return this.ports;
+		return this.ports.getEntities();
 	}
 
 	removePort(port: PortModel) {

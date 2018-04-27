@@ -28,7 +28,11 @@ export class PointModel extends CanvasElementModel<CanvasElementModelListener> {
 	}
 
 	isConnectedToPort(): boolean {
-		return this.parent.getPortForPoint(this) !== null;
+		return this.link.getPortForPoint(this) !== null;
+	}
+
+	setLink(link: LinkModel) {
+		this.link = link;
 	}
 
 	getLink(): LinkModel {

@@ -4,7 +4,7 @@ import * as _ from "lodash";
 import { LabelModel } from "./LabelModel";
 import { DiagramEngine } from "../DiagramEngine";
 import { DiagramModel } from "./DiagramModel";
-import { BaseModel, BaseListener, BaseEvent } from "@projectstorm/react-canvas";
+import { BaseModel, BaseListener, BaseEvent, GraphModel } from "@projectstorm/react-canvas";
 
 export interface LinkModelListener extends BaseListener<LinkModel> {
 	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
@@ -13,37 +13,25 @@ export interface LinkModelListener extends BaseListener<LinkModel> {
 }
 
 export class LinkModel<T extends LinkModelListener = LinkModelListener> extends BaseModel<DiagramModel, T> {
-	sourcePort: PortModel | null;
-	targetPort: PortModel | null;
-	labels: LabelModel[];
-	points: PointModel[];
-	extras: {};
+	protected sourcePort: PortModel | null;
+	protected targetPort: PortModel | null;
+	protected labels: GraphModel<LabelModel, LinkModel>;
+	protected points: GraphModel<PointModel, LinkModel>;
 
 	constructor(linkType: string = "default") {
 		super(linkType);
-		this.points = [];
-		this.extras = {};
+		this.points = new GraphModel();
+		this.labels = new GraphModel();
+		this.points.setParentDelegate(this);
+		this.labels.setParentDelegate(this);
 		this.sourcePort = null;
 		this.targetPort = null;
-		this.labels = [];
 	}
 
 	deSerialize(ob, engine: DiagramEngine, cache) {
 		super.deSerialize(ob, engine, cache);
-		this.extras = ob.extras;
-		this.points = _.map(ob.points || [], (point: { x; y }) => {
-			var p = new PointModel(this, { x: point.x, y: point.y });
-			p.deSerialize(point, engine);
-			return p;
-		});
-
-		//deserialize labels
-		_.forEach(ob.labels || [], (label: any) => {
-			let labelOb = engine.getFactory(label.type).generateModel();
-			labelOb.deSerialize(label, engine, cache);
-			this.addLabel(labelOb);
-		});
-
+		this.points.deSerialize(ob["points"], engine, cache);
+		this.labels.deSerialize(ob["labels"], engine, cache);
 		if (ob.target) {
 			this.setTargetPort(
 				this.getParent()
@@ -63,17 +51,12 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			source: this.sourcePort ? this.sourcePort.getParent().id : null,
-			sourcePort: this.sourcePort ? this.sourcePort.id : null,
-			target: this.targetPort ? this.targetPort.getParent().id : null,
-			targetPort: this.targetPort ? this.targetPort.id : null,
-			points: _.map(this.points, point => {
-				return point.serialize();
-			}),
-			extras: this.extras,
-			labels: _.map(this.labels, label => {
-				return label.serialize();
-			})
+			source: this.sourcePort ? this.sourcePort.getParent().getID() : null,
+			sourcePort: this.sourcePort ? this.sourcePort.getID() : null,
+			target: this.targetPort ? this.targetPort.getParent().getID() : null,
+			targetPort: this.targetPort ? this.targetPort.getID() : null,
+			points: this.points.serialize(),
+			labels: this.labels.serialize()
 		});
 	}
 
@@ -88,20 +71,15 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	isLastPoint(point: PointModel) {
 		var index = this.getPointIndex(point);
-		return index === this.points.length - 1;
+		return index === this.points.count() - 1;
 	}
 
 	getPointIndex(point: PointModel) {
-		return this.points.indexOf(point);
+		return _.values(this.points.getEntities()).indexOf(point);
 	}
 
 	getPointModel(id: string): PointModel | null {
-		for (var i = 0; i < this.points.length; i++) {
-			if (this.points[i].id === id) {
-				return this.points[i];
-			}
-		}
-		return null;
+		return this.points.getEntities()[id];
 	}
 
 	getPortForPoint(point: PointModel): PortModel {
@@ -125,11 +103,11 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	getFirstPoint(): PointModel {
-		return this.points[0];
+		return _.values(this.points.getEntities())[0];
 	}
 
 	getLastPoint(): PointModel {
-		return this.points[this.points.length - 1];
+		return _.values(this.points.getEntities())[this.points.count() - 1];
 	}
 
 	setSourcePort(port: PortModel) {
@@ -175,19 +153,18 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	addLabel(label: LabelModel) {
-		label.setParent(this);
-		this.labels.push(label);
+		this.labels.addEntity(label);
 	}
 
 	getPoints(): PointModel[] {
-		return this.points;
+		return _.values(this.points.getEntities());
 	}
 
 	setPoints(points: PointModel[]) {
 		_.forEach(points, point => {
-			point.setParent(this);
+			point.setLink(this);
 		});
-		this.points = points;
+		this.points.add = points;
 	}
 
 	removePoint(pointModel: PointModel) {
@@ -209,12 +186,15 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	addPoint<P extends PointModel>(pointModel: P, index = 1): P {
-		pointModel.setParent(this);
+		pointModel.setLink(this);
 		this.points.splice(index, 0, pointModel);
 		return pointModel;
 	}
 
-	generatePoint(x: number = 0, y: number = 0): PointModel {
-		return new PointModel(this, { x: x, y: y });
+	generatePoint(x: number, y: number): PointModel {
+		let point = new PointModel(this);
+		point.getPoint().x = x;
+		point.getPoint().y = y;
+		return point;
 	}
 }
