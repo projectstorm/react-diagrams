@@ -1,15 +1,23 @@
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
-import {Rectangle, CanvasElementModel, CanvasElementModelListener} from "@projectstorm/react-canvas";
+import { Point, CanvasElementModel, CanvasElementModelListener, Rectangle } from "@projectstorm/react-canvas";
 
 export class PointModel extends CanvasElementModel<CanvasElementModelListener> {
+	protected point: Point;
+	protected link: LinkModel;
 
-	constructor(link: LinkModel, points: { x: number; y: number }) {
-		super();
-		this.x = points.x;
-		this.y = points.y;
-		this.parent = link;
+	constructor(link: LinkModel) {
+		super("point");
+		this.link = link;
+	}
+
+	setDimensions(dimensions: Rectangle) {
+		this.point = dimensions.getTopLeft();
+	}
+
+	getDimensions(): Rectangle {
+		return new Rectangle(this.point, 10, 10);
 	}
 
 	getSelectedEntities() {
@@ -24,44 +32,29 @@ export class PointModel extends CanvasElementModel<CanvasElementModelListener> {
 	}
 
 	getLink(): LinkModel {
-		return this.getParent();
+		return this.link;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
-		this.x = ob.x;
-		this.y = ob.y;
+	deSerialize(ob, engine: DiagramEngine, cache) {
+		super.deSerialize(ob, engine, cache);
+		this.point = new Point(ob["x"], ob["y"]);
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			x: this.x,
-			y: this.y
+			x: this.point.x,
+			y: this.point.y
 		});
 	}
 
 	remove() {
 		//clear references
-		if (this.parent) {
-			this.parent.removePoint(this);
+		if (this.link) {
+			this.link.removePoint(this);
 		}
-		super.remove();
 	}
 
-	updateLocation(points: { x: number; y: number }) {
-		this.x = points.x;
-		this.y = points.y;
-	}
-
-	getX(): number {
-		return this.x;
-	}
-
-	getY(): number {
-		return this.y;
-	}
-
-	isLocked() {
-		return super.isLocked() || this.getParent().isLocked();
+	getPoint(): Point {
+		return this.point;
 	}
 }

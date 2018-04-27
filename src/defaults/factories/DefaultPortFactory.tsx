@@ -1,12 +1,17 @@
 import { DefaultPortModel } from "../models/DefaultPortModel";
-import { AbstractPortFactory } from "../../factories/AbstractPortFactory";
+import { AbstractElementFactory } from "@projectstorm/react-canvas";
+import { DiagramEngine } from "storm-react-diagrams";
 
-export class DefaultPortFactory extends AbstractPortFactory<DefaultPortModel> {
+export class DefaultPortFactory extends AbstractElementFactory<DefaultPortModel> {
 	constructor() {
 		super("default");
 	}
 
-	getNewInstance(initialConfig?: any): DefaultPortModel {
+	generateWidget(engine: DiagramEngine, model: DefaultPortModel): JSX.Element {
+		return null;
+	}
+
+	generateModel(): DefaultPortModel {
 		return new DefaultPortModel(true, "unknown");
 	}
 }

@@ -8,9 +8,9 @@ import { DiagramEngine } from "../../DiagramEngine";
  * @author Dylan Vorster
  */
 export class DefaultNodeModel extends NodeModel {
-	name: string;
-	color: string;
-	ports: { [s: string]: DefaultPortModel };
+	protected name: string;
+	protected color: string;
+	protected ports: { [s: string]: DefaultPortModel };
 
 	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)") {
 		super("default");

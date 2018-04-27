@@ -1,18 +1,15 @@
 import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
-import {Rectangle, CanvasElementModel} from "@projectstorm/react-canvas";
+import { Rectangle, CanvasElementModel } from "@projectstorm/react-canvas";
 
 export class NodeModel extends CanvasElementModel {
-
-	dimensions: Rectangle;
-	extras: any;
-	ports: { [s: string]: PortModel };
+	protected dimensions: Rectangle;
+	protected ports: { [s: string]: PortModel };
 
 	constructor(nodeType: string = "default") {
 		super(nodeType);
-		this.dimensions = new Rectangle(0,0,0,0);
-		this.extras = {};
+		this.dimensions = new Rectangle(0, 0, 0, 0);
 		this.ports = {};
 	}
 
@@ -26,7 +23,7 @@ export class NodeModel extends CanvasElementModel {
 
 	getSelectedEntities() {
 		let entities = [];
-		if(this.isSelected()){
+		if (this.isSelected()) {
 			entities.push(this);
 		}
 
@@ -45,9 +42,7 @@ export class NodeModel extends CanvasElementModel {
 
 	deSerialize(ob, engine: DiagramEngine, cache) {
 		super.deSerialize(ob, engine, cache);
-		this.x = ob.x;
-		this.y = ob.y;
-		this.extras = ob.extras;
+		this.dimensions.deserialize(ob.dimensions);
 
 		//deserialize ports
 		_.forEach(ob.ports, (port: any) => {
@@ -59,20 +54,10 @@ export class NodeModel extends CanvasElementModel {
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			x: this.x,
-			y: this.y,
-			extras: this.extras,
+			dimensions: this.dimensions.serialize(),
 			ports: _.map(this.ports, port => {
 				return port.serialize();
 			})
-		});
-	}
-
-	doClone(lookupTable = {}, clone) {
-		// also clone the ports
-		clone.ports = {};
-		_.forEach(this.ports, port => {
-			clone.addPort(port.clone(lookupTable));
 		});
 	}
 
@@ -113,10 +98,5 @@ export class NodeModel extends CanvasElementModel {
 		port.setParent(this);
 		this.ports[port.name] = port;
 		return port;
-	}
-
-	updateDimensions({ width, height }: { width: number; height: number }) {
-		this.width = width;
-		this.height = height;
 	}
 }

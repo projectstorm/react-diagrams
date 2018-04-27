@@ -1,25 +1,22 @@
 import * as React from "react";
 import { DefaultLinkWidget } from "../widgets/DefaultLinkWidget";
 import { DiagramEngine } from "../../DiagramEngine";
-import { AbstractLinkFactory } from "../../factories/AbstractLinkFactory";
+import { AbstractElementFactory } from "@projectstorm/react-canvas";
 import { DefaultLinkModel } from "../models/DefaultLinkModel";
 
-/**
- * @author Dylan Vorster
- */
-export class DefaultLinkFactory extends AbstractLinkFactory<DefaultLinkModel> {
+export class DefaultLinkFactory extends AbstractElementFactory<DefaultLinkModel> {
 	constructor() {
 		super("default");
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, link: DefaultLinkModel): JSX.Element {
+	generateWidget(engine: DiagramEngine, model: DefaultLinkModel): JSX.Element {
 		return React.createElement(DefaultLinkWidget, {
-			link: link,
-			diagramEngine: diagramEngine
+			link: model,
+			diagramEngine: engine
 		});
 	}
 
-	getNewInstance(initialConfig?: any): DefaultLinkModel {
+	generateModel(): DefaultLinkModel {
 		return new DefaultLinkModel();
 	}
 
@@ -27,8 +24,8 @@ export class DefaultLinkFactory extends AbstractLinkFactory<DefaultLinkModel> {
 		return (
 			<path
 				className={selected ? widget.bem("--path-selected") : ""}
-				strokeWidth={model.width}
-				stroke={model.color}
+				strokeWidth={model.getWidth()}
+				stroke={model.getColor()}
 				d={path}
 			/>
 		);

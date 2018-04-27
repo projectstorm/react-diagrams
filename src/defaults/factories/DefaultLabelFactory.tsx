@@ -2,10 +2,9 @@ import * as React from "react";
 import { DiagramEngine } from "../../DiagramEngine";
 import { DefaultLabelModel } from "../models/DefaultLabelModel";
 import { DefaultLabelWidget } from "../widgets/DefaultLabelWidget";
-import {AbstractElementFactory} from "@projectstorm/react-canvas";
+import { AbstractElementFactory } from "@projectstorm/react-canvas";
 
 export class DefaultLabelFactory extends AbstractElementFactory<DefaultLabelModel> {
-
 	constructor() {
 		super("default");
 	}
@@ -16,5 +15,5 @@ export class DefaultLabelFactory extends AbstractElementFactory<DefaultLabelMode
 
 	generateModel(): DefaultLabelModel {
 		return new DefaultLabelModel();
-    }
+	}
 }

@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import { DiagramEngine } from "../../DiagramEngine";
 import { DefaultLabelModel } from "./DefaultLabelModel";
 import { LabelModel } from "../../models/LabelModel";
-import {BaseEvent} from "@projectstorm/react-canvas";
+import { BaseEvent } from "@projectstorm/react-canvas";
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string }): void;
@@ -12,9 +12,9 @@ export interface DefaultLinkModelListener extends LinkModelListener {
 }
 
 export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
-	width: number;
-	color: string;
-	curvyness: number;
+	protected width: number;
+	protected color: string;
+	protected curvyness: number;
 
 	constructor(type: string = "default") {
 		super(type);
@@ -63,5 +63,17 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 				listener.colorChanged({ ...event, color: color });
 			}
 		});
+	}
+
+	getWidth() {
+		return this.width;
+	}
+
+	getColor() {
+		return this.color;
+	}
+
+	getCurvyness() {
+		return this.curvyness;
 	}
 }

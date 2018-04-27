@@ -85,11 +85,11 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 	};
 
 	generatePoint(pointIndex: number): JSX.Element {
-		let x = this.props.link.points[pointIndex].x;
-		let y = this.props.link.points[pointIndex].y;
+		let x = this.props.link.points[pointIndex].getPoint().x;
+		let y = this.props.link.points[pointIndex].getPoint().y;
 
 		return (
-			<g key={"point-" + this.props.link.points[pointIndex].id}>
+			<g key={"point-" + this.props.link.points[pointIndex].getID()}>
 				<circle
 					cx={x}
 					cy={y}
@@ -107,8 +107,8 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 					onMouseEnter={() => {
 						this.setState({ selected: true });
 					}}
-					data-id={this.props.link.points[pointIndex].id}
-					data-linkid={this.props.link.id}
+					data-id={this.props.link.points[pointIndex].getID()}
+					data-linkid={this.props.link.getID()}
 					cx={x}
 					cy={y}
 					r={15}
@@ -123,15 +123,15 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		const canvas = this.props.diagramEngine.canvas as HTMLElement;
 		return (
 			<foreignObject
-				key={label.id}
+				key={label.getID()}
 				className={this.bem("__label")}
 				width={canvas.offsetWidth}
 				height={canvas.offsetHeight}
 			>
-				<div ref={ref => (this.refLabels[label.id] = ref)}>
+				<div ref={ref => (this.refLabels[label.getID()] = ref)}>
 					{this.props.diagramEngine
-						.getFactoryForLabel(label)
-						.generateReactWidget(this.props.diagramEngine, label)}
+						.getFactoryForElement(label)
+						.generateWidget(this.props.diagramEngine, label)}
 				</div>
 			</foreignObject>
 		);
@@ -141,7 +141,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		var props = this.props;
 
 		var Bottom = React.cloneElement(
-			(props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory).generateLinkSegment(
+			(props.diagramEngine.getFactoryForElement(this.props.link) as DefaultLinkFactory).generateLinkSegment(
 				this.props.link,
 				this,
 				this.state.selected || this.props.link.isSelected(),
@@ -267,7 +267,10 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 
 		if (this.isSmartRoutingApplicable()) {
 			// first step: calculate a direct path between the points being linked
-			const directPathCoords = this.pathFinding.calculateDirectPath(_.first(points), _.last(points));
+			const directPathCoords = this.pathFinding.calculateDirectPath(
+				_.first(points).getPoint(),
+				_.last(points).getPoint()
+			);
 
 			const routingMatrix = diagramEngine.getRoutingMatrix();
 			// now we need to extract, from the routing matrix, the very first walkable points
@@ -305,7 +308,9 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		// See @link{#isSmartRoutingApplicable()}.
 		if (paths.length === 0) {
 			if (points.length === 2) {
-				var isHorizontal = Math.abs(points[0].x - points[1].x) > Math.abs(points[0].y - points[1].y);
+				var isHorizontal =
+					Math.abs(points[0].getPoint().x - points[1].getPoint().x) >
+					Math.abs(points[0].getPoint().x - points[1].getPoint().y);
 				var xOrY = isHorizontal ? "x" : "y";
 
 				//draw the smoothing
@@ -327,7 +332,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 
 				paths.push(
 					this.generateLink(
-						Toolkit.generateCurvePath(pointLeft, pointRight, this.props.link.curvyness),
+						Toolkit.generateCurvePath(pointLeft, pointRight, this.props.link.getCurvyness()),
 						{
 							onMouseDown: event => {
 								this.addPointToLink(event, 1);
@@ -348,7 +353,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 						this.generateLink(
 							Toolkit.generateLinePath(points[j], points[j + 1]),
 							{
-								"data-linkid": this.props.link.id,
+								"data-linkid": this.props.link.getID(),
 								"data-point": j,
 								onMouseDown: (event: MouseEvent) => {
 									this.addPointToLink(event, j + 1);

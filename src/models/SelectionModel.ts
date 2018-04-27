@@ -1,4 +1,4 @@
-import {BaseModel, BaseListener} from "@projectstorm/react-canvas";
+import { BaseModel, BaseListener } from "@projectstorm/react-canvas";
 
 import { BaseEntity } from "../BaseEntity";
 

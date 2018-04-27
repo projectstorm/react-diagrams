@@ -4,7 +4,7 @@ import { LinkModel } from "./LinkModel";
 import { NodeModel } from "./NodeModel";
 import { PortModel } from "./PortModel";
 import { PointModel } from "./PointModel";
-import {BaseModel, BaseEvent, CanvasModel, CanvasModelListener} from "@projectstorm/react-canvas";
+import { BaseModel, BaseEvent, CanvasModel, CanvasModelListener } from "@projectstorm/react-canvas";
 /**
  * @author Dylan Vorster
  *

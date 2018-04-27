@@ -1,4 +1,4 @@
-import {BaseModel, BaseListener} from "@projectstorm/react-canvas";
+import { BaseModel, BaseListener } from "@projectstorm/react-canvas";
 import { NodeModel } from "./NodeModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
@@ -8,12 +8,6 @@ export class PortModel extends BaseModel<NodeModel, BaseListener> {
 	name: string;
 	links: { [id: string]: LinkModel };
 	maximumLinks: number;
-
-	// calculated post rendering so routing can be done correctly
-	x: number;
-	y: number;
-	width: number;
-	height: number;
 
 	constructor(name: string, type?: string, maximumLinks?: number) {
 		super(type);
@@ -33,15 +27,10 @@ export class PortModel extends BaseModel<NodeModel, BaseListener> {
 			name: this.name,
 			parentNode: this.parent.id,
 			links: _.map(this.links, link => {
-				return link.id;
+				return link.getID();
 			}),
 			maximumLinks: this.maximumLinks
 		});
-	}
-
-	doClone(lookupTable = {}, clone) {
-		clone.links = {};
-		clone.parentNode = this.getParent().clone(lookupTable);
 	}
 
 	getNode(): NodeModel {
@@ -84,18 +73,7 @@ export class PortModel extends BaseModel<NodeModel, BaseListener> {
 		return null;
 	}
 
-	updateCoords({ x, y, width, height }: { x: number; y: number; width: number; height: number }) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
-
 	canLinkToPort(port: PortModel): boolean {
 		return true;
-	}
-
-	isLocked() {
-		return super.isLocked() || this.getParent().isLocked();
 	}
 }

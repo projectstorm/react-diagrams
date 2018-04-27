@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import { DiagramEngine } from "../../DiagramEngine";
 
 export class DefaultLabelModel extends LabelModel {
-	label: string;
+	protected label: string;
 
 	constructor() {
 		super("default");

@@ -4,7 +4,7 @@ import * as _ from "lodash";
 import { LabelModel } from "./LabelModel";
 import { DiagramEngine } from "../DiagramEngine";
 import { DiagramModel } from "./DiagramModel";
-import {BaseModel, BaseListener, BaseEvent} from "@projectstorm/react-canvas";
+import { BaseModel, BaseListener, BaseEvent } from "@projectstorm/react-canvas";
 
 export interface LinkModelListener extends BaseListener<LinkModel> {
 	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
@@ -21,7 +21,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	constructor(linkType: string = "default") {
 		super(linkType);
-		this.points = [new PointModel(this, { x: 0, y: 0 }), new PointModel(this, { x: 0, y: 0 })];
+		this.points = [];
 		this.extras = {};
 		this.sourcePort = null;
 		this.targetPort = null;
@@ -29,7 +29,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	deSerialize(ob, engine: DiagramEngine, cache) {
-		super.deSerialize(ob, engine,cache);
+		super.deSerialize(ob, engine, cache);
 		this.extras = ob.extras;
 		this.points = _.map(ob.points || [], (point: { x; y }) => {
 			var p = new PointModel(this, { x: point.x, y: point.y });
@@ -75,20 +75,6 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 				return label.serialize();
 			})
 		});
-	}
-
-	doClone(lookupTable = {}, clone) {
-		clone.setPoints(
-			_.map(this.getPoints(), (point: PointModel) => {
-				return point.clone(lookupTable);
-			})
-		);
-		if (this.sourcePort) {
-			clone.setSourcePort(this.sourcePort.clone(lookupTable));
-		}
-		if (this.targetPort) {
-			clone.setTargetPort(this.targetPort.clone(lookupTable));
-		}
 	}
 
 	remove() {

@@ -36,7 +36,6 @@ export interface DiagramEngineListener extends BaseListener {
  * Passed as a parameter to the DiagramWidget
  */
 export class DiagramEngine extends CanvasEngine {
-
 	diagramModel: DiagramModel;
 	canvas: Element;
 	paintableWidgets: {};
@@ -69,7 +68,7 @@ export class DiagramEngine extends CanvasEngine {
 		}
 	}
 
-	installDefaults(){
+	installDefaults() {
 		super.installDefaults();
 	}
 
@@ -136,7 +135,6 @@ export class DiagramEngine extends CanvasEngine {
 	getDiagramModel(): DiagramModel {
 		return this.diagramModel;
 	}
-
 
 	getRelativeMousePoint(event): { x: number; y: number } {
 		var point = this.getRelativePoint(event.clientX, event.clientY);
