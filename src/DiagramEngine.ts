@@ -16,6 +16,7 @@ import { DefaultPortFactory } from "./defaults/factories/DefaultPortFactory";
 import { LabelModel } from "./models/LabelModel";
 import { DefaultLabelFactory } from "./defaults/factories/DefaultLabelFactory";
 import { Toolkit } from "./Toolkit";
+import { CanvasEngine } from "@projectstorm/react-canvas";
 /**
  * @author Dylan Vorster
  */
@@ -34,7 +35,7 @@ export interface DiagramEngineListener extends BaseListener {
 /**
  * Passed as a parameter to the DiagramWidget
  */
-export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
+export class DiagramEngine extends CanvasEngine {
 	nodeFactories: { [s: string]: AbstractNodeFactory };
 	linkFactories: { [s: string]: AbstractLinkFactory };
 	portFactories: { [s: string]: AbstractPortFactory };
@@ -81,14 +82,6 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.registerLinkFactory(new DefaultLinkFactory());
 		this.registerPortFactory(new DefaultPortFactory());
 		this.registerLabelFactory(new DefaultLabelFactory());
-	}
-
-	repaintCanvas() {
-		this.iterateListeners(listener => {
-			if (listener.repaintCanvas) {
-				listener.repaintCanvas();
-			}
-		});
 	}
 
 	clearRepaintEntities() {
@@ -171,38 +164,18 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	registerLabelFactory(factory: AbstractLabelFactory) {
 		this.labelFactories[factory.getType()] = factory;
-		this.iterateListeners(listener => {
-			if (listener.labelFactoriesUpdated) {
-				listener.labelFactoriesUpdated();
-			}
-		});
 	}
 
 	registerPortFactory(factory: AbstractPortFactory) {
 		this.portFactories[factory.getType()] = factory;
-		this.iterateListeners(listener => {
-			if (listener.portFactoriesUpdated) {
-				listener.portFactoriesUpdated();
-			}
-		});
 	}
 
 	registerNodeFactory(factory: AbstractNodeFactory) {
 		this.nodeFactories[factory.getType()] = factory;
-		this.iterateListeners(listener => {
-			if (listener.nodeFactoriesUpdated) {
-				listener.nodeFactoriesUpdated();
-			}
-		});
 	}
 
 	registerLinkFactory(factory: AbstractLinkFactory) {
 		this.linkFactories[factory.getType()] = factory;
-		this.iterateListeners(listener => {
-			if (listener.linkFactoriesUpdated) {
-				listener.linkFactoriesUpdated();
-			}
-		});
 	}
 
 	getPortFactory(type: string): AbstractPortFactory {
@@ -570,14 +543,4 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 			matrix[y][x] = 1;
 		}
 	};
-
-	zoomToFit() {
-		const xFactor = this.canvas.clientWidth / this.canvas.scrollWidth;
-		const yFactor = this.canvas.clientHeight / this.canvas.scrollHeight;
-		const zoomFactor = xFactor < yFactor ? xFactor : yFactor;
-
-		this.diagramModel.setZoomLevel(this.diagramModel.getZoomLevel() * zoomFactor);
-		this.diagramModel.setOffset(0, 0);
-		this.repaintCanvas();
-	}
 }

@@ -14,7 +14,7 @@ import { PortModel } from "../models/PortModel";
 import { LinkModel } from "../models/LinkModel";
 import { BaseModel, BaseModelListener } from "../models/BaseModel";
 import { BaseEntity } from "../BaseEntity";
-import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
+import { BaseWidget, BaseWidgetProps } from "@projectstorm/react-canvas";
 
 export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -74,21 +74,10 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	}
 
 	componentWillUnmount() {
-		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
 		this.props.diagramEngine.setCanvas(null);
 		window.removeEventListener("keyup", this.onKeyUpPointer);
 		window.removeEventListener("mouseUp", this.onMouseUp);
 		window.removeEventListener("mouseMove", this.onMouseMove);
-	}
-
-	componentWillReceiveProps(nextProps: DiagramProps) {
-		if (this.props.diagramEngine !== nextProps.diagramEngine) {
-			this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
-			const diagramEngineListener = nextProps.diagramEngine.addListener({
-				repaintCanvas: () => this.forceUpdate()
-			});
-			this.setState({ diagramEngineListener });
-		}
 	}
 
 	componentWillUpdate(nextProps: DiagramProps) {
@@ -116,12 +105,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		//add a keyboard listener
 		this.setState({
 			document: document,
-			renderedNodes: true,
-			diagramEngineListener: this.props.diagramEngine.addListener({
-				repaintCanvas: () => {
-					this.forceUpdate();
-				}
-			})
+			renderedNodes: true
 		});
 
 		window.addEventListener("keyup", this.onKeyUpPointer, false);

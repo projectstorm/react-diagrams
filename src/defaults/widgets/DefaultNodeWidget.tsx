@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import { DefaultNodeModel } from "../models/DefaultNodeModel";
 import { DefaultPortLabel } from "./DefaultPortLabelWidget";
 import { DiagramEngine } from "../../DiagramEngine";
-import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
+import { BaseWidget, BaseWidgetProps } from "@projectstorm/react-canvas";
 
 export interface DefaultNodeProps extends BaseWidgetProps {
 	node: DefaultNodeModel;

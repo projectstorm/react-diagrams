@@ -7,7 +7,7 @@ import { DefaultLinkModel } from "../models/DefaultLinkModel";
 import PathFinding from "../../routing/PathFinding";
 import * as _ from "lodash";
 import { LabelModel } from "../../models/LabelModel";
-import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
+import { BaseWidget, BaseWidgetProps } from "@projectstorm/react-canvas";
 
 export interface DefaultLinkProps extends BaseWidgetProps {
 	color?: string;

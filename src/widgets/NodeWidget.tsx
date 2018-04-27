@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DiagramEngine } from "../DiagramEngine";
 import { NodeModel } from "../models/NodeModel";
-import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
+import { BaseWidget, BaseWidgetProps } from "@projectstorm/react-canvas";
 
 export interface NodeProps extends BaseWidgetProps {
 	node: NodeModel;

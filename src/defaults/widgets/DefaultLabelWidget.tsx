@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DefaultLabelModel } from "../models/DefaultLabelModel";
-import {BaseWidget, BaseWidgetProps} from "@projectstorm/react-canvas";
+import { BaseWidget, BaseWidgetProps } from "@projectstorm/react-canvas";
 
 export interface DefaultLabelWidgetProps extends BaseWidgetProps {
 	model: DefaultLabelModel;
