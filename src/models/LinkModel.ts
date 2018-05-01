@@ -3,24 +3,31 @@ import { PointModel } from "./PointModel";
 import * as _ from "lodash";
 import { LabelModel } from "./LabelModel";
 import { DiagramEngine } from "../DiagramEngine";
-import { DiagramModel } from "./DiagramModel";
-import { BaseModel, BaseListener, BaseEvent, GraphModel } from "@projectstorm/react-canvas";
+import {
+	BaseEvent,
+	GraphModel,
+	GraphModelOrdered,
+	CanvasElementModel,
+	CanvasElementModelListener,
+	Rectangle
+} from "@projectstorm/react-canvas";
+import {DiagramModel} from "storm-react-diagrams";
 
-export interface LinkModelListener extends BaseListener<LinkModel> {
-	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
+export interface LinkModelListener<T extends LinkModel = any> extends CanvasElementModelListener<T> {
+	sourcePortChanged?(event: BaseEvent<T> & { port: null | PortModel }): void;
 
-	targetPortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
+	targetPortChanged?(event: BaseEvent<T> & { port: null | PortModel }): void;
 }
 
-export class LinkModel<T extends LinkModelListener = LinkModelListener> extends BaseModel<DiagramModel, T> {
+export class LinkModel<T extends LinkModelListener = LinkModelListener> extends CanvasElementModel<T> {
 	protected sourcePort: PortModel | null;
 	protected targetPort: PortModel | null;
 	protected labels: GraphModel<LabelModel, LinkModel>;
-	protected points: GraphModel<PointModel, LinkModel>;
+	protected points: GraphModelOrdered<PointModel, LinkModel>;
 
 	constructor(linkType: string = "default") {
 		super(linkType);
-		this.points = new GraphModel();
+		this.points = new GraphModelOrdered();
 		this.labels = new GraphModel();
 		this.points.setParentDelegate(this);
 		this.labels.setParentDelegate(this);
@@ -28,24 +35,24 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		this.targetPort = null;
 	}
 
+	setDimensions(dimensions: Rectangle) {
+		throw new Error("Method not implemented.");
+	}
+
+	getDimensions(): Rectangle {
+		throw new Error("Method not implemented.");
+	}
+
 	deSerialize(ob, engine: DiagramEngine, cache) {
 		super.deSerialize(ob, engine, cache);
 		this.points.deSerialize(ob["points"], engine, cache);
 		this.labels.deSerialize(ob["labels"], engine, cache);
 		if (ob.target) {
-			this.setTargetPort(
-				this.getParent()
-					.getNode(ob.target)
-					.getPortFromID(ob.targetPort)
-			);
+			this.setTargetPort(cache[ob.targetPort]);
 		}
 
 		if (ob.source) {
-			this.setSourcePort(
-				this.getParent()
-					.getNode(ob.source)
-					.getPortFromID(ob.sourcePort)
-			);
+			this.setSourcePort(cache[ob.sourcePort]);
 		}
 	}
 
@@ -118,7 +125,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.sourcePort.removeLink(this);
 		}
 		this.sourcePort = port;
-		this.iterateListeners((listener: LinkModelListener, event) => {
+		this.iterateListeners((listener: T, event) => {
 			if (listener.sourcePortChanged) {
 				listener.sourcePortChanged({ ...event, port: port });
 			}
@@ -141,7 +148,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.targetPort.removeLink(this);
 		}
 		this.targetPort = port;
-		this.iterateListeners((listener: LinkModelListener, event) => {
+		this.iterateListeners((listener: T, event) => {
 			if (listener.targetPortChanged) {
 				listener.targetPortChanged({ ...event, port: port });
 			}
@@ -157,32 +164,18 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	}
 
 	getPoints(): PointModel[] {
-		return _.values(this.points.getEntities());
+		return this.points.getArray();
 	}
 
 	setPoints(points: PointModel[]) {
 		_.forEach(points, point => {
 			point.setLink(this);
 		});
-		this.points.add = points;
+		this.points.addEntities(points);
 	}
 
 	removePoint(pointModel: PointModel) {
-		this.points.splice(this.getPointIndex(pointModel), 1);
-	}
-
-	removePointsBefore(pointModel: PointModel) {
-		this.points.splice(0, this.getPointIndex(pointModel));
-	}
-
-	removePointsAfter(pointModel: PointModel) {
-		this.points.splice(this.getPointIndex(pointModel) + 1);
-	}
-
-	removeMiddlePoints() {
-		if (this.points.length > 2) {
-			this.points.splice(0, this.points.length - 2);
-		}
+		this.points.removeEntity(pointModel);
 	}
 
 	addPoint<P extends PointModel>(pointModel: P, index = 1): P {
