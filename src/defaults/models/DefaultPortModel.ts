@@ -1,8 +1,8 @@
 import * as _ from "lodash";
 import { PortModel } from "../../models/PortModel";
-import { DiagramEngine } from "../../DiagramEngine";
 import { DefaultLinkModel } from "./DefaultLinkModel";
 import { LinkModel } from "../../models/LinkModel";
+import { DeserializeEvent } from "@projectstorm/react-canvas";
 
 export class DefaultPortModel extends PortModel {
 	in: boolean;
@@ -15,10 +15,10 @@ export class DefaultPortModel extends PortModel {
 		this.label = label || name;
 	}
 
-	deSerialize(object, engine: DiagramEngine, cache) {
-		super.deSerialize(object, engine, cache);
-		this.in = object.in;
-		this.label = object.label;
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.in = event.data.in;
+		this.label = event.data.label;
 	}
 
 	serialize() {

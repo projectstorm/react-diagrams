@@ -1,9 +1,8 @@
 import { LinkModel, LinkModelListener } from "../../models/LinkModel";
 import * as _ from "lodash";
-import { DiagramEngine } from "../../DiagramEngine";
 import { DefaultLabelModel } from "./DefaultLabelModel";
 import { LabelModel } from "../../models/LabelModel";
-import { BaseEvent } from "@projectstorm/react-canvas";
+import { BaseEvent, DeserializeEvent } from "@projectstorm/react-canvas";
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string }): void;
@@ -31,11 +30,11 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 		});
 	}
 
-	deSerialize(ob, engine: DiagramEngine, cache) {
-		super.deSerialize(ob, engine, cache);
-		this.color = ob.color;
-		this.width = ob.width;
-		this.curvyness = ob.curvyness;
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.color = event.data.color;
+		this.width = event.data.width;
+		this.curvyness = event.data.curvyness;
 	}
 
 	addLabel(label: LabelModel | string) {
@@ -49,7 +48,7 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 
 	setWidth(width: number) {
 		this.width = width;
-		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
+		this.iterateListeners("width changed", (listener: DefaultLinkModelListener, event: BaseEvent) => {
 			if (listener.widthChanged) {
 				listener.widthChanged({ ...event, width: width });
 			}
@@ -58,7 +57,7 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 
 	setColor(color: string) {
 		this.color = color;
-		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
+		this.iterateListeners("color changed", (listener: DefaultLinkModelListener, event: BaseEvent) => {
 			if (listener.colorChanged) {
 				listener.colorChanged({ ...event, color: color });
 			}

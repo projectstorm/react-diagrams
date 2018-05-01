@@ -2,16 +2,15 @@ import { PortModel } from "./PortModel";
 import { PointModel } from "./PointModel";
 import * as _ from "lodash";
 import { LabelModel } from "./LabelModel";
-import { DiagramEngine } from "../DiagramEngine";
 import {
 	BaseEvent,
 	GraphModel,
 	GraphModelOrdered,
 	CanvasElementModel,
 	CanvasElementModelListener,
-	Rectangle
+	Rectangle,
+	DeserializeEvent
 } from "@projectstorm/react-canvas";
-import {DiagramModel} from "storm-react-diagrams";
 
 export interface LinkModelListener<T extends LinkModel = any> extends CanvasElementModelListener<T> {
 	sourcePortChanged?(event: BaseEvent<T> & { port: null | PortModel }): void;
@@ -43,16 +42,16 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 		throw new Error("Method not implemented.");
 	}
 
-	deSerialize(ob, engine: DiagramEngine, cache) {
-		super.deSerialize(ob, engine, cache);
-		this.points.deSerialize(ob["points"], engine, cache);
-		this.labels.deSerialize(ob["labels"], engine, cache);
-		if (ob.target) {
-			this.setTargetPort(cache[ob.targetPort]);
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.points.deSerialize(event.subset("points"));
+		this.labels.deSerialize(event.subset("labels"));
+		if (event.data.target) {
+			this.setTargetPort(event.cache[event.data.targetPort] as PortModel);
 		}
 
-		if (ob.source) {
-			this.setSourcePort(cache[ob.sourcePort]);
+		if (event.data.source) {
+			this.setSourcePort(event.cache[event.data.sourcePort] as PortModel);
 		}
 	}
 
@@ -125,7 +124,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.sourcePort.removeLink(this);
 		}
 		this.sourcePort = port;
-		this.iterateListeners((listener: T, event) => {
+		this.iterateListeners("source port changed", (listener: T, event) => {
 			if (listener.sourcePortChanged) {
 				listener.sourcePortChanged({ ...event, port: port });
 			}
@@ -148,7 +147,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.targetPort.removeLink(this);
 		}
 		this.targetPort = port;
-		this.iterateListeners((listener: T, event) => {
+		this.iterateListeners("target port chnaged", (listener: T, event) => {
 			if (listener.targetPortChanged) {
 				listener.targetPortChanged({ ...event, port: port });
 			}

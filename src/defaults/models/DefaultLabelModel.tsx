@@ -1,6 +1,6 @@
 import { LabelModel } from "../../models/LabelModel";
 import * as _ from "lodash";
-import { DiagramEngine } from "../../DiagramEngine";
+import { DeserializeEvent } from "@projectstorm/react-canvas";
 
 export class DefaultLabelModel extends LabelModel {
 	protected label: string;
@@ -14,9 +14,9 @@ export class DefaultLabelModel extends LabelModel {
 		this.label = label;
 	}
 
-	deSerialize(ob, engine: DiagramEngine, cache) {
-		super.deSerialize(ob, engine, cache);
-		this.label = ob.label;
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.label = event.data.label;
 	}
 
 	serialize() {

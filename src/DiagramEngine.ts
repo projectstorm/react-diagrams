@@ -1,11 +1,10 @@
 import { DiagramModel } from "./models/DiagramModel";
 import { CanvasEngine } from "@projectstorm/react-canvas";
-import {DefaultLabelFactory, DefaultLinkFactory, DefaultNodeFactory, DefaultPortFactory} from "storm-react-diagrams";
+import { DefaultLabelFactory, DefaultLinkFactory, DefaultNodeFactory, DefaultPortFactory } from "storm-react-diagrams";
 
 export class DiagramEngine extends CanvasEngine<DiagramModel> {
 	paintableWidgets: {};
 	linksThatHaveInitiallyRendered: {};
-	nodesRendered: boolean;
 	maxNumberPointsPerLink: number;
 	smartRouting: boolean;
 
@@ -22,15 +21,6 @@ export class DiagramEngine extends CanvasEngine<DiagramModel> {
 		this.registerElementFactory(new DefaultLinkFactory());
 		this.registerElementFactory(new DefaultNodeFactory());
 		this.registerElementFactory(new DefaultPortFactory());
-	}
-
-	clearRepaintEntities() {
-		this.paintableWidgets = null;
-	}
-
-	recalculatePortsVisually() {
-		this.nodesRendered = false;
-		this.linksThatHaveInitiallyRendered = {};
 	}
 
 	getMaxNumberPointsPerLink(): number {

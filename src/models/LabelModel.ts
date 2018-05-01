@@ -1,7 +1,6 @@
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
-import { DiagramEngine } from "../DiagramEngine";
-import { BaseModel } from "@projectstorm/react-canvas";
+import { BaseModel, DeserializeEvent } from "@projectstorm/react-canvas";
 
 export class LabelModel extends BaseModel<LinkModel> {
 	offsetX: number;
@@ -13,10 +12,10 @@ export class LabelModel extends BaseModel<LinkModel> {
 		this.offsetY = 0;
 	}
 
-	deSerialize(ob, engine: DiagramEngine, cache: { [id: string]: BaseModel }) {
-		super.deSerialize(ob, engine, cache);
-		this.offsetX = ob.offsetX;
-		this.offsetY = ob.offsetY;
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.offsetX = event.data.offsetX;
+		this.offsetY = event.data.offsetY;
 	}
 
 	serialize() {

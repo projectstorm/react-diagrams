@@ -1,8 +1,7 @@
-import { BaseModel, BaseListener } from "@projectstorm/react-canvas";
+import { BaseModel, BaseListener, DeserializeEvent } from "@projectstorm/react-canvas";
 import { NodeModel } from "./NodeModel";
 import { LinkModel } from "./LinkModel";
 import * as _ from "lodash";
-import { DiagramEngine } from "../DiagramEngine";
 
 export class PortModel extends BaseModel<NodeModel, BaseListener> {
 	name: string;
@@ -16,16 +15,16 @@ export class PortModel extends BaseModel<NodeModel, BaseListener> {
 		this.maximumLinks = maximumLinks;
 	}
 
-	deSerialize(ob, engine: DiagramEngine, cache) {
-		super.deSerialize(ob, engine, cache);
-		this.name = ob.name;
-		this.maximumLinks = ob.maximumLinks;
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.name = event.data.name;
+		this.maximumLinks = event.data.maximumLinks;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
 			name: this.name,
-			parentNode: this.parent.id,
+			parentNode: this.parent.getID(),
 			links: _.map(this.links, link => {
 				return link.getID();
 			}),

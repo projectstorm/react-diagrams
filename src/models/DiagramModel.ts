@@ -1,16 +1,7 @@
 import * as _ from "lodash";
-import {DiagramEngine} from "../DiagramEngine";
-import {LinkModel} from "./LinkModel";
-import {NodeModel} from "./NodeModel";
-import {PortModel} from "./PortModel";
-import {PointModel} from "./PointModel";
-import {
-	BaseModel,
-	BaseEvent,
-	CanvasModel,
-	CanvasModelListener,
-	CanvasLayerModel
-} from "@projectstorm/react-canvas";
+import { LinkModel } from "./LinkModel";
+import { NodeModel } from "./NodeModel";
+import { BaseModel, BaseEvent, CanvasModel, CanvasModelListener, CanvasLayerModel } from "@projectstorm/react-canvas";
 
 export interface DiagramListener extends CanvasModelListener {
 	nodesUpdated?(event: BaseEvent & { node: NodeModel; isCreated: boolean }): void;
@@ -21,7 +12,6 @@ export interface DiagramListener extends CanvasModelListener {
 }
 
 export class DiagramModel extends CanvasModel<DiagramListener> {
-
 	linksLayer: CanvasLayerModel;
 	nodesLayer: CanvasLayerModel;
 
@@ -32,12 +22,11 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 		this.nodesLayer = new CanvasLayerModel();
 	}
 
-
 	getNode(node: string | NodeModel): NodeModel | null {
 		if (node instanceof NodeModel) {
 			return node;
 		}
-		return this.nodesLayer.getEntity[node] || null
+		return this.nodesLayer.getEntity[node] || null;
 	}
 
 	getLink(link: string | LinkModel): LinkModel | null {
@@ -70,9 +59,9 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 			}
 		});
 		this.nodes[node.getID()] = node;
-		this.iterateListeners((listener, event) => {
+		this.iterateListeners("node added", (listener, event) => {
 			if (listener.nodesUpdated) {
-				listener.nodesUpdated({...event, node: node, isCreated: true});
+				listener.nodesUpdated({ ...event, node: node, isCreated: true });
 			}
 		});
 		return node;
@@ -81,9 +70,9 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 	removeLink(link: LinkModel | string) {
 		link = this.getLink(link);
 		delete this.links[link.getID()];
-		this.iterateListeners((listener, event) => {
+		this.iterateListeners("link removed", (listener, event) => {
 			if (listener.linksUpdated) {
-				listener.linksUpdated({...event, link: link as LinkModel, isCreated: false});
+				listener.linksUpdated({ ...event, link: link as LinkModel, isCreated: false });
 			}
 		});
 	}
@@ -91,9 +80,9 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 	removeNode(node: NodeModel | string) {
 		node = this.getNode(node);
 		delete this.nodes[node.getID()];
-		this.iterateListeners((listener, event) => {
+		this.iterateListeners("node removed", (listener, event) => {
 			if (listener.nodesUpdated) {
-				listener.nodesUpdated({...event, node: node as NodeModel, isCreated: false});
+				listener.nodesUpdated({ ...event, node: node as NodeModel, isCreated: false });
 			}
 		});
 	}

@@ -2,12 +2,9 @@ import * as _ from "lodash";
 import { DefaultPortModel } from "./DefaultPortModel";
 import { NodeModel } from "../../models/NodeModel";
 import { Toolkit } from "../../Toolkit";
-import { DiagramEngine } from "../../DiagramEngine";
+import { DeserializeEvent } from "@projectstorm/react-canvas";
 
-/**
- * @author Dylan Vorster
- */
-export class DefaultNodeModel extends NodeModel {
+export class DefaultNodeModel extends NodeModel<DefaultPortModel> {
 	protected name: string;
 	protected color: string;
 
@@ -25,10 +22,10 @@ export class DefaultNodeModel extends NodeModel {
 		return this.addPort(new DefaultPortModel(false, Toolkit.UID(), label));
 	}
 
-	deSerialize(object, engine: DiagramEngine, cache) {
-		super.deSerialize(object, engine, cache);
-		this.name = object.name;
-		this.color = object.color;
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.name = event.data.name;
+		this.color = event.data.color;
 	}
 
 	serialize() {
@@ -39,13 +36,13 @@ export class DefaultNodeModel extends NodeModel {
 	}
 
 	getInPorts(): DefaultPortModel[] {
-		return _.filter(this.ports, portModel => {
+		return _.filter(this.getPorts(), portModel => {
 			return portModel.in;
 		});
 	}
 
 	getOutPorts(): DefaultPortModel[] {
-		return _.filter(this.ports, portModel => {
+		return _.filter(this.getPorts(), portModel => {
 			return !portModel.in;
 		});
 	}

@@ -1,7 +1,6 @@
 import { PortModel } from "./PortModel";
 import * as _ from "lodash";
-import { DiagramEngine } from "../DiagramEngine";
-import { Rectangle, CanvasElementModel, GraphModel } from "@projectstorm/react-canvas";
+import { Rectangle, CanvasElementModel, GraphModel, DeserializeEvent } from "@projectstorm/react-canvas";
 
 export class NodeModel<T extends PortModel = PortModel> extends CanvasElementModel {
 	protected dimensions: Rectangle;
@@ -21,14 +20,15 @@ export class NodeModel<T extends PortModel = PortModel> extends CanvasElementMod
 		return this.dimensions;
 	}
 
-	deSerialize(ob, engine: DiagramEngine, cache) {
-		super.deSerialize(ob, engine, cache);
-		this.dimensions.deserialize(ob.dimensions);
+	deSerialize(event: DeserializeEvent) {
+		super.deSerialize(event);
+		this.dimensions.deserialize(event.data.dimensions);
 
 		//deserialize ports
-		_.forEach(ob.ports, (port: any) => {
-			let portOb = engine.getFactory(port.type).generateModel() as PortModel;
-			portOb.deSerialize(port, engine, cache);
+		let ports = event.subset("ports");
+		_.forEach(ports.data, (port: any, index) => {
+			let portOb = event.engine.getFactory(port.type).generateModel() as PortModel;
+			portOb.deSerialize(ports.subset(index));
 			this.addPort(portOb);
 		});
 	}
@@ -40,7 +40,7 @@ export class NodeModel<T extends PortModel = PortModel> extends CanvasElementMod
 		});
 	}
 
-	getPortFromID(id): PortModel | null {
+	getPortFromID(id): T | null {
 		for (let i in this.ports) {
 			if (this.ports[i].getID() === id) {
 				return this.ports[i];
@@ -49,15 +49,15 @@ export class NodeModel<T extends PortModel = PortModel> extends CanvasElementMod
 		return null;
 	}
 
-	getPort(name: string): PortModel | null {
+	getPort(name: string): T | null {
 		return this.ports.getEntities()[name];
 	}
 
-	getPorts(): { [s: string]: PortModel } {
+	getPorts(): { [s: string]: T } {
 		return this.ports.getEntities();
 	}
 
-	removePort(port: PortModel) {
+	removePort(port: T) {
 		//clear the parent node reference
 		if (this.ports[port.name]) {
 			this.ports[port.name].setParent(null);
@@ -65,7 +65,7 @@ export class NodeModel<T extends PortModel = PortModel> extends CanvasElementMod
 		}
 	}
 
-	addPort<T extends PortModel>(port: T): T {
+	addPort<T extends T>(port: T): T {
 		port.setParent(this);
 		this.ports[port.name] = port;
 		return port;
