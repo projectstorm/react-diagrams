@@ -53,7 +53,7 @@ export default () => {
 	model.addAll(node1, node2, node3, node4, link1, link2, link3);
 
 	// load model into engine and render
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	return (
 		<DemoWorkspaceWidget

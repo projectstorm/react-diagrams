@@ -46,7 +46,7 @@ export default () => {
 		});
 	});
 
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	var props = {
 		diagramEngine: engine,

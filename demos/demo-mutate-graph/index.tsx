@@ -31,7 +31,7 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		node.x += 30;
 		node.y += 30;
 		model2.deSerializeDiagram(obj, engine);
-		engine.setDiagramModel(model2);
+		engine.setModel(model2);
 		this.forceUpdate();
 	}
 
@@ -79,7 +79,7 @@ export default () => {
 	model.addAll(node1, node2, link1);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//6) render the diagram!
 	return <NodeDelayedPosition engine={engine} model={model} />;

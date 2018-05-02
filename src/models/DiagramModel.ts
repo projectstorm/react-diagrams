@@ -12,8 +12,8 @@ export interface DiagramListener extends CanvasModelListener {
 }
 
 export class DiagramModel extends CanvasModel<DiagramListener> {
-	linksLayer: CanvasLayerModel;
-	nodesLayer: CanvasLayerModel;
+	linksLayer: CanvasLayerModel<LinkModel>;
+	nodesLayer: CanvasLayerModel<NodeModel>;
 
 	constructor() {
 		super();
@@ -53,12 +53,7 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 	}
 
 	addNode(node: NodeModel): NodeModel {
-		node.addListener({
-			entityRemoved: () => {
-				this.removeNode(node);
-			}
-		});
-		this.nodes[node.getID()] = node;
+		this.nodesLayer.addEntity(node);
 		this.iterateListeners("node added", (listener, event) => {
 			if (listener.nodesUpdated) {
 				listener.nodesUpdated({ ...event, node: node, isCreated: true });
@@ -68,8 +63,7 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 	}
 
 	removeLink(link: LinkModel | string) {
-		link = this.getLink(link);
-		delete this.links[link.getID()];
+		this.linksLayer.removeEntity(link);
 		this.iterateListeners("link removed", (listener, event) => {
 			if (listener.linksUpdated) {
 				listener.linksUpdated({ ...event, link: link as LinkModel, isCreated: false });
@@ -78,8 +72,7 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 	}
 
 	removeNode(node: NodeModel | string) {
-		node = this.getNode(node);
-		delete this.nodes[node.getID()];
+		this.nodesLayer.removeEntity(node);
 		this.iterateListeners("node removed", (listener, event) => {
 			if (listener.nodesUpdated) {
 				listener.nodesUpdated({ ...event, node: node as NodeModel, isCreated: false });
@@ -88,10 +81,10 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 	}
 
 	getLinks(): { [s: string]: LinkModel } {
-		return this.links;
+		return this.linksLayer.getEntities();
 	}
 
 	getNodes(): { [s: string]: NodeModel } {
-		return this.nodes;
+		return this.nodesLayer.getEntities();
 	}
 }

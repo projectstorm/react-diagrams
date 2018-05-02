@@ -20,6 +20,10 @@ export class NodeModel<T extends PortModel = PortModel> extends CanvasElementMod
 		return this.dimensions;
 	}
 
+	setPosition(x:number, y:number){
+		this.dimensions.updateDimensions(x,y, this.dimensions.getWidth(), this.dimensions.getHeight());
+	}
+
 	deSerialize(event: DeserializeEvent) {
 		super.deSerialize(event);
 		this.dimensions.deserialize(event.data.dimensions);

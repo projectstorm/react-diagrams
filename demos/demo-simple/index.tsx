@@ -34,7 +34,7 @@ export default () => {
 	model.addAll(node1, node2, link1);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//6) render the diagram!
 	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />;

@@ -51,7 +51,7 @@ export default () => {
 
 	model.addAll(node3, node4, link2);
 
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//!========================================= <<<<<<<
 

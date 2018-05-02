@@ -40,7 +40,7 @@ class Demo8Widget extends React.Component<any, any> {
 		const { engine } = this.props;
 		const model = engine.getDiagramModel();
 		let distributedModel = getDistributedModel(engine, model);
-		engine.setDiagramModel(distributedModel);
+		engine.setModel(distributedModel);
 		this.forceUpdate();
 	}
 
@@ -114,7 +114,7 @@ export default () => {
 	//5) load model into engine
 	let model2 = getDistributedModel(engine, model);
 
-	engine.setDiagramModel(model2);
+	engine.setModel(model2);
 
 	return <Demo8Widget engine={engine} />;
 };

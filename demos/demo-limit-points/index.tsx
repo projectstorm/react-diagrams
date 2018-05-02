@@ -33,7 +33,7 @@ export default () => {
 
 	model.addAll(node1, node2, link1);
 
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	var props = {
 		diagramEngine: engine,

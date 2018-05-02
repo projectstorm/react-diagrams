@@ -29,7 +29,7 @@ export default () => {
 	model.addAll(node1, node2, link1);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//!------------- SERIALIZING ------------------
 
@@ -39,7 +39,7 @@ export default () => {
 
 	var model2 = new DiagramModel();
 	model2.deSerializeDiagram(JSON.parse(str), engine);
-	engine.setDiagramModel(model2);
+	engine.setModel(model2);
 
 	return (
 		<DemoWorkspaceWidget
