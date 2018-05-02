@@ -20,6 +20,15 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 
 		this.linksLayer = new CanvasLayerModel();
 		this.nodesLayer = new CanvasLayerModel();
+
+		this.linksLayer.setSVG(true);
+		this.linksLayer.setTransformable(true);
+
+		this.nodesLayer.setSVG(false);
+		this.nodesLayer.setTransformable(true);
+
+		this.addLayer(this.linksLayer);
+		this.addLayer(this.nodesLayer);
 	}
 
 	getNode(node: string | NodeModel): NodeModel | null {
@@ -33,7 +42,7 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 		if (link instanceof LinkModel) {
 			return link;
 		}
-		this.linksLayer.getEntity(link) || null;
+		return this.linksLayer.getEntity(link) || null;
 	}
 
 	addAll(...models: BaseModel[]): BaseModel[] {
@@ -49,6 +58,11 @@ export class DiagramModel extends CanvasModel<DiagramListener> {
 
 	addLink(link: LinkModel): LinkModel {
 		this.linksLayer.addEntity(link);
+		this.iterateListeners("link added", (listener, event) => {
+			if (listener.linksUpdated) {
+				listener.linksUpdated({ ...event, link: link, isCreated: true });
+			}
+		});
 		return link;
 	}
 

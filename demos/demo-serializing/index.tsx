@@ -1,8 +1,9 @@
-import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "storm-react-diagrams";
+import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel } from "storm-react-diagrams";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
 import { action } from "@storybook/addon-actions";
 import * as beautify from "json-beautify";
+import {DeserializeEvent} from "../../../react-canvas/src/models/BaseModel";
 
 export default () => {
 	//1) setup the diagram engine
@@ -33,12 +34,12 @@ export default () => {
 
 	//!------------- SERIALIZING ------------------
 
-	var str = JSON.stringify(model.serializeDiagram());
+	var str = JSON.stringify(model.serialize());
 
 	//!------------- DESERIALIZING ----------------
 
 	var model2 = new DiagramModel();
-	model2.deSerializeDiagram(JSON.parse(str), engine);
+	model2.deSerialize(new DeserializeEvent(JSON.parse(str), engine));
 	engine.setModel(model2);
 
 	return (

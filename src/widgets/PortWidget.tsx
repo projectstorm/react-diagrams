@@ -11,9 +11,6 @@ export interface PortState {
 	selected: boolean;
 }
 
-/**
- * @author Dylan Vorster
- */
 export class PortWidget extends BaseWidget<PortProps, PortState> {
 	constructor(props: PortProps) {
 		super("srd-port", props);
