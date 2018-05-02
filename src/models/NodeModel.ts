@@ -4,7 +4,7 @@ import { Rectangle, CanvasElementModel, GraphModel, DeserializeEvent } from "@pr
 
 export class NodeModel<T extends PortModel = PortModel> extends CanvasElementModel {
 	protected dimensions: Rectangle;
-	protected ports: GraphModel<null, T>;
+	protected ports: GraphModel<T, null>;
 
 	constructor(nodeType: string = "default") {
 		super(nodeType);
@@ -31,7 +31,7 @@ export class NodeModel<T extends PortModel = PortModel> extends CanvasElementMod
 		//deserialize ports
 		let ports = event.subset("ports");
 		_.forEach(ports.data, (port: any, index) => {
-			let portOb = event.engine.getFactory(port.type).generateModel() as PortModel;
+			let portOb = event.engine.getFactory(port.type).generateModel() as T;
 			portOb.deSerialize(ports.subset(index));
 			this.addPort(portOb);
 		});
@@ -69,9 +69,8 @@ export class NodeModel<T extends PortModel = PortModel> extends CanvasElementMod
 		}
 	}
 
-	addPort<T extends T>(port: T): T {
-		port.setParent(this);
-		this.ports[port.name] = port;
+	addPort(port: T): T {
+		this.ports.addEntity(port);
 		return port;
 	}
 }
