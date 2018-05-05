@@ -179,7 +179,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	addPoint<P extends PointModel>(pointModel: P, index = 1): P {
 		pointModel.setLink(this);
-		this.points.splice(index, 0, pointModel);
+		this.points.addEntity(pointModel, index);
 		return pointModel;
 	}
 
