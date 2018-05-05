@@ -46,7 +46,6 @@ export default () => {
 
 	// also a label for A and D
 	const link3 = port1.link(port4);
-	link3.setTargetPort(port4);
 	(link3 as DefaultLinkModel).addLabel("Emoji label: 🎉");
 
 	// add all to the main model
