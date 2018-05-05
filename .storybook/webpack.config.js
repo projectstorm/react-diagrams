@@ -22,7 +22,7 @@ module.exports = {
 			},
 			{
 				test: /\.tsx?$/,
-				loader: 'awesome-typescript-loader',
+				loader: 'awesome-typescript-loader?declaration=false',
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
