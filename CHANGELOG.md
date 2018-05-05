@@ -1,3 +1,11 @@
+__5.2.1__
+
+* [fix] Always remove link from old source/target port on port change
+* [maintenance] upgrade node modules
+* [refactor] https://github.com/projectstorm/react-diagrams/commit/55f62587bd3b12513c7d37eff59edfc8bdb8d6c9
+* [bug] https://github.com/projectstorm/react-diagrams/commit/75ef02dd4d131a0e7c08b2680c69efc390e50b84
+-> and other improvements, also checkout the foundation work happening over at https://github.com/projectstorm/react-canvas
+
 __5.1.0__ 
 
 * [api] Rename XXXFactory into AbstractXXXFactory
