@@ -4,7 +4,7 @@
 
 ---
 
-**DEMO**: [http://projectstorm.cloud/react-diagrams](http://www.projectstorm.io/react-diagrams)
+**DEMO**: [http://projectstorm.cloud/react-diagrams](http://projectstorm.cloud/react-diagrams)
 
 **DOCS:** [https://projectstorm.gitbooks.io/react-diagrams](https://projectstorm.gitbooks.io/react-diagrams)
 
