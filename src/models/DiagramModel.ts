@@ -36,6 +36,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	zoom: number;
 	rendered: boolean;
 	gridSize: number;
+	isCanvasMoving: boolean;
 
 	constructor() {
 		super();
@@ -48,6 +49,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.zoom = 100;
 		this.rendered = false;
 		this.gridSize = 0;
+		this.isCanvasMoving = false;
 	}
 
 	setGridSize(size: number = 0) {
@@ -73,6 +75,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.offsetY = object.offsetY;
 		this.zoom = object.zoom;
 		this.gridSize = object.gridSize;
+		this.isCanvasMoving = object.isCanvasMoving;
 
 		// deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
@@ -102,7 +105,8 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			}),
 			nodes: _.map(this.nodes, node => {
 				return node.serialize();
-			})
+			}),
+			isCanvasMoving: this.isCanvasMoving
 		});
 	}
 
@@ -177,6 +181,10 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
+	setIsCanvasMoving(value: boolean) {
+		this.isCanvasMoving = value;
+	}
+
 	setOffset(offsetX: number, offsetY: number) {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
@@ -211,6 +219,10 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 	getOffsetX() {
 		return this.offsetX;
+	}
+
+	getIsCanvasMoving() {
+		return this.isCanvasMoving;
 	}
 
 	getZoomLevel() {

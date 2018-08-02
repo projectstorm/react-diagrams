@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import { NodeWidget } from "../NodeWidget";
 import { NodeModel } from "../../models/NodeModel";
 import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
+import { NodeLayerWidgetInner } from "./NodeLayerWidgetInner";
 
 export interface NodeLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -47,17 +48,7 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> 
 						")"
 				}}
 			>
-				{_.map(diagramModel.getNodes(), (node: NodeModel) => {
-					return React.createElement(
-						NodeWidget,
-						{
-							diagramEngine: this.props.diagramEngine,
-							key: node.id,
-							node: node
-						},
-						this.props.diagramEngine.generateWidgetForNode(node)
-					);
-				})}
+				<NodeLayerWidgetInner diagramEngine={this.props.diagramEngine} />
 			</div>
 		);
 	}
