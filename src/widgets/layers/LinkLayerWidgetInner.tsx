@@ -11,7 +11,6 @@ export interface LLWIProps {
 
 export class LinkLayerWidgetInner extends React.Component<LLWIProps> {
 	public shouldComponentUpdate(nextProps) {
-		var modelNow = this.props.diagramEngine.getDiagramModel();
 		var modelNext = nextProps.diagramEngine.getDiagramModel();
 
 		var isCanvasMoving = modelNext.getIsCanvasMoving();

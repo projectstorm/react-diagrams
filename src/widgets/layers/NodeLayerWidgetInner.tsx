@@ -10,7 +10,6 @@ export interface NLWIProps {
 
 export class NodeLayerWidgetInner extends React.Component<NLWIProps> {
 	public shouldComponentUpdate(nextProps) {
-		var modelNow = this.props.diagramEngine.getDiagramModel();
 		var modelNext = nextProps.diagramEngine.getDiagramModel();
 
 		var isCanvasMoving = modelNext.getIsCanvasMoving();
