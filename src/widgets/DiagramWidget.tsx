@@ -476,7 +476,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 				}}
 				onMouseDown={event => {
 					if (event.nativeEvent.which === 3) return;
-					this.setState({ ...this.state, wasMoved: false });
+					this.setState({ wasMoved: false });
 
 					diagramEngine.clearRepaintEntities();
 					var model = this.getMouseElement(event);
@@ -526,8 +526,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 							diagramModel.clearSelection();
 						}
 						model.model.setSelected(true);
-
-						this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 					}
 					this.state.document.addEventListener("mousemove", this.onMouseMove);
 					this.state.document.addEventListener("mouseup", this.onMouseUp);
@@ -539,11 +537,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						pointAdded={(point: PointModel, event) => {
 							this.state.document.addEventListener("mousemove", this.onMouseMove);
 							this.state.document.addEventListener("mouseup", this.onMouseUp);
-							event.stopPropagation();
 							diagramModel.clearSelection(point);
-							this.setState({
-								action: new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
-							});
+							this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 						}}
 					/>
 				)}
