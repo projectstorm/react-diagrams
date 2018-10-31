@@ -26,7 +26,7 @@ tell the mouse pointer to click and drag on various elements while making assert
 
 We use Jest for the assertions and the interactivity is handled by puppeteer. Due to the laborious nature
 of writing e2e tests, there is a helper method that is provided in each test that makes interacting
-with the diagrams a lot easier. Using this helper, you cna easily tell the mouse to drag links between nodes,
+with the diagrams a lot easier. Using this helper, you can easily tell the mouse to drag links between nodes,
 select them and also easily assert information about them. The important thing here, is that this helper
 does not touch the model in any way, but is purely a helper for writing the tests themselves. Please
 make use of this helper when writing tests, as it ensure that the tests are defensive in nature, and also
