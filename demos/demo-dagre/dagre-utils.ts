@@ -11,8 +11,8 @@ export function distributeElements(model) {
 	let nodes = distributeGraph(clonedModel);
 	nodes.forEach(node => {
 		let modelNode = clonedModel.nodes.find(item => item.id === node.id);
-		modelNode.x = node.x - (node.width / 2);
-		modelNode.y = node.y - (node.height / 2);
+		modelNode.x = node.x - node.width / 2;
+		modelNode.y = node.y - node.height / 2;
 	});
 	return clonedModel;
 }
