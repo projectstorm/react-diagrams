@@ -18,7 +18,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	targetPort: PortModel | null;
 	labels: LabelModel[];
 	points: PointModel[];
-	extras: {};
+	extras: any;
 
 	constructor(linkType: string = "default", id?: string) {
 		super(linkType, id);
