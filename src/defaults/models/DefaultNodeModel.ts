@@ -13,8 +13,8 @@ export class DefaultNodeModel extends NodeModel {
 	color: string;
 	ports: { [s: string]: DefaultPortModel };
 
-	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)") {
-		super("default");
+	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)", id?: string) {
+		super("default", id);
 		this.name = name;
 		this.color = color;
 	}
