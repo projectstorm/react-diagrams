@@ -9,12 +9,9 @@ export interface NodeLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
 }
 
-export interface NodeLayerState {}
+export interface NodeLayerState { }
 
-export class NodeLayerWidget extends BaseWidget<
-	NodeLayerProps,
-	NodeLayerState
-> {
+export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> {
 	constructor(props: NodeLayerProps) {
 		super("srd-node-layer", props);
 		this.state = {};
@@ -24,9 +21,7 @@ export class NodeLayerWidget extends BaseWidget<
 		if (!this.props.diagramEngine.nodesRendered) {
 			const diagramModel = this.props.diagramEngine.getDiagramModel();
 			_.map(diagramModel.getNodes(), node => {
-				node.updateDimensions(
-					this.props.diagramEngine.getNodeDimensions(node)
-				);
+				node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
 			});
 		}
 	};

@@ -1,9 +1,4 @@
-import {
-	BaseListener,
-	BaseEntity,
-	BaseEvent,
-	BaseEntityType
-} from "../BaseEntity";
+import { BaseListener, BaseEntity, BaseEvent, BaseEntityType } from "../BaseEntity";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 import { LinkModel } from "./LinkModel";
@@ -16,17 +11,11 @@ import { PointModel } from "./PointModel";
  *
  */
 export interface DiagramListener extends BaseListener {
-	nodesUpdated?(
-		event: BaseEvent & { node: NodeModel; isCreated: boolean }
-	): void;
+	nodesUpdated?(event: BaseEvent & { node: NodeModel; isCreated: boolean }): void;
 
-	linksUpdated?(
-		event: BaseEvent & { link: LinkModel; isCreated: boolean }
-	): void;
+	linksUpdated?(event: BaseEvent & { link: LinkModel; isCreated: boolean }): void;
 
-	offsetUpdated?(
-		event: BaseEvent<DiagramModel> & { offsetX: number; offsetY: number }
-	): void;
+	offsetUpdated?(event: BaseEvent<DiagramModel> & { offsetX: number; offsetY: number }): void;
 
 	zoomUpdated?(event: BaseEvent<DiagramModel> & { zoom: number }): void;
 
@@ -74,10 +63,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		if (this.gridSize === 0) {
 			return pos;
 		}
-		return (
-			this.gridSize *
-			Math.floor((pos + this.gridSize / 2) / this.gridSize)
-		);
+		return this.gridSize * Math.floor((pos + this.gridSize / 2) / this.gridSize);
 	}
 
 	deSerializeDiagram(object: any, diagramEngine: DiagramEngine) {
@@ -90,9 +76,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
-			let nodeOb = diagramEngine
-				.getNodeFactory(node.type)
-				.getNewInstance(node);
+			let nodeOb = diagramEngine.getNodeFactory(node.type).getNewInstance(node);
 			nodeOb.setParent(this);
 			nodeOb.deSerialize(node, diagramEngine);
 			this.addNode(nodeOb);
@@ -100,9 +84,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialze links
 		_.forEach(object.links, (link: any) => {
-			let linkOb = diagramEngine
-				.getLinkFactory(link.type)
-				.getNewInstance();
+			let linkOb = diagramEngine.getLinkFactory(link.type).getNewInstance();
 			linkOb.setParent(this);
 			linkOb.deSerialize(link, diagramEngine);
 			this.addLink(linkOb);
@@ -124,9 +106,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	clearSelection(
-		ignore: BaseModel<BaseEntity, BaseModelListener> | null = null
-	) {
+	clearSelection(ignore: BaseModel<BaseEntity, BaseModelListener> | null = null) {
 		_.forEach(this.getSelectedItems(), element => {
 			if (ignore && ignore.getID() === element.getID()) {
 				return;
@@ -135,9 +115,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	getSelectedItems(
-		...filters: BaseEntityType[]
-	): BaseModel<BaseEntity, BaseModelListener>[] {
+	getSelectedItems(...filters: BaseEntityType[]): BaseModel<BaseEntity, BaseModelListener>[] {
 		if (!Array.isArray(filters)) {
 			filters = [filters];
 		}
@@ -179,10 +157,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 				if (_.includes(filters, "port") && item instanceof PortModel) {
 					return true;
 				}
-				if (
-					_.includes(filters, "point") &&
-					item instanceof PointModel
-				) {
+				if (_.includes(filters, "point") && item instanceof PointModel) {
 					return true;
 				}
 				return false;
@@ -204,7 +179,6 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	setOffsetX(offsetX: number) {
 		this.offsetX = offsetX;
 	}
-
 	setOffsetY(offsetY: number) {
 		this.offsetY = offsetY;
 	}
@@ -261,11 +235,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.links[link.getID()] = link;
 		this.iterateListeners((listener, event) => {
 			if (listener.linksUpdated) {
-				listener.linksUpdated({
-					...event,
-					link: link,
-					isCreated: true
-				});
+				listener.linksUpdated({ ...event, link: link, isCreated: true });
 			}
 		});
 		return link;
@@ -280,11 +250,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		this.nodes[node.getID()] = node;
 		this.iterateListeners((listener, event) => {
 			if (listener.nodesUpdated) {
-				listener.nodesUpdated({
-					...event,
-					node: node,
-					isCreated: true
-				});
+				listener.nodesUpdated({ ...event, node: node, isCreated: true });
 			}
 		});
 		return node;
@@ -295,11 +261,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		delete this.links[link.getID()];
 		this.iterateListeners((listener, event) => {
 			if (listener.linksUpdated) {
-				listener.linksUpdated({
-					...event,
-					link: link as LinkModel,
-					isCreated: false
-				});
+				listener.linksUpdated({ ...event, link: link as LinkModel, isCreated: false });
 			}
 		});
 	}
@@ -309,11 +271,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		delete this.nodes[node.getID()];
 		this.iterateListeners((listener, event) => {
 			if (listener.nodesUpdated) {
-				listener.nodesUpdated({
-					...event,
-					node: node as NodeModel,
-					isCreated: false
-				});
+				listener.nodesUpdated({ ...event, node: node as NodeModel, isCreated: false });
 			}
 		});
 	}
