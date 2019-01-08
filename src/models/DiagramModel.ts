@@ -169,40 +169,18 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 	setZoomLevel(zoom: number) {
 		this.zoom = zoom;
-
-		this.iterateListeners((listener, event) => {
-			if (listener.zoomUpdated) {
-				listener.zoomUpdated({ ...event, zoom: zoom });
-			}
-		});
 	}
 
 	setOffset(offsetX: number, offsetY: number) {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: offsetY });
-			}
-		});
 	}
 
 	setOffsetX(offsetX: number) {
 		this.offsetX = offsetX;
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: this.offsetY });
-			}
-		});
 	}
 	setOffsetY(offsetY: number) {
 		this.offsetY = offsetY;
-
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: this.offsetX, offsetY: this.offsetY });
-			}
-		});
 	}
 
 	getOffsetY() {

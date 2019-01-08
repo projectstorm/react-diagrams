@@ -20,6 +20,7 @@
 	"typings": "./dist/@types/src/main",
 	"author": "dylanvorster",
 	"scripts": {
+		"build": "tsc",
 		"build:ts": "webpack",
 		"build:ts:prod": "cross-env NODE_ENV=production webpack",
 		"build:sass:prod": "node-sass --output-style compressed ./src/sass/main.scss > ./dist/style.min.css",
@@ -79,7 +80,7 @@
 		"ts-jest": "^22.4.4",
 		"ts-loader": "^4.2.0",
 		"tslint": "^5.10.0",
-		"typescript": "^2.8.3",
+		"typescript": "^2.9.2",
 		"uglifyjs-webpack-plugin": "^1.2.5",
 		"val-loader": "^1.1.0",
 		"webpack": "^4.7.0",
