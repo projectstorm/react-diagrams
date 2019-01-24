@@ -1,5 +1,7 @@
 # STORM React Diagrams
 
+**NOTE**: This is a fork of [STORM React Diagrams](https://github.com/projectstorm/react-diagrams) with some custom changes required by maana-io
+
 **PSA**: React Diagrams is currently getting a bit of a rewrite to enable much more advanced features. To see the new foundation WIP visit [https://github.com/projectstorm/react-canvas](https://github.com/projectstorm/react-canvas).
 
 ---
@@ -30,7 +32,7 @@ A no-nonsense diagramming library written entirely in React with the help of a f
 * Simple to operate and understand without sugar and magic
 * Fast and optimized to handle large diagrams with hundreds of nodes/links
 * Super easy to use, and should work as you expect it to
-* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages 
+* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages
 
 #### Run the demos
 
@@ -38,7 +40,7 @@ After running `yarn install` you must then run:  `yarn run storybook`
 
 #### Building from source
 
-Simply run `webpack` in the root directory \(or `export NODE_ENV=production && webpack` if you want a production build\) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.   
+Simply run `webpack` in the root directory \(or `export NODE_ENV=production && webpack` if you want a production build\) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 We use webpack for this because TSC cannot compile a single UMD file \(TSC can currently only output multiple UMD files\).
 
 ## [Checkout the docs](https://projectstorm.gitbooks.io/react-diagrams)
