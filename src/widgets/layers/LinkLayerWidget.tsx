@@ -10,15 +10,29 @@ export interface LinkLayerProps extends BaseWidgetProps {
 	pointAdded: (point: PointModel, event: MouseEvent) => any;
 }
 
-export interface LinkLayerState {}
+export interface LinkLayerState { }
 
 /**
  * @author Dylan Vorster
  */
 export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> {
+	forceUpdateLinks: string[];
+
 	constructor(props: LinkLayerProps) {
 		super("srd-link-layer", props);
 		this.state = {};
+		this.forceUpdateLinks = [];
+	}
+
+	updateLinkLayer(linkIds: string[]) {
+		this.forceUpdateLinks = linkIds;
+		this.forceUpdate();
+	}
+
+	componentDidUpdate() {
+		if (this.forceUpdateLinks.length) {
+			this.forceUpdateLinks = [];
+		}
 	}
 
 	render() {
@@ -38,11 +52,13 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 				}}
 			>
 				{//only perform these actions when we have a diagram
-				this.props.diagramEngine.canvas &&
+					this.props.diagramEngine.canvas &&
 					_.map(diagramModel.getLinks(), link => {
 						if (
 							this.props.diagramEngine.nodesRendered &&
-							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]
+							(!this.props.diagramEngine
+								.linksThatHaveInitiallyRendered[link.id] ||
+								this.forceUpdateLinks.indexOf(link.id) > -1)
 						) {
 							if (link.sourcePort !== null) {
 								try {
@@ -79,7 +95,15 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 						}
 
 						return (
-							<LinkWidget key={link.getID()} link={link} diagramEngine={this.props.diagramEngine}>
+							<LinkWidget
+								key={link.getID()}
+								link={link}
+								diagramEngine={this.props.diagramEngine}
+								suppressUpdate={
+									this.forceUpdateLinks.length &&
+									this.forceUpdateLinks.indexOf(link.id) < 0
+								}
+							>
 								{React.cloneElement(generatedLink, {
 									pointAdded: this.props.pointAdded
 								})}
