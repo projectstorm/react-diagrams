@@ -1,9 +1,9 @@
 {
-	"name": "storm-react-diagrams",
-	"version": "5.2.2",
+	"name": "maana-react-diagrams",
+	"version": "5.2.4",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/projectstorm/react-diagrams.git"
+		"url": "https://github.com/maana-io/react-diagrams.git"
 	},
 	"keywords": [
 		"web",
@@ -19,6 +19,9 @@
 	"main": "./dist/main.js",
 	"typings": "./dist/@types/src/main",
 	"author": "dylanvorster",
+	"publishConfig": {
+		"registry": "https://npm.corp.maana.io/artifactory/api/npm/npm-local"
+	},
 	"scripts": {
 		"build": "tsc",
 		"build:ts": "webpack",
@@ -31,13 +34,13 @@
 		"lint": "tslint -p .",
 		"test:ci": "rm -rf ./dist && node ./tests/e2e/generate-e2e.js && jest --no-cache",
 		"test": "jest --no-cache",
-		"prepublishOnly": "yarn run build:ts:prod && yarn run build:sass:prod"
+		"prepublishOnly": "npm run build:ts:prod && npm run build:sass:prod"
 	},
 	"dependencies": {
-		"closest": "^0.0.1",
+		"closest": "0.0.1",
 		"lodash": "^4.17.10",
-		"pathfinding": "^0.4.18",
-		"paths-js": "^0.4.7",
+		"pathfinding": "0.4.18",
+		"paths-js": "0.4.7",
 		"react": "^16.3.2"
 	},
 	"devDependencies": {
@@ -83,7 +86,7 @@
 		"typescript": "^2.9.2",
 		"uglifyjs-webpack-plugin": "^1.2.5",
 		"val-loader": "^1.1.0",
-		"webpack": "^4.7.0",
-		"webpack-cli": "^2.1.2"
+		"webpack": "4.7.0",
+		"webpack-cli": "2.1.2"
 	}
 }
