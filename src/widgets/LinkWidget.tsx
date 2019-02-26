@@ -7,9 +7,10 @@ export interface LinkProps extends BaseWidgetProps {
 	link: LinkModel;
 	diagramEngine: DiagramEngine;
 	children?: any;
+	suppressUpdate?: boolean;
 }
 
-export interface LinkState {}
+export interface LinkState { }
 
 /**
  * @author Dylan Vorster
@@ -20,8 +21,8 @@ export class LinkWidget extends BaseWidget<LinkProps, LinkState> {
 		this.state = {};
 	}
 
-	shouldComponentUpdate() {
-		return this.props.diagramEngine.canEntityRepaint(this.props.link);
+	shouldComponentUpdate(nextProps: LinkProps) {
+		return !nextProps.suppressUpdate;
 	}
 
 	render() {

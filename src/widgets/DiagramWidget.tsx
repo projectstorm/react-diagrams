@@ -47,6 +47,8 @@ export interface DiagramState {
  * @author Dylan Vorster
  */
 export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
+	nodeLayerWidgetRef: React.Ref<LinkLayerWidget>;
+
 	public static defaultProps: DiagramProps = {
 		diagramEngine: null,
 		allowLooseLinks: true,
@@ -72,6 +74,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			diagramEngineListener: null,
 			document: null
 		};
+
+		this.nodeLayerWidgetRef = React.createRef();
 	}
 
 	componentWillUnmount() {
@@ -131,6 +135,10 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		if (process.env.NODE_ENV !== "test") {
 			window.focus();
 		}
+	}
+
+	updateLinkLayer(linkIds: string[]) {
+		this.nodeLayerWidgetRef["current"].updateLinkLayer(linkIds);
 	}
 
 	/**
@@ -535,6 +543,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			>
 				{this.state.renderedNodes && (
 					<LinkLayerWidget
+						ref={this.nodeLayerWidgetRef}
 						diagramEngine={diagramEngine}
 						pointAdded={(point: PointModel, event) => {
 							this.state.document.addEventListener("mousemove", this.onMouseMove);
