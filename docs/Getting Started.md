@@ -7,7 +7,7 @@ The first thing you need to do, is grab the distribution files on NPM. You can d
 **Via yarn:**
 
 ```
-yarn install storm-react-diagrams
+yarn add storm-react-diagrams
 ```
 
 **Via npm:**
