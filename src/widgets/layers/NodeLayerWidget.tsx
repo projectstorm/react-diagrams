@@ -1,9 +1,11 @@
 import * as React from "react";
-import { DiagramEngine } from "../../DiagramEngine";
 import * as _ from "lodash";
-import { NodeWidget } from "../NodeWidget";
-import { NodeModel } from "../../models/NodeModel";
+
 import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
+
+import { DiagramEngine } from "../../DiagramEngine";
+import { NodeModel } from "../../models/NodeModel";
+import { NodeWidget } from "../NodeWidget";
 
 export interface NodeLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -18,12 +20,14 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> 
 	}
 
 	updateNodeDimensions = () => {
-		if (!this.props.diagramEngine.nodesRendered) {
-			const diagramModel = this.props.diagramEngine.getDiagramModel();
-			_.map(diagramModel.getNodes(), node => {
-				node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
-			});
-		}
+		setTimeout(() => {
+			if (!this.props.diagramEngine.nodesRendered) {
+				const diagramModel = this.props.diagramEngine.getDiagramModel();
+				_.map(diagramModel.getNodes(), node => {
+					node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
+				});
+			}
+		}, 0)
 	};
 
 	componentDidUpdate() {
