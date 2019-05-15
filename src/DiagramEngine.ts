@@ -1,21 +1,24 @@
-import { BaseEntity, BaseListener } from "./BaseEntity";
-import { DiagramModel } from "./models/DiagramModel";
 import * as _ from "lodash";
+
+import { BaseEntity, BaseListener } from "./BaseEntity";
 import { BaseModel, BaseModelListener } from "./models/BaseModel";
-import { NodeModel } from "./models/NodeModel";
-import { PointModel } from "./models/PointModel";
-import { PortModel } from "./models/PortModel";
-import { LinkModel } from "./models/LinkModel";
+import { DefaultLinkFactory, DefaultNodeFactory } from "./main";
+
 import { AbstractLabelFactory } from "./factories/AbstractLabelFactory";
 import { AbstractLinkFactory } from "./factories/AbstractLinkFactory";
 import { AbstractNodeFactory } from "./factories/AbstractNodeFactory";
 import { AbstractPortFactory } from "./factories/AbstractPortFactory";
-import { DefaultLinkFactory, DefaultNodeFactory } from "./main";
-import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
-import { DefaultPortFactory } from "./defaults/factories/DefaultPortFactory";
-import { LabelModel } from "./models/LabelModel";
 import { DefaultLabelFactory } from "./defaults/factories/DefaultLabelFactory";
+import { DefaultPortFactory } from "./defaults/factories/DefaultPortFactory";
+import { DiagramModel } from "./models/DiagramModel";
+import { LabelModel } from "./models/LabelModel";
+import { LinkModel } from "./models/LinkModel";
+import { NodeModel } from "./models/NodeModel";
+import { PointModel } from "./models/PointModel";
+import { PortModel } from "./models/PortModel";
+import { ROUTING_SCALING_FACTOR } from "./routing/PathFinding";
 import { Toolkit } from "./Toolkit";
+
 /**
  * @author Dylan Vorster
  */
@@ -315,6 +318,28 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	}
 
 	/**
+	 * More efficient calculation of rectangular coordinates of the port passed in when deltas and zoom are known.
+	 */
+	calculatePortCoords(
+		port: PortModel,
+		deltaX: number,
+		deltaY: number,
+		amountZoom: number
+	): {
+		x: number;
+		y: number;
+		width: number;
+		height: number;
+	} {
+		return {
+			x: (port.x + deltaX) / amountZoom,
+			y: (port.y + deltaY) / amountZoom,
+			width: port.width,
+			height: port.height
+		};
+	}
+
+	/**
 	 * Calculate rectangular coordinates of the port passed in.
 	 */
 	getPortCoords(
@@ -551,18 +576,20 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		const allElements = _.flatMap(
 			_.values(this.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
 		);
-		allElements.filter(port => port !== null).forEach(port => {
-			const startX = Math.floor(port.x / ROUTING_SCALING_FACTOR);
-			const endX = Math.ceil((port.x + port.width) / ROUTING_SCALING_FACTOR);
-			const startY = Math.floor(port.y / ROUTING_SCALING_FACTOR);
-			const endY = Math.ceil((port.y + port.height) / ROUTING_SCALING_FACTOR);
+		allElements
+			.filter(port => port !== null)
+			.forEach(port => {
+				const startX = Math.floor(port.x / ROUTING_SCALING_FACTOR);
+				const endX = Math.ceil((port.x + port.width) / ROUTING_SCALING_FACTOR);
+				const startY = Math.floor(port.y / ROUTING_SCALING_FACTOR);
+				const endY = Math.ceil((port.y + port.height) / ROUTING_SCALING_FACTOR);
 
-			for (let x = startX - 1; x <= endX + 1; x++) {
-				for (let y = startY - 1; y < endY + 1; y++) {
-					this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+				for (let x = startX - 1; x <= endX + 1; x++) {
+					for (let y = startY - 1; y < endY + 1; y++) {
+						this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+					}
 				}
-			}
-		});
+			});
 	};
 
 	markMatrixPoint = (matrix: number[][], x: number, y: number) => {

@@ -1,21 +1,23 @@
 import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
 import * as _ from "lodash";
-import { LinkLayerWidget } from "./layers/LinkLayerWidget";
-import { NodeLayerWidget } from "./layers/NodeLayerWidget";
-import { Toolkit } from "../Toolkit";
+
+import { BaseModel, BaseModelListener } from "../models/BaseModel";
+import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+
 import { BaseAction } from "../actions/BaseAction";
+import { BaseEntity } from "../BaseEntity";
+import { DiagramEngine } from "../DiagramEngine";
+import { LinkLayerWidget } from "./layers/LinkLayerWidget";
+import { LinkModel } from "../models/LinkModel";
 import { MoveCanvasAction } from "../actions/MoveCanvasAction";
 import { MoveItemsAction } from "../actions/MoveItemsAction";
-import { SelectingAction } from "../actions/SelectingAction";
+import { NodeLayerWidget } from "./layers/NodeLayerWidget";
 import { NodeModel } from "../models/NodeModel";
 import { PointModel } from "../models/PointModel";
 import { PortModel } from "../models/PortModel";
-import { LinkModel } from "../models/LinkModel";
+import { SelectingAction } from "../actions/SelectingAction";
 import { SelectionModel } from "../models/SelectionModel";
-import { BaseModel, BaseModelListener } from "../models/BaseModel";
-import { BaseEntity } from "../BaseEntity";
-import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+import { Toolkit } from "../Toolkit";
 
 export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -266,7 +268,12 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					// update port coordinates as well
 					if (model.model instanceof NodeModel) {
 						_.forEach(model.model.getPorts(), port => {
-							const portCoords = this.props.diagramEngine.getPortCoords(port);
+							const portCoords = this.props.diagramEngine.calculatePortCoords(
+								port,
+								amountX,
+								amountY,
+								amountZoom
+							);
 							port.updateCoords(portCoords);
 						});
 					}
