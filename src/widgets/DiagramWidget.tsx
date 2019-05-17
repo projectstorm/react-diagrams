@@ -50,6 +50,7 @@ export interface DiagramState {
  */
 export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	nodeLayerWidgetRef: React.Ref<LinkLayerWidget>;
+	lastAnimationFrame: number;
 
 	public static defaultProps: DiagramProps = {
 		diagramEngine: null,
@@ -217,12 +218,12 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		}
 	}
 
-	onMouseMove(event) {
+	handleMouseMoveAnimationFrame(clientX, clientY) {
 		var diagramEngine = this.props.diagramEngine;
 		var diagramModel = diagramEngine.getDiagramModel();
 		//select items so draw a bounding box
 		if (this.state.action instanceof SelectingAction) {
-			var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
+			var relative = diagramEngine.getRelativePoint(clientX, clientY);
 
 			_.forEach(diagramModel.getNodes(), node => {
 				if ((this.state.action as SelectingAction).containsElement(node.x, node.y, diagramModel)) {
@@ -252,8 +253,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			this.setState({ action: this.state.action });
 			return;
 		} else if (this.state.action instanceof MoveItemsAction) {
-			let amountX = event.clientX - this.state.action.mouseX;
-			let amountY = event.clientY - this.state.action.mouseY;
+			let amountX = clientX - this.state.action.mouseX;
+			let amountY = clientY - this.state.action.mouseY;
 			let amountZoom = diagramModel.getZoomLevel() / 100;
 
 			_.forEach(this.state.action.selectionModels, model => {
@@ -303,13 +304,23 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			//translate the actual canvas
 			if (this.props.allowCanvasTranslation) {
 				diagramModel.setOffset(
-					this.state.action.initialOffsetX + (event.clientX - this.state.action.mouseX),
-					this.state.action.initialOffsetY + (event.clientY - this.state.action.mouseY)
+					this.state.action.initialOffsetX + (clientX - this.state.action.mouseX),
+					this.state.action.initialOffsetY + (clientY - this.state.action.mouseY)
 				);
 				this.fireAction();
 				this.forceUpdate();
 			}
 		}
+		this.lastAnimationFrame = null;
+	}
+
+	onMouseMove(event) {
+		// Requesting an animation frame allows the browser to repaint between frames
+		// resulting in a much smoother dragging experience.
+		if (this.lastAnimationFrame) cancelAnimationFrame(this.lastAnimationFrame);
+		const clientX = event.clientX;
+		const clientY = event.clientY;
+		this.lastAnimationFrame = requestAnimationFrame(() => this.handleMouseMoveAnimationFrame(clientX, clientY));
 	}
 
 	onKeyUp(event) {
