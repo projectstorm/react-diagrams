@@ -45,8 +45,18 @@ export class Toolkit {
 
 	public static generateCurvePath(firstPoint: PointModel, lastPoint: PointModel, curvy: number = 0): string {
 		var isHorizontal = Math.abs(firstPoint.x - lastPoint.x) > Math.abs(firstPoint.y - lastPoint.y);
-		var curvyX = isHorizontal ? curvy : 0;
-		var curvyY = isHorizontal ? 0 : curvy;
+
+		var xOrY = isHorizontal ? "x" : "y";
+
+		// make sure that smoothening works
+		// without disrupting the line direction
+		let curvyness = curvy;
+		if (firstPoint[xOrY] > firstPoint[xOrY]) {
+			curvyness = -curvy;
+		}
+
+		var curvyX = isHorizontal ? curvyness : 0;
+		var curvyY = isHorizontal ? 0 : curvyness;
 
 		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvyX},${firstPoint.y + curvyY}
     ${lastPoint.x - curvyX},${lastPoint.y - curvyY} ${lastPoint.x},${lastPoint.y}`;
