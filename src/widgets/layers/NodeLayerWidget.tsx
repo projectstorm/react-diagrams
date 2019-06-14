@@ -20,14 +20,12 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> 
 	}
 
 	updateNodeDimensions = () => {
-		setTimeout(() => {
-			if (!this.props.diagramEngine.nodesRendered) {
-				const diagramModel = this.props.diagramEngine.getDiagramModel();
-				_.map(diagramModel.getNodes(), node => {
-					node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
-				});
-			}
-		}, 0)
+		if (!this.props.diagramEngine.nodesRendered) {
+			const diagramModel = this.props.diagramEngine.getDiagramModel();
+			_.map(diagramModel.getNodes(), node => {
+				node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
+			});
+		}
 	};
 
 	componentDidUpdate() {
