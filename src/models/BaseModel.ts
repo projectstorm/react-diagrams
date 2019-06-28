@@ -2,6 +2,7 @@ import { BaseEntity, BaseListener } from "../BaseEntity";
 import * as _ from "lodash";
 import { BaseEvent } from "../BaseEntity";
 import { DiagramEngine } from "../DiagramEngine";
+import { PointModel } from "../models/PointModel";
 
 export interface BaseModelListener extends BaseListener {
 	selectionChanged?(event: BaseEvent<BaseModel> & { isSelected: boolean }): void;
@@ -34,7 +35,7 @@ export class BaseModel<
 		this.parent = parent;
 	}
 
-	public getSelectedEntities(): BaseModel<any, T>[] {
+	public getSelectedEntities(): Array<BaseModel<any, T> | PointModel> {
 		if (this.isSelected()) {
 			return [this];
 		}
