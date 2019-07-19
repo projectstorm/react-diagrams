@@ -551,18 +551,20 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		const allElements = _.flatMap(
 			_.values(this.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
 		);
-		allElements.filter(port => port !== null).forEach(port => {
-			const startX = Math.floor(port.x / ROUTING_SCALING_FACTOR);
-			const endX = Math.ceil((port.x + port.width) / ROUTING_SCALING_FACTOR);
-			const startY = Math.floor(port.y / ROUTING_SCALING_FACTOR);
-			const endY = Math.ceil((port.y + port.height) / ROUTING_SCALING_FACTOR);
+		allElements
+			.filter(port => port !== null)
+			.forEach(port => {
+				const startX = Math.floor(port.x / ROUTING_SCALING_FACTOR);
+				const endX = Math.ceil((port.x + port.width) / ROUTING_SCALING_FACTOR);
+				const startY = Math.floor(port.y / ROUTING_SCALING_FACTOR);
+				const endY = Math.ceil((port.y + port.height) / ROUTING_SCALING_FACTOR);
 
-			for (let x = startX - 1; x <= endX + 1; x++) {
-				for (let y = startY - 1; y < endY + 1; y++) {
-					this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+				for (let x = startX - 1; x <= endX + 1; x++) {
+					for (let y = startY - 1; y < endY + 1; y++) {
+						this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+					}
 				}
-			}
-		});
+			});
 	};
 
 	markMatrixPoint = (matrix: number[][], x: number, y: number) => {

@@ -19,12 +19,12 @@ export class DefaultNodeModel extends NodeModel<NodeModelListener> {
 		this.color = color;
 	}
 
-	addInPort(label: string): DefaultPortModel {
-		return this.addPort(new DefaultPortModel(true, Toolkit.UID(), label));
+	addInPort(label: string, id: string = ""): DefaultPortModel {
+		return this.addPort(new DefaultPortModel(true, id || Toolkit.UID(), label));
 	}
 
-	addOutPort(label: string): DefaultPortModel {
-		return this.addPort(new DefaultPortModel(false, Toolkit.UID(), label));
+	addOutPort(label: string, id: string = ""): DefaultPortModel {
+		return this.addPort(new DefaultPortModel(false, id || Toolkit.UID(), label));
 	}
 
 	deSerialize(object, engine: DiagramEngine) {
