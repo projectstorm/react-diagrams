@@ -1,4 +1,4 @@
-__5.3.0__
+__5.3.2__
 
 * [maintenance] Upgrade :allthethings: (all the build tooling was upgrade)
 * [api] move to ES6 (JS now contains native classes)
