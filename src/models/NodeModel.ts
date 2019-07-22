@@ -5,6 +5,7 @@ import { PortModel } from "./PortModel";
 import * as _ from "lodash";
 import { DiagramEngine } from "../DiagramEngine";
 import { DiagramModel } from "./DiagramModel";
+import { PointModel } from "./PointModel";
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEvent<NodeModel>): void;
