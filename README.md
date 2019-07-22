@@ -1,13 +1,14 @@
 # STORM React Diagrams
 
-**PSA 2018**: React Diagrams ~is currently~ was getting a bit of a rewrite to enable much more advanced features. To see the new foundation WIP visit [https://github.com/projectstorm/react-canvas](https://github.com/projectstorm/react-canvas).
+__PSA 2018__: React Diagrams ~is currently~ was getting a bit of a rewrite to enable much more advanced features. To see the new foundation WIP visit [https://github.com/projectstorm/react-canvas](https://github.com/projectstorm/react-canvas).
 
-**PSA 2019**: I still want to jump onto the rewrite, but it is a much larger project than anticipated, so going to try maintain this one in the mean time. 
+__PSA 2019__: I still want to jump onto the rewrite, but it is a much larger project than anticipated, so going to try maintain this one in the mean time.
+
 ---
 
 **DEMO**: [http://projectstorm.cloud/react-diagrams](http://projectstorm.cloud/react-diagrams)
 
-**DOCS:** [https://projectstorm.gitbooks.io/react-diagrams](https://projectstorm.gitbooks.io/react-diagrams)
+**(SOME) DOCS:** [https://projectstorm.gitbooks.io/react-diagrams](https://projectstorm.gitbooks.io/react-diagrams)
 
 **RELEASE NOTES** : [http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/](http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/)
 
@@ -31,7 +32,7 @@ A no-nonsense diagramming library written entirely in React with the help of a f
 * Simple to operate and understand without sugar and magic
 * Fast and optimized to handle large diagrams with hundreds of nodes/links
 * Super easy to use, and should work as you expect it to
-* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages 
+* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages
 
 #### Run the demos
 
@@ -39,7 +40,7 @@ After running `yarn install` you must then run:  `yarn run storybook`
 
 #### Building from source
 
-Simply run `webpack` in the root directory \(or `export NODE_ENV=production && webpack` if you want a production build\) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.   
+Simply run `webpack` in the root directory \(or `export NODE_ENV=production && webpack` if you want a production build\) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 We use webpack for this because TSC cannot compile a single UMD file \(TSC can currently only output multiple UMD files\).
 
 ## [Checkout the docs](https://projectstorm.gitbooks.io/react-diagrams)
