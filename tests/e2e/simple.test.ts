@@ -1,19 +1,15 @@
 import "jest";
-import * as puppeteer from "puppeteer";
 import {E2EHelper} from "./E2EHelper";
 
-function itShould(demo: string, directive, test: (page: puppeteer.Page, helper: E2EHelper) => any) {
-	it(directive, async () => {
-		await page.goto("file://" + __dirname + "/../../dist/e2e/" + demo + "/index.html");
-		let helper = new E2EHelper(page);
-		await test(page, helper);
-		await page.close();
-	});
-}
-
 describe("simple test", () => {
-	itShould("demo-simple", "should delete a link and create a new one", async (page, helper) => {
+
+	beforeAll(async () => {
+		await page.goto(`file://${__dirname}/../../dist/e2e/demo-simple/index.html`)
+	});
+
+	it("should delete a link and create a new one", async () => {
 		// get the existing link
+		let helper = new E2EHelper(page);
 		let link = await helper.link("12");
 		await expect(await link.exists()).toBeTruthy();
 

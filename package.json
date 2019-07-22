@@ -28,7 +28,7 @@
 		"storybook:github": "storybook-to-ghpages",
 		"pretty": "prettier --use-tabs --write \"{src,demos,tests}/**/*.{ts,tsx}\" --print-width 120",
 		"lint": "tslint -p .",
-		"test:ci": "HEADLESS=true rm -rf ./dist && node ./tests/e2e/generate-e2e.js && jest --no-cache",
+		"test:ci": "rm -rf ./dist && node ./tests/e2e/generate-e2e.js && jest --runInBand --no-cache",
 		"test": "jest --no-cache",
 		"prepublishOnly": "yarn run build:ts:prod && yarn run build:sass:prod"
 	},

@@ -46,7 +46,7 @@ export class E2EPort extends E2EElement {
 		// click on this port
 		this.page.mouse.move(bounds.x, bounds.y);
 		this.page.mouse.down();
-
+		//
 		let bounds2 = await port.element.boundingBox();
 
 		// drag to other port
@@ -72,10 +72,13 @@ export class E2EPort extends E2EElement {
 		this.page.mouse.move(x, y);
 		this.page.mouse.up();
 
+		const link = _.difference(_.flatMap((await this.parent.model()).ports, "links"), currentLinks)[0];
+		if(!link){
+			return null;
+		}
+
 		// get the parent to get the link
-		return await this.helper.link(
-			_.difference(_.flatMap((await this.parent.model()).ports, "links"), currentLinks)[0]
-		);
+		return await this.helper.link(link);
 	}
 }
 
@@ -119,11 +122,19 @@ export class E2EHelper {
 	}
 
 	async link(id): Promise<E2ELink> {
+		if(!id){
+			throw "Link ID must be valid"
+		}
 		let selector = await this.page.waitForSelector(`path[data-linkid="${id}"]`);
 		return new E2ELink(this, this.page, selector, id);
 	}
 
 	async node(id): Promise<E2ENode> {
+		if(!id){
+			if(!id){
+				throw "Node ID must be valid"
+			}
+		}
 		let selector = await this.page.waitForSelector(`div[data-nodeid="${id}"]`);
 		return new E2ENode(this, this.page, selector, id);
 	}
