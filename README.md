@@ -1,7 +1,8 @@
 # STORM React Diagrams
 
-**PSA**: React Diagrams is currently getting a bit of a rewrite to enable much more advanced features. To see the new foundation WIP visit [https://github.com/projectstorm/react-canvas](https://github.com/projectstorm/react-canvas).
+**PSA 2018**: React Diagrams ~is currently~ was getting a bit of a rewrite to enable much more advanced features. To see the new foundation WIP visit [https://github.com/projectstorm/react-canvas](https://github.com/projectstorm/react-canvas).
 
+**PSA 2019**: I still want to jump onto the rewrite, but it is a much larger project than anticipated, so going to try maintain this one in the mean time. 
 ---
 
 **DEMO**: [http://projectstorm.cloud/react-diagrams](http://projectstorm.cloud/react-diagrams)
