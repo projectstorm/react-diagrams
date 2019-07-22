@@ -4,8 +4,7 @@
 	"compilerOptions": {
 		"suppressExcessPropertyErrors": true,
 		"declaration": true,
-		"outDir": "@types",
-		"target": "es5",
+		"outDir": "dist/@types",
 		"strictNullChecks": false,
 		"sourceMap": true,
 		"skipLibCheck": true,
@@ -14,11 +13,16 @@
 		"paths": {
 			"storm-react-diagrams": ["src/main.ts"]
 		},
+		"target": "es6",
+		"module": "commonjs",
 		"lib": [
 			"dom",
-			"es2015"
+			"es6"
 		]
 	},
+	"include": [
+		"./src"
+	],
 	"exclude": [
 		"node_modules",
 		"**/*.spec.ts",

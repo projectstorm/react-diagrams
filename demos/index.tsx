@@ -1,23 +1,19 @@
 import * as React from "react";
-import { storiesOf, addDecorator } from "@storybook/react";
-import { setOptions } from "@storybook/addon-options";
-import { host } from "storybook-host";
-import { Helper } from "./.helpers/Helper";
-import { Toolkit } from "../src/Toolkit";
+import {storiesOf, addDecorator, addParameters} from "@storybook/react";
+import {setOptions} from "@storybook/addon-options";
+import {host} from "storybook-host";
+import {Helper} from "./.helpers/Helper";
+import {Toolkit} from "../src/Toolkit";
+import {themes} from '@storybook/theming';
+
+addParameters({
+	options: {
+		theme: themes.dark,
+	},
+});
 
 //include the SCSS for the demo
 import "./.helpers/demo.scss";
-
-Toolkit.TESTING = true;
-
-addDecorator(
-	host({
-		cropMarks: false,
-		height: "100%",
-		width: "100%",
-		padding: 20
-	})
-);
 
 setOptions({
 	name: "STORM React Diagrams",
@@ -25,105 +21,51 @@ setOptions({
 	addonPanelInRight: true
 });
 
+import demo_simple from "./demo-simple";
+import demo_flow from "./demo-simple-flow";
+import demo_performance from "./demo-performance";
+import demo_locks from "./demo-locks";
+import demo_grid from "./demo-grid";
+import demo_limit_points from "./demo-limit-points";
+import demo_listeners from "./demo-listeners";
+import demo_zoom from "./demo-zoom-to-fit";
+import demo_labels from "./demo-labelled-links";
+
 storiesOf("Simple Usage", module)
-	.add(
-		"Simple example",
-		Helper.makeDemo(
-			require("./demo-simple/index").default(),
-			require("!!raw-loader!./demo-simple/index"),
-			require("./demo-simple/docs.md")
-		)
-	)
-	.add(
-		"Simple flow example",
-		Helper.makeDemo(require("./demo-simple-flow/index").default(), require("!!raw-loader!./demo-simple-flow/index"))
-	)
-	.add(
-		"Performance demo",
-		Helper.makeDemo(require("./demo-performance/index").default(), require("!!raw-loader!./demo-performance/index"))
-	)
-	.add(
-		"Locked widget",
-		Helper.makeDemo(require("./demo-locks/index").default(), require("!!raw-loader!./demo-locks/index"))
-	)
-	.add(
-		"Canvas grid size",
-		Helper.makeDemo(require("./demo-grid/index").default(), require("!!raw-loader!./demo-grid/index"))
-	)
-	.add(
-		"Limiting link points",
-		Helper.makeDemo(
-			require("./demo-limit-points/index").default(),
-			require("!!raw-loader!./demo-limit-points/index")
-		)
-	)
-	.add(
-		"Events and listeners",
-		Helper.makeDemo(require("./demo-listeners/index").default(), require("!!raw-loader!./demo-listeners/index"))
-	)
-	.add(
-		"Zoom to fit",
-		Helper.makeDemo(require("./demo-zoom-to-fit/index").default(), require("!!raw-loader!./demo-zoom-to-fit/index"))
-	)
-	.add(
-		"Links with labels",
-		Helper.makeDemo(
-			require("./demo-labelled-links/index").default(),
-			require("!!raw-loader!./demo-labelled-links/index")
-		)
-	);
+	.add("Simple example", demo_simple)
+	.add("Simple flow example", demo_flow)
+	.add("Performance demo", demo_performance)
+	.add("Locked widget", demo_locks)
+	.add("Canvas grid size", demo_grid)
+	.add("Limiting link points", demo_limit_points)
+	.add("Events and listeners", demo_listeners)
+	.add("Zoom to fit", demo_zoom)
+	.add("Links with labels", demo_labels);
+
+import demo_adv_clone_selected from "./demo-cloning";
+import demo_adv_ser_des from "./demo-serializing";
+import demo_adv_prog from "./demo-mutate-graph";
+import demo_adv_dnd from "./demo-drag-and-drop";
+import demo_smart_routing from "./demo-smart-routing";
 
 storiesOf("Advanced Techniques", module)
-	.add(
-		"Clone Selected",
-		Helper.makeDemo(require("./demo-cloning/index").default(), require("!!raw-loader!./demo-cloning/index"))
-	)
-	.add(
-		"Serializing and de-serializing",
-		Helper.makeDemo(require("./demo-serializing/index").default(), require("!!raw-loader!./demo-serializing/index"))
-	)
-	.add(
-		"Programatically modifying graph",
-		Helper.makeDemo(
-			require("./demo-mutate-graph/index").default(),
-			require("!!raw-loader!./demo-mutate-graph/index")
-		)
-	)
-	.add(
-		"Large application",
-		Helper.makeDemo(
-			require("./demo-drag-and-drop/index").default(),
-			require("!!raw-loader!./demo-drag-and-drop/components/BodyWidget")
-		)
-	)
-	.add(
-		"Smart routing",
-		Helper.makeDemo(
-			require("./demo-smart-routing/index").default(),
-			require("!!raw-loader!./demo-smart-routing/index")
-		)
-	);
+	.add("Clone Selected", demo_adv_clone_selected)
+	.add("Serializing and de-serializing", demo_adv_ser_des)
+	.add("Programatically modifying graph", demo_adv_prog)
+	.add("Drag and drop", demo_adv_dnd)
+	.add("Smart routing", demo_smart_routing);
+
+import demo_cust_nodes from "./demo-custom-node1";
+import demo_cust_links from "./demo-custom-link1";
 
 storiesOf("Custom Models", module)
-	.add(
-		"Custom diamond node",
-		Helper.makeDemo(
-			require("./demo-custom-node1/index").default(),
-			require("!!raw-loader!./demo-custom-node1/index")
-		)
-	)
-	.add(
-		"Custom animated links",
-		Helper.makeDemo(
-			require("./demo-custom-link1/index").default(),
-			require("!!raw-loader!./demo-custom-link1/index")
-		)
-	);
+	.add("Custom diamond node", demo_cust_nodes)
+	.add("Custom animated links", demo_cust_links);
 
-storiesOf("3rd party libraries", module).add(
-	"Auto Distribute (Dagre)",
-	Helper.makeDemo(require("./demo-dagre/index").default(), require("!!raw-loader!./demo-dagre/index"))
-);
+import demo_3rd_dagre from "./demo-dagre";
+
+storiesOf("3rd party libraries", module)
+	.add("Auto Distribute (Dagre)", demo_3rd_dagre);
 
 // enable this to log mouse location when writing new puppeteer tests
 //Helper.logMousePosition()

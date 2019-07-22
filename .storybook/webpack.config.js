@@ -1,39 +1,48 @@
 const path = require('path');
-module.exports = {
-	module: {
-		rules: [
-			{
-				test: /\.scss$/,
-				loaders: ["style-loader", "css-loader", "sass-loader"],
-				include: path.resolve(__dirname, '../')
-			},
-			{
-				test: /\.css/,
-				loaders: ["style-loader", "css-loader"],
-				include: path.resolve(__dirname, '../')
-			},
-			{
-				enforce: 'pre',
-				test: /\.js$/,
-				loader: "source-map-loader",
-				exclude: [
-					/node_modules\//
-				]
-			},
-			{
-				test: /\.tsx?$/,
-				loader: 'awesome-typescript-loader?declaration=false',
-			},
-			{
-				test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-				loader: "file-loader"
+module.exports = async ({config, mode}) => {
+	return {
+		...config,
+		resolve: {
+			...config.resolve,
+			extensions: ['.tsx', '.ts', '.js'],
+			alias: {
+				...config.resolve.alias,
+				'storm-react-diagrams': path.join(__dirname, "..", "src", "main")
 			}
-		]
-	},
-	resolve: {
-		alias: {
-			'storm-react-diagrams': path.join(__dirname, "..", "src", "main")
 		},
-		extensions: [".tsx", ".ts", ".js"]
-	}
+		module: {
+			...config.module,
+			rules: [
+				...config.module.rules,
+				...[
+					{
+						test: /\.scss$/,
+						loaders: [
+							'style-loader',
+							'css-loader',
+							{
+								loader: 'postcss-loader',
+								options: {config: {path: path.join(__dirname, '..')}}
+							},
+							'sass-loader'
+						]
+					},
+					{
+						enforce: 'pre',
+						test: /\.js$/,
+						loader: 'source-map-loader',
+						exclude: [/node_modules\//]
+					},
+					{
+						test: /\.tsx?$/,
+						exclude: /node_modules/,
+						loader: 'ts-loader',
+						options: {
+							transpileOnly: true
+						}
+					},
+				]
+			]
+		}
+	};
 };

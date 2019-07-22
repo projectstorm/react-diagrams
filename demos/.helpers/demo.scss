@@ -1,5 +1,11 @@
 @import "../../src/sass/main";
 
+html, body, #root{
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
 .srd-demo-workspace{
   background: black;
   display: flex;
@@ -34,15 +40,6 @@
     flex-grow: 1;
     height: 100%;
   }
-}
-
-.docs-preview-wrapper{
-  background: rgb(60,60,60);
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .srd-demo-canvas{
