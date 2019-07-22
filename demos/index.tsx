@@ -6,6 +6,8 @@ import {Helper} from "./.helpers/Helper";
 import {Toolkit} from "../src/Toolkit";
 import {themes} from '@storybook/theming';
 
+Toolkit.TESTING = true;
+
 addParameters({
 	options: {
 		theme: themes.dark,

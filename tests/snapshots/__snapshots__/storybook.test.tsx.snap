@@ -1,722 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Tests demos/demo-cloning/index.tsx 1`] = `
-<div
-  className="srd-demo-workspace"
->
-  <div
-    className="srd-demo-workspace__toolbar"
-  >
-    <button
-      onClick={[Function]}
-    >
-      Clone Selected
-    </button>
-  </div>
-  <div
-    className="srd-demo-workspace__content"
-  >
-    <div
-      className="srd-diagram srd-demo-canvas "
-      onMouseDown={[Function]}
-      onWheel={[Function]}
-    >
-      <svg
-        className="srd-link-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      />
-      <div
-        className="srd-node-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      >
-        <div
-          className="node srd-node "
-          data-nodeid="6"
-          style={
-            Object {
-              "left": 100,
-              "top": 100,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(0,192,255)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node 1
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              />
-              <div
-                className="srd-default-node__out "
-              >
-                <div
-                  className="srd-default-port srd-default-port--out "
-                >
-                  <div
-                    className="name"
-                  >
-                    Out
-                  </div>
-                  <div
-                    className="port srd-port "
-                    data-name="7"
-                    data-nodeid="6"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="node srd-node "
-          data-nodeid="9"
-          style={
-            Object {
-              "left": 400,
-              "top": 100,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(192,255,0)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node 2
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              >
-                <div
-                  className="srd-default-port srd-default-port--in "
-                >
-                  <div
-                    className="port srd-port "
-                    data-name="10"
-                    data-nodeid="9"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                  <div
-                    className="name"
-                  >
-                    In
-                  </div>
-                </div>
-              </div>
-              <div
-                className="srd-default-node__out "
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-custom-link1/index.tsx 1`] = `
-<div
-  className="srd-diagram srd-demo-canvas "
-  onMouseDown={[Function]}
-  onWheel={[Function]}
->
-  <svg
-    className="srd-link-layer "
-    style={
-      Object {
-        "transform": "translate(0px,0px) scale(1)",
-      }
-    }
-  />
-  <div
-    className="srd-node-layer "
-    style={
-      Object {
-        "transform": "translate(0px,0px) scale(1)",
-      }
-    }
-  >
-    <div
-      className="node srd-node "
-      data-nodeid="6"
-      style={
-        Object {
-          "left": 100,
-          "top": 100,
-        }
-      }
-    >
-      <div
-        className="srd-default-node "
-        style={
-          Object {
-            "background": "rgb(0,192,255)",
-          }
-        }
-      >
-        <div
-          className="srd-default-node__title "
-        >
-          <div
-            className="srd-default-node__name "
-          >
-            Source
-          </div>
-        </div>
-        <div
-          className="srd-default-node__ports "
-        >
-          <div
-            className="srd-default-node__in "
-          />
-          <div
-            className="srd-default-node__out "
-          >
-            <div
-              className="srd-default-port srd-default-port--out "
-            >
-              <div
-                className="name"
-              >
-                Out thick
-              </div>
-              <div
-                className="port srd-port "
-                data-name="out-1"
-                data-nodeid="6"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-            </div>
-            <div
-              className="srd-default-port srd-default-port--out "
-            >
-              <div
-                className="name"
-              >
-                Out default
-              </div>
-              <div
-                className="port srd-port "
-                data-name="out-2"
-                data-nodeid="6"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="node srd-node "
-      data-nodeid="9"
-      style={
-        Object {
-          "left": 300,
-          "top": 100,
-        }
-      }
-    >
-      <div
-        className="srd-default-node "
-        style={
-          Object {
-            "background": "rgb(192,255,0)",
-          }
-        }
-      >
-        <div
-          className="srd-default-node__title "
-        >
-          <div
-            className="srd-default-node__name "
-          >
-            Target
-          </div>
-        </div>
-        <div
-          className="srd-default-node__ports "
-        >
-          <div
-            className="srd-default-node__in "
-          >
-            <div
-              className="srd-default-port srd-default-port--in "
-            >
-              <div
-                className="port srd-port "
-                data-name="in-1"
-                data-nodeid="9"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-              <div
-                className="name"
-              >
-                In thick
-              </div>
-            </div>
-            <div
-              className="srd-default-port srd-default-port--in "
-            >
-              <div
-                className="port srd-port "
-                data-name="in-2"
-                data-nodeid="9"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-              <div
-                className="name"
-              >
-                In default
-              </div>
-            </div>
-          </div>
-          <div
-            className="srd-default-node__out "
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      className="node srd-node "
-      data-nodeid="12"
-      style={
-        Object {
-          "left": 100,
-          "top": 200,
-        }
-      }
-    >
-      <div
-        className="srd-default-node "
-        style={
-          Object {
-            "background": "rgb(0,192,255)",
-          }
-        }
-      >
-        <div
-          className="srd-default-node__title "
-        >
-          <div
-            className="srd-default-node__name "
-          >
-            Source
-          </div>
-        </div>
-        <div
-          className="srd-default-node__ports "
-        >
-          <div
-            className="srd-default-node__in "
-          />
-          <div
-            className="srd-default-node__out "
-          >
-            <div
-              className="srd-default-port srd-default-port--out "
-            >
-              <div
-                className="name"
-              >
-                Out thick
-              </div>
-              <div
-                className="port srd-port "
-                data-name="out-1"
-                data-nodeid="12"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-            </div>
-            <div
-              className="srd-default-port srd-default-port--out "
-            >
-              <div
-                className="name"
-              >
-                Out default
-              </div>
-              <div
-                className="port srd-port "
-                data-name="out-2"
-                data-nodeid="12"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="node srd-node "
-      data-nodeid="15"
-      style={
-        Object {
-          "left": 300,
-          "top": 200,
-        }
-      }
-    >
-      <div
-        className="srd-default-node "
-        style={
-          Object {
-            "background": "rgb(192,255,0)",
-          }
-        }
-      >
-        <div
-          className="srd-default-node__title "
-        >
-          <div
-            className="srd-default-node__name "
-          >
-            Target
-          </div>
-        </div>
-        <div
-          className="srd-default-node__ports "
-        >
-          <div
-            className="srd-default-node__in "
-          >
-            <div
-              className="srd-default-port srd-default-port--in "
-            >
-              <div
-                className="port srd-port "
-                data-name="in-1"
-                data-nodeid="15"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-              <div
-                className="name"
-              >
-                In thick
-              </div>
-            </div>
-            <div
-              className="srd-default-port srd-default-port--in "
-            >
-              <div
-                className="port srd-port "
-                data-name="in-2"
-                data-nodeid="15"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-              <div
-                className="name"
-              >
-                In default
-              </div>
-            </div>
-          </div>
-          <div
-            className="srd-default-node__out "
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-custom-node1/index.tsx 1`] = `
-<div
-  className="srd-diagram srd-demo-canvas "
-  onMouseDown={[Function]}
-  onWheel={[Function]}
->
-  <svg
-    className="srd-link-layer "
-    style={
-      Object {
-        "transform": "translate(0px,0px) scale(1)",
-      }
-    }
-  />
-  <div
-    className="srd-node-layer "
-    style={
-      Object {
-        "transform": "translate(0px,0px) scale(1)",
-      }
-    }
-  >
-    <div
-      className="node srd-node "
-      data-nodeid="8"
-      style={
-        Object {
-          "left": 100,
-          "top": 150,
-        }
-      }
-    >
-      <div
-        className="srd-default-node "
-        style={
-          Object {
-            "background": "rgb(0,192,255)",
-          }
-        }
-      >
-        <div
-          className="srd-default-node__title "
-        >
-          <div
-            className="srd-default-node__name "
-          >
-            Node 1
-          </div>
-        </div>
-        <div
-          className="srd-default-node__ports "
-        >
-          <div
-            className="srd-default-node__in "
-          />
-          <div
-            className="srd-default-node__out "
-          >
-            <div
-              className="srd-default-port srd-default-port--out "
-            >
-              <div
-                className="name"
-              >
-                Out
-              </div>
-              <div
-                className="port srd-port "
-                data-name="9"
-                data-nodeid="8"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="node srd-node "
-      data-nodeid="11"
-      style={
-        Object {
-          "left": 250,
-          "top": 108,
-        }
-      }
-    >
-      <div
-        className="diamond-node"
-        style={
-          Object {
-            "height": 150,
-            "position": "relative",
-            "width": 150,
-          }
-        }
-      >
-        <svg
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "
-          <g id=\\"Layer_1\\">
-          </g>
-          <g id=\\"Layer_2\\">
-            <polygon fill=\\"purple\\" stroke=\\"#000000\\" stroke-width=\\"3\\" stroke-miterlimit=\\"10\\" points=\\"10,75 75,10 140,75 75,140 \\"/>
-          </g>
-        ",
-            }
-          }
-          height={150}
-          width={150}
-        />
-        <div
-          style={
-            Object {
-              "left": -8,
-              "position": "absolute",
-              "top": 67,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port srd-port "
-            data-name="left"
-            data-nodeid="11"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-        <div
-          style={
-            Object {
-              "left": 67,
-              "position": "absolute",
-              "top": -8,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port srd-port "
-            data-name="top"
-            data-nodeid="11"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-        <div
-          style={
-            Object {
-              "left": 142,
-              "position": "absolute",
-              "top": 67,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port srd-port "
-            data-name="right"
-            data-nodeid="11"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-        <div
-          style={
-            Object {
-              "left": 67,
-              "position": "absolute",
-              "top": 142,
-              "zIndex": 10,
-            }
-          }
-        >
-          <div
-            className="port srd-port "
-            data-name="bottom"
-            data-nodeid="11"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      className="node srd-node "
-      data-nodeid="16"
-      style={
-        Object {
-          "left": 500,
-          "top": 150,
-        }
-      }
-    >
-      <div
-        className="srd-default-node "
-        style={
-          Object {
-            "background": "red",
-          }
-        }
-      >
-        <div
-          className="srd-default-node__title "
-        >
-          <div
-            className="srd-default-node__name "
-          >
-            Node 3
-          </div>
-        </div>
-        <div
-          className="srd-default-node__ports "
-        >
-          <div
-            className="srd-default-node__in "
-          >
-            <div
-              className="srd-default-port srd-default-port--in "
-            >
-              <div
-                className="port srd-port "
-                data-name="17"
-                data-nodeid="16"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              />
-              <div
-                className="name"
-              >
-                In
-              </div>
-            </div>
-          </div>
-          <div
-            className="srd-default-node__out "
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-dagre/index.tsx 1`] = `
+exports[`Storyshots 3rd party libraries Auto Distribute (Dagre) 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -1193,7 +477,162 @@ exports[`Storyshots Tests demos/demo-dagre/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-drag-and-drop/index.tsx 1`] = `
+exports[`Storyshots Advanced Techniques Clone Selected 1`] = `
+<div
+  className="srd-demo-workspace"
+>
+  <div
+    className="srd-demo-workspace__toolbar"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Clone Selected
+    </button>
+  </div>
+  <div
+    className="srd-demo-workspace__content"
+  >
+    <div
+      className="srd-diagram srd-demo-canvas "
+      onMouseDown={[Function]}
+      onWheel={[Function]}
+    >
+      <svg
+        className="srd-link-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      />
+      <div
+        className="srd-node-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      >
+        <div
+          className="node srd-node "
+          data-nodeid="6"
+          style={
+            Object {
+              "left": 100,
+              "top": 100,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(0,192,255)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node 1
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              />
+              <div
+                className="srd-default-node__out "
+              >
+                <div
+                  className="srd-default-port srd-default-port--out "
+                >
+                  <div
+                    className="name"
+                  >
+                    Out
+                  </div>
+                  <div
+                    className="port srd-port "
+                    data-name="7"
+                    data-nodeid="6"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="node srd-node "
+          data-nodeid="9"
+          style={
+            Object {
+              "left": 400,
+              "top": 100,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(192,255,0)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node 2
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              >
+                <div
+                  className="srd-default-port srd-default-port--in "
+                >
+                  <div
+                    className="port srd-port "
+                    data-name="10"
+                    data-nodeid="9"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="srd-default-node__out "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Advanced Techniques Drag and drop 1`] = `
 <div
   className="body"
 >
@@ -1382,7 +821,1189 @@ exports[`Storyshots Tests demos/demo-drag-and-drop/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-grid/index.tsx 1`] = `
+exports[`Storyshots Advanced Techniques Programatically modifying graph 1`] = `
+<div
+  className="srd-demo-workspace"
+>
+  <div
+    className="srd-demo-workspace__toolbar"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Update position
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Update position via serialize
+    </button>
+  </div>
+  <div
+    className="srd-demo-workspace__content"
+  >
+    <div
+      className="srd-diagram srd-demo-canvas "
+      onMouseDown={[Function]}
+      onWheel={[Function]}
+    >
+      <svg
+        className="srd-link-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      />
+      <div
+        className="srd-node-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      >
+        <div
+          className="node srd-node "
+          data-nodeid="6"
+          style={
+            Object {
+              "left": 100,
+              "top": 100,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(0,192,255)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node 1
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              />
+              <div
+                className="srd-default-node__out "
+              >
+                <div
+                  className="srd-default-port srd-default-port--out "
+                >
+                  <div
+                    className="name"
+                  >
+                    Out
+                  </div>
+                  <div
+                    className="port srd-port "
+                    data-name="7"
+                    data-nodeid="6"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="node srd-node "
+          data-nodeid="9"
+          style={
+            Object {
+              "left": 400,
+              "top": 100,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(192,255,0)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node 2
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              >
+                <div
+                  className="srd-default-port srd-default-port--in "
+                >
+                  <div
+                    className="port srd-port "
+                    data-name="10"
+                    data-nodeid="9"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="srd-default-node__out "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Advanced Techniques Serializing and de-serializing 1`] = `
+<div
+  className="srd-demo-workspace"
+>
+  <div
+    className="srd-demo-workspace__toolbar"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Serialize Graph
+    </button>
+  </div>
+  <div
+    className="srd-demo-workspace__content"
+  >
+    <div
+      className="srd-diagram srd-demo-canvas "
+      onMouseDown={[Function]}
+      onWheel={[Function]}
+    >
+      <svg
+        className="srd-link-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      />
+      <div
+        className="srd-node-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      >
+        <div
+          className="node srd-node "
+          data-nodeid="6"
+          style={
+            Object {
+              "left": 100,
+              "top": 100,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(0,192,255)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node 1
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              />
+              <div
+                className="srd-default-node__out "
+              >
+                <div
+                  className="srd-default-port srd-default-port--out "
+                >
+                  <div
+                    className="name"
+                  >
+                    Out
+                  </div>
+                  <div
+                    className="port srd-port "
+                    data-name="7"
+                    data-nodeid="6"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="node srd-node "
+          data-nodeid="9"
+          style={
+            Object {
+              "left": 400,
+              "top": 100,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(192,255,0)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node 2
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              >
+                <div
+                  className="srd-default-port srd-default-port--in "
+                >
+                  <div
+                    className="port srd-port "
+                    data-name="10"
+                    data-nodeid="9"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="srd-default-node__out "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Advanced Techniques Smart routing 1`] = `
+<div
+  className="srd-demo-workspace"
+>
+  <div
+    className="srd-demo-workspace__toolbar"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Serialize Graph
+    </button>
+  </div>
+  <div
+    className="srd-demo-workspace__content"
+  >
+    <div
+      className="srd-diagram srd-demo-canvas "
+      onMouseDown={[Function]}
+      onWheel={[Function]}
+    >
+      <svg
+        className="srd-link-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      />
+      <div
+        className="srd-node-layer "
+        style={
+          Object {
+            "transform": "translate(0px,0px) scale(1)",
+          }
+        }
+      >
+        <div
+          className="node srd-node "
+          data-nodeid="6"
+          style={
+            Object {
+              "left": 340,
+              "top": 350,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(0,192,255)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node A
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              />
+              <div
+                className="srd-default-node__out "
+              >
+                <div
+                  className="srd-default-port srd-default-port--out "
+                >
+                  <div
+                    className="name"
+                  >
+                    Out
+                  </div>
+                  <div
+                    className="port srd-port "
+                    data-name="out-1"
+                    data-nodeid="6"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="node srd-node "
+          data-nodeid="8"
+          style={
+            Object {
+              "left": 240,
+              "top": 80,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(255,255,0)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node B
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              />
+              <div
+                className="srd-default-node__out "
+              >
+                <div
+                  className="srd-default-port srd-default-port--out "
+                >
+                  <div
+                    className="name"
+                  >
+                    Out
+                  </div>
+                  <div
+                    className="port srd-port "
+                    data-name="out-1"
+                    data-nodeid="8"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="node srd-node "
+          data-nodeid="10"
+          style={
+            Object {
+              "left": 540,
+              "top": 180,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(192,255,255)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node C
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              >
+                <div
+                  className="srd-default-port srd-default-port--in "
+                >
+                  <div
+                    className="port srd-port "
+                    data-name="in-1"
+                    data-nodeid="10"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="srd-default-node__out "
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="node srd-node "
+          data-nodeid="12"
+          style={
+            Object {
+              "left": 95,
+              "top": 185,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(192,0,255)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node D
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              >
+                <div
+                  className="srd-default-port srd-default-port--in "
+                >
+                  <div
+                    className="port srd-port "
+                    data-name="in-1"
+                    data-nodeid="12"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                  />
+                  <div
+                    className="name"
+                  >
+                    In
+                  </div>
+                </div>
+              </div>
+              <div
+                className="srd-default-node__out "
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="node srd-node "
+          data-nodeid="14"
+          style={
+            Object {
+              "left": 250,
+              "top": 180,
+            }
+          }
+        >
+          <div
+            className="srd-default-node "
+            style={
+              Object {
+                "background": "rgb(192,255,0)",
+              }
+            }
+          >
+            <div
+              className="srd-default-node__title "
+            >
+              <div
+                className="srd-default-node__name "
+              >
+                Node E
+              </div>
+            </div>
+            <div
+              className="srd-default-node__ports "
+            >
+              <div
+                className="srd-default-node__in "
+              />
+              <div
+                className="srd-default-node__out "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Custom Models Custom animated links 1`] = `
+<div
+  className="srd-diagram srd-demo-canvas "
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    className="srd-link-layer "
+    style={
+      Object {
+        "transform": "translate(0px,0px) scale(1)",
+      }
+    }
+  />
+  <div
+    className="srd-node-layer "
+    style={
+      Object {
+        "transform": "translate(0px,0px) scale(1)",
+      }
+    }
+  >
+    <div
+      className="node srd-node "
+      data-nodeid="6"
+      style={
+        Object {
+          "left": 100,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="srd-default-node "
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="srd-default-node__title "
+        >
+          <div
+            className="srd-default-node__name "
+          >
+            Source
+          </div>
+        </div>
+        <div
+          className="srd-default-node__ports "
+        >
+          <div
+            className="srd-default-node__in "
+          />
+          <div
+            className="srd-default-node__out "
+          >
+            <div
+              className="srd-default-port srd-default-port--out "
+            >
+              <div
+                className="name"
+              >
+                Out thick
+              </div>
+              <div
+                className="port srd-port "
+                data-name="out-1"
+                data-nodeid="6"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+            <div
+              className="srd-default-port srd-default-port--out "
+            >
+              <div
+                className="name"
+              >
+                Out default
+              </div>
+              <div
+                className="port srd-port "
+                data-name="out-2"
+                data-nodeid="6"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node srd-node "
+      data-nodeid="9"
+      style={
+        Object {
+          "left": 300,
+          "top": 100,
+        }
+      }
+    >
+      <div
+        className="srd-default-node "
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="srd-default-node__title "
+        >
+          <div
+            className="srd-default-node__name "
+          >
+            Target
+          </div>
+        </div>
+        <div
+          className="srd-default-node__ports "
+        >
+          <div
+            className="srd-default-node__in "
+          >
+            <div
+              className="srd-default-port srd-default-port--in "
+            >
+              <div
+                className="port srd-port "
+                data-name="in-1"
+                data-nodeid="9"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                In thick
+              </div>
+            </div>
+            <div
+              className="srd-default-port srd-default-port--in "
+            >
+              <div
+                className="port srd-port "
+                data-name="in-2"
+                data-nodeid="9"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                In default
+              </div>
+            </div>
+          </div>
+          <div
+            className="srd-default-node__out "
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node srd-node "
+      data-nodeid="12"
+      style={
+        Object {
+          "left": 100,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="srd-default-node "
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="srd-default-node__title "
+        >
+          <div
+            className="srd-default-node__name "
+          >
+            Source
+          </div>
+        </div>
+        <div
+          className="srd-default-node__ports "
+        >
+          <div
+            className="srd-default-node__in "
+          />
+          <div
+            className="srd-default-node__out "
+          >
+            <div
+              className="srd-default-port srd-default-port--out "
+            >
+              <div
+                className="name"
+              >
+                Out thick
+              </div>
+              <div
+                className="port srd-port "
+                data-name="out-1"
+                data-nodeid="12"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+            <div
+              className="srd-default-port srd-default-port--out "
+            >
+              <div
+                className="name"
+              >
+                Out default
+              </div>
+              <div
+                className="port srd-port "
+                data-name="out-2"
+                data-nodeid="12"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node srd-node "
+      data-nodeid="15"
+      style={
+        Object {
+          "left": 300,
+          "top": 200,
+        }
+      }
+    >
+      <div
+        className="srd-default-node "
+        style={
+          Object {
+            "background": "rgb(192,255,0)",
+          }
+        }
+      >
+        <div
+          className="srd-default-node__title "
+        >
+          <div
+            className="srd-default-node__name "
+          >
+            Target
+          </div>
+        </div>
+        <div
+          className="srd-default-node__ports "
+        >
+          <div
+            className="srd-default-node__in "
+          >
+            <div
+              className="srd-default-port srd-default-port--in "
+            >
+              <div
+                className="port srd-port "
+                data-name="in-1"
+                data-nodeid="15"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                In thick
+              </div>
+            </div>
+            <div
+              className="srd-default-port srd-default-port--in "
+            >
+              <div
+                className="port srd-port "
+                data-name="in-2"
+                data-nodeid="15"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                In default
+              </div>
+            </div>
+          </div>
+          <div
+            className="srd-default-node__out "
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Custom Models Custom diamond node 1`] = `
+<div
+  className="srd-diagram srd-demo-canvas "
+  onMouseDown={[Function]}
+  onWheel={[Function]}
+>
+  <svg
+    className="srd-link-layer "
+    style={
+      Object {
+        "transform": "translate(0px,0px) scale(1)",
+      }
+    }
+  />
+  <div
+    className="srd-node-layer "
+    style={
+      Object {
+        "transform": "translate(0px,0px) scale(1)",
+      }
+    }
+  >
+    <div
+      className="node srd-node "
+      data-nodeid="8"
+      style={
+        Object {
+          "left": 100,
+          "top": 150,
+        }
+      }
+    >
+      <div
+        className="srd-default-node "
+        style={
+          Object {
+            "background": "rgb(0,192,255)",
+          }
+        }
+      >
+        <div
+          className="srd-default-node__title "
+        >
+          <div
+            className="srd-default-node__name "
+          >
+            Node 1
+          </div>
+        </div>
+        <div
+          className="srd-default-node__ports "
+        >
+          <div
+            className="srd-default-node__in "
+          />
+          <div
+            className="srd-default-node__out "
+          >
+            <div
+              className="srd-default-port srd-default-port--out "
+            >
+              <div
+                className="name"
+              >
+                Out
+              </div>
+              <div
+                className="port srd-port "
+                data-name="9"
+                data-nodeid="8"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="node srd-node "
+      data-nodeid="11"
+      style={
+        Object {
+          "left": 250,
+          "top": 108,
+        }
+      }
+    >
+      <div
+        className="diamond-node"
+        style={
+          Object {
+            "height": 150,
+            "position": "relative",
+            "width": 150,
+          }
+        }
+      >
+        <svg
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "
+          <g id=\\"Layer_1\\">
+          </g>
+          <g id=\\"Layer_2\\">
+            <polygon fill=\\"purple\\" stroke=\\"#000000\\" stroke-width=\\"3\\" stroke-miterlimit=\\"10\\" points=\\"10,75 75,10 140,75 75,140 \\"/>
+          </g>
+        ",
+            }
+          }
+          height={150}
+          width={150}
+        />
+        <div
+          style={
+            Object {
+              "left": -8,
+              "position": "absolute",
+              "top": 67,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port srd-port "
+            data-name="left"
+            data-nodeid="11"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 67,
+              "position": "absolute",
+              "top": -8,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port srd-port "
+            data-name="top"
+            data-nodeid="11"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 142,
+              "position": "absolute",
+              "top": 67,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port srd-port "
+            data-name="right"
+            data-nodeid="11"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+        <div
+          style={
+            Object {
+              "left": 67,
+              "position": "absolute",
+              "top": 142,
+              "zIndex": 10,
+            }
+          }
+        >
+          <div
+            className="port srd-port "
+            data-name="bottom"
+            data-nodeid="11"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="node srd-node "
+      data-nodeid="16"
+      style={
+        Object {
+          "left": 500,
+          "top": 150,
+        }
+      }
+    >
+      <div
+        className="srd-default-node "
+        style={
+          Object {
+            "background": "red",
+          }
+        }
+      >
+        <div
+          className="srd-default-node__title "
+        >
+          <div
+            className="srd-default-node__name "
+          >
+            Node 3
+          </div>
+        </div>
+        <div
+          className="srd-default-node__ports "
+        >
+          <div
+            className="srd-default-node__in "
+          >
+            <div
+              className="srd-default-port srd-default-port--in "
+            >
+              <div
+                className="port srd-port "
+                data-name="17"
+                data-nodeid="16"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              />
+              <div
+                className="name"
+              >
+                In
+              </div>
+            </div>
+          </div>
+          <div
+            className="srd-default-node__out "
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Simple Usage Canvas grid size 1`] = `
 <div
   className="srd-diagram srd-demo-canvas "
   onMouseDown={[Function]}
@@ -1520,7 +2141,349 @@ exports[`Storyshots Tests demos/demo-grid/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-labelled-links/index.tsx 1`] = `
+exports[`Storyshots Simple Usage Events and listeners 1`] = `
+<div>
+  <p>
+    Click the diagram elements to inspect some of the possible events.
+  </p>
+  <div
+    className="srd-diagram srd-demo-canvas "
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      className="srd-link-layer "
+      style={
+        Object {
+          "transform": "translate(0px,0px) scale(1)",
+        }
+      }
+    />
+    <div
+      className="srd-node-layer "
+      style={
+        Object {
+          "transform": "translate(0px,0px) scale(1)",
+        }
+      }
+    >
+      <div
+        className="node srd-node "
+        data-nodeid="6"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="srd-default-node "
+          style={
+            Object {
+              "background": "rgb(255,99,66)",
+            }
+          }
+        >
+          <div
+            className="srd-default-node__title "
+          >
+            <div
+              className="srd-default-node__name "
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="srd-default-node__ports "
+          >
+            <div
+              className="srd-default-node__in "
+            />
+            <div
+              className="srd-default-node__out "
+            >
+              <div
+                className="srd-default-port srd-default-port--out "
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port srd-port "
+                  data-name="7"
+                  data-nodeid="6"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node srd-node "
+        data-nodeid="9"
+        style={
+          Object {
+            "left": 400,
+            "top": 40,
+          }
+        }
+      >
+        <div
+          className="srd-default-node "
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="srd-default-node__title "
+          >
+            <div
+              className="srd-default-node__name "
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="srd-default-node__ports "
+          >
+            <div
+              className="srd-default-node__in "
+            >
+              <div
+                className="srd-default-port srd-default-port--in "
+              >
+                <div
+                  className="port srd-port "
+                  data-name="10"
+                  data-nodeid="9"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In
+                </div>
+              </div>
+            </div>
+            <div
+              className="srd-default-node__out "
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="node srd-node "
+        data-nodeid="12"
+        style={
+          Object {
+            "left": 300,
+            "top": 160,
+          }
+        }
+      >
+        <div
+          className="srd-default-node "
+          style={
+            Object {
+              "background": "rgb(128,99,255)",
+            }
+          }
+        >
+          <div
+            className="srd-default-node__title "
+          >
+            <div
+              className="srd-default-node__name "
+            >
+              Node 3
+            </div>
+          </div>
+          <div
+            className="srd-default-node__ports "
+          >
+            <div
+              className="srd-default-node__in "
+            >
+              <div
+                className="srd-default-port srd-default-port--in "
+              >
+                <div
+                  className="port srd-port "
+                  data-name="13"
+                  data-nodeid="12"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In
+                </div>
+              </div>
+            </div>
+            <div
+              className="srd-default-node__out "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Simple Usage Limiting link points 1`] = `
+<div>
+  <p>
+    A maximum of 5 points can be created per link.
+  </p>
+  <div
+    className="srd-diagram srd-demo-canvas "
+    onMouseDown={[Function]}
+    onWheel={[Function]}
+  >
+    <svg
+      className="srd-link-layer "
+      style={
+        Object {
+          "transform": "translate(0px,0px) scale(1)",
+        }
+      }
+    />
+    <div
+      className="srd-node-layer "
+      style={
+        Object {
+          "transform": "translate(0px,0px) scale(1)",
+        }
+      }
+    >
+      <div
+        className="node srd-node "
+        data-nodeid="6"
+        style={
+          Object {
+            "left": 100,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="srd-default-node "
+          style={
+            Object {
+              "background": "rgb(0,192,255)",
+            }
+          }
+        >
+          <div
+            className="srd-default-node__title "
+          >
+            <div
+              className="srd-default-node__name "
+            >
+              Node 1
+            </div>
+          </div>
+          <div
+            className="srd-default-node__ports "
+          >
+            <div
+              className="srd-default-node__in "
+            />
+            <div
+              className="srd-default-node__out "
+            >
+              <div
+                className="srd-default-port srd-default-port--out "
+              >
+                <div
+                  className="name"
+                >
+                  Out
+                </div>
+                <div
+                  className="port srd-port "
+                  data-name="7"
+                  data-nodeid="6"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="node srd-node "
+        data-nodeid="9"
+        style={
+          Object {
+            "left": 400,
+            "top": 100,
+          }
+        }
+      >
+        <div
+          className="srd-default-node "
+          style={
+            Object {
+              "background": "rgb(192,255,0)",
+            }
+          }
+        >
+          <div
+            className="srd-default-node__title "
+          >
+            <div
+              className="srd-default-node__name "
+            >
+              Node 2
+            </div>
+          </div>
+          <div
+            className="srd-default-node__ports "
+          >
+            <div
+              className="srd-default-node__in "
+            >
+              <div
+                className="srd-default-port srd-default-port--in "
+              >
+                <div
+                  className="port srd-port "
+                  data-name="10"
+                  data-nodeid="9"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                />
+                <div
+                  className="name"
+                >
+                  In
+                </div>
+              </div>
+            </div>
+            <div
+              className="srd-default-node__out "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Simple Usage Links with labels 1`] = `
 <div
   className="srd-demo-workspace"
 >
@@ -1787,349 +2750,7 @@ exports[`Storyshots Tests demos/demo-labelled-links/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-limit-points/index.tsx 1`] = `
-<div>
-  <p>
-    A maximum of 5 points can be created per link.
-  </p>
-  <div
-    className="srd-diagram srd-demo-canvas "
-    onMouseDown={[Function]}
-    onWheel={[Function]}
-  >
-    <svg
-      className="srd-link-layer "
-      style={
-        Object {
-          "transform": "translate(0px,0px) scale(1)",
-        }
-      }
-    />
-    <div
-      className="srd-node-layer "
-      style={
-        Object {
-          "transform": "translate(0px,0px) scale(1)",
-        }
-      }
-    >
-      <div
-        className="node srd-node "
-        data-nodeid="6"
-        style={
-          Object {
-            "left": 100,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="srd-default-node "
-          style={
-            Object {
-              "background": "rgb(0,192,255)",
-            }
-          }
-        >
-          <div
-            className="srd-default-node__title "
-          >
-            <div
-              className="srd-default-node__name "
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="srd-default-node__ports "
-          >
-            <div
-              className="srd-default-node__in "
-            />
-            <div
-              className="srd-default-node__out "
-            >
-              <div
-                className="srd-default-port srd-default-port--out "
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port srd-port "
-                  data-name="7"
-                  data-nodeid="6"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node srd-node "
-        data-nodeid="9"
-        style={
-          Object {
-            "left": 400,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="srd-default-node "
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="srd-default-node__title "
-          >
-            <div
-              className="srd-default-node__name "
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="srd-default-node__ports "
-          >
-            <div
-              className="srd-default-node__in "
-            >
-              <div
-                className="srd-default-port srd-default-port--in "
-              >
-                <div
-                  className="port srd-port "
-                  data-name="10"
-                  data-nodeid="9"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  In
-                </div>
-              </div>
-            </div>
-            <div
-              className="srd-default-node__out "
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-listeners/index.tsx 1`] = `
-<div>
-  <p>
-    Click the diagram elements to inspect some of the possible events.
-  </p>
-  <div
-    className="srd-diagram srd-demo-canvas "
-    onMouseDown={[Function]}
-    onWheel={[Function]}
-  >
-    <svg
-      className="srd-link-layer "
-      style={
-        Object {
-          "transform": "translate(0px,0px) scale(1)",
-        }
-      }
-    />
-    <div
-      className="srd-node-layer "
-      style={
-        Object {
-          "transform": "translate(0px,0px) scale(1)",
-        }
-      }
-    >
-      <div
-        className="node srd-node "
-        data-nodeid="6"
-        style={
-          Object {
-            "left": 100,
-            "top": 100,
-          }
-        }
-      >
-        <div
-          className="srd-default-node "
-          style={
-            Object {
-              "background": "rgb(255,99,66)",
-            }
-          }
-        >
-          <div
-            className="srd-default-node__title "
-          >
-            <div
-              className="srd-default-node__name "
-            >
-              Node 1
-            </div>
-          </div>
-          <div
-            className="srd-default-node__ports "
-          >
-            <div
-              className="srd-default-node__in "
-            />
-            <div
-              className="srd-default-node__out "
-            >
-              <div
-                className="srd-default-port srd-default-port--out "
-              >
-                <div
-                  className="name"
-                >
-                  Out
-                </div>
-                <div
-                  className="port srd-port "
-                  data-name="7"
-                  data-nodeid="6"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="node srd-node "
-        data-nodeid="9"
-        style={
-          Object {
-            "left": 400,
-            "top": 40,
-          }
-        }
-      >
-        <div
-          className="srd-default-node "
-          style={
-            Object {
-              "background": "rgb(192,255,0)",
-            }
-          }
-        >
-          <div
-            className="srd-default-node__title "
-          >
-            <div
-              className="srd-default-node__name "
-            >
-              Node 2
-            </div>
-          </div>
-          <div
-            className="srd-default-node__ports "
-          >
-            <div
-              className="srd-default-node__in "
-            >
-              <div
-                className="srd-default-port srd-default-port--in "
-              >
-                <div
-                  className="port srd-port "
-                  data-name="10"
-                  data-nodeid="9"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  In
-                </div>
-              </div>
-            </div>
-            <div
-              className="srd-default-node__out "
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="node srd-node "
-        data-nodeid="12"
-        style={
-          Object {
-            "left": 300,
-            "top": 160,
-          }
-        }
-      >
-        <div
-          className="srd-default-node "
-          style={
-            Object {
-              "background": "rgb(128,99,255)",
-            }
-          }
-        >
-          <div
-            className="srd-default-node__title "
-          >
-            <div
-              className="srd-default-node__name "
-            >
-              Node 3
-            </div>
-          </div>
-          <div
-            className="srd-default-node__ports "
-          >
-            <div
-              className="srd-default-node__in "
-            >
-              <div
-                className="srd-default-port srd-default-port--in "
-              >
-                <div
-                  className="port srd-port "
-                  data-name="13"
-                  data-nodeid="12"
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                />
-                <div
-                  className="name"
-                >
-                  In
-                </div>
-              </div>
-            </div>
-            <div
-              className="srd-default-node__out "
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-locks/index.tsx 1`] = `
+exports[`Storyshots Simple Usage Locked widget 1`] = `
 <div
   className="srd-diagram srd-demo-canvas "
   onMouseDown={[Function]}
@@ -2379,167 +3000,7 @@ exports[`Storyshots Tests demos/demo-locks/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-mutate-graph/index.tsx 1`] = `
-<div
-  className="srd-demo-workspace"
->
-  <div
-    className="srd-demo-workspace__toolbar"
-  >
-    <button
-      onClick={[Function]}
-    >
-      Update position
-    </button>
-    <button
-      onClick={[Function]}
-    >
-      Update position via serialize
-    </button>
-  </div>
-  <div
-    className="srd-demo-workspace__content"
-  >
-    <div
-      className="srd-diagram srd-demo-canvas "
-      onMouseDown={[Function]}
-      onWheel={[Function]}
-    >
-      <svg
-        className="srd-link-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      />
-      <div
-        className="srd-node-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      >
-        <div
-          className="node srd-node "
-          data-nodeid="6"
-          style={
-            Object {
-              "left": 100,
-              "top": 100,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(0,192,255)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node 1
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              />
-              <div
-                className="srd-default-node__out "
-              >
-                <div
-                  className="srd-default-port srd-default-port--out "
-                >
-                  <div
-                    className="name"
-                  >
-                    Out
-                  </div>
-                  <div
-                    className="port srd-port "
-                    data-name="7"
-                    data-nodeid="6"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="node srd-node "
-          data-nodeid="9"
-          style={
-            Object {
-              "left": 400,
-              "top": 100,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(192,255,0)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node 2
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              >
-                <div
-                  className="srd-default-port srd-default-port--in "
-                >
-                  <div
-                    className="port srd-port "
-                    data-name="10"
-                    data-nodeid="9"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                  <div
-                    className="name"
-                  >
-                    In
-                  </div>
-                </div>
-              </div>
-              <div
-                className="srd-default-node__out "
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-performance/index.tsx 1`] = `
+exports[`Storyshots Simple Usage Performance demo 1`] = `
 <div
   className="srd-diagram srd-demo-canvas "
   onMouseDown={[Function]}
@@ -9733,162 +10194,7 @@ exports[`Storyshots Tests demos/demo-performance/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-serializing/index.tsx 1`] = `
-<div
-  className="srd-demo-workspace"
->
-  <div
-    className="srd-demo-workspace__toolbar"
-  >
-    <button
-      onClick={[Function]}
-    >
-      Serialize Graph
-    </button>
-  </div>
-  <div
-    className="srd-demo-workspace__content"
-  >
-    <div
-      className="srd-diagram srd-demo-canvas "
-      onMouseDown={[Function]}
-      onWheel={[Function]}
-    >
-      <svg
-        className="srd-link-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      />
-      <div
-        className="srd-node-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      >
-        <div
-          className="node srd-node "
-          data-nodeid="6"
-          style={
-            Object {
-              "left": 100,
-              "top": 100,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(0,192,255)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node 1
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              />
-              <div
-                className="srd-default-node__out "
-              >
-                <div
-                  className="srd-default-port srd-default-port--out "
-                >
-                  <div
-                    className="name"
-                  >
-                    Out
-                  </div>
-                  <div
-                    className="port srd-port "
-                    data-name="7"
-                    data-nodeid="6"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="node srd-node "
-          data-nodeid="9"
-          style={
-            Object {
-              "left": 400,
-              "top": 100,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(192,255,0)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node 2
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              >
-                <div
-                  className="srd-default-port srd-default-port--in "
-                >
-                  <div
-                    className="port srd-port "
-                    data-name="10"
-                    data-nodeid="9"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                  <div
-                    className="name"
-                  >
-                    In
-                  </div>
-                </div>
-              </div>
-              <div
-                className="srd-default-node__out "
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-simple/index.tsx 1`] = `
+exports[`Storyshots Simple Usage Simple example 1`] = `
 <div
   className="srd-diagram srd-demo-canvas "
   onMouseDown={[Function]}
@@ -10026,7 +10332,7 @@ exports[`Storyshots Tests demos/demo-simple/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-simple-flow/index.tsx 1`] = `
+exports[`Storyshots Simple Usage Simple flow example 1`] = `
 <div
   className="srd-diagram srd-demo-canvas "
   onMouseDown={[Function]}
@@ -10220,313 +10526,7 @@ exports[`Storyshots Tests demos/demo-simple-flow/index.tsx 1`] = `
 </div>
 `;
 
-exports[`Storyshots Tests demos/demo-smart-routing/index.tsx 1`] = `
-<div
-  className="srd-demo-workspace"
->
-  <div
-    className="srd-demo-workspace__toolbar"
-  >
-    <button
-      onClick={[Function]}
-    >
-      Serialize Graph
-    </button>
-  </div>
-  <div
-    className="srd-demo-workspace__content"
-  >
-    <div
-      className="srd-diagram srd-demo-canvas "
-      onMouseDown={[Function]}
-      onWheel={[Function]}
-    >
-      <svg
-        className="srd-link-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      />
-      <div
-        className="srd-node-layer "
-        style={
-          Object {
-            "transform": "translate(0px,0px) scale(1)",
-          }
-        }
-      >
-        <div
-          className="node srd-node "
-          data-nodeid="6"
-          style={
-            Object {
-              "left": 340,
-              "top": 350,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(0,192,255)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node A
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              />
-              <div
-                className="srd-default-node__out "
-              >
-                <div
-                  className="srd-default-port srd-default-port--out "
-                >
-                  <div
-                    className="name"
-                  >
-                    Out
-                  </div>
-                  <div
-                    className="port srd-port "
-                    data-name="out-1"
-                    data-nodeid="6"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="node srd-node "
-          data-nodeid="8"
-          style={
-            Object {
-              "left": 240,
-              "top": 80,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(255,255,0)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node B
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              />
-              <div
-                className="srd-default-node__out "
-              >
-                <div
-                  className="srd-default-port srd-default-port--out "
-                >
-                  <div
-                    className="name"
-                  >
-                    Out
-                  </div>
-                  <div
-                    className="port srd-port "
-                    data-name="out-1"
-                    data-nodeid="8"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="node srd-node "
-          data-nodeid="10"
-          style={
-            Object {
-              "left": 540,
-              "top": 180,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(192,255,255)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node C
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              >
-                <div
-                  className="srd-default-port srd-default-port--in "
-                >
-                  <div
-                    className="port srd-port "
-                    data-name="in-1"
-                    data-nodeid="10"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                  <div
-                    className="name"
-                  >
-                    In
-                  </div>
-                </div>
-              </div>
-              <div
-                className="srd-default-node__out "
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          className="node srd-node "
-          data-nodeid="12"
-          style={
-            Object {
-              "left": 95,
-              "top": 185,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(192,0,255)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node D
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              >
-                <div
-                  className="srd-default-port srd-default-port--in "
-                >
-                  <div
-                    className="port srd-port "
-                    data-name="in-1"
-                    data-nodeid="12"
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  />
-                  <div
-                    className="name"
-                  >
-                    In
-                  </div>
-                </div>
-              </div>
-              <div
-                className="srd-default-node__out "
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          className="node srd-node "
-          data-nodeid="14"
-          style={
-            Object {
-              "left": 250,
-              "top": 180,
-            }
-          }
-        >
-          <div
-            className="srd-default-node "
-            style={
-              Object {
-                "background": "rgb(192,255,0)",
-              }
-            }
-          >
-            <div
-              className="srd-default-node__title "
-            >
-              <div
-                className="srd-default-node__name "
-              >
-                Node E
-              </div>
-            </div>
-            <div
-              className="srd-default-node__ports "
-            >
-              <div
-                className="srd-default-node__in "
-              />
-              <div
-                className="srd-default-node__out "
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Tests demos/demo-zoom-to-fit/index.tsx 1`] = `
+exports[`Storyshots Simple Usage Zoom to fit 1`] = `
 <div
   className="srd-demo-workspace"
 >

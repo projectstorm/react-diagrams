@@ -37,8 +37,6 @@ glob.glob(__dirname + "/../../demos/demo-*/index.tsx", {}, (err, files) => {
 		},
 	};
 
-	console.log(config);
-
 	webpack(config, (err, stats) => {
 		if (err || stats.hasErrors()) {
 			// Handle errors here
