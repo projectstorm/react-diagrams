@@ -1,3 +1,14 @@
+__5.3.0__
+
+* [maintenance] Upgrade :allthethings: (all the build tooling was upgrade)
+* [api] move to ES6 (JS now contains native classes)
+* [api] changed package name to @projectstorm/react-diagrams
+* [bug] [PR259](https://github.com/projectstorm/react-diagrams/pull/259) Fixes #258
+* [refactor] [PR 306](https://github.com/projectstorm/react-diagrams/pull/306) `:any` fix
+* [feature] [PR 178](https://github.com/projectstorm/react-diagrams/pull/178) Trigger a positionChanged event when moving a Node that has the listener assigned.
+* [fix] [PR 356](https://github.com/projectstorm/react-diagrams/pull/356) Fixed Type issue with 'PointModel[]'
+* [demo] dark mode and upgrade storybook
+
 __5.2.1__
 
 * [fix] Always remove link from old source/target port on port change

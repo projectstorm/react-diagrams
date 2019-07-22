@@ -34,6 +34,10 @@ A no-nonsense diagramming library written entirely in React with the help of a f
 * Super easy to use, and should work as you expect it to
 * Perfect for creating declarative systems such as programmatic pipelines and visual programming languages
 
+#### Installing
+
+```yarn add @projectstorm/react-diagrams``` 
+
 #### Run the demos
 
 After running `yarn install` you must then run:  `yarn run storybook`
