@@ -1,6 +1,7 @@
 const path = require("path");
 // jest.config.js
 module.exports = {
+	"preset": "jest-puppeteer",
 	transform: {
 		".*test_loader.*": path.join(__dirname, "tests", "helpers", "storybook-loader.js" ),
 		'^.+\\.tsx?$': 'ts-jest',
@@ -14,6 +15,6 @@ module.exports = {
 		__dirname+'/tests'
 	],
 	testMatch: [
-		"**/*\.test\.tsx"
+		"**/*\.test\.ts"
 	]
 };

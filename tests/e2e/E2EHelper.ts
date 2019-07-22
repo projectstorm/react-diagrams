@@ -98,7 +98,11 @@ export class E2ELink extends E2EElement {
 	async select(): Promise<any> {
 		const point = await this.page.evaluate(id => {
 			const path = document.querySelector(`path[data-linkid="${id}"]`) as SVGPathElement;
-			return path.getPointAtLength(path.getTotalLength() / 2);
+			const point =path.getPointAtLength(path.getTotalLength() / 2);
+			return {
+				x: point.x,
+				y: point.y
+			}
 		}, this.id);
 		await this.page.keyboard.down("Shift");
 		await this.page.mouse.move(point.x, point.y);
