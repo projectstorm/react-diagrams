@@ -30,7 +30,7 @@
 		"lint": "tslint -p .",
 		"test:ci": "rm -rf ./dist && node ./tests/e2e/generate-e2e.js && jest --runInBand --no-cache",
 		"test": "jest --no-cache",
-		"prepublishOnly": "yarn run build:ts:prod && yarn run build:sass:prod"
+		"prepublishOnly": "rm -rf ./dist && yarn run build:ts:prod && yarn run build:sass:prod"
 	},
 	"peerDependencies": {
 		"closest": "^0.0.1",
