@@ -1,0 +1,13 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"declaration": false,
+		"jsx": "react",
+		"allowJs": true,
+		"target": "es6",
+		"moduleResolution": "node"
+	},
+	"include": [
+		"./src"
+	]
+}

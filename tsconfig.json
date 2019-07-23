@@ -1,18 +1,13 @@
 {
 	"compileOnSave": false,
-	"name": "storm-react-diagrams",
 	"compilerOptions": {
 		"suppressExcessPropertyErrors": true,
-		"declaration": true,
+		"declaration": false,
 		"outDir": "dist/@types",
 		"strictNullChecks": false,
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"jsx": "react",
-		"baseUrl": ".",
-		"paths": {
-			"storm-react-diagrams": ["src/main.ts"]
-		},
 		"target": "es6",
 		"module": "commonjs",
 		"lib": [

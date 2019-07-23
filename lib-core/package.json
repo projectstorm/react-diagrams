@@ -1,0 +1,31 @@
+{
+	"name": "@projectstorm/react-diagrams-core",
+	"version": "5.3.2",
+	"author": "dylanvorster",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/projectstorm/react-diagrams.git"
+	},
+	"scripts": {
+		"clean": "rm -rf ./dist",
+		"build": "../node_modules/.bin/webpack"
+	},
+	"keywords": [
+		"web",
+		"diagram",
+		"diagrams",
+		"react",
+		"typescript",
+		"flowchart",
+		"simple",
+		"links",
+		"nodes"
+	],
+	"main": "./dist/index.js",
+	"typings": "./dist/@types/index",
+	"peerDependencies": {
+		"closest": "^0.0.1",
+		"lodash": "4.*",
+		"react": "16.*"
+	}
+}
