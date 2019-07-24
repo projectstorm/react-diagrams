@@ -7,7 +7,11 @@
 		"url": "https://github.com/projectstorm/react-diagrams.git"
 	},
 	"scripts": {
-		"start": "../node_modules/.bin/start-storybook"
+		"start": "../node_modules/.bin/start-storybook",
+		"build": "../node_modules/.bin/build-storybook -c .storybook -o .out",
+		"github": "../node_modules/.bin/storybook-to-ghpages",
+		"test:ci": "rm -rf ./dist && node ./tests-e2e/e2e/generate-e2e.js && jest --runInBand --no-cache",
+		"test": "../node_modules/.bin/jest --no-cache"
 	},
 	"keywords": [
 		"web",

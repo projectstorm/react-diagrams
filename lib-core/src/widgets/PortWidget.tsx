@@ -1,6 +1,8 @@
 import * as React from 'react';
+import * as _ from "lodash";
 import { NodeModel } from '../models/NodeModel';
 import { BaseWidget, BaseWidgetProps } from './BaseWidget';
+import {Toolkit} from "../Toolkit";
 
 export interface PortProps extends BaseWidgetProps {
 	name: string;
@@ -23,6 +25,16 @@ export class PortWidget extends BaseWidget<PortProps, PortState> {
 		return 'port ' + super.getClassName() + (this.state.selected ? this.bem('--selected') : '');
 	}
 
+	getExtraProps(){
+		if(Toolkit.TESTING){
+			const links = _.keys(this.props.node.getPort(this.props.name).links).join(',');
+			return {
+				'data-links': links
+			}
+		}
+		return {};
+	}
+
 	render() {
 		return (
 			<div
@@ -35,6 +47,7 @@ export class PortWidget extends BaseWidget<PortProps, PortState> {
 				}}
 				data-name={this.props.name}
 				data-nodeid={this.props.node.getID()}
+				{...this.getExtraProps()}
 			/>
 		);
 	}
