@@ -22,10 +22,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # test building project
-      - run: yarn run prepublishOnly
-
-      # test building storybook
-      - run: yarn run storybook:build
+      - run: yarn run build
 
       # test e2e tests and jest snapshots
       - run: yarn run test:ci
