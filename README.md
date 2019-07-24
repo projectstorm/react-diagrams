@@ -57,7 +57,11 @@ and add some extras:
     
 ## How to use
 
-Take a look at the demos `[./lib-demo-gallery/demos](./lib-demo-gallery/demos)`
+Take a look at the demos [lib-demo-gallery/demos](https://github.com/projectstorm/react-diagrams/tree/lerna/lib-demo-gallery/demos)
+
+__or__
+
+Take a look at the demo project: [lib-demo-project](https://github.com/projectstorm/react-diagrams/tree/lerna/lib-demo-project)
 
 ## Run the demos
 
