@@ -1,17 +1,18 @@
-import { BaseEntity, BaseListener } from "./BaseEntity";
-import { DiagramModel } from "./models/DiagramModel";
+import {BaseEntity, BaseListener} from "./BaseEntity";
+import {DiagramModel} from "./models/DiagramModel";
 import * as _ from "lodash";
-import { BaseModel, BaseModelListener } from "./models/BaseModel";
-import { NodeModel } from "./models/NodeModel";
-import { PointModel } from "./models/PointModel";
-import { PortModel } from "./models/PortModel";
-import { LinkModel } from "./models/LinkModel";
-import { AbstractLabelFactory } from "./factories/AbstractLabelFactory";
-import { AbstractLinkFactory } from "./factories/AbstractLinkFactory";
-import { AbstractNodeFactory } from "./factories/AbstractNodeFactory";
-import { AbstractPortFactory } from "./factories/AbstractPortFactory";
-import { LabelModel } from "./models/LabelModel";
-import { Toolkit } from "./Toolkit";
+import {BaseModel, BaseModelListener} from "./models/BaseModel";
+import {NodeModel} from "./models/NodeModel";
+import {PointModel} from "./models/PointModel";
+import {PortModel} from "./models/PortModel";
+import {LinkModel} from "./models/LinkModel";
+import {AbstractLabelFactory} from "./factories/AbstractLabelFactory";
+import {AbstractLinkFactory} from "./factories/AbstractLinkFactory";
+import {AbstractNodeFactory} from "./factories/AbstractNodeFactory";
+import {AbstractPortFactory} from "./factories/AbstractPortFactory";
+import {LabelModel} from "./models/LabelModel";
+import {Toolkit} from "./Toolkit";
+
 /**
  * @author Dylan Vorster
  */
@@ -152,6 +153,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	registerLabelFactory(factory: AbstractLabelFactory) {
 		this.labelFactories[factory.getType()] = factory;
+		factory.setDiagramEngine(this);
 		this.iterateListeners(listener => {
 			if (listener.labelFactoriesUpdated) {
 				listener.labelFactoriesUpdated();
@@ -161,6 +163,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	registerPortFactory(factory: AbstractPortFactory) {
 		this.portFactories[factory.getType()] = factory;
+		factory.setDiagramEngine(this);
 		this.iterateListeners(listener => {
 			if (listener.portFactoriesUpdated) {
 				listener.portFactoriesUpdated();
@@ -170,6 +173,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	registerNodeFactory(factory: AbstractNodeFactory) {
 		this.nodeFactories[factory.getType()] = factory;
+		factory.setDiagramEngine(this);
 		this.iterateListeners(listener => {
 			if (listener.nodeFactoriesUpdated) {
 				listener.nodeFactoriesUpdated();
@@ -179,6 +183,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	registerLinkFactory(factory: AbstractLinkFactory) {
 		this.linkFactories[factory.getType()] = factory;
+		factory.setDiagramEngine(this);
 		this.iterateListeners(listener => {
 			if (listener.linkFactoriesUpdated) {
 				listener.linkFactoriesUpdated();
@@ -252,7 +257,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getRelativePoint(x, y) {
 		var canvasRect = this.canvas.getBoundingClientRect();
-		return { x: x - canvasRect.left, y: y - canvasRect.top };
+		return {x: x - canvasRect.left, y: y - canvasRect.top};
 	}
 
 	getNodeElement(node: NodeModel): Element {
@@ -270,10 +275,10 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		if (selector === null) {
 			throw new Error(
 				"Cannot find Node Port element with nodeID: [" +
-					port.getParent().getID() +
-					"] and name: [" +
-					port.getName() +
-					"]"
+				port.getParent().getID() +
+				"] and name: [" +
+				port.getName() +
+				"]"
 			);
 		}
 		return selector;

@@ -1,8 +1,11 @@
+import * as React from "react";
+import {AbstractLinkFactory, DiagramEngine} from "@projectstorm/react-diagrams-core";
+import {PathFindingLinkModel} from "./PathFindingLinkModel";
+import {PathFindingLinkWidget} from "./PathFindingLinkWidget";
 import * as _ from "lodash";
 import * as Path from "paths-js/path";
-import {DiagramEngine} from "@projectstorm/react-diagrams-core";
 
-export class PathFindingEngine extends DiagramEngine{
+export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkModel>{
 
 	ROUTING_SCALING_FACTOR: number;
 	smartRouting: boolean;
@@ -16,8 +19,18 @@ export class PathFindingEngine extends DiagramEngine{
 	vAdjustmentFactor: number = 0;
 
 	constructor(){
-		super();
-		this.ROUTING_SCALING_FACTOR = 5;
+		super("pathfinding");
+
+	}
+
+	generateReactWidget(diagramEngine: DiagramEngine, link: PathFindingLinkModel): JSX.Element {
+		return (
+			<PathFindingLinkWidget diagramEngine={diagramEngine} link={link} />
+		);
+	}
+
+	getNewInstance(initialConfig?: any): PathFindingLinkModel {
+		return undefined;
 	}
 
 	isSmartRoutingEnabled() {
@@ -121,14 +134,14 @@ export class PathFindingEngine extends DiagramEngine{
 		height: number;
 		vAdjustmentFactor: number;
 	} => {
-		const allNodesCoords = _.values(this.diagramModel.nodes).map(item => ({
+		const allNodesCoords = _.values(this.engine.diagramModel.nodes).map(item => ({
 			x: item.x,
 			width: item.width,
 			y: item.y,
 			height: item.height
 		}));
 
-		const allLinks = _.values(this.diagramModel.links);
+		const allLinks = _.values(this.engine.diagramModel.links);
 		const allPortsCoords = _.flatMap(allLinks.map(link => [link.sourcePort, link.targetPort]))
 			.filter(port => port !== null)
 			.map(item => ({
@@ -145,7 +158,7 @@ export class PathFindingEngine extends DiagramEngine{
 			height: 0
 		}));
 
-		const canvas = this.canvas as HTMLDivElement;
+		const canvas = this.engine.canvas as HTMLDivElement;
 		const minX =
 			Math.floor(
 				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x).x, 0) /
@@ -180,7 +193,7 @@ export class PathFindingEngine extends DiagramEngine{
 	 * Updates (by reference) where nodes will be drawn on the matrix passed in.
 	 */
 	markNodes = (matrix: number[][]): void => {
-		_.values(this.diagramModel.nodes).forEach(node => {
+		_.values(this.engine.diagramModel.nodes).forEach(node => {
 			const startX = Math.floor(node.x / this.ROUTING_SCALING_FACTOR);
 			const endX = Math.ceil((node.x + node.width) / this.ROUTING_SCALING_FACTOR);
 			const startY = Math.floor(node.y / this.ROUTING_SCALING_FACTOR);
@@ -199,7 +212,7 @@ export class PathFindingEngine extends DiagramEngine{
 	 */
 	markPorts = (matrix: number[][]): void => {
 		const allElements = _.flatMap(
-			_.values(this.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
+			_.values(this.engine.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
 		);
 		allElements.filter(port => port !== null).forEach(port => {
 			const startX = Math.floor(port.x / this.ROUTING_SCALING_FACTOR);
@@ -229,5 +242,4 @@ export class PathFindingEngine extends DiagramEngine{
 		});
 		return path.print();
 	}
-
 }

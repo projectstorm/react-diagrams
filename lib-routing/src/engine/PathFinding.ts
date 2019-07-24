@@ -1,5 +1,5 @@
 import * as PF from "pathfinding";
-import {PathFindingEngine} from "./PathFindingEngine";
+import {PathFindingLinkFactory} from "../link/PathFindingLinkFactory";
 
 /*
 it can be very expensive to calculate routes when every single pixel on the canvas
@@ -14,11 +14,11 @@ const pathFinderInstance = new PF.JumpPointFinder({
 
 export default class PathFinding {
 	instance: any;
-	diagramEngine: PathFindingEngine;
+	factory: PathFindingLinkFactory;
 
-	constructor(diagramEngine: PathFindingEngine) {
+	constructor(factory: PathFindingLinkFactory) {
 		this.instance = pathFinderInstance;
-		this.diagramEngine = diagramEngine;
+		this.factory = factory;
 	}
 
 	/**
@@ -35,14 +35,14 @@ export default class PathFinding {
 			y: number;
 		}
 	): number[][] {
-		const matrix = this.diagramEngine.getCanvasMatrix();
+		const matrix = this.factory.getCanvasMatrix();
 		const grid = new PF.Grid(matrix);
 
 		return pathFinderInstance.findPath(
-			this.diagramEngine.translateRoutingX(Math.floor(from.x / this.diagramEngine.ROUTING_SCALING_FACTOR)),
-			this.diagramEngine.translateRoutingY(Math.floor(from.y / this.diagramEngine.ROUTING_SCALING_FACTOR)),
-			this.diagramEngine.translateRoutingX(Math.floor(to.x / this.diagramEngine.ROUTING_SCALING_FACTOR)),
-			this.diagramEngine.translateRoutingY(Math.floor(to.y / this.diagramEngine.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingX(Math.floor(from.x / this.factory.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingY(Math.floor(from.y / this.factory.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingX(Math.floor(to.x / this.factory.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingY(Math.floor(to.y / this.factory.ROUTING_SCALING_FACTOR)),
 			grid
 		);
 	}
@@ -124,8 +124,8 @@ export default class PathFinding {
 		const pathCoords = pathToStart
 			.concat(dynamicPath, pathToEnd)
 			.map(coords => [
-				this.diagramEngine.translateRoutingX(coords[0], true),
-				this.diagramEngine.translateRoutingY(coords[1], true)
+				this.factory.translateRoutingX(coords[0], true),
+				this.factory.translateRoutingY(coords[1], true)
 			]);
 		return PF.Util.compressPath(pathCoords);
 	}

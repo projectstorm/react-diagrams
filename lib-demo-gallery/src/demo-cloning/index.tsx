@@ -1,4 +1,4 @@
-import {
+import createEngine,{
 	DiagramEngine,
 	DiagramModel,
 	DefaultNodeModel,
@@ -6,10 +6,10 @@ import {
 	NodeModel,
 	DiagramWidget,
 	BaseModel
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 import * as _ from "lodash";
 import * as React from "react";
-import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
 
 /**
  * Tests cloning
@@ -58,8 +58,7 @@ class CloneSelected extends React.Component<any, any> {
 
 export default () => {
 	//1) setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	var engine = createEngine();
 
 	//2) setup the diagram model
 	var model = new DiagramModel();

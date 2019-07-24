@@ -10,7 +10,10 @@
 	"workspaces": [
 		"lib-all",
 		"lib-core",
-		"lib-defaults"
+		"lib-defaults",
+		"lib-routing",
+		"lib-demo-project",
+		"lib-demo-gallery"
 	],
 	"keywords": [
 		"web",
@@ -24,7 +27,7 @@
 		"nodes"
 	],
 	"scripts": {
-		"build": "yarn build:clean && lerna exec -- yarn build",
+		"build": "yarn build:clean && lerna run build --stream",
 		"build:clean": "lerna run clean --stream"
 	},
 	"peerDependencies": {

@@ -1,13 +1,11 @@
 import * as React from "react";
-import {
+import createEngine,{
 	DiagramEngine,
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
-	PointModel,
 	DiagramWidget,
 	DiagramProps
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 
 /**
  *
@@ -17,8 +15,7 @@ import {
  */
 export default () => {
 	//1) setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	var engine = createEngine();
 
 	var model = new DiagramModel();
 

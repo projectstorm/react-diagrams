@@ -1,21 +1,18 @@
 import * as React from "react";
 import { action } from "@storybook/addon-actions";
-import {
-	DiagramEngine,
+import createEngine,{
 	DiagramModel,
 	DiagramProps,
 	DefaultNodeModel,
-	LinkModel,
 	DiagramWidget
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 
 /**
  * Shows some of the events triggered when elements are selected
  */
 export default () => {
 	// setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	var engine = createEngine();
 
 	var model = new DiagramModel();
 

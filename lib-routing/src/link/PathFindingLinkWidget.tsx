@@ -2,20 +2,21 @@ import * as React from "react";
 import * as _ from "lodash";
 import {
 	BaseWidget,
-	BaseWidgetProps,
+	BaseWidgetProps, DiagramEngine,
 	LabelModel,
 	PointModel,
 } from "@projectstorm/react-diagrams-core";
 import PathFinding from "../engine/PathFinding";
-import {PathFindingEngine} from "../engine/PathFindingEngine";
 import {DefaultLinkFactory, DefaultLinkModel} from "@projectstorm/react-diagrams-defaults";
+import {PathFindingLinkFactory} from "./PathFindingLinkFactory";
 
 export interface PathFindingLinkWidgetProps extends BaseWidgetProps {
 	color?: string;
 	width?: number;
 	smooth?: boolean;
 	link: DefaultLinkModel;
-	diagramEngine: PathFindingEngine;
+	diagramEngine: DiagramEngine;
+	factory: PathFindingLinkFactory;
 	pointAdded?: (point: PointModel, event: MouseEvent) => any;
 }
 
@@ -29,6 +30,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		width: 3,
 		link: null,
 		engine: null,
+		factory: null,
 		smooth: false,
 		diagramEngine: null
 	};
@@ -47,10 +49,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		this.state = {
 			selected: false
 		};
-
-		if (props.diagramEngine.isSmartRoutingEnabled()) {
-			this.pathFinding = new PathFinding(this.props.diagramEngine);
-		}
+		this.pathFinding = new PathFinding(this.props.factory);
 	}
 
 	calculateAllLabelPosition() {
@@ -247,7 +246,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		// first step: calculate a direct path between the points being linked
 		const directPathCoords = this.pathFinding.calculateDirectPath(_.first(points), _.last(points));
 
-		const routingMatrix = diagramEngine.getRoutingMatrix();
+		const routingMatrix = this.props.factory.getRoutingMatrix();
 		// now we need to extract, from the routing matrix, the very first walkable points
 		// so they can be used as origin and destination of the link to be created
 		const smartLink = this.pathFinding.calculateLinkStartEndCoords(routingMatrix, directPathCoords);
@@ -267,7 +266,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 			paths.push(
 				//smooth: boolean, extraProps: any, id: string | number, firstPoint: PointModel, lastPoint: PointModel
 				this.generateLink(
-					this.props.diagramEngine.generateDynamicPath(simplifiedPath),
+					this.props.factory.generateDynamicPath(simplifiedPath),
 					{
 						onMouseDown: event => {
 							this.addPointToLink(event, 1);

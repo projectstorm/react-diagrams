@@ -1,6 +1,6 @@
-import { DiagramEngine, DiagramModel, DefaultNodeModel, LinkModel, DiagramWidget } from "storm-react-diagrams";
+import createEngine,{ DiagramModel, DefaultNodeModel, DiagramWidget } from "@projectstorm/react-diagrams";
 import * as React from "react";
-import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
 
 /**
  * Tests the grid size
@@ -56,8 +56,7 @@ class NodeDelayedPosition extends React.Component<any, any> {
 
 export default () => {
 	//1) setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	var engine = createEngine();
 
 	//2) setup the diagram model
 	var model = new DiagramModel();

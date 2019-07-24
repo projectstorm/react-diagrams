@@ -1,4 +1,4 @@
-import { NodeModel } from "storm-react-diagrams";
+import { NodeModel } from "@projectstorm/react-diagrams";
 import { DiamondPortModel } from "./DiamondPortModel";
 
 export class DiamondNodeModel extends NodeModel {

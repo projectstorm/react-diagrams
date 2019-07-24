@@ -1,16 +1,12 @@
-import {
-	DiagramEngine,
-	DefaultNodeFactory,
-	DefaultLinkFactory,
+import createEngine,{
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
 	DefaultPortModel,
 	DiagramWidget
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 import { distributeElements } from "./dagre-utils";
 import * as React from "react";
-import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
 
 function createNode(name) {
 	return new DefaultNodeModel(name, "rgb(0,192,255)");
@@ -67,8 +63,7 @@ function getDistributedModel(engine, model) {
 
 export default () => {
 	//1) setup the diagram engine
-	let engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	let engine = createEngine();
 
 	//2) setup the diagram model
 	let model = new DiagramModel();

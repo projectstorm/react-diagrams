@@ -2,14 +2,6 @@ const path = require('path');
 module.exports = async ({config, mode}) => {
 	return {
 		...config,
-		resolve: {
-			...config.resolve,
-			extensions: ['.tsx', '.ts', '.js'],
-			alias: {
-				...config.resolve.alias,
-				'storm-react-diagrams': path.join(__dirname, "..", "src", "main")
-			}
-		},
 		module: {
 			...config.module,
 			rules: [

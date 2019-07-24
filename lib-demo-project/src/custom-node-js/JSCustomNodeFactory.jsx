@@ -3,8 +3,6 @@ import {AbstractNodeFactory} from "@projectstorm/react-diagrams";
 import {JSCustomNodeModel} from "./JSCustomNodeModel";
 import {JSCustomNodeWidget} from "./JSCustomNodeWidget";
 
-console.log(AbstractNodeFactory)
-
 export class JSCustomNodeFactory extends AbstractNodeFactory{
 
 	constructor(){

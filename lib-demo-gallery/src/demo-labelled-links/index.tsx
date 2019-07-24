@@ -6,9 +6,9 @@ import {
 	DefaultPortModel,
 	DiagramWidget,
 	DefaultLinkModel
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 import * as React from "react";
-import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
 import { action } from "@storybook/addon-actions";
 
 export default () => {

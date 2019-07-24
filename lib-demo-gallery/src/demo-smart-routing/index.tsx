@@ -1,19 +1,16 @@
-import {
-	DiagramEngine,
+import createEngine,{
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
 	DefaultPortModel,
 	DiagramWidget
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 import * as React from "react";
-import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
+import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
 import { action } from "@storybook/addon-actions";
 
 export default () => {
 	// setup the diagram engine
-	const engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	const engine = createEngine();
 
 	// setup the diagram model
 	const model = new DiagramModel();

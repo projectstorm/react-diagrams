@@ -1,4 +1,4 @@
-import * as SRD from "storm-react-diagrams";
+import * as SRD from "@projectstorm/react-diagrams";
 
 /**
  * @author Dylan Vorster
@@ -8,9 +8,7 @@ export class Application {
 	protected diagramEngine: SRD.DiagramEngine;
 
 	constructor() {
-		this.diagramEngine = new SRD.DiagramEngine();
-		this.diagramEngine.installDefaultFactories();
-
+		this.diagramEngine = SRD.default();
 		this.newModel();
 	}
 

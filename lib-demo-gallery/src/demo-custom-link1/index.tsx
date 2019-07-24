@@ -1,17 +1,12 @@
-import {
-	DiagramEngine,
+import createEngine,{
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
 	DefaultPortModel,
 	DiagramWidget,
-	LinkWidget,
-	LinkProps,
 	DefaultLinkWidget,
 	DefaultLinkModel,
 	DefaultLinkFactory
-} from "storm-react-diagrams";
-import { action } from "@storybook/addon-actions";
+} from "@projectstorm/react-diagrams";
 import * as React from "react";
 
 export class AdvancedLinkModel extends DefaultLinkModel {
@@ -117,8 +112,7 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
  */
 export default () => {
 	//1) setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	var engine = createEngine();
 	engine.registerLinkFactory(new AdvancedLinkFactory());
 
 	// create some nodes

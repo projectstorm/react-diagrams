@@ -1,11 +1,8 @@
-import {
-	DiagramEngine,
+import createEngine,{
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
-	DefaultPortModel,
 	DiagramWidget
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 import * as React from "react";
 
 // import the custom models
@@ -19,8 +16,7 @@ import { DiamondPortModel } from "./DiamondPortModel";
  */
 export default () => {
 	//1) setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	var engine = createEngine();
 
 	// register some other factories as well
 	engine.registerPortFactory(new SimplePortFactory("diamond", config => new DiamondPortModel()));

@@ -1,7 +1,7 @@
 import { configure } from '@storybook/react';
 
 function loadStories() {
-	require('../demos/index.tsx');
+	require('../src/index.tsx');
 	// You can require as many demos as you need.
 }
 

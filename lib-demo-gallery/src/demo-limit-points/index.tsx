@@ -1,20 +1,17 @@
 import * as React from "react";
-import {
-	DiagramEngine,
+import createEngine,{
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
 	DiagramWidget,
 	DiagramProps
-} from "storm-react-diagrams";
+} from "@projectstorm/react-diagrams";
 
 /**
  * Shows that a limit of points can be set for links
  */
 export default () => {
 	// setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	var engine = createEngine();
 
 	var model = new DiagramModel();
 
