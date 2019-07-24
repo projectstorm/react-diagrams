@@ -2,8 +2,5 @@
 	"extends": "../tsconfig",
 	"include": [
 		"./demos"
-	],
-	"exclude": [
-		"./dist"
 	]
 }

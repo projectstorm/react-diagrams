@@ -1,4 +1,4 @@
-import PathFinding from '../../src/routing/PathFinding';
+import PathFinding from "../src/engine/PathFinding";
 
 describe('calculating start and end points', () => {
 	beforeEach(() => {

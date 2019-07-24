@@ -10,8 +10,8 @@
 		"start": "../node_modules/.bin/start-storybook",
 		"build": "../node_modules/.bin/build-storybook -c .storybook -o .out",
 		"github": "../node_modules/.bin/storybook-to-ghpages",
-		"test:ci": "rm -rf ./dist && node ./tests-e2e/e2e/generate-e2e.js && jest --runInBand --no-cache",
-		"test": "../node_modules/.bin/jest --no-cache"
+		"test:run": "../node_modules/.bin/jest --no-cache",
+		"test": "yarn build && yarn test:run"
 	},
 	"keywords": [
 		"web",
@@ -23,12 +23,5 @@
 		"simple",
 		"links",
 		"nodes"
-	],
-	"main": "./dist/index.js",
-	"typings": "./dist/@types/index",
-	"peerDependencies": {
-		"closest": "^0.0.1",
-		"lodash": "4.*",
-		"react": "16.*"
-	}
+	]
 }
