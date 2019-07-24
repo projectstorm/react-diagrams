@@ -7,14 +7,15 @@ import {
 	PointModel,
 } from "@projectstorm/react-diagrams-core";
 import PathFinding from "../engine/PathFinding";
-import {DefaultLinkFactory, DefaultLinkModel} from "@projectstorm/react-diagrams-defaults";
+import {DefaultLinkFactory} from "@projectstorm/react-diagrams-defaults";
 import {PathFindingLinkFactory} from "./PathFindingLinkFactory";
+import {PathFindingLinkModel} from "./PathFindingLinkModel";
 
 export interface PathFindingLinkWidgetProps extends BaseWidgetProps {
 	color?: string;
 	width?: number;
 	smooth?: boolean;
-	link: DefaultLinkModel;
+	link: PathFindingLinkModel;
 	diagramEngine: DiagramEngine;
 	factory: PathFindingLinkFactory;
 	pointAdded?: (point: PointModel, event: MouseEvent) => any;
@@ -88,10 +89,10 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 				/>
 				<circle
 					onMouseLeave={() => {
-						this.setState({ selected: false });
+						this.setState({selected: false});
 					}}
 					onMouseEnter={() => {
-						this.setState({ selected: true });
+						this.setState({selected: true});
 					}}
 					data-id={this.props.link.points[pointIndex].id}
 					data-linkid={this.props.link.id}
@@ -138,19 +139,14 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 	}
 
 	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
-		var props = this.props;
 
-		var Bottom = React.cloneElement(
-			(props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory).generateLinkSegment(
-				this.props.link,
-				this,
-				this.state.selected || this.props.link.isSelected(),
-				path
-			),
-			{
-				ref: ref => ref && this.refPaths.push(ref)
-			}
-		);
+		let Bottom = <path
+			className={this.state.selected ? this.bem("--path-selected") : ""}
+			strokeWidth={this.props.width}
+			stroke={this.props.color}
+			ref={ref => ref && this.refPaths.push(ref)}
+			d={path}
+		/>;
 
 		var Top = React.cloneElement(Bottom, {
 			...extraProps,

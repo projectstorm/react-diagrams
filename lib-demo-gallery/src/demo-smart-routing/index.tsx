@@ -2,7 +2,8 @@ import createEngine,{
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
-	DiagramWidget
+	DiagramWidget,
+	PathFindingLinkFactory
 } from "@projectstorm/react-diagrams";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
@@ -32,9 +33,11 @@ export default () => {
 	const node5 = new DefaultNodeModel("Node E", "rgb(192,255,0)");
 	node5.setPosition(250, 180);
 
-	// linking things together
-	const link1 = port1.link(port4);
-	const link2 = port2.link(port3);
+	const pathfinding = engine.getLinkFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME);
+
+	// linking things together (specifically using the pathfinding link)
+	const link1 = port1.link(port4, pathfinding);
+	const link2 = port2.link(port3, pathfinding);
 
 	// add all to the main model
 	model.addAll(node1, node2, node3, node4, node5, link1, link2);
@@ -55,6 +58,9 @@ export default () => {
 			}
 		>
 			<DiagramWidget
+				actionStoppedFiring={() => {
+					pathfinding.calculateRoutingMatrix();
+				}}
 				className="srd-demo-canvas"
 				diagramEngine={engine}
 				smartRouting={true}

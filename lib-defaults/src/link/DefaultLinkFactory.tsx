@@ -3,17 +3,15 @@ import {AbstractLinkFactory, DiagramEngine} from "@projectstorm/react-diagrams-c
 import {DefaultLinkModel} from "./DefaultLinkModel";
 import {DefaultLinkWidget} from "./DefaultLinkWidget";
 
-
 export class DefaultLinkFactory extends AbstractLinkFactory<DefaultLinkModel> {
 	constructor() {
 		super("default");
 	}
 
 	generateReactWidget(diagramEngine: DiagramEngine, link: DefaultLinkModel): JSX.Element {
-		return React.createElement(DefaultLinkWidget, {
-			link: link,
-			diagramEngine: diagramEngine
-		});
+		return (
+			<DefaultLinkWidget link={link} diagramEngine={diagramEngine} />
+		);
 	}
 
 	getNewInstance(initialConfig?: any): DefaultLinkModel {

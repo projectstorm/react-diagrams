@@ -26,6 +26,8 @@ export interface DiagramEngineListener extends BaseListener {
 	labelFactoriesUpdated?(): void;
 
 	repaintCanvas?(): void;
+
+	rendered?() : void;
 }
 
 /**
@@ -205,9 +207,9 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		throw new Error(`cannot find factory for node of type: [${type}]`);
 	}
 
-	getLinkFactory(type: string): AbstractLinkFactory {
+	getLinkFactory<T extends AbstractLinkFactory = AbstractLinkFactory>(type: string): T {
 		if (this.linkFactories[type]) {
-			return this.linkFactories[type];
+			return this.linkFactories[type] as T;
 		}
 		throw new Error(`cannot find factory for link of type: [${type}]`);
 	}

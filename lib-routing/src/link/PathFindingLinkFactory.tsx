@@ -7,8 +7,7 @@ import * as Path from "paths-js/path";
 
 export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkModel>{
 
-	ROUTING_SCALING_FACTOR: number;
-	smartRouting: boolean;
+	ROUTING_SCALING_FACTOR: number = 5;
 
 	// calculated only when smart routing is active
 	canvasMatrix: number[][] = [];
@@ -18,25 +17,20 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 	hAdjustmentFactor: number = 0;
 	vAdjustmentFactor: number = 0;
 
+	static NAME = 'pathfinding';
+
 	constructor(){
-		super("pathfinding");
+		super(PathFindingLinkFactory.NAME);
 	}
 
 	generateReactWidget(diagramEngine: DiagramEngine, link: PathFindingLinkModel): JSX.Element {
 		return (
-			<PathFindingLinkWidget diagramEngine={diagramEngine} link={link} />
+			<PathFindingLinkWidget diagramEngine={diagramEngine} link={link} factory={this} />
 		);
 	}
 
 	getNewInstance(initialConfig?: any): PathFindingLinkModel {
-		return undefined;
-	}
-
-	isSmartRoutingEnabled() {
-		return !!this.smartRouting;
-	}
-	setSmartRoutingStatus(status: boolean) {
-		this.smartRouting = status;
+		return new PathFindingLinkModel();
 	}
 
 	/**

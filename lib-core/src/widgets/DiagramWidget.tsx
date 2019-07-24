@@ -108,6 +108,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 				renderedNodes: true
 			});
 		}
+		this.props.diagramEngine.iterateListeners((list) => {
+			list.rendered && list.rendered();
+		})
 	}
 
 	componentDidMount() {
@@ -130,6 +133,10 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		if (process.env.NODE_ENV !== "test") {
 			window.focus();
 		}
+
+		this.props.diagramEngine.iterateListeners((list) => {
+			list.rendered && list.rendered();
+		})
 	}
 
 	/**
@@ -421,8 +428,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	render() {
 		var diagramEngine = this.props.diagramEngine;
 		diagramEngine.setMaxNumberPointsPerLink(this.props.maxNumberPointsPerLink);
-		// diagramEngine.setSmartRoutingStatus(this.props.smartRouting);
-		// TODO fixme
 		var diagramModel = diagramEngine.getDiagramModel();
 
 		return (

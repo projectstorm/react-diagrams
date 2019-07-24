@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import {DiagramEngine, LinkModel, PortModel} from "@projectstorm/react-diagrams-core";
+import {AbstractLinkFactory, DiagramEngine, LinkModel, PortModel} from "@projectstorm/react-diagrams-core";
 import {DefaultLinkModel} from "../link/DefaultLinkModel";
 
 export class DefaultPortModel extends PortModel {
@@ -26,8 +26,8 @@ export class DefaultPortModel extends PortModel {
 		});
 	}
 
-	link(port: PortModel): LinkModel {
-		let link = this.createLinkModel();
+	link(port: PortModel, factory?: AbstractLinkFactory): LinkModel {
+		let link = this.createLinkModel(factory);
 		link.setSourcePort(this);
 		link.setTargetPort(port);
 		return link;
@@ -40,8 +40,11 @@ export class DefaultPortModel extends PortModel {
 		return true;
 	}
 
-	createLinkModel(): LinkModel {
+	createLinkModel(factory?: AbstractLinkFactory): LinkModel {
 		let link = super.createLinkModel();
+		if(!link && factory){
+			return factory.getNewInstance();
+		}
 		return link || new DefaultLinkModel();
 	}
 }
