@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: projectstorm/react-diagrams-ci
+      - image: buildkite/puppeteer
 
     working_directory: ~/repo
 
