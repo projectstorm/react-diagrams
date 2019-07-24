@@ -1,6 +1,6 @@
-import { Toolkit } from "./Toolkit";
-import * as _ from "lodash";
-import { DiagramEngine } from "./DiagramEngine";
+import { Toolkit } from './Toolkit';
+import * as _ from 'lodash';
+import { DiagramEngine } from './DiagramEngine';
 
 /**
  * @author Dylan Vorster
@@ -16,7 +16,7 @@ export interface BaseListener<T extends BaseEntity = any> {
 	lockChanged?(event: BaseEvent<T> & { locked: boolean }): void;
 }
 
-export type BaseEntityType = "node" | "link" | "port" | "point";
+export type BaseEntityType = 'node' | 'link' | 'port' | 'point';
 
 export class BaseEntity<T extends BaseListener = BaseListener> {
 	public listeners: { [s: string]: T };

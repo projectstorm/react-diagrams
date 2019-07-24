@@ -1,4 +1,4 @@
-import createEngine,{
+import createEngine, {
 	DiagramEngine,
 	DiagramModel,
 	DefaultNodeModel,
@@ -6,10 +6,10 @@ import createEngine,{
 	NodeModel,
 	DiagramWidget,
 	BaseModel
-} from "@projectstorm/react-diagrams";
-import * as _ from "lodash";
-import * as React from "react";
-import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
+} from '@projectstorm/react-diagrams';
+import * as _ from 'lodash';
+import * as React from 'react';
+import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 
 /**
  * Tests cloning
@@ -64,13 +64,13 @@ export default () => {
 	var model = new DiagramModel();
 
 	//3-A) create a default node
-	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-	let port = node1.addOutPort("Out");
+	var node1 = new DefaultNodeModel('Node 1', 'rgb(0,192,255)');
+	let port = node1.addOutPort('Out');
 	node1.setPosition(100, 100);
 
 	//3-B) create another default node
-	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	let port2 = node2.addInPort("In");
+	var node2 = new DefaultNodeModel('Node 2', 'rgb(192,255,0)');
+	let port2 = node2.addInPort('In');
 	node2.setPosition(400, 100);
 
 	// link the ports

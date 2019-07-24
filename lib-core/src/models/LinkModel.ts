@@ -1,11 +1,11 @@
-import { BaseModel, BaseModelListener } from "./BaseModel";
-import { PortModel } from "./PortModel";
-import { PointModel } from "./PointModel";
-import * as _ from "lodash";
-import { BaseEvent } from "../BaseEntity";
-import { LabelModel } from "./LabelModel";
-import { DiagramEngine } from "../DiagramEngine";
-import { DiagramModel } from "./DiagramModel";
+import { BaseModel, BaseModelListener } from './BaseModel';
+import { PortModel } from './PortModel';
+import { PointModel } from './PointModel';
+import * as _ from 'lodash';
+import { BaseEvent } from '../BaseEntity';
+import { LabelModel } from './LabelModel';
+import { DiagramEngine } from '../DiagramEngine';
+import { DiagramModel } from './DiagramModel';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
@@ -20,7 +20,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 	points: PointModel[];
 	extras: any;
 
-	constructor(linkType: string = "default", id?: string) {
+	constructor(linkType: string = 'default', id?: string) {
 		super(linkType, id);
 		this.points = [new PointModel(this, { x: 0, y: 0 }), new PointModel(this, { x: 0, y: 0 })];
 		this.extras = {};

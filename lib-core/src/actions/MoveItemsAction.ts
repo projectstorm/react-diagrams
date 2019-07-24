@@ -1,8 +1,8 @@
-import { BaseAction } from "./BaseAction";
-import { SelectionModel } from "../models/SelectionModel";
-import { PointModel } from "../models/PointModel";
-import { NodeModel } from "../models/NodeModel";
-import { DiagramEngine } from "../DiagramEngine";
+import { BaseAction } from './BaseAction';
+import { SelectionModel } from '../models/SelectionModel';
+import { PointModel } from '../models/PointModel';
+import { NodeModel } from '../models/NodeModel';
+import { DiagramEngine } from '../DiagramEngine';
 
 export class MoveItemsAction extends BaseAction {
 	selectionModels: SelectionModel[];

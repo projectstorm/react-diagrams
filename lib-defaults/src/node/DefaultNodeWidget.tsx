@@ -1,8 +1,8 @@
-import * as React from "react";
-import * as _ from "lodash";
-import {BaseWidget, BaseWidgetProps, DiagramEngine} from "@projectstorm/react-diagrams-core";
-import {DefaultNodeModel} from "./DefaultNodeModel";
-import {DefaultPortLabel} from "../port/DefaultPortLabelWidget";
+import * as React from 'react';
+import * as _ from 'lodash';
+import { BaseWidget, BaseWidgetProps, DiagramEngine } from '@projectstorm/react-diagrams-core';
+import { DefaultNodeModel } from './DefaultNodeModel';
+import { DefaultPortLabel } from '../port/DefaultPortLabelWidget';
 
 export interface DefaultNodeProps extends BaseWidgetProps {
 	node: DefaultNodeModel;
@@ -16,7 +16,7 @@ export interface DefaultNodeState {}
  */
 export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps, DefaultNodeState> {
 	constructor(props: DefaultNodeProps) {
-		super("srd-default-node", props);
+		super('srd-default-node', props);
 		this.state = {};
 	}
 
@@ -27,16 +27,12 @@ export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps, DefaultNodeS
 	render() {
 		return (
 			<div {...this.getProps()} style={{ background: this.props.node.color }}>
-				<div className={this.bem("__title")}>
-					<div className={this.bem("__name")}>{this.props.node.name}</div>
+				<div className={this.bem('__title')}>
+					<div className={this.bem('__name')}>{this.props.node.name}</div>
 				</div>
-				<div className={this.bem("__ports")}>
-					<div className={this.bem("__in")}>
-						{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}
-					</div>
-					<div className={this.bem("__out")}>
-						{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}
-					</div>
+				<div className={this.bem('__ports')}>
+					<div className={this.bem('__in')}>{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
+					<div className={this.bem('__out')}>{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
 				</div>
 			</div>
 		);

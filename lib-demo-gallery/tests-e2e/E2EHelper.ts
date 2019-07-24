@@ -1,5 +1,5 @@
-import { ElementHandle, Page } from "puppeteer";
-import * as _ from "lodash";
+import { ElementHandle, Page } from 'puppeteer';
+import * as _ from 'lodash';
 
 export class E2EElement {
 	helper: E2EHelper;
@@ -22,7 +22,7 @@ export class E2ENode extends E2EElement {
 
 	async model(): Promise<any> {
 		return await this.page.evaluate(id => {
-			return window["diagram_instance"]
+			return window['diagram_instance']
 				.getDiagramModel()
 				.getNode(id)
 				.serialize();
@@ -39,7 +39,7 @@ export class E2EPort extends E2EElement {
 	}
 
 	async link(port: E2EPort): Promise<E2ELink> {
-		let currentLinks = _.flatMap((await this.parent.model()).ports, "links");
+		let currentLinks = _.flatMap((await this.parent.model()).ports, 'links');
 
 		let bounds = await this.element.boundingBox();
 
@@ -54,13 +54,11 @@ export class E2EPort extends E2EElement {
 		this.page.mouse.up();
 
 		// get the parent to get the link
-		return await this.helper.link(
-			_.difference(_.flatMap((await this.parent.model()).ports, "links"), currentLinks)[0]
-		);
+		return await this.helper.link(_.difference(_.flatMap((await this.parent.model()).ports, 'links'), currentLinks)[0]);
 	}
 
 	async linkToPoint(x: number, y: number): Promise<E2ELink> {
-		let currentLinks = _.flatMap((await this.parent.model()).ports, "links");
+		let currentLinks = _.flatMap((await this.parent.model()).ports, 'links');
 
 		let bounds = await this.element.boundingBox();
 
@@ -72,8 +70,8 @@ export class E2EPort extends E2EElement {
 		this.page.mouse.move(x, y);
 		this.page.mouse.up();
 
-		const link = _.difference(_.flatMap((await this.parent.model()).ports, "links"), currentLinks)[0];
-		if(!link){
+		const link = _.difference(_.flatMap((await this.parent.model()).ports, 'links'), currentLinks)[0];
+		if (!link) {
 			return null;
 		}
 
@@ -85,7 +83,7 @@ export class E2EPort extends E2EElement {
 export class E2ELink extends E2EElement {
 	async model(): Promise<any> {
 		return await this.page.evaluate(id => {
-			return window["diagram_instance"]
+			return window['diagram_instance']
 				.getDiagramModel()
 				.getLink(id)
 				.serialize();
@@ -101,16 +99,16 @@ export class E2ELink extends E2EElement {
 	async select(): Promise<any> {
 		const point = await this.page.evaluate(id => {
 			const path = document.querySelector(`path[data-linkid="${id}"]`) as SVGPathElement;
-			const point =path.getPointAtLength(path.getTotalLength() / 2);
+			const point = path.getPointAtLength(path.getTotalLength() / 2);
 			return {
 				x: point.x,
 				y: point.y
-			}
+			};
 		}, this.id);
-		await this.page.keyboard.down("Shift");
+		await this.page.keyboard.down('Shift');
 		await this.page.mouse.move(point.x, point.y);
 		await this.page.mouse.down();
-		await this.page.keyboard.up("Shift");
+		await this.page.keyboard.up('Shift');
 	}
 }
 
@@ -122,17 +120,17 @@ export class E2EHelper {
 	}
 
 	async link(id): Promise<E2ELink> {
-		if(!id){
-			throw "Link ID must be valid"
+		if (!id) {
+			throw 'Link ID must be valid';
 		}
 		let selector = await this.page.waitForSelector(`path[data-linkid="${id}"]`);
 		return new E2ELink(this, this.page, selector, id);
 	}
 
 	async node(id): Promise<E2ENode> {
-		if(!id){
-			if(!id){
-				throw "Node ID must be valid"
+		if (!id) {
+			if (!id) {
+				throw 'Node ID must be valid';
 			}
 		}
 		let selector = await this.page.waitForSelector(`div[data-nodeid="${id}"]`);

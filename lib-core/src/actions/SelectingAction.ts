@@ -1,5 +1,5 @@
-import { BaseAction } from "./BaseAction";
-import { DiagramModel } from "../models/DiagramModel";
+import { BaseAction } from './BaseAction';
+import { DiagramModel } from '../models/DiagramModel';
 
 export class SelectingAction extends BaseAction {
 	mouseX2: number;

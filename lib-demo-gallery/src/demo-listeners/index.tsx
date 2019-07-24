@@ -1,11 +1,11 @@
-import * as React from "react";
-import { action } from "@storybook/addon-actions";
-import createEngine,{
+import * as React from 'react';
+import { action } from '@storybook/addon-actions';
+import createEngine, {
 	DiagramModel,
 	DiagramProps,
 	DefaultNodeModel,
 	DiagramWidget
-} from "@projectstorm/react-diagrams";
+} from '@projectstorm/react-diagrams';
 
 /**
  * Shows some of the events triggered when elements are selected
@@ -17,16 +17,16 @@ export default () => {
 	var model = new DiagramModel();
 
 	// sample for link with simple line
-	var node1 = new DefaultNodeModel("Node 1", "rgb(255,99,66)");
-	var port1 = node1.addOutPort("Out");
+	var node1 = new DefaultNodeModel('Node 1', 'rgb(255,99,66)');
+	var port1 = node1.addOutPort('Out');
 	node1.setPosition(100, 100);
 
-	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	var port2 = node2.addInPort("In");
+	var node2 = new DefaultNodeModel('Node 2', 'rgb(192,255,0)');
+	var port2 = node2.addInPort('In');
 	node2.setPosition(400, 40);
 
-	var node3 = new DefaultNodeModel("Node 3", "rgb(128,99,255)");
-	var port3 = node3.addInPort("In");
+	var node3 = new DefaultNodeModel('Node 3', 'rgb(128,99,255)');
+	var port3 = node3.addInPort('In');
 	node3.setPosition(300, 160);
 
 	//link the nodes
@@ -39,7 +39,7 @@ export default () => {
 	// add a selection listener to each
 	models.forEach(item => {
 		item.addListener({
-			selectionChanged: action("selectionChanged")
+			selectionChanged: action('selectionChanged')
 		});
 	});
 

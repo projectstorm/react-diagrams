@@ -1,9 +1,9 @@
-import * as React from "react";
-import { DiagramEngine } from "../../DiagramEngine";
-import * as _ from "lodash";
-import { NodeWidget } from "../NodeWidget";
-import { NodeModel } from "../../models/NodeModel";
-import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
+import * as React from 'react';
+import { DiagramEngine } from '../../DiagramEngine';
+import * as _ from 'lodash';
+import { NodeWidget } from '../NodeWidget';
+import { NodeModel } from '../../models/NodeModel';
+import { BaseWidget, BaseWidgetProps } from '../BaseWidget';
 
 export interface NodeLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -13,7 +13,7 @@ export interface NodeLayerState {}
 
 export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> {
 	constructor(props: NodeLayerProps) {
-		super("srd-node-layer", props);
+		super('srd-node-layer', props);
 		this.state = {};
 	}
 
@@ -38,15 +38,14 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps, NodeLayerState> 
 				{...this.getProps()}
 				style={{
 					transform:
-						"translate(" +
+						'translate(' +
 						diagramModel.getOffsetX() +
-						"px," +
+						'px,' +
 						diagramModel.getOffsetY() +
-						"px) scale(" +
+						'px) scale(' +
 						diagramModel.getZoomLevel() / 100.0 +
-						")"
-				}}
-			>
+						')'
+				}}>
 				{_.map(diagramModel.getNodes(), (node: NodeModel) => {
 					return React.createElement(
 						NodeWidget,

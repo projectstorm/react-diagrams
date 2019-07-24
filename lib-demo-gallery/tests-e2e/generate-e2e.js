@@ -1,40 +1,39 @@
-let glob = require("glob");
-let webpack = require("webpack");
-let path = require("path");
+let glob = require('glob');
+let webpack = require('webpack');
+let path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-glob.glob(__dirname + "/../../demos/demo-*/index.tsx", {}, (err, files) => {
-
-	let config = require("../../webpack.config");
+glob.glob(__dirname + '/../../demos/demo-*/index.tsx', {}, (err, files) => {
+	let config = require('../../webpack.config');
 
 	let entry = {};
 	let copy = [];
-	files.forEach((entryFile) => {
-		entry[path.basename(path.dirname(entryFile))] = 'val-loader?entry='+entryFile+'!'+__dirname+"/entry.js";
-		copy.push({to: path.basename(path.dirname(entryFile)), from: __dirname+"/index.html"});
+	files.forEach(entryFile => {
+		entry[path.basename(path.dirname(entryFile))] = 'val-loader?entry=' + entryFile + '!' + __dirname + '/entry.js';
+		copy.push({ to: path.basename(path.dirname(entryFile)), from: __dirname + '/index.html' });
 	});
 
 	config = {
 		entry: entry,
-		plugins: [
-			new CopyWebpackPlugin(copy)
-		],
+		plugins: [new CopyWebpackPlugin(copy)],
 		output: {
 			filename: '[name]/main.js',
-			path: __dirname + '/../../dist/e2e',
+			path: __dirname + '/../../dist/e2e'
 		},
 		module: {
-			rules: [{
-				test: /\.scss$/,
-				use: ['style-loader','css-loader', 'sass-loader']
-			}].concat(config.module.rules)
+			rules: [
+				{
+					test: /\.scss$/,
+					use: ['style-loader', 'css-loader', 'sass-loader']
+				}
+			].concat(config.module.rules)
 		},
 		resolve: {
 			...config.resolve,
 			alias: {
-				'storm-react-diagrams': path.join(__dirname, "..", "..", "src", "main")
+				'storm-react-diagrams': path.join(__dirname, '..', '..', 'src', 'main')
 			}
-		},
+		}
 	};
 
 	webpack(config, (err, stats) => {
@@ -43,5 +42,4 @@ glob.glob(__dirname + "/../../demos/demo-*/index.tsx", {}, (err, files) => {
 			return;
 		}
 	});
-
 });

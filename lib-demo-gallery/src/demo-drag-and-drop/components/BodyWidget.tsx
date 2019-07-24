@@ -1,9 +1,9 @@
-import * as React from "react";
-import * as _ from "lodash";
-import { TrayWidget } from "./TrayWidget";
-import { Application } from "../Application";
-import { TrayItemWidget } from "./TrayItemWidget";
-import { DefaultNodeModel, DiagramWidget } from "@projectstorm/react-diagrams";
+import * as React from 'react';
+import * as _ from 'lodash';
+import { TrayWidget } from './TrayWidget';
+import { Application } from '../Application';
+import { TrayItemWidget } from './TrayItemWidget';
+import { DefaultNodeModel, DiagramWidget } from '@projectstorm/react-diagrams';
 
 export interface BodyWidgetProps {
 	app: Application;
@@ -28,13 +28,13 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 				</div>
 				<div className="content">
 					<TrayWidget>
-						<TrayItemWidget model={{ type: "in" }} name="In Node" color="rgb(192,255,0)" />
-						<TrayItemWidget model={{ type: "out" }} name="Out Node" color="rgb(0,192,255)" />
+						<TrayItemWidget model={{ type: 'in' }} name="In Node" color="rgb(192,255,0)" />
+						<TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,192,255)" />
 					</TrayWidget>
 					<div
 						className="diagram-layer"
 						onDrop={event => {
-							var data = JSON.parse(event.dataTransfer.getData("storm-diagram-node"));
+							var data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'));
 							var nodesCount = _.keys(
 								this.props.app
 									.getDiagramEngine()
@@ -43,12 +43,12 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 							).length;
 
 							var node = null;
-							if (data.type === "in") {
-								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(192,255,0)");
-								node.addInPort("In");
+							if (data.type === 'in') {
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(192,255,0)');
+								node.addInPort('In');
 							} else {
-								node = new DefaultNodeModel("Node " + (nodesCount + 1), "rgb(0,192,255)");
-								node.addOutPort("Out");
+								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,192,255)');
+								node.addOutPort('Out');
 							}
 							var points = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
 							node.x = points.x;
@@ -61,8 +61,7 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 						}}
 						onDragOver={event => {
 							event.preventDefault();
-						}}
-					>
+						}}>
 						<DiagramWidget className="srd-demo-canvas" diagramEngine={this.props.app.getDiagramEngine()} />
 					</div>
 				</div>

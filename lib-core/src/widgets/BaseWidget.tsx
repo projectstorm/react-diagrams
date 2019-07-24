@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 export interface BaseWidgetProps {
 	/**
@@ -25,13 +25,11 @@ export class BaseWidget<P extends BaseWidgetProps = BaseWidgetProps, S = any> ex
 	}
 
 	bem(selector: string): string {
-		return (this.props.baseClass || this.className) + selector + " ";
+		return (this.props.baseClass || this.className) + selector + ' ';
 	}
 
 	getClassName(): string {
-		return (
-			(this.props.baseClass || this.className) + " " + (this.props.className ? this.props.className + " " : "")
-		);
+		return (this.props.baseClass || this.className) + ' ' + (this.props.className ? this.props.className + ' ' : '');
 	}
 
 	getProps(): any {

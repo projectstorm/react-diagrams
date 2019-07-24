@@ -1,10 +1,10 @@
-import {DiagramEngine, LabelModel} from "@projectstorm/react-diagrams-core";
+import { DiagramEngine, LabelModel } from '@projectstorm/react-diagrams-core';
 
 export class DefaultLabelModel extends LabelModel {
 	label: string;
 
 	constructor() {
-		super("default");
+		super('default');
 		this.offsetY = -23;
 	}
 
@@ -21,6 +21,6 @@ export class DefaultLabelModel extends LabelModel {
 		return {
 			...super.serialize(),
 			label: this.label
-		}
+		};
 	}
 }

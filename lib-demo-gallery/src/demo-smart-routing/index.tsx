@@ -1,13 +1,13 @@
-import createEngine,{
+import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
 	DiagramWidget,
 	PathFindingLinkFactory
-} from "@projectstorm/react-diagrams";
-import * as React from "react";
-import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
-import { action } from "@storybook/addon-actions";
+} from '@projectstorm/react-diagrams';
+import * as React from 'react';
+import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { action } from '@storybook/addon-actions';
 
 export default () => {
 	// setup the diagram engine
@@ -17,20 +17,20 @@ export default () => {
 	const model = new DiagramModel();
 
 	// create four nodes in a way that straight links wouldn't work
-	const node1 = new DefaultNodeModel("Node A", "rgb(0,192,255)");
-	const port1 = node1.addPort(new DefaultPortModel(false, "out-1", "Out"));
+	const node1 = new DefaultNodeModel('Node A', 'rgb(0,192,255)');
+	const port1 = node1.addPort(new DefaultPortModel(false, 'out-1', 'Out'));
 	node1.setPosition(340, 350);
 
-	const node2 = new DefaultNodeModel("Node B", "rgb(255,255,0)");
-	const port2 = node2.addPort(new DefaultPortModel(false, "out-1", "Out"));
+	const node2 = new DefaultNodeModel('Node B', 'rgb(255,255,0)');
+	const port2 = node2.addPort(new DefaultPortModel(false, 'out-1', 'Out'));
 	node2.setPosition(240, 80);
-	const node3 = new DefaultNodeModel("Node C", "rgb(192,255,255)");
-	const port3 = node3.addPort(new DefaultPortModel(true, "in-1", "In"));
+	const node3 = new DefaultNodeModel('Node C', 'rgb(192,255,255)');
+	const port3 = node3.addPort(new DefaultPortModel(true, 'in-1', 'In'));
 	node3.setPosition(540, 180);
-	const node4 = new DefaultNodeModel("Node D", "rgb(192,0,255)");
-	const port4 = node4.addPort(new DefaultPortModel(true, "in-1", "In"));
+	const node4 = new DefaultNodeModel('Node D', 'rgb(192,0,255)');
+	const port4 = node4.addPort(new DefaultPortModel(true, 'in-1', 'In'));
 	node4.setPosition(95, 185);
-	const node5 = new DefaultNodeModel("Node E", "rgb(192,255,0)");
+	const node5 = new DefaultNodeModel('Node E', 'rgb(192,255,0)');
 	node5.setPosition(250, 180);
 
 	const pathfinding = engine.getLinkFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME);
@@ -50,13 +50,11 @@ export default () => {
 			buttons={
 				<button
 					onClick={() => {
-						action("Serialized Graph")(JSON.stringify(model.serializeDiagram(), null, 2));
-					}}
-				>
+						action('Serialized Graph')(JSON.stringify(model.serializeDiagram(), null, 2));
+					}}>
 					Serialize Graph
 				</button>
-			}
-		>
+			}>
 			<DiagramWidget
 				actionStoppedFiring={() => {
 					pathfinding.calculateRoutingMatrix();

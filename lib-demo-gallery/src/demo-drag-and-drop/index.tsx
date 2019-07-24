@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { BodyWidget } from "./components/BodyWidget";
-import { Application } from "./Application";
+import { BodyWidget } from './components/BodyWidget';
+import { Application } from './Application';
 
-import "./sass/main.scss";
+import './sass/main.scss';
 
 export default () => {
 	var app = new Application();

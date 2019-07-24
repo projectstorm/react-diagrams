@@ -46,6 +46,6 @@ module.exports = {
 		compress: true,
 		port: 9000,
 		disableHostCheck: true,
-		overlay: true,
+		overlay: true
 	}
 };

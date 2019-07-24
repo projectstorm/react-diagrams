@@ -1,5 +1,5 @@
-import { BaseModel } from "../models/BaseModel";
-import {DiagramEngine} from "../DiagramEngine";
+import { BaseModel } from '../models/BaseModel';
+import { DiagramEngine } from '../DiagramEngine';
 
 export abstract class AbstractFactory<T extends BaseModel> {
 	type: string;
@@ -9,7 +9,7 @@ export abstract class AbstractFactory<T extends BaseModel> {
 		this.type = name;
 	}
 
-	setDiagramEngine(engine: DiagramEngine){
+	setDiagramEngine(engine: DiagramEngine) {
 		this.engine = engine;
 	}
 

@@ -1,15 +1,15 @@
-import createEngine,{
+import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
 	DiagramWidget
-} from "@projectstorm/react-diagrams";
-import { distributeElements } from "./dagre-utils";
-import * as React from "react";
-import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
+} from '@projectstorm/react-diagrams';
+import { distributeElements } from './dagre-utils';
+import * as React from 'react';
+import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 
 function createNode(name) {
-	return new DefaultNodeModel(name, "rgb(0,192,255)");
+	return new DefaultNodeModel(name, 'rgb(0,192,255)');
 }
 
 let count = 0;
@@ -17,8 +17,8 @@ let count = 0;
 function connectNodes(nodeFrom, nodeTo) {
 	//just to get id-like structure
 	count++;
-	const portOut = nodeFrom.addPort(new DefaultPortModel(true, `${nodeFrom.name}-out-${count}`, "Out"));
-	const portTo = nodeTo.addPort(new DefaultPortModel(false, `${nodeFrom.name}-to-${count}`, "IN"));
+	const portOut = nodeFrom.addPort(new DefaultPortModel(true, `${nodeFrom.name}-out-${count}`, 'Out'));
+	const portTo = nodeTo.addPort(new DefaultPortModel(false, `${nodeFrom.name}-to-${count}`, 'IN'));
 	return portOut.link(portTo);
 }
 
@@ -72,13 +72,13 @@ export default () => {
 	let nodesFrom = [];
 	let nodesTo = [];
 
-	nodesFrom.push(createNode("from-1"));
-	nodesFrom.push(createNode("from-2"));
-	nodesFrom.push(createNode("from-3"));
+	nodesFrom.push(createNode('from-1'));
+	nodesFrom.push(createNode('from-2'));
+	nodesFrom.push(createNode('from-3'));
 
-	nodesTo.push(createNode("to-1"));
-	nodesTo.push(createNode("to-2"));
-	nodesTo.push(createNode("to-3"));
+	nodesTo.push(createNode('to-1'));
+	nodesTo.push(createNode('to-2'));
+	nodesTo.push(createNode('to-3'));
 
 	//4) link nodes together
 	let links = nodesFrom.map((node, index) => {

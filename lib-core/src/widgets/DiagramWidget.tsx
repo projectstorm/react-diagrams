@@ -1,20 +1,20 @@
-import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
-import * as _ from "lodash";
-import { LinkLayerWidget } from "./layers/LinkLayerWidget";
-import { NodeLayerWidget } from "./layers/NodeLayerWidget";
-import { Toolkit } from "../Toolkit";
-import { BaseAction } from "../actions/BaseAction";
-import { MoveCanvasAction } from "../actions/MoveCanvasAction";
-import { MoveItemsAction } from "../actions/MoveItemsAction";
-import { SelectingAction } from "../actions/SelectingAction";
-import { NodeModel } from "../models/NodeModel";
-import { PointModel } from "../models/PointModel";
-import { PortModel } from "../models/PortModel";
-import { LinkModel } from "../models/LinkModel";
-import { BaseModel, BaseModelListener } from "../models/BaseModel";
-import { BaseEntity } from "../BaseEntity";
-import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+import * as React from 'react';
+import { DiagramEngine } from '../DiagramEngine';
+import * as _ from 'lodash';
+import { LinkLayerWidget } from './layers/LinkLayerWidget';
+import { NodeLayerWidget } from './layers/NodeLayerWidget';
+import { Toolkit } from '../Toolkit';
+import { BaseAction } from '../actions/BaseAction';
+import { MoveCanvasAction } from '../actions/MoveCanvasAction';
+import { MoveItemsAction } from '../actions/MoveItemsAction';
+import { SelectingAction } from '../actions/SelectingAction';
+import { NodeModel } from '../models/NodeModel';
+import { PointModel } from '../models/PointModel';
+import { PortModel } from '../models/PortModel';
+import { LinkModel } from '../models/LinkModel';
+import { BaseModel, BaseModelListener } from '../models/BaseModel';
+import { BaseEntity } from '../BaseEntity';
+import { BaseWidget, BaseWidgetProps } from './BaseWidget';
 
 export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -60,7 +60,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	onKeyUpPointer: (this: Window, ev: KeyboardEvent) => void = null;
 
 	constructor(props: DiagramProps) {
-		super("srd-diagram", props);
+		super('srd-diagram', props);
 		this.onMouseMove = this.onMouseMove.bind(this);
 		this.onMouseUp = this.onMouseUp.bind(this);
 		this.state = {
@@ -76,9 +76,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	componentWillUnmount() {
 		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
 		this.props.diagramEngine.setCanvas(null);
-		window.removeEventListener("keyup", this.onKeyUpPointer);
-		window.removeEventListener("mouseUp", this.onMouseUp);
-		window.removeEventListener("mouseMove", this.onMouseMove);
+		window.removeEventListener('keyup', this.onKeyUpPointer);
+		window.removeEventListener('mouseUp', this.onMouseUp);
+		window.removeEventListener('mouseMove', this.onMouseMove);
 	}
 
 	componentWillReceiveProps(nextProps: DiagramProps) {
@@ -108,9 +108,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 				renderedNodes: true
 			});
 		}
-		this.props.diagramEngine.iterateListeners((list) => {
+		this.props.diagramEngine.iterateListeners(list => {
 			list.rendered && list.rendered();
-		})
+		});
 	}
 
 	componentDidMount() {
@@ -127,16 +127,16 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			})
 		});
 
-		window.addEventListener("keyup", this.onKeyUpPointer, false);
+		window.addEventListener('keyup', this.onKeyUpPointer, false);
 
 		// dont focus the window when in test mode - jsdom fails
-		if (process.env.NODE_ENV !== "test") {
+		if (process.env.NODE_ENV !== 'test') {
 			window.focus();
 		}
 
-		this.props.diagramEngine.iterateListeners((list) => {
+		this.props.diagramEngine.iterateListeners(list => {
 			list.rendered && list.rendered();
-		})
+		});
 	}
 
 	/**
@@ -147,42 +147,38 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
 		//is it a port
-		var element = Toolkit.closest(target, ".port[data-name]");
+		var element = Toolkit.closest(target, '.port[data-name]');
 		if (element) {
-			var nodeElement = Toolkit.closest(target, ".node[data-nodeid]") as HTMLElement;
+			var nodeElement = Toolkit.closest(target, '.node[data-nodeid]') as HTMLElement;
 			return {
-				model: diagramModel
-					.getNode(nodeElement.getAttribute("data-nodeid"))
-					.getPort(element.getAttribute("data-name")),
+				model: diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-name')),
 				element: element
 			};
 		}
 
 		//look for a point
-		element = Toolkit.closest(target, ".point[data-id]");
+		element = Toolkit.closest(target, '.point[data-id]');
 		if (element) {
 			return {
-				model: diagramModel
-					.getLink(element.getAttribute("data-linkid"))
-					.getPointModel(element.getAttribute("data-id")),
+				model: diagramModel.getLink(element.getAttribute('data-linkid')).getPointModel(element.getAttribute('data-id')),
 				element: element
 			};
 		}
 
 		//look for a link
-		element = Toolkit.closest(target, "[data-linkid]");
+		element = Toolkit.closest(target, '[data-linkid]');
 		if (element) {
 			return {
-				model: diagramModel.getLink(element.getAttribute("data-linkid")),
+				model: diagramModel.getLink(element.getAttribute('data-linkid')),
 				element: element
 			};
 		}
 
 		//look for a node
-		element = Toolkit.closest(target, ".node[data-nodeid]");
+		element = Toolkit.closest(target, '.node[data-nodeid]');
 		if (element) {
 			return {
-				model: diagramModel.getNode(element.getAttribute("data-nodeid")),
+				model: diagramModel.getNode(element.getAttribute('data-nodeid')),
 				element: element
 			};
 		}
@@ -390,8 +386,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					} else if (
 						_.some(
 							_.values(targetPort.getLinks()),
-							(l: LinkModel) =>
-								l !== link && (l.getSourcePort() === sourcePort || l.getTargetPort() === sourcePort)
+							(l: LinkModel) => l !== link && (l.getSourcePort() === sourcePort || l.getTargetPort() === sourcePort)
 						)
 					) {
 						//link is a duplicate
@@ -406,15 +401,15 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction();
 		}
-		this.state.document.removeEventListener("mousemove", this.onMouseMove);
-		this.state.document.removeEventListener("mouseup", this.onMouseUp);
+		this.state.document.removeEventListener('mousemove', this.onMouseMove);
+		this.state.document.removeEventListener('mouseup', this.onMouseUp);
 	}
 
 	drawSelectionBox() {
 		let dimensions = (this.state.action as SelectingAction).getBoxDimensions();
 		return (
 			<div
-				className={this.bem("__selector")}
+				className={this.bem('__selector')}
 				style={{
 					top: dimensions.top,
 					left: dimensions.left,
@@ -522,9 +517,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 								link.getLastPoint().setSelected(true);
 								diagramModel.addLink(link);
 
-								this.startFiringAction(
-									new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
-								);
+								this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 							}
 						} else {
 							diagramModel.clearSelection();
@@ -538,16 +531,15 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 						this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 					}
-					this.state.document.addEventListener("mousemove", this.onMouseMove);
-					this.state.document.addEventListener("mouseup", this.onMouseUp);
-				}}
-			>
+					this.state.document.addEventListener('mousemove', this.onMouseMove);
+					this.state.document.addEventListener('mouseup', this.onMouseUp);
+				}}>
 				{this.state.renderedNodes && (
 					<LinkLayerWidget
 						diagramEngine={diagramEngine}
 						pointAdded={(point: PointModel, event) => {
-							this.state.document.addEventListener("mousemove", this.onMouseMove);
-							this.state.document.addEventListener("mouseup", this.onMouseUp);
+							this.state.document.addEventListener('mousemove', this.onMouseMove);
+							this.state.document.addEventListener('mouseup', this.onMouseUp);
 							event.stopPropagation();
 							diagramModel.clearSelection(point);
 							this.setState({

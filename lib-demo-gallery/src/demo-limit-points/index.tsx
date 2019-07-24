@@ -1,10 +1,10 @@
-import * as React from "react";
-import createEngine,{
+import * as React from 'react';
+import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DiagramWidget,
 	DiagramProps
-} from "@projectstorm/react-diagrams";
+} from '@projectstorm/react-diagrams';
 
 /**
  * Shows that a limit of points can be set for links
@@ -16,13 +16,13 @@ export default () => {
 	var model = new DiagramModel();
 
 	//3-A) create a default node
-	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-	let port = node1.addOutPort("Out");
+	var node1 = new DefaultNodeModel('Node 1', 'rgb(0,192,255)');
+	let port = node1.addOutPort('Out');
 	node1.setPosition(100, 100);
 
 	//3-B) create another default node
-	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	let port2 = node2.addInPort("In");
+	var node2 = new DefaultNodeModel('Node 2', 'rgb(192,255,0)');
+	let port2 = node2.addInPort('In');
 	node2.setPosition(400, 100);
 
 	// link the ports

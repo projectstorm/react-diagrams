@@ -1,8 +1,8 @@
-import createEngine,{ DiagramModel, DefaultNodeModel, DiagramWidget } from "@projectstorm/react-diagrams";
-import * as React from "react";
-import { DemoWorkspaceWidget } from "../helpers/DemoWorkspaceWidget";
-import { action } from "@storybook/addon-actions";
-import * as beautify from "json-beautify";
+import createEngine, { DiagramModel, DefaultNodeModel, DiagramWidget } from '@projectstorm/react-diagrams';
+import * as React from 'react';
+import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { action } from '@storybook/addon-actions';
+import * as beautify from 'json-beautify';
 
 export default () => {
 	//1) setup the diagram engine
@@ -12,13 +12,13 @@ export default () => {
 	var model = new DiagramModel();
 
 	//3-A) create a default node
-	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-	var port1 = node1.addOutPort("Out");
+	var node1 = new DefaultNodeModel('Node 1', 'rgb(0,192,255)');
+	var port1 = node1.addOutPort('Out');
 	node1.setPosition(100, 100);
 
 	//3-B) create another default node
-	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-	var port2 = node2.addInPort("In");
+	var node2 = new DefaultNodeModel('Node 2', 'rgb(192,255,0)');
+	var port2 = node2.addInPort('In');
 	node2.setPosition(400, 100);
 
 	//3-C) link the 2 nodes together
@@ -45,13 +45,11 @@ export default () => {
 			buttons={
 				<button
 					onClick={() => {
-						action("Serialized Graph")(beautify(model2.serializeDiagram(), null, 2, 80));
-					}}
-				>
+						action('Serialized Graph')(beautify(model2.serializeDiagram(), null, 2, 80));
+					}}>
 					Serialize Graph
 				</button>
-			}
-		>
+			}>
 			<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
 		</DemoWorkspaceWidget>
 	);

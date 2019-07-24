@@ -1,5 +1,5 @@
-import * as PF from "pathfinding";
-import {PathFindingLinkFactory} from "../link/PathFindingLinkFactory";
+import * as PF from 'pathfinding';
+import { PathFindingLinkFactory } from '../link/PathFindingLinkFactory';
 
 /*
 it can be very expensive to calculate routes when every single pixel on the canvas

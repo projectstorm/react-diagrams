@@ -1,10 +1,10 @@
 const path = require('path');
-module.exports = async ({config, mode}) => {
+module.exports = async ({ config, mode }) => {
 	return {
 		...config,
 		resolve: {
 			...config.resolve,
-			extensions: ['.tsx', '.ts', '.js'],
+			extensions: ['.tsx', '.ts', '.js']
 		},
 		module: {
 			...config.module,
@@ -18,7 +18,7 @@ module.exports = async ({config, mode}) => {
 							'css-loader',
 							{
 								loader: 'postcss-loader',
-								options: {config: {path: path.join(__dirname, '..')}}
+								options: { config: { path: path.join(__dirname, '..') } }
 							},
 							'sass-loader'
 						]
@@ -36,7 +36,7 @@ module.exports = async ({config, mode}) => {
 						options: {
 							transpileOnly: true
 						}
-					},
+					}
 				]
 			]
 		}

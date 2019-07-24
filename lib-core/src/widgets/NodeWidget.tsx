@@ -1,7 +1,7 @@
-import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
-import { NodeModel } from "../models/NodeModel";
-import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+import * as React from 'react';
+import { DiagramEngine } from '../DiagramEngine';
+import { NodeModel } from '../models/NodeModel';
+import { BaseWidget, BaseWidgetProps } from './BaseWidget';
 
 export interface NodeProps extends BaseWidgetProps {
 	node: NodeModel;
@@ -16,7 +16,7 @@ export interface NodeState {}
  */
 export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
 	constructor(props: NodeProps) {
-		super("srd-node", props);
+		super('srd-node', props);
 		this.state = {};
 	}
 
@@ -25,7 +25,7 @@ export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
 	}
 
 	getClassName() {
-		return "node " + super.getClassName() + (this.props.node.isSelected() ? this.bem("--selected") : "");
+		return 'node ' + super.getClassName() + (this.props.node.isSelected() ? this.bem('--selected') : '');
 	}
 
 	render() {
@@ -36,8 +36,7 @@ export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
 				style={{
 					top: this.props.node.y,
 					left: this.props.node.x
-				}}
-			>
+				}}>
 				{this.props.children}
 			</div>
 		);

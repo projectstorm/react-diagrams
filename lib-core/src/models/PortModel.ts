@@ -1,8 +1,8 @@
-import { BaseModel, BaseModelListener } from "./BaseModel";
-import { NodeModel } from "./NodeModel";
-import { LinkModel } from "./LinkModel";
-import * as _ from "lodash";
-import { DiagramEngine } from "../DiagramEngine";
+import { BaseModel, BaseModelListener } from './BaseModel';
+import { NodeModel } from './NodeModel';
+import { LinkModel } from './LinkModel';
+import * as _ from 'lodash';
+import { DiagramEngine } from '../DiagramEngine';
 
 export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	name: string;

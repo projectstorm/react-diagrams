@@ -1,11 +1,11 @@
-import { BaseListener, BaseEntity, BaseEvent, BaseEntityType } from "../BaseEntity";
-import * as _ from "lodash";
-import { DiagramEngine } from "../DiagramEngine";
-import { LinkModel } from "./LinkModel";
-import { NodeModel } from "./NodeModel";
-import { PortModel } from "./PortModel";
-import { BaseModel, BaseModelListener } from "./BaseModel";
-import { PointModel } from "./PointModel";
+import { BaseListener, BaseEntity, BaseEvent, BaseEntityType } from '../BaseEntity';
+import * as _ from 'lodash';
+import { DiagramEngine } from '../DiagramEngine';
+import { LinkModel } from './LinkModel';
+import { NodeModel } from './NodeModel';
+import { PortModel } from './PortModel';
+import { BaseModel, BaseModelListener } from './BaseModel';
+import { PointModel } from './PointModel';
 /**
  * @author Dylan Vorster
  *
@@ -148,16 +148,16 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		if (filters.length > 0) {
 			items = _.filter(_.uniq(items), (item: BaseModel<any>) => {
-				if (_.includes(filters, "node") && item instanceof NodeModel) {
+				if (_.includes(filters, 'node') && item instanceof NodeModel) {
 					return true;
 				}
-				if (_.includes(filters, "link") && item instanceof LinkModel) {
+				if (_.includes(filters, 'link') && item instanceof LinkModel) {
 					return true;
 				}
-				if (_.includes(filters, "port") && item instanceof PortModel) {
+				if (_.includes(filters, 'port') && item instanceof PortModel) {
 					return true;
 				}
-				if (_.includes(filters, "point") && item instanceof PointModel) {
+				if (_.includes(filters, 'point') && item instanceof PointModel) {
 					return true;
 				}
 				return false;

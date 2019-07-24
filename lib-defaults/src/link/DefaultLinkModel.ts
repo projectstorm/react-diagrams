@@ -1,6 +1,6 @@
-import * as _ from "lodash";
-import {BaseEvent, DiagramEngine, LabelModel, LinkModel, LinkModelListener} from "@projectstorm/react-diagrams-core";
-import {DefaultLabelModel} from "../label/DefaultLabelModel";
+import * as _ from 'lodash';
+import { BaseEvent, DiagramEngine, LabelModel, LinkModel, LinkModelListener } from '@projectstorm/react-diagrams-core';
+import { DefaultLabelModel } from '../label/DefaultLabelModel';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string }): void;
@@ -13,9 +13,9 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 	color: string;
 	curvyness: number;
 
-	constructor(type: string = "default") {
+	constructor(type: string = 'default') {
 		super(type);
-		this.color = "rgba(255,255,255,0.5)";
+		this.color = 'rgba(255,255,255,0.5)';
 		this.width = 3;
 		this.curvyness = 50;
 	}

@@ -1,15 +1,15 @@
-import {DiagramEngine} from "@projectstorm/react-diagrams-core";
+import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import {
 	DefaultLabelFactory,
 	DefaultLinkFactory,
 	DefaultNodeFactory,
 	DefaultPortFactory
-} from "@projectstorm/react-diagrams-defaults";
-import {PathFindingLinkFactory} from "@projectstorm/react-diagrams-routing";
+} from '@projectstorm/react-diagrams-defaults';
+import { PathFindingLinkFactory } from '@projectstorm/react-diagrams-routing';
 
-export * from "@projectstorm/react-diagrams-core";
-export * from "@projectstorm/react-diagrams-defaults";
-export * from "@projectstorm/react-diagrams-routing";
+export * from '@projectstorm/react-diagrams-core';
+export * from '@projectstorm/react-diagrams-defaults';
+export * from '@projectstorm/react-diagrams-routing';
 
 /**
  * Construct an engine with the defaults installed
@@ -22,4 +22,4 @@ export default (): DiagramEngine => {
 	engine.registerPortFactory(new DefaultPortFactory());
 	engine.registerLinkFactory(new PathFindingLinkFactory());
 	return engine;
-}
+};

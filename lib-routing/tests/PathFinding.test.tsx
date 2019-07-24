@@ -1,11 +1,11 @@
-import PathFinding from "../../src/routing/PathFinding";
+import PathFinding from '../../src/routing/PathFinding';
 
-describe("calculating start and end points", () => {
+describe('calculating start and end points', () => {
 	beforeEach(() => {
 		this.pathFinding = new PathFinding(null);
 	});
 
-	test("return correct object for valid walkable input", () => {
+	test('return correct object for valid walkable input', () => {
 		const matrix = [
 			[0, 0, 0, 0, 1, 1],
 			[0, 0, 0, 0, 1, 1],
@@ -30,7 +30,7 @@ describe("calculating start and end points", () => {
 		expect(result.pathToEnd).toEqual([[3, 2], [4, 1], [5, 0]]);
 	});
 
-	test("undefined is returned when no walkable path exists", () => {
+	test('undefined is returned when no walkable path exists', () => {
 		const matrix = [[0, 0, 1, 1], [0, 0, 1, 1], [1, 1, 0, 0], [1, 1, 0, 0]];
 		const path = [[0, 3], [1, 2], [2, 1], [3, 0]];
 

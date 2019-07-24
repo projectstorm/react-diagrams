@@ -1,17 +1,17 @@
-import {BaseEntity, BaseListener} from "./BaseEntity";
-import {DiagramModel} from "./models/DiagramModel";
-import * as _ from "lodash";
-import {BaseModel, BaseModelListener} from "./models/BaseModel";
-import {NodeModel} from "./models/NodeModel";
-import {PointModel} from "./models/PointModel";
-import {PortModel} from "./models/PortModel";
-import {LinkModel} from "./models/LinkModel";
-import {AbstractLabelFactory} from "./factories/AbstractLabelFactory";
-import {AbstractLinkFactory} from "./factories/AbstractLinkFactory";
-import {AbstractNodeFactory} from "./factories/AbstractNodeFactory";
-import {AbstractPortFactory} from "./factories/AbstractPortFactory";
-import {LabelModel} from "./models/LabelModel";
-import {Toolkit} from "./Toolkit";
+import { BaseEntity, BaseListener } from './BaseEntity';
+import { DiagramModel } from './models/DiagramModel';
+import * as _ from 'lodash';
+import { BaseModel, BaseModelListener } from './models/BaseModel';
+import { NodeModel } from './models/NodeModel';
+import { PointModel } from './models/PointModel';
+import { PortModel } from './models/PortModel';
+import { LinkModel } from './models/LinkModel';
+import { AbstractLabelFactory } from './factories/AbstractLabelFactory';
+import { AbstractLinkFactory } from './factories/AbstractLinkFactory';
+import { AbstractNodeFactory } from './factories/AbstractNodeFactory';
+import { AbstractPortFactory } from './factories/AbstractPortFactory';
+import { LabelModel } from './models/LabelModel';
+import { Toolkit } from './Toolkit';
 
 /**
  * @author Dylan Vorster
@@ -27,7 +27,7 @@ export interface DiagramEngineListener extends BaseListener {
 
 	repaintCanvas?(): void;
 
-	rendered?() : void;
+	rendered?(): void;
 }
 
 /**
@@ -62,7 +62,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 			//pop it onto the window so our E2E helpers can find it
 			if (window) {
-				(window as any)["diagram_instance"] = this;
+				(window as any)['diagram_instance'] = this;
 			}
 		}
 	}
@@ -236,7 +236,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	generateWidgetForLink(link: LinkModel): JSX.Element | null {
 		var linkFactory = this.getFactoryForLink(link);
 		if (!linkFactory) {
-			throw new Error("Cannot find link factory for link: " + link.getType());
+			throw new Error('Cannot find link factory for link: ' + link.getType());
 		}
 		return linkFactory.generateReactWidget(this, link);
 	}
@@ -244,7 +244,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	generateWidgetForNode(node: NodeModel): JSX.Element | null {
 		var nodeFactory = this.getFactoryForNode(node);
 		if (!nodeFactory) {
-			throw new Error("Cannot find widget factory for node: " + node.getType());
+			throw new Error('Cannot find widget factory for node: ' + node.getType());
 		}
 		return nodeFactory.generateReactWidget(this, node);
 	}
@@ -259,13 +259,13 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getRelativePoint(x, y) {
 		var canvasRect = this.canvas.getBoundingClientRect();
-		return {x: x - canvasRect.left, y: y - canvasRect.top};
+		return { x: x - canvasRect.left, y: y - canvasRect.top };
 	}
 
 	getNodeElement(node: NodeModel): Element {
 		const selector = this.canvas.querySelector(`.node[data-nodeid="${node.getID()}"]`);
 		if (selector === null) {
-			throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
+			throw new Error('Cannot find Node element with nodeID: [' + node.getID() + ']');
 		}
 		return selector;
 	}
@@ -276,11 +276,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		);
 		if (selector === null) {
 			throw new Error(
-				"Cannot find Node Port element with nodeID: [" +
-				port.getParent().getID() +
-				"] and name: [" +
-				port.getName() +
-				"]"
+				'Cannot find Node Port element with nodeID: [' +
+					port.getParent().getID() +
+					'] and name: [' +
+					port.getName() +
+					']'
 			);
 		}
 		return selector;
@@ -318,12 +318,8 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		const canvasRect = this.canvas.getBoundingClientRect() as ClientRect;
 
 		return {
-			x:
-				(sourceRect.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0) -
-				canvasRect.left,
-			y:
-				(sourceRect.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0) -
-				canvasRect.top,
+			x: (sourceRect.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0) - canvasRect.left,
+			y: (sourceRect.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0) - canvasRect.top,
 			width: sourceRect.width,
 			height: sourceRect.height
 		};

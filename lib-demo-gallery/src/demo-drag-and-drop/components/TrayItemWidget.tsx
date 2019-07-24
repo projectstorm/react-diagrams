@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 export interface TrayItemWidgetProps {
 	model: any;
@@ -20,10 +20,9 @@ export class TrayItemWidget extends React.Component<TrayItemWidgetProps, TrayIte
 				style={{ borderColor: this.props.color }}
 				draggable={true}
 				onDragStart={event => {
-					event.dataTransfer.setData("storm-diagram-node", JSON.stringify(this.props.model));
+					event.dataTransfer.setData('storm-diagram-node', JSON.stringify(this.props.model));
 				}}
-				className="tray-item"
-			>
+				className="tray-item">
 				{this.props.name}
 			</div>
 		);

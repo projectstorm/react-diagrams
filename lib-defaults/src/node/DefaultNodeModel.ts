@@ -1,15 +1,14 @@
-import * as _ from "lodash";
-import {DiagramEngine, NodeModel, NodeModelListener, Toolkit} from "@projectstorm/react-diagrams-core";
-import {DefaultPortModel} from "../port/DefaultPortModel";
-
+import * as _ from 'lodash';
+import { DiagramEngine, NodeModel, NodeModelListener, Toolkit } from '@projectstorm/react-diagrams-core';
+import { DefaultPortModel } from '../port/DefaultPortModel';
 
 export class DefaultNodeModel extends NodeModel<NodeModelListener> {
 	name: string;
 	color: string;
 	ports: { [s: string]: DefaultPortModel };
 
-	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)") {
-		super("default");
+	constructor(name: string = 'Untitled', color: string = 'rgb(0,192,255)') {
+		super('default');
 		this.name = name;
 		this.color = color;
 	}

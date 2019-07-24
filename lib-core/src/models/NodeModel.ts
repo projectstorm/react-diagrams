@@ -1,9 +1,9 @@
-import { BaseEvent } from "../BaseEntity";
-import { BaseModel, BaseModelListener } from "./BaseModel";
-import { PortModel } from "./PortModel";
-import * as _ from "lodash";
-import { DiagramEngine } from "../DiagramEngine";
-import { DiagramModel } from "./DiagramModel";
+import { BaseEvent } from '../BaseEntity';
+import { BaseModel, BaseModelListener } from './BaseModel';
+import { PortModel } from './PortModel';
+import * as _ from 'lodash';
+import { DiagramEngine } from '../DiagramEngine';
+import { DiagramModel } from './DiagramModel';
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEvent<NodeModel>): void;
@@ -19,7 +19,7 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 	width: number;
 	height: number;
 
-	constructor(nodeType: string = "default", id?: string) {
+	constructor(nodeType: string = 'default', id?: string) {
 		super(nodeType, id);
 		this.x = 0;
 		this.y = 0;

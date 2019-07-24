@@ -1,12 +1,11 @@
-import * as React from "react";
-import {AbstractLinkFactory, DiagramEngine} from "@projectstorm/react-diagrams-core";
-import {PathFindingLinkModel} from "./PathFindingLinkModel";
-import {PathFindingLinkWidget} from "./PathFindingLinkWidget";
-import * as _ from "lodash";
-import * as Path from "paths-js/path";
+import * as React from 'react';
+import { AbstractLinkFactory, DiagramEngine } from '@projectstorm/react-diagrams-core';
+import { PathFindingLinkModel } from './PathFindingLinkModel';
+import { PathFindingLinkWidget } from './PathFindingLinkWidget';
+import * as _ from 'lodash';
+import * as Path from 'paths-js/path';
 
-export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkModel>{
-
+export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkModel> {
 	ROUTING_SCALING_FACTOR: number = 5;
 
 	// calculated only when smart routing is active
@@ -19,14 +18,12 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 
 	static NAME = 'pathfinding';
 
-	constructor(){
+	constructor() {
 		super(PathFindingLinkFactory.NAME);
 	}
 
 	generateReactWidget(diagramEngine: DiagramEngine, link: PathFindingLinkModel): JSX.Element {
-		return (
-			<PathFindingLinkWidget diagramEngine={diagramEngine} link={link} factory={this} />
-		);
+		return <PathFindingLinkWidget diagramEngine={diagramEngine} link={link} factory={this} />;
 	}
 
 	getNewInstance(initialConfig?: any): PathFindingLinkModel {
@@ -155,18 +152,15 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 		const minX =
 			Math.floor(
 				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x).x, 0) /
-				this.ROUTING_SCALING_FACTOR
+					this.ROUTING_SCALING_FACTOR
 			) * this.ROUTING_SCALING_FACTOR;
-		const maxXElement = _.maxBy(
-			_.concat(allNodesCoords, allPortsCoords, allPointsCoords),
-			item => item.x + item.width
-		);
+		const maxXElement = _.maxBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x + item.width);
 		const maxX = Math.max(maxXElement.x + maxXElement.width, canvas.offsetWidth);
 
 		const minY =
 			Math.floor(
 				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.y).y, 0) /
-				this.ROUTING_SCALING_FACTOR
+					this.ROUTING_SCALING_FACTOR
 			) * this.ROUTING_SCALING_FACTOR;
 		const maxYElement = _.maxBy(
 			_.concat(allNodesCoords, allPortsCoords, allPointsCoords),
@@ -207,18 +201,20 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 		const allElements = _.flatMap(
 			_.values(this.engine.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
 		);
-		allElements.filter(port => port !== null).forEach(port => {
-			const startX = Math.floor(port.x / this.ROUTING_SCALING_FACTOR);
-			const endX = Math.ceil((port.x + port.width) / this.ROUTING_SCALING_FACTOR);
-			const startY = Math.floor(port.y / this.ROUTING_SCALING_FACTOR);
-			const endY = Math.ceil((port.y + port.height) / this.ROUTING_SCALING_FACTOR);
+		allElements
+			.filter(port => port !== null)
+			.forEach(port => {
+				const startX = Math.floor(port.x / this.ROUTING_SCALING_FACTOR);
+				const endX = Math.ceil((port.x + port.width) / this.ROUTING_SCALING_FACTOR);
+				const startY = Math.floor(port.y / this.ROUTING_SCALING_FACTOR);
+				const endY = Math.ceil((port.y + port.height) / this.ROUTING_SCALING_FACTOR);
 
-			for (let x = startX - 1; x <= endX + 1; x++) {
-				for (let y = startY - 1; y < endY + 1; y++) {
-					this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+				for (let x = startX - 1; x <= endX + 1; x++) {
+					for (let y = startY - 1; y < endY + 1; y++) {
+						this.markMatrixPoint(matrix, this.translateRoutingX(x), this.translateRoutingY(y));
+					}
 				}
-			}
-		});
+			});
 	};
 
 	markMatrixPoint = (matrix: number[][], x: number, y: number) => {

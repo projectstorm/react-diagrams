@@ -1,12 +1,12 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import "./main.css";
-import createEngine, {DefaultLinkModel, DiagramModel} from "@projectstorm/react-diagrams";
-import {JSCustomNodeFactory} from "./custom-node-js/JSCustomNodeFactory";
-import {TSCustomNodeFactory} from "./custom-node-ts/TSCustomNodeFactory";
-import {JSCustomNodeModel} from "./custom-node-js/JSCustomNodeModel";
-import {TSCustomNodeModel} from "./custom-node-ts/TSCustomNodeModel";
-import {BodyWidget} from "./BodyWidget";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import './main.css';
+import createEngine, { DefaultLinkModel, DiagramModel } from '@projectstorm/react-diagrams';
+import { JSCustomNodeFactory } from './custom-node-js/JSCustomNodeFactory';
+import { TSCustomNodeFactory } from './custom-node-ts/TSCustomNodeFactory';
+import { JSCustomNodeModel } from './custom-node-js/JSCustomNodeModel';
+import { TSCustomNodeModel } from './custom-node-ts/TSCustomNodeModel';
+import { BodyWidget } from './BodyWidget';
 
 // create an instance of the engine
 const engine = createEngine();
@@ -21,10 +21,10 @@ const model = new DiagramModel();
 //####################################################
 // now create two nodes of each type, and connect them
 
-const node1 = new JSCustomNodeModel({color: "rgb(192,255,0)"});
+const node1 = new JSCustomNodeModel({ color: 'rgb(192,255,0)' });
 node1.setPosition(50, 50);
 
-const node2 = new TSCustomNodeModel({color: "rgb(0,192,255)"});
+const node2 = new TSCustomNodeModel({ color: 'rgb(0,192,255)' });
 node2.setPosition(200, 50);
 
 const link1 = new DefaultLinkModel();
@@ -39,5 +39,5 @@ model.addAll(node1, node2, link1);
 engine.setDiagramModel(model);
 
 document.addEventListener('DOMContentLoaded', () => {
-	ReactDOM.render(<BodyWidget engine={engine}/>, document.querySelector("#application"));
+	ReactDOM.render(<BodyWidget engine={engine} />, document.querySelector('#application'));
 });

@@ -1,4 +1,4 @@
-const config = require("../webpack.shared")(__dirname);
+const config = require('../webpack.shared')(__dirname);
 module.exports = {
 	...config,
 	output: {

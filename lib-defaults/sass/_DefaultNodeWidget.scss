@@ -1,43 +1,44 @@
 .srd-default-node {
-  background-color: rgb(30, 30, 30);
-  border-radius: 5px;
-  font-family: sans-serif;
-  color: white;
-  border: solid 2px black;
-  overflow: visible;
-  font-size: 11px;
+	background-color: rgb(30, 30, 30);
+	border-radius: 5px;
+	font-family: sans-serif;
+	color: white;
+	border: solid 2px black;
+	overflow: visible;
+	font-size: 11px;
 
-  &__title {
-    background: rgba(black, 0.3);
-    display: flex;
-    white-space: nowrap;
-    > * {
-      align-self: center;
-    }
-    .fa {
-      padding: 5px;
-      opacity: 0.2;
-      cursor: pointer;
+	&__title {
+		background: rgba(black, 0.3);
+		display: flex;
+		white-space: nowrap;
+		> * {
+			align-self: center;
+		}
+		.fa {
+			padding: 5px;
+			opacity: 0.2;
+			cursor: pointer;
 
-      &:hover {
-        opacity: 1.0;
-      }
-    }
-  }
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
 
-  &__name {
-    flex-grow: 1;
-    padding: 5px 5px;
-  }
+	&__name {
+		flex-grow: 1;
+		padding: 5px 5px;
+	}
 
-  &__ports {
-    display: flex;
-    background-image: linear-gradient(rgba(black, 0.1), rgba(black, 0.2));
-  }
+	&__ports {
+		display: flex;
+		background-image: linear-gradient(rgba(black, 0.1), rgba(black, 0.2));
+	}
 
-  &__in, &__out{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
+	&__in,
+	&__out {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+	}
 }

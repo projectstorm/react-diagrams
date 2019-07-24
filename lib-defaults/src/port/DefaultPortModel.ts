@@ -1,6 +1,6 @@
-import * as _ from "lodash";
-import {AbstractLinkFactory, DiagramEngine, LinkModel, PortModel} from "@projectstorm/react-diagrams-core";
-import {DefaultLinkModel} from "../link/DefaultLinkModel";
+import * as _ from 'lodash';
+import { AbstractLinkFactory, DiagramEngine, LinkModel, PortModel } from '@projectstorm/react-diagrams-core';
+import { DefaultLinkModel } from '../link/DefaultLinkModel';
 
 export class DefaultPortModel extends PortModel {
 	in: boolean;
@@ -8,7 +8,7 @@ export class DefaultPortModel extends PortModel {
 	links: { [id: string]: DefaultLinkModel };
 
 	constructor(isInput: boolean, name: string, label: string = null, id?: string) {
-		super(name, "default", id);
+		super(name, 'default', id);
 		this.in = isInput;
 		this.label = label || name;
 	}
@@ -42,7 +42,7 @@ export class DefaultPortModel extends PortModel {
 
 	createLinkModel(factory?: AbstractLinkFactory): LinkModel {
 		let link = super.createLinkModel();
-		if(!link && factory){
+		if (!link && factory) {
 			return factory.getNewInstance();
 		}
 		return link || new DefaultLinkModel();

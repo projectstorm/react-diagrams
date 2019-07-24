@@ -1,7 +1,7 @@
-import { BaseModel } from "./BaseModel";
-import { LinkModel } from "./LinkModel";
-import * as _ from "lodash";
-import { DiagramEngine } from "../DiagramEngine";
+import { BaseModel } from './BaseModel';
+import { LinkModel } from './LinkModel';
+import * as _ from 'lodash';
+import { DiagramEngine } from '../DiagramEngine';
 
 export class LabelModel extends BaseModel<LinkModel> {
 	offsetX: number;

@@ -28,7 +28,8 @@
 	],
 	"scripts": {
 		"build": "yarn build:clean && lerna run build --stream",
-		"build:clean": "lerna run clean --stream"
+		"build:clean": "lerna run clean --stream",
+		"pretty": "prettier --write \"lib-*/**/*.{ts,tsx,scss,js,jsx}\""
 	},
 	"peerDependencies": {
 		"closest": "^0.0.1",

@@ -1,15 +1,10 @@
-import * as React from "react";
-import * as _ from "lodash";
-import {
-	BaseWidget,
-	BaseWidgetProps, DiagramEngine,
-	LabelModel,
-	PointModel,
-} from "@projectstorm/react-diagrams-core";
-import PathFinding from "../engine/PathFinding";
-import {DefaultLinkFactory} from "@projectstorm/react-diagrams-defaults";
-import {PathFindingLinkFactory} from "./PathFindingLinkFactory";
-import {PathFindingLinkModel} from "./PathFindingLinkModel";
+import * as React from 'react';
+import * as _ from 'lodash';
+import { BaseWidget, BaseWidgetProps, DiagramEngine, LabelModel, PointModel } from '@projectstorm/react-diagrams-core';
+import PathFinding from '../engine/PathFinding';
+import { DefaultLinkFactory } from '@projectstorm/react-diagrams-defaults';
+import { PathFindingLinkFactory } from './PathFindingLinkFactory';
+import { PathFindingLinkModel } from './PathFindingLinkModel';
 
 export interface PathFindingLinkWidgetProps extends BaseWidgetProps {
 	color?: string;
@@ -27,7 +22,7 @@ export interface PathFindingLinkWidgetState {
 
 export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps, PathFindingLinkWidgetState> {
 	public static defaultProps: PathFindingLinkWidgetProps = {
-		color: "black",
+		color: 'black',
 		width: 3,
 		link: null,
 		engine: null,
@@ -43,7 +38,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 	pathFinding: PathFinding; // only set when smart routing is active
 
 	constructor(props: PathFindingLinkWidgetProps) {
-		super("srd-default-link", props);
+		super('srd-default-link', props);
 
 		this.refLabels = {};
 		this.refPaths = [];
@@ -76,23 +71,23 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		let y = this.props.link.points[pointIndex].y;
 
 		return (
-			<g key={"point-" + this.props.link.points[pointIndex].id}>
+			<g key={'point-' + this.props.link.points[pointIndex].id}>
 				<circle
 					cx={x}
 					cy={y}
 					r={5}
 					className={
-						"point " +
-						this.bem("__point") +
-						(this.props.link.points[pointIndex].isSelected() ? this.bem("--point-selected") : "")
+						'point ' +
+						this.bem('__point') +
+						(this.props.link.points[pointIndex].isSelected() ? this.bem('--point-selected') : '')
 					}
 				/>
 				<circle
 					onMouseLeave={() => {
-						this.setState({selected: false});
+						this.setState({ selected: false });
 					}}
 					onMouseEnter={() => {
-						this.setState({selected: true});
+						this.setState({ selected: true });
 					}}
 					data-id={this.props.link.points[pointIndex].id}
 					data-linkid={this.props.link.id}
@@ -100,7 +95,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 					cy={y}
 					r={15}
 					opacity={0}
-					className={"point " + this.bem("__point")}
+					className={'point ' + this.bem('__point')}
 				/>
 			</g>
 		);
@@ -125,40 +120,38 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		return (
 			<foreignObject
 				key={label.id}
-				className={this.bem("__label")}
+				className={this.bem('__label')}
 				width={canvas.offsetWidth}
-				height={canvas.offsetHeight}
-			>
+				height={canvas.offsetHeight}>
 				<div ref={ref => (this.refLabels[label.id] = ref)}>
-					{this.props.diagramEngine
-						.getFactoryForLabel(label)
-						.generateReactWidget(this.props.diagramEngine, label)}
+					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget(this.props.diagramEngine, label)}
 				</div>
 			</foreignObject>
 		);
 	}
 
 	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
-
-		let Bottom = <path
-			className={this.state.selected ? this.bem("--path-selected") : ""}
-			strokeWidth={this.props.width}
-			stroke={this.props.color}
-			ref={ref => ref && this.refPaths.push(ref)}
-			d={path}
-		/>;
+		let Bottom = (
+			<path
+				className={this.state.selected ? this.bem('--path-selected') : ''}
+				strokeWidth={this.props.width}
+				stroke={this.props.color}
+				ref={ref => ref && this.refPaths.push(ref)}
+				d={path}
+			/>
+		);
 
 		var Top = React.cloneElement(Bottom, {
 			...extraProps,
-			strokeLinecap: "round",
+			strokeLinecap: 'round',
 			onMouseLeave: () => {
-				this.setState({selected: false});
+				this.setState({ selected: false });
 			},
 			onMouseEnter: () => {
-				this.setState({selected: true});
+				this.setState({ selected: true });
 			},
 			ref: null,
-			"data-linkid": this.props.link.getID(),
+			'data-linkid': this.props.link.getID(),
 			strokeOpacity: this.state.selected ? 0.1 : 0,
 			strokeWidth: 20,
 			onContextMenu: () => {
@@ -170,7 +163,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		});
 
 		return (
-			<g key={"link-" + id}>
+			<g key={'link-' + id}>
 				{Bottom}
 				{Top}
 			</g>
@@ -208,7 +201,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 			return;
 		}
 
-		const {path, position} = this.findPathAndRelativePositionToRenderLabel(index);
+		const { path, position } = this.findPathAndRelativePositionToRenderLabel(index);
 
 		const labelDimensions = {
 			width: this.refLabels[label.id].offsetWidth,
@@ -222,14 +215,13 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 			y: pathCentre.y - labelDimensions.height / 2 + label.offsetY
 		};
 		this.refLabels[label.id].setAttribute(
-			"style",
+			'style',
 			`transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`
 		);
 	};
 
-
 	render() {
-		const {diagramEngine} = this.props;
+		const { diagramEngine } = this.props;
 		if (!diagramEngine.nodesRendered) {
 			return null;
 		}
@@ -237,7 +229,6 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		//ensure id is present for all points on the path
 		var points = this.props.link.points;
 		var paths = [];
-
 
 		// first step: calculate a direct path between the points being linked
 		const directPathCoords = this.pathFinding.calculateDirectPath(_.first(points), _.last(points));
@@ -248,16 +239,10 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		const smartLink = this.pathFinding.calculateLinkStartEndCoords(routingMatrix, directPathCoords);
 
 		if (smartLink) {
-			const {start, end, pathToStart, pathToEnd} = smartLink;
+			const { start, end, pathToStart, pathToEnd } = smartLink;
 
 			// second step: calculate a path avoiding hitting other elements
-			const simplifiedPath = this.pathFinding.calculateDynamicPath(
-				routingMatrix,
-				start,
-				end,
-				pathToStart,
-				pathToEnd
-			);
+			const simplifiedPath = this.pathFinding.calculateDynamicPath(routingMatrix, start, end, pathToStart, pathToEnd);
 
 			paths.push(
 				//smooth: boolean, extraProps: any, id: string | number, firstPoint: PointModel, lastPoint: PointModel
@@ -268,7 +253,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 							this.addPointToLink(event, 1);
 						}
 					},
-					"0"
+					'0'
 				)
 			);
 		}

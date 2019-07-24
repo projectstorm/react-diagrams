@@ -1,5 +1,5 @@
-import * as dagre from "dagre";
-import * as _ from "lodash";
+import * as dagre from 'dagre';
+import * as _ from 'lodash';
 
 const size = {
 	width: 60,
@@ -50,7 +50,5 @@ function mapEdges(model) {
 			from: link.source,
 			to: link.target
 		}))
-		.filter(
-			item => model.nodes.find(node => node.id === item.from) && model.nodes.find(node => node.id === item.to)
-		);
+		.filter(item => model.nodes.find(node => node.id === item.from) && model.nodes.find(node => node.id === item.to));
 }

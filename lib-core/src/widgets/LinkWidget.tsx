@@ -1,7 +1,7 @@
-import * as React from "react";
-import { DiagramEngine } from "../DiagramEngine";
-import { LinkModel } from "../models/LinkModel";
-import { BaseWidget, BaseWidgetProps } from "./BaseWidget";
+import * as React from 'react';
+import { DiagramEngine } from '../DiagramEngine';
+import { LinkModel } from '../models/LinkModel';
+import { BaseWidget, BaseWidgetProps } from './BaseWidget';
 
 export interface LinkProps extends BaseWidgetProps {
 	link: LinkModel;
@@ -16,7 +16,7 @@ export interface LinkState {}
  */
 export class LinkWidget extends BaseWidget<LinkProps, LinkState> {
 	constructor(props: LinkProps) {
-		super("srd-link", props);
+		super('srd-link', props);
 		this.state = {};
 	}
 
