@@ -16,12 +16,12 @@ A super simple, no-nonsense diagramming library written in React that just works
 
 [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![NPM](https://img.shields.io/npm/v/@projectstorm/react-diagrams.svg)](https://npmjs.org/package/@projectstorm/react-diagrams)  [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams) [![Package Quality](http://npm.packagequality.com/shield/storm-react-diagrams.svg)](http://packagequality.com/#?package=storm-react-diagrams)  [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master)
 
-Example implementation using custom models:
-![Personal Project](./images/example1.jpg)
-![](./images/example2.jpg)
-Get started with the default models right out of the box:
-![](./images/example3.jpg)
+Example implementation using custom models: (Dylan's personal code)
 
+![Personal Project](./docs/images/example1.jpg)
+![](./docs/images/example2.jpg)
+Get started with the default models right out of the box:
+![](./docs/images/example3.jpg)
 
 ## Introduction
 
@@ -34,17 +34,32 @@ A no-nonsense diagramming library written entirely in React with the help of a f
 * Super easy to use, and should work as you expect it to
 * Perfect for creating declarative systems such as programmatic pipelines and visual programming languages
 
-#### Installing
+## Installing
 
-```yarn add @projectstorm/react-diagrams``` 
+For all the bells and whistles:
 
-#### Run the demos
+```yarn add @projectstorm/react-diagrams```
+
+This includes all the packages listed below (and works like it used to before version 6.0)
+
+### A more modular approach
+
+STORM React diagrams has a more modualr design and as such, you can import just the core (contains no default factories)
+
+```yarn add @projectstorm/react-diagrams-core```
+
+and add some extras:
+
+```yarn add @projectstorm/react-diagrams-defaults```
+```yarn add @projectstorm/react-diagrams-routing```
+
+## Run the demos
 
 After running `yarn install` you must then run:  `yarn run storybook`
 
-#### Building from source
+## Building from source
 
-Simply run `webpack` in the root directory \(or `export NODE_ENV=production && webpack` if you want a production build\) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
+Simply run `yarn build` in the root directory \(or `NODE_ENV=production yarn build` if you want a production build\) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 We use webpack for this because TSC cannot compile a single UMD file \(TSC can currently only output multiple UMD files\).
 
 ## [Checkout the docs](https://projectstorm.gitbooks.io/react-diagrams)
