@@ -5,9 +5,11 @@ import {
 	DefaultNodeFactory,
 	DefaultPortFactory
 } from "@projectstorm/react-diagrams-defaults";
+import {PathFindingLinkFactory} from "@projectstorm/react-diagrams-routing";
 
-export * from "@projectstorm/react-diagrams-core"
-export * from "@projectstorm/react-diagrams-defaults"
+export * from "@projectstorm/react-diagrams-core";
+export * from "@projectstorm/react-diagrams-defaults";
+export * from "@projectstorm/react-diagrams-routing";
 
 /**
  * Construct an engine with the defaults installed
@@ -18,5 +20,6 @@ export default (): DiagramEngine => {
 	engine.registerNodeFactory(new DefaultNodeFactory());
 	engine.registerLinkFactory(new DefaultLinkFactory());
 	engine.registerPortFactory(new DefaultPortFactory());
+	engine.registerLinkFactory(new PathFindingLinkFactory());
 	return engine;
 }

@@ -2,6 +2,10 @@ const path = require('path');
 module.exports = async ({config, mode}) => {
 	return {
 		...config,
+		resolve: {
+			...config.resolve,
+			extensions: ['.tsx', '.ts', '.js'],
+		},
 		module: {
 			...config.module,
 			rules: [

@@ -1,8 +1,9 @@
 import * as React from "react";
 import {storiesOf, addParameters} from "@storybook/react";
 import {setOptions} from "@storybook/addon-options";
-
+import {Toolkit} from "@projectstorm/react-diagrams-core";
 import {themes} from '@storybook/theming';
+import "./src/helpers/demo.scss";
 
 Toolkit.TESTING = true;
 
@@ -11,9 +12,6 @@ addParameters({
 		theme: themes.dark,
 	},
 });
-
-//include the SCSS for the demo
-import "./src/helpers/demo.scss";
 
 setOptions({
 	name: "STORM React Diagrams",
@@ -63,7 +61,6 @@ storiesOf("Custom Models", module)
 	.add("Custom animated links", demo_cust_links);
 
 import demo_3rd_dagre from "./src/demo-dagre";
-import {Toolkit} from "@projectstorm/react-diagrams-core";
 
 storiesOf("3rd party libraries", module)
 	.add("Auto Distribute (Dagre)", demo_3rd_dagre);

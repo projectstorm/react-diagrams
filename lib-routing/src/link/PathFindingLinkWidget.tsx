@@ -20,11 +20,11 @@ export interface PathFindingLinkWidgetProps extends BaseWidgetProps {
 	pointAdded?: (point: PointModel, event: MouseEvent) => any;
 }
 
-export interface DefaultLinkState {
+export interface PathFindingLinkWidgetState {
 	selected: boolean;
 }
 
-export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps, DefaultLinkState> {
+export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps, PathFindingLinkWidgetState> {
 	public static defaultProps: PathFindingLinkWidgetProps = {
 		color: "black",
 		width: 3,

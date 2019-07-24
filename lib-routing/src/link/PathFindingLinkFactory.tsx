@@ -20,7 +20,6 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 
 	constructor(){
 		super("pathfinding");
-
 	}
 
 	generateReactWidget(diagramEngine: DiagramEngine, link: PathFindingLinkModel): JSX.Element {

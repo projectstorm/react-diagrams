@@ -7,7 +7,7 @@
 		"url": "https://github.com/projectstorm/react-diagrams.git"
 	},
 	"scripts": {
-		"start": "../node_modules/.bin/storybook"
+		"start": "../node_modules/.bin/start-storybook"
 	},
 	"keywords": [
 		"web",
