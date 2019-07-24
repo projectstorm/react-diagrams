@@ -6,11 +6,11 @@ export interface TSCustomNodeModelOptions {
 
 export class TSCustomNodeModel extends NodeModel{
 
-	options: TSCustomNodeModelOptions;
+	color: string;
 
 	constructor(options: TSCustomNodeModelOptions = {}){
 		super('ts-custom-node');
-		this.options = options || { color: 'red' };
+		this.color = options.color || 'red';
 
 		// setup an in and out port
 		this.addPort(new DefaultPortModel(true,"in"));
@@ -20,15 +20,13 @@ export class TSCustomNodeModel extends NodeModel{
 	serialize() {
 		return {
 			...super.serialize(),
-			color: this.options.color
+			color: this.color
 		}
 	}
 
 	deSerialize(ob: any, engine: DiagramEngine): void {
 		super.deSerialize(ob, engine);
-		this.options = {
-			color: ob.color
-		}
+		this.color = ob.color;
 	}
 
 }
