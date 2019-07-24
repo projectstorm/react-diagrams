@@ -38,20 +38,20 @@ A no-nonsense diagramming library written entirely in React with the help of a f
 
 For all the bells and whistles:
 
-```yarn add @projectstorm/react-diagrams```
+    yarn add @projectstorm/react-diagrams
 
 This includes all the packages listed below (and works like it used to before version 6.0)
 
 ### A more modular approach
 
-STORM React diagrams has a more modualr design and as such, you can import just the core (contains no default factories)
+This library now has a more modular design and you can import just the core (contains no default factories or routing)
 
-```yarn add @projectstorm/react-diagrams-core```
+    yarn add @projectstorm/react-diagrams-core
 
 and add some extras:
 
-```yarn add @projectstorm/react-diagrams-defaults```
-```yarn add @projectstorm/react-diagrams-routing```
+    yarn add @projectstorm/react-diagrams-defaults
+    yarn add @projectstorm/react-diagrams-routing
 
 ## Run the demos
 
