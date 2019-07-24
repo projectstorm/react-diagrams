@@ -14,7 +14,8 @@ __PSA 2019__: I still want to jump onto the rewrite, but it is a much larger pro
 
 A super simple, no-nonsense diagramming library written in React that just works.
 
-[![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![NPM](https://img.shields.io/npm/v/@projectstorm/react-diagrams.svg)](https://npmjs.org/package/@projectstorm/react-diagrams)  [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams) [![Package Quality](http://npm.packagequality.com/shield/storm-react-diagrams.svg)](http://packagequality.com/#?package=storm-react-diagrams)  [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master)
+[![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![NPM](https://img.shields.io/npm/v/@projectstorm/react-diagrams.svg)](https://npmjs.org/package/@projectstorm/react-diagrams)  [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams) [![Package Quality](http://npm.packagequality.com/shield/storm-react-diagrams.svg)](http://packagequality.com/#?package=storm-react-diagrams)  [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master)[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+
 
 Example implementation using custom models: (Dylan's personal code)
 
@@ -31,8 +32,9 @@ A no-nonsense diagramming library written entirely in React with the help of a f
 * Customizable without having to hack the core \(adapters/factories etc..\)
 * Simple to operate and understand without sugar and magic
 * Fast and optimized to handle large diagrams with hundreds of nodes/links
+* Use HTML to create nodes, instead of SVG's
 * Super easy to use, and should work as you expect it to
-* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages
+* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages (Labview, Symlink etc..)
 
 ## Installing
 
@@ -52,6 +54,10 @@ and add some extras:
 
     yarn add @projectstorm/react-diagrams-defaults
     yarn add @projectstorm/react-diagrams-routing
+    
+## How to use
+
+Take a look at the demos `[./lib-demo-gallery/demos](./lib-demo-gallery/demos)`
 
 ## Run the demos
 
