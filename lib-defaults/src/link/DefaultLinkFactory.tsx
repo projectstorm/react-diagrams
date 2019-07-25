@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AbstractReactFactory, DiagramEngine} from '@projectstorm/react-diagrams-core';
+import { AbstractReactFactory, DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkWidget } from './DefaultLinkWidget';
 

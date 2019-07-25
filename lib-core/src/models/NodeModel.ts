@@ -3,7 +3,7 @@ import { PortModel } from './PortModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { DiagramModel } from './DiagramModel';
-import {BaseEntityEvent} from "../BaseEntity";
+import { BaseEntityEvent } from '../BaseEntity';
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;

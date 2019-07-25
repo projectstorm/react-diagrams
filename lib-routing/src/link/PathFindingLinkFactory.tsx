@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AbstractReactFactory} from '@projectstorm/react-diagrams-core';
+import { AbstractReactFactory } from '@projectstorm/react-diagrams-core';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
 import { PathFindingLinkWidget } from './PathFindingLinkWidget';
 import * as _ from 'lodash';

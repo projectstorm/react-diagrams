@@ -1,21 +1,20 @@
 import { Toolkit } from './Toolkit';
 import * as _ from 'lodash';
 import { DiagramEngine } from './DiagramEngine';
-import {BaseEvent, BaseListener, BaseObserver} from "./core/BaseObserver";
+import { BaseEvent, BaseListener, BaseObserver } from './core/BaseObserver';
 
-export interface BaseEntityEvent<T extends BaseEntity = BaseEntity> extends BaseEvent{
+export interface BaseEntityEvent<T extends BaseEntity = BaseEntity> extends BaseEvent {
 	entity: T;
 	id: string;
 }
 
-export interface BaseEntityListener<T extends BaseEntity = BaseEntity> extends BaseListener{
+export interface BaseEntityListener<T extends BaseEntity = BaseEntity> extends BaseListener {
 	lockChanged?(event: BaseEntityEvent<T> & { locked: boolean }): void;
 }
 
 export type BaseEntityType = 'node' | 'link' | 'port' | 'point';
 
-export class BaseEntity<T extends BaseListener = BaseListener> extends BaseObserver<T>{
-
+export class BaseEntity<T extends BaseListener = BaseListener> extends BaseObserver<T> {
 	protected id: string;
 	protected locked: boolean;
 
@@ -62,10 +61,13 @@ export class BaseEntity<T extends BaseListener = BaseListener> extends BaseObser
 	}
 
 	fireEvent(event: Partial<BaseEntityEvent> & object, k: keyof T) {
-		super.fireEvent({
-			id: Toolkit.UID(),
-			...event,
-		}, k);
+		super.fireEvent(
+			{
+				id: Toolkit.UID(),
+				...event
+			},
+			k
+		);
 	}
 
 	public isLocked(): boolean {
@@ -74,8 +76,11 @@ export class BaseEntity<T extends BaseListener = BaseListener> extends BaseObser
 
 	public setLocked(locked: boolean = true) {
 		this.locked = locked;
-		this.fireEvent({
-			locked: locked
-		}, 'lockChanged');
+		this.fireEvent(
+			{
+				locked: locked
+			},
+			'lockChanged'
+		);
 	}
 }

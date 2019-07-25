@@ -1,5 +1,5 @@
 import 'jest';
-import {E2ENode} from "./helpers/E2EHelper";
+import { E2ENode } from './helpers/E2EHelper';
 
 describe('simple flow test', () => {
 	beforeEach(async () => {

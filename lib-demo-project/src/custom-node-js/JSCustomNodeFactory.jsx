@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {AbstractReactFactory} from '@projectstorm/react-diagrams';
-import {JSCustomNodeModel} from './JSCustomNodeModel';
-import {JSCustomNodeWidget} from './JSCustomNodeWidget';
+import { AbstractReactFactory } from '@projectstorm/react-diagrams';
+import { JSCustomNodeModel } from './JSCustomNodeModel';
+import { JSCustomNodeWidget } from './JSCustomNodeWidget';
 
 export class JSCustomNodeFactory extends AbstractReactFactory {
 	constructor() {
@@ -13,6 +13,6 @@ export class JSCustomNodeFactory extends AbstractReactFactory {
 	}
 
 	generateReactWidget(event) {
-		return <JSCustomNodeWidget node={event.model}/>;
+		return <JSCustomNodeWidget node={event.model} />;
 	}
 }

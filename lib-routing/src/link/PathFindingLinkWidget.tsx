@@ -123,7 +123,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 				width={canvas.offsetWidth}
 				height={canvas.offsetHeight}>
 				<div ref={ref => (this.refLabels[label.getID()] = ref)}>
-					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget({model: label})}
+					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget({ model: label })}
 				</div>
 			</foreignObject>
 		);

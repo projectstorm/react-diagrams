@@ -1,8 +1,4 @@
-import createEngine, {
-	DiagramModel,
-	DefaultNodeModel,
-	DiagramWidget
-} from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel, DiagramWidget } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 
 export default () => {

@@ -1,5 +1,5 @@
-import {AbstractFactory} from "./AbstractFactory";
-import {BaseModel} from "../models/BaseModel";
+import { AbstractFactory } from './AbstractFactory';
+import { BaseModel } from '../models/BaseModel';
 
 export interface GenerateWidgetEvent<T extends BaseModel> {
 	model: T;
@@ -8,8 +8,7 @@ export interface GenerateWidgetEvent<T extends BaseModel> {
 /**
  * Further extends the AbstractFactory to add widget generation capability.
  */
-export abstract class AbstractReactFactory<T extends BaseModel> extends AbstractFactory<T>{
-
+export abstract class AbstractReactFactory<T extends BaseModel> extends AbstractFactory<T> {
 	/**
 	 * Generates React widgets from the model contained in the event object
 	 */

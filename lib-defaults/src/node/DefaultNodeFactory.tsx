@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AbstractReactFactory} from '@projectstorm/react-diagrams-core';
+import { AbstractReactFactory } from '@projectstorm/react-diagrams-core';
 import { DefaultNodeModel } from './DefaultNodeModel';
 import { DefaultNodeWidget } from './DefaultNodeWidget';
 /**
@@ -11,9 +11,7 @@ export class DefaultNodeFactory extends AbstractReactFactory<DefaultNodeModel> {
 	}
 
 	generateReactWidget(event): JSX.Element {
-		return (
-			<DefaultNodeWidget node={event.model} />
-		)
+		return <DefaultNodeWidget node={event.model} />;
 	}
 
 	generateModel(event): DefaultNodeModel {

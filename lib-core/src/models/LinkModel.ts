@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { LabelModel } from './LabelModel';
 import { DiagramEngine } from '../DiagramEngine';
 import { DiagramModel } from './DiagramModel';
-import {BaseEntityEvent} from "../BaseEntity";
+import { BaseEntityEvent } from '../BaseEntity';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
@@ -156,7 +156,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.sourcePort.removeLink(this);
 		}
 		this.sourcePort = port;
-		this.fireEvent({port}, 'sourcePortChanged');
+		this.fireEvent({ port }, 'sourcePortChanged');
 	}
 
 	getSourcePort(): PortModel {
@@ -175,7 +175,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.targetPort.removeLink(this);
 		}
 		this.targetPort = port;
-		this.fireEvent({port}, 'targetPortChanged');
+		this.fireEvent({ port }, 'targetPortChanged');
 	}
 
 	point(x: number, y: number): PointModel {

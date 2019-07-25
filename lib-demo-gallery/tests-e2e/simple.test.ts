@@ -1,5 +1,5 @@
 import 'jest';
-import {E2ELink, E2ENode} from "./helpers/E2EHelper";
+import { E2ELink, E2ENode } from './helpers/E2EHelper';
 
 describe('simple test', () => {
 	beforeAll(async () => {

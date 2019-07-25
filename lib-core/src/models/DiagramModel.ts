@@ -1,4 +1,4 @@
-import {BaseEntity, BaseEntityEvent, BaseEntityListener, BaseEntityType} from '../BaseEntity';
+import { BaseEntity, BaseEntityEvent, BaseEntityListener, BaseEntityType } from '../BaseEntity';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { LinkModel } from './LinkModel';
@@ -46,7 +46,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 	setGridSize(size: number = 0) {
 		this.gridSize = size;
-		this.fireEvent({size: size}, 'gridUpdated');
+		this.fireEvent({ size: size }, 'gridUpdated');
 	}
 
 	getGridPosition(pos) {
@@ -66,7 +66,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
-			let nodeOb = diagramEngine.getFactoryForNode(node.type).generateModel({initialConfig: node});
+			let nodeOb = diagramEngine.getFactoryForNode(node.type).generateModel({ initialConfig: node });
 			nodeOb.setParent(this);
 			nodeOb.deSerialize(node, diagramEngine);
 			this.addNode(nodeOb);
@@ -74,7 +74,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialze links
 		_.forEach(object.links, (link: any) => {
-			let linkOb = diagramEngine.getFactoryForLink(link.type).generateModel({initialConfig: link});
+			let linkOb = diagramEngine.getFactoryForLink(link.type).generateModel({ initialConfig: link });
 			linkOb.setParent(this);
 			linkOb.deSerialize(link, diagramEngine);
 			this.addLink(linkOb);
@@ -159,13 +159,13 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 	setZoomLevel(zoom: number) {
 		this.zoom = zoom;
-		this.fireEvent({zoom}, 'zoomUpdated')
+		this.fireEvent({ zoom }, 'zoomUpdated');
 	}
 
 	setOffset(offsetX: number, offsetY: number) {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
-		this.fireEvent({offsetX, offsetY}, 'offsetUpdated');
+		this.fireEvent({ offsetX, offsetY }, 'offsetUpdated');
 	}
 
 	setOffsetX(offsetX: number) {
@@ -226,10 +226,13 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			}
 		});
 		this.links[link.getID()] = link;
-		this.fireEvent({
-			link,
-			isCreated: true
-		}, 'linksUpdated');
+		this.fireEvent(
+			{
+				link,
+				isCreated: true
+			},
+			'linksUpdated'
+		);
 		return link;
 	}
 
@@ -240,20 +243,20 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 			}
 		});
 		this.nodes[node.getID()] = node;
-		this.fireEvent({node, isCreated: true}, 'nodesUpdated');
+		this.fireEvent({ node, isCreated: true }, 'nodesUpdated');
 		return node;
 	}
 
 	removeLink(link: LinkModel | string) {
 		link = this.getLink(link);
 		delete this.links[link.getID()];
-		this.fireEvent({link, isCreated: false}, 'linksUpdated');
+		this.fireEvent({ link, isCreated: false }, 'linksUpdated');
 	}
 
 	removeNode(node: NodeModel | string) {
 		node = this.getNode(node);
 		delete this.nodes[node.getID()];
-		this.fireEvent({node, isCreated: false}, 'nodesUpdated');
+		this.fireEvent({ node, isCreated: false }, 'nodesUpdated');
 	}
 
 	getLinks(): { [s: string]: LinkModel } {

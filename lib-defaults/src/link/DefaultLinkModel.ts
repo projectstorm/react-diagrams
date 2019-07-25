@@ -52,11 +52,11 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 
 	setWidth(width: number) {
 		this.width = width;
-		this.fireEvent({width}, 'widthChanged');
+		this.fireEvent({ width }, 'widthChanged');
 	}
 
 	setColor(color: string) {
 		this.color = color;
-		this.fireEvent({color}, 'colorChanged');
+		this.fireEvent({ color }, 'colorChanged');
 	}
 }

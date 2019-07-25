@@ -8,7 +8,6 @@ export interface LinkProps {
 }
 
 export class LinkWidget extends React.Component<LinkProps> {
-
 	shouldComponentUpdate() {
 		return this.props.diagramEngine.canEntityRepaint(this.props.link);
 	}

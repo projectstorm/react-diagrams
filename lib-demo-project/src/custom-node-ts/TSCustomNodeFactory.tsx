@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AbstractReactFactory} from '@projectstorm/react-diagrams';
+import { AbstractReactFactory } from '@projectstorm/react-diagrams';
 import { TSCustomNodeModel } from './TSCustomNodeModel';
 import { TSCustomNodeWidget } from './TSCustomNodeWidget';
 

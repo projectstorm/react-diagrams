@@ -1,19 +1,18 @@
 import * as _ from 'lodash';
-import {BaseEntity} from './BaseEntity';
-import {DiagramModel} from './models/DiagramModel';
-import {BaseModel, BaseModelListener} from './models/BaseModel';
-import {NodeModel} from './models/NodeModel';
-import {PointModel} from './models/PointModel';
-import {PortModel} from './models/PortModel';
-import {LinkModel} from './models/LinkModel';
-import {LabelModel} from './models/LabelModel';
-import {FactoryBank} from "./core/FactoryBank";
-import {AbstractFactory} from "./core/AbstractFactory";
-import {AbstractReactFactory} from "./core/AbstractReactFactory";
-import {BaseListener} from "./core/BaseObserver";
+import { BaseEntity } from './BaseEntity';
+import { DiagramModel } from './models/DiagramModel';
+import { BaseModel, BaseModelListener } from './models/BaseModel';
+import { NodeModel } from './models/NodeModel';
+import { PointModel } from './models/PointModel';
+import { PortModel } from './models/PortModel';
+import { LinkModel } from './models/LinkModel';
+import { LabelModel } from './models/LabelModel';
+import { FactoryBank } from './core/FactoryBank';
+import { AbstractFactory } from './core/AbstractFactory';
+import { AbstractReactFactory } from './core/AbstractReactFactory';
+import { BaseListener } from './core/BaseObserver';
 
 export interface DiagramEngineListener extends BaseListener {
-
 	repaintCanvas?(): void;
 
 	rendered?(): void;
@@ -23,7 +22,6 @@ export interface DiagramEngineListener extends BaseListener {
  * Passed as a parameter to the DiagramWidget
  */
 export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
-
 	protected nodeFactories: FactoryBank<AbstractReactFactory<NodeModel>>;
 	protected linkFactories: FactoryBank<AbstractReactFactory<LinkModel>>;
 	protected portFactories: FactoryBank<AbstractFactory<PortModel>>;
@@ -48,13 +46,13 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 		const setup = (factory: FactoryBank) => {
 			factory.registerListener({
-				factoryAdded: (event) => {
+				factoryAdded: event => {
 					event.factory.setDiagramEngine(this);
 				},
-				factoryRemoved: (event) => {
+				factoryRemoved: event => {
 					event.factory.setDiagramEngine(null);
 				}
-			})
+			});
 		};
 
 		setup(this.nodeFactories);
@@ -157,28 +155,28 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		return this.portFactories;
 	}
 
-	getFactoryForNode(node: NodeModel){
+	getFactoryForNode(node: NodeModel) {
 		return this.nodeFactories.getFactory(node.getType());
 	}
 
-	getFactoryForLink(link: LinkModel){
+	getFactoryForLink(link: LinkModel) {
 		return this.linkFactories.getFactory(link.getType());
 	}
 
-	getFactoryForLabel(label: LabelModel){
+	getFactoryForLabel(label: LabelModel) {
 		return this.labelFactories.getFactory(label.getType());
 	}
 
-	getFactoryForPort(port: PortModel){
+	getFactoryForPort(port: PortModel) {
 		return this.portFactories.getFactory(port.getType());
 	}
 
-	generateWidgetForLink(link: LinkModel): JSX.Element{
-		return this.getFactoryForLink(link).generateReactWidget({model: link});
+	generateWidgetForLink(link: LinkModel): JSX.Element {
+		return this.getFactoryForLink(link).generateReactWidget({ model: link });
 	}
 
-	generateWidgetForNode(node: NodeModel): JSX.Element{
-		return this.getFactoryForNode(node).generateReactWidget({model: node});
+	generateWidgetForNode(node: NodeModel): JSX.Element {
+		return this.getFactoryForNode(node).generateReactWidget({ model: node });
 	}
 
 	getRelativeMousePoint(event): { x: number; y: number } {
@@ -191,7 +189,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getRelativePoint(x, y) {
 		var canvasRect = this.canvas.getBoundingClientRect();
-		return {x: x - canvasRect.left, y: y - canvasRect.top};
+		return { x: x - canvasRect.left, y: y - canvasRect.top };
 	}
 
 	getNodeElement(node: NodeModel): Element {
@@ -209,10 +207,10 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		if (selector === null) {
 			throw new Error(
 				'Cannot find Node Port element with nodeID: [' +
-				port.getParent().getID() +
-				'] and name: [' +
-				port.getName() +
-				']'
+					port.getParent().getID() +
+					'] and name: [' +
+					port.getName() +
+					']'
 			);
 		}
 		return selector;

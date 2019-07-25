@@ -1,4 +1,4 @@
-import {ElementHandle, FrameBase} from 'puppeteer';
+import { ElementHandle, FrameBase } from 'puppeteer';
 import * as _ from 'lodash';
 
 export abstract class E2EElement {
@@ -12,24 +12,23 @@ export abstract class E2EElement {
 		return page;
 	}
 
-	async getElement(): Promise<ElementHandle | null>{
-		if(!await this.getSelector()){
+	async getElement(): Promise<ElementHandle | null> {
+		if (!(await this.getSelector())) {
 			return null;
 		}
-		return (await this.getSelector()).$(this.selector())
-	};
+		return (await this.getSelector()).$(this.selector());
+	}
 
-	async waitForElement(): Promise<ElementHandle | null>{
+	async waitForElement(): Promise<ElementHandle | null> {
 		return (await this.getSelector()).waitForSelector(this.selector(), {
 			timeout: 1000
-		})
-	};
+		});
+	}
 
 	protected abstract selector(): string;
 }
 
 export class E2ENode extends E2EElement {
-
 	async port(id: string): Promise<E2EPort> {
 		return new E2EPort(id, this);
 	}
@@ -49,13 +48,13 @@ export class E2EPort extends E2EElement {
 
 	async getLinks(): Promise<E2ELink[]> {
 		const element = await this.getElement();
-		const attribute = await page.evaluate( (obj) => {
+		const attribute = await page.evaluate(obj => {
 			return obj.getAttribute('data-links');
 		}, element);
-		if(attribute.trim() === ""){
+		if (attribute.trim() === '') {
 			return [];
 		}
-		return _.map(attribute.split(','), (id) => {
+		return _.map(attribute.split(','), id => {
 			return new E2ELink(id);
 		});
 	}
@@ -115,7 +114,6 @@ export class E2EPort extends E2EElement {
 }
 
 export class E2ELink extends E2EElement {
-
 	async select(): Promise<any> {
 		const point = await page.evaluate(id => {
 			const path = document.querySelector(`path[data-linkid="${id}"]`) as SVGPathElement;

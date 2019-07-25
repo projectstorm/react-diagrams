@@ -1,4 +1,4 @@
-import {BaseEntity, BaseEntityEvent, BaseEntityListener} from '../BaseEntity';
+import { BaseEntity, BaseEntityEvent, BaseEntityListener } from '../BaseEntity';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { PointModel } from '../models/PointModel';
@@ -13,7 +13,6 @@ export class BaseModel<
 	X extends BaseEntity = BaseEntity,
 	T extends BaseModelListener = BaseModelListener
 > extends BaseEntity<T> {
-
 	protected type: string;
 	protected selected: boolean;
 	protected parent: X;
@@ -67,12 +66,15 @@ export class BaseModel<
 	public setSelected(selected: boolean = true) {
 		this.selected = selected;
 
-		this.fireEvent({
-			isSelected: selected
-		},'selectionChanged');
+		this.fireEvent(
+			{
+				isSelected: selected
+			},
+			'selectionChanged'
+		);
 	}
 
 	public remove() {
-		this.fireEvent({},'entityRemoved');
+		this.fireEvent({}, 'entityRemoved');
 	}
 }

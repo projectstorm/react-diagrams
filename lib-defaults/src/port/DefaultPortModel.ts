@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {AbstractFactory, DiagramEngine, LinkModel, PortModel} from '@projectstorm/react-diagrams-core';
+import { AbstractFactory, DiagramEngine, LinkModel, PortModel } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from '../link/DefaultLinkModel';
 
 export class DefaultPortModel extends PortModel {

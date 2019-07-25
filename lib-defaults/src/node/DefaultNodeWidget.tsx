@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import {BaseWidget, BaseWidgetProps} from '@projectstorm/react-diagrams-core';
-import {DefaultNodeModel} from './DefaultNodeModel';
-import {DefaultPortLabel} from '../port/DefaultPortLabelWidget';
-import styled from "@emotion/styled";
+import { BaseWidget, BaseWidgetProps } from '@projectstorm/react-diagrams-core';
+import { DefaultNodeModel } from './DefaultNodeModel';
+import { DefaultPortLabel } from '../port/DefaultPortLabelWidget';
+import styled from '@emotion/styled';
 
 namespace S {
-	export const Node = styled.div<{background: string}>`
+	export const Node = styled.div<{ background: string }>`
 		background-color: ${p => p.background};
 		border-radius: 5px;
 		font-family: sans-serif;
@@ -17,7 +17,7 @@ namespace S {
 	`;
 
 	export const Title = styled.div`
-		background: rgba(0,0,0, 0.3);
+		background: rgba(0, 0, 0, 0.3);
 		display: flex;
 		white-space: nowrap;
 		justify-items: center;
@@ -30,7 +30,7 @@ namespace S {
 
 	export const Ports = styled.div`
 		display: flex;
-		background-image: linear-gradient(rgba(0,0,0, 0.1), rgba(0,0,0, 0.2));
+		background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
 	`;
 
 	export const PortsContainer = styled.div`
@@ -49,9 +49,8 @@ export interface DefaultNodeProps extends BaseWidgetProps {
  * for both all the input ports on the left, and the output ports on the right.
  */
 export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps> {
-
-	generatePort = (port) => {
-		return <DefaultPortLabel model={port} key={port.id}/>;
+	generatePort = port => {
+		return <DefaultPortLabel model={port} key={port.id} />;
 	};
 
 	render() {
