@@ -1,14 +1,14 @@
-import { BaseModel } from './BaseModel';
-import { LinkModel } from './LinkModel';
+import { BaseModel, BaseModelGenerics } from "../core-models/BaseModel";
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 
-export class LabelModel extends BaseModel<LinkModel> {
+export class LabelModel<G extends BaseModelGenerics = BaseModelGenerics> extends BaseModel<G> {
+
 	offsetX: number;
 	offsetY: number;
 
-	constructor(type?: string, id?: string) {
-		super(type, id);
+	constructor(options: G['OPTIONS']) {
+		super(options);
 		this.offsetX = 0;
 		this.offsetY = 0;
 	}

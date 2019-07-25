@@ -1,10 +1,16 @@
-import { BaseEntity, BaseEntityEvent, BaseEntityListener, BaseEntityType } from '../BaseEntity';
+import {
+	BaseEntity,
+	BaseEntityEvent,
+	BaseEntityGenerics,
+	BaseEntityListener, BaseEntityOptions,
+	BaseEntityType
+} from "../core-models/BaseEntity";
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { LinkModel } from './LinkModel';
 import { NodeModel } from './NodeModel';
 import { PortModel } from './PortModel';
-import { BaseModel, BaseModelListener } from './BaseModel';
+import { BaseModel } from '../core-models/BaseModel';
 import { PointModel } from './PointModel';
 
 export interface DiagramListener extends BaseEntityListener {
@@ -19,50 +25,58 @@ export interface DiagramListener extends BaseEntityListener {
 	gridUpdated?(event: BaseEntityEvent<DiagramModel> & { size: number }): void;
 }
 
-export class DiagramModel extends BaseEntity<DiagramListener> {
+export interface DiagramModelOptions extends BaseEntityOptions{
+	offsetX?: number;
+	offsetY?: number;
+	zoom?: number;
+	gridSize?: number;
+}
+
+export interface DiagramModelGenerics extends BaseEntityGenerics{
+	LISTENER: DiagramListener;
+	OPTIONS: DiagramModelOptions;
+}
+
+export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics> extends BaseEntity<G> {
 	//models
 	protected links: { [s: string]: LinkModel };
 	protected nodes: { [s: string]: NodeModel };
 
-	//control variables
-	offsetX: number;
-	offsetY: number;
-	zoom: number;
 	rendered: boolean;
-	gridSize: number;
 
-	constructor() {
-		super();
+	constructor(options: G['OPTIONS'] = {}) {
+		super({
+			zoom: 100,
+			gridSize: 0,
+			offsetX: 0,
+			offsetY: 0,
+			...options,
+		});
 
 		this.links = {};
 		this.nodes = {};
-
-		this.offsetX = 0;
-		this.offsetY = 0;
-		this.zoom = 100;
 		this.rendered = false;
-		this.gridSize = 0;
 	}
 
 	setGridSize(size: number = 0) {
-		this.gridSize = size;
+		this.options.gridSize = size;
 		this.fireEvent({ size: size }, 'gridUpdated');
 	}
 
 	getGridPosition(pos) {
-		if (this.gridSize === 0) {
+		if (this.options.gridSize === 0) {
 			return pos;
 		}
-		return this.gridSize * Math.floor((pos + this.gridSize / 2) / this.gridSize);
+		return this.options.gridSize * Math.floor((pos + this.options.gridSize / 2) / this.options.gridSize);
 	}
 
 	deSerializeDiagram(object: any, diagramEngine: DiagramEngine) {
 		this.deSerialize(object, diagramEngine);
 
-		this.offsetX = object.offsetX;
-		this.offsetY = object.offsetY;
-		this.zoom = object.zoom;
-		this.gridSize = object.gridSize;
+		this.options.offsetX = object.offsetX;
+		this.options.offsetY = object.offsetY;
+		this.options.zoom = object.zoom;
+		this.options.gridSize = object.gridSize;
 
 		// deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
@@ -83,10 +97,10 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 	serializeDiagram() {
 		return _.merge(this.serialize(), {
-			offsetX: this.offsetX,
-			offsetY: this.offsetY,
-			zoom: this.zoom,
-			gridSize: this.gridSize,
+			offsetX: this.options.offsetX,
+			offsetY: this.options.offsetY,
+			zoom: this.options.zoom,
+			gridSize: this.options.gridSize,
 			links: _.map(this.links, link => {
 				return link.serialize();
 			}),
@@ -96,7 +110,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	clearSelection(ignore: BaseModel<BaseEntity, BaseModelListener> | null = null) {
+	clearSelection(ignore: BaseModel | null = null) {
 		_.forEach(this.getSelectedItems(), element => {
 			if (ignore && ignore.getID() === element.getID()) {
 				return;
@@ -105,7 +119,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		});
 	}
 
-	getSelectedItems(...filters: BaseEntityType[]): BaseModel<BaseEntity, BaseModelListener>[] {
+	getSelectedItems(...filters: BaseEntityType[]): BaseModel[] {
 		if (!Array.isArray(filters)) {
 			filters = [filters];
 		}
@@ -128,7 +142,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 		//find all points
 		items = items.concat(
 			_.flatMap(this.links, link => {
-				return _.flatMap(link.points, point => {
+				return _.flatMap(link.getPoints(), point => {
 					return point.getSelectedEntities();
 				});
 			})
@@ -158,34 +172,34 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	}
 
 	setZoomLevel(zoom: number) {
-		this.zoom = zoom;
+		this.options.zoom = zoom;
 		this.fireEvent({ zoom }, 'zoomUpdated');
 	}
 
 	setOffset(offsetX: number, offsetY: number) {
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
+		this.options.offsetX = offsetX;
+		this.options.offsetY = offsetY;
 		this.fireEvent({ offsetX, offsetY }, 'offsetUpdated');
 	}
 
 	setOffsetX(offsetX: number) {
-		this.setOffset(offsetX, this.offsetY);
+		this.setOffset(offsetX, this.options.offsetY);
 	}
 
 	setOffsetY(offsetY: number) {
-		this.setOffset(this.offsetX, offsetY);
+		this.setOffset(this.options.offsetX, offsetY);
 	}
 
 	getOffsetY() {
-		return this.offsetY;
+		return this.options.offsetY;
 	}
 
 	getOffsetX() {
-		return this.offsetX;
+		return this.options.offsetX;
 	}
 
 	getZoomLevel() {
-		return this.zoom;
+		return this.options.zoom;
 	}
 
 	getNode(node: string | NodeModel): NodeModel | null {

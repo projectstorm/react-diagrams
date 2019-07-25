@@ -1,8 +1,6 @@
 import closest = require('closest');
 import { PointModel } from './models/PointModel';
-/**
- * @author Dylan Vorster
- */
+
 export class Toolkit {
 	static TESTING: boolean = false;
 	static TESTING_UID = 0;
@@ -37,11 +35,11 @@ export class Toolkit {
 	}
 
 	public static generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
-		return `M${firstPoint.x},${firstPoint.y} L ${lastPoint.x},${lastPoint.y}`;
+		return `M${firstPoint.getX()},${firstPoint.getY()} L ${lastPoint.getX()},${lastPoint.getY()}`;
 	}
 
 	public static generateCurvePath(firstPoint: PointModel, lastPoint: PointModel, curvy: number = 0): string {
-		var isHorizontal = Math.abs(firstPoint.x - lastPoint.x) > Math.abs(firstPoint.y - lastPoint.y);
+		var isHorizontal = Math.abs(firstPoint.getX() - lastPoint.getX()) > Math.abs(firstPoint.getY() - lastPoint.getY());
 
 		var xOrY = isHorizontal ? 'x' : 'y';
 
@@ -55,7 +53,7 @@ export class Toolkit {
 		var curvyX = isHorizontal ? curvyness : 0;
 		var curvyY = isHorizontal ? 0 : curvyness;
 
-		return `M${firstPoint.x},${firstPoint.y} C ${firstPoint.x + curvyX},${firstPoint.y + curvyY}
-    ${lastPoint.x - curvyX},${lastPoint.y - curvyY} ${lastPoint.x},${lastPoint.y}`;
+		return `M${firstPoint.getX()},${firstPoint.getY()} C ${firstPoint.getX() + curvyX},${firstPoint.getY() + curvyY}
+    ${lastPoint.getX() - curvyX},${lastPoint.getY() - curvyY} ${lastPoint.getX()},${lastPoint.getY()}`;
 	}
 }

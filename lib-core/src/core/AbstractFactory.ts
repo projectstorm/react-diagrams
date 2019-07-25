@@ -1,4 +1,4 @@
-import { BaseModel } from '../models/BaseModel';
+import { BaseModel } from '../core-models/BaseModel';
 import { DiagramEngine } from '../DiagramEngine';
 
 export interface GenerateModelEvent {

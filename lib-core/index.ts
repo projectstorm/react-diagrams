@@ -10,7 +10,7 @@ export * from './src/core/FactoryBank';
 export * from './src/core/AbstractFactory';
 export * from './src/core/AbstractReactFactory';
 
-export * from './src/models/BaseModel';
+export * from './src/core-models/BaseModel';
 export * from './src/models/DiagramModel';
 export * from './src/models/LabelModel';
 export * from './src/models/LinkModel';
@@ -27,6 +27,6 @@ export * from './src/widgets/LinkWidget';
 export * from './src/widgets/NodeWidget';
 export * from './src/widgets/PortWidget';
 
-export * from './src/BaseEntity';
+export * from './src/core-models/BaseEntity';
 export * from './src/DiagramEngine';
 export * from './src/Toolkit';

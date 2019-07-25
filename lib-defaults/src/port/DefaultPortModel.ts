@@ -1,28 +1,42 @@
 import * as _ from 'lodash';
-import { AbstractFactory, DiagramEngine, LinkModel, PortModel } from '@projectstorm/react-diagrams-core';
+import {
+	AbstractFactory,
+	DiagramEngine,
+	LinkModel,
+	PortModel, PortModelGenerics,
+	PortModelOptions
+} from "@projectstorm/react-diagrams-core";
 import { DefaultLinkModel } from '../link/DefaultLinkModel';
 
-export class DefaultPortModel extends PortModel {
-	in: boolean;
-	label: string;
-	links: { [id: string]: DefaultLinkModel };
+export interface DefaultPortModelOptions extends Omit<PortModelOptions, 'type'>{
+	label?: string;
+	in?: boolean;
+}
 
-	constructor(isInput: boolean, name: string, label: string = null, id?: string) {
-		super(name, 'default', id);
-		this.in = isInput;
-		this.label = label || name;
+export interface DefaultPortModelGenerics{
+	OPTIONS: DefaultPortModelOptions;
+	PARENT: DefaultLinkModel;
+}
+
+export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortModelGenerics> {
+
+	constructor(options: DefaultPortModelOptions) {
+		super({
+			...options,
+			type: 'default'
+		});
 	}
 
 	deSerialize(object, engine: DiagramEngine) {
 		super.deSerialize(object, engine);
-		this.in = object.in;
-		this.label = object.label;
+		this.options.in = object.in;
+		this.options.label = object.label;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			in: this.in,
-			label: this.label
+			in: this.options.in,
+			label: this.options.label
 		});
 	}
 
@@ -35,7 +49,7 @@ export class DefaultPortModel extends PortModel {
 
 	canLinkToPort(port: PortModel): boolean {
 		if (port instanceof DefaultPortModel) {
-			return this.in !== port.in;
+			return this.options.in !== port.getOptions().in;
 		}
 		return true;
 	}

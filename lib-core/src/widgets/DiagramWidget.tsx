@@ -12,8 +12,7 @@ import { NodeModel } from '../models/NodeModel';
 import { PointModel } from '../models/PointModel';
 import { PortModel } from '../models/PortModel';
 import { LinkModel } from '../models/LinkModel';
-import { BaseModel, BaseModelListener } from '../models/BaseModel';
-import { BaseEntity } from '../BaseEntity';
+import { BaseModel } from '../core-models/BaseModel';
 import { BaseWidget, BaseWidgetProps } from './BaseWidget';
 
 export interface DiagramProps extends BaseWidgetProps {
@@ -142,7 +141,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event): { model: BaseModel<BaseEntity, BaseModelListener>; element: Element } {
+	getMouseElement(event): { model: BaseModel; element: Element } {
 		var target = event.target as Element;
 		var diagramModel = this.props.diagramEngine.diagramModel;
 
@@ -217,15 +216,15 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 
 			_.forEach(diagramModel.getNodes(), node => {
-				if ((this.state.action as SelectingAction).containsElement(node.x, node.y, diagramModel)) {
+				if ((this.state.action as SelectingAction).containsElement(node.getX(), node.getY(), diagramModel)) {
 					node.setSelected(true);
 				}
 			});
 
 			_.forEach(diagramModel.getLinks(), link => {
 				var allSelected = true;
-				_.forEach(link.points, point => {
-					if ((this.state.action as SelectingAction).containsElement(point.x, point.y, diagramModel)) {
+				_.forEach(link.getPoints(), point => {
+					if ((this.state.action as SelectingAction).containsElement(point.getX(), point.getY(), diagramModel)) {
 						point.setSelected(true);
 					} else {
 						allSelected = false;
@@ -254,11 +253,12 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					model.model instanceof NodeModel ||
 					(model.model instanceof PointModel && !model.model.isConnectedToPort())
 				) {
-					model.model.x = diagramModel.getGridPosition(model.initialX + amountX / amountZoom);
-					model.model.y = diagramModel.getGridPosition(model.initialY + amountY / amountZoom);
+					model.model.setPosition(
+						diagramModel.getGridPosition(model.initialX + amountX / amountZoom),
+						diagramModel.getGridPosition(model.initialY + amountY / amountZoom)
+					);
 
 					if (model.model instanceof NodeModel) {
-						model.model.positionChanged();
 
 						// update port coordinates as well
 						_.forEach(model.model.getPorts(), port => {
@@ -266,23 +266,15 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 							port.updateCoords(portCoords);
 						});
 					}
-
-					// TODO fixme (do this based on actions firing)
-					// if (diagramEngine.isSmartRoutingEnabled()) {
-					// 	diagramEngine.calculateRoutingMatrix();
-					// }
 				} else if (model.model instanceof PointModel) {
 					// we want points that are connected to ports, to not necessarily snap to grid
 					// this stuff needs to be pixel perfect, dont touch it
-					model.model.x = model.initialX + diagramModel.getGridPosition(amountX / amountZoom);
-					model.model.y = model.initialY + diagramModel.getGridPosition(amountY / amountZoom);
+					model.model.setPosition(
+						model.initialX + diagramModel.getGridPosition(amountX / amountZoom),
+						model.initialY + diagramModel.getGridPosition(amountY / amountZoom)
+					);
 				}
 			});
-
-			// TODO fixme (do this based on actions firing)
-			// if (diagramEngine.isSmartRoutingEnabled()) {
-			// 	diagramEngine.calculateCanvasMatrix();
-			// }
 
 			this.fireAction();
 			if (!this.state.wasMoved) {

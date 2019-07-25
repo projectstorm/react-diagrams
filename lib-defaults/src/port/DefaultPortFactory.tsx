@@ -7,6 +7,8 @@ export class DefaultPortFactory extends AbstractFactory<DefaultPortModel> {
 	}
 
 	generateModel(): DefaultPortModel {
-		return new DefaultPortModel(true, 'unknown');
+		return new DefaultPortModel({
+			name: 'unknown'
+		});
 	}
 }

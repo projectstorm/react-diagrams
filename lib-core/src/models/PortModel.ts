@@ -1,42 +1,53 @@
-import { BaseModel, BaseModelListener } from './BaseModel';
+import { BaseModel, BaseModelGenerics, BaseModelOptions } from "../core-models/BaseModel";
 import { NodeModel } from './NodeModel';
 import { LinkModel } from './LinkModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
+import { BasePositionModel } from "../core-models/BasePositionModel";
 
-export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
+export enum PortModelAlignment{
+	TOP='top',
+	LEFT='left',
+	BOTTOM='bottom',
+	RIGHT='right'
+}
+
+export interface PortModelOptions extends BaseModelOptions{
+	alignment?: PortModelAlignment;
+	maximumLinks?: number;
 	name: string;
+}
+
+export interface PortModelGenerics extends BaseModelGenerics{
+	OPTIONS: PortModelOptions;
+	PARENT: NodeModel;
+}
+
+export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends BasePositionModel<G> {
+
 	links: { [id: string]: LinkModel };
-	maximumLinks: number;
 
 	// calculated post rendering so routing can be done correctly
-	x: number;
-	y: number;
 	width: number;
 	height: number;
 
-	constructor(name: string, type?: string, id?: string, maximumLinks?: number) {
-		super(type, id);
-		this.name = name;
+	constructor(options: G['OPTIONS']) {
+		super(options);
 		this.links = {};
-		this.maximumLinks = maximumLinks;
 	}
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
-		this.name = ob.name;
-		this.maximumLinks = ob.maximumLinks;
 	}
 
 	serialize() {
-		return _.merge(super.serialize(), {
-			name: this.name,
+		return {
+			...super.serialize(),
 			parentNode: this.parent.getID(),
 			links: _.map(this.links, link => {
 				return link.getID;
 			}),
-			maximumLinks: this.maximumLinks
-		});
+		};
 	}
 
 	doClone(lookupTable = {}, clone) {
@@ -49,15 +60,15 @@ export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	}
 
 	getName(): string {
-		return this.name;
+		return this.options.name;
 	}
 
 	getMaximumLinks(): number {
-		return this.maximumLinks;
+		return this.options.maximumLinks;
 	}
 
 	setMaximumLinks(maximumLinks: number) {
-		this.maximumLinks = maximumLinks;
+		this.options.maximumLinks = maximumLinks;
 	}
 
 	removeLink(link: LinkModel) {
@@ -73,11 +84,11 @@ export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	}
 
 	public createLinkModel(): LinkModel | null {
-		if (_.isFinite(this.maximumLinks)) {
+		if (_.isFinite(this.options.maximumLinks)) {
 			var numberOfLinks: number = _.size(this.links);
-			if (this.maximumLinks === 1 && numberOfLinks >= 1) {
+			if (this.options.maximumLinks === 1 && numberOfLinks >= 1) {
 				return _.values(this.links)[0];
-			} else if (numberOfLinks >= this.maximumLinks) {
+			} else if (numberOfLinks >= this.options.maximumLinks) {
 				return null;
 			}
 		}

@@ -28,8 +28,8 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 				{...this.getProps()}
 				data-nodeid={this.props.node.getID()}
 				style={{
-					top: this.props.node.y,
-					left: this.props.node.x
+					top: this.props.node.getX(),
+					left: this.props.node.getY()
 				}}>
 				{this.props.children}
 			</div>

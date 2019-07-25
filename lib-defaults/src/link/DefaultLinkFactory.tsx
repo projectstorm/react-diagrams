@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AbstractReactFactory, DiagramEngine } from '@projectstorm/react-diagrams-core';
+import { AbstractReactFactory } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkWidget } from './DefaultLinkWidget';
 
@@ -20,8 +20,8 @@ export class DefaultLinkFactory extends AbstractReactFactory<DefaultLinkModel> {
 		return (
 			<path
 				className={selected ? widget.bem('--path-selected') : ''}
-				strokeWidth={model.width}
-				stroke={model.color}
+				strokeWidth={model.getOptions().width}
+				stroke={model.getOptions().color}
 				d={path}
 			/>
 		);

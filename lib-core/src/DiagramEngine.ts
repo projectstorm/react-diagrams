@@ -1,16 +1,16 @@
-import * as _ from 'lodash';
-import { BaseEntity } from './BaseEntity';
-import { DiagramModel } from './models/DiagramModel';
-import { BaseModel, BaseModelListener } from './models/BaseModel';
-import { NodeModel } from './models/NodeModel';
-import { PointModel } from './models/PointModel';
-import { PortModel } from './models/PortModel';
-import { LinkModel } from './models/LinkModel';
-import { LabelModel } from './models/LabelModel';
-import { FactoryBank } from './core/FactoryBank';
-import { AbstractFactory } from './core/AbstractFactory';
-import { AbstractReactFactory } from './core/AbstractReactFactory';
-import { BaseListener } from './core/BaseObserver';
+import * as _ from "lodash";
+import { BaseEntity } from "./core-models/BaseEntity";
+import { DiagramModel } from "./models/DiagramModel";
+import { BaseModel } from "./core-models/BaseModel";
+import { NodeModel } from "./models/NodeModel";
+import { PointModel } from "./models/PointModel";
+import { PortModel } from "./models/PortModel";
+import { LinkModel } from "./models/LinkModel";
+import { LabelModel } from "./models/LabelModel";
+import { FactoryBank } from "./core/FactoryBank";
+import { AbstractFactory } from "./core/AbstractFactory";
+import { AbstractReactFactory } from "./core/AbstractReactFactory";
+import { BaseListener, BaseObserver } from "./core/BaseObserver";
 
 export interface DiagramEngineListener extends BaseListener {
 	repaintCanvas?(): void;
@@ -21,7 +21,7 @@ export interface DiagramEngineListener extends BaseListener {
 /**
  * Passed as a parameter to the DiagramWidget
  */
-export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
+export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	protected nodeFactories: FactoryBank<AbstractReactFactory<NodeModel>>;
 	protected linkFactories: FactoryBank<AbstractReactFactory<LinkModel>>;
 	protected portFactories: FactoryBank<AbstractFactory<PortModel>>;
@@ -77,7 +77,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.paintableWidgets = null;
 	}
 
-	enableRepaintEntities(entities: BaseModel<BaseEntity, BaseModelListener>[]) {
+	enableRepaintEntities(entities: BaseModel[]) {
 		this.paintableWidgets = {};
 		entities.forEach(entity => {
 			//if a node is requested to repaint, add all of its links
@@ -101,7 +101,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	 * Checks to see if a model is locked by running through
 	 * its parents to see if they are locked first
 	 */
-	isModelLocked(model: BaseEntity<BaseListener>) {
+	isModelLocked(model: BaseEntity) {
 		//always check the diagram model
 		if (this.diagramModel.isLocked()) {
 			return true;
@@ -115,7 +115,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		this.linksThatHaveInitiallyRendered = {};
 	}
 
-	canEntityRepaint(baseModel: BaseModel<BaseEntity, BaseModelListener>) {
+	canEntityRepaint(baseModel: BaseModel) {
 		//no rules applied, allow repaint
 		if (this.paintableWidgets === null) {
 			return true;
@@ -195,7 +195,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	getNodeElement(node: NodeModel): Element {
 		const selector = this.canvas.querySelector(`.node[data-nodeid="${node.getID()}"]`);
 		if (selector === null) {
-			throw new Error('Cannot find Node element with nodeID: [' + node.getID() + ']');
+			throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
 		}
 		return selector;
 	}
@@ -206,11 +206,11 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		);
 		if (selector === null) {
 			throw new Error(
-				'Cannot find Node Port element with nodeID: [' +
-					port.getParent().getID() +
-					'] and name: [' +
-					port.getName() +
-					']'
+				"Cannot find Node Port element with nodeID: [" +
+				port.getParent().getID() +
+				"] and name: [" +
+				port.getName() +
+				"]"
 			);
 		}
 		return selector;

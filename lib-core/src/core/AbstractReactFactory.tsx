@@ -1,5 +1,5 @@
 import { AbstractFactory } from './AbstractFactory';
-import { BaseModel } from '../models/BaseModel';
+import { BaseModel } from '../core-models/BaseModel';
 
 export interface GenerateWidgetEvent<T extends BaseModel> {
 	model: T;

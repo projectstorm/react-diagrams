@@ -22,8 +22,8 @@ export class MoveItemsAction extends BaseAction {
 		this.selectionModels = selectedItems.map((item: PointModel | NodeModel) => {
 			return {
 				model: item,
-				initialX: item.x,
-				initialY: item.y
+				initialX: item.getX(),
+				initialY: item.getY()
 			};
 		});
 	}

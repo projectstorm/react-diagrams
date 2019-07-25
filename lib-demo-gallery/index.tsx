@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { storiesOf, addParameters } from '@storybook/react';
+import { storiesOf, addParameters, addDecorator } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import { Toolkit } from '@projectstorm/react-diagrams';
 import { themes } from '@storybook/theming';
@@ -17,6 +17,11 @@ setOptions({
 	name: 'STORM React Diagrams',
 	url: 'https://github.com/projectstorm/react-diagrams',
 	addonPanelInRight: true
+});
+
+addDecorator((fn) => {
+	Toolkit.TESTING_UID = 0;
+	return fn();
 });
 
 import demo_simple from './demos/demo-simple';

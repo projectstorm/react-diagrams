@@ -1,8 +1,7 @@
-import { BaseModel, BaseModelListener } from './BaseModel';
-import { BaseEntity } from '../BaseEntity';
+import { BaseModel } from '../core-models/BaseModel';
 
 export interface SelectionModel {
-	model: BaseModel<BaseEntity, BaseModelListener>;
+	model: BaseModel;
 	initialX: number;
 	initialY: number;
 }

@@ -14,17 +14,17 @@ export class DefaultPortLabel extends BaseWidget<DefaultPortLabelProps, DefaultP
 	}
 
 	getClassName() {
-		return super.getClassName() + (this.props.model.in ? this.bem('--in') : this.bem('--out'));
+		return super.getClassName() + (this.props.model.getOptions().in ? this.bem('--in') : this.bem('--out'));
 	}
 
 	render() {
-		var port = <PortWidget node={this.props.model.getParent()} name={this.props.model.name} />;
-		var label = <div className="name">{this.props.model.label}</div>;
+		var port = <PortWidget node={this.props.model.getParent()} name={this.props.model.getOptions().name} />;
+		var label = <div className="name">{this.props.model.getOptions().label}</div>;
 
 		return (
 			<div {...this.getProps()}>
-				{this.props.model.in ? port : label}
-				{this.props.model.in ? label : port}
+				{this.props.model.getOptions().in ? port : label}
+				{this.props.model.getOptions().in ? label : port}
 			</div>
 		);
 	}

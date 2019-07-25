@@ -1,11 +1,10 @@
-import * as _ from 'lodash';
 import {
-	BaseEntityEvent,
+	BaseEntityEvent, BaseModelOptions,
 	DiagramEngine,
 	LabelModel,
-	LinkModel,
+	LinkModel, LinkModelGenerics,
 	LinkModelListener
-} from '@projectstorm/react-diagrams-core';
+} from "@projectstorm/react-diagrams-core";
 import { DefaultLabelModel } from '../label/DefaultLabelModel';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
@@ -14,31 +13,40 @@ export interface DefaultLinkModelListener extends LinkModelListener {
 	widthChanged?(event: BaseEntityEvent<DefaultLinkModel> & { width: 0 | number }): void;
 }
 
-export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
-	width: number;
-	color: string;
-	curvyness: number;
+export interface DefaultLinkModelOptions extends Omit<BaseModelOptions, 'type'>{
+	width?: number;
+	color?: string;
+	curvyness?: number;
+}
 
-	constructor(type: string = 'default') {
-		super(type);
-		this.color = 'rgba(255,255,255,0.5)';
-		this.width = 3;
-		this.curvyness = 50;
+export interface DefaultLinkModelGenerics{
+	LISTENER: DefaultLinkModelListener;
+	OPTIONS: DefaultLinkModelOptions;
+}
+
+export class DefaultLinkModel extends LinkModel<LinkModelGenerics & DefaultLinkModelGenerics> {
+
+	constructor(options: DefaultLinkModelOptions = {}) {
+		super({
+			...options,
+			type: 'default'
+		});
 	}
 
 	serialize() {
-		return _.merge(super.serialize(), {
-			width: this.width,
-			color: this.color,
-			curvyness: this.curvyness
-		});
+		return {
+			...super.serialize(),
+			width: this.options.width,
+			color: this.options.color,
+			curvyness: this.options.curvyness
+		};
 	}
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
-		this.color = ob.color;
-		this.width = ob.width;
-		this.curvyness = ob.curvyness;
+		this.options.color = ob.color;
+		this.options.width = ob.width;
+		this.options.curvyness = ob.curvyness;
 	}
 
 	addLabel(label: LabelModel | string) {
@@ -51,12 +59,12 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 	}
 
 	setWidth(width: number) {
-		this.width = width;
+		this.options.width = width;
 		this.fireEvent({ width }, 'widthChanged');
 	}
 
 	setColor(color: string) {
-		this.color = color;
+		this.options.color = color;
 		this.fireEvent({ color }, 'colorChanged');
 	}
 }

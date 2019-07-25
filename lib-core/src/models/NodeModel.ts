@@ -1,29 +1,32 @@
-import { BaseModel, BaseModelListener } from './BaseModel';
+import { BaseModel, BaseModelGenerics, BaseModelListener } from "../core-models/BaseModel";
 import { PortModel } from './PortModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
-import { DiagramModel } from './DiagramModel';
-import { BaseEntityEvent } from '../BaseEntity';
+import { BaseEntityEvent } from '../core-models/BaseEntity';
+import { BasePositionModel, BasePositionModelGenerics } from "../core-models/BasePositionModel";
+import { DiagramModel } from "./DiagramModel";
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
 }
 
-export class NodeModel<T extends NodeModelListener = NodeModelListener> extends BaseModel<DiagramModel, T> {
-	x: number;
-	y: number;
-	extras: any;
+export interface NodeModelGenerics extends BasePositionModelGenerics{
+	LISTENER: NodeModelListener;
+	PARENT: DiagramModel;
+}
+
+export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends BasePositionModel<G> {
+
 	ports: { [s: string]: PortModel };
 
 	// calculated post rendering so routing can be done correctly
 	width: number;
 	height: number;
 
-	constructor(nodeType: string = 'default', id?: string) {
-		super(nodeType, id);
+	constructor(options: G['OPTIONS']) {
+		super(options);
 		this.x = 0;
 		this.y = 0;
-		this.extras = {};
 		this.ports = {};
 	}
 
@@ -34,17 +37,14 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 		_.forEach(this.ports, port => {
 			_.forEach(port.getLinks(), link => {
 				let point = link.getPointForPort(port);
-				point.x = point.x + x - oldX;
-				point.y = point.y + y - oldY;
+				point.updateLocation({
+					x: point.getX() + x - oldX,
+					y: point.getY() + y - oldY
+				});
 			});
 		});
 		this.x = x;
 		this.y = y;
-	}
-
-	// TODO remopve
-	positionChanged() {
-		this.fireEvent({}, 'positionChanged');
 	}
 
 	getSelectedEntities() {
@@ -65,9 +65,6 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
-		this.x = ob.x;
-		this.y = ob.y;
-		this.extras = ob.extras;
 
 		//deserialize ports
 		_.forEach(ob.ports, (port: any) => {
@@ -78,14 +75,12 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 	}
 
 	serialize() {
-		return _.merge(super.serialize(), {
-			x: this.x,
-			y: this.y,
-			extras: this.extras,
+		return {
+			...super.serialize(),
 			ports: _.map(this.ports, port => {
 				return port.serialize();
 			})
-		});
+		}
 	}
 
 	doClone(lookupTable = {}, clone) {
@@ -124,15 +119,15 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 
 	removePort(port: PortModel) {
 		//clear the parent node reference
-		if (this.ports[port.name]) {
-			this.ports[port.name].setParent(null);
-			delete this.ports[port.name];
+		if (this.ports[port.getName()]) {
+			this.ports[port.getName()].setParent(null);
+			delete this.ports[port.getName()];
 		}
 	}
 
 	addPort<T extends PortModel>(port: T): T {
 		port.setParent(this);
-		this.ports[port.name] = port;
+		this.ports[port.getName()] = port;
 		return port;
 	}
 

@@ -1,17 +1,29 @@
-import { BaseModel, BaseModelListener } from './BaseModel';
+import { BaseModel, BaseModelListener, BaseModelOptions } from "../core-models/BaseModel";
 import { LinkModel } from './LinkModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
+import { BasePositionModel } from "../core-models/BasePositionModel";
 
-export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
-	x: number;
-	y: number;
+export interface PointModelOptions extends Omit<PointModelOptions, 'type'>{
+	link: LinkModel;
+	points: { x: number; y: number };
+}
 
-	constructor(link: LinkModel, points: { x: number; y: number }) {
-		super();
-		this.x = points.x;
-		this.y = points.y;
-		this.parent = link;
+export interface PointModelGenerics{
+	PARENT: LinkModel;
+	OPTIONS: PointModelOptions;
+	LISTENER: BaseModelListener;
+}
+
+export class PointModel<G extends PointModelGenerics = PointModelGenerics> extends BasePositionModel<G & {OPTIONS: BaseModelOptions}> {
+
+	constructor(options: G['OPTIONS']) {
+		super({
+			...options,
+			type: 'point'
+		});
+		this.x = options.points.x;
+		this.y = options.points.y;
 	}
 
 	getSelectedEntities() {
@@ -31,14 +43,14 @@ export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
-		this.x = ob.x;
-		this.y = ob.y;
+		this.options.points.x = ob.x;
+		this.options.points.y = ob.y;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			x: this.x,
-			y: this.y
+			x: this.options.points.x,
+			y: this.options.points.y
 		});
 	}
 
@@ -51,16 +63,16 @@ export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 	}
 
 	updateLocation(points: { x: number; y: number }) {
-		this.x = points.x;
-		this.y = points.y;
+		this.options.points.x = points.x;
+		this.options.points.y = points.y;
 	}
 
 	getX(): number {
-		return this.x;
+		return this.options.points.x;
 	}
 
 	getY(): number {
-		return this.y;
+		return this.options.points.y;
 	}
 
 	isLocked() {
