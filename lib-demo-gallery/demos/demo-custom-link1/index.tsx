@@ -92,7 +92,7 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 		this.type = 'advanced';
 	}
 
-	getNewInstance(initialConfig?: any): AdvancedLinkModel {
+	generateModel(): AdvancedLinkModel {
 		return new AdvancedLinkModel();
 	}
 
@@ -113,7 +113,7 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 export default () => {
 	//1) setup the diagram engine
 	var engine = createEngine();
-	engine.registerLinkFactory(new AdvancedLinkFactory());
+	engine.getLinkFactories().registerFactory(new AdvancedLinkFactory());
 
 	// create some nodes
 	var node1 = new DefaultNodeModel('Source', 'rgb(0,192,255)');

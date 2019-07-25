@@ -38,7 +38,7 @@ export default () => {
 
 	// add a selection listener to each
 	models.forEach(item => {
-		item.addListener({
+		item.registerListener({
 			selectionChanged: action('selectionChanged')
 		});
 	});

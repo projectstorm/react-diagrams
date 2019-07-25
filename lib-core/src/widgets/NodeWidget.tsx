@@ -9,15 +9,9 @@ export interface NodeProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
 }
 
-export interface NodeState {}
-
-/**
- * @author Dylan Vorster
- */
-export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
+export class NodeWidget extends BaseWidget<NodeProps> {
 	constructor(props: NodeProps) {
 		super('srd-node', props);
-		this.state = {};
 	}
 
 	shouldComponentUpdate() {
@@ -32,7 +26,7 @@ export class NodeWidget extends BaseWidget<NodeProps, NodeState> {
 		return (
 			<div
 				{...this.getProps()}
-				data-nodeid={this.props.node.id}
+				data-nodeid={this.props.node.getID()}
 				style={{
 					top: this.props.node.y,
 					left: this.props.node.x

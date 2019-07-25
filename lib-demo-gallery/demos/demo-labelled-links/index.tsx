@@ -1,9 +1,6 @@
-import {
-	DiagramEngine,
+import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
-	DefaultPortModel,
 	DiagramWidget,
 	DefaultLinkModel
 } from '@projectstorm/react-diagrams';
@@ -13,8 +10,7 @@ import { action } from '@storybook/addon-actions';
 
 export default () => {
 	// setup the diagram engine
-	const engine = new DiagramEngine();
-	engine.installDefaultFactories();
+	const engine = createEngine();
 
 	// setup the diagram model
 	const model = new DiagramModel();

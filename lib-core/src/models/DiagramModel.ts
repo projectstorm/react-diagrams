@@ -1,4 +1,4 @@
-import { BaseListener, BaseEntity, BaseEvent, BaseEntityType } from '../BaseEntity';
+import {BaseEntity, BaseEntityEvent, BaseEntityListener, BaseEntityType} from '../BaseEntity';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { LinkModel } from './LinkModel';
@@ -6,29 +6,23 @@ import { NodeModel } from './NodeModel';
 import { PortModel } from './PortModel';
 import { BaseModel, BaseModelListener } from './BaseModel';
 import { PointModel } from './PointModel';
-/**
- * @author Dylan Vorster
- *
- */
-export interface DiagramListener extends BaseListener {
-	nodesUpdated?(event: BaseEvent & { node: NodeModel; isCreated: boolean }): void;
 
-	linksUpdated?(event: BaseEvent & { link: LinkModel; isCreated: boolean }): void;
+export interface DiagramListener extends BaseEntityListener {
+	nodesUpdated?(event: BaseEntityEvent & { node: NodeModel; isCreated: boolean }): void;
 
-	offsetUpdated?(event: BaseEvent<DiagramModel> & { offsetX: number; offsetY: number }): void;
+	linksUpdated?(event: BaseEntityEvent & { link: LinkModel; isCreated: boolean }): void;
 
-	zoomUpdated?(event: BaseEvent<DiagramModel> & { zoom: number }): void;
+	offsetUpdated?(event: BaseEntityEvent<DiagramModel> & { offsetX: number; offsetY: number }): void;
 
-	gridUpdated?(event: BaseEvent<DiagramModel> & { size: number }): void;
+	zoomUpdated?(event: BaseEntityEvent<DiagramModel> & { zoom: number }): void;
+
+	gridUpdated?(event: BaseEntityEvent<DiagramModel> & { size: number }): void;
 }
 
-/**
- *
- */
 export class DiagramModel extends BaseEntity<DiagramListener> {
 	//models
-	links: { [s: string]: LinkModel };
-	nodes: { [s: string]: NodeModel };
+	protected links: { [s: string]: LinkModel };
+	protected nodes: { [s: string]: NodeModel };
 
 	//control variables
 	offsetX: number;
@@ -52,11 +46,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 	setGridSize(size: number = 0) {
 		this.gridSize = size;
-		this.iterateListeners((listener, event) => {
-			if (listener.gridUpdated) {
-				listener.gridUpdated({ ...event, size: size });
-			}
-		});
+		this.fireEvent({size: size}, 'gridUpdated');
 	}
 
 	getGridPosition(pos) {
@@ -76,7 +66,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialize nodes
 		_.forEach(object.nodes, (node: any) => {
-			let nodeOb = diagramEngine.getNodeFactory(node.type).getNewInstance(node);
+			let nodeOb = diagramEngine.getFactoryForNode(node.type).generateModel({initialConfig: node});
 			nodeOb.setParent(this);
 			nodeOb.deSerialize(node, diagramEngine);
 			this.addNode(nodeOb);
@@ -84,7 +74,7 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 		// deserialze links
 		_.forEach(object.links, (link: any) => {
-			let linkOb = diagramEngine.getLinkFactory(link.type).getNewInstance();
+			let linkOb = diagramEngine.getFactoryForLink(link.type).generateModel({initialConfig: link});
 			linkOb.setParent(this);
 			linkOb.deSerialize(link, diagramEngine);
 			this.addLink(linkOb);
@@ -169,40 +159,21 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 
 	setZoomLevel(zoom: number) {
 		this.zoom = zoom;
-
-		this.iterateListeners((listener, event) => {
-			if (listener.zoomUpdated) {
-				listener.zoomUpdated({ ...event, zoom: zoom });
-			}
-		});
+		this.fireEvent({zoom}, 'zoomUpdated')
 	}
 
 	setOffset(offsetX: number, offsetY: number) {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: offsetY });
-			}
-		});
+		this.fireEvent({offsetX, offsetY}, 'offsetUpdated');
 	}
 
 	setOffsetX(offsetX: number) {
-		this.offsetX = offsetX;
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: offsetX, offsetY: this.offsetY });
-			}
-		});
+		this.setOffset(offsetX, this.offsetY);
 	}
-	setOffsetY(offsetY: number) {
-		this.offsetY = offsetY;
 
-		this.iterateListeners((listener, event) => {
-			if (listener.offsetUpdated) {
-				listener.offsetUpdated({ ...event, offsetX: this.offsetX, offsetY: this.offsetY });
-			}
-		});
+	setOffsetY(offsetY: number) {
+		this.setOffset(this.offsetX, offsetY);
 	}
 
 	getOffsetY() {
@@ -249,53 +220,40 @@ export class DiagramModel extends BaseEntity<DiagramListener> {
 	}
 
 	addLink(link: LinkModel): LinkModel {
-		link.addListener({
+		link.registerListener({
 			entityRemoved: () => {
 				this.removeLink(link);
 			}
 		});
 		this.links[link.getID()] = link;
-		this.iterateListeners((listener, event) => {
-			if (listener.linksUpdated) {
-				listener.linksUpdated({ ...event, link: link, isCreated: true });
-			}
-		});
+		this.fireEvent({
+			link,
+			isCreated: true
+		}, 'linksUpdated');
 		return link;
 	}
 
 	addNode(node: NodeModel): NodeModel {
-		node.addListener({
+		node.registerListener({
 			entityRemoved: () => {
 				this.removeNode(node);
 			}
 		});
 		this.nodes[node.getID()] = node;
-		this.iterateListeners((listener, event) => {
-			if (listener.nodesUpdated) {
-				listener.nodesUpdated({ ...event, node: node, isCreated: true });
-			}
-		});
+		this.fireEvent({node, isCreated: true}, 'nodesUpdated');
 		return node;
 	}
 
 	removeLink(link: LinkModel | string) {
 		link = this.getLink(link);
 		delete this.links[link.getID()];
-		this.iterateListeners((listener, event) => {
-			if (listener.linksUpdated) {
-				listener.linksUpdated({ ...event, link: link as LinkModel, isCreated: false });
-			}
-		});
+		this.fireEvent({link, isCreated: false}, 'linksUpdated');
 	}
 
 	removeNode(node: NodeModel | string) {
 		node = this.getNode(node);
 		delete this.nodes[node.getID()];
-		this.iterateListeners((listener, event) => {
-			if (listener.nodesUpdated) {
-				listener.nodesUpdated({ ...event, node: node as NodeModel, isCreated: false });
-			}
-		});
+		this.fireEvent({node, isCreated: false}, 'nodesUpdated');
 	}
 
 	getLinks(): { [s: string]: LinkModel } {

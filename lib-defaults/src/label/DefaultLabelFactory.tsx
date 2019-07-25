@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { AbstractLabelFactory, DiagramEngine } from '@projectstorm/react-diagrams-core';
+import {AbstractReactFactory} from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from './DefaultLabelModel';
 import { DefaultLabelWidget } from './DefaultLabelWidget';
 
 /**
  * @author Dylan Vorster
  */
-export class DefaultLabelFactory extends AbstractLabelFactory<DefaultLabelModel> {
+export class DefaultLabelFactory extends AbstractReactFactory<DefaultLabelModel> {
 	constructor() {
 		super('default');
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, label: DefaultLabelModel): JSX.Element {
-		return <DefaultLabelWidget model={label} />;
+	generateReactWidget(event): JSX.Element {
+		return <DefaultLabelWidget model={event.model} />;
 	}
 
-	getNewInstance(initialConfig?: any): DefaultLabelModel {
+	generateModel(event): DefaultLabelModel {
 		return new DefaultLabelModel();
 	}
 }

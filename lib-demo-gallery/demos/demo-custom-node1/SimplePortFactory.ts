@@ -1,6 +1,6 @@
-import { PortModel, AbstractPortFactory } from '@projectstorm/react-diagrams';
+import {AbstractFactory, PortModel} from '@projectstorm/react-diagrams';
 
-export class SimplePortFactory extends AbstractPortFactory {
+export class SimplePortFactory extends AbstractFactory {
 	cb: (initialConfig?: any) => PortModel;
 
 	constructor(type: string, cb: (initialConfig?: any) => PortModel) {
@@ -8,7 +8,7 @@ export class SimplePortFactory extends AbstractPortFactory {
 		this.cb = cb;
 	}
 
-	getNewInstance(initialConfig?: any): PortModel {
-		return this.cb(initialConfig);
+	generateModel(event): PortModel {
+		return this.cb(event.initialConfig);
 	}
 }

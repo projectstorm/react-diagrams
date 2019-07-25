@@ -1,12 +1,12 @@
-import { BaseEvent } from '../BaseEntity';
 import { BaseModel, BaseModelListener } from './BaseModel';
 import { PortModel } from './PortModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { DiagramModel } from './DiagramModel';
+import {BaseEntityEvent} from "../BaseEntity";
 
 export interface NodeModelListener extends BaseModelListener {
-	positionChanged?(event: BaseEvent<NodeModel>): void;
+	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
 }
 
 export class NodeModel<T extends NodeModelListener = NodeModelListener> extends BaseModel<DiagramModel, T> {
@@ -42,10 +42,9 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 		this.y = y;
 	}
 
+	// TODO remopve
 	positionChanged() {
-		this.iterateListeners(
-			(listener: NodeModelListener, event) => listener.positionChanged && listener.positionChanged(event)
-		);
+		this.fireEvent({}, 'positionChanged');
 	}
 
 	getSelectedEntities() {
@@ -72,7 +71,7 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 
 		//deserialize ports
 		_.forEach(ob.ports, (port: any) => {
-			let portOb = engine.getPortFactory(port.type).getNewInstance();
+			let portOb = engine.getFactoryForPort(port.type).generateModel({});
 			portOb.deSerialize(port, engine);
 			this.addPort(portOb);
 		});
@@ -108,7 +107,7 @@ export class NodeModel<T extends NodeModelListener = NodeModelListener> extends 
 
 	getPortFromID(id): PortModel | null {
 		for (var i in this.ports) {
-			if (this.ports[i].id === id) {
+			if (this.ports[i].getID() === id) {
 				return this.ports[i];
 			}
 		}

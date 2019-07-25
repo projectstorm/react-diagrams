@@ -12,8 +12,8 @@ import { BodyWidget } from './BodyWidget';
 const engine = createEngine();
 
 // register the two engines
-engine.registerNodeFactory(new JSCustomNodeFactory());
-engine.registerNodeFactory(new TSCustomNodeFactory());
+engine.getNodeFactories().registerFactory(new JSCustomNodeFactory());
+engine.getNodeFactories().registerFactory(new TSCustomNodeFactory());
 
 // create a diagram model
 const model = new DiagramModel();

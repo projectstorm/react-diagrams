@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { BaseWidget, BaseWidgetProps, DiagramEngine, LabelModel, PointModel } from '@projectstorm/react-diagrams-core';
 import PathFinding from '../engine/PathFinding';
-import { DefaultLinkFactory } from '@projectstorm/react-diagrams-defaults';
 import { PathFindingLinkFactory } from './PathFindingLinkFactory';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
 
@@ -71,7 +70,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		let y = this.props.link.points[pointIndex].y;
 
 		return (
-			<g key={'point-' + this.props.link.points[pointIndex].id}>
+			<g key={'point-' + this.props.link.points[pointIndex].getID()}>
 				<circle
 					cx={x}
 					cy={y}
@@ -89,8 +88,8 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 					onMouseEnter={() => {
 						this.setState({ selected: true });
 					}}
-					data-id={this.props.link.points[pointIndex].id}
-					data-linkid={this.props.link.id}
+					data-id={this.props.link.points[pointIndex].getID()}
+					data-linkid={this.props.link.getID()}
 					cx={x}
 					cy={y}
 					r={15}
@@ -119,12 +118,12 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		const canvas = this.props.diagramEngine.canvas as HTMLElement;
 		return (
 			<foreignObject
-				key={label.id}
+				key={label.getID()}
 				className={this.bem('__label')}
 				width={canvas.offsetWidth}
 				height={canvas.offsetHeight}>
-				<div ref={ref => (this.refLabels[label.id] = ref)}>
-					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget(this.props.diagramEngine, label)}
+				<div ref={ref => (this.refLabels[label.getID()] = ref)}>
+					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget({model: label})}
 				</div>
 			</foreignObject>
 		);

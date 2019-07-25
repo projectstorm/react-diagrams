@@ -5,11 +5,10 @@ export * from './src/actions/MoveCanvasAction';
 export * from './src/actions/SelectingAction';
 export * from './src/actions/MoveItemsAction';
 
-export * from './src/factories/AbstractFactory';
-export * from './src/factories/AbstractLabelFactory';
-export * from './src/factories/AbstractLinkFactory';
-export * from './src/factories/AbstractNodeFactory';
-export * from './src/factories/AbstractPortFactory';
+export * from './src/core/BaseObserver';
+export * from './src/core/FactoryBank';
+export * from './src/core/AbstractFactory';
+export * from './src/core/AbstractReactFactory';
 
 export * from './src/models/BaseModel';
 export * from './src/models/DiagramModel';

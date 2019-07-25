@@ -2,15 +2,15 @@ import { BaseModel, BaseModelListener } from './BaseModel';
 import { PortModel } from './PortModel';
 import { PointModel } from './PointModel';
 import * as _ from 'lodash';
-import { BaseEvent } from '../BaseEntity';
 import { LabelModel } from './LabelModel';
 import { DiagramEngine } from '../DiagramEngine';
 import { DiagramModel } from './DiagramModel';
+import {BaseEntityEvent} from "../BaseEntity";
 
 export interface LinkModelListener extends BaseModelListener {
-	sourcePortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
+	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
 
-	targetPortChanged?(event: BaseEvent<LinkModel> & { port: null | PortModel }): void;
+	targetPortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
 }
 
 export class LinkModel<T extends LinkModelListener = LinkModelListener> extends BaseModel<DiagramModel, T> {
@@ -40,7 +40,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 		//deserialize labels
 		_.forEach(ob.labels || [], (label: any) => {
-			let labelOb = engine.getLabelFactory(label.type).getNewInstance();
+			let labelOb = engine.getFactoryForLabel(label.type).generateModel({});
 			labelOb.deSerialize(label, engine);
 			this.addLabel(labelOb);
 		});
@@ -64,10 +64,10 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	serialize() {
 		return _.merge(super.serialize(), {
-			source: this.sourcePort ? this.sourcePort.getParent().id : null,
-			sourcePort: this.sourcePort ? this.sourcePort.id : null,
-			target: this.targetPort ? this.targetPort.getParent().id : null,
-			targetPort: this.targetPort ? this.targetPort.id : null,
+			source: this.sourcePort ? this.sourcePort.getParent().getID() : null,
+			sourcePort: this.sourcePort ? this.sourcePort.getID() : null,
+			target: this.targetPort ? this.targetPort.getParent().getID() : null,
+			targetPort: this.targetPort ? this.targetPort.getID() : null,
 			points: _.map(this.points, point => {
 				return point.serialize();
 			}),
@@ -113,7 +113,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 
 	getPointModel(id: string): PointModel | null {
 		for (var i = 0; i < this.points.length; i++) {
-			if (this.points[i].id === id) {
+			if (this.points[i].getID() === id) {
 				return this.points[i];
 			}
 		}
@@ -156,11 +156,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.sourcePort.removeLink(this);
 		}
 		this.sourcePort = port;
-		this.iterateListeners((listener: LinkModelListener, event) => {
-			if (listener.sourcePortChanged) {
-				listener.sourcePortChanged({ ...event, port: port });
-			}
-		});
+		this.fireEvent({port}, 'sourcePortChanged');
 	}
 
 	getSourcePort(): PortModel {
@@ -179,11 +175,7 @@ export class LinkModel<T extends LinkModelListener = LinkModelListener> extends 
 			this.targetPort.removeLink(this);
 		}
 		this.targetPort = port;
-		this.iterateListeners((listener: LinkModelListener, event) => {
-			if (listener.targetPortChanged) {
-				listener.targetPortChanged({ ...event, port: port });
-			}
-		});
+		this.fireEvent({port}, 'targetPortChanged');
 	}
 
 	point(x: number, y: number): PointModel {

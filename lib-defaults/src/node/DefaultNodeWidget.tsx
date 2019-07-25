@@ -1,40 +1,70 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { BaseWidget, BaseWidgetProps, DiagramEngine } from '@projectstorm/react-diagrams-core';
-import { DefaultNodeModel } from './DefaultNodeModel';
-import { DefaultPortLabel } from '../port/DefaultPortLabelWidget';
+import {BaseWidget, BaseWidgetProps} from '@projectstorm/react-diagrams-core';
+import {DefaultNodeModel} from './DefaultNodeModel';
+import {DefaultPortLabel} from '../port/DefaultPortLabelWidget';
+import styled from "@emotion/styled";
+
+namespace S {
+	export const Node = styled.div<{background: string}>`
+		background-color: ${p => p.background};
+		border-radius: 5px;
+		font-family: sans-serif;
+		color: white;
+		border: solid 2px black;
+		overflow: visible;
+		font-size: 11px;
+	`;
+
+	export const Title = styled.div`
+		background: rgba(0,0,0, 0.3);
+		display: flex;
+		white-space: nowrap;
+		justify-items: center;
+	`;
+
+	export const TitleName = styled.div`
+		flex-grow: 1;
+		padding: 5px 5px;
+	`;
+
+	export const Ports = styled.div`
+		display: flex;
+		background-image: linear-gradient(rgba(0,0,0, 0.1), rgba(0,0,0, 0.2));
+	`;
+
+	export const PortsContainer = styled.div`
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+	`;
+}
 
 export interface DefaultNodeProps extends BaseWidgetProps {
 	node: DefaultNodeModel;
-	diagramEngine: DiagramEngine;
 }
 
-export interface DefaultNodeState {}
-
 /**
- * @author Dylan Vorster
+ * Default node that models the DefaultNodeModel. It creates two columns
+ * for both all the input ports on the left, and the output ports on the right.
  */
-export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps, DefaultNodeState> {
-	constructor(props: DefaultNodeProps) {
-		super('srd-default-node', props);
-		this.state = {};
-	}
+export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps> {
 
-	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
-	}
+	generatePort = (port) => {
+		return <DefaultPortLabel model={port} key={port.id}/>;
+	};
 
 	render() {
 		return (
-			<div {...this.getProps()} style={{ background: this.props.node.color }}>
-				<div className={this.bem('__title')}>
-					<div className={this.bem('__name')}>{this.props.node.name}</div>
-				</div>
-				<div className={this.bem('__ports')}>
-					<div className={this.bem('__in')}>{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}</div>
-					<div className={this.bem('__out')}>{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}</div>
-				</div>
-			</div>
+			<S.Node background={this.props.node.color}>
+				<S.Title>
+					<S.TitleName>{this.props.node.name}</S.TitleName>
+				</S.Title>
+				<S.Ports>
+					<S.PortsContainer>{_.map(this.props.node.getInPorts(), this.generatePort)}</S.PortsContainer>
+					<S.PortsContainer>{_.map(this.props.node.getOutPorts(), this.generatePort)}</S.PortsContainer>
+				</S.Ports>
+			</S.Node>
 		);
 	}
 }

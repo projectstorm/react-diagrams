@@ -10,15 +10,9 @@ export interface LinkLayerProps extends BaseWidgetProps {
 	pointAdded: (point: PointModel, event: MouseEvent) => any;
 }
 
-export interface LinkLayerState {}
-
-/**
- * @author Dylan Vorster
- */
-export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> {
+export class LinkLayerWidget extends BaseWidget<LinkLayerProps> {
 	constructor(props: LinkLayerProps) {
 		super('srd-link-layer', props);
-		this.state = {};
 	}
 
 	render() {
@@ -41,7 +35,7 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 					_.map(diagramModel.getLinks(), link => {
 						if (
 							this.props.diagramEngine.nodesRendered &&
-							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id]
+							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()]
 						) {
 							if (link.sourcePort !== null) {
 								try {
@@ -51,7 +45,7 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 									const portCoords = this.props.diagramEngine.getPortCoords(link.sourcePort);
 									link.sourcePort.updateCoords(portCoords);
 
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
+									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()] = true;
 								} catch (ignore) {
 									/*noop*/
 								}
@@ -64,7 +58,7 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps, LinkLayerState> 
 									const portCoords = this.props.diagramEngine.getPortCoords(link.targetPort);
 									link.targetPort.updateCoords(portCoords);
 
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.id] = true;
+									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()] = true;
 								} catch (ignore) {
 									/*noop*/
 								}

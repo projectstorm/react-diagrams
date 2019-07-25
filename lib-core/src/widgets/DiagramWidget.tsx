@@ -74,7 +74,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	}
 
 	componentWillUnmount() {
-		this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
+		this.props.diagramEngine.deregisterListener(this.state.diagramEngineListener);
 		this.props.diagramEngine.setCanvas(null);
 		window.removeEventListener('keyup', this.onKeyUpPointer);
 		window.removeEventListener('mouseUp', this.onMouseUp);
@@ -83,8 +83,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 	componentWillReceiveProps(nextProps: DiagramProps) {
 		if (this.props.diagramEngine !== nextProps.diagramEngine) {
-			this.props.diagramEngine.removeListener(this.state.diagramEngineListener);
-			const diagramEngineListener = nextProps.diagramEngine.addListener({
+			this.props.diagramEngine.deregisterListener(this.state.diagramEngineListener);
+			const diagramEngineListener = nextProps.diagramEngine.registerListener({
 				repaintCanvas: () => this.forceUpdate()
 			});
 			this.setState({ diagramEngineListener });
@@ -92,7 +92,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	}
 
 	componentWillUpdate(nextProps: DiagramProps) {
-		if (this.props.diagramEngine.diagramModel.id !== nextProps.diagramEngine.diagramModel.id) {
+		if (this.props.diagramEngine.diagramModel.getID() !== nextProps.diagramEngine.diagramModel.getID()) {
 			this.setState({ renderedNodes: false });
 			nextProps.diagramEngine.diagramModel.rendered = true;
 		}

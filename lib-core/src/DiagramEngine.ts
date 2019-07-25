@@ -1,29 +1,18 @@
-import { BaseEntity, BaseListener } from './BaseEntity';
-import { DiagramModel } from './models/DiagramModel';
 import * as _ from 'lodash';
-import { BaseModel, BaseModelListener } from './models/BaseModel';
-import { NodeModel } from './models/NodeModel';
-import { PointModel } from './models/PointModel';
-import { PortModel } from './models/PortModel';
-import { LinkModel } from './models/LinkModel';
-import { AbstractLabelFactory } from './factories/AbstractLabelFactory';
-import { AbstractLinkFactory } from './factories/AbstractLinkFactory';
-import { AbstractNodeFactory } from './factories/AbstractNodeFactory';
-import { AbstractPortFactory } from './factories/AbstractPortFactory';
-import { LabelModel } from './models/LabelModel';
-import { Toolkit } from './Toolkit';
+import {BaseEntity} from './BaseEntity';
+import {DiagramModel} from './models/DiagramModel';
+import {BaseModel, BaseModelListener} from './models/BaseModel';
+import {NodeModel} from './models/NodeModel';
+import {PointModel} from './models/PointModel';
+import {PortModel} from './models/PortModel';
+import {LinkModel} from './models/LinkModel';
+import {LabelModel} from './models/LabelModel';
+import {FactoryBank} from "./core/FactoryBank";
+import {AbstractFactory} from "./core/AbstractFactory";
+import {AbstractReactFactory} from "./core/AbstractReactFactory";
+import {BaseListener} from "./core/BaseObserver";
 
-/**
- * @author Dylan Vorster
- */
 export interface DiagramEngineListener extends BaseListener {
-	portFactoriesUpdated?(): void;
-
-	nodeFactoriesUpdated?(): void;
-
-	linkFactoriesUpdated?(): void;
-
-	labelFactoriesUpdated?(): void;
 
 	repaintCanvas?(): void;
 
@@ -34,10 +23,11 @@ export interface DiagramEngineListener extends BaseListener {
  * Passed as a parameter to the DiagramWidget
  */
 export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
-	nodeFactories: { [s: string]: AbstractNodeFactory };
-	linkFactories: { [s: string]: AbstractLinkFactory };
-	portFactories: { [s: string]: AbstractPortFactory };
-	labelFactories: { [s: string]: AbstractLabelFactory };
+
+	protected nodeFactories: FactoryBank<AbstractReactFactory<NodeModel>>;
+	protected linkFactories: FactoryBank<AbstractReactFactory<LinkModel>>;
+	protected portFactories: FactoryBank<AbstractFactory<PortModel>>;
+	protected labelFactories: FactoryBank<AbstractReactFactory<LabelModel>>;
 
 	diagramModel: DiagramModel;
 	canvas: Element;
@@ -49,22 +39,32 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 	constructor() {
 		super();
 		this.diagramModel = new DiagramModel();
-		this.nodeFactories = {};
-		this.linkFactories = {};
-		this.portFactories = {};
-		this.labelFactories = {};
+
+		// create banks for the different factory types
+		this.nodeFactories = new FactoryBank();
+		this.linkFactories = new FactoryBank();
+		this.portFactories = new FactoryBank();
+		this.labelFactories = new FactoryBank();
+
+		const setup = (factory: FactoryBank) => {
+			factory.registerListener({
+				factoryAdded: (event) => {
+					event.factory.setDiagramEngine(this);
+				},
+				factoryRemoved: (event) => {
+					event.factory.setDiagramEngine(null);
+				}
+			})
+		};
+
+		setup(this.nodeFactories);
+		setup(this.linkFactories);
+		setup(this.portFactories);
+		setup(this.labelFactories);
+
 		this.canvas = null;
 		this.paintableWidgets = null;
 		this.linksThatHaveInitiallyRendered = {};
-
-		if (Toolkit.TESTING) {
-			Toolkit.TESTING_UID = 0;
-
-			//pop it onto the window so our E2E helpers can find it
-			if (window) {
-				(window as any)['diagram_instance'] = this;
-			}
-		}
 	}
 
 	repaintCanvas() {
@@ -141,112 +141,44 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	//!-------------- FACTORIES ------------
 
-	getNodeFactories(): { [s: string]: AbstractNodeFactory } {
+	getNodeFactories(): FactoryBank {
 		return this.nodeFactories;
 	}
 
-	getLinkFactories(): { [s: string]: AbstractLinkFactory } {
+	getLinkFactories(): FactoryBank {
 		return this.linkFactories;
 	}
 
-	getLabelFactories(): { [s: string]: AbstractLabelFactory } {
+	getLabelFactories(): FactoryBank {
 		return this.labelFactories;
 	}
 
-	registerLabelFactory(factory: AbstractLabelFactory) {
-		this.labelFactories[factory.getType()] = factory;
-		factory.setDiagramEngine(this);
-		this.iterateListeners(listener => {
-			if (listener.labelFactoriesUpdated) {
-				listener.labelFactoriesUpdated();
-			}
-		});
+	getPortFactories(): FactoryBank {
+		return this.portFactories;
 	}
 
-	registerPortFactory(factory: AbstractPortFactory) {
-		this.portFactories[factory.getType()] = factory;
-		factory.setDiagramEngine(this);
-		this.iterateListeners(listener => {
-			if (listener.portFactoriesUpdated) {
-				listener.portFactoriesUpdated();
-			}
-		});
+	getFactoryForNode(node: NodeModel){
+		return this.nodeFactories.getFactory(node.getType());
 	}
 
-	registerNodeFactory(factory: AbstractNodeFactory) {
-		this.nodeFactories[factory.getType()] = factory;
-		factory.setDiagramEngine(this);
-		this.iterateListeners(listener => {
-			if (listener.nodeFactoriesUpdated) {
-				listener.nodeFactoriesUpdated();
-			}
-		});
+	getFactoryForLink(link: LinkModel){
+		return this.linkFactories.getFactory(link.getType());
 	}
 
-	registerLinkFactory(factory: AbstractLinkFactory) {
-		this.linkFactories[factory.getType()] = factory;
-		factory.setDiagramEngine(this);
-		this.iterateListeners(listener => {
-			if (listener.linkFactoriesUpdated) {
-				listener.linkFactoriesUpdated();
-			}
-		});
+	getFactoryForLabel(label: LabelModel){
+		return this.labelFactories.getFactory(label.getType());
 	}
 
-	getPortFactory(type: string): AbstractPortFactory {
-		if (this.portFactories[type]) {
-			return this.portFactories[type];
-		}
-		throw new Error(`cannot find factory for port of type: [${type}]`);
+	getFactoryForPort(port: PortModel){
+		return this.portFactories.getFactory(port.getType());
 	}
 
-	getNodeFactory(type: string): AbstractNodeFactory {
-		if (this.nodeFactories[type]) {
-			return this.nodeFactories[type];
-		}
-		throw new Error(`cannot find factory for node of type: [${type}]`);
+	generateWidgetForLink(link: LinkModel): JSX.Element{
+		return this.getFactoryForLink(link).generateReactWidget({model: link});
 	}
 
-	getLinkFactory<T extends AbstractLinkFactory = AbstractLinkFactory>(type: string): T {
-		if (this.linkFactories[type]) {
-			return this.linkFactories[type] as T;
-		}
-		throw new Error(`cannot find factory for link of type: [${type}]`);
-	}
-
-	getLabelFactory(type: string): AbstractLabelFactory {
-		if (this.labelFactories[type]) {
-			return this.labelFactories[type];
-		}
-		throw new Error(`cannot find factory for label of type: [${type}]`);
-	}
-
-	getFactoryForNode(node: NodeModel): AbstractNodeFactory | null {
-		return this.getNodeFactory(node.getType());
-	}
-
-	getFactoryForLink(link: LinkModel): AbstractLinkFactory | null {
-		return this.getLinkFactory(link.getType());
-	}
-
-	getFactoryForLabel(label: LabelModel): AbstractLabelFactory | null {
-		return this.getLabelFactory(label.getType());
-	}
-
-	generateWidgetForLink(link: LinkModel): JSX.Element | null {
-		var linkFactory = this.getFactoryForLink(link);
-		if (!linkFactory) {
-			throw new Error('Cannot find link factory for link: ' + link.getType());
-		}
-		return linkFactory.generateReactWidget(this, link);
-	}
-
-	generateWidgetForNode(node: NodeModel): JSX.Element | null {
-		var nodeFactory = this.getFactoryForNode(node);
-		if (!nodeFactory) {
-			throw new Error('Cannot find widget factory for node: ' + node.getType());
-		}
-		return nodeFactory.generateReactWidget(this, node);
+	generateWidgetForNode(node: NodeModel): JSX.Element{
+		return this.getFactoryForNode(node).generateReactWidget({model: node});
 	}
 
 	getRelativeMousePoint(event): { x: number; y: number } {
@@ -259,7 +191,7 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 
 	getRelativePoint(x, y) {
 		var canvasRect = this.canvas.getBoundingClientRect();
-		return { x: x - canvasRect.left, y: y - canvasRect.top };
+		return {x: x - canvasRect.left, y: y - canvasRect.top};
 	}
 
 	getNodeElement(node: NodeModel): Element {
@@ -277,10 +209,10 @@ export class DiagramEngine extends BaseEntity<DiagramEngineListener> {
 		if (selector === null) {
 			throw new Error(
 				'Cannot find Node Port element with nodeID: [' +
-					port.getParent().getID() +
-					'] and name: [' +
-					port.getName() +
-					']'
+				port.getParent().getID() +
+				'] and name: [' +
+				port.getName() +
+				']'
 			);
 		}
 		return selector;

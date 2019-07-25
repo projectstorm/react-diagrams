@@ -85,7 +85,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		let y = this.props.link.points[pointIndex].y;
 
 		return (
-			<g key={'point-' + this.props.link.points[pointIndex].id}>
+			<g key={'point-' + this.props.link.points[pointIndex].getID()}>
 				<circle
 					cx={x}
 					cy={y}
@@ -103,8 +103,8 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 					onMouseEnter={() => {
 						this.setState({ selected: true });
 					}}
-					data-id={this.props.link.points[pointIndex].id}
-					data-linkid={this.props.link.id}
+					data-id={this.props.link.points[pointIndex].getID()}
+					data-linkid={this.props.link.getID()}
 					cx={x}
 					cy={y}
 					r={15}
@@ -119,12 +119,12 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		const canvas = this.props.diagramEngine.canvas as HTMLElement;
 		return (
 			<foreignObject
-				key={label.id}
+				key={label.getID()}
 				className={this.bem('__label')}
 				width={canvas.offsetWidth}
 				height={canvas.offsetHeight}>
-				<div ref={ref => (this.refLabels[label.id] = ref)}>
-					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget(this.props.diagramEngine, label)}
+				<div ref={ref => (this.refLabels[label.getID()] = ref)}>
+					{this.props.diagramEngine.getFactoryForLabel(label).generateReactWidget({model: label})}
 				</div>
 			</foreignObject>
 		);
@@ -274,7 +274,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 						this.generateLink(
 							Toolkit.generateLinePath(points[j], points[j + 1]),
 							{
-								'data-linkid': this.props.link.id,
+								'data-linkid': this.props.link.getID(),
 								'data-point': j,
 								onMouseDown: (event: MouseEvent) => {
 									this.addPointToLink(event, j + 1);

@@ -1,30 +1,26 @@
 import { Toolkit } from './Toolkit';
 import * as _ from 'lodash';
 import { DiagramEngine } from './DiagramEngine';
+import {BaseEvent, BaseListener, BaseObserver} from "./core/BaseObserver";
 
-/**
- * @author Dylan Vorster
- */
-export interface BaseEvent<T extends BaseEntity = any> {
-	entity: BaseEntity<BaseListener>;
-	stopPropagation: () => any;
-	firing: boolean;
+export interface BaseEntityEvent<T extends BaseEntity = BaseEntity> extends BaseEvent{
+	entity: T;
 	id: string;
 }
 
-export interface BaseListener<T extends BaseEntity = any> {
-	lockChanged?(event: BaseEvent<T> & { locked: boolean }): void;
+export interface BaseEntityListener<T extends BaseEntity = BaseEntity> extends BaseListener{
+	lockChanged?(event: BaseEntityEvent<T> & { locked: boolean }): void;
 }
 
 export type BaseEntityType = 'node' | 'link' | 'port' | 'point';
 
-export class BaseEntity<T extends BaseListener = BaseListener> {
-	public listeners: { [s: string]: T };
-	public id: string;
-	public locked: boolean;
+export class BaseEntity<T extends BaseListener = BaseListener> extends BaseObserver<T>{
+
+	protected id: string;
+	protected locked: boolean;
 
 	constructor(id?: string) {
-		this.listeners = {};
+		super();
 		this.id = id || Toolkit.UID();
 		this.locked = false;
 	}
@@ -65,39 +61,11 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 		};
 	}
 
-	public iterateListeners(cb: (t: T, event: BaseEvent) => any) {
-		let event: BaseEvent = {
+	fireEvent(event: Partial<BaseEntityEvent> & object, k: keyof T) {
+		super.fireEvent({
 			id: Toolkit.UID(),
-			firing: true,
-			entity: this,
-			stopPropagation: () => {
-				event.firing = false;
-			}
-		};
-
-		for (var i in this.listeners) {
-			if (this.listeners.hasOwnProperty(i)) {
-				// propagation stopped
-				if (!event.firing) {
-					return;
-				}
-				cb(this.listeners[i], event);
-			}
-		}
-	}
-
-	public removeListener(listener: string) {
-		if (this.listeners[listener]) {
-			delete this.listeners[listener];
-			return true;
-		}
-		return false;
-	}
-
-	public addListener(listener: T): string {
-		var uid = Toolkit.UID();
-		this.listeners[uid] = listener;
-		return uid;
+			...event,
+		}, k);
 	}
 
 	public isLocked(): boolean {
@@ -106,10 +74,8 @@ export class BaseEntity<T extends BaseListener = BaseListener> {
 
 	public setLocked(locked: boolean = true) {
 		this.locked = locked;
-		this.iterateListeners((listener, event) => {
-			if (listener.lockChanged) {
-				listener.lockChanged({ ...event, locked: locked });
-			}
-		});
+		this.fireEvent({
+			locked: locked
+		}, 'lockChanged');
 	}
 }

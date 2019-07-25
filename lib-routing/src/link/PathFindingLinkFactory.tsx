@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { AbstractLinkFactory, DiagramEngine } from '@projectstorm/react-diagrams-core';
+import {AbstractReactFactory} from '@projectstorm/react-diagrams-core';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
 import { PathFindingLinkWidget } from './PathFindingLinkWidget';
 import * as _ from 'lodash';
 import * as Path from 'paths-js/path';
 
-export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkModel> {
+export class PathFindingLinkFactory extends AbstractReactFactory<PathFindingLinkModel> {
 	ROUTING_SCALING_FACTOR: number = 5;
 
 	// calculated only when smart routing is active
@@ -22,11 +22,11 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 		super(PathFindingLinkFactory.NAME);
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, link: PathFindingLinkModel): JSX.Element {
-		return <PathFindingLinkWidget diagramEngine={diagramEngine} link={link} factory={this} />;
+	generateReactWidget(event): JSX.Element {
+		return <PathFindingLinkWidget diagramEngine={this.engine} link={event.model} factory={this} />;
 	}
 
-	getNewInstance(initialConfig?: any): PathFindingLinkModel {
+	generateModel(event): PathFindingLinkModel {
 		return new PathFindingLinkModel();
 	}
 
@@ -124,14 +124,14 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 		height: number;
 		vAdjustmentFactor: number;
 	} => {
-		const allNodesCoords = _.values(this.engine.diagramModel.nodes).map(item => ({
+		const allNodesCoords = _.values(this.engine.diagramModel.getNodes()).map(item => ({
 			x: item.x,
 			width: item.width,
 			y: item.y,
 			height: item.height
 		}));
 
-		const allLinks = _.values(this.engine.diagramModel.links);
+		const allLinks = _.values(this.engine.diagramModel.getLinks());
 		const allPortsCoords = _.flatMap(allLinks.map(link => [link.sourcePort, link.targetPort]))
 			.filter(port => port !== null)
 			.map(item => ({
@@ -180,7 +180,7 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 	 * Updates (by reference) where nodes will be drawn on the matrix passed in.
 	 */
 	markNodes = (matrix: number[][]): void => {
-		_.values(this.engine.diagramModel.nodes).forEach(node => {
+		_.values(this.engine.diagramModel.getNodes()).forEach(node => {
 			const startX = Math.floor(node.x / this.ROUTING_SCALING_FACTOR);
 			const endX = Math.ceil((node.x + node.width) / this.ROUTING_SCALING_FACTOR);
 			const startY = Math.floor(node.y / this.ROUTING_SCALING_FACTOR);
@@ -199,7 +199,7 @@ export class PathFindingLinkFactory extends AbstractLinkFactory<PathFindingLinkM
 	 */
 	markPorts = (matrix: number[][]): void => {
 		const allElements = _.flatMap(
-			_.values(this.engine.diagramModel.links).map(link => [].concat(link.sourcePort, link.targetPort))
+			_.values(this.engine.diagramModel.getLinks()).map(link => [].concat(link.sourcePort, link.targetPort))
 		);
 		allElements
 			.filter(port => port !== null)

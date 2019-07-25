@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { AbstractNodeFactory } from '@projectstorm/react-diagrams';
-import { JSCustomNodeModel } from './JSCustomNodeModel';
-import { JSCustomNodeWidget } from './JSCustomNodeWidget';
+import {AbstractReactFactory} from '@projectstorm/react-diagrams';
+import {JSCustomNodeModel} from './JSCustomNodeModel';
+import {JSCustomNodeWidget} from './JSCustomNodeWidget';
 
-export class JSCustomNodeFactory extends AbstractNodeFactory {
+export class JSCustomNodeFactory extends AbstractReactFactory {
 	constructor() {
 		super('js-custom-node');
 	}
 
-	getNewInstance(initialConfig) {
+	generateModel(event) {
 		return new JSCustomNodeModel();
 	}
 
-	generateReactWidget(diagramEngine, node) {
-		return <JSCustomNodeWidget node={node} />;
+	generateReactWidget(event) {
+		return <JSCustomNodeWidget node={event.model}/>;
 	}
 }

@@ -1,25 +1,22 @@
-import { BaseEntity, BaseListener } from '../BaseEntity';
+import {BaseEntity, BaseEntityEvent, BaseEntityListener} from '../BaseEntity';
 import * as _ from 'lodash';
-import { BaseEvent } from '../BaseEntity';
 import { DiagramEngine } from '../DiagramEngine';
 import { PointModel } from '../models/PointModel';
 
-export interface BaseModelListener extends BaseListener {
-	selectionChanged?(event: BaseEvent<BaseModel> & { isSelected: boolean }): void;
+export interface BaseModelListener extends BaseEntityListener {
+	selectionChanged?(event: BaseEntityEvent<BaseModel> & { isSelected: boolean }): void;
 
-	entityRemoved?(event: BaseEvent<BaseModel>): void;
+	entityRemoved?(event: BaseEntityEvent<BaseModel>): void;
 }
 
-/**
- * @author Dylan Vorster
- */
 export class BaseModel<
 	X extends BaseEntity = BaseEntity,
 	T extends BaseModelListener = BaseModelListener
 > extends BaseEntity<T> {
-	type: string;
-	selected: boolean;
-	parent: X;
+
+	protected type: string;
+	protected selected: boolean;
+	protected parent: X;
 
 	constructor(type?: string, id?: string) {
 		super(id);
@@ -69,18 +66,13 @@ export class BaseModel<
 
 	public setSelected(selected: boolean = true) {
 		this.selected = selected;
-		this.iterateListeners((listener, event) => {
-			if (listener.selectionChanged) {
-				listener.selectionChanged({ ...event, isSelected: selected });
-			}
-		});
+
+		this.fireEvent({
+			isSelected: selected
+		},'selectionChanged');
 	}
 
 	public remove() {
-		this.iterateListeners((listener, event) => {
-			if (listener.entityRemoved) {
-				listener.entityRemoved(event);
-			}
-		});
+		this.fireEvent({},'entityRemoved');
 	}
 }

@@ -33,7 +33,7 @@ export default () => {
 	const node5 = new DefaultNodeModel('Node E', 'rgb(192,255,0)');
 	node5.setPosition(250, 180);
 
-	const pathfinding = engine.getLinkFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME);
+	const pathfinding = engine.getLinkFactories().getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME);
 
 	// linking things together (specifically using the pathfinding link)
 	const link1 = port1.link(port4, pathfinding);

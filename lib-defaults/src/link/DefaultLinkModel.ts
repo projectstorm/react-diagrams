@@ -1,11 +1,17 @@
 import * as _ from 'lodash';
-import { BaseEvent, DiagramEngine, LabelModel, LinkModel, LinkModelListener } from '@projectstorm/react-diagrams-core';
+import {
+	BaseEntityEvent,
+	DiagramEngine,
+	LabelModel,
+	LinkModel,
+	LinkModelListener
+} from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from '../label/DefaultLabelModel';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
-	colorChanged?(event: BaseEvent<DefaultLinkModel> & { color: null | string }): void;
+	colorChanged?(event: BaseEntityEvent<DefaultLinkModel> & { color: null | string }): void;
 
-	widthChanged?(event: BaseEvent<DefaultLinkModel> & { width: 0 | number }): void;
+	widthChanged?(event: BaseEntityEvent<DefaultLinkModel> & { width: 0 | number }): void;
 }
 
 export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
@@ -46,19 +52,11 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 
 	setWidth(width: number) {
 		this.width = width;
-		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
-			if (listener.widthChanged) {
-				listener.widthChanged({ ...event, width: width });
-			}
-		});
+		this.fireEvent({width}, 'widthChanged');
 	}
 
 	setColor(color: string) {
 		this.color = color;
-		this.iterateListeners((listener: DefaultLinkModelListener, event: BaseEvent) => {
-			if (listener.colorChanged) {
-				listener.colorChanged({ ...event, color: color });
-			}
-		});
+		this.fireEvent({color}, 'colorChanged');
 	}
 }

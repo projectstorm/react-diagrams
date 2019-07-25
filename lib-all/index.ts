@@ -16,10 +16,10 @@ export * from '@projectstorm/react-diagrams-routing';
  */
 export default (): DiagramEngine => {
 	const engine = new DiagramEngine();
-	engine.registerLabelFactory(new DefaultLabelFactory());
-	engine.registerNodeFactory(new DefaultNodeFactory());
-	engine.registerLinkFactory(new DefaultLinkFactory());
-	engine.registerPortFactory(new DefaultPortFactory());
-	engine.registerLinkFactory(new PathFindingLinkFactory());
+	engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
+	engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
+	engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
+	engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
+	engine.getPortFactories().registerFactory(new DefaultPortFactory());
 	return engine;
 };

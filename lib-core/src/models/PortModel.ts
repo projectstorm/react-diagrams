@@ -31,9 +31,9 @@ export class PortModel extends BaseModel<NodeModel, BaseModelListener> {
 	serialize() {
 		return _.merge(super.serialize(), {
 			name: this.name,
-			parentNode: this.parent.id,
+			parentNode: this.parent.getID(),
 			links: _.map(this.links, link => {
-				return link.id;
+				return link.getID;
 			}),
 			maximumLinks: this.maximumLinks
 		});

@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { AbstractLinkFactory, DiagramEngine } from '@projectstorm/react-diagrams-core';
+import {AbstractReactFactory, DiagramEngine} from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkWidget } from './DefaultLinkWidget';
 
-export class DefaultLinkFactory extends AbstractLinkFactory<DefaultLinkModel> {
+export class DefaultLinkFactory extends AbstractReactFactory<DefaultLinkModel> {
 	constructor() {
 		super('default');
 	}
 
-	generateReactWidget(diagramEngine: DiagramEngine, link: DefaultLinkModel): JSX.Element {
-		return <DefaultLinkWidget link={link} diagramEngine={diagramEngine} />;
+	generateReactWidget(event): JSX.Element {
+		return <DefaultLinkWidget link={event.model} diagramEngine={this.engine} />;
 	}
 
-	getNewInstance(initialConfig?: any): DefaultLinkModel {
+	generateModel(event): DefaultLinkModel {
 		return new DefaultLinkModel();
 	}
 

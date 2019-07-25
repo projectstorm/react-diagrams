@@ -1,5 +1,4 @@
 import createEngine, {
-	DiagramEngine,
 	DiagramModel,
 	DefaultNodeModel,
 	DiagramWidget,
