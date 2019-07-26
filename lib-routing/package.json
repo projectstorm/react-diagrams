@@ -30,6 +30,7 @@
 	},
 	"peerDependencies": {
 		"closest": "^0.0.1",
+		"dagre": "^0.8.4",
 		"lodash": "4.*",
 		"pathfinding": "^0.4.18",
 		"paths-js": "^0.4.9",

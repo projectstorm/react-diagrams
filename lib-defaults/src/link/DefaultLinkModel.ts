@@ -33,6 +33,7 @@ export class DefaultLinkModel extends LinkModel<LinkModelGenerics & DefaultLinkM
 			type: 'default',
 			width: options.width || 3,
 			color: options.color || 'gray',
+			curvyness: 50,
 			...options
 		});
 	}

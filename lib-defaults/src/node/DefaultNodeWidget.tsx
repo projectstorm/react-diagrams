@@ -37,6 +37,14 @@ namespace S {
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
+		
+		&:first-child{
+			margin-right: 10px;
+		}
+		
+		&:only-child{
+			margin-right: 0px;
+		}
 	`;
 }
 

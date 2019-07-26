@@ -56,11 +56,12 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		this.options.color = object.color;
 	}
 
-	serialize() {
-		return _.merge(super.serialize(), {
+	serialize(): any{
+		return {
+			...super.serialize(),
 			name: this.options.name,
 			color: this.options.color
-		});
+		}
 	}
 
 	getInPorts(): DefaultPortModel[] {

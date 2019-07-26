@@ -50,6 +50,7 @@
 		"@storybook/react": "^5.1.9",
 		"@storybook/storybook-deployer": "^2.8.1",
 		"@storybook/theming": "^5.1.9",
+		"@types/dagre": "^0.7.42",
 		"@types/jest": "^24.0.15",
 		"@types/jest-environment-puppeteer": "^4.0.0",
 		"@types/lodash": "^4.14.136",

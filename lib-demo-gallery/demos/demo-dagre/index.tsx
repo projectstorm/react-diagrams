@@ -3,9 +3,8 @@ import createEngine, {
 	DefaultNodeModel,
 	DefaultPortModel,
 	DiagramWidget,
-	NodeModel
-} from '@projectstorm/react-diagrams';
-import { distributeElements } from './dagre-utils';
+	NodeModel, DagreEngine, DiagramEngine, PathFindingLinkFactory
+} from "@projectstorm/react-diagrams";
 import * as React from 'react';
 import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 
@@ -15,51 +14,64 @@ function createNode(name) {
 
 let count = 0;
 
-function connectNodes(nodeFrom, nodeTo) {
+function connectNodes(nodeFrom, nodeTo, engine: DiagramEngine) {
 	//just to get id-like structure
 	count++;
 	const portOut = nodeFrom.addPort(new DefaultPortModel(true, `${nodeFrom.name}-out-${count}`, 'Out'));
 	const portTo = nodeTo.addPort(new DefaultPortModel(false, `${nodeFrom.name}-to-${count}`, 'IN'));
 	return portOut.link(portTo);
+
+	// ################# UNCOMMENT THIS LINE FOR PATH FINDING #############################
+	// return portOut.link(portTo, engine.getLinkFactories().getFactory(PathFindingLinkFactory.NAME));
+	// #####################################################################################
 }
 
 /**
  * Tests auto distribution
  */
-class Demo8Widget extends React.Component<any, any> {
+class Demo8Widget extends React.Component<{model: DiagramModel, engine: DiagramEngine}, any> {
+
+	engine: DagreEngine;
+
 	constructor(props) {
 		super(props);
-		this.state = {};
-		this.autoDistribute = this.autoDistribute.bind(this);
+		this.engine = new DagreEngine({
+			graph: {
+				rankdir: 'RL',
+				ranker: 'longest-path'
+			},
+			includeLinks: true
+		});
 	}
 
-	autoDistribute() {
-		const { engine } = this.props;
-		const model = engine.getDiagramModel();
-		let distributedModel = getDistributedModel(engine, model);
-		engine.setDiagramModel(distributedModel);
-		this.forceUpdate();
+	autoDistribute = () => {
+		this.engine.redistribute(this.props.model);
+
+		// only happens if pathfing is enabled (check line 25)
+		this.reroute();
+		this.props.engine.repaintCanvas();
+	};
+
+	componentDidMount(): void {
+		this.forceUpdate(() => {
+			this.autoDistribute()
+		})
+	}
+
+	reroute(){
+		this.props.engine.getLinkFactories().getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME).calculateRoutingMatrix();
 	}
 
 	render() {
-		const { engine } = this.props;
-
 		return (
 			<DemoWorkspaceWidget buttons={<button onClick={this.autoDistribute}>Re-distribute</button>}>
-				<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
+				<DiagramWidget className="srd-demo-canvas" diagramEngine={this.props.engine} actionStoppedFiring={() => {
+					// only happens if pathfing is enabled (check line 25)
+					this.reroute();
+				}} />
 			</DemoWorkspaceWidget>
 		);
 	}
-}
-
-function getDistributedModel(engine, model) {
-	const serialized = model.serializeDiagram();
-	const distributedSerializedDiagram = distributeElements(serialized);
-
-	//deserialize the model
-	let deSerializedModel = new DiagramModel();
-	deSerializedModel.deSerializeDiagram(distributedSerializedDiagram, engine);
-	return deSerializedModel;
 }
 
 export default () => {
@@ -83,13 +95,13 @@ export default () => {
 
 	//4) link nodes together
 	let links = nodesFrom.map((node, index) => {
-		return connectNodes(node, nodesTo[index]);
+		return connectNodes(node, nodesTo[index], engine);
 	});
 
 	// more links for more complicated diagram
-	links.push(connectNodes(nodesFrom[0], nodesTo[1]));
-	links.push(connectNodes(nodesTo[0], nodesFrom[1]));
-	links.push(connectNodes(nodesFrom[1], nodesTo[2]));
+	links.push(connectNodes(nodesFrom[0], nodesTo[1],engine));
+	links.push(connectNodes(nodesTo[0], nodesFrom[1],engine));
+	links.push(connectNodes(nodesFrom[1], nodesTo[2],engine));
 
 	// initial random position
 	nodesFrom.forEach((node, index) => {
@@ -106,10 +118,7 @@ export default () => {
 		model.addLink(link);
 	});
 
-	//5) load model into engine
-	let model2 = getDistributedModel(engine, model);
+	engine.setDiagramModel(model);
 
-	engine.setDiagramModel(model2);
-
-	return <Demo8Widget engine={engine} />;
+	return <Demo8Widget model={model} engine={engine} />;
 };
