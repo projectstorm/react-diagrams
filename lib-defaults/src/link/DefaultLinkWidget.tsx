@@ -202,8 +202,8 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		}
 	};
 
-	calculateLabelPosition = (label, index: number) => {
-		if (!this.refLabels[label.id]) {
+	calculateLabelPosition = (label: LabelModel, index: number) => {
+		if (!this.refLabels[label.getID()]) {
 			// no label? nothing to do here
 			return;
 		}
@@ -211,8 +211,8 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		const { path, position } = this.findPathAndRelativePositionToRenderLabel(index);
 
 		const labelDimensions = {
-			width: this.refLabels[label.id].offsetWidth,
-			height: this.refLabels[label.id].offsetHeight
+			width: this.refLabels[label.getID()].offsetWidth,
+			height: this.refLabels[label.getID()].offsetHeight
 		};
 
 		const pathCentre = path.getPointAtLength(position);
@@ -221,7 +221,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 			x: pathCentre.x - labelDimensions.width / 2 + label.offsetX,
 			y: pathCentre.y - labelDimensions.height / 2 + label.offsetY
 		};
-		this.refLabels[label.id].setAttribute(
+		this.refLabels[label.getID()].setAttribute(
 			'style',
 			`transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`
 		);

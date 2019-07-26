@@ -1,17 +1,24 @@
 import * as React from 'react';
-import { BaseWidget, BaseWidgetProps } from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from './DefaultLabelModel';
+import styled from '@emotion/styled';
 
-export interface DefaultLabelWidgetProps extends BaseWidgetProps {
+export interface DefaultLabelWidgetProps {
 	model: DefaultLabelModel;
 }
 
-export class DefaultLabelWidget extends BaseWidget<DefaultLabelWidgetProps> {
-	constructor(props) {
-		super('srd-default-label', props);
-	}
+namespace S {
+	export const Label = styled.div`
+		background: rgba(0, 0, 0, 0.8);
+		border-radius: 5px;
+		color: white;
+		font-size: 12px;
+		padding: 4px 8px;
+		font-family: sans-serif;
+	`;
+}
 
+export class DefaultLabelWidget extends React.Component<DefaultLabelWidgetProps> {
 	render() {
-		return <div {...this.getProps()}>{this.props.model.getOptions().label}</div>;
+		return <S.Label>{this.props.model.getOptions().label}</S.Label>;
 	}
 }

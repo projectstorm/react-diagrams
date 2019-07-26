@@ -2,7 +2,8 @@ import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
-	DiagramWidget
+	DiagramWidget,
+	NodeModel
 } from '@projectstorm/react-diagrams';
 import { distributeElements } from './dagre-utils';
 import * as React from 'react';
@@ -69,8 +70,8 @@ export default () => {
 	let model = new DiagramModel();
 
 	//3) create a default nodes
-	let nodesFrom = [];
-	let nodesTo = [];
+	let nodesFrom: NodeModel[] = [];
+	let nodesTo: NodeModel[] = [];
 
 	nodesFrom.push(createNode('from-1'));
 	nodesFrom.push(createNode('from-2'));
@@ -92,13 +93,12 @@ export default () => {
 
 	// initial random position
 	nodesFrom.forEach((node, index) => {
-		node.x = index * 70;
+		node.setPosition(index * 70, index * 70);
 		model.addNode(node);
 	});
 
 	nodesTo.forEach((node, index) => {
-		node.x = index * 70;
-		node.y = 100;
+		node.setPosition(index * 70, 100);
 		model.addNode(node);
 	});
 

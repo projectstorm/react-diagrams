@@ -83,7 +83,6 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 	fireEvent(event: Partial<BaseEntityEvent> & object, k: keyof T['LISTENER']) {
 		super.fireEvent(
 			{
-				id: Toolkit.UID(),
 				entity: this,
 				...event
 			},
