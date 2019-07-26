@@ -14,17 +14,7 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps> {
 		super('srd-node-layer', props);
 	}
 
-	updateNodeDimensions = () => {
-		if (!this.props.diagramEngine.nodesRendered) {
-			const diagramModel = this.props.diagramEngine.getDiagramModel();
-			_.map(diagramModel.getNodes(), node => {
-				node.updateDimensions(this.props.diagramEngine.getNodeDimensions(node));
-			});
-		}
-	};
-
 	componentDidUpdate() {
-		this.updateNodeDimensions();
 		this.props.diagramEngine.nodesRendered = true;
 	}
 

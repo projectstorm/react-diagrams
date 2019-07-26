@@ -33,6 +33,7 @@ import demo_limit_points from './demos/demo-limit-points';
 import demo_listeners from './demos/demo-listeners';
 import demo_zoom from './demos/demo-zoom-to-fit';
 import demo_labels from './demos/demo-labelled-links';
+import demo_dynamic_ports from './demos/demo-dynamic-ports';
 
 storiesOf('Simple Usage', module)
 	.add('Simple example', demo_simple)
@@ -43,6 +44,7 @@ storiesOf('Simple Usage', module)
 	.add('Limiting link points', demo_limit_points)
 	.add('Events and listeners', demo_listeners)
 	.add('Zoom to fit', demo_zoom)
+	.add('Dynamic ports', demo_dynamic_ports)
 	.add('Links with labels', demo_labels);
 
 import demo_adv_clone_selected from './demos/demo-cloning';

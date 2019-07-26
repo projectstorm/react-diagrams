@@ -1,54 +1,30 @@
 import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
-	LinkModel,
-	NodeModel,
 	DiagramWidget,
-	BaseModel
+	DiagramEngine
 } from '@projectstorm/react-diagrams';
 import * as _ from 'lodash';
 import * as React from 'react';
 import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 
-/**
- * Tests cloning
- */
-class CloneSelected extends React.Component<any, any> {
-	constructor(props: any) {
-		super(props);
-		this.cloneSelected = this.cloneSelected.bind(this);
-	}
-
-	cloneSelected() {
-		let { engine } = this.props;
-		let offset = { x: 100, y: 100 };
-		let model = engine.getDiagramModel();
-
-		let itemMap = {};
-		_.forEach(model.getSelectedItems(), (item: BaseModel<any>) => {
-			let newItem = item.clone(itemMap);
-
-			// offset the nodes slightly
-			if (newItem instanceof NodeModel) {
-				newItem.setPosition(newItem.getX() + offset.x, newItem.getY() + offset.y);
-				model.addNode(newItem);
-			} else if (newItem instanceof LinkModel) {
-				// offset the link points
-				newItem.getPoints().forEach(p => {
-					p.setPosition(p.getX() + offset.x, p.getY() + offset.y);
-				});
-				model.addLink(newItem);
+class CloneSelected extends React.Component<{ model: DiagramModel; engine: DiagramEngine }, any> {
+	addPorts = () => {
+		const nodes: DefaultNodeModel[] = _.values(this.props.model.getNodes()) as DefaultNodeModel[];
+		for (let node of nodes) {
+			if (node.getInPorts().length > 0) {
+				node.addInPort(`in-${node.getInPorts().length + 1}`, false);
+			} else {
+				node.addOutPort(`out-${node.getOutPorts().length + 1}`, false);
 			}
-			newItem.selected = false;
-		});
-
-		this.forceUpdate();
-	}
+		}
+		this.props.engine.repaintCanvas();
+	};
 
 	render() {
 		const { engine } = this.props;
 		return (
-			<DemoWorkspaceWidget buttons={<button onClick={this.cloneSelected}>Clone Selected</button>}>
+			<DemoWorkspaceWidget buttons={<button onClick={this.addPorts}>Add more ports</button>}>
 				<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
 			</DemoWorkspaceWidget>
 		);

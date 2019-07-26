@@ -14,8 +14,12 @@ export interface PortState {
 }
 
 export class PortWidget extends BaseWidget<PortProps, PortState> {
+	ob: ResizeObserver;
+	ref: React.RefObject<HTMLDivElement>;
+
 	constructor(props: PortProps) {
 		super('srd-port', props);
+		this.ref = React.createRef();
 		this.state = {
 			selected: false
 		};
@@ -38,6 +42,7 @@ export class PortWidget extends BaseWidget<PortProps, PortState> {
 	render() {
 		return (
 			<div
+				ref={this.ref}
 				{...this.getProps()}
 				onMouseEnter={() => {
 					this.setState({ selected: true });

@@ -28,6 +28,8 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	constructor(options: G['OPTIONS']) {
 		super(options);
 		this.ports = {};
+		this.width = 0;
+		this.height = 0;
 	}
 
 	setPosition(point: Point);

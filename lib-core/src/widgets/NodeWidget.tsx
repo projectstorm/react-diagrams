@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { NodeModel } from '../models/NodeModel';
 import { BaseWidget, BaseWidgetProps } from './BaseWidget';
@@ -10,8 +11,12 @@ export interface NodeProps extends BaseWidgetProps {
 }
 
 export class NodeWidget extends BaseWidget<NodeProps> {
+	ob: ResizeObserver;
+	ref: React.RefObject<HTMLDivElement>;
+
 	constructor(props: NodeProps) {
 		super('srd-node', props);
+		this.ref = React.createRef();
 	}
 
 	shouldComponentUpdate() {
@@ -22,9 +27,31 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 		return 'node ' + super.getClassName() + (this.props.node.isSelected() ? this.bem('--selected') : '');
 	}
 
+	componentWillUnmount(): void {
+		this.ob.disconnect();
+		this.ob = null;
+	}
+
+	componentDidMount(): void {
+		this.ob = new ResizeObserver(entities => {
+			const bounds = entities[0].contentRect;
+			this.props.node.updateDimensions({ width: bounds.width, height: bounds.height });
+
+			//now mark the links as dirty
+			_.forEach(this.props.node.getPorts(), port => {
+				_.forEach(port.getLinks(), link => {
+					this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()] = false;
+				});
+			});
+			this.props.diagramEngine.repaintCanvas();
+		});
+		this.ob.observe(this.ref.current);
+	}
+
 	render() {
 		return (
 			<div
+				ref={this.ref}
 				{...this.getProps()}
 				data-nodeid={this.props.node.getID()}
 				style={{
