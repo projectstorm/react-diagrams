@@ -44,7 +44,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 			...super.serialize(),
 			parentNode: this.parent.getID(),
 			links: _.map(this.links, link => {
-				return link.getID;
+				return link.getID();
 			})
 		};
 	}

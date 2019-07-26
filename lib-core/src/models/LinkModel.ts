@@ -78,7 +78,8 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 	}
 
 	serialize() {
-		return _.merge(super.serialize(), {
+		return {
+			...super.serialize(),
 			source: this.sourcePort ? this.sourcePort.getParent().getID() : null,
 			sourcePort: this.sourcePort ? this.sourcePort.getID() : null,
 			target: this.targetPort ? this.targetPort.getParent().getID() : null,
@@ -89,7 +90,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 			labels: _.map(this.labels, label => {
 				return label.serialize();
 			})
-		});
+		};
 	}
 
 	doClone(lookupTable = {}, clone) {

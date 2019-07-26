@@ -53,7 +53,10 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 			return lookupTable[this.options.id];
 		}
 		let clone = _.clone(this);
-		clone.options.id = Toolkit.UID();
+		clone.options = {
+			...this.options,
+			id: Toolkit.UID()
+		};
 		clone.clearListeners();
 		lookupTable[this.options.id] = clone;
 

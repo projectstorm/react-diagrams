@@ -155,19 +155,31 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		return this.portFactories;
 	}
 
-	getFactoryForNode(node: NodeModel) {
+	getFactoryForNode(node: NodeModel | string) {
+		if (typeof node === 'string') {
+			return this.nodeFactories.getFactory(node);
+		}
 		return this.nodeFactories.getFactory(node.getType());
 	}
 
-	getFactoryForLink(link: LinkModel) {
+	getFactoryForLink(link: LinkModel | string) {
+		if (typeof link === 'string') {
+			return this.linkFactories.getFactory(link);
+		}
 		return this.linkFactories.getFactory(link.getType());
 	}
 
 	getFactoryForLabel(label: LabelModel) {
+		if (typeof label === 'string') {
+			return this.labelFactories.getFactory(label);
+		}
 		return this.labelFactories.getFactory(label.getType());
 	}
 
 	getFactoryForPort(port: PortModel) {
+		if (typeof port === 'string') {
+			return this.portFactories.getFactory(port);
+		}
 		return this.portFactories.getFactory(port.getType());
 	}
 

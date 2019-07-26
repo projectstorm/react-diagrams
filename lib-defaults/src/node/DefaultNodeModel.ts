@@ -14,7 +14,7 @@ export interface DefaultNodeModelGenerics {
 
 export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeModelGenerics> {
 	constructor(name: string, color: string);
-	constructor(options: DefaultNodeModelOptions);
+	constructor(options?: DefaultNodeModelOptions);
 	constructor(options: any = {}, color?: string) {
 		if (typeof options === 'string') {
 			options = {

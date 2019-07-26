@@ -97,7 +97,8 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	serializeDiagram() {
-		return _.merge(this.serialize(), {
+		return {
+			...this.serialize(),
 			offsetX: this.options.offsetX,
 			offsetY: this.options.offsetY,
 			zoom: this.options.zoom,
@@ -108,7 +109,7 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 			nodes: _.map(this.nodes, node => {
 				return node.serialize();
 			})
-		});
+		};
 	}
 
 	clearSelection(ignore: BaseModel | null = null) {

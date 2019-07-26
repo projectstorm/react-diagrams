@@ -44,6 +44,8 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 	serialize() {
 		return {
 			...super.serialize(),
+			type: this.options.type,
+			selected: this.options.selected,
 			extras: this.options.extras
 		};
 	}
@@ -51,6 +53,7 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 	deSerialize(data: { [p: string]: any }, engine: DiagramEngine) {
 		super.deSerialize(data, engine);
 		this.options.extras = data.extras;
+		this.options.selected = data.selected;
 	}
 
 	getType(): string {

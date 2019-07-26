@@ -1,5 +1,4 @@
 import { BaseModel, BaseModelGenerics } from '../core-models/BaseModel';
-import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 
 export class LabelModel<G extends BaseModelGenerics = BaseModelGenerics> extends BaseModel<G> {
@@ -19,9 +18,10 @@ export class LabelModel<G extends BaseModelGenerics = BaseModelGenerics> extends
 	}
 
 	serialize() {
-		return _.merge(super.serialize(), {
+		return {
+			...super.serialize(),
 			offsetX: this.offsetX,
 			offsetY: this.offsetY
-		});
+		};
 	}
 }

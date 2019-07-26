@@ -33,6 +33,7 @@ export default () => {
 	//!------------- SERIALIZING ------------------
 
 	var str = JSON.stringify(model.serializeDiagram());
+	console.log(model.serializeDiagram());
 
 	//!------------- DESERIALIZING ----------------
 
