@@ -6,6 +6,7 @@ import { BasePositionModel, BasePositionModelGenerics } from '../core-models/Bas
 import { DiagramModel } from './DiagramModel';
 import { PortModel } from './PortModel';
 import { LinkModel } from './LinkModel';
+import { Point } from '@projectstorm/react-diagrams-geometry';
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
@@ -26,26 +27,22 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 
 	constructor(options: G['OPTIONS']) {
 		super(options);
-		this.x = 0;
-		this.y = 0;
 		this.ports = {};
 	}
 
-	setPosition(x, y) {
-		//store position
-		let oldX = this.x;
-		let oldY = this.y;
+	setPosition(point: Point);
+	setPosition(x: number, y: number);
+	setPosition(x, y?) {
+		let old = this.position;
+		super.setPosition(x, y);
+
+		// also update the port co-ordinates (for make glorious speed)
 		_.forEach(this.ports, port => {
 			_.forEach(port.getLinks(), link => {
 				let point = link.getPointForPort(port);
-				point.updateLocation({
-					x: point.getX() + x - oldX,
-					y: point.getY() + y - oldY
-				});
+				point.setPosition(point.getX() + x - old.x, point.getY() + y - old.y);
 			});
 		});
-		this.x = x;
-		this.y = y;
 	}
 
 	getSelectedEntities() {

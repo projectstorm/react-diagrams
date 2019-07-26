@@ -12,6 +12,7 @@
 		"lib-core",
 		"lib-defaults",
 		"lib-routing",
+		"lib-geometry",
 		"lib-demo-project",
 		"lib-demo-gallery"
 	],
@@ -54,6 +55,7 @@
 		"@types/jest": "^24.0.15",
 		"@types/jest-environment-puppeteer": "^4.0.0",
 		"@types/lodash": "^4.14.136",
+		"@types/mathjs": "^6.0.0",
 		"@types/node": "^12.6.8",
 		"@types/promise": "^7.1.30",
 		"@types/puppeteer": "^1.12.4",
@@ -73,6 +75,7 @@
 		"json-beautify": "^1.1.0",
 		"lerna": "^3.16.3",
 		"lodash": "4.*",
+		"mathjs": "^6.0.3",
 		"node-sass": "^4.12.0",
 		"pathfinding": "^0.4.18",
 		"paths-js": "^0.4.9",

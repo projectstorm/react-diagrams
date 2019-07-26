@@ -11,6 +11,7 @@ import { FactoryBank } from './core/FactoryBank';
 import { AbstractFactory } from './core/AbstractFactory';
 import { AbstractReactFactory } from './core/AbstractReactFactory';
 import { BaseListener, BaseObserver } from './core/BaseObserver';
+import { Point } from '@projectstorm/react-diagrams-geometry';
 
 export interface DiagramEngineListener extends BaseListener {
 	repaintCanvas?(): void;
@@ -191,12 +192,12 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		return this.getFactoryForNode(node).generateReactWidget({ model: node });
 	}
 
-	getRelativeMousePoint(event): { x: number; y: number } {
+	getRelativeMousePoint(event): Point {
 		var point = this.getRelativePoint(event.clientX, event.clientY);
-		return {
-			x: (point.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
-			y: (point.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
-		};
+		return new Point(
+			(point.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
+			(point.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
+		);
 	}
 
 	getRelativePoint(x, y) {
@@ -228,20 +229,18 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		return selector;
 	}
 
-	getPortCenter(port: PortModel) {
+	getPortCenter(port: PortModel): Point {
 		var sourceElement = this.getNodePortElement(port);
 		var sourceRect = sourceElement.getBoundingClientRect();
 
 		var rel = this.getRelativePoint(sourceRect.left, sourceRect.top);
 
-		return {
-			x:
-				sourceElement.offsetWidth / 2 +
+		return new Point(
+			sourceElement.offsetWidth / 2 +
 				(rel.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0),
-			y:
-				sourceElement.offsetHeight / 2 +
+			sourceElement.offsetHeight / 2 +
 				(rel.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0)
-		};
+		);
 	}
 
 	/**

@@ -4,6 +4,7 @@ import { LinkModel } from './LinkModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { BasePositionModel } from '../core-models/BasePositionModel';
+import { Point } from '@projectstorm/react-diagrams-geometry';
 
 export enum PortModelAlignment {
 	TOP = 'top',
@@ -95,8 +96,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	}
 
 	updateCoords({ x, y, width, height }: { x: number; y: number; width: number; height: number }) {
-		this.x = x;
-		this.y = y;
+		this.position = new Point(x, y);
 		this.width = width;
 		this.height = height;
 	}

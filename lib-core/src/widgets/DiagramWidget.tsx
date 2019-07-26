@@ -489,7 +489,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					} else if (model.model instanceof PortModel) {
 						//its a port element, we want to drag a link
 						if (!this.props.diagramEngine.isModelLocked(model.model)) {
-							var relative = diagramEngine.getRelativeMousePoint(event);
+							var relativePoint = diagramEngine.getRelativeMousePoint(event);
 							var sourcePort = model.model;
 							var link = sourcePort.createLinkModel();
 							link.setSourcePort(sourcePort);
@@ -501,8 +501,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 								}
 								link.setTargetPort(null);
 
-								link.getFirstPoint().updateLocation(relative);
-								link.getLastPoint().updateLocation(relative);
+								link.getFirstPoint().setPosition(relativePoint);
+								link.getLastPoint().setPosition(relativePoint);
 
 								diagramModel.clearSelection();
 								link.getLastPoint().setSelected(true);

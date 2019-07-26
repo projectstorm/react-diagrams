@@ -4,7 +4,6 @@ import { BasePositionModel } from '../core-models/BasePositionModel';
 
 export interface PointModelOptions extends Omit<PointModelOptions, 'type'> {
 	link: LinkModel;
-	points: { x: number; y: number };
 }
 
 export interface PointModelGenerics {
@@ -22,8 +21,6 @@ export class PointModel<G extends PointModelGenerics = PointModelGenerics> exten
 			type: 'point'
 		});
 		this.parent = options.link;
-		this.x = options.points.x;
-		this.y = options.points.y;
 	}
 
 	getSelectedEntities() {
@@ -47,10 +44,6 @@ export class PointModel<G extends PointModelGenerics = PointModelGenerics> exten
 			this.parent.removePoint(this);
 		}
 		super.remove();
-	}
-
-	updateLocation(points: { x: number; y: number }) {
-		this.setPosition(points.x, points.y);
 	}
 
 	isLocked() {
