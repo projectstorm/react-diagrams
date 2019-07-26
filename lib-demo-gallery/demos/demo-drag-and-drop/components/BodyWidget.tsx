@@ -42,7 +42,7 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 									.getNodes()
 							).length;
 
-							var node = null;
+							var node: DefaultNodeModel = null;
 							if (data.type === 'in') {
 								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(192,255,0)');
 								node.addInPort('In');
@@ -50,9 +50,8 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 								node = new DefaultNodeModel('Node ' + (nodesCount + 1), 'rgb(0,192,255)');
 								node.addOutPort('Out');
 							}
-							var points = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
-							node.x = points.x;
-							node.y = points.y;
+							var point = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
+							node.setPosition(point);
 							this.props.app
 								.getDiagramEngine()
 								.getDiagramModel()

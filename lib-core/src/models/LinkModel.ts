@@ -6,6 +6,7 @@ import { LabelModel } from './LabelModel';
 import { DiagramEngine } from '../DiagramEngine';
 import { BaseEntityEvent } from '../core-models/BaseEntity';
 import { DiagramModel } from './DiagramModel';
+import { Point } from '@projectstorm/react-diagrams-geometry';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
@@ -29,12 +30,10 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		super(options);
 		this.points = [
 			new PointModel({
-				link: this,
-				points: { x: 0, y: 0 }
+				link: this
 			}),
 			new PointModel({
-				link: this,
-				points: { x: 0, y: 0 }
+				link: this
 			})
 		];
 		this.sourcePort = null;
@@ -47,7 +46,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		this.points = _.map(ob.points || [], (point: { x; y }) => {
 			var p = new PointModel({
 				link: this,
-				points: { x: point.x, y: point.y }
+				position: new Point(point.x, point.y)
 			});
 			p.deSerialize(point, engine);
 			return p;
@@ -244,7 +243,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 	generatePoint(x: number = 0, y: number = 0): PointModel {
 		return new PointModel({
 			link: this,
-			points: { x: x, y: y }
+			position: new Point(x, y)
 		});
 	}
 }

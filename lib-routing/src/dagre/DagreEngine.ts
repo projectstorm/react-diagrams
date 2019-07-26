@@ -2,6 +2,7 @@ import { DiagramModel, PointModel } from '@projectstorm/react-diagrams-core';
 import * as dagre from 'dagre';
 import * as _ from 'lodash';
 import { GraphLabel } from 'dagre';
+import { Point } from '@projectstorm/react-diagrams-geometry';
 
 export interface DagreEngineOptions {
 	graph?: GraphLabel;
@@ -69,7 +70,7 @@ export class DagreEngine {
 
 				const points = [link.getFirstPoint()];
 				for (let i = 1; i < edge.points.length - 2; i++) {
-					points.push(new PointModel({ link: link, points: edge.points[i] }));
+					points.push(new PointModel({ link: link, position: new Point(edge.points[i].x, edge.points[i].y) }));
 				}
 				link.setPoints(points.concat(link.getLastPoint()));
 			});

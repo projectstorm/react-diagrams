@@ -1,8 +1,12 @@
-import { BaseModelListener, BaseModelOptions } from '../core-models/BaseModel';
+import { BaseModelListener } from '../core-models/BaseModel';
 import { LinkModel } from './LinkModel';
-import { BasePositionModel } from '../core-models/BasePositionModel';
+import {
+	BasePositionModel,
+	BasePositionModelGenerics,
+	BasePositionModelOptions
+} from '../core-models/BasePositionModel';
 
-export interface PointModelOptions extends Omit<PointModelOptions, 'type'> {
+export interface PointModelOptions extends Omit<BasePositionModelOptions, 'type'> {
 	link: LinkModel;
 }
 
@@ -13,7 +17,7 @@ export interface PointModelGenerics {
 }
 
 export class PointModel<G extends PointModelGenerics = PointModelGenerics> extends BasePositionModel<
-	G & { OPTIONS: BaseModelOptions }
+	G & BasePositionModelGenerics
 > {
 	constructor(options: G['OPTIONS']) {
 		super({

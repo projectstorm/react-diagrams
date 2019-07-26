@@ -74,7 +74,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		) {
 			const point = new PointModel({
 				link: this.props.link,
-				points: this.props.diagramEngine.getRelativeMousePoint(event)
+				position: this.props.diagramEngine.getRelativeMousePoint(event)
 			});
 			point.setSelected(true);
 			this.forceUpdate();

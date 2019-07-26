@@ -200,9 +200,9 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		);
 	}
 
-	getRelativePoint(x, y) {
+	getRelativePoint(x, y): Point {
 		var canvasRect = this.canvas.getBoundingClientRect();
-		return { x: x - canvasRect.left, y: y - canvasRect.top };
+		return new Point(x - canvasRect.left, y - canvasRect.top);
 	}
 
 	getNodeElement(node: NodeModel): Element {

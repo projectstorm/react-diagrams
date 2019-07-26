@@ -26,6 +26,7 @@
 	"typings": "./dist/@types/index",
 	"dependencies": {
 		"@projectstorm/react-diagrams-core": "5.3.2",
+		"@projectstorm/react-diagrams-geometry": "5.3.2",
 		"@projectstorm/react-diagrams-defaults": "5.3.2"
 	},
 	"peerDependencies": {

@@ -1,5 +1,4 @@
 import { Point } from './Point';
-import { Rectangle } from './Rectangle';
 import * as _ from 'lodash';
 import { Matrix } from 'mathjs';
 
@@ -139,3 +138,5 @@ export class Polygon {
 		return new Rectangle(new Point(minX, minY), new Point(maxX, minY), new Point(maxX, maxY), new Point(minX, maxY));
 	}
 }
+
+import { Rectangle } from './Rectangle';
