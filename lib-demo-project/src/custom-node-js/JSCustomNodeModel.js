@@ -12,14 +12,18 @@ export class JSCustomNodeModel extends NodeModel {
 		this.color = options.color || { options: 'red' };
 
 		// setup an in and out port
-		this.addPort(new DefaultPortModel({
-			in: true,
-			name: 'in',
-		}));
-		this.addPort(new DefaultPortModel({
-			in: false,
-			name: 'out',
-		}));
+		this.addPort(
+			new DefaultPortModel({
+				in: true,
+				name: 'in'
+			})
+		);
+		this.addPort(
+			new DefaultPortModel({
+				in: false,
+				name: 'out'
+			})
+		);
 	}
 
 	serialize() {

@@ -19,6 +19,7 @@ export interface DefaultLinkModelOptions extends Omit<BaseModelOptions, 'type'> 
 	width?: number;
 	color?: string;
 	curvyness?: number;
+	type?: string;
 }
 
 export interface DefaultLinkModelGenerics {
@@ -29,10 +30,10 @@ export interface DefaultLinkModelGenerics {
 export class DefaultLinkModel extends LinkModel<LinkModelGenerics & DefaultLinkModelGenerics> {
 	constructor(options: DefaultLinkModelOptions = {}) {
 		super({
+			type: 'default',
 			width: options.width || 3,
 			color: options.color || 'gray',
-			...options,
-			type: 'default'
+			...options
 		});
 	}
 

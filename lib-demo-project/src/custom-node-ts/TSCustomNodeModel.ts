@@ -1,6 +1,6 @@
-import { DiagramEngine, NodeModel, DefaultPortModel, BaseModelOptions } from "@projectstorm/react-diagrams";
+import { DiagramEngine, NodeModel, DefaultPortModel, BaseModelOptions } from '@projectstorm/react-diagrams';
 
-export interface TSCustomNodeModelOptions extends Omit<BaseModelOptions, 'type'>{
+export interface TSCustomNodeModelOptions extends Omit<BaseModelOptions, 'type'> {
 	color?: string;
 }
 
@@ -15,14 +15,18 @@ export class TSCustomNodeModel extends NodeModel {
 		this.color = options.color || 'red';
 
 		// setup an in and out port
-		this.addPort(new DefaultPortModel({
-			in: true,
-			name: 'in',
-		}));
-		this.addPort(new DefaultPortModel({
-			in: false,
-			name: 'out',
-		}));
+		this.addPort(
+			new DefaultPortModel({
+				in: true,
+				name: 'in'
+			})
+		);
+		this.addPort(
+			new DefaultPortModel({
+				in: false,
+				name: 'out'
+			})
+		);
 	}
 
 	serialize() {

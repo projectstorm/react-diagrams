@@ -4,15 +4,18 @@ import createEngine, {
 	DefaultPortModel,
 	DiagramWidget,
 	DefaultLinkWidget,
-	DefaultLinkModel,
-	DefaultLinkFactory
+	DefaultLinkFactory,
+	LinkModel,
+	DefaultLinkModel
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 	constructor() {
-		super('advanced');
-		this.width = 10;
+		super({
+			type: 'advanced',
+			width: 10
+		});
 	}
 }
 
@@ -70,7 +73,7 @@ export class AdvancedLinkSegment extends React.Component<{ model: AdvancedLinkMo
 					ref={ref => {
 						this.path = ref;
 					}}
-					strokeWidth={this.props.model.width}
+					strokeWidth={this.props.model.getOptions().width}
 					stroke="rgba(255,0,0,0.5)"
 					d={this.props.path}
 				/>

@@ -5,7 +5,10 @@ export class DiamondPortModel extends PortModel {
 	position: string | 'top' | 'bottom' | 'left' | 'right';
 
 	constructor(pos: string = 'top') {
-		super(pos, 'diamond');
+		super({
+			type: 'diamond',
+			name: pos
+		});
 		this.position = pos;
 	}
 

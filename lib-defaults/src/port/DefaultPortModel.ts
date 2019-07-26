@@ -21,7 +21,16 @@ export interface DefaultPortModelGenerics {
 }
 
 export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortModelGenerics> {
-	constructor(options: DefaultPortModelOptions) {
+	constructor(isIn: boolean, name?: string, label?: string);
+	constructor(options: DefaultPortModelOptions);
+	constructor(options: any, name?: string, label?: string) {
+		if (!!name) {
+			options = {
+				in: !!options,
+				name: name,
+				label: label
+			};
+		}
 		super({
 			label: options.label || options.name,
 			...options,

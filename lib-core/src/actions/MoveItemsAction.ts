@@ -3,7 +3,7 @@ import { SelectionModel } from '../models/SelectionModel';
 import { PointModel } from '../models/PointModel';
 import { NodeModel } from '../models/NodeModel';
 import { DiagramEngine } from '../DiagramEngine';
-import { BasePositionModel } from "../core-models/BasePositionModel";
+import { BasePositionModel } from '../core-models/BasePositionModel';
 
 export class MoveItemsAction extends BaseAction {
 	selectionModels: SelectionModel[];
@@ -17,7 +17,7 @@ export class MoveItemsAction extends BaseAction {
 
 		//dont allow items which are locked to move
 		selectedItems = selectedItems.filter(item => {
-			if(!(item instanceof BasePositionModel)){
+			if (!(item instanceof BasePositionModel)) {
 				return false;
 			}
 			return !diagramEngine.isModelLocked(item);

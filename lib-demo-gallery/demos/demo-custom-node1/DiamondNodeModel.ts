@@ -3,7 +3,9 @@ import { DiamondPortModel } from './DiamondPortModel';
 
 export class DiamondNodeModel extends NodeModel {
 	constructor() {
-		super('diamond');
+		super({
+			type: 'diamond'
+		});
 		this.addPort(new DiamondPortModel('top'));
 		this.addPort(new DiamondPortModel('left'));
 		this.addPort(new DiamondPortModel('bottom'));

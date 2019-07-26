@@ -13,7 +13,15 @@ export interface DefaultNodeModelGenerics {
 }
 
 export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeModelGenerics> {
-	constructor(options: DefaultNodeModelOptions = {}) {
+	constructor(name: string, color: string);
+	constructor(options: DefaultNodeModelOptions);
+	constructor(options: any = {}, color?: string) {
+		if (typeof options === 'string') {
+			options = {
+				name: options,
+				color: color
+			};
+		}
 		super({
 			type: 'default',
 			name: 'Untitled',
