@@ -37,12 +37,12 @@ namespace S {
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		
-		&:first-child{
+
+		&:first-child {
 			margin-right: 10px;
 		}
-		
-		&:only-child{
+
+		&:only-child {
 			margin-right: 0px;
 		}
 	`;

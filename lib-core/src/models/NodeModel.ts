@@ -5,7 +5,7 @@ import { BaseEntityEvent } from '../core-models/BaseEntity';
 import { BasePositionModel, BasePositionModelGenerics } from '../core-models/BasePositionModel';
 import { DiagramModel } from './DiagramModel';
 import { PortModel } from './PortModel';
-import { LinkModel } from "./LinkModel";
+import { LinkModel } from './LinkModel';
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
@@ -110,10 +110,10 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		return null;
 	}
 
-	getLink(id: string): LinkModel{
-		for(let portID in this.ports){
+	getLink(id: string): LinkModel {
+		for (let portID in this.ports) {
 			const links = this.ports[portID].getLinks();
-			if(links[id]){
+			if (links[id]) {
 				return links[id];
 			}
 		}

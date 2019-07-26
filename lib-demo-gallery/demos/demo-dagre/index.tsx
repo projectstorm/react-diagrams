@@ -3,8 +3,11 @@ import createEngine, {
 	DefaultNodeModel,
 	DefaultPortModel,
 	DiagramWidget,
-	NodeModel, DagreEngine, DiagramEngine, PathFindingLinkFactory
-} from "@projectstorm/react-diagrams";
+	NodeModel,
+	DagreEngine,
+	DiagramEngine,
+	PathFindingLinkFactory
+} from '@projectstorm/react-diagrams';
 import * as React from 'react';
 import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 
@@ -29,8 +32,7 @@ function connectNodes(nodeFrom, nodeTo, engine: DiagramEngine) {
 /**
  * Tests auto distribution
  */
-class Demo8Widget extends React.Component<{model: DiagramModel, engine: DiagramEngine}, any> {
-
+class Demo8Widget extends React.Component<{ model: DiagramModel; engine: DiagramEngine }, any> {
 	engine: DagreEngine;
 
 	constructor(props) {
@@ -54,21 +56,28 @@ class Demo8Widget extends React.Component<{model: DiagramModel, engine: DiagramE
 
 	componentDidMount(): void {
 		this.forceUpdate(() => {
-			this.autoDistribute()
-		})
+			this.autoDistribute();
+		});
 	}
 
-	reroute(){
-		this.props.engine.getLinkFactories().getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME).calculateRoutingMatrix();
+	reroute() {
+		this.props.engine
+			.getLinkFactories()
+			.getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME)
+			.calculateRoutingMatrix();
 	}
 
 	render() {
 		return (
 			<DemoWorkspaceWidget buttons={<button onClick={this.autoDistribute}>Re-distribute</button>}>
-				<DiagramWidget className="srd-demo-canvas" diagramEngine={this.props.engine} actionStoppedFiring={() => {
-					// only happens if pathfing is enabled (check line 25)
-					this.reroute();
-				}} />
+				<DiagramWidget
+					className="srd-demo-canvas"
+					diagramEngine={this.props.engine}
+					actionStoppedFiring={() => {
+						// only happens if pathfing is enabled (check line 25)
+						this.reroute();
+					}}
+				/>
 			</DemoWorkspaceWidget>
 		);
 	}
@@ -99,9 +108,9 @@ export default () => {
 	});
 
 	// more links for more complicated diagram
-	links.push(connectNodes(nodesFrom[0], nodesTo[1],engine));
-	links.push(connectNodes(nodesTo[0], nodesFrom[1],engine));
-	links.push(connectNodes(nodesFrom[1], nodesTo[2],engine));
+	links.push(connectNodes(nodesFrom[0], nodesTo[1], engine));
+	links.push(connectNodes(nodesTo[0], nodesFrom[1], engine));
+	links.push(connectNodes(nodesFrom[1], nodesTo[2], engine));
 
 	// initial random position
 	nodesFrom.forEach((node, index) => {
