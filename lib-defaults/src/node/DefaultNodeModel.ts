@@ -1,24 +1,18 @@
 import * as _ from 'lodash';
-import {
-	BaseModelOptions,
-	DiagramEngine,
-	NodeModel,
-	NodeModelGenerics,
-} from "@projectstorm/react-diagrams-core";
+import { BaseModelOptions, DiagramEngine, NodeModel, NodeModelGenerics } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from '../port/DefaultPortModel';
 
-export interface DefaultNodeModelOptions extends Omit<BaseModelOptions, 'type'>{
+export interface DefaultNodeModelOptions extends Omit<BaseModelOptions, 'type'> {
 	name?: string;
 	color?: string;
 }
 
-export interface DefaultNodeModelGenerics{
+export interface DefaultNodeModelGenerics {
 	PORT: DefaultPortModel;
 	OPTIONS: DefaultNodeModelOptions;
 }
 
 export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeModelGenerics> {
-
 	constructor(options: DefaultNodeModelOptions = {}) {
 		super({
 			type: 'default',
@@ -29,19 +23,23 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 	}
 
 	addInPort(label: string): DefaultPortModel {
-		return this.addPort(new DefaultPortModel({
-			in: true,
-			name: label,
-			label: label
-		}));
+		return this.addPort(
+			new DefaultPortModel({
+				in: true,
+				name: label,
+				label: label
+			})
+		);
 	}
 
 	addOutPort(label: string): DefaultPortModel {
-		return this.addPort(new DefaultPortModel({
-			in: false,
-			name: label,
-			label: label
-		}));
+		return this.addPort(
+			new DefaultPortModel({
+				in: false,
+				name: label,
+				label: label
+			})
+		);
 	}
 
 	deSerialize(object, engine: DiagramEngine) {

@@ -2,9 +2,10 @@ import {
 	BaseEntity,
 	BaseEntityEvent,
 	BaseEntityGenerics,
-	BaseEntityListener, BaseEntityOptions,
+	BaseEntityListener,
+	BaseEntityOptions,
 	BaseEntityType
-} from "../core-models/BaseEntity";
+} from '../core-models/BaseEntity';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { LinkModel } from './LinkModel';
@@ -25,14 +26,14 @@ export interface DiagramListener extends BaseEntityListener {
 	gridUpdated?(event: BaseEntityEvent<DiagramModel> & { size: number }): void;
 }
 
-export interface DiagramModelOptions extends BaseEntityOptions{
+export interface DiagramModelOptions extends BaseEntityOptions {
 	offsetX?: number;
 	offsetY?: number;
 	zoom?: number;
 	gridSize?: number;
 }
 
-export interface DiagramModelGenerics extends BaseEntityGenerics{
+export interface DiagramModelGenerics extends BaseEntityGenerics {
 	LISTENER: DiagramListener;
 	OPTIONS: DiagramModelOptions;
 }
@@ -50,7 +51,7 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 			gridSize: 0,
 			offsetX: 0,
 			offsetY: 0,
-			...options,
+			...options
 		});
 
 		this.links = {};

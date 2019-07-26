@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as _ from "lodash";
+import * as React from 'react';
+import * as _ from 'lodash';
 import {
 	BaseWidget,
 	BaseWidgetProps,
@@ -7,9 +7,9 @@ import {
 	LabelModel,
 	PointModel,
 	Toolkit
-} from "@projectstorm/react-diagrams-core";
-import { DefaultLinkModel } from "./DefaultLinkModel";
-import { DefaultLinkFactory } from "./DefaultLinkFactory";
+} from '@projectstorm/react-diagrams-core';
+import { DefaultLinkModel } from './DefaultLinkModel';
+import { DefaultLinkFactory } from './DefaultLinkFactory';
 
 export interface DefaultLinkProps extends BaseWidgetProps {
 	color?: string;
@@ -26,7 +26,7 @@ export interface DefaultLinkState {
 
 export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkState> {
 	public static defaultProps: DefaultLinkProps = {
-		color: "black",
+		color: 'black',
 		width: 3,
 		link: null,
 		engine: null,
@@ -39,7 +39,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 	refPaths: SVGPathElement[];
 
 	constructor(props: DefaultLinkProps) {
-		super("srd-default-link", props);
+		super('srd-default-link', props);
 
 		this.refLabels = {};
 		this.refPaths = [];
@@ -88,15 +88,15 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		let y = this.props.link.getPoints()[pointIndex].getY();
 
 		return (
-			<g key={"point-" + this.props.link.getPoints()[pointIndex].getID()}>
+			<g key={'point-' + this.props.link.getPoints()[pointIndex].getID()}>
 				<circle
 					cx={x}
 					cy={y}
 					r={5}
 					className={
-						"point " +
-						this.bem("__point") +
-						(this.props.link.getPoints()[pointIndex].isSelected() ? this.bem("--point-selected") : "")
+						'point ' +
+						this.bem('__point') +
+						(this.props.link.getPoints()[pointIndex].isSelected() ? this.bem('--point-selected') : '')
 					}
 				/>
 				<circle
@@ -112,7 +112,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 					cy={y}
 					r={15}
 					opacity={0}
-					className={"point " + this.bem("__point")}
+					className={'point ' + this.bem('__point')}
 				/>
 			</g>
 		);
@@ -123,7 +123,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		return (
 			<foreignObject
 				key={label.getID()}
-				className={this.bem("__label")}
+				className={this.bem('__label')}
 				width={canvas.offsetWidth}
 				height={canvas.offsetHeight}>
 				<div ref={ref => (this.refLabels[label.getID()] = ref)}>
@@ -150,7 +150,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 
 		var Top = React.cloneElement(Bottom, {
 			...extraProps,
-			strokeLinecap: "round",
+			strokeLinecap: 'round',
 			onMouseLeave: () => {
 				this.setState({ selected: false });
 			},
@@ -158,7 +158,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 				this.setState({ selected: true });
 			},
 			ref: null,
-			"data-linkid": this.props.link.getID(),
+			'data-linkid': this.props.link.getID(),
 			strokeOpacity: this.state.selected ? 0.1 : 0,
 			strokeWidth: 20,
 			onContextMenu: () => {
@@ -170,7 +170,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		});
 
 		return (
-			<g key={"link-" + id}>
+			<g key={'link-' + id}>
 				{Bottom}
 				{Top}
 			</g>
@@ -222,7 +222,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 			y: pathCentre.y - labelDimensions.height / 2 + label.offsetY
 		};
 		this.refLabels[label.id].setAttribute(
-			"style",
+			'style',
 			`transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`
 		);
 	};
@@ -241,8 +241,9 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		// See @link{#isSmartRoutingApplicable()}.
 		if (paths.length === 0) {
 			if (points.length === 2) {
-				var isHorizontal = Math.abs(points[0].getX() - points[1].getX()) > Math.abs(points[0].getY() - points[1].getY());
-				var xOrY = isHorizontal ? "x" : "y";
+				var isHorizontal =
+					Math.abs(points[0].getX() - points[1].getX()) > Math.abs(points[0].getY() - points[1].getY());
+				var xOrY = isHorizontal ? 'x' : 'y';
 
 				//draw the smoothing
 				//if the points are too close, just draw a straight line
@@ -262,7 +263,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 								this.addPointToLink(event, 1);
 							}
 						},
-						"0"
+						'0'
 					)
 				);
 
@@ -277,8 +278,8 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 						this.generateLink(
 							Toolkit.generateLinePath(points[j], points[j + 1]),
 							{
-								"data-linkid": this.props.link.getID(),
-								"data-point": j,
+								'data-linkid': this.props.link.getID(),
+								'data-point': j,
 								onMouseDown: (event: MouseEvent) => {
 									this.addPointToLink(event, j + 1);
 								}

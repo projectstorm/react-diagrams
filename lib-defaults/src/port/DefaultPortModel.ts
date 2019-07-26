@@ -3,24 +3,24 @@ import {
 	AbstractFactory,
 	DiagramEngine,
 	LinkModel,
-	PortModel, PortModelGenerics,
+	PortModel,
+	PortModelGenerics,
 	PortModelOptions
-} from "@projectstorm/react-diagrams-core";
+} from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from '../link/DefaultLinkModel';
-import { DefaultNodeModel } from "../node/DefaultNodeModel";
+import { DefaultNodeModel } from '../node/DefaultNodeModel';
 
-export interface DefaultPortModelOptions extends Omit<PortModelOptions, 'type'>{
+export interface DefaultPortModelOptions extends Omit<PortModelOptions, 'type'> {
 	label?: string;
 	in?: boolean;
 }
 
-export interface DefaultPortModelGenerics{
+export interface DefaultPortModelGenerics {
 	OPTIONS: DefaultPortModelOptions;
 	PARENT: DefaultNodeModel;
 }
 
 export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortModelGenerics> {
-
 	constructor(options: DefaultPortModelOptions) {
 		super({
 			...options,

@@ -1,16 +1,16 @@
-import * as _ from "lodash";
-import { BaseEntity } from "./core-models/BaseEntity";
-import { DiagramModel } from "./models/DiagramModel";
-import { BaseModel } from "./core-models/BaseModel";
-import { NodeModel } from "./models/NodeModel";
-import { PointModel } from "./models/PointModel";
-import { PortModel } from "./models/PortModel";
-import { LinkModel } from "./models/LinkModel";
-import { LabelModel } from "./models/LabelModel";
-import { FactoryBank } from "./core/FactoryBank";
-import { AbstractFactory } from "./core/AbstractFactory";
-import { AbstractReactFactory } from "./core/AbstractReactFactory";
-import { BaseListener, BaseObserver } from "./core/BaseObserver";
+import * as _ from 'lodash';
+import { BaseEntity } from './core-models/BaseEntity';
+import { DiagramModel } from './models/DiagramModel';
+import { BaseModel } from './core-models/BaseModel';
+import { NodeModel } from './models/NodeModel';
+import { PointModel } from './models/PointModel';
+import { PortModel } from './models/PortModel';
+import { LinkModel } from './models/LinkModel';
+import { LabelModel } from './models/LabelModel';
+import { FactoryBank } from './core/FactoryBank';
+import { AbstractFactory } from './core/AbstractFactory';
+import { AbstractReactFactory } from './core/AbstractReactFactory';
+import { BaseListener, BaseObserver } from './core/BaseObserver';
 
 export interface DiagramEngineListener extends BaseListener {
 	repaintCanvas?(): void;
@@ -195,7 +195,7 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	getNodeElement(node: NodeModel): Element {
 		const selector = this.canvas.querySelector(`.node[data-nodeid="${node.getID()}"]`);
 		if (selector === null) {
-			throw new Error("Cannot find Node element with nodeID: [" + node.getID() + "]");
+			throw new Error('Cannot find Node element with nodeID: [' + node.getID() + ']');
 		}
 		return selector;
 	}
@@ -206,11 +206,11 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		);
 		if (selector === null) {
 			throw new Error(
-				"Cannot find Node Port element with nodeID: [" +
-				port.getParent().getID() +
-				"] and name: [" +
-				port.getName() +
-				"]"
+				'Cannot find Node Port element with nodeID: [' +
+					port.getParent().getID() +
+					'] and name: [' +
+					port.getName() +
+					']'
 			);
 		}
 		return selector;

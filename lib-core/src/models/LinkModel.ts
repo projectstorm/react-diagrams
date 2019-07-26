@@ -1,11 +1,11 @@
-import { BaseModel, BaseModelGenerics, BaseModelListener } from "../core-models/BaseModel";
-import { PortModel } from "./PortModel";
-import { PointModel } from "./PointModel";
-import * as _ from "lodash";
-import { LabelModel } from "./LabelModel";
-import { DiagramEngine } from "../DiagramEngine";
-import { BaseEntityEvent } from "../core-models/BaseEntity";
-import { DiagramModel } from "./DiagramModel";
+import { BaseModel, BaseModelGenerics, BaseModelListener } from '../core-models/BaseModel';
+import { PortModel } from './PortModel';
+import { PointModel } from './PointModel';
+import * as _ from 'lodash';
+import { LabelModel } from './LabelModel';
+import { DiagramEngine } from '../DiagramEngine';
+import { BaseEntityEvent } from '../core-models/BaseEntity';
+import { DiagramModel } from './DiagramModel';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
@@ -19,14 +19,13 @@ export interface LinkModelGenerics extends BaseModelGenerics {
 }
 
 export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends BaseModel<G> {
-
 	protected sourcePort: PortModel | null;
 	protected targetPort: PortModel | null;
 
 	protected labels: LabelModel[];
 	protected points: PointModel[];
 
-	constructor(options: G["OPTIONS"]) {
+	constructor(options: G['OPTIONS']) {
 		super(options);
 		this.points = [
 			new PointModel({
@@ -171,7 +170,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 			this.sourcePort.removeLink(this);
 		}
 		this.sourcePort = port;
-		this.fireEvent({ port }, "sourcePortChanged");
+		this.fireEvent({ port }, 'sourcePortChanged');
 	}
 
 	getSourcePort(): PortModel {
@@ -190,7 +189,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 			this.targetPort.removeLink(this);
 		}
 		this.targetPort = port;
-		this.fireEvent({ port }, "targetPortChanged");
+		this.fireEvent({ port }, 'targetPortChanged');
 	}
 
 	point(x: number, y: number): PointModel {
@@ -206,7 +205,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		return this.points;
 	}
 
-	getLabels(){
+	getLabels() {
 		return this.labels;
 	}
 

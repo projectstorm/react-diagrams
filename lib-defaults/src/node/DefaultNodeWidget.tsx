@@ -49,7 +49,6 @@ export interface DefaultNodeProps extends BaseWidgetProps {
  * for both all the input ports on the left, and the output ports on the right.
  */
 export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps> {
-
 	listener: any;
 
 	generatePort = port => {
@@ -57,9 +56,8 @@ export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps> {
 	};
 
 	componentWillUnmount(): void {
-
 		// release repaint listener
-		if(this.listener){
+		if (this.listener) {
 			this.listener();
 		}
 	}
@@ -67,9 +65,9 @@ export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps> {
 	componentDidMount(): void {
 		this.listener = this.props.node.registerListener({
 			eventDidFire: () => {
-				this.forceUpdate()
+				this.forceUpdate();
 			}
-		})
+		});
 	}
 
 	render() {

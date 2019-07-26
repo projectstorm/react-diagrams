@@ -1,7 +1,7 @@
 import { Toolkit } from '../Toolkit';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
-import { BaseEvent, BaseListener, BaseObserver } from "../core/BaseObserver";
+import { BaseEvent, BaseListener, BaseObserver } from '../core/BaseObserver';
 
 export interface BaseEntityEvent<T extends BaseEntity = BaseEntity> extends BaseEvent {
 	entity: T;
@@ -22,21 +22,20 @@ export interface BaseEntityOptions {
 export type BaseEntityGenerics = {
 	LISTENER: BaseEntityListener;
 	OPTIONS: BaseEntityOptions;
-}
+};
 
 export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> extends BaseObserver<T['LISTENER']> {
-
 	protected options: T['OPTIONS'];
 
 	constructor(options: T['OPTIONS'] = {}) {
 		super();
 		this.options = {
 			id: Toolkit.UID(),
-			...options,
+			...options
 		};
 	}
 
-	getOptions(){
+	getOptions() {
 		return this.options;
 	}
 

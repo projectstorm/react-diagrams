@@ -1,23 +1,22 @@
-import { BaseModelListener } from "../core-models/BaseModel";
+import { BaseModelListener } from '../core-models/BaseModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { BaseEntityEvent } from '../core-models/BaseEntity';
-import { BasePositionModel, BasePositionModelGenerics } from "../core-models/BasePositionModel";
-import { DiagramModel } from "./DiagramModel";
-import { PortModel } from "./PortModel";
+import { BasePositionModel, BasePositionModelGenerics } from '../core-models/BasePositionModel';
+import { DiagramModel } from './DiagramModel';
+import { PortModel } from './PortModel';
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
 }
 
-export interface NodeModelGenerics extends BasePositionModelGenerics{
+export interface NodeModelGenerics extends BasePositionModelGenerics {
 	LISTENER: NodeModelListener;
 	PARENT: DiagramModel;
 	PORT: PortModel;
 }
 
 export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends BasePositionModel<G> {
-
 	ports: { [s: string]: G['PORT'] };
 
 	// calculated post rendering so routing can be done correctly
@@ -81,7 +80,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 			ports: _.map(this.ports, port => {
 				return port.serialize();
 			})
-		}
+		};
 	}
 
 	doClone(lookupTable = {}, clone) {

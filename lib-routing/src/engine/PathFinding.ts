@@ -1,6 +1,6 @@
 import * as PF from 'pathfinding';
 import { PathFindingLinkFactory } from '../link/PathFindingLinkFactory';
-import { PointModel } from "@projectstorm/react-diagrams-core";
+import { PointModel } from '@projectstorm/react-diagrams-core';
 
 /*
 it can be very expensive to calculate routes when every single pixel on the canvas
@@ -26,10 +26,7 @@ export default class PathFinding {
 	 * Taking as argument a fully unblocked walking matrix, this method
 	 * finds a direct path from point A to B.
 	 */
-	calculateDirectPath(
-		from: PointModel,
-		to: PointModel
-	): number[][] {
+	calculateDirectPath(from: PointModel, to: PointModel): number[][] {
 		const matrix = this.factory.getCanvasMatrix();
 		const grid = new PF.Grid(matrix);
 

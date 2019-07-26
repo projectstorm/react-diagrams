@@ -1,20 +1,14 @@
-import {
-	BaseModelGenerics,
-	BaseModelOptions,
-	DiagramEngine,
-	LabelModel,
-} from "@projectstorm/react-diagrams-core";
+import { BaseModelGenerics, BaseModelOptions, DiagramEngine, LabelModel } from '@projectstorm/react-diagrams-core';
 
-export interface DefaultLabelModelOptions extends Omit<BaseModelOptions, 'type'>{
+export interface DefaultLabelModelOptions extends Omit<BaseModelOptions, 'type'> {
 	label?: string;
 }
 
-export interface DefaultLabelModelGenerics{
+export interface DefaultLabelModelGenerics {
 	OPTIONS: DefaultLabelModelOptions;
 }
 
 export class DefaultLabelModel extends LabelModel<BaseModelGenerics & DefaultLabelModelGenerics> {
-
 	constructor(options: DefaultLabelModelOptions = {}) {
 		super({
 			...options,

@@ -1,9 +1,9 @@
-import * as React from "react";
-import { DiagramEngine } from "../../DiagramEngine";
-import { LinkWidget } from "../LinkWidget";
-import * as _ from "lodash";
-import { PointModel } from "../../models/PointModel";
-import { BaseWidget, BaseWidgetProps } from "../BaseWidget";
+import * as React from 'react';
+import { DiagramEngine } from '../../DiagramEngine';
+import { LinkWidget } from '../LinkWidget';
+import * as _ from 'lodash';
+import { PointModel } from '../../models/PointModel';
+import { BaseWidget, BaseWidgetProps } from '../BaseWidget';
 
 export interface LinkLayerProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -12,7 +12,7 @@ export interface LinkLayerProps extends BaseWidgetProps {
 
 export class LinkLayerWidget extends BaseWidget<LinkLayerProps> {
 	constructor(props: LinkLayerProps) {
-		super("srd-link-layer", props);
+		super('srd-link-layer', props);
 	}
 
 	render() {
@@ -22,16 +22,16 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps> {
 				{...this.getProps()}
 				style={{
 					transform:
-						"translate(" +
+						'translate(' +
 						diagramModel.getOffsetX() +
-						"px," +
+						'px,' +
 						diagramModel.getOffsetY() +
-						"px) scale(" +
+						'px) scale(' +
 						diagramModel.getZoomLevel() / 100.0 +
-						")"
+						')'
 				}}>
 				{//only perform these actions when we have a diagram
-					this.props.diagramEngine.canvas &&
+				this.props.diagramEngine.canvas &&
 					_.map(diagramModel.getLinks(), link => {
 						if (
 							this.props.diagramEngine.nodesRendered &&

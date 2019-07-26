@@ -1,11 +1,5 @@
-import {
-	BaseEntity,
-	BaseEntityEvent,
-	BaseEntityGenerics,
-	BaseEntityListener,
-	BaseEntityOptions
-} from "./BaseEntity";
-import { DiagramEngine } from "../DiagramEngine";
+import { BaseEntity, BaseEntityEvent, BaseEntityGenerics, BaseEntityListener, BaseEntityOptions } from './BaseEntity';
+import { DiagramEngine } from '../DiagramEngine';
 
 export interface BaseModelListener extends BaseEntityListener {
 	selectionChanged?(event: BaseEntityEvent<BaseModel> & { isSelected: boolean }): void;
@@ -19,14 +13,13 @@ export interface BaseModelOptions extends BaseEntityOptions {
 	extras?: any;
 }
 
-export interface BaseModelGenerics extends BaseEntityGenerics{
-	LISTENER: BaseModelListener
+export interface BaseModelGenerics extends BaseEntityGenerics {
+	LISTENER: BaseModelListener;
 	PARENT: BaseEntity;
 	OPTIONS: BaseModelOptions;
 }
 
 export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends BaseEntity<G> {
-
 	protected parent: G['PARENT'];
 
 	constructor(options: G['OPTIONS']) {
@@ -75,11 +68,11 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 			{
 				isSelected: selected
 			},
-			"selectionChanged"
+			'selectionChanged'
 		);
 	}
 
 	remove() {
-		this.fireEvent({}, "entityRemoved");
+		this.fireEvent({}, 'entityRemoved');
 	}
 }

@@ -1,9 +1,9 @@
-import * as React from "react";
-import * as _ from "lodash";
-import { BaseWidget, BaseWidgetProps, DiagramEngine, LabelModel, PointModel } from "@projectstorm/react-diagrams-core";
-import PathFinding from "../engine/PathFinding";
-import { PathFindingLinkFactory } from "./PathFindingLinkFactory";
-import { PathFindingLinkModel } from "./PathFindingLinkModel";
+import * as React from 'react';
+import * as _ from 'lodash';
+import { BaseWidget, BaseWidgetProps, DiagramEngine, LabelModel, PointModel } from '@projectstorm/react-diagrams-core';
+import PathFinding from '../engine/PathFinding';
+import { PathFindingLinkFactory } from './PathFindingLinkFactory';
+import { PathFindingLinkModel } from './PathFindingLinkModel';
 
 export interface PathFindingLinkWidgetProps extends BaseWidgetProps {
 	color?: string;
@@ -21,7 +21,7 @@ export interface PathFindingLinkWidgetState {
 
 export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps, PathFindingLinkWidgetState> {
 	public static defaultProps: PathFindingLinkWidgetProps = {
-		color: "black",
+		color: 'black',
 		width: 3,
 		link: null,
 		engine: null,
@@ -37,7 +37,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 	pathFinding: PathFinding; // only set when smart routing is active
 
 	constructor(props: PathFindingLinkWidgetProps) {
-		super("srd-default-link", props);
+		super('srd-default-link', props);
 
 		this.refLabels = {};
 		this.refPaths = [];
@@ -70,15 +70,15 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		let y = this.props.link.getPoints()[pointIndex].getY();
 
 		return (
-			<g key={"point-" + this.props.link.getPoints()[pointIndex].getID()}>
+			<g key={'point-' + this.props.link.getPoints()[pointIndex].getID()}>
 				<circle
 					cx={x}
 					cy={y}
 					r={5}
 					className={
-						"point " +
-						this.bem("__point") +
-						(this.props.link.getPoints()[pointIndex].isSelected() ? this.bem("--point-selected") : "")
+						'point ' +
+						this.bem('__point') +
+						(this.props.link.getPoints()[pointIndex].isSelected() ? this.bem('--point-selected') : '')
 					}
 				/>
 				<circle
@@ -94,7 +94,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 					cy={y}
 					r={15}
 					opacity={0}
-					className={"point " + this.bem("__point")}
+					className={'point ' + this.bem('__point')}
 				/>
 			</g>
 		);
@@ -122,7 +122,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		return (
 			<foreignObject
 				key={label.getID()}
-				className={this.bem("__label")}
+				className={this.bem('__label')}
 				width={canvas.offsetWidth}
 				height={canvas.offsetHeight}>
 				<div ref={ref => (this.refLabels[label.getID()] = ref)}>
@@ -135,7 +135,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
 		let Bottom = (
 			<path
-				className={this.state.selected ? this.bem("--path-selected") : ""}
+				className={this.state.selected ? this.bem('--path-selected') : ''}
 				strokeWidth={this.props.width}
 				stroke={this.props.color}
 				ref={ref => ref && this.refPaths.push(ref)}
@@ -145,7 +145,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 
 		var Top = React.cloneElement(Bottom, {
 			...extraProps,
-			strokeLinecap: "round",
+			strokeLinecap: 'round',
 			onMouseLeave: () => {
 				this.setState({ selected: false });
 			},
@@ -153,7 +153,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 				this.setState({ selected: true });
 			},
 			ref: null,
-			"data-linkid": this.props.link.getID(),
+			'data-linkid': this.props.link.getID(),
 			strokeOpacity: this.state.selected ? 0.1 : 0,
 			strokeWidth: 20,
 			onContextMenu: () => {
@@ -165,7 +165,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 		});
 
 		return (
-			<g key={"link-" + id}>
+			<g key={'link-' + id}>
 				{Bottom}
 				{Top}
 			</g>
@@ -217,7 +217,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 			y: pathCentre.y - labelDimensions.height / 2 + label.offsetY
 		};
 		this.refLabels[label.id].setAttribute(
-			"style",
+			'style',
 			`transform: translate(${labelCoordinates.x}px, ${labelCoordinates.y}px);`
 		);
 	};
@@ -255,7 +255,7 @@ export class PathFindingLinkWidget extends BaseWidget<PathFindingLinkWidgetProps
 							this.addPointToLink(event, 1);
 						}
 					},
-					"0"
+					'0'
 				)
 			);
 		}

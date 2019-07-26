@@ -1,4 +1,4 @@
-import { Toolkit } from "../Toolkit";
+import { Toolkit } from '../Toolkit';
 
 export interface BaseEvent {
 	firing: boolean;
@@ -25,7 +25,7 @@ export type BaseListener = {
 	/**
 	 * Type for other events that will fire
 	 */
-	[key: string]: (event: BaseEvent) => any
+	[key: string]: (event: BaseEvent) => any;
 };
 
 /**
@@ -38,7 +38,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		this.listeners = {};
 	}
 
-	private fireEventInternal(fire: boolean, k: keyof L, event: BaseEvent, ) {
+	private fireEventInternal(fire: boolean, k: keyof L, event: BaseEvent) {
 		this.iterateListeners(listener => {
 			// returning false here will instruct itteration to stop
 			if (!fire && !event.firing) {
@@ -61,16 +61,16 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		};
 
 		// fire pre
-		this.fireEventInternal( true, "eventWillFire", {
+		this.fireEventInternal(true, 'eventWillFire', {
 			...event,
 			function: k
 		} as BaseEventProxy);
 
 		// fire main event
-		this.fireEventInternal( false, k, event as BaseEvent);
+		this.fireEventInternal(false, k, event as BaseEvent);
 
 		// fire post
-		this.fireEventInternal( true, "eventDidFire", {
+		this.fireEventInternal(true, 'eventDidFire', {
 			...event,
 			function: k
 		} as BaseEventProxy);

@@ -1,17 +1,16 @@
-import { BaseModel, BaseModelGenerics, BaseModelListener } from "./BaseModel";
-import { DiagramEngine } from "../DiagramEngine";
-import { BaseEntityEvent } from "./BaseEntity";
+import { BaseModel, BaseModelGenerics, BaseModelListener } from './BaseModel';
+import { DiagramEngine } from '../DiagramEngine';
+import { BaseEntityEvent } from './BaseEntity';
 
-export interface BasePositionModelListener extends BaseModelListener{
+export interface BasePositionModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<BasePositionModel>): void;
 }
 
-export interface BasePositionModelGenerics extends BaseModelGenerics{
+export interface BasePositionModelGenerics extends BaseModelGenerics {
 	LISTENER: BasePositionModelListener;
 }
 
-export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics> extends BaseModel<G>{
-
+export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics> extends BaseModel<G> {
 	protected x: number;
 	protected y: number;
 
@@ -32,15 +31,14 @@ export class BasePositionModel<G extends BasePositionModelGenerics = BasePositio
 			...super.serialize(),
 			x: this.x,
 			y: this.y
-		}
+		};
 	}
 
 	getX() {
 		return this.x;
 	}
 
-	getY(){
+	getY() {
 		return this.y;
 	}
-
 }

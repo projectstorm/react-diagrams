@@ -259,7 +259,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					);
 
 					if (model.model instanceof NodeModel) {
-
 						// update port coordinates as well
 						_.forEach(model.model.getPorts(), port => {
 							const portCoords = this.props.diagramEngine.getPortCoords(port);

@@ -1,10 +1,12 @@
 import {
-	BaseEntityEvent, BaseModelOptions,
+	BaseEntityEvent,
+	BaseModelOptions,
 	DiagramEngine,
 	LabelModel,
-	LinkModel, LinkModelGenerics,
+	LinkModel,
+	LinkModelGenerics,
 	LinkModelListener
-} from "@projectstorm/react-diagrams-core";
+} from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from '../label/DefaultLabelModel';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
@@ -13,19 +15,18 @@ export interface DefaultLinkModelListener extends LinkModelListener {
 	widthChanged?(event: BaseEntityEvent<DefaultLinkModel> & { width: 0 | number }): void;
 }
 
-export interface DefaultLinkModelOptions extends Omit<BaseModelOptions, 'type'>{
+export interface DefaultLinkModelOptions extends Omit<BaseModelOptions, 'type'> {
 	width?: number;
 	color?: string;
 	curvyness?: number;
 }
 
-export interface DefaultLinkModelGenerics{
+export interface DefaultLinkModelGenerics {
 	LISTENER: DefaultLinkModelListener;
 	OPTIONS: DefaultLinkModelOptions;
 }
 
 export class DefaultLinkModel extends LinkModel<LinkModelGenerics & DefaultLinkModelGenerics> {
-
 	constructor(options: DefaultLinkModelOptions = {}) {
 		super({
 			...options,

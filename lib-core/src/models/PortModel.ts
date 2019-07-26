@@ -1,30 +1,29 @@
-import { BaseModel, BaseModelGenerics, BaseModelOptions } from "../core-models/BaseModel";
+import { BaseModel, BaseModelGenerics, BaseModelOptions } from '../core-models/BaseModel';
 import { NodeModel } from './NodeModel';
 import { LinkModel } from './LinkModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
-import { BasePositionModel } from "../core-models/BasePositionModel";
+import { BasePositionModel } from '../core-models/BasePositionModel';
 
-export enum PortModelAlignment{
-	TOP='top',
-	LEFT='left',
-	BOTTOM='bottom',
-	RIGHT='right'
+export enum PortModelAlignment {
+	TOP = 'top',
+	LEFT = 'left',
+	BOTTOM = 'bottom',
+	RIGHT = 'right'
 }
 
-export interface PortModelOptions extends BaseModelOptions{
+export interface PortModelOptions extends BaseModelOptions {
 	alignment?: PortModelAlignment;
 	maximumLinks?: number;
 	name: string;
 }
 
-export interface PortModelGenerics extends BaseModelGenerics{
+export interface PortModelGenerics extends BaseModelGenerics {
 	OPTIONS: PortModelOptions;
 	PARENT: NodeModel;
 }
 
 export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends BasePositionModel<G> {
-
 	links: { [id: string]: LinkModel };
 
 	// calculated post rendering so routing can be done correctly
@@ -46,7 +45,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 			parentNode: this.parent.getID(),
 			links: _.map(this.links, link => {
 				return link.getID;
-			}),
+			})
 		};
 	}
 

@@ -1,22 +1,23 @@
-import { BaseModel, BaseModelListener, BaseModelOptions } from "../core-models/BaseModel";
+import { BaseModel, BaseModelListener, BaseModelOptions } from '../core-models/BaseModel';
 import { LinkModel } from './LinkModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
-import { BasePositionModel } from "../core-models/BasePositionModel";
+import { BasePositionModel } from '../core-models/BasePositionModel';
 
-export interface PointModelOptions extends Omit<PointModelOptions, 'type'>{
+export interface PointModelOptions extends Omit<PointModelOptions, 'type'> {
 	link: LinkModel;
 	points: { x: number; y: number };
 }
 
-export interface PointModelGenerics{
+export interface PointModelGenerics {
 	PARENT: LinkModel;
 	OPTIONS: PointModelOptions;
 	LISTENER: BaseModelListener;
 }
 
-export class PointModel<G extends PointModelGenerics = PointModelGenerics> extends BasePositionModel<G & {OPTIONS: BaseModelOptions}> {
-
+export class PointModel<G extends PointModelGenerics = PointModelGenerics> extends BasePositionModel<
+	G & { OPTIONS: BaseModelOptions }
+> {
 	constructor(options: G['OPTIONS']) {
 		super({
 			...options,

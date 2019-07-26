@@ -1,9 +1,8 @@
-import { BaseModel, BaseModelGenerics } from "../core-models/BaseModel";
+import { BaseModel, BaseModelGenerics } from '../core-models/BaseModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 
 export class LabelModel<G extends BaseModelGenerics = BaseModelGenerics> extends BaseModel<G> {
-
 	offsetX: number;
 	offsetY: number;
 
