@@ -1,8 +1,8 @@
-import * as _ from "lodash";
-import { BaseModelOptions, DiagramEngine, NodeModel, NodeModelGenerics } from "@projectstorm/react-diagrams-core";
-import { DefaultPortModel } from "../port/DefaultPortModel";
+import * as _ from 'lodash';
+import { BaseModelOptions, DiagramEngine, NodeModel, NodeModelGenerics } from '@projectstorm/react-diagrams-core';
+import { DefaultPortModel } from '../port/DefaultPortModel';
 
-export interface DefaultNodeModelOptions extends Omit<BaseModelOptions, "type"> {
+export interface DefaultNodeModelOptions extends Omit<BaseModelOptions, 'type'> {
 	name?: string;
 	color?: string;
 }
@@ -19,23 +19,23 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 	constructor(name: string, color: string);
 	constructor(options?: DefaultNodeModelOptions);
 	constructor(options: any = {}, color?: string) {
-		if (typeof options === "string") {
+		if (typeof options === 'string') {
 			options = {
 				name: options,
 				color: color
 			};
 		}
 		super({
-			type: "default",
-			name: "Untitled",
-			color: "rgb(0,192,255)",
+			type: 'default',
+			name: 'Untitled',
+			color: 'rgb(0,192,255)',
 			...options
 		});
 		this.portsOut = [];
 		this.portsIn = [];
 	}
 
-	removePort(port: (DefaultNodeModelGenerics & NodeModelGenerics)["PORT"]): void {
+	removePort(port: (DefaultNodeModelGenerics & NodeModelGenerics)['PORT']): void {
 		super.removePort(port);
 		if (port.getOptions().in) {
 			this.portsIn.splice(this.portsIn.indexOf(port));
@@ -44,7 +44,7 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		}
 	}
 
-	addPort<T extends (DefaultNodeModelGenerics & NodeModelGenerics)["PORT"]>(port: T): T {
+	addPort<T extends (DefaultNodeModelGenerics & NodeModelGenerics)['PORT']>(port: T): T {
 		super.addPort(port);
 		if (port.getOptions().in) {
 			if (this.portsIn.indexOf(port) === -1) {

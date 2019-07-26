@@ -465,7 +465,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						);
 
 						diagramEngine.enableRepaintEntities([]);
-						this.forceUpdate();
+						this.forceUpdate(() => {
+							this.props.diagramEngine.clearRepaintEntities();
+						});
 					}
 				}}
 				onMouseDown={event => {

@@ -34,6 +34,7 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 
 	componentDidMount(): void {
 		this.ob = new ResizeObserver(entities => {
+			const initial = this.props.node.width;
 			const bounds = entities[0].contentRect;
 			this.props.node.updateDimensions({ width: bounds.width, height: bounds.height });
 
@@ -43,7 +44,9 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 					this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()] = false;
 				});
 			});
-			this.props.diagramEngine.repaintCanvas();
+			if (initial !== 0) {
+				this.props.diagramEngine.repaintCanvas();
+			}
 		});
 		this.ob.observe(this.ref.current);
 	}
