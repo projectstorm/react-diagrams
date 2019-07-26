@@ -1,26 +1,41 @@
-import { DiagramEngine, LabelModel } from '@projectstorm/react-diagrams-core';
+import {
+	BaseModelGenerics,
+	BaseModelOptions,
+	DiagramEngine,
+	LabelModel,
+} from "@projectstorm/react-diagrams-core";
 
-export class DefaultLabelModel extends LabelModel {
-	label: string;
+export interface DefaultLabelModelOptions extends Omit<BaseModelOptions, 'type'>{
+	label?: string;
+}
 
-	constructor() {
-		super('default');
+export interface DefaultLabelModelGenerics{
+	OPTIONS: DefaultLabelModelOptions;
+}
+
+export class DefaultLabelModel extends LabelModel<BaseModelGenerics & DefaultLabelModelGenerics> {
+
+	constructor(options: DefaultLabelModelOptions = {}) {
+		super({
+			...options,
+			type: 'default'
+		});
 		this.offsetY = -23;
 	}
 
 	setLabel(label: string) {
-		this.label = label;
+		this.options.label = label;
 	}
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
-		this.label = ob.label;
+		this.options.label = ob.label;
 	}
 
 	serialize() {
 		return {
 			...super.serialize(),
-			label: this.label
+			label: this.options.label
 		};
 	}
 }

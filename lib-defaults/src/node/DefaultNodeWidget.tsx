@@ -49,15 +49,34 @@ export interface DefaultNodeProps extends BaseWidgetProps {
  * for both all the input ports on the left, and the output ports on the right.
  */
 export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps> {
+
+	listener: any;
+
 	generatePort = port => {
 		return <DefaultPortLabel model={port} key={port.id} />;
 	};
 
+	componentWillUnmount(): void {
+
+		// release repaint listener
+		if(this.listener){
+			this.listener();
+		}
+	}
+
+	componentDidMount(): void {
+		this.listener = this.props.node.registerListener({
+			eventDidFire: () => {
+				this.forceUpdate()
+			}
+		})
+	}
+
 	render() {
 		return (
-			<S.Node background={this.props.node.color}>
+			<S.Node background={this.props.node.getOptions().color}>
 				<S.Title>
-					<S.TitleName>{this.props.node.name}</S.TitleName>
+					<S.TitleName>{this.props.node.getOptions().name}</S.TitleName>
 				</S.Title>
 				<S.Ports>
 					<S.PortsContainer>{_.map(this.props.node.getInPorts(), this.generatePort)}</S.PortsContainer>

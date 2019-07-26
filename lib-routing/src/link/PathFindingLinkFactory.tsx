@@ -125,26 +125,26 @@ export class PathFindingLinkFactory extends AbstractReactFactory<PathFindingLink
 		vAdjustmentFactor: number;
 	} => {
 		const allNodesCoords = _.values(this.engine.diagramModel.getNodes()).map(item => ({
-			x: item.x,
+			x: item.getX(),
 			width: item.width,
-			y: item.y,
+			y: item.getY(),
 			height: item.height
 		}));
 
 		const allLinks = _.values(this.engine.diagramModel.getLinks());
-		const allPortsCoords = _.flatMap(allLinks.map(link => [link.sourcePort, link.targetPort]))
+		const allPortsCoords = _.flatMap(allLinks.map(link => [link.getSourcePort(), link.getTargetPort()]))
 			.filter(port => port !== null)
 			.map(item => ({
-				x: item.x,
+				x: item.getX(),
 				width: item.width,
-				y: item.y,
+				y: item.getY(),
 				height: item.height
 			}));
-		const allPointsCoords = _.flatMap(allLinks.map(link => link.points)).map(item => ({
+		const allPointsCoords = _.flatMap(allLinks.map(link => link.getPoints())).map(item => ({
 			// points don't have width/height, so let's just use 0
-			x: item.x,
+			x: item.getX(),
 			width: 0,
-			y: item.y,
+			y: item.getY(),
 			height: 0
 		}));
 
@@ -181,10 +181,10 @@ export class PathFindingLinkFactory extends AbstractReactFactory<PathFindingLink
 	 */
 	markNodes = (matrix: number[][]): void => {
 		_.values(this.engine.diagramModel.getNodes()).forEach(node => {
-			const startX = Math.floor(node.x / this.ROUTING_SCALING_FACTOR);
-			const endX = Math.ceil((node.x + node.width) / this.ROUTING_SCALING_FACTOR);
-			const startY = Math.floor(node.y / this.ROUTING_SCALING_FACTOR);
-			const endY = Math.ceil((node.y + node.height) / this.ROUTING_SCALING_FACTOR);
+			const startX = Math.floor(node.getX() / this.ROUTING_SCALING_FACTOR);
+			const endX = Math.ceil((node.getX() + node.width) / this.ROUTING_SCALING_FACTOR);
+			const startY = Math.floor(node.getY() / this.ROUTING_SCALING_FACTOR);
+			const endY = Math.ceil((node.getY() + node.height) / this.ROUTING_SCALING_FACTOR);
 
 			for (let x = startX - 1; x <= endX + 1; x++) {
 				for (let y = startY - 1; y < endY + 1; y++) {
@@ -199,7 +199,7 @@ export class PathFindingLinkFactory extends AbstractReactFactory<PathFindingLink
 	 */
 	markPorts = (matrix: number[][]): void => {
 		const allElements = _.flatMap(
-			_.values(this.engine.diagramModel.getLinks()).map(link => [].concat(link.sourcePort, link.targetPort))
+			_.values(this.engine.diagramModel.getLinks()).map(link => [].concat(link.getSourcePort(), link.getTargetPort()))
 		);
 		allElements
 			.filter(port => port !== null)

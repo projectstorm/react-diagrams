@@ -1,10 +1,10 @@
-import { BaseModel, BaseModelGenerics, BaseModelListener } from "../core-models/BaseModel";
-import { PortModel } from './PortModel';
+import { BaseModelListener } from "../core-models/BaseModel";
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { BaseEntityEvent } from '../core-models/BaseEntity';
 import { BasePositionModel, BasePositionModelGenerics } from "../core-models/BasePositionModel";
 import { DiagramModel } from "./DiagramModel";
+import { PortModel } from "./PortModel";
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
@@ -13,11 +13,12 @@ export interface NodeModelListener extends BaseModelListener {
 export interface NodeModelGenerics extends BasePositionModelGenerics{
 	LISTENER: NodeModelListener;
 	PARENT: DiagramModel;
+	PORT: PortModel;
 }
 
 export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends BasePositionModel<G> {
 
-	ports: { [s: string]: PortModel };
+	ports: { [s: string]: G['PORT'] };
 
 	// calculated post rendering so routing can be done correctly
 	width: number;
@@ -100,7 +101,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		});
 	}
 
-	getPortFromID(id): PortModel | null {
+	getPortFromID(id): G['PORT'] | null {
 		for (var i in this.ports) {
 			if (this.ports[i].getID() === id) {
 				return this.ports[i];
@@ -109,15 +110,15 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		return null;
 	}
 
-	getPort(name: string): PortModel | null {
+	getPort(name: string): G['PORT'] | null {
 		return this.ports[name];
 	}
 
-	getPorts(): { [s: string]: PortModel } {
+	getPorts(): { [s: string]: G['PORT'] } {
 		return this.ports;
 	}
 
-	removePort(port: PortModel) {
+	removePort(port: G['PORT']) {
 		//clear the parent node reference
 		if (this.ports[port.getName()]) {
 			this.ports[port.getName()].setParent(null);
@@ -125,7 +126,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		}
 	}
 
-	addPort<T extends PortModel>(port: T): T {
+	addPort<T extends G['PORT']>(port: T): T {
 		port.setParent(this);
 		this.ports[port.getName()] = port;
 		return port;

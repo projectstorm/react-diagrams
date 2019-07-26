@@ -1,14 +1,32 @@
-import { Toolkit } from '../Toolkit';
+import { Toolkit } from "../Toolkit";
 
 export interface BaseEvent {
 	firing: boolean;
 	stopPropagation: () => any;
 }
 
+export interface BaseEventProxy extends BaseEvent {
+	function: string;
+}
+
 /**
  * Listeners are always in the form of an object that contains methods that take events
  */
-export type BaseListener = { [key: string]: (event: BaseEvent) => any };
+export type BaseListener = {
+	/**
+	 * Generic event that fires before a specific event was fired
+	 */
+	eventWillFire?: (event: BaseEvent & { function: string }) => void;
+
+	/**
+	 * Generic event that fires after a specific event was fired (even if it was consumed)
+	 */
+	eventDidFire?: (event: BaseEvent & { function: string }) => void;
+	/**
+	 * Type for other events that will fire
+	 */
+	[key: string]: (event: BaseEvent) => any
+};
 
 /**
  * Base observer pattern class for working with listeners
@@ -20,6 +38,19 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		this.listeners = {};
 	}
 
+	private fireEventInternal(fire: boolean, k: keyof L, event: BaseEvent, ) {
+		this.iterateListeners(listener => {
+			// returning false here will instruct itteration to stop
+			if (!fire && !event.firing) {
+				return false;
+			}
+			// fire selected listener
+			if (listener[k]) {
+				listener[k](event as BaseEvent);
+			}
+		});
+	}
+
 	fireEvent(event: Partial<BaseEvent> & object, k: keyof L) {
 		event = {
 			firing: true,
@@ -29,15 +60,20 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 			...event
 		};
 
-		this.iterateListeners(listener => {
-			// returning false here will instruct itteration to stop
-			if (!event.firing) {
-				return false;
-			}
-			if (listener[k]) {
-				listener[k](event as BaseEvent);
-			}
-		});
+		// fire pre
+		this.fireEventInternal( true, "eventWillFire", {
+			...event,
+			function: k
+		} as BaseEventProxy);
+
+		// fire main event
+		this.fireEventInternal( false, k, event as BaseEvent);
+
+		// fire post
+		this.fireEventInternal( true, "eventDidFire", {
+			...event,
+			function: k
+		} as BaseEventProxy);
 	}
 
 	iterateListeners(cb: (listener: L) => any) {

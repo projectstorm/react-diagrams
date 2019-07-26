@@ -1,5 +1,6 @@
 import * as PF from 'pathfinding';
 import { PathFindingLinkFactory } from '../link/PathFindingLinkFactory';
+import { PointModel } from "@projectstorm/react-diagrams-core";
 
 /*
 it can be very expensive to calculate routes when every single pixel on the canvas
@@ -26,23 +27,17 @@ export default class PathFinding {
 	 * finds a direct path from point A to B.
 	 */
 	calculateDirectPath(
-		from: {
-			x: number;
-			y: number;
-		},
-		to: {
-			x: number;
-			y: number;
-		}
+		from: PointModel,
+		to: PointModel
 	): number[][] {
 		const matrix = this.factory.getCanvasMatrix();
 		const grid = new PF.Grid(matrix);
 
 		return pathFinderInstance.findPath(
-			this.factory.translateRoutingX(Math.floor(from.x / this.factory.ROUTING_SCALING_FACTOR)),
-			this.factory.translateRoutingY(Math.floor(from.y / this.factory.ROUTING_SCALING_FACTOR)),
-			this.factory.translateRoutingX(Math.floor(to.x / this.factory.ROUTING_SCALING_FACTOR)),
-			this.factory.translateRoutingY(Math.floor(to.y / this.factory.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingX(Math.floor(from.getX() / this.factory.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingY(Math.floor(from.getY() / this.factory.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingX(Math.floor(to.getX() / this.factory.ROUTING_SCALING_FACTOR)),
+			this.factory.translateRoutingY(Math.floor(to.getY() / this.factory.ROUTING_SCALING_FACTOR)),
 			grid
 		);
 	}

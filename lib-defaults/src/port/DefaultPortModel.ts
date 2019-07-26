@@ -7,6 +7,7 @@ import {
 	PortModelOptions
 } from "@projectstorm/react-diagrams-core";
 import { DefaultLinkModel } from '../link/DefaultLinkModel';
+import { DefaultNodeModel } from "../node/DefaultNodeModel";
 
 export interface DefaultPortModelOptions extends Omit<PortModelOptions, 'type'>{
 	label?: string;
@@ -15,7 +16,7 @@ export interface DefaultPortModelOptions extends Omit<PortModelOptions, 'type'>{
 
 export interface DefaultPortModelGenerics{
 	OPTIONS: DefaultPortModelOptions;
-	PARENT: DefaultLinkModel;
+	PARENT: DefaultNodeModel;
 }
 
 export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortModelGenerics> {

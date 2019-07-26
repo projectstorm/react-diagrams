@@ -12,6 +12,6 @@ export class DefaultLabelWidget extends BaseWidget<DefaultLabelWidgetProps> {
 	}
 
 	render() {
-		return <div {...this.getProps()}>{this.props.model.label}</div>;
+		return <div {...this.getProps()}>{this.props.model.getOptions().label}</div>;
 	}
 }
