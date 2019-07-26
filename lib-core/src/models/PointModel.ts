@@ -1,7 +1,5 @@
-import { BaseModel, BaseModelListener, BaseModelOptions } from '../core-models/BaseModel';
+import { BaseModelListener, BaseModelOptions } from '../core-models/BaseModel';
 import { LinkModel } from './LinkModel';
-import * as _ from 'lodash';
-import { DiagramEngine } from '../DiagramEngine';
 import { BasePositionModel } from '../core-models/BasePositionModel';
 
 export interface PointModelOptions extends Omit<PointModelOptions, 'type'> {
@@ -23,6 +21,7 @@ export class PointModel<G extends PointModelGenerics = PointModelGenerics> exten
 			...options,
 			type: 'point'
 		});
+		this.parent = options.link;
 		this.x = options.points.x;
 		this.y = options.points.y;
 	}
@@ -42,19 +41,6 @@ export class PointModel<G extends PointModelGenerics = PointModelGenerics> exten
 		return this.getParent();
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
-		this.options.points.x = ob.x;
-		this.options.points.y = ob.y;
-	}
-
-	serialize() {
-		return _.merge(super.serialize(), {
-			x: this.options.points.x,
-			y: this.options.points.y
-		});
-	}
-
 	remove() {
 		//clear references
 		if (this.parent) {
@@ -64,16 +50,7 @@ export class PointModel<G extends PointModelGenerics = PointModelGenerics> exten
 	}
 
 	updateLocation(points: { x: number; y: number }) {
-		this.options.points.x = points.x;
-		this.options.points.y = points.y;
-	}
-
-	getX(): number {
-		return this.options.points.x;
-	}
-
-	getY(): number {
-		return this.options.points.y;
+		this.setPosition(points.x, points.y);
 	}
 
 	isLocked() {

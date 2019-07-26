@@ -23,6 +23,7 @@ export interface DefaultPortModelGenerics {
 export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortModelGenerics> {
 	constructor(options: DefaultPortModelOptions) {
 		super({
+			label: options.label || options.name,
 			...options,
 			type: 'default'
 		});

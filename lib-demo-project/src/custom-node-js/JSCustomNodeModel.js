@@ -5,12 +5,21 @@ import { DefaultPortModel, NodeModel } from '@projectstorm/react-diagrams';
  */
 export class JSCustomNodeModel extends NodeModel {
 	constructor(options = {}) {
-		super('js-custom-node');
+		super({
+			...options,
+			type: 'js-custom-node'
+		});
 		this.color = options.color || { options: 'red' };
 
 		// setup an in and out port
-		this.addPort(new DefaultPortModel(true, 'in'));
-		this.addPort(new DefaultPortModel(false, 'out'));
+		this.addPort(new DefaultPortModel({
+			in: true,
+			name: 'in',
+		}));
+		this.addPort(new DefaultPortModel({
+			in: false,
+			name: 'out',
+		}));
 	}
 
 	serialize() {

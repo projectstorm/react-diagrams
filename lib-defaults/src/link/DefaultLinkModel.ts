@@ -29,6 +29,8 @@ export interface DefaultLinkModelGenerics {
 export class DefaultLinkModel extends LinkModel<LinkModelGenerics & DefaultLinkModelGenerics> {
 	constructor(options: DefaultLinkModelOptions = {}) {
 		super({
+			width: options.width || 3,
+			color: options.color || 'gray',
 			...options,
 			type: 'default'
 		});

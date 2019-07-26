@@ -5,6 +5,7 @@
 
 html, body, #application{
 	height: 100%;
+	overflow: hidden;
 }
 
 .diagram-container{
