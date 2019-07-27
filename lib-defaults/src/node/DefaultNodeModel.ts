@@ -41,6 +41,12 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		this.portsIn = [];
 	}
 
+	doClone(lookupTable: {}, clone: any): void {
+		clone.portsIn = [];
+		clone.portsOut = [];
+		super.doClone(lookupTable, clone);
+	}
+
 	removePort(port: (DefaultNodeModelGenerics & NodeModelGenerics)['PORT']): void {
 		super.removePort(port);
 		if (port.getOptions().in) {

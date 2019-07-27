@@ -36,6 +36,12 @@ export class PortWidget extends BaseWidget<PortProps, PortState> {
 		this.engineListenerHandle.deregister();
 	}
 
+	componentDidUpdate(prevProps: Readonly<PortProps>, prevState: Readonly<PortState>, snapshot?: any): void {
+		if (!this.props.port.reportedPosition) {
+			this.report();
+		}
+	}
+
 	componentDidMount(): void {
 		this.engineListenerHandle = this.props.engine.registerListener({
 			canvasReady: () => {

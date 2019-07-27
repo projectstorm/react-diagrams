@@ -4,15 +4,18 @@ import { LinkModel } from '../models/LinkModel';
 import { ListenerHandle } from '../core/BaseObserver';
 import { BaseEntityEvent } from '../core-models/BaseEntity';
 import { BasePositionModel } from '../core-models/BasePositionModel';
+import { PointModel } from '../models/PointModel';
+import { PortModel } from '../models/PortModel';
 
 export interface LinkProps {
 	link: LinkModel;
 	diagramEngine: DiagramEngine;
+	pointAdded: (point: PointModel, event: MouseEvent) => any;
 }
 
 export interface LinkState {
-	sourceID: string;
-	targetID: string;
+	sourceID: PortModel;
+	targetID: PortModel;
 }
 
 export class LinkWidget extends React.Component<LinkProps, LinkState> {
@@ -37,11 +40,9 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 	}
 
 	static getDerivedStateFromProps(nextProps: LinkProps, prevState: LinkState): LinkState {
-		const s = nextProps.link.getSourcePort();
-		const t = nextProps.link.getTargetPort();
 		return {
-			sourceID: s && s.getID(),
-			targetID: t && t.getID()
+			sourceID: nextProps.link.getSourcePort(),
+			targetID: nextProps.link.getTargetPort()
 		};
 	}
 
@@ -93,6 +94,8 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 		}
 
 		//generate links
-		return this.props.diagramEngine.generateWidgetForLink(link);
+		return React.cloneElement(this.props.diagramEngine.generateWidgetForLink(link), {
+			pointAdded: this.props.pointAdded
+		});
 	}
 }

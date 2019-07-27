@@ -32,7 +32,14 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps> {
 				}}>
 				{//only perform these actions when we have a diagram
 				_.map(diagramModel.getLinks(), link => {
-					return <LinkWidget key={link.getID()} link={link} diagramEngine={this.props.diagramEngine} />;
+					return (
+						<LinkWidget
+							pointAdded={this.props.pointAdded}
+							key={link.getID()}
+							link={link}
+							diagramEngine={this.props.diagramEngine}
+						/>
+					);
 				})}
 			</svg>
 		);

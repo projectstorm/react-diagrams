@@ -55,7 +55,7 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 					top: this.props.node.getY(),
 					left: this.props.node.getX()
 				}}>
-				{this.props.children}
+				{this.props.diagramEngine.generateWidgetForNode(this.props.node)}
 			</div>
 		);
 	}
