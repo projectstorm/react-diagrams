@@ -38,11 +38,15 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
+		this.options.name = ob.name;
+		this.options.alignment = ob.alignment;
 	}
 
 	serialize() {
 		return {
 			...super.serialize(),
+			name: this.options.name,
+			alignment: this.options.alignment,
 			parentNode: this.parent.getID(),
 			links: _.map(this.links, link => {
 				return link.getID();

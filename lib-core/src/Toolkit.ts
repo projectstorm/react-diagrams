@@ -39,7 +39,7 @@ export class Toolkit {
 	}
 
 	public static generateCurvePath(firstPoint: PointModel, lastPoint: PointModel, curvy: number = 0): string {
-		var isHorizontal = Math.abs(firstPoint.getX() - lastPoint.getX()) > Math.abs(firstPoint.getY() - lastPoint.getY());
+		var isHorizontal = true;
 
 		var xOrY = isHorizontal ? 'x' : 'y';
 
@@ -53,7 +53,7 @@ export class Toolkit {
 		var curvyX = isHorizontal ? curvyness : 0;
 		var curvyY = isHorizontal ? 0 : curvyness;
 
-		return `M${firstPoint.getX()},${firstPoint.getY()} C ${firstPoint.getX() + curvyX},${firstPoint.getY() + curvyY}
+		return `M${firstPoint.getPosition()} C ${firstPoint.getX() + curvyX},${firstPoint.getY() + curvyY}
     ${lastPoint.getX() - curvyX},${lastPoint.getY() - curvyY} ${lastPoint.getX()},${lastPoint.getY()}`;
 	}
 }

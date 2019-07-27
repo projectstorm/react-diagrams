@@ -1,5 +1,11 @@
 import * as _ from 'lodash';
-import { BaseModelOptions, DiagramEngine, NodeModel, NodeModelGenerics } from '@projectstorm/react-diagrams-core';
+import {
+	BaseModelOptions,
+	DiagramEngine,
+	NodeModel,
+	NodeModelGenerics,
+	PortModelAlignment
+} from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from '../port/DefaultPortModel';
 
 export interface DefaultNodeModelOptions extends Omit<BaseModelOptions, 'type'> {
@@ -62,7 +68,8 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		const p = new DefaultPortModel({
 			in: true,
 			name: label,
-			label: label
+			label: label,
+			alignment: PortModelAlignment.LEFT
 		});
 		if (!after) {
 			this.portsIn.splice(0, 0, p);
@@ -74,7 +81,8 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		const p = new DefaultPortModel({
 			in: false,
 			name: label,
-			label: label
+			label: label,
+			alignment: PortModelAlignment.RIGHT
 		});
 		if (!after) {
 			this.portsOut.splice(0, 0, p);

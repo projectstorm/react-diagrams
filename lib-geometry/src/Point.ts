@@ -19,7 +19,11 @@ export class Point {
 		return new Point(this.x, this.y);
 	}
 
-	public asMatrix() {
+	toSVG() {
+		return this.x + ' ' + this.y;
+	}
+
+	asMatrix() {
 		return mathjs.matrix([[this.x], [this.y], [1]]);
 	}
 

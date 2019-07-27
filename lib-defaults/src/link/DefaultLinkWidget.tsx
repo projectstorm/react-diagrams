@@ -237,66 +237,48 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		var points = this.props.link.getPoints();
 		var paths = [];
 
-		// true when smart routing was skipped or not enabled.
-		// See @link{#isSmartRoutingApplicable()}.
-		if (paths.length === 0) {
-			if (points.length === 2) {
-				var isHorizontal =
-					Math.abs(points[0].getX() - points[1].getX()) > Math.abs(points[0].getY() - points[1].getY());
-				var xOrY = isHorizontal ? 'x' : 'y';
+		if (points.length === 2) {
+			paths.push(
+				this.generateLink(
+					this.props.link.getSVGPath(),
+					{
+						onMouseDown: event => {
+							this.addPointToLink(event, 1);
+						}
+					},
+					'0'
+				)
+			);
 
-				//draw the smoothing
-				//if the points are too close, just draw a straight line
-				var margin = 50;
-				if (Math.abs(points[0][xOrY] - points[1][xOrY]) < 50) {
-					margin = 5;
-				}
-
-				var pointLeft = points[0];
-				var pointRight = points[1];
-
+			// draw the link as dangeling
+			if (this.props.link.getTargetPort() == null) {
+				paths.push(this.generatePoint(1));
+			}
+		} else {
+			//draw the multiple anchors and complex line instead
+			for (let j = 0; j < points.length - 1; j++) {
 				paths.push(
 					this.generateLink(
-						Toolkit.generateCurvePath(pointLeft, pointRight, this.props.link.getOptions().curvyness),
+						Toolkit.generateLinePath(points[j], points[j + 1]),
 						{
-							onMouseDown: event => {
-								this.addPointToLink(event, 1);
+							'data-linkid': this.props.link.getID(),
+							'data-point': j,
+							onMouseDown: (event: MouseEvent) => {
+								this.addPointToLink(event, j + 1);
 							}
 						},
-						'0'
+						j
 					)
 				);
+			}
 
-				// draw the link as dangeling
-				if (this.props.link.getTargetPort() == null) {
-					paths.push(this.generatePoint(1));
-				}
-			} else {
-				//draw the multiple anchors and complex line instead
-				for (let j = 0; j < points.length - 1; j++) {
-					paths.push(
-						this.generateLink(
-							Toolkit.generateLinePath(points[j], points[j + 1]),
-							{
-								'data-linkid': this.props.link.getID(),
-								'data-point': j,
-								onMouseDown: (event: MouseEvent) => {
-									this.addPointToLink(event, j + 1);
-								}
-							},
-							j
-						)
-					);
-				}
+			//render the circles
+			for (let i = 1; i < points.length - 1; i++) {
+				paths.push(this.generatePoint(i));
+			}
 
-				//render the circles
-				for (let i = 1; i < points.length - 1; i++) {
-					paths.push(this.generatePoint(i));
-				}
-
-				if (this.props.link.getTargetPort() == null) {
-					paths.push(this.generatePoint(points.length - 1));
-				}
+			if (this.props.link.getTargetPort() == null) {
+				paths.push(this.generatePoint(points.length - 1));
 			}
 		}
 

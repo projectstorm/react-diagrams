@@ -5,9 +5,12 @@ import {
 	LabelModel,
 	LinkModel,
 	LinkModelGenerics,
-	LinkModelListener
+	LinkModelListener,
+	PortModel,
+	PortModelAlignment
 } from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from '../label/DefaultLabelModel';
+import { BezierCurve } from '../../../lib-geometry/src/BezierCurve';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEntityEvent<DefaultLinkModel> & { color: null | string }): void;
@@ -36,6 +39,44 @@ export class DefaultLinkModel extends LinkModel<LinkModelGenerics & DefaultLinkM
 			curvyness: 50,
 			...options
 		});
+	}
+
+	calculateControlOffset(port: PortModel): [number, number] {
+		if (port.getOptions().alignment === PortModelAlignment.RIGHT) {
+			return [this.options.curvyness, 0];
+		} else if (port.getOptions().alignment === PortModelAlignment.LEFT) {
+			return [-this.options.curvyness, 0];
+		} else if (port.getOptions().alignment === PortModelAlignment.TOP) {
+			return [0, -this.options.curvyness];
+		}
+		return [0, this.options.curvyness];
+	}
+
+	getSVGPath(): string {
+		if (this.points.length == 2) {
+			const curve = new BezierCurve();
+			curve.setSource(this.getFirstPoint().getPosition());
+			curve.setTarget(this.getLastPoint().getPosition());
+			curve.setSourceControl(
+				this.getFirstPoint()
+					.getPosition()
+					.clone()
+			);
+			curve.setTargetControl(
+				this.getLastPoint()
+					.getPosition()
+					.clone()
+			);
+
+			if (this.sourcePort) {
+				curve.getSourceControl().translate(...this.calculateControlOffset(this.getSourcePort()));
+			}
+
+			if (this.targetPort) {
+				curve.getTargetControl().translate(...this.calculateControlOffset(this.getTargetPort()));
+			}
+			return curve.getSVGCurve();
+		}
 	}
 
 	serialize() {
