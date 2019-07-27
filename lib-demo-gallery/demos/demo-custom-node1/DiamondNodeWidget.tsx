@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { DiamondNodeModel } from './DiamondNodeModel';
-import { PortWidget } from '@projectstorm/react-diagrams';
+import { DiagramEngine, PortModelAlignment, PortWidget } from '@projectstorm/react-diagrams';
 
 export interface DiamonNodeWidgetProps {
 	node: DiamondNodeModel;
+	engine: DiagramEngine;
 	size?: number;
 }
 
@@ -13,11 +14,6 @@ export interface DiamonNodeWidgetState {}
  * @author Dylan Vorster
  */
 export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, DiamonNodeWidgetState> {
-	public static defaultProps: DiamonNodeWidgetProps = {
-		size: 150,
-		node: null
-	};
-
 	constructor(props: DiamonNodeWidgetProps) {
 		super(props);
 		this.state = {};
@@ -41,7 +37,7 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
           <g id="Layer_1">
           </g>
           <g id="Layer_2">
-            <polygon fill="purple" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,` +
+            <polygon fill="mediumpurple" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,` +
 							this.props.size / 2 +
 							` ` +
 							this.props.size / 2 +
@@ -65,7 +61,7 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 						top: this.props.size / 2 - 8,
 						left: -8
 					}}>
-					<PortWidget name="left" node={this.props.node} />
+					<PortWidget port={this.props.node.getPort(PortModelAlignment.LEFT)} engine={this.props.engine} />
 				</div>
 				<div
 					style={{
@@ -74,7 +70,7 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 						left: this.props.size / 2 - 8,
 						top: -8
 					}}>
-					<PortWidget name="top" node={this.props.node} />
+					<PortWidget port={this.props.node.getPort(PortModelAlignment.TOP)} engine={this.props.engine} />
 				</div>
 				<div
 					style={{
@@ -83,7 +79,7 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 						left: this.props.size - 8,
 						top: this.props.size / 2 - 8
 					}}>
-					<PortWidget name="right" node={this.props.node} />
+					<PortWidget port={this.props.node.getPort(PortModelAlignment.RIGHT)} engine={this.props.engine} />
 				</div>
 				<div
 					style={{
@@ -92,7 +88,7 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
 						left: this.props.size / 2 - 8,
 						top: this.props.size - 8
 					}}>
-					<PortWidget name="bottom" node={this.props.node} />
+					<PortWidget port={this.props.node.getPort(PortModelAlignment.BOTTOM)} engine={this.props.engine} />
 				</div>
 			</div>
 		);

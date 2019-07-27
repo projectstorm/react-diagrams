@@ -4,6 +4,7 @@ import {
 	DiagramEngine,
 	LinkModel,
 	PortModel,
+	PortModelAlignment,
 	PortModelGenerics,
 	PortModelOptions
 } from '@projectstorm/react-diagrams-core';
@@ -23,7 +24,7 @@ export interface DefaultPortModelGenerics {
 export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortModelGenerics> {
 	constructor(isIn: boolean, name?: string, label?: string);
 	constructor(options: DefaultPortModelOptions);
-	constructor(options: any, name?: string, label?: string) {
+	constructor(options: DefaultPortModelOptions | boolean, name?: string, label?: string) {
 		if (!!name) {
 			options = {
 				in: !!options,
@@ -31,10 +32,12 @@ export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortM
 				label: label
 			};
 		}
+		options = options as DefaultPortModelOptions;
 		super({
 			label: options.label || options.name,
-			...options,
-			type: 'default'
+			alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT,
+			type: 'default',
+			...options
 		});
 	}
 

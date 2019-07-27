@@ -1,10 +1,13 @@
 import { PathFindingLinkFactory } from './PathFindingLinkFactory';
-import { LinkModel } from '@projectstorm/react-diagrams-core';
+import { BaseModelOptions, LinkModel } from '@projectstorm/react-diagrams-core';
+
+export interface PathFindingLinkModelOptions extends Omit<BaseModelOptions, 'type'> {}
 
 export class PathFindingLinkModel extends LinkModel {
-	constructor() {
+	constructor(options: PathFindingLinkModelOptions = {}) {
 		super({
-			type: PathFindingLinkFactory.NAME
+			type: PathFindingLinkFactory.NAME,
+			...options
 		});
 	}
 }

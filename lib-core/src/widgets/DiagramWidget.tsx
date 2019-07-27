@@ -35,10 +35,8 @@ export interface DiagramProps extends BaseWidgetProps {
 export interface DiagramState {
 	action: BaseAction | null;
 	wasMoved: boolean;
-	renderedNodes: boolean;
 	windowListener: any;
 	diagramEngineListener: any;
-	document: any;
 }
 
 /**
@@ -57,11 +55,13 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	};
 
 	onKeyUpPointer: (this: Window, ev: KeyboardEvent) => void = null;
+	ref: React.RefObject<HTMLDivElement>;
 
 	constructor(props: DiagramProps) {
 		super('srd-diagram', props);
 		this.onMouseMove = this.onMouseMove.bind(this);
 		this.onMouseUp = this.onMouseUp.bind(this);
+		this.ref = React.createRef();
 		this.state = {
 			action: null,
 			wasMoved: false,
@@ -90,26 +90,15 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		}
 	}
 
-	componentWillUpdate(nextProps: DiagramProps) {
-		if (this.props.diagramEngine.diagramModel.getID() !== nextProps.diagramEngine.diagramModel.getID()) {
-			this.setState({ renderedNodes: false });
-			nextProps.diagramEngine.diagramModel.rendered = true;
-		}
-		if (!nextProps.diagramEngine.diagramModel.rendered) {
-			this.setState({ renderedNodes: false });
-			nextProps.diagramEngine.diagramModel.rendered = true;
-		}
-	}
-
-	componentDidUpdate() {
-		if (!this.state.renderedNodes) {
-			this.setState({
-				renderedNodes: true
-			});
-		}
+	registerCanvas() {
+		this.props.diagramEngine.setCanvas(this.ref.current);
 		this.props.diagramEngine.iterateListeners(list => {
 			list.rendered && list.rendered();
 		});
+	}
+
+	componentDidUpdate() {
+		this.registerCanvas();
 	}
 
 	componentDidMount() {
@@ -117,9 +106,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 		//add a keyboard listener
 		this.setState({
-			document: document,
-			renderedNodes: true,
-			diagramEngineListener: this.props.diagramEngine.addListener({
+			diagramEngineListener: this.props.diagramEngine.registerListener({
 				repaintCanvas: () => {
 					this.forceUpdate();
 				}
@@ -133,9 +120,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			window.focus();
 		}
 
-		this.props.diagramEngine.iterateListeners(list => {
-			list.rendered && list.rendered();
-		});
+		this.registerCanvas();
 	}
 
 	/**
@@ -392,8 +377,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction();
 		}
-		this.state.document.removeEventListener('mousemove', this.onMouseMove);
-		this.state.document.removeEventListener('mouseup', this.onMouseUp);
+		document.removeEventListener('mousemove', this.onMouseMove);
+		document.removeEventListener('mouseup', this.onMouseUp);
 	}
 
 	drawSelectionBox() {
@@ -419,11 +404,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		return (
 			<div
 				{...this.getProps()}
-				ref={ref => {
-					if (ref) {
-						this.props.diagramEngine.setCanvas(ref);
-					}
-				}}
+				ref={this.ref}
 				onWheel={event => {
 					if (this.props.allowCanvasZoom) {
 						event.stopPropagation();
@@ -523,23 +504,21 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 						this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
 					}
-					this.state.document.addEventListener('mousemove', this.onMouseMove);
-					this.state.document.addEventListener('mouseup', this.onMouseUp);
+					document.addEventListener('mousemove', this.onMouseMove);
+					document.addEventListener('mouseup', this.onMouseUp);
 				}}>
-				{this.state.renderedNodes && (
-					<LinkLayerWidget
-						diagramEngine={diagramEngine}
-						pointAdded={(point: PointModel, event) => {
-							this.state.document.addEventListener('mousemove', this.onMouseMove);
-							this.state.document.addEventListener('mouseup', this.onMouseUp);
-							event.stopPropagation();
-							diagramModel.clearSelection(point);
-							this.setState({
-								action: new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
-							});
-						}}
-					/>
-				)}
+				<LinkLayerWidget
+					diagramEngine={diagramEngine}
+					pointAdded={(point: PointModel, event) => {
+						document.addEventListener('mousemove', this.onMouseMove);
+						document.addEventListener('mouseup', this.onMouseUp);
+						event.stopPropagation();
+						diagramModel.clearSelection(point);
+						this.setState({
+							action: new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
+						});
+					}}
+				/>
 				<NodeLayerWidget diagramEngine={diagramEngine} />
 				{this.state.action instanceof SelectingAction && this.drawSelectionBox()}
 			</div>

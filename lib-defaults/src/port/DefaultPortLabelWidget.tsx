@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { BaseWidget, BaseWidgetProps, PortWidget } from '@projectstorm/react-diagrams-core';
+import { BaseWidget, BaseWidgetProps, DiagramEngine, PortWidget } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from './DefaultPortModel';
 
 export interface DefaultPortLabelProps extends BaseWidgetProps {
-	model: DefaultPortModel;
+	port: DefaultPortModel;
+	engine: DiagramEngine;
 }
 
 export interface DefaultPortLabelState {}
@@ -14,17 +15,17 @@ export class DefaultPortLabel extends BaseWidget<DefaultPortLabelProps, DefaultP
 	}
 
 	getClassName() {
-		return super.getClassName() + (this.props.model.getOptions().in ? this.bem('--in') : this.bem('--out'));
+		return super.getClassName() + (this.props.port.getOptions().in ? this.bem('--in') : this.bem('--out'));
 	}
 
 	render() {
-		var port = <PortWidget node={this.props.model.getParent()} name={this.props.model.getOptions().name} />;
-		var label = <div className="name">{this.props.model.getOptions().label}</div>;
+		var port = <PortWidget engine={this.props.engine} port={this.props.port} />;
+		var label = <div className="name">{this.props.port.getOptions().label}</div>;
 
 		return (
 			<div {...this.getProps()}>
-				{this.props.model.getOptions().in ? port : label}
-				{this.props.model.getOptions().in ? label : port}
+				{this.props.port.getOptions().in ? port : label}
+				{this.props.port.getOptions().in ? label : port}
 			</div>
 		);
 	}

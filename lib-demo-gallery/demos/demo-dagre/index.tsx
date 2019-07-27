@@ -11,7 +11,7 @@ import createEngine, {
 import * as React from 'react';
 import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 
-function createNode(name) {
+function createNode(name): any {
 	return new DefaultNodeModel(name, 'rgb(0,192,255)');
 }
 
@@ -55,9 +55,9 @@ class Demo8Widget extends React.Component<{ model: DiagramModel; engine: Diagram
 	};
 
 	componentDidMount(): void {
-		this.forceUpdate(() => {
+		setTimeout(() => {
 			this.autoDistribute();
-		});
+		}, 500);
 	}
 
 	reroute() {

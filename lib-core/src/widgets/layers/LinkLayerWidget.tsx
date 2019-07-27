@@ -31,54 +31,9 @@ export class LinkLayerWidget extends BaseWidget<LinkLayerProps> {
 						')'
 				}}>
 				{//only perform these actions when we have a diagram
-				this.props.diagramEngine.canvas &&
-					_.map(diagramModel.getLinks(), link => {
-						if (
-							this.props.diagramEngine.nodesRendered &&
-							!this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()]
-						) {
-							if (link.getSourcePort() != null) {
-								try {
-									const portCenter = this.props.diagramEngine.getPortCenter(link.getSourcePort());
-									link.getPoints()[0].setPosition(portCenter);
-
-									const portCoords = this.props.diagramEngine.getPortCoords(link.getSourcePort());
-									link.getSourcePort().updateCoords(portCoords);
-
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()] = true;
-								} catch (ignore) {
-									/*noop*/
-								}
-							}
-							if (link.getTargetPort() !== null) {
-								try {
-									const portCenter = this.props.diagramEngine.getPortCenter(link.getTargetPort());
-									_.last(link.getPoints()).setPosition(portCenter);
-
-									const portCoords = this.props.diagramEngine.getPortCoords(link.getTargetPort());
-									link.getTargetPort().updateCoords(portCoords);
-
-									this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()] = true;
-								} catch (ignore) {
-									/*noop*/
-								}
-							}
-						}
-
-						//generate links
-						var generatedLink = this.props.diagramEngine.generateWidgetForLink(link);
-						if (!generatedLink) {
-							throw new Error(`no link generated for type: ${link.getType()}`);
-						}
-
-						return (
-							<LinkWidget key={link.getID()} link={link} diagramEngine={this.props.diagramEngine}>
-								{React.cloneElement(generatedLink, {
-									pointAdded: this.props.pointAdded
-								})}
-							</LinkWidget>
-						);
-					})}
+				_.map(diagramModel.getLinks(), link => {
+					return <LinkWidget key={link.getID()} link={link} diagramEngine={this.props.diagramEngine} />;
+				})}
 			</svg>
 		);
 	}

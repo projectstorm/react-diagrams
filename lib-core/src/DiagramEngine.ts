@@ -14,6 +14,8 @@ import { BaseListener, BaseObserver } from './core/BaseObserver';
 import { Point } from '@projectstorm/react-diagrams-geometry';
 
 export interface DiagramEngineListener extends BaseListener {
+	canvasReady?(): void;
+
 	repaintCanvas?(): void;
 
 	rendered?(): void;
@@ -32,7 +34,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	canvas: Element;
 	paintableWidgets: {};
 	linksThatHaveInitiallyRendered: {};
-	nodesRendered: boolean;
 	maxNumberPointsPerLink: number;
 
 	constructor() {
@@ -63,7 +64,7 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 
 		this.canvas = null;
 		this.paintableWidgets = null;
-		this.linksThatHaveInitiallyRendered = {};
+		// this.linksThatHaveInitiallyRendered = {};
 	}
 
 	repaintCanvas() {
@@ -112,7 +113,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	}
 
 	recalculatePortsVisually() {
-		this.nodesRendered = false;
 		this.linksThatHaveInitiallyRendered = {};
 	}
 
@@ -126,7 +126,12 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	}
 
 	setCanvas(canvas: Element | null) {
-		this.canvas = canvas;
+		if (this.canvas !== canvas) {
+			this.canvas = canvas;
+			if (canvas) {
+				this.fireEvent({}, 'canvasReady');
+			}
+		}
 	}
 
 	setDiagramModel(model: DiagramModel) {
@@ -247,20 +252,29 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	 * Calculate rectangular coordinates of the port passed in.
 	 */
 	getPortCoords(
-		port: PortModel
+		port: PortModel,
+		element?: HTMLDivElement
 	): {
 		x: number;
 		y: number;
 		width: number;
 		height: number;
 	} {
-		const sourceElement = this.getNodePortElement(port);
-		const sourceRect = sourceElement.getBoundingClientRect();
+		if (!this.canvas) {
+			throw new Error('Canvas needs to be set first');
+		}
+		if (!element) {
+			element = this.getNodePortElement(port);
+		}
+		const sourceRect = element.getBoundingClientRect();
 		const canvasRect = this.canvas.getBoundingClientRect() as ClientRect;
 
 		return {
-			x: (sourceRect.x - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0) - canvasRect.left,
-			y: (sourceRect.y - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0) - canvasRect.top,
+			x:
+				(sourceRect.left - this.diagramModel.getOffsetX()) / (this.diagramModel.getZoomLevel() / 100.0) -
+				canvasRect.left,
+			y:
+				(sourceRect.top - this.diagramModel.getOffsetY()) / (this.diagramModel.getZoomLevel() / 100.0) - canvasRect.top,
 			width: sourceRect.width,
 			height: sourceRect.height
 		};

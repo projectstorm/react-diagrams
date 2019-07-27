@@ -34,19 +34,13 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 
 	componentDidMount(): void {
 		this.ob = new ResizeObserver(entities => {
-			const initial = this.props.node.width;
 			const bounds = entities[0].contentRect;
 			this.props.node.updateDimensions({ width: bounds.width, height: bounds.height });
 
 			//now mark the links as dirty
 			_.forEach(this.props.node.getPorts(), port => {
-				_.forEach(port.getLinks(), link => {
-					this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()] = false;
-				});
+				port.updateCoords(this.props.diagramEngine.getPortCoords(port));
 			});
-			if (initial !== 0) {
-				this.props.diagramEngine.repaintCanvas();
-			}
 		});
 		this.ob.observe(this.ref.current);
 	}

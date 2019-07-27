@@ -5,7 +5,6 @@ import { BaseEvent, BaseListener, BaseObserver } from '../core/BaseObserver';
 
 export interface BaseEntityEvent<T extends BaseEntity = BaseEntity> extends BaseEvent {
 	entity: T;
-	id: string;
 }
 
 export interface BaseEntityListener<T extends BaseEntity = BaseEntity> extends BaseListener {

@@ -28,6 +28,22 @@ export type BaseListener = {
 	[key: string]: (event: BaseEvent) => any;
 };
 
+export interface ListenerHandle {
+	/**
+	 * Used to degister the listener
+	 */
+	deregister: () => any;
+	/**
+	 * Original ID of the listener
+	 */
+	id: string;
+
+	/**
+	 * Original Listener
+	 */
+	listner: BaseListener;
+}
+
 /**
  * Base observer pattern class for working with listeners
  */
@@ -86,27 +102,41 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		}
 	}
 
-	/**
-	 * @deprecated use registerListener instead
-	 */
-	addListener(listener: L) {
-		this.registerListener(listener);
+	getListenerHandle(listener: L): ListenerHandle {
+		for (let id in this.listeners) {
+			if (this.listeners[id] === listener) {
+				return {
+					id: id,
+					listner: listener,
+					deregister: () => {
+						delete this.listeners[id];
+					}
+				};
+			}
+		}
 	}
 
-	registerListener(listener: L) {
+	registerListener(listener: L): ListenerHandle {
 		const id = Toolkit.UID();
 		this.listeners[id] = listener;
-		return () => {
-			delete this.listeners[id];
+		return {
+			id: id,
+			listner: listener,
+			deregister: () => {
+				delete this.listeners[id];
+			}
 		};
 	}
 
-	deregisterListener(listener: L) {
-		for (let id in this.listeners) {
-			if (this.listeners[id] === listener) {
-				delete this.listeners[id];
-				return true;
-			}
+	deregisterListener(listener: L | ListenerHandle) {
+		if (typeof listener === 'object') {
+			(listener as ListenerHandle).deregister();
+			return true;
+		}
+		const handle = this.getListenerHandle(listener);
+		if (handle) {
+			handle.deregister();
+			return true;
 		}
 		return false;
 	}

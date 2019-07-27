@@ -1,10 +1,15 @@
-import { BaseModel, BaseModelGenerics, BaseModelOptions } from '../core-models/BaseModel';
+import { BaseModelOptions } from '../core-models/BaseModel';
 import { NodeModel } from './NodeModel';
 import { LinkModel } from './LinkModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
-import { BasePositionModel } from '../core-models/BasePositionModel';
+import {
+	BasePositionModel,
+	BasePositionModelGenerics,
+	BasePositionModelListener
+} from '../core-models/BasePositionModel';
 import { Point } from '@projectstorm/react-diagrams-geometry';
+import { BaseEntityEvent } from '../core-models/BaseEntity';
 
 export enum PortModelAlignment {
 	TOP = 'top',
@@ -13,15 +18,23 @@ export enum PortModelAlignment {
 	RIGHT = 'right'
 }
 
+export interface PortModelListener extends BasePositionModelListener {
+	/**
+	 * fires when it first receives positional information
+	 */
+	reportInitialPosition?: (event: BaseEntityEvent<PortModel>) => void;
+}
+
 export interface PortModelOptions extends BaseModelOptions {
 	alignment?: PortModelAlignment;
 	maximumLinks?: number;
 	name: string;
 }
 
-export interface PortModelGenerics extends BaseModelGenerics {
+export interface PortModelGenerics extends BasePositionModelGenerics {
 	OPTIONS: PortModelOptions;
 	PARENT: NodeModel;
+	LISTENER: PortModelListener;
 }
 
 export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends BasePositionModel<G> {
@@ -30,14 +43,17 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	// calculated post rendering so routing can be done correctly
 	width: number;
 	height: number;
+	reportedPosition: boolean;
 
 	constructor(options: G['OPTIONS']) {
 		super(options);
 		this.links = {};
+		this.reportedPosition = false;
 	}
 
 	deSerialize(ob, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
+		this.reportedPosition = false;
 		this.options.name = ob.name;
 		this.options.alignment = ob.alignment;
 	}
@@ -99,10 +115,22 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		return null;
 	}
 
-	updateCoords({ x, y, width, height }: { x: number; y: number; width: number; height: number }) {
-		this.position = new Point(x, y);
+	updateCoords(cords: { x: number; y: number; width: number; height: number }) {
+		const { x, y, width, height } = cords;
 		this.width = width;
 		this.height = height;
+		this.setPosition(x, y);
+		const center = new Point(x + width / 2, y + height / 2);
+		_.forEach(this.getLinks(), link => {
+			link.getPointForPort(this).setPosition(center.clone());
+		});
+		this.reportedPosition = true;
+		this.fireEvent(
+			{
+				entity: this
+			},
+			'reportInitialPosition'
+		);
 	}
 
 	canLinkToPort(port: PortModel): boolean {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { BaseWidget, BaseWidgetProps } from '@projectstorm/react-diagrams-core';
+import { BaseWidget, BaseWidgetProps, DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { DefaultNodeModel } from './DefaultNodeModel';
 import { DefaultPortLabel } from '../port/DefaultPortLabelWidget';
 import styled from '@emotion/styled';
@@ -50,6 +50,7 @@ namespace S {
 
 export interface DefaultNodeProps extends BaseWidgetProps {
 	node: DefaultNodeModel;
+	engine: DiagramEngine;
 }
 
 /**
@@ -58,7 +59,7 @@ export interface DefaultNodeProps extends BaseWidgetProps {
  */
 export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps> {
 	generatePort = port => {
-		return <DefaultPortLabel model={port} key={port.id} />;
+		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id} />;
 	};
 
 	render() {

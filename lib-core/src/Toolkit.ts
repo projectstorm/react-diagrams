@@ -12,7 +12,7 @@ export class Toolkit {
 	public static UID(): string {
 		if (Toolkit.TESTING) {
 			Toolkit.TESTING_UID++;
-			return '' + Toolkit.TESTING_UID;
+			return `${Toolkit.TESTING_UID}`;
 		}
 		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
 			const r = (Math.random() * 16) | 0;
@@ -36,24 +36,5 @@ export class Toolkit {
 
 	public static generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
 		return `M${firstPoint.getX()},${firstPoint.getY()} L ${lastPoint.getX()},${lastPoint.getY()}`;
-	}
-
-	public static generateCurvePath(firstPoint: PointModel, lastPoint: PointModel, curvy: number = 0): string {
-		var isHorizontal = true;
-
-		var xOrY = isHorizontal ? 'x' : 'y';
-
-		// make sure that smoothening works
-		// without disrupting the line direction
-		let curvyness = curvy;
-		if (firstPoint[xOrY] > firstPoint[xOrY]) {
-			curvyness = -curvy;
-		}
-
-		var curvyX = isHorizontal ? curvyness : 0;
-		var curvyY = isHorizontal ? 0 : curvyness;
-
-		return `M${firstPoint.getPosition()} C ${firstPoint.getX() + curvyX},${firstPoint.getY() + curvyY}
-    ${lastPoint.getX() - curvyX},${lastPoint.getY() - curvyY} ${lastPoint.getX()},${lastPoint.getY()}`;
 	}
 }

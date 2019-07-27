@@ -14,10 +14,6 @@ export class NodeLayerWidget extends BaseWidget<NodeLayerProps> {
 		super('srd-node-layer', props);
 	}
 
-	componentDidUpdate() {
-		this.props.diagramEngine.nodesRendered = true;
-	}
-
 	render() {
 		var diagramModel = this.props.diagramEngine.getDiagramModel();
 		return (

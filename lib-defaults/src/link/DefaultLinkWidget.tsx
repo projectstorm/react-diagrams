@@ -228,11 +228,6 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 	};
 
 	render() {
-		const { diagramEngine } = this.props;
-		if (!diagramEngine.nodesRendered) {
-			return null;
-		}
-
 		//ensure id is present for all points on the path
 		var points = this.props.link.getPoints();
 		var paths = [];
