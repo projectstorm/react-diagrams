@@ -3,6 +3,9 @@ import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
 import { NodeModel } from '../models/NodeModel';
 import { BaseWidget, BaseWidgetProps } from './BaseWidget';
+import { BaseEntityEvent } from '../core-models/BaseEntity';
+import { BaseModel } from '../core-models/BaseModel';
+import { ListenerHandle } from '../core/BaseObserver';
 
 export interface NodeProps extends BaseWidgetProps {
 	node: NodeModel;
@@ -13,6 +16,7 @@ export interface NodeProps extends BaseWidgetProps {
 export class NodeWidget extends BaseWidget<NodeProps> {
 	ob: ResizeObserver;
 	ref: React.RefObject<HTMLDivElement>;
+	listener: ListenerHandle;
 
 	constructor(props: NodeProps) {
 		super('srd-node', props);
@@ -32,6 +36,21 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 		this.ob = null;
 	}
 
+	componentDidUpdate(prevProps: Readonly<NodeProps>, prevState: Readonly<any>, snapshot?: any): void {
+		if (this.listener && this.props.node !== prevProps.node) {
+			this.listener.deregister();
+			this.installSelectionListener();
+		}
+	}
+
+	installSelectionListener() {
+		this.listener = this.props.node.registerListener({
+			selectionChanged: (event: BaseEntityEvent<BaseModel> & { isSelected: boolean }) => {
+				this.forceUpdate();
+			}
+		});
+	}
+
 	componentDidMount(): void {
 		this.ob = new ResizeObserver(entities => {
 			const bounds = entities[0].contentRect;
@@ -43,6 +62,7 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 			});
 		});
 		this.ob.observe(this.ref.current);
+		this.installSelectionListener();
 	}
 
 	render() {

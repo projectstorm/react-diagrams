@@ -1,9 +1,10 @@
-import { BaseAction } from './BaseAction';
+import { BaseMouseAction } from './BaseMouseAction';
 import { DiagramModel } from '../models/DiagramModel';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../DiagramEngine';
+import { MouseEvent } from 'react';
 
-export class SelectingAction extends BaseAction {
+export class SelectingAction extends BaseMouseAction {
 	mouseX2: number;
 	mouseY2: number;
 	engine: DiagramEngine;
@@ -65,5 +66,11 @@ export class SelectingAction extends BaseAction {
 
 		this.mouseX2 = relative.x;
 		this.mouseY2 = relative.y;
+	}
+
+	fireMouseUp(event: MouseEvent) {}
+
+	fireMouseDown(event: MouseEvent) {
+		var model = this.engine.getMouseElement(event);
 	}
 }

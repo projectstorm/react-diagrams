@@ -1,6 +1,6 @@
 import './sass/main.scss';
 
-export * from './src/actions/BaseAction';
+export * from './src/actions/BaseMouseAction';
 export * from './src/actions/MoveCanvasAction';
 export * from './src/actions/SelectingAction';
 export * from './src/actions/MoveItemsAction';

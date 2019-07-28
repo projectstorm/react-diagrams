@@ -5,7 +5,7 @@ export enum BezierCurvepPoints {
 	SOURCE = 0,
 	SOURCE_CONTROL = 1,
 	TARGET_CONTROL = 2,
-	TARGET = 4
+	TARGET = 3
 }
 
 export class BezierCurve extends Polygon {

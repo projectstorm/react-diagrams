@@ -12,6 +12,8 @@ import { AbstractFactory } from './core/AbstractFactory';
 import { AbstractReactFactory } from './core/AbstractReactFactory';
 import { BaseListener, BaseObserver } from './core/BaseObserver';
 import { Point } from '@projectstorm/react-diagrams-geometry';
+import { Toolkit } from './Toolkit';
+import { MouseEvent } from 'react';
 
 export interface DiagramEngineListener extends BaseListener {
 	canvasReady?(): void;
@@ -77,6 +79,53 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 
 	clearRepaintEntities() {
 		this.paintableWidgets = null;
+	}
+
+	/**
+	 * Gets a model and element under the mouse cursor
+	 */
+	getMouseElement(event: MouseEvent): { model: BaseModel; element: Element } {
+		var target = event.target as Element;
+		var diagramModel = this.diagramModel;
+
+		//is it a port
+		var element = Toolkit.closest(target, '.port[data-name]');
+		if (element) {
+			var nodeElement = Toolkit.closest(target, '.node[data-nodeid]') as HTMLElement;
+			return {
+				model: diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-name')),
+				element: element
+			};
+		}
+
+		//look for a point
+		element = Toolkit.closest(target, '.point[data-id]');
+		if (element) {
+			return {
+				model: diagramModel.getLink(element.getAttribute('data-linkid')).getPointModel(element.getAttribute('data-id')),
+				element: element
+			};
+		}
+
+		//look for a link
+		element = Toolkit.closest(target, '[data-linkid]');
+		if (element) {
+			return {
+				model: diagramModel.getLink(element.getAttribute('data-linkid')),
+				element: element
+			};
+		}
+
+		//look for a node
+		element = Toolkit.closest(target, '.node[data-nodeid]');
+		if (element) {
+			return {
+				model: diagramModel.getNode(element.getAttribute('data-nodeid')),
+				element: element
+			};
+		}
+
+		return null;
 	}
 
 	enableRepaintEntities(entities: BaseModel[]) {

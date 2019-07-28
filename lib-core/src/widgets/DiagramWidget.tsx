@@ -3,16 +3,14 @@ import { DiagramEngine } from '../DiagramEngine';
 import * as _ from 'lodash';
 import { LinkLayerWidget } from './layers/LinkLayerWidget';
 import { NodeLayerWidget } from './layers/NodeLayerWidget';
-import { Toolkit } from '../Toolkit';
-import { BaseAction } from '../actions/BaseAction';
+import { BaseMouseAction } from '../actions/BaseMouseAction';
 import { MoveCanvasAction } from '../actions/MoveCanvasAction';
 import { MoveItemsAction } from '../actions/MoveItemsAction';
 import { SelectingAction } from '../actions/SelectingAction';
 import { PointModel } from '../models/PointModel';
 import { PortModel } from '../models/PortModel';
-import { LinkModel } from '../models/LinkModel';
-import { BaseModel } from '../core-models/BaseModel';
 import { BaseWidget, BaseWidgetProps } from './BaseWidget';
+import { MouseEvent } from 'react';
 
 export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
@@ -24,16 +22,15 @@ export interface DiagramProps extends BaseWidgetProps {
 	maxNumberPointsPerLink?: number;
 	smartRouting?: boolean;
 
-	actionStartedFiring?: (action: BaseAction) => boolean;
-	actionStillFiring?: (action: BaseAction) => void;
-	actionStoppedFiring?: (action: BaseAction) => void;
+	actionStartedFiring?: (action: BaseMouseAction) => boolean;
+	actionStillFiring?: (action: BaseMouseAction) => void;
+	actionStoppedFiring?: (action: BaseMouseAction) => void;
 
 	deleteKeys?: number[];
 }
 
 export interface DiagramState {
-	action: BaseAction | null;
-	wasMoved: boolean;
+	action: BaseMouseAction | null;
 	windowListener: any;
 	diagramEngineListener: any;
 }
@@ -122,53 +119,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		this.registerCanvas();
 	}
 
-	/**
-	 * Gets a model and element under the mouse cursor
-	 */
-	getMouseElement(event): { model: BaseModel; element: Element } {
-		var target = event.target as Element;
-		var diagramModel = this.props.diagramEngine.diagramModel;
-
-		//is it a port
-		var element = Toolkit.closest(target, '.port[data-name]');
-		if (element) {
-			var nodeElement = Toolkit.closest(target, '.node[data-nodeid]') as HTMLElement;
-			return {
-				model: diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-name')),
-				element: element
-			};
-		}
-
-		//look for a point
-		element = Toolkit.closest(target, '.point[data-id]');
-		if (element) {
-			return {
-				model: diagramModel.getLink(element.getAttribute('data-linkid')).getPointModel(element.getAttribute('data-id')),
-				element: element
-			};
-		}
-
-		//look for a link
-		element = Toolkit.closest(target, '[data-linkid]');
-		if (element) {
-			return {
-				model: diagramModel.getLink(element.getAttribute('data-linkid')),
-				element: element
-			};
-		}
-
-		//look for a node
-		element = Toolkit.closest(target, '.node[data-nodeid]');
-		if (element) {
-			return {
-				model: diagramModel.getNode(element.getAttribute('data-nodeid')),
-				element: element
-			};
-		}
-
-		return null;
-	}
-
 	fireAction() {
 		if (this.state.action && this.props.actionStillFiring) {
 			this.props.actionStillFiring(this.state.action);
@@ -182,7 +132,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		this.setState({ action: null });
 	}
 
-	startFiringAction(action: BaseAction) {
+	startFiringAction(action: BaseMouseAction) {
 		var setState = true;
 		if (this.props.actionStartedFiring) {
 			setState = this.props.actionStartedFiring(action);
@@ -215,90 +165,11 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	}
 
 	onMouseUp(event) {
-		var diagramEngine = this.props.diagramEngine;
-		//are we going to connect a link to something?
-		if (this.state.action instanceof MoveItemsAction) {
-			var element = this.getMouseElement(event);
-			_.forEach(this.state.action.selectionModels, model => {
-				//only care about points connecting to things
-				if (!(model.model instanceof PointModel)) {
-					return;
-				}
-				if (element && element.model instanceof PortModel && !diagramEngine.isModelLocked(element.model)) {
-					let link = model.model.getLink();
-					if (link.getTargetPort() !== null) {
-						//if this was a valid link already and we are adding a node in the middle, create 2 links from the original
-						if (link.getTargetPort() !== element.model && link.getSourcePort() !== element.model) {
-							const targetPort = link.getTargetPort();
-							let newLink = link.clone({});
-							newLink.setSourcePort(element.model);
-							newLink.setTargetPort(targetPort);
-							link.setTargetPort(element.model);
-							targetPort.removeLink(link);
-							newLink.removePointsBefore(newLink.getPoints()[link.getPointIndex(model.model)]);
-							link.removePointsAfter(model.model);
-							diagramEngine.getDiagramModel().addLink(newLink);
-							//if we are connecting to the same target or source, remove tweener points
-						} else if (link.getTargetPort() === element.model) {
-							link.removePointsAfter(model.model);
-						} else if (link.getSourcePort() === element.model) {
-							link.removePointsBefore(model.model);
-						}
-					} else {
-						link.setTargetPort(element.model);
-					}
-					delete this.props.diagramEngine.linksThatHaveInitiallyRendered[link.getID()];
-				}
-			});
-
-			//check for / remove any loose links in any models which have been moved
-			if (!this.props.allowLooseLinks && this.state.wasMoved) {
-				_.forEach(this.state.action.selectionModels, model => {
-					//only care about points connecting to things
-					if (!(model.model instanceof PointModel)) {
-						return;
-					}
-
-					let selectedPoint: PointModel = model.model;
-					let link: LinkModel = selectedPoint.getLink();
-					if (link.getSourcePort() === null || link.getTargetPort() === null) {
-						link.remove();
-					}
-				});
-			}
-
-			//remove any invalid links
-			_.forEach(this.state.action.selectionModels, model => {
-				//only care about points connecting to things
-				if (!(model.model instanceof PointModel)) {
-					return;
-				}
-
-				let link: LinkModel = model.model.getLink();
-				let sourcePort: PortModel = link.getSourcePort();
-				let targetPort: PortModel = link.getTargetPort();
-				if (sourcePort !== null && targetPort !== null) {
-					if (!sourcePort.canLinkToPort(targetPort)) {
-						//link not allowed
-						link.remove();
-					} else if (
-						_.some(
-							_.values(targetPort.getLinks()),
-							(l: LinkModel) => l !== link && (l.getSourcePort() === sourcePort || l.getTargetPort() === sourcePort)
-						)
-					) {
-						//link is a duplicate
-						link.remove();
-					}
-				}
-			});
-
-			diagramEngine.clearRepaintEntities();
-			this.stopFiringAction(!this.state.wasMoved);
-		} else {
-			diagramEngine.clearRepaintEntities();
-			this.stopFiringAction();
+		if (this.state.action) {
+			this.state.action.fireMouseUp(event);
 		}
+		this.props.diagramEngine.clearRepaintEntities();
+		this.stopFiringAction();
 		document.removeEventListener('mousemove', this.onMouseMove);
 		document.removeEventListener('mouseup', this.onMouseUp);
 	}
@@ -316,6 +187,37 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 				}}
 			/>
 		);
+	}
+
+	getActionForEvent(event: MouseEvent): BaseMouseAction {
+		this.props.diagramEngine.clearRepaintEntities();
+		const { diagramEngine } = this.props;
+		const model = diagramEngine.getMouseElement(event);
+		const relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
+
+		// the canvas was selected
+		if (model === null) {
+			// is it a multiple selection
+			if (event.shiftKey) {
+				return new SelectingAction(relative.x, relative.y, diagramEngine);
+			} else {
+				// its a drag the canvas event
+				return new MoveCanvasAction(event.clientX, event.clientY, diagramEngine.getDiagramModel());
+			}
+		}
+		// its a port element, we want to drag a link
+		else if (model.model instanceof PortModel) {
+			if (!this.props.diagramEngine.isModelLocked(model.model)) {
+				return new MoveItemsAction(event.clientX, event.clientY, diagramEngine, this.props.allowLooseLinks);
+			} else {
+				diagramEngine.getDiagramModel().clearSelection();
+			}
+		}
+		// its some or other element, probably want to move it
+		if (!event.shiftKey && !model.model.isSelected()) {
+			diagramEngine.getDiagramModel().clearSelection();
+		}
+		return new MoveItemsAction(event.clientX, event.clientY, diagramEngine, this.props.allowLooseLinks);
 	}
 
 	render() {
@@ -374,57 +276,12 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					}
 				}}
 				onMouseDown={event => {
-					if (event.nativeEvent.which === 3) return;
-					this.setState({ ...this.state, wasMoved: false });
-
 					diagramEngine.clearRepaintEntities();
-					var model = this.getMouseElement(event);
-					//the canvas was selected
-					if (model === null) {
-						//is it a multiple selection
-						if (event.shiftKey) {
-							var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
-							this.startFiringAction(new SelectingAction(relative.x, relative.y, diagramEngine));
-						} else {
-							//its a drag the canvas event
-							diagramModel.clearSelection();
-							this.startFiringAction(new MoveCanvasAction(event.clientX, event.clientY, diagramModel));
-						}
-					} else if (model.model instanceof PortModel) {
-						//its a port element, we want to drag a link
-						if (!this.props.diagramEngine.isModelLocked(model.model)) {
-							var relativePoint = diagramEngine.getRelativeMousePoint(event);
-							var sourcePort = model.model;
-							var link = sourcePort.createLinkModel();
-							link.setSourcePort(sourcePort);
-
-							if (link) {
-								link.removeMiddlePoints();
-								if (link.getSourcePort() !== sourcePort) {
-									link.setSourcePort(sourcePort);
-								}
-								link.setTargetPort(null);
-
-								link.getFirstPoint().setPosition(relativePoint);
-								link.getLastPoint().setPosition(relativePoint);
-
-								diagramModel.clearSelection();
-								link.getLastPoint().setSelected(true);
-								diagramModel.addLink(link);
-
-								this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
-							}
-						} else {
-							diagramModel.clearSelection();
-						}
-					} else {
-						//its some or other element, probably want to move it
-						if (!event.shiftKey && !model.model.isSelected()) {
-							diagramModel.clearSelection();
-						}
-						model.model.setSelected(true);
-
-						this.startFiringAction(new MoveItemsAction(event.clientX, event.clientY, diagramEngine));
+					// try and get an action for this event
+					const action = this.getActionForEvent(event);
+					if (action) {
+						action.fireMouseDown(event);
+						this.startFiringAction(action);
 					}
 					document.addEventListener('mousemove', this.onMouseMove);
 					document.addEventListener('mouseup', this.onMouseUp);
@@ -436,9 +293,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						document.addEventListener('mouseup', this.onMouseUp);
 						event.stopPropagation();
 						diagramModel.clearSelection(point);
-						this.setState({
-							action: new MoveItemsAction(event.clientX, event.clientY, diagramEngine)
-						});
+						const action = new MoveItemsAction(event.clientX, event.clientY, diagramEngine, this.props.allowLooseLinks);
+						action.fireMouseDown(event);
+						this.startFiringAction(action);
 					}}
 				/>
 				<NodeLayerWidget diagramEngine={diagramEngine} />

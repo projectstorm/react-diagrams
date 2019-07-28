@@ -1,7 +1,8 @@
-import { BaseAction } from './BaseAction';
+import { BaseMouseAction } from './BaseMouseAction';
 import { DiagramModel } from '../models/DiagramModel';
+import { MouseEvent } from 'react';
 
-export class MoveCanvasAction extends BaseAction {
+export class MoveCanvasAction extends BaseMouseAction {
 	initialOffsetX: number;
 	initialOffsetY: number;
 
@@ -17,5 +18,11 @@ export class MoveCanvasAction extends BaseAction {
 			this.initialOffsetX + (event.clientX - this.mouseX),
 			this.initialOffsetY + (event.clientY - this.mouseY)
 		);
+	}
+
+	fireMouseUp(event: MouseEvent) {}
+
+	fireMouseDown(event: MouseEvent) {
+		this.model.clearSelection();
 	}
 }
