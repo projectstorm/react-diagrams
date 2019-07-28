@@ -7,7 +7,19 @@ export interface DefaultLinkPointWidgetProps {
 	colorSelected: string;
 }
 
-export class DefaultLinkPointWidget extends React.Component<DefaultLinkPointWidgetProps> {
+export interface DefaultLinkPointWidgetState {
+	selected: boolean
+}
+
+export class DefaultLinkPointWidget extends React.Component<DefaultLinkPointWidgetProps, DefaultLinkPointWidgetState> {
+
+	constructor(props){
+		super(props);
+		this.state = {
+			selected: false
+		}
+	}
+
 	render() {
 		const { point } = this.props;
 		return (
@@ -16,9 +28,10 @@ export class DefaultLinkPointWidget extends React.Component<DefaultLinkPointWidg
 					cx={point.getPosition().x}
 					cy={point.getPosition().y}
 					r={5}
-					fill={point.isSelected() ? this.props.colorSelected : this.props.color}
+					fill={this.state.selected || this.props.point.isSelected() ? this.props.colorSelected : this.props.color}
 				/>
 				<circle
+					className="point"
 					onMouseLeave={() => {
 						this.setState({ selected: false });
 					}}

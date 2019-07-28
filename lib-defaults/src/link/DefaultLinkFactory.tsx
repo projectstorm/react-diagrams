@@ -9,7 +9,7 @@ export class DefaultLinkFactory extends AbstractReactFactory<DefaultLinkModel> {
 	}
 
 	generateReactWidget(event): JSX.Element {
-		return <DefaultLinkWidget link={event.model} diagramEngine={this.engine} />;
+		return <DefaultLinkWidget colorSelected="mediumpurple" link={event.model} diagramEngine={this.engine} />;
 	}
 
 	generateModel(event): DefaultLinkModel {
