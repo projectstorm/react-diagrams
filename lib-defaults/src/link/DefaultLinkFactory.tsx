@@ -22,6 +22,7 @@ export class DefaultLinkFactory extends AbstractReactFactory<DefaultLinkModel> {
 				className={selected ? widget.bem('--path-selected') : ''}
 				strokeWidth={model.getOptions().width}
 				stroke={model.getOptions().color}
+				fill="none"
 				d={path}
 			/>
 		);

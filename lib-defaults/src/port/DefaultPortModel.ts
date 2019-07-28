@@ -45,7 +45,7 @@ export class DefaultPortModel extends PortModel<DefaultPortModelGenerics> {
 		this.options.label = object.label;
 	}
 
-	serialize(): any {
+	serialize() {
 		return {
 			...super.serialize(),
 			in: this.options.in,

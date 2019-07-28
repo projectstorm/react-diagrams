@@ -7,6 +7,8 @@ import { BasePositionModel } from '../core-models/BasePositionModel';
 import { PointModel } from '../models/PointModel';
 import { PortModel } from '../models/PortModel';
 import { MouseEvent } from 'react';
+import * as _ from 'lodash';
+import { LabelWidget } from './LabelWidget';
 
 export interface LinkProps {
 	link: LinkModel;
@@ -95,8 +97,15 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 		}
 
 		//generate links
-		return React.cloneElement(this.props.diagramEngine.generateWidgetForLink(link), {
-			pointAdded: this.props.pointAdded
-		});
+		return (
+			<g>
+				{React.cloneElement(this.props.diagramEngine.generateWidgetForLink(link), {
+					pointAdded: this.props.pointAdded
+				})}
+				{_.map(this.props.link.getLabels(), (labelModel, index) => {
+					return <LabelWidget engine={this.props.diagramEngine} label={labelModel} index={index} />;
+				})}
+			</g>
+		);
 	}
 }

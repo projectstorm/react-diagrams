@@ -35,7 +35,7 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	protected actionFactories: FactoryBank<AbstractActionFactory>;
 
 	diagramModel: DiagramModel;
-	canvas: Element;
+	canvas: HTMLDivElement;
 	paintableWidgets: {};
 	linksThatHaveInitiallyRendered: {};
 	maxNumberPointsPerLink: number;
@@ -179,7 +179,7 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		return this.paintableWidgets[baseModel.getID()] !== undefined;
 	}
 
-	setCanvas(canvas: Element | null) {
+	setCanvas(canvas?: HTMLDivElement) {
 		if (this.canvas !== canvas) {
 			this.canvas = canvas;
 			if (canvas) {

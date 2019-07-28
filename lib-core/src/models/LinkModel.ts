@@ -26,6 +26,8 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 	protected labels: LabelModel[];
 	protected points: PointModel[];
 
+	protected renderedPaths: SVGPathElement[];
+
 	constructor(options: G['OPTIONS']) {
 		super(options);
 		this.points = [
@@ -38,6 +40,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		];
 		this.sourcePort = null;
 		this.targetPort = null;
+		this.renderedPaths = [];
 		this.labels = [];
 	}
 
@@ -74,6 +77,14 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 					.getPortFromID(ob.sourcePort)
 			);
 		}
+	}
+
+	getRenderedPath(): SVGPathElement[] {
+		return this.renderedPaths;
+	}
+
+	setRenderedPaths(paths: SVGPathElement[]) {
+		this.renderedPaths = paths;
 	}
 
 	serialize() {

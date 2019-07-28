@@ -1,7 +1,12 @@
 import { BaseModel, BaseModelGenerics } from '../core-models/BaseModel';
 import { DiagramEngine } from '../DiagramEngine';
+import { LinkModel } from './LinkModel';
 
-export class LabelModel<G extends BaseModelGenerics = BaseModelGenerics> extends BaseModel<G> {
+export interface LabelModelGenerics extends BaseModelGenerics {
+	PARENT: LinkModel;
+}
+
+export class LabelModel<G extends LabelModelGenerics = LabelModelGenerics> extends BaseModel<G> {
 	offsetX: number;
 	offsetY: number;
 
