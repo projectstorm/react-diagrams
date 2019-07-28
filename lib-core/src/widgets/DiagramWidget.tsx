@@ -198,7 +198,8 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 				{...this.getProps()}
 				ref={this.ref}
 				onWheel={event => {
-					if (this.props.allowCanvasZoom) {
+					const allow = this.props.allowCanvasZoom == null ? true : this.props.allowCanvasZoom;
+					if (allow) {
 						event.stopPropagation();
 						const oldZoomFactor = diagramModel.getZoomLevel() / 100;
 						let scrollDelta = this.props.inverseZoom ? -event.deltaY : event.deltaY;
@@ -249,7 +250,12 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					const action = this.getActionForEvent(event);
 					if (action) {
 						if (action instanceof AbstractMouseAction) {
-							action.fireMouseDown(event);
+							const selected = diagramEngine.getMouseElement(event);
+							action.fireMouseDown({
+								mouseEvent: event,
+								selectedEntity: selected && (selected.element as HTMLElement),
+								selectedModel: selected && selected.model
+							});
 						}
 						this.startFiringAction(action);
 					}
@@ -262,7 +268,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						document.addEventListener('mousemove', this.onMouseMove);
 						document.addEventListener('mouseup', this.onMouseUp);
 						event.stopPropagation();
-						diagramModel.clearSelection(point);
 
 						// TODO implement this better and more generic
 						let action: MoveItemsAction = null;
@@ -272,7 +277,11 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						} catch (e) {}
 						if (fac) {
 							action = fac.generateAction(event);
-							action.fireMouseDown(event);
+							action.fireMouseDown({
+								selectedModel: point,
+								selectedEntity: event.target as HTMLElement,
+								mouseEvent: event
+							});
 							this.startFiringAction(action);
 						}
 					}}

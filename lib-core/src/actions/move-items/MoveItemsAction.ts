@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { PortModel } from '../../models/PortModel';
 import { LinkModel } from '../../models/LinkModel';
 import { MouseEvent } from 'react';
+import { ActionFactoryActivationEvent } from '../../core-actions/AbstractActionFactory';
 
 export class MoveItemsAction extends AbstractMouseAction {
 	selectionModels: SelectionModel[];
@@ -137,19 +138,17 @@ export class MoveItemsAction extends AbstractMouseAction {
 		this.engine.clearRepaintEntities();
 	}
 
-	fireMouseDown(event: React.MouseEvent) {
-		const selectedElement = this.engine.getMouseElement(event);
-
+	fireMouseDown(event: ActionFactoryActivationEvent) {
 		// clear selection first?
-		if (!selectedElement.model.isSelected()) {
+		if (!event.selectedModel.isSelected()) {
 			this.model.clearSelection();
 		}
 
-		if (selectedElement.model instanceof PortModel) {
+		if (event.selectedModel instanceof PortModel) {
 			//its a port element, we want to drag a link
-			if (!this.engine.isModelLocked(selectedElement.model)) {
-				const portCenter = this.engine.getPortCenter(selectedElement.model);
-				const sourcePort = selectedElement.model;
+			if (!this.engine.isModelLocked(event.selectedModel)) {
+				const portCenter = this.engine.getPortCenter(event.selectedModel);
+				const sourcePort = event.selectedModel;
 				const link = sourcePort.createLinkModel();
 				link.setSourcePort(sourcePort);
 
@@ -169,7 +168,7 @@ export class MoveItemsAction extends AbstractMouseAction {
 				}
 			}
 		} else {
-			selectedElement.model.setSelected(true);
+			event.selectedModel.setSelected(true);
 		}
 		const selectedItems = this.model.getSelectedItems().filter(item => {
 			if (!(item instanceof BasePositionModel)) {

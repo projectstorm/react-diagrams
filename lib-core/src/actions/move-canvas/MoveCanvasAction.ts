@@ -20,9 +20,9 @@ export class MoveCanvasAction extends AbstractMouseAction {
 		);
 	}
 
-	fireMouseUp(event: MouseEvent) {}
+	fireMouseUp(event) {}
 
-	fireMouseDown(event: MouseEvent) {
+	fireMouseDown(event) {
 		this.model.clearSelection();
 	}
 }

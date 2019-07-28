@@ -76,9 +76,8 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 				link: this.props.link,
 				position: this.props.diagramEngine.getRelativeMousePoint(event)
 			});
-			point.setSelected(true);
-			this.forceUpdate();
 			this.props.link.addPoint(point, index);
+			this.forceUpdate();
 			this.props.pointAdded(point, event);
 		}
 	};

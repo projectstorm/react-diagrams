@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react';
 import { AbstractAction } from './AbstractAction';
 import { DiagramEngine } from '../DiagramEngine';
+import { ActionFactoryActivationEvent } from './AbstractActionFactory';
 
 export abstract class AbstractMouseAction extends AbstractAction {
 	protected mouseX: number;
@@ -12,7 +13,7 @@ export abstract class AbstractMouseAction extends AbstractAction {
 		this.mouseY = mouseY;
 	}
 
-	abstract fireMouseDown(event: MouseEvent);
+	abstract fireMouseDown(event: ActionFactoryActivationEvent);
 
 	abstract fireMouseMove(event: MouseEvent);
 

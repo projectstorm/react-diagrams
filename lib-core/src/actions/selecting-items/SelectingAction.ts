@@ -66,9 +66,7 @@ export class SelectingAction extends AbstractMouseAction {
 		this.mouseY2 = relative.y;
 	}
 
-	fireMouseUp(event: MouseEvent) {}
+	fireMouseUp(event) {}
 
-	fireMouseDown(event: MouseEvent) {
-		var model = this.engine.getMouseElement(event);
-	}
+	fireMouseDown(event) {}
 }

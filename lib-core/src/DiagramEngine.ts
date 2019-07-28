@@ -42,6 +42,7 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 
 	constructor() {
 		super();
+		this.maxNumberPointsPerLink = 1000;
 		this.diagramModel = new DiagramModel();
 
 		// create banks for the different factory types
