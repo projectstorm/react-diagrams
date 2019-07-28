@@ -43,12 +43,14 @@ export class FactoryBank<F extends AbstractFactory = AbstractFactory> extends Ba
 	}
 
 	registerFactory(factory: F) {
+		factory.setFactoryBank(this);
 		this.factories[factory.getType()] = factory;
 		this.fireEvent({ factory }, 'factoryAdded');
 	}
 
 	deregisterFactory(type: string) {
 		const factory = this.factories[type];
+		factory.setFactoryBank(null);
 		delete this.factories[type];
 		this.fireEvent({ factory }, 'factoryRemoved');
 	}

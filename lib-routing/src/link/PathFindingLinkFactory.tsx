@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { AbstractReactFactory } from '@projectstorm/react-diagrams-core';
+import {
+	AbstractReactFactory,
+	DiagramEngine,
+	FactoryBank,
+	AbstractFactory,
+	ListenerHandle
+} from '@projectstorm/react-diagrams-core';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
 import { PathFindingLinkWidget } from './PathFindingLinkWidget';
 import * as _ from 'lodash';
@@ -17,9 +23,29 @@ export class PathFindingLinkFactory extends AbstractReactFactory<PathFindingLink
 	vAdjustmentFactor: number = 0;
 
 	static NAME = 'pathfinding';
+	listener: ListenerHandle;
 
 	constructor() {
 		super(PathFindingLinkFactory.NAME);
+	}
+
+	setDiagramEngine(engine: DiagramEngine): void {
+		super.setDiagramEngine(engine);
+		this.listener = engine.registerListener({
+			canvasReady: () => {
+				_.defer(() => {
+					this.calculateRoutingMatrix();
+					engine.repaintCanvas();
+				});
+			}
+		});
+	}
+
+	setFactoryBank(bank: FactoryBank<AbstractFactory>): void {
+		super.setFactoryBank(bank);
+		if (!bank && this.listener) {
+			this.listener.deregister();
+		}
 	}
 
 	generateReactWidget(event): JSX.Element {

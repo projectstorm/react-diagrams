@@ -73,8 +73,8 @@ export class LabelWidget extends React.Component<LabelWidgetProps> {
 		const pathCentre = path.getPointAtLength(position);
 
 		const labelCoordinates = {
-			x: pathCentre.x - labelDimensions.width / 2 + this.props.label.offsetX,
-			y: pathCentre.y - labelDimensions.height / 2 + this.props.label.offsetY
+			x: pathCentre.x - labelDimensions.width / 2 + this.props.label.getOptions().offsetX,
+			y: pathCentre.y - labelDimensions.height / 2 + this.props.label.getOptions().offsetY
 		};
 
 		this.ref.current.style.transform = `translate(${labelCoordinates.x}px, ${labelCoordinates.y}px)`;

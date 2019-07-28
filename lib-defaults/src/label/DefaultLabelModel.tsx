@@ -1,12 +1,7 @@
-import {
-	BaseModelGenerics,
-	BaseModelOptions,
-	DiagramEngine,
-	LabelModel,
-	LabelModelGenerics
-} from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, LabelModel, LabelModelGenerics } from '@projectstorm/react-diagrams-core';
+import { LabelModelOptions } from '@projectstorm/react-diagrams-core/src/models/LabelModel';
 
-export interface DefaultLabelModelOptions extends BaseModelOptions {
+export interface DefaultLabelModelOptions extends LabelModelOptions {
 	label?: string;
 }
 
@@ -18,9 +13,9 @@ export class DefaultLabelModel extends LabelModel<DefaultLabelModelGenerics> {
 	constructor(options: DefaultLabelModelOptions = {}) {
 		super({
 			...options,
+			offsetY: options.offsetY == null ? -23 : options.offsetY,
 			type: 'default'
 		});
-		this.offsetY = -23;
 	}
 
 	setLabel(label: string) {

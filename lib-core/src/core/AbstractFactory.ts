@@ -1,4 +1,5 @@
 import { DiagramEngine } from '../DiagramEngine';
+import { FactoryBank } from './FactoryBank';
 
 /**
  * Base factory for all the different types of entities.
@@ -13,6 +14,7 @@ export abstract class AbstractFactory<T = any> {
 	 * The engine gets injected when the factory is registered
 	 */
 	protected engine: DiagramEngine;
+	protected bank: FactoryBank;
 
 	constructor(type: string) {
 		this.type = type;
@@ -20,6 +22,10 @@ export abstract class AbstractFactory<T = any> {
 
 	setDiagramEngine(engine: DiagramEngine) {
 		this.engine = engine;
+	}
+
+	setFactoryBank(bank: FactoryBank) {
+		this.bank = bank;
 	}
 
 	getType(): string {

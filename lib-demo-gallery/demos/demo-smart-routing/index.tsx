@@ -3,7 +3,8 @@ import createEngine, {
 	DefaultNodeModel,
 	DefaultPortModel,
 	DiagramWidget,
-	PathFindingLinkFactory
+	PathFindingLinkFactory,
+	DefaultLabelModel
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
@@ -39,6 +40,13 @@ export default () => {
 	const link1 = port1.link(port4, pathfinding);
 	const link2 = port2.link(port3, pathfinding);
 
+	link1.addLabel(
+		new DefaultLabelModel({
+			label: 'I am a label!',
+			offsetY: 20
+		})
+	);
+
 	// add all to the main model
 	model.addAll(node1, node2, node3, node4, node5, link1, link2);
 
@@ -61,8 +69,6 @@ export default () => {
 				}}
 				className="srd-demo-canvas"
 				diagramEngine={engine}
-				smartRouting={true}
-				maxNumberPointsPerLink={0}
 			/>
 		</DemoWorkspaceWidget>
 	);
