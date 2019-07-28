@@ -8,16 +8,15 @@ export interface DefaultLinkPointWidgetProps {
 }
 
 export interface DefaultLinkPointWidgetState {
-	selected: boolean
+	selected: boolean;
 }
 
 export class DefaultLinkPointWidget extends React.Component<DefaultLinkPointWidgetProps, DefaultLinkPointWidgetState> {
-
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			selected: false
-		}
+		};
 	}
 
 	render() {
