@@ -1,5 +1,6 @@
 import { BaseEvent, BaseListener, BaseObserver } from './BaseObserver';
 import { AbstractFactory } from './AbstractFactory';
+import * as _ from 'lodash';
 
 export interface FactoryBankListener<F extends AbstractFactory> extends BaseListener {
 	/**
@@ -22,6 +23,10 @@ export class FactoryBank<F extends AbstractFactory = AbstractFactory> extends Ba
 	constructor() {
 		super();
 		this.factories = {};
+	}
+
+	getFactories(): F[] {
+		return _.values(this.factories);
 	}
 
 	clearFactories() {

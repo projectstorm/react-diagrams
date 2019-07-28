@@ -1,7 +1,7 @@
-import { AbstractFactory } from '@projectstorm/react-diagrams-core';
+import { AbstractModelFactory } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from './DefaultPortModel';
 
-export class DefaultPortFactory extends AbstractFactory<DefaultPortModel> {
+export class DefaultPortFactory extends AbstractModelFactory<DefaultPortModel> {
 	constructor() {
 		super('default');
 	}

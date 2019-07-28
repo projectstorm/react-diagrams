@@ -6,6 +6,7 @@ import { BaseEntityEvent } from '../core-models/BaseEntity';
 import { BasePositionModel } from '../core-models/BasePositionModel';
 import { PointModel } from '../models/PointModel';
 import { PortModel } from '../models/PortModel';
+import { MouseEvent } from 'react';
 
 export interface LinkProps {
 	link: LinkModel;

@@ -8,12 +8,13 @@ import { PortModel } from './models/PortModel';
 import { LinkModel } from './models/LinkModel';
 import { LabelModel } from './models/LabelModel';
 import { FactoryBank } from './core/FactoryBank';
-import { AbstractFactory } from './core/AbstractFactory';
 import { AbstractReactFactory } from './core/AbstractReactFactory';
 import { BaseListener, BaseObserver } from './core/BaseObserver';
 import { Point } from '@projectstorm/react-diagrams-geometry';
 import { Toolkit } from './Toolkit';
 import { MouseEvent } from 'react';
+import { AbstractActionFactory } from './core-actions/AbstractActionFactory';
+import { AbstractModelFactory } from './core/AbstractModelFactory';
 
 export interface DiagramEngineListener extends BaseListener {
 	canvasReady?(): void;
@@ -29,8 +30,9 @@ export interface DiagramEngineListener extends BaseListener {
 export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 	protected nodeFactories: FactoryBank<AbstractReactFactory<NodeModel>>;
 	protected linkFactories: FactoryBank<AbstractReactFactory<LinkModel>>;
-	protected portFactories: FactoryBank<AbstractFactory<PortModel>>;
+	protected portFactories: FactoryBank<AbstractModelFactory<PortModel>>;
 	protected labelFactories: FactoryBank<AbstractReactFactory<LabelModel>>;
+	protected actionFactories: FactoryBank<AbstractActionFactory>;
 
 	diagramModel: DiagramModel;
 	canvas: Element;
@@ -47,6 +49,7 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		this.linkFactories = new FactoryBank();
 		this.portFactories = new FactoryBank();
 		this.labelFactories = new FactoryBank();
+		this.actionFactories = new FactoryBank();
 
 		const setup = (factory: FactoryBank) => {
 			factory.registerListener({
@@ -63,6 +66,7 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		setup(this.linkFactories);
 		setup(this.portFactories);
 		setup(this.labelFactories);
+		setup(this.actionFactories);
 
 		this.canvas = null;
 		this.paintableWidgets = null;
@@ -194,20 +198,24 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 
 	//!-------------- FACTORIES ------------
 
-	getNodeFactories(): FactoryBank {
+	getNodeFactories() {
 		return this.nodeFactories;
 	}
 
-	getLinkFactories(): FactoryBank {
+	getLinkFactories() {
 		return this.linkFactories;
 	}
 
-	getLabelFactories(): FactoryBank {
+	getLabelFactories() {
 		return this.labelFactories;
 	}
 
-	getPortFactories(): FactoryBank {
+	getPortFactories() {
 		return this.portFactories;
+	}
+
+	getActionFactories() {
+		return this.actionFactories;
 	}
 
 	getFactoryForNode(node: NodeModel | string) {

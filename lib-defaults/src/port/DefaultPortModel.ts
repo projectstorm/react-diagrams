@@ -1,12 +1,12 @@
 import * as _ from 'lodash';
 import {
-	AbstractFactory,
 	DiagramEngine,
 	LinkModel,
 	PortModel,
 	PortModelAlignment,
 	PortModelGenerics,
-	PortModelOptions
+	PortModelOptions,
+	AbstractModelFactory
 } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from '../link/DefaultLinkModel';
 import { DefaultNodeModel } from '../node/DefaultNodeModel';
@@ -21,7 +21,7 @@ export interface DefaultPortModelGenerics {
 	PARENT: DefaultNodeModel;
 }
 
-export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortModelGenerics> {
+export class DefaultPortModel extends PortModel<DefaultPortModelGenerics & PortModelGenerics> {
 	constructor(isIn: boolean, name?: string, label?: string);
 	constructor(options: DefaultPortModelOptions);
 	constructor(options: DefaultPortModelOptions | boolean, name?: string, label?: string) {
@@ -54,7 +54,7 @@ export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortM
 		});
 	}
 
-	link(port: PortModel, factory?: AbstractFactory<LinkModel>): LinkModel {
+	link(port: PortModel, factory?: AbstractModelFactory<LinkModel>): LinkModel {
 		let link = this.createLinkModel(factory);
 		link.setSourcePort(this);
 		link.setTargetPort(port);
@@ -68,7 +68,7 @@ export class DefaultPortModel extends PortModel<PortModelGenerics & DefaultPortM
 		return true;
 	}
 
-	createLinkModel(factory?: AbstractFactory<LinkModel>): LinkModel {
+	createLinkModel(factory?: AbstractModelFactory<LinkModel>): LinkModel {
 		let link = super.createLinkModel();
 		if (!link && factory) {
 			return factory.generateModel({});

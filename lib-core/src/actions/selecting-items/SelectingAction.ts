@@ -1,17 +1,15 @@
-import { BaseMouseAction } from './BaseMouseAction';
-import { DiagramModel } from '../models/DiagramModel';
+import { AbstractMouseAction } from '../../core-actions/AbstractMouseAction';
+import { DiagramModel } from '../../models/DiagramModel';
 import * as _ from 'lodash';
-import { DiagramEngine } from '../DiagramEngine';
+import { DiagramEngine } from '../../DiagramEngine';
 import { MouseEvent } from 'react';
 
-export class SelectingAction extends BaseMouseAction {
+export class SelectingAction extends AbstractMouseAction {
 	mouseX2: number;
 	mouseY2: number;
-	engine: DiagramEngine;
 
 	constructor(mouseX: number, mouseY: number, engine: DiagramEngine) {
-		super(mouseX, mouseY, engine.getDiagramModel());
-		this.engine = engine;
+		super(mouseX, mouseY, engine);
 		this.mouseX2 = mouseX;
 		this.mouseY2 = mouseY;
 	}

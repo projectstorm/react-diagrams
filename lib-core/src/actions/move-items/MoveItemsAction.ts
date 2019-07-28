@@ -1,24 +1,22 @@
-import { BaseMouseAction } from './BaseMouseAction';
-import { SelectionModel } from '../models/SelectionModel';
-import { PointModel } from '../models/PointModel';
-import { NodeModel } from '../models/NodeModel';
-import { DiagramEngine } from '../DiagramEngine';
-import { BasePositionModel } from '../core-models/BasePositionModel';
+import { AbstractMouseAction } from '../../core-actions/AbstractMouseAction';
+import { SelectionModel } from '../../models/SelectionModel';
+import { PointModel } from '../../models/PointModel';
+import { NodeModel } from '../../models/NodeModel';
+import { DiagramEngine } from '../../DiagramEngine';
+import { BasePositionModel } from '../../core-models/BasePositionModel';
 import * as _ from 'lodash';
-import { PortModel } from '../models/PortModel';
-import { LinkModel } from '../models/LinkModel';
+import { PortModel } from '../../models/PortModel';
+import { LinkModel } from '../../models/LinkModel';
 import { MouseEvent } from 'react';
 
-export class MoveItemsAction extends BaseMouseAction {
+export class MoveItemsAction extends AbstractMouseAction {
 	selectionModels: SelectionModel[];
 	moved: boolean;
-	diagramEngine: DiagramEngine;
 	allowLooseLinks: boolean;
 
 	constructor(mouseX: number, mouseY: number, diagramEngine: DiagramEngine, allowLooseLinks: boolean) {
-		super(mouseX, mouseY, diagramEngine.getDiagramModel());
+		super(mouseX, mouseY, diagramEngine);
 		this.allowLooseLinks = allowLooseLinks;
-		this.diagramEngine = diagramEngine;
 		this.moved = false;
 	}
 
@@ -38,7 +36,7 @@ export class MoveItemsAction extends BaseMouseAction {
 				if (model.model instanceof NodeModel) {
 					// update port coordinates as well
 					_.forEach(model.model.getPorts(), port => {
-						const portCoords = this.diagramEngine.getPortCoords(port);
+						const portCoords = this.engine.getPortCoords(port);
 						port.updateCoords(portCoords);
 					});
 				}
@@ -55,36 +53,42 @@ export class MoveItemsAction extends BaseMouseAction {
 	}
 
 	fireMouseUp(event: MouseEvent) {
-		const element = this.diagramEngine.getMouseElement(event);
+		const element = this.engine.getMouseElement(event);
 		_.forEach(this.selectionModels, model => {
 			//only care about points connecting to things
 			if (!(model.model instanceof PointModel)) {
 				return;
 			}
-			if (element && element.model instanceof PortModel && !this.diagramEngine.isModelLocked(element.model)) {
+			if (element && element.model instanceof PortModel && !this.engine.isModelLocked(element.model)) {
 				let link = model.model.getLink();
+
+				//if this was a valid link already and we are adding a node in the middle, create 2 links from the original
 				if (link.getTargetPort()) {
-					//if this was a valid link already and we are adding a node in the middle, create 2 links from the original
 					if (link.getTargetPort() !== element.model && link.getSourcePort() !== element.model) {
 						const targetPort = link.getTargetPort();
 						let newLink = link.clone({});
 						newLink.setSourcePort(element.model);
 						newLink.setTargetPort(targetPort);
 						link.setTargetPort(element.model);
+						link.getLastPoint().setPosition(this.engine.getPortCenter(element.model));
 						targetPort.removeLink(link);
 						newLink.removePointsBefore(newLink.getPoints()[link.getPointIndex(model.model)]);
 						link.removePointsAfter(model.model);
-						this.diagramEngine.getDiagramModel().addLink(newLink);
+						this.engine.getDiagramModel().addLink(newLink);
 						//if we are connecting to the same target or source, remove tweener points
 					} else if (link.getTargetPort() === element.model) {
 						link.removePointsAfter(model.model);
 					} else if (link.getSourcePort() === element.model) {
 						link.removePointsBefore(model.model);
 					}
-				} else {
-					link.setTargetPort(element.model);
 				}
-				delete this.diagramEngine.linksThatHaveInitiallyRendered[link.getID()];
+
+				// set the target port
+				else {
+					link.setTargetPort(element.model);
+					link.getLastPoint().setPosition(this.engine.getPortCenter(element.model));
+				}
+				delete this.engine.linksThatHaveInitiallyRendered[link.getID()];
 			}
 		});
 
@@ -130,15 +134,21 @@ export class MoveItemsAction extends BaseMouseAction {
 			}
 		});
 
-		this.diagramEngine.clearRepaintEntities();
+		this.engine.clearRepaintEntities();
 	}
 
 	fireMouseDown(event: React.MouseEvent) {
-		const selectedElement = this.diagramEngine.getMouseElement(event);
+		const selectedElement = this.engine.getMouseElement(event);
+
+		// clear selection first?
+		if (!selectedElement.model.isSelected()) {
+			this.model.clearSelection();
+		}
+
 		if (selectedElement.model instanceof PortModel) {
 			//its a port element, we want to drag a link
-			if (!this.diagramEngine.isModelLocked(selectedElement.model)) {
-				const portCenter = this.diagramEngine.getPortCenter(selectedElement.model);
+			if (!this.engine.isModelLocked(selectedElement.model)) {
+				const portCenter = this.engine.getPortCenter(selectedElement.model);
 				const sourcePort = selectedElement.model;
 				const link = sourcePort.createLinkModel();
 				link.setSourcePort(sourcePort);
@@ -165,7 +175,7 @@ export class MoveItemsAction extends BaseMouseAction {
 			if (!(item instanceof BasePositionModel)) {
 				return false;
 			}
-			return !this.diagramEngine.isModelLocked(item);
+			return !this.engine.isModelLocked(item);
 		});
 
 		this.selectionModels = selectedItems.map((item: PointModel | NodeModel) => {
@@ -175,6 +185,6 @@ export class MoveItemsAction extends BaseMouseAction {
 				initialY: item.getY()
 			};
 		});
-		this.diagramEngine.enableRepaintEntities(this.model.getSelectedItems());
+		this.engine.enableRepaintEntities(this.model.getSelectedItems());
 	}
 }

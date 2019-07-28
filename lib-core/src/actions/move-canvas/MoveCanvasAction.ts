@@ -1,15 +1,15 @@
-import { BaseMouseAction } from './BaseMouseAction';
-import { DiagramModel } from '../models/DiagramModel';
+import { AbstractMouseAction } from '../../core-actions/AbstractMouseAction';
 import { MouseEvent } from 'react';
+import { DiagramEngine } from '../../DiagramEngine';
 
-export class MoveCanvasAction extends BaseMouseAction {
+export class MoveCanvasAction extends AbstractMouseAction {
 	initialOffsetX: number;
 	initialOffsetY: number;
 
-	constructor(mouseX: number, mouseY: number, diagramModel: DiagramModel) {
-		super(mouseX, mouseY, diagramModel);
-		this.initialOffsetX = diagramModel.getOffsetX();
-		this.initialOffsetY = diagramModel.getOffsetY();
+	constructor(mouseX: number, mouseY: number, engine: DiagramEngine) {
+		super(mouseX, mouseY, engine);
+		this.initialOffsetX = this.model.getOffsetX();
+		this.initialOffsetY = this.model.getOffsetY();
 	}
 
 	fireMouseMove(event: MouseEvent) {

@@ -47,7 +47,7 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		super.doClone(lookupTable, clone);
 	}
 
-	removePort(port: (DefaultNodeModelGenerics & NodeModelGenerics)['PORT']): void {
+	removePort(port: DefaultPortModel): void {
 		super.removePort(port);
 		if (port.getOptions().in) {
 			this.portsIn.splice(this.portsIn.indexOf(port));
@@ -56,7 +56,7 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		}
 	}
 
-	addPort<T extends (DefaultNodeModelGenerics & NodeModelGenerics)['PORT']>(port: T): T {
+	addPort<T extends DefaultPortModel>(port: T): T {
 		super.addPort(port);
 		if (port.getOptions().in) {
 			if (this.portsIn.indexOf(port) === -1) {

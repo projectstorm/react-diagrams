@@ -3,68 +3,46 @@ import { DiagramEngine } from '../DiagramEngine';
 import * as _ from 'lodash';
 import { LinkLayerWidget } from './layers/LinkLayerWidget';
 import { NodeLayerWidget } from './layers/NodeLayerWidget';
-import { BaseMouseAction } from '../actions/BaseMouseAction';
-import { MoveCanvasAction } from '../actions/MoveCanvasAction';
-import { MoveItemsAction } from '../actions/MoveItemsAction';
-import { SelectingAction } from '../actions/SelectingAction';
+import { AbstractMouseAction } from '../core-actions/AbstractMouseAction';
+import { MoveItemsAction } from '../actions/move-items/MoveItemsAction';
+import { SelectingAction } from '../actions/selecting-items/SelectingAction';
 import { PointModel } from '../models/PointModel';
-import { PortModel } from '../models/PortModel';
 import { BaseWidget, BaseWidgetProps } from './BaseWidget';
 import { MouseEvent } from 'react';
+import { ActionFactoryActivationEvent } from '../core-actions/AbstractActionFactory';
+import { AbstractAction } from '../core-actions/AbstractAction';
+import { MoveItemsActionFactory } from '../actions/move-items/MoveItemsActionFactory';
 
 export interface DiagramProps extends BaseWidgetProps {
 	diagramEngine: DiagramEngine;
 
-	allowLooseLinks?: boolean;
-	allowCanvasTranslation?: boolean;
+	// zoom
 	allowCanvasZoom?: boolean;
 	inverseZoom?: boolean;
-	maxNumberPointsPerLink?: number;
-	smartRouting?: boolean;
 
-	actionStartedFiring?: (action: BaseMouseAction) => boolean;
-	actionStillFiring?: (action: BaseMouseAction) => void;
-	actionStoppedFiring?: (action: BaseMouseAction) => void;
+	actionStartedFiring?: (action: AbstractAction) => boolean;
+	actionStillFiring?: (action: AbstractAction) => void;
+	actionStoppedFiring?: (action: AbstractAction) => void;
 
 	deleteKeys?: number[];
 }
 
 export interface DiagramState {
-	action: BaseMouseAction | null;
-	windowListener: any;
+	action: AbstractAction;
 	diagramEngineListener: any;
 }
 
-/**
- * @author Dylan Vorster
- */
 export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
-	public static defaultProps: DiagramProps = {
-		diagramEngine: null,
-		allowLooseLinks: true,
-		allowCanvasTranslation: true,
-		allowCanvasZoom: true,
-		inverseZoom: false,
-		maxNumberPointsPerLink: Infinity, // backwards compatible default
-		smartRouting: false,
-		deleteKeys: [46, 8]
-	};
-
 	onKeyUpPointer: (this: Window, ev: KeyboardEvent) => void = null;
 	ref: React.RefObject<HTMLDivElement>;
 
 	constructor(props: DiagramProps) {
 		super('srd-diagram', props);
-		this.onMouseMove = this.onMouseMove.bind(this);
-		this.onMouseUp = this.onMouseUp.bind(this);
+
 		this.ref = React.createRef();
 		this.state = {
 			action: null,
-			wasMoved: false,
-			renderedNodes: false,
-			windowListener: null,
-			diagramEngineListener: null,
-			document: null
+			diagramEngineListener: null
 		};
 	}
 
@@ -132,7 +110,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		this.setState({ action: null });
 	}
 
-	startFiringAction(action: BaseMouseAction) {
+	startFiringAction(action: AbstractAction) {
 		var setState = true;
 		if (this.props.actionStartedFiring) {
 			setState = this.props.actionStartedFiring(action);
@@ -142,18 +120,30 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		}
 	}
 
-	onMouseMove(event) {
+	onMouseUp = event => {
+		if (this.state.action && this.state.action instanceof AbstractMouseAction) {
+			this.state.action.fireMouseUp(event);
+		}
+		this.props.diagramEngine.clearRepaintEntities();
+		this.stopFiringAction();
+		document.removeEventListener('mousemove', this.onMouseMove);
+		document.removeEventListener('mouseup', this.onMouseUp);
+	};
+
+	onMouseMove = event => {
 		//select items so draw a bounding box
 		if (this.state.action) {
-			this.state.action.fireMouseMove(event);
+			if (this.state.action && this.state.action instanceof AbstractMouseAction) {
+				this.state.action.fireMouseMove(event);
+			}
 			this.fireAction();
 			this.forceUpdate();
 		}
-	}
+	};
 
-	onKeyUp(event) {
+	onKeyUp = event => {
 		//delete all selected
-		if (this.props.deleteKeys.indexOf(event.keyCode) !== -1) {
+		if ((this.props.deleteKeys || [46, 8]).indexOf(event.keyCode) !== -1) {
 			_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), element => {
 				//only delete items which are not locked
 				if (!this.props.diagramEngine.isModelLocked(element)) {
@@ -162,17 +152,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 			});
 			this.forceUpdate();
 		}
-	}
-
-	onMouseUp(event) {
-		if (this.state.action) {
-			this.state.action.fireMouseUp(event);
-		}
-		this.props.diagramEngine.clearRepaintEntities();
-		this.stopFiringAction();
-		document.removeEventListener('mousemove', this.onMouseMove);
-		document.removeEventListener('mouseup', this.onMouseUp);
-	}
+	};
 
 	drawSelectionBox() {
 		let dimensions = (this.state.action as SelectingAction).getBoxDimensions();
@@ -189,41 +169,29 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		);
 	}
 
-	getActionForEvent(event: MouseEvent): BaseMouseAction {
+	getActionForEvent(event: MouseEvent): AbstractAction {
+		event.persist();
 		this.props.diagramEngine.clearRepaintEntities();
 		const { diagramEngine } = this.props;
 		const model = diagramEngine.getMouseElement(event);
-		const relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
 
-		// the canvas was selected
-		if (model === null) {
-			// is it a multiple selection
-			if (event.shiftKey) {
-				return new SelectingAction(relative.x, relative.y, diagramEngine);
-			} else {
-				// its a drag the canvas event
-				return new MoveCanvasAction(event.clientX, event.clientY, diagramEngine.getDiagramModel());
+		const activateEvent: ActionFactoryActivationEvent = {
+			selectedModel: model && model.model,
+			selectedEntity: model && (model.element as HTMLElement),
+			mouseEvent: event
+		};
+
+		for (let factory of diagramEngine.getActionFactories().getFactories()) {
+			if (factory.activate(activateEvent)) {
+				return factory.generateAction(event);
 			}
 		}
-		// its a port element, we want to drag a link
-		else if (model.model instanceof PortModel) {
-			if (!this.props.diagramEngine.isModelLocked(model.model)) {
-				return new MoveItemsAction(event.clientX, event.clientY, diagramEngine, this.props.allowLooseLinks);
-			} else {
-				diagramEngine.getDiagramModel().clearSelection();
-			}
-		}
-		// its some or other element, probably want to move it
-		if (!event.shiftKey && !model.model.isSelected()) {
-			diagramEngine.getDiagramModel().clearSelection();
-		}
-		return new MoveItemsAction(event.clientX, event.clientY, diagramEngine, this.props.allowLooseLinks);
+		return null;
 	}
 
 	render() {
-		var diagramEngine = this.props.diagramEngine;
-		diagramEngine.setMaxNumberPointsPerLink(this.props.maxNumberPointsPerLink);
-		var diagramModel = diagramEngine.getDiagramModel();
+		const diagramEngine = this.props.diagramEngine;
+		const diagramModel = diagramEngine.getDiagramModel();
 
 		return (
 			<div
@@ -280,7 +248,9 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 					// try and get an action for this event
 					const action = this.getActionForEvent(event);
 					if (action) {
-						action.fireMouseDown(event);
+						if (action instanceof AbstractMouseAction) {
+							action.fireMouseDown(event);
+						}
 						this.startFiringAction(action);
 					}
 					document.addEventListener('mousemove', this.onMouseMove);
@@ -293,9 +263,18 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						document.addEventListener('mouseup', this.onMouseUp);
 						event.stopPropagation();
 						diagramModel.clearSelection(point);
-						const action = new MoveItemsAction(event.clientX, event.clientY, diagramEngine, this.props.allowLooseLinks);
-						action.fireMouseDown(event);
-						this.startFiringAction(action);
+
+						// TODO implement this better and more generic
+						let action: MoveItemsAction = null;
+						let fac: MoveItemsActionFactory = null;
+						try {
+							fac = diagramEngine.getActionFactories().getFactory<MoveItemsActionFactory>(MoveItemsActionFactory.NAME);
+						} catch (e) {}
+						if (fac) {
+							action = fac.generateAction(event);
+							action.fireMouseDown(event);
+							this.startFiringAction(action);
+						}
 					}}
 				/>
 				<NodeLayerWidget diagramEngine={diagramEngine} />

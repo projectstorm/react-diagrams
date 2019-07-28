@@ -1,13 +1,22 @@
 import './sass/main.scss';
 
-export * from './src/actions/BaseMouseAction';
-export * from './src/actions/MoveCanvasAction';
-export * from './src/actions/SelectingAction';
-export * from './src/actions/MoveItemsAction';
+export * from './src/core-actions/AbstractAction';
+export * from './src/core-actions/AbstractActionFactory';
+export * from './src/core-actions/AbstractMouseAction';
+
+export * from './src/actions/move-canvas/MoveCanvasActionFactory';
+export * from './src/actions/move-canvas/MoveCanvasAction';
+
+export * from './src/actions/selecting-items/SelectingAction';
+export * from './src/actions/selecting-items/SelectingItemsActionFactory';
+
+export * from './src/actions/move-items/MoveItemsAction';
+export * from './src/actions/move-items/MoveItemsActionFactory';
 
 export * from './src/core/BaseObserver';
 export * from './src/core/FactoryBank';
 export * from './src/core/AbstractFactory';
+export * from './src/core/AbstractModelFactory';
 export * from './src/core/AbstractReactFactory';
 
 export * from './src/core-models/BaseModel';

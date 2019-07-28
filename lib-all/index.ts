@@ -1,4 +1,9 @@
-import { DiagramEngine } from '@projectstorm/react-diagrams-core';
+import {
+	DiagramEngine,
+	MoveCanvasActionFactory,
+	MoveItemsActionFactory,
+	SelectingItemsActionFactory
+} from '@projectstorm/react-diagrams-core';
 import {
 	DefaultLabelFactory,
 	DefaultLinkFactory,
@@ -16,10 +21,17 @@ export * from '@projectstorm/react-diagrams-routing';
  */
 export default (): DiagramEngine => {
 	const engine = new DiagramEngine();
+
+	// register model factories
 	engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
-	engine.getNodeFactories().registerFactory(new DefaultNodeFactory());
+	engine.getNodeFactories().registerFactory(new DefaultNodeFactory() as any); // i cant figure out why
 	engine.getLinkFactories().registerFactory(new DefaultLinkFactory());
 	engine.getLinkFactories().registerFactory(new PathFindingLinkFactory());
 	engine.getPortFactories().registerFactory(new DefaultPortFactory());
+
+	// register the default interaction behaviours
+	engine.getActionFactories().registerFactory(new MoveCanvasActionFactory());
+	engine.getActionFactories().registerFactory(new SelectingItemsActionFactory());
+	engine.getActionFactories().registerFactory(new MoveItemsActionFactory());
 	return engine;
 };

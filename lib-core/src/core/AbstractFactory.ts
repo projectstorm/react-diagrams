@@ -1,15 +1,10 @@
-import { BaseModel } from '../core-models/BaseModel';
 import { DiagramEngine } from '../DiagramEngine';
-
-export interface GenerateModelEvent {
-	initialConfig?: any;
-}
 
 /**
  * Base factory for all the different types of entities.
  * Gets registered with the engine, and is used to generate models
  */
-export abstract class AbstractFactory<T extends BaseModel = BaseModel> {
+export abstract class AbstractFactory<T = any> {
 	/**
 	 * Couples the factory with the models it generates
 	 */
@@ -30,9 +25,4 @@ export abstract class AbstractFactory<T extends BaseModel = BaseModel> {
 	getType(): string {
 		return this.type;
 	}
-
-	/**
-	 * Generates new models (the core factory pattern)
-	 */
-	abstract generateModel(event: GenerateModelEvent): T;
 }

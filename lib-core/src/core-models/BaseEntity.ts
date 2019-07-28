@@ -79,7 +79,7 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 		};
 	}
 
-	fireEvent(event: Partial<BaseEntityEvent> & object, k: keyof T['LISTENER']) {
+	fireEvent<L extends Partial<BaseEntityEvent> & object>(event: L, k: keyof T['LISTENER']) {
 		super.fireEvent(
 			{
 				entity: this,
