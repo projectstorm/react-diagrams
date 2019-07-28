@@ -18,19 +18,19 @@ export interface DefaultLinkModelListener extends LinkModelListener {
 	widthChanged?(event: BaseEntityEvent<DefaultLinkModel> & { width: 0 | number }): void;
 }
 
-export interface DefaultLinkModelOptions extends Omit<BaseModelOptions, 'type'> {
+export interface DefaultLinkModelOptions extends BaseModelOptions {
 	width?: number;
 	color?: string;
 	curvyness?: number;
 	type?: string;
 }
 
-export interface DefaultLinkModelGenerics {
+export interface DefaultLinkModelGenerics extends LinkModelGenerics {
 	LISTENER: DefaultLinkModelListener;
 	OPTIONS: DefaultLinkModelOptions;
 }
 
-export class DefaultLinkModel extends LinkModel<LinkModelGenerics & DefaultLinkModelGenerics> {
+export class DefaultLinkModel extends LinkModel<DefaultLinkModelGenerics> {
 	constructor(options: DefaultLinkModelOptions = {}) {
 		super({
 			type: 'default',

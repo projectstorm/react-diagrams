@@ -72,7 +72,7 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 		this.options.locked = data.locked;
 	}
 
-	serialize() {
+	serialize(): object {
 		return {
 			id: this.options.id,
 			locked: this.options.locked

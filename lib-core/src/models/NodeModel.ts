@@ -15,11 +15,10 @@ export interface NodeModelListener extends BaseModelListener {
 export interface NodeModelGenerics extends BasePositionModelGenerics {
 	LISTENER: NodeModelListener;
 	PARENT: DiagramModel;
-	PORT: PortModel;
 }
 
 export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends BasePositionModel<G> {
-	ports: { [s: string]: G['PORT'] };
+	ports: { [s: string]: PortModel };
 
 	// calculated post rendering so routing can be done correctly
 	width: number;
@@ -100,7 +99,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		});
 	}
 
-	getPortFromID(id): G['PORT'] | null {
+	getPortFromID(id): PortModel | null {
 		for (var i in this.ports) {
 			if (this.ports[i].getID() === id) {
 				return this.ports[i];
@@ -118,15 +117,15 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		}
 	}
 
-	getPort(name: string): G['PORT'] | null {
+	getPort(name: string): PortModel | null {
 		return this.ports[name];
 	}
 
-	getPorts(): { [s: string]: G['PORT'] } {
+	getPorts(): { [s: string]: PortModel } {
 		return this.ports;
 	}
 
-	removePort(port: G['PORT']) {
+	removePort(port: PortModel) {
 		//clear the parent node reference
 		if (this.ports[port.getName()]) {
 			this.ports[port.getName()].setParent(null);
@@ -134,7 +133,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		}
 	}
 
-	addPort<T extends G['PORT']>(port: T): T {
+	addPort(port: PortModel): PortModel {
 		port.setParent(this);
 		this.ports[port.getName()] = port;
 		return port;

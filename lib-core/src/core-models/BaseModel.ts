@@ -8,7 +8,7 @@ export interface BaseModelListener extends BaseEntityListener {
 }
 
 export interface BaseModelOptions extends BaseEntityOptions {
-	type: string;
+	type?: string;
 	selected?: boolean;
 	extras?: any;
 }

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import {
-	BaseModelOptions,
+	BasePositionModelOptions,
 	DiagramEngine,
 	NodeModel,
 	NodeModelGenerics,
@@ -8,17 +8,16 @@ import {
 } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from '../port/DefaultPortModel';
 
-export interface DefaultNodeModelOptions extends Omit<BaseModelOptions, 'type'> {
+export interface DefaultNodeModelOptions extends BasePositionModelOptions {
 	name?: string;
 	color?: string;
 }
 
-export interface DefaultNodeModelGenerics {
-	PORT: DefaultPortModel;
+export interface DefaultNodeModelGenerics extends NodeModelGenerics {
 	OPTIONS: DefaultNodeModelOptions;
 }
 
-export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeModelGenerics> {
+export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 	protected portsIn: DefaultPortModel[];
 	protected portsOut: DefaultPortModel[];
 
@@ -102,10 +101,10 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics & NodeM
 		this.options.color = object.color;
 		this.portsIn = _.map(object.portsInOrder, id => {
 			return this.getPortFromID(id);
-		});
+		}) as DefaultPortModel[];
 		this.portsOut = _.map(object.portsOutOrder, id => {
 			return this.getPortFromID(id);
-		});
+		}) as DefaultPortModel[];
 	}
 
 	serialize(): any {

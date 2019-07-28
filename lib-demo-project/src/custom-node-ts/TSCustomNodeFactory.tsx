@@ -13,6 +13,6 @@ export class TSCustomNodeFactory extends AbstractReactFactory<TSCustomNodeModel>
 	}
 
 	generateReactWidget(event): JSX.Element {
-		return <TSCustomNodeWidget node={event.model} />;
+		return <TSCustomNodeWidget engine={this.engine} node={event.model} />;
 	}
 }

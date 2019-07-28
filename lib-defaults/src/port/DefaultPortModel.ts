@@ -9,19 +9,17 @@ import {
 	AbstractModelFactory
 } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from '../link/DefaultLinkModel';
-import { DefaultNodeModel } from '../node/DefaultNodeModel';
 
-export interface DefaultPortModelOptions extends Omit<PortModelOptions, 'type'> {
+export interface DefaultPortModelOptions extends PortModelOptions {
 	label?: string;
 	in?: boolean;
 }
 
-export interface DefaultPortModelGenerics {
+export interface DefaultPortModelGenerics extends PortModelGenerics {
 	OPTIONS: DefaultPortModelOptions;
-	PARENT: DefaultNodeModel;
 }
 
-export class DefaultPortModel extends PortModel<DefaultPortModelGenerics & PortModelGenerics> {
+export class DefaultPortModel extends PortModel<DefaultPortModelGenerics> {
 	constructor(isIn: boolean, name?: string, label?: string);
 	constructor(options: DefaultPortModelOptions);
 	constructor(options: DefaultPortModelOptions | boolean, name?: string, label?: string) {
@@ -47,11 +45,12 @@ export class DefaultPortModel extends PortModel<DefaultPortModelGenerics & PortM
 		this.options.label = object.label;
 	}
 
-	serialize() {
-		return _.merge(super.serialize(), {
+	serialize(): any {
+		return {
+			...super.serialize(),
 			in: this.options.in,
 			label: this.options.label
-		});
+		};
 	}
 
 	link(port: PortModel, factory?: AbstractModelFactory<LinkModel>): LinkModel {
