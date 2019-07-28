@@ -1,12 +1,16 @@
 import { BaseAction } from './BaseAction';
 import { DiagramModel } from '../models/DiagramModel';
+import * as _ from 'lodash';
+import { DiagramEngine } from '../DiagramEngine';
 
 export class SelectingAction extends BaseAction {
 	mouseX2: number;
 	mouseY2: number;
+	engine: DiagramEngine;
 
-	constructor(mouseX: number, mouseY: number) {
-		super(mouseX, mouseY);
+	constructor(mouseX: number, mouseY: number, engine: DiagramEngine) {
+		super(mouseX, mouseY, engine.getDiagramModel());
+		this.engine = engine;
 		this.mouseX2 = mouseX;
 		this.mouseY2 = mouseY;
 	}
@@ -32,5 +36,34 @@ export class SelectingAction extends BaseAction {
 			y * z + diagramModel.getOffsetY() > dimensions.top &&
 			y * z + diagramModel.getOffsetY() < dimensions.bottom
 		);
+	}
+
+	fireMouseMove(event: MouseEvent) {
+		var relative = this.engine.getRelativePoint(event.clientX, event.clientY);
+
+		_.forEach(this.model.getNodes(), node => {
+			// TODO use geometry instead
+			if (this.containsElement(node.getX(), node.getY(), this.model)) {
+				node.setSelected(true);
+			}
+		});
+
+		_.forEach(this.model.getLinks(), link => {
+			var allSelected = true;
+			_.forEach(link.getPoints(), point => {
+				if (this.containsElement(point.getX(), point.getY(), this.model)) {
+					point.setSelected(true);
+				} else {
+					allSelected = false;
+				}
+			});
+
+			if (allSelected) {
+				link.setSelected(true);
+			}
+		});
+
+		this.mouseX2 = relative.x;
+		this.mouseY2 = relative.y;
 	}
 }

@@ -8,7 +8,6 @@ import { BaseAction } from '../actions/BaseAction';
 import { MoveCanvasAction } from '../actions/MoveCanvasAction';
 import { MoveItemsAction } from '../actions/MoveItemsAction';
 import { SelectingAction } from '../actions/SelectingAction';
-import { NodeModel } from '../models/NodeModel';
 import { PointModel } from '../models/PointModel';
 import { PortModel } from '../models/PortModel';
 import { LinkModel } from '../models/LinkModel';
@@ -194,88 +193,11 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	}
 
 	onMouseMove(event) {
-		var diagramEngine = this.props.diagramEngine;
-		var diagramModel = diagramEngine.getDiagramModel();
 		//select items so draw a bounding box
-		if (this.state.action instanceof SelectingAction) {
-			var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
-
-			_.forEach(diagramModel.getNodes(), node => {
-				if ((this.state.action as SelectingAction).containsElement(node.getX(), node.getY(), diagramModel)) {
-					node.setSelected(true);
-				}
-			});
-
-			_.forEach(diagramModel.getLinks(), link => {
-				var allSelected = true;
-				_.forEach(link.getPoints(), point => {
-					if ((this.state.action as SelectingAction).containsElement(point.getX(), point.getY(), diagramModel)) {
-						point.setSelected(true);
-					} else {
-						allSelected = false;
-					}
-				});
-
-				if (allSelected) {
-					link.setSelected(true);
-				}
-			});
-
-			this.state.action.mouseX2 = relative.x;
-			this.state.action.mouseY2 = relative.y;
-
+		if (this.state.action) {
+			this.state.action.fireMouseMove(event);
 			this.fireAction();
-			this.setState({ action: this.state.action });
-			return;
-		} else if (this.state.action instanceof MoveItemsAction) {
-			let amountX = event.clientX - this.state.action.mouseX;
-			let amountY = event.clientY - this.state.action.mouseY;
-			let amountZoom = diagramModel.getZoomLevel() / 100;
-
-			_.forEach(this.state.action.selectionModels, model => {
-				// in this case we need to also work out the relative grid position
-				if (
-					model.model instanceof NodeModel ||
-					(model.model instanceof PointModel && !model.model.isConnectedToPort())
-				) {
-					model.model.setPosition(
-						diagramModel.getGridPosition(model.initialX + amountX / amountZoom),
-						diagramModel.getGridPosition(model.initialY + amountY / amountZoom)
-					);
-
-					if (model.model instanceof NodeModel) {
-						// update port coordinates as well
-						_.forEach(model.model.getPorts(), port => {
-							const portCoords = this.props.diagramEngine.getPortCoords(port);
-							port.updateCoords(portCoords);
-						});
-					}
-				} else if (model.model instanceof PointModel) {
-					// we want points that are connected to ports, to not necessarily snap to grid
-					// this stuff needs to be pixel perfect, dont touch it
-					model.model.setPosition(
-						model.initialX + diagramModel.getGridPosition(amountX / amountZoom),
-						model.initialY + diagramModel.getGridPosition(amountY / amountZoom)
-					);
-				}
-			});
-
-			this.fireAction();
-			if (!this.state.wasMoved) {
-				this.setState({ wasMoved: true });
-			} else {
-				this.forceUpdate();
-			}
-		} else if (this.state.action instanceof MoveCanvasAction) {
-			//translate the actual canvas
-			if (this.props.allowCanvasTranslation) {
-				diagramModel.setOffset(
-					this.state.action.initialOffsetX + (event.clientX - this.state.action.mouseX),
-					this.state.action.initialOffsetY + (event.clientY - this.state.action.mouseY)
-				);
-				this.fireAction();
-				this.forceUpdate();
-			}
+			this.forceUpdate();
 		}
 	}
 
@@ -462,7 +384,7 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 						//is it a multiple selection
 						if (event.shiftKey) {
 							var relative = diagramEngine.getRelativePoint(event.clientX, event.clientY);
-							this.startFiringAction(new SelectingAction(relative.x, relative.y));
+							this.startFiringAction(new SelectingAction(relative.x, relative.y, diagramEngine));
 						} else {
 							//its a drag the canvas event
 							diagramModel.clearSelection();
