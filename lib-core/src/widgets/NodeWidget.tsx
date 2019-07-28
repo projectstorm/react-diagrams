@@ -6,6 +6,7 @@ import { BaseWidget, BaseWidgetProps } from './BaseWidget';
 import { BaseEntityEvent } from '../core-models/BaseEntity';
 import { BaseModel } from '../core-models/BaseModel';
 import { ListenerHandle } from '../core/BaseObserver';
+import { PeformanceWidget } from './PeformanceWidget';
 
 export interface NodeProps extends BaseWidgetProps {
 	node: NodeModel;
@@ -21,10 +22,6 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 	constructor(props: NodeProps) {
 		super('srd-node', props);
 		this.ref = React.createRef();
-	}
-
-	shouldComponentUpdate() {
-		return this.props.diagramEngine.canEntityRepaint(this.props.node);
 	}
 
 	getClassName() {
@@ -67,16 +64,22 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 
 	render() {
 		return (
-			<div
-				ref={this.ref}
-				{...this.getProps()}
-				data-nodeid={this.props.node.getID()}
-				style={{
-					top: this.props.node.getY(),
-					left: this.props.node.getX()
-				}}>
-				{this.props.diagramEngine.generateWidgetForNode(this.props.node)}
-			</div>
+			<PeformanceWidget serialized={this.props.node.serialize()}>
+				{() => {
+					return (
+						<div
+							ref={this.ref}
+							{...this.getProps()}
+							data-nodeid={this.props.node.getID()}
+							style={{
+								top: this.props.node.getY(),
+								left: this.props.node.getX()
+							}}>
+							{this.props.diagramEngine.generateWidgetForNode(this.props.node)}
+						</div>
+					);
+				}}
+			</PeformanceWidget>
 		);
 	}
 }

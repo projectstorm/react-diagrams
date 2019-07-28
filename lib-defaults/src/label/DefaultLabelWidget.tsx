@@ -14,6 +14,7 @@ namespace S {
 		font-size: 12px;
 		padding: 4px 8px;
 		font-family: sans-serif;
+		user-select: none;
 	`;
 }
 

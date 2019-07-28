@@ -33,14 +33,6 @@ export class MoveItemsAction extends AbstractMouseAction {
 					this.model.getGridPosition(model.initialX + amountX / amountZoom),
 					this.model.getGridPosition(model.initialY + amountY / amountZoom)
 				);
-
-				if (model.model instanceof NodeModel) {
-					// update port coordinates as well
-					_.forEach(model.model.getPorts(), port => {
-						const portCoords = this.engine.getPortCoords(port);
-						port.updateCoords(portCoords);
-					});
-				}
 			} else if (model.model instanceof PointModel) {
 				// we want points that are connected to ports, to not necessarily snap to grid
 				// this stuff needs to be pixel perfect, dont touch it
@@ -89,7 +81,6 @@ export class MoveItemsAction extends AbstractMouseAction {
 					link.setTargetPort(element.model);
 					link.getLastPoint().setPosition(this.engine.getPortCenter(element.model));
 				}
-				delete this.engine.linksThatHaveInitiallyRendered[link.getID()];
 			}
 		});
 
@@ -134,8 +125,6 @@ export class MoveItemsAction extends AbstractMouseAction {
 				}
 			}
 		});
-
-		this.engine.clearRepaintEntities();
 	}
 
 	fireMouseDown(event: ActionFactoryActivationEvent) {
@@ -184,6 +173,5 @@ export class MoveItemsAction extends AbstractMouseAction {
 				initialY: item.getY()
 			};
 		});
-		this.engine.enableRepaintEntities(this.model.getSelectedItems());
 	}
 }

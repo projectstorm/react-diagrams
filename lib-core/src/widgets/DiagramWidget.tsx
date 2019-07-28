@@ -124,7 +124,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 		if (this.state.action && this.state.action instanceof AbstractMouseAction) {
 			this.state.action.fireMouseUp(event);
 		}
-		this.props.diagramEngine.clearRepaintEntities();
 		this.stopFiringAction();
 		document.removeEventListener('mousemove', this.onMouseMove);
 		document.removeEventListener('mouseup', this.onMouseUp);
@@ -171,7 +170,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 	getActionForEvent(event: MouseEvent): AbstractAction {
 		event.persist();
-		this.props.diagramEngine.clearRepaintEntities();
 		const { diagramEngine } = this.props;
 		const model = diagramEngine.getMouseElement(event);
 
@@ -238,14 +236,10 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 							diagramModel.getOffsetY() - heightDiff * yFactor
 						);
 
-						diagramEngine.enableRepaintEntities([]);
-						this.forceUpdate(() => {
-							this.props.diagramEngine.clearRepaintEntities();
-						});
+						this.forceUpdate();
 					}
 				}}
 				onMouseDown={event => {
-					diagramEngine.clearRepaintEntities();
 					// try and get an action for this event
 					const action = this.getActionForEvent(event);
 					if (action) {

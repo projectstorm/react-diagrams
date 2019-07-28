@@ -36,8 +36,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 
 	diagramModel: DiagramModel;
 	canvas: HTMLDivElement;
-	paintableWidgets: {};
-	linksThatHaveInitiallyRendered: {};
 	maxNumberPointsPerLink: number;
 
 	constructor() {
@@ -70,7 +68,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		setup(this.actionFactories);
 
 		this.canvas = null;
-		this.paintableWidgets = null;
 		// this.linksThatHaveInitiallyRendered = {};
 	}
 
@@ -80,10 +77,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 				listener.repaintCanvas();
 			}
 		});
-	}
-
-	clearRepaintEntities() {
-		this.paintableWidgets = null;
 	}
 
 	/**
@@ -133,26 +126,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		return null;
 	}
 
-	enableRepaintEntities(entities: BaseModel[]) {
-		this.paintableWidgets = {};
-		entities.forEach(entity => {
-			//if a node is requested to repaint, add all of its links
-			if (entity instanceof NodeModel) {
-				_.forEach(entity.getPorts(), port => {
-					_.forEach(port.getLinks(), link => {
-						this.paintableWidgets[link.getID()] = true;
-					});
-				});
-			}
-
-			if (entity instanceof PointModel) {
-				this.paintableWidgets[entity.getLink().getID()] = true;
-			}
-
-			this.paintableWidgets[entity.getID()] = true;
-		});
-	}
-
 	/**
 	 * Checks to see if a model is locked by running through
 	 * its parents to see if they are locked first
@@ -166,19 +139,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		return model.isLocked();
 	}
 
-	recalculatePortsVisually() {
-		this.linksThatHaveInitiallyRendered = {};
-	}
-
-	canEntityRepaint(baseModel: BaseModel) {
-		//no rules applied, allow repaint
-		if (this.paintableWidgets === null) {
-			return true;
-		}
-
-		return this.paintableWidgets[baseModel.getID()] !== undefined;
-	}
-
 	setCanvas(canvas?: HTMLDivElement) {
 		if (this.canvas !== canvas) {
 			this.canvas = canvas;
@@ -190,7 +150,6 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 
 	setDiagramModel(model: DiagramModel) {
 		this.diagramModel = model;
-		this.recalculatePortsVisually();
 	}
 
 	getDiagramModel(): DiagramModel {
