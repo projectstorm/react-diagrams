@@ -28,7 +28,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	componentDidUpdate(): void {
 		this.props.link.setRenderedPaths(
 			this.refPaths.map(ref => {
-				console.log(ref);
 				return ref.current;
 			})
 		);
@@ -37,7 +36,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 	componentDidMount(): void {
 		this.props.link.setRenderedPaths(
 			this.refPaths.map(ref => {
-				console.log(ref.current);
 				return ref.current;
 			})
 		);
