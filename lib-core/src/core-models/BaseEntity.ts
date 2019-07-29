@@ -67,12 +67,12 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 		this.listeners = {};
 	}
 
-	deSerialize(data: { [s: string]: any }, engine: DiagramEngine) {
+	deSerialize(data: ReturnType<this['serialize']>, engine: DiagramEngine) {
 		this.options.id = data.id;
 		this.options.locked = data.locked;
 	}
 
-	serialize(): object {
+	serialize() {
 		return {
 			id: this.options.id,
 			locked: this.options.locked

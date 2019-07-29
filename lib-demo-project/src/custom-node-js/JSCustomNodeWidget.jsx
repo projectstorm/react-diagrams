@@ -5,8 +5,8 @@ export class JSCustomNodeWidget extends React.Component {
 	render() {
 		return (
 			<div className="custom-node">
-				<PortWidget node={this.props.node} name="in" />
-				<PortWidget node={this.props.node} name="out" />
+				<PortWidget engine={this.props.engine} port={this.props.node.getPort('in')} />
+				<PortWidget engine={this.props.engine} port={this.props.node.getPort('out')} />
 				<div className="custom-node-color" style={{ backgroundColor: this.props.node.color }} />
 			</div>
 		);

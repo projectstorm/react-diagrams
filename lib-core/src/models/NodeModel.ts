@@ -18,7 +18,7 @@ export interface NodeModelGenerics extends BasePositionModelGenerics {
 }
 
 export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends BasePositionModel<G> {
-	ports: { [s: string]: PortModel };
+	protected ports: { [s: string]: PortModel };
 
 	// calculated post rendering so routing can be done correctly
 	width: number;
@@ -62,7 +62,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		return entities;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
+	deSerialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
 
 		//deserialize ports
@@ -73,7 +73,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		});
 	}
 
-	serialize(): any {
+	serialize() {
 		return {
 			...super.serialize(),
 			ports: _.map(this.ports, port => {

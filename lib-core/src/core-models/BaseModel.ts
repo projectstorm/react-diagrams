@@ -50,7 +50,7 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 		};
 	}
 
-	deSerialize(data: { [p: string]: any }, engine: DiagramEngine) {
+	deSerialize(data: ReturnType<this['serialize']>, engine: DiagramEngine) {
 		super.deSerialize(data, engine);
 		this.options.extras = data.extras;
 		this.options.selected = data.selected;
