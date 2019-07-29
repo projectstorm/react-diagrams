@@ -1,5 +1,5 @@
 import { DiagramEngine, LabelModel, LabelModelGenerics } from '@projectstorm/react-diagrams-core';
-import { LabelModelOptions } from '@projectstorm/react-diagrams-core/src/models/LabelModel';
+import { LabelModelOptions } from '@projectstorm/react-diagrams-core';
 
 export interface DefaultLabelModelOptions extends LabelModelOptions {
 	label?: string;

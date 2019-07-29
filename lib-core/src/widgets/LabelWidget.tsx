@@ -63,7 +63,12 @@ export class LabelWidget extends React.Component<LabelWidgetProps> {
 	};
 
 	calculateLabelPosition = () => {
-		const { path, position } = this.findPathAndRelativePositionToRenderLabel(this.props.index + 1);
+		const found = this.findPathAndRelativePositionToRenderLabel(this.props.index + 1);
+		if (!found) {
+			return;
+		}
+
+		const { path, position } = found;
 
 		const labelDimensions = {
 			width: this.ref.current.offsetWidth,

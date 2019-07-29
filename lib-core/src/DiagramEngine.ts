@@ -1,9 +1,7 @@
-import * as _ from 'lodash';
 import { BaseEntity } from './core-models/BaseEntity';
 import { DiagramModel } from './models/DiagramModel';
 import { BaseModel } from './core-models/BaseModel';
 import { NodeModel } from './models/NodeModel';
-import { PointModel } from './models/PointModel';
 import { PortModel } from './models/PortModel';
 import { LinkModel } from './models/LinkModel';
 import { LabelModel } from './models/LabelModel';
@@ -178,32 +176,32 @@ export class DiagramEngine extends BaseObserver<DiagramEngineListener> {
 		return this.actionFactories;
 	}
 
-	getFactoryForNode(node: NodeModel | string) {
+	getFactoryForNode<F extends AbstractReactFactory<NodeModel>>(node: NodeModel | string) {
 		if (typeof node === 'string') {
 			return this.nodeFactories.getFactory(node);
 		}
 		return this.nodeFactories.getFactory(node.getType());
 	}
 
-	getFactoryForLink(link: LinkModel | string) {
+	getFactoryForLink<F extends AbstractReactFactory<LinkModel>>(link: LinkModel | string) {
 		if (typeof link === 'string') {
-			return this.linkFactories.getFactory(link);
+			return this.linkFactories.getFactory<F>(link);
 		}
-		return this.linkFactories.getFactory(link.getType());
+		return this.linkFactories.getFactory<F>(link.getType());
 	}
 
-	getFactoryForLabel(label: LabelModel) {
+	getFactoryForLabel<F extends AbstractReactFactory<LabelModel>>(label: LabelModel) {
 		if (typeof label === 'string') {
 			return this.labelFactories.getFactory(label);
 		}
 		return this.labelFactories.getFactory(label.getType());
 	}
 
-	getFactoryForPort(port: PortModel) {
+	getFactoryForPort<F extends AbstractModelFactory<PortModel>>(port: PortModel) {
 		if (typeof port === 'string') {
-			return this.portFactories.getFactory(port);
+			return this.portFactories.getFactory<F>(port);
 		}
-		return this.portFactories.getFactory(port.getType());
+		return this.portFactories.getFactory<F>(port.getType());
 	}
 
 	generateWidgetForLink(link: LinkModel): JSX.Element {

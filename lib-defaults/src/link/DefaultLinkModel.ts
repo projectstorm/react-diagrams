@@ -10,7 +10,7 @@ import {
 	PortModelAlignment
 } from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from '../label/DefaultLabelModel';
-import { BezierCurve } from '../../../lib-geometry/src/BezierCurve';
+import { BezierCurve } from '@projectstorm/react-diagrams-geometry';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEntityEvent<DefaultLinkModel> & { color: null | string }): void;
@@ -21,6 +21,7 @@ export interface DefaultLinkModelListener extends LinkModelListener {
 export interface DefaultLinkModelOptions extends BaseModelOptions {
 	width?: number;
 	color?: string;
+	selectedColor?: string;
 	curvyness?: number;
 	type?: string;
 }
@@ -36,6 +37,7 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelGenerics> {
 			type: 'default',
 			width: options.width || 3,
 			color: options.color || 'gray',
+			selectedColor: options.selectedColor || 'rgb(0,192,255)',
 			curvyness: 50,
 			...options
 		});
@@ -84,15 +86,17 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelGenerics> {
 			...super.serialize(),
 			width: this.options.width,
 			color: this.options.color,
-			curvyness: this.options.curvyness
+			curvyness: this.options.curvyness,
+			selectedColor: this.options.selectedColor
 		};
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
+	deSerialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
 		super.deSerialize(ob, engine);
 		this.options.color = ob.color;
 		this.options.width = ob.width;
 		this.options.curvyness = ob.curvyness;
+		this.options.selectedColor = ob.selectedColor;
 	}
 
 	addLabel(label: LabelModel | string) {

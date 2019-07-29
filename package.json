@@ -45,6 +45,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.5.5",
 		"@babel/preset-react": "^7.0.0",
+		"@emotion/core": "^10.0.14",
 		"@emotion/styled": "^10.0.14",
 		"@storybook/addon-actions": "^5.1.9",
 		"@storybook/addon-options": "^5.1.9",

@@ -1,6 +1,6 @@
 import { DiagramEngine, NodeModel, DefaultPortModel, BaseModelOptions } from '@projectstorm/react-diagrams';
 
-export interface TSCustomNodeModelOptions extends Omit<BaseModelOptions, 'type'> {
+export interface TSCustomNodeModelOptions extends BaseModelOptions {
 	color?: string;
 }
 

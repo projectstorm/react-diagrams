@@ -1,15 +1,10 @@
 import * as React from 'react';
-import { BaseWidget, BaseWidgetProps, DiagramEngine, PointModel, Toolkit } from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, PointModel, Toolkit } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from './DefaultLinkModel';
-import { DefaultLinkFactory } from './DefaultLinkFactory';
 import { DefaultLinkPointWidget } from './DefaultLinkPointWidget';
+import { DefaultLinkSegmentWidget } from './DefaultLinkSegmentWidget';
 
-export interface DefaultLinkProps extends BaseWidgetProps {
-	color?: string;
-	colorSelected?: string;
-
-	width?: number;
-	smooth?: boolean;
+export interface DefaultLinkProps {
 	link: DefaultLinkModel;
 	diagramEngine: DiagramEngine;
 	pointAdded?: (point: PointModel, event: MouseEvent) => any;
@@ -19,15 +14,11 @@ export interface DefaultLinkState {
 	selected: boolean;
 }
 
-export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkState> {
-	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
-	refLabels: { [id: string]: HTMLElement };
-	refPaths: SVGPathElement[];
+export class DefaultLinkWidget extends React.Component<DefaultLinkProps, DefaultLinkState> {
+	refPaths: React.RefObject<SVGPathElement>[];
 
 	constructor(props: DefaultLinkProps) {
-		super('srd-default-link', props);
-
-		this.refLabels = {};
+		super(props);
 		this.refPaths = [];
 		this.state = {
 			selected: false
@@ -35,11 +26,21 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 	}
 
 	componentDidUpdate(): void {
-		this.props.link.setRenderedPaths(this.refPaths);
+		this.props.link.setRenderedPaths(
+			this.refPaths.map(ref => {
+				console.log(ref);
+				return ref.current;
+			})
+		);
 	}
 
 	componentDidMount(): void {
-		this.props.link.setRenderedPaths(this.refPaths);
+		this.props.link.setRenderedPaths(
+			this.refPaths.map(ref => {
+				console.log(ref.current);
+				return ref.current;
+			})
+		);
 	}
 
 	componentWillUnmount(): void {
@@ -67,54 +68,29 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 			<DefaultLinkPointWidget
 				key={point.getID()}
 				point={point as any}
-				colorSelected={this.props.colorSelected}
-				color={this.props.color}
+				colorSelected={this.props.link.getOptions().selectedColor}
+				color={this.props.link.getOptions().color}
 			/>
 		);
 	}
 
 	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
-		var props = this.props;
-
-		var Bottom = React.cloneElement(
-			(props.diagramEngine.getFactoryForLink(this.props.link) as DefaultLinkFactory).generateLinkSegment(
-				this.props.link,
-				this,
-				this.state.selected || this.props.link.isSelected(),
-				path
-			),
-			{
-				ref: ref => ref && this.refPaths.push(ref)
-			}
-		);
-
-		var Top = React.cloneElement(Bottom, {
-			...extraProps,
-			strokeLinecap: 'round',
-			onMouseLeave: () => {
-				this.setState({ selected: false });
-			},
-			onMouseEnter: () => {
-				this.setState({ selected: true });
-			},
-			ref: null,
-			'data-linkid': this.props.link.getID(),
-			strokeOpacity: this.state.selected ? 0.1 : 0,
-			strokeWidth: 20,
-			fill: 'none',
-			onContextMenu: () => {
-				if (!this.props.diagramEngine.isModelLocked(this.props.link)) {
-					event.preventDefault();
-					this.props.link.remove();
-				}
-			}
-		});
-
+		const ref = React.createRef<SVGPathElement>();
+		this.refPaths.push(ref);
 		return (
-			<g key={'link-' + id}>
-				{Bottom}
-				{Top}
-			</g>
+			<DefaultLinkSegmentWidget
+				key={`link-${id}`}
+				path={path}
+				selected={this.state.selected}
+				diagramEngine={this.props.diagramEngine}
+				factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
+				link={this.props.link}
+				forwardRef={ref}
+				onSelection={selected => {
+					this.setState({ selected: selected });
+				}}
+				extras={extraProps}
+			/>
 		);
 	}
 
@@ -122,6 +98,7 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		//ensure id is present for all points on the path
 		var points = this.props.link.getPoints();
 		var paths = [];
+		this.refPaths = [];
 
 		if (points.length === 2) {
 			paths.push(
@@ -168,7 +145,6 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 			}
 		}
 
-		this.refPaths = [];
 		return paths;
 	}
 }

@@ -4,6 +4,7 @@ import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import PathFinding from '../engine/PathFinding';
 import { PathFindingLinkFactory } from './PathFindingLinkFactory';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
+import { DefaultLinkSegmentWidget } from '@projectstorm/react-diagrams-defaults/src/link/DefaultLinkSegmentWidget';
 
 export interface PathFindingLinkWidgetProps {
 	color?: string;
@@ -19,17 +20,7 @@ export interface PathFindingLinkWidgetState {
 }
 
 export class PathFindingLinkWidget extends React.Component<PathFindingLinkWidgetProps, PathFindingLinkWidgetState> {
-	public static defaultProps: PathFindingLinkWidgetProps = {
-		color: 'black',
-		width: 3,
-		link: null,
-		engine: null,
-		factory: null,
-		smooth: false,
-		diagramEngine: null
-	};
-
-	refPaths: SVGPathElement[];
+	refPaths: React.RefObject<SVGPathElement>[];
 	pathFinding: PathFinding;
 
 	constructor(props: PathFindingLinkWidgetProps) {
@@ -42,11 +33,19 @@ export class PathFindingLinkWidget extends React.Component<PathFindingLinkWidget
 	}
 
 	componentDidUpdate(): void {
-		this.props.link.setRenderedPaths(this.refPaths);
+		this.props.link.setRenderedPaths(
+			this.refPaths.map(ref => {
+				return ref.current;
+			})
+		);
 	}
 
 	componentDidMount(): void {
-		this.props.link.setRenderedPaths(this.refPaths);
+		this.props.link.setRenderedPaths(
+			this.refPaths.map(ref => {
+				return ref.current;
+			})
+		);
 	}
 
 	componentWillUnmount(): void {
@@ -54,46 +53,27 @@ export class PathFindingLinkWidget extends React.Component<PathFindingLinkWidget
 	}
 
 	generateLink(path: string, id: string | number): JSX.Element {
-		let Bottom = (
-			<path
-				fill="none"
-				strokeWidth={this.props.width}
-				stroke={this.props.color}
-				ref={ref => ref && this.refPaths.push(ref)}
-				d={path}
-			/>
-		);
-
-		var Top = React.cloneElement(Bottom, {
-			strokeLinecap: 'round',
-			onMouseLeave: () => {
-				this.setState({ selected: false });
-			},
-			onMouseEnter: () => {
-				this.setState({ selected: true });
-			},
-			ref: null,
-			'data-linkid': this.props.link.getID(),
-			strokeOpacity: this.state.selected ? 0.1 : 0,
-			strokeWidth: 20,
-			fill: 'none',
-			onContextMenu: () => {
-				if (!this.props.diagramEngine.isModelLocked(this.props.link)) {
-					event.preventDefault();
-					this.props.link.remove();
-				}
-			}
-		});
-
+		const ref = React.createRef<SVGPathElement>();
+		this.refPaths.push(ref);
 		return (
-			<g key={'link-' + id}>
-				{Bottom}
-				{Top}
-			</g>
+			<DefaultLinkSegmentWidget
+				key={`link-${id}`}
+				path={path}
+				selected={this.state.selected}
+				diagramEngine={this.props.diagramEngine}
+				factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
+				link={this.props.link}
+				forwardRef={ref}
+				onSelection={selected => {
+					this.setState({ selected: selected });
+				}}
+				extras={{}}
+			/>
 		);
 	}
 
 	render() {
+		this.refPaths = [];
 		//ensure id is present for all points on the path
 		var points = this.props.link.getPoints();
 		var paths = [];
@@ -116,8 +96,6 @@ export class PathFindingLinkWidget extends React.Component<PathFindingLinkWidget
 				this.generateLink(this.props.factory.generateDynamicPath(simplifiedPath), '0')
 			);
 		}
-
-		this.refPaths = [];
 		return <>{paths}</>;
 	}
 }

@@ -1,32 +1,35 @@
 import * as React from 'react';
-import { BaseWidget, BaseWidgetProps, DiagramEngine, PortWidget } from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, PortWidget } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from './DefaultPortModel';
+import styled from '@emotion/styled';
 
-export interface DefaultPortLabelProps extends BaseWidgetProps {
+export interface DefaultPortLabelProps {
 	port: DefaultPortModel;
 	engine: DiagramEngine;
 }
 
-export interface DefaultPortLabelState {}
+namespace S {
+	export const PortLabel = styled.div`
+		display: flex;
+		margin-top: 1px;
+		align-items: center;
+	`;
 
-export class DefaultPortLabel extends BaseWidget<DefaultPortLabelProps, DefaultPortLabelState> {
-	constructor(props) {
-		super('srd-default-port', props);
-	}
+	export const Label = styled.div`
+		padding: 0 5px;
+	`;
+}
 
-	getClassName() {
-		return super.getClassName() + (this.props.port.getOptions().in ? this.bem('--in') : this.bem('--out'));
-	}
-
+export class DefaultPortLabel extends React.Component<DefaultPortLabelProps> {
 	render() {
-		var port = <PortWidget engine={this.props.engine} port={this.props.port} />;
-		var label = <div className="name">{this.props.port.getOptions().label}</div>;
+		const port = <PortWidget engine={this.props.engine} port={this.props.port} />;
+		const label = <S.Label>{this.props.port.getOptions().label}</S.Label>;
 
 		return (
-			<div {...this.getProps()}>
+			<S.PortLabel>
 				{this.props.port.getOptions().in ? port : label}
 				{this.props.port.getOptions().in ? label : port}
-			</div>
+			</S.PortLabel>
 		);
 	}
 }

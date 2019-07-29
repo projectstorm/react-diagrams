@@ -2,27 +2,50 @@ import * as React from 'react';
 import { AbstractReactFactory } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkWidget } from './DefaultLinkWidget';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/core';
 
-export class DefaultLinkFactory extends AbstractReactFactory<DefaultLinkModel> {
-	constructor() {
-		super('default');
+namespace S {
+	export const Keyframes = keyframes`
+		from {
+			stroke-dashoffset: 24;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
+	`;
+
+	const selected = css`
+		stroke-dasharray: 10, 2;
+		animation: ${Keyframes} 1s linear infinite;
+	`;
+
+	export const Path = styled.path<{ selected: boolean }>`
+		${p => p.selected && selected};
+		fill: none;
+		pointer-events: all;
+	`;
+}
+
+export class DefaultLinkFactory<Link extends DefaultLinkModel = DefaultLinkModel> extends AbstractReactFactory<Link> {
+	constructor(type = 'default') {
+		super(type);
 	}
 
 	generateReactWidget(event): JSX.Element {
-		return <DefaultLinkWidget colorSelected="mediumpurple" link={event.model} diagramEngine={this.engine} />;
+		return <DefaultLinkWidget link={event.model} diagramEngine={this.engine} />;
 	}
 
-	generateModel(event): DefaultLinkModel {
-		return new DefaultLinkModel();
+	generateModel(event): Link {
+		return new DefaultLinkModel() as Link;
 	}
 
-	generateLinkSegment(model: DefaultLinkModel, widget: DefaultLinkWidget, selected: boolean, path: string) {
+	generateLinkSegment(model: Link, selected: boolean, path: string) {
 		return (
-			<path
-				className={selected ? widget.bem('--path-selected') : ''}
+			<S.Path
+				selected={selected}
+				stroke={selected ? model.getOptions().selectedColor : model.getOptions().color}
 				strokeWidth={model.getOptions().width}
-				stroke={model.getOptions().color}
-				fill="none"
 				d={path}
 			/>
 		);

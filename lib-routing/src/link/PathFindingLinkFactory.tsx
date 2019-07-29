@@ -10,8 +10,9 @@ import { PathFindingLinkModel } from './PathFindingLinkModel';
 import { PathFindingLinkWidget } from './PathFindingLinkWidget';
 import * as _ from 'lodash';
 import * as Path from 'paths-js/path';
+import { DefaultLinkFactory } from '@projectstorm/react-diagrams-defaults';
 
-export class PathFindingLinkFactory extends AbstractReactFactory<PathFindingLinkModel> {
+export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkModel> {
 	ROUTING_SCALING_FACTOR: number = 5;
 
 	// calculated only when smart routing is active
