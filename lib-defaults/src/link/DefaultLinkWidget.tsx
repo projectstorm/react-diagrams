@@ -20,15 +20,6 @@ export interface DefaultLinkState {
 }
 
 export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkState> {
-	public static defaultProps: DefaultLinkProps = {
-		color: 'black',
-		width: 3,
-		link: null,
-		engine: null,
-		smooth: false,
-		diagramEngine: null
-	};
-
 	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
 	refLabels: { [id: string]: HTMLElement };
 	refPaths: SVGPathElement[];
@@ -178,6 +169,6 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 		}
 
 		this.refPaths = [];
-		return <>{paths}</>;
+		return paths;
 	}
 }

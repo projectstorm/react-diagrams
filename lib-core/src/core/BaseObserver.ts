@@ -1,4 +1,5 @@
 import { Toolkit } from '../Toolkit';
+import { FactoryBankListener } from './FactoryBank';
 
 export interface BaseEvent {
 	firing: boolean;
@@ -67,7 +68,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		});
 	}
 
-	fireEvent(event: Partial<BaseEvent> & object, k: keyof L) {
+	fireEvent<K extends keyof L>(event: Partial<Parameters<L[K]>[0]>, k: keyof L) {
 		event = {
 			firing: true,
 			stopPropagation: () => {

@@ -15,7 +15,7 @@ export interface NodeProps extends BaseWidgetProps {
 }
 
 export class NodeWidget extends BaseWidget<NodeProps> {
-	ob: ResizeObserver;
+	ob: any;
 	ref: React.RefObject<HTMLDivElement>;
 	listener: ListenerHandle;
 
@@ -49,6 +49,7 @@ export class NodeWidget extends BaseWidget<NodeProps> {
 	}
 
 	componentDidMount(): void {
+		// @ts-ignore
 		this.ob = new ResizeObserver(entities => {
 			const bounds = entities[0].contentRect;
 			this.props.node.updateDimensions({ width: bounds.width, height: bounds.height });

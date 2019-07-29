@@ -2,7 +2,7 @@ import { BaseEvent, BaseListener, BaseObserver } from './BaseObserver';
 import { AbstractFactory } from './AbstractFactory';
 import * as _ from 'lodash';
 
-export interface FactoryBankListener<F extends AbstractFactory> extends BaseListener {
+export interface FactoryBankListener<F extends AbstractFactory = AbstractFactory> extends BaseListener {
 	/**
 	 * Factory as added to rhe bank
 	 */
@@ -13,6 +13,8 @@ export interface FactoryBankListener<F extends AbstractFactory> extends BaseList
 	 */
 	factoryRemoved?: (event: BaseEvent & { factory: AbstractFactory }) => any;
 }
+
+type Param<T extends string> = Parameters<FactoryBankListener[T]>[0];
 
 /**
  * Store and managed Factories that extend from Abstractfactory
@@ -45,13 +47,13 @@ export class FactoryBank<F extends AbstractFactory = AbstractFactory> extends Ba
 	registerFactory(factory: F) {
 		factory.setFactoryBank(this);
 		this.factories[factory.getType()] = factory;
-		this.fireEvent({ factory }, 'factoryAdded');
+		this.fireEvent<'factoryAdded'>({ factory }, 'factoryAdded');
 	}
 
 	deregisterFactory(type: string) {
 		const factory = this.factories[type];
 		factory.setFactoryBank(null);
 		delete this.factories[type];
-		this.fireEvent({ factory }, 'factoryRemoved');
+		this.fireEvent<'factoryRemoved'>({ factory }, 'factoryRemoved');
 	}
 }

@@ -16,7 +16,6 @@ export interface PortState {
 }
 
 export class PortWidget extends BaseWidget<PortProps, PortState> {
-	ob: ResizeObserver;
 	ref: React.RefObject<HTMLDivElement>;
 	engineListenerHandle: ListenerHandle;
 

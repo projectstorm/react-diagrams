@@ -1,4 +1,4 @@
-import closest = require('closest');
+import * as closest from 'closest';
 import { PointModel } from './models/PointModel';
 
 export class Toolkit {
