@@ -33,6 +33,7 @@
 		"watch": "yarn build:clean && lerna run watch --stream",
 		"publish:dev": "yarn build:prod && lerna publish --force-publish --dist-tag=next",
 		"publish:prod": "yarn build:prod && lerna publish --force-publish",
+		"publish:storybook": "cd lib-demo-gallery && yarn storybook:build && ../node_modules/.bin/storybook-to-ghpages --existing-output-dir .out",
 		"build:clean": "lerna run clean --stream",
 		"test": "lerna run test --stream",
 		"test:ci": "lerna run test --stream -- --runInBand --ci ",
