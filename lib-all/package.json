@@ -8,7 +8,8 @@
 	},
 	"scripts": {
 		"clean": "rm -rf ./dist",
-		"build": "../node_modules/.bin/webpack"
+		"build": "../node_modules/.bin/webpack",
+		"build:prod": "NODE_ENV=production ../node_modules/.bin/webpack"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -30,13 +31,6 @@
 		"@projectstorm/react-diagrams-core": "^6.0.0-alpha.4.0",
 		"@projectstorm/react-diagrams-defaults": "^6.0.0-alpha.4.0",
 		"@projectstorm/react-diagrams-routing": "^6.0.0-alpha.4.0"
-	},
-	"peerDependencies": {
-		"closest": "^0.0.1",
-		"lodash": "4.*",
-		"pathfinding": "^0.4.18",
-		"paths-js": "^0.4.9",
-		"react": "16.*"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }

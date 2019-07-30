@@ -41,4 +41,4 @@ module.exports = (directory) => {
 			minimizer: [new TerserPlugin()],
 		}
 	}
-}
+};

@@ -9,6 +9,7 @@
 	"scripts": {
 		"clean": "rm -rf ./dist",
 		"build": "../node_modules/.bin/webpack",
+		"build:prod": "NODE_ENV=production ../node_modules/.bin/webpack",
 		"test": "../node_modules/.bin/jest --no-cache"
 	},
 	"publishConfig": {
@@ -33,7 +34,6 @@
 		"@projectstorm/react-diagrams-geometry": "^6.0.0-alpha.4.0"
 	},
 	"peerDependencies": {
-		"closest": "^0.0.1",
 		"dagre": "^0.8.4",
 		"lodash": "4.*",
 		"pathfinding": "^0.4.18",
