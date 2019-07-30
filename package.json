@@ -30,6 +30,7 @@
 	"scripts": {
 		"build": "yarn build:clean && lerna run build --stream",
 		"watch": "yarn build:clean && lerna run watch --stream",
+		"publish:npm": "lerna publish",
 		"build:clean": "lerna run clean --stream",
 		"test": "lerna run test --stream",
 		"test:ci": "lerna run test --stream -- --runInBand --ci ",
