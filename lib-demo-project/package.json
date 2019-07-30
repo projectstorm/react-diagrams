@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-demo",
-	"version": "6.0.0-alpha.0",
+	"version": "6.0.0-alpha.1",
 	"author": "dylanvorster",
 	"repository": {
 		"type": "git",
@@ -23,6 +23,6 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams": "^6.0.0-alpha.0"
+		"@projectstorm/react-diagrams": "^6.0.0-alpha.1"
 	}
 }
