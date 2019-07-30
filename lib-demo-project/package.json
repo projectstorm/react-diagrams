@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-demo",
-	"version": "6.0.0-alpha.4.0",
+	"version": "6.0.0-alpha.4.1",
 	"author": "dylanvorster",
 	"private": true,
 	"repository": {
@@ -24,7 +24,7 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams": "^6.0.0-alpha.4.0"
+		"@projectstorm/react-diagrams": "^6.0.0-alpha.4.1"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }

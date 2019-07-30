@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-defaults",
-	"version": "6.0.0-alpha.4.0",
+	"version": "6.0.0-alpha.4.1",
 	"author": "dylanvorster",
 	"repository": {
 		"type": "git",
@@ -28,13 +28,13 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-core": "^6.0.0-alpha.4.0"
+		"@projectstorm/react-diagrams-core": "^6.0.0-alpha.4.1"
 	},
 	"peerDependencies": {
-		"lodash": "4.*",
-		"react": "16.*",
+		"@emotion/core": "^10.*",
 		"@emotion/styled": "^10.*",
-		"@emotion/core": "^10.*"
+		"lodash": "4.*",
+		"react": "16.*"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }
