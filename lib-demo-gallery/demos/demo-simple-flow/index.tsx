@@ -1,9 +1,18 @@
-import createEngine, { DiagramModel, DefaultNodeModel, DiagramWidget } from '@projectstorm/react-diagrams';
+import createEngine, {
+	DiagramModel,
+	DefaultNodeModel,
+	DiagramWidget,
+	MoveItemsActionFactory
+} from "@projectstorm/react-diagrams";
 import * as React from 'react';
 
 export default () => {
 	//1) setup the diagram engine
 	var engine = createEngine();
+
+	// ############################################ MAGIC HAPPENS HERE
+	engine.getActionFactories().registerFactory(new MoveItemsActionFactory({allowLooseLinks: false}));
+	// ############################################ MAGIC HAPPENS HERE
 
 	//2) setup the diagram model
 	var model = new DiagramModel();
