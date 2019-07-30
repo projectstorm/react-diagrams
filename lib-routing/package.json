@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-routing",
-	"version": "6.0.0-alpha.1",
+	"version": "6.0.0-y.0",
 	"author": "dylanvorster",
 	"repository": {
 		"type": "git",
@@ -10,6 +10,9 @@
 		"clean": "rm -rf ./dist",
 		"build": "../node_modules/.bin/webpack",
 		"test": "../node_modules/.bin/jest --no-cache"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"keywords": [
 		"web",
@@ -25,9 +28,9 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-core": "^6.0.0-alpha.1",
-		"@projectstorm/react-diagrams-defaults": "^6.0.0-alpha.1",
-		"@projectstorm/react-diagrams-geometry": "^6.0.0-alpha.1"
+		"@projectstorm/react-diagrams-core": "^6.0.0-y.0",
+		"@projectstorm/react-diagrams-defaults": "^6.0.0-y.0",
+		"@projectstorm/react-diagrams-geometry": "^6.0.0-y.0"
 	},
 	"peerDependencies": {
 		"closest": "^0.0.1",
@@ -36,5 +39,6 @@
 		"pathfinding": "^0.4.18",
 		"paths-js": "^0.4.9",
 		"react": "16.*"
-	}
+	},
+	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }

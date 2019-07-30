@@ -1,7 +1,8 @@
 {
 	"name": "@projectstorm/react-diagrams-gallery",
-	"version": "6.0.0-alpha.0",
+	"version": "6.0.0-y.0",
 	"author": "dylanvorster",
+	"private": true,
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/projectstorm/react-diagrams.git"
