@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-core",
-	"version": "6.0.0-alpha.3.0",
+	"version": "6.0.0-alpha.4.0",
 	"author": "dylanvorster",
 	"repository": {
 		"type": "git",
@@ -27,7 +27,7 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-geometry": "^6.0.0-alpha.3.0"
+		"@projectstorm/react-diagrams-geometry": "^6.0.0-alpha.4.0"
 	},
 	"peerDependencies": {
 		"closest": "^0.0.1",
