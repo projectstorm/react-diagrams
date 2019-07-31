@@ -4,7 +4,7 @@ import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import PathFinding from '../engine/PathFinding';
 import { PathFindingLinkFactory } from './PathFindingLinkFactory';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
-import { DefaultLinkSegmentWidget } from '@projectstorm/react-diagrams-defaults/src/link/DefaultLinkSegmentWidget';
+import { DefaultLinkSegmentWidget } from '@projectstorm/react-diagrams-defaults';
 
 export interface PathFindingLinkWidgetProps {
 	color?: string;
