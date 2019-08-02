@@ -117,6 +117,15 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		}
 	}
 
+	clearPort(port: PortModel){
+		if(this.sourcePort === port){
+			this.setSourcePort(null);
+		}
+		else if(this.targetPort === port){
+			this.setTargetPort(null);
+		}
+	}
+
 	remove() {
 		if (this.sourcePort) {
 			this.sourcePort.removeLink(this);

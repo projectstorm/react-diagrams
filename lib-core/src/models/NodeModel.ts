@@ -126,6 +126,10 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	}
 
 	removePort(port: PortModel) {
+		// clear the port from the links
+		for(let link of _.values(port.getLinks())){
+			link.clearPort(port);
+		}
 		//clear the parent node reference
 		if (this.ports[port.getName()]) {
 			this.ports[port.getName()].setParent(null);
