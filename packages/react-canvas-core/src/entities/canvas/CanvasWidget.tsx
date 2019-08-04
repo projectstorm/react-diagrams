@@ -1,19 +1,19 @@
 import * as React from 'react';
-import {CanvasEngine} from "../../CanvasEngine";
-import {TransformLayerWidget} from "../layer/TransformLayerWidget";
-import styled from "@emotion/styled";
+import { CanvasEngine } from '../../CanvasEngine';
+import { TransformLayerWidget } from '../layer/TransformLayerWidget';
+import styled from '@emotion/styled';
 
 export interface DiagramProps extends React.Component {
 	engine: CanvasEngine;
 	className?: string;
 }
 
-namespace S{
+namespace S {
 	export const Canvas = styled.div`
 		position: relative;
 		cursor: move;
 		overflow: hidden;
-	`
+	`;
 }
 
 export class CanvasWidget extends React.Component<DiagramProps> {
@@ -52,16 +52,16 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 	}
 
 	componentDidMount() {
-		this.canvasListener =  this.props.engine.registerListener({
+		this.canvasListener = this.props.engine.registerListener({
 			repaintCanvas: () => {
 				this.forceUpdate();
 			}
 		});
 
-		this.keyDown = (event) => {
+		this.keyDown = event => {
 			this.props.engine.getActionEventBus().fireAction(event);
 		};
-		this.keyUp = (event) => {
+		this.keyUp = event => {
 			this.props.engine.getActionEventBus().fireAction(event);
 		};
 
@@ -89,17 +89,14 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 				}}
 				onMouseMove={event => {
 					this.props.engine.getActionEventBus().fireAction(event);
-				}}
-			>
-				{
-					model.getLayers().map((layer) => {
-						return (
-							<TransformLayerWidget layer={layer} >
-								{engine.getFactoryForLayer(layer).generateReactWidget({model: layer})}
-							</TransformLayerWidget>
-						)
-					})
-				}
+				}}>
+				{model.getLayers().map(layer => {
+					return (
+						<TransformLayerWidget layer={layer}>
+							{engine.getFactoryForLayer(layer).generateReactWidget({ model: layer })}
+						</TransformLayerWidget>
+					);
+				})}
 			</S.Canvas>
 		);
 	}

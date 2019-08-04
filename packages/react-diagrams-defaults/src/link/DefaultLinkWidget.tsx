@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {DiagramEngine, LinkWidget, PointModel} from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkPointWidget } from './DefaultLinkPointWidget';
 import { DefaultLinkSegmentWidget } from './DefaultLinkSegmentWidget';
-import {Toolkit} from "@projectstorm/react-canvas-core";
+import { Toolkit } from '@projectstorm/react-canvas-core';
 
 export interface DefaultLinkProps {
 	link: DefaultLinkModel;

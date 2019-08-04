@@ -1,6 +1,6 @@
-import {Action, InputType} from "../core-actions/Action";
-import {KeyboardEvent} from "react";
-import * as _ from "lodash";
+import { Action, InputType } from '../core-actions/Action';
+import { KeyboardEvent } from 'react';
+import * as _ from 'lodash';
 
 export interface DeleteItemsActionOptions {
 	keyCodes?: number[];
@@ -9,26 +9,25 @@ export interface DeleteItemsActionOptions {
 /**
  * Deletes all selected items
  */
-export class DeleteItemsAction extends Action{
-
-	constructor(options:DeleteItemsActionOptions = {}){
+export class DeleteItemsAction extends Action {
+	constructor(options: DeleteItemsActionOptions = {}) {
 		options = {
-			keyCodes:[46, 8],
+			keyCodes: [46, 8],
 			...options
 		};
 		super({
 			type: InputType.KEY_DOWN,
-			fire:(event: KeyboardEvent) => {
-				if(options.keyCodes.indexOf(event.keyCode) !== -1) {
+			fire: (event: KeyboardEvent) => {
+				if (options.keyCodes.indexOf(event.keyCode) !== -1) {
 					_.forEach(this.engine.getModel().getSelectedItems(), model => {
 						// only delete items which are not locked
-						if(!model.isLocked){
+						if (!model.isLocked) {
 							model.remove();
 						}
 					});
 					this.engine.repaintCanvas();
 				}
 			}
-		})
+		});
 	}
 }

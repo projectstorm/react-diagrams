@@ -1,6 +1,6 @@
-import {MouseEvent, KeyboardEvent, WheelEvent} from 'react';
-import {Toolkit} from "../Toolkit";
-import {CanvasEngine} from "../CanvasEngine";
+import { MouseEvent, KeyboardEvent, WheelEvent } from 'react';
+import { Toolkit } from '../Toolkit';
+import { CanvasEngine } from '../CanvasEngine';
 
 export enum InputType {
 	MOUSE_DOWN = 'mouse-down',
@@ -8,7 +8,7 @@ export enum InputType {
 	MOUSE_MOVE = 'mouse-move',
 	MOUSE_WHEEL = 'mouse-wheel',
 	KEY_DOWN = 'key-down',
-	KEY_UP = 'key-up',
+	KEY_UP = 'key-up'
 }
 
 export interface Mapping {
@@ -26,18 +26,16 @@ export interface ActionOptions {
 }
 
 export class Action<T extends CanvasEngine = CanvasEngine> {
-
 	options: ActionOptions;
 	id: string;
 	engine: T;
 
-	constructor(options: ActionOptions){
+	constructor(options: ActionOptions) {
 		this.options = options;
 		this.id = Toolkit.UID();
 	}
 
-	setEngine(engine: T){
+	setEngine(engine: T) {
 		this.engine = engine;
 	}
-
 }

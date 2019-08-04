@@ -1,15 +1,16 @@
-
 import * as _ from 'lodash';
 import { LinkModel } from '../entities/link/LinkModel';
 import { NodeModel } from '../entities/node/NodeModel';
 import {
 	BaseEntityEvent,
-	BaseEntityListener, BaseModel,
+	BaseEntityListener,
+	BaseModel,
 	CanvasModel,
-	CanvasModelGenerics, LayerModel
-} from "@projectstorm/react-canvas-core";
-import {NodeLayerModel} from "../entities/node-layer/NodeLayerModel";
-import {LinkLayerModel} from "../entities/link-layer/LinkLayerModel";
+	CanvasModelGenerics,
+	LayerModel
+} from '@projectstorm/react-canvas-core';
+import { NodeLayerModel } from '../entities/node-layer/NodeLayerModel';
+import { LinkLayerModel } from '../entities/link-layer/LinkLayerModel';
 
 export interface DiagramListener extends BaseEntityListener {
 	nodesUpdated?(event: BaseEntityEvent & { node: NodeModel; isCreated: boolean }): void;
@@ -22,7 +23,6 @@ export interface DiagramModelGenerics extends CanvasModelGenerics {
 }
 
 export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics> extends CanvasModel<G> {
-
 	protected activeNodeLayer: NodeLayerModel;
 	protected activeLinkLayer: LinkLayerModel;
 
@@ -34,44 +34,44 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 
 	addLayer(layer: LayerModel): void {
 		super.addLayer(layer);
-		if(layer instanceof NodeLayerModel){
+		if (layer instanceof NodeLayerModel) {
 			this.activeNodeLayer = layer;
 		}
-		if(layer instanceof LinkLayerModel){
+		if (layer instanceof LinkLayerModel) {
 			this.activeLinkLayer = layer;
 		}
 	}
 
-	getLinkLayers(): LinkLayerModel[]{
-		return _.filter(this.layers, (layer) => {
+	getLinkLayers(): LinkLayerModel[] {
+		return _.filter(this.layers, layer => {
 			return layer instanceof LinkLayerModel;
 		}) as LinkLayerModel[];
 	}
 
-	getNodeLayers(): NodeLayerModel[]{
-		return _.filter(this.layers, (layer) => {
+	getNodeLayers(): NodeLayerModel[] {
+		return _.filter(this.layers, layer => {
 			return layer instanceof NodeLayerModel;
 		}) as NodeLayerModel[];
 	}
 
-	getActiveNodeLayer(): NodeLayerModel{
-		if(!this.activeNodeLayer){
+	getActiveNodeLayer(): NodeLayerModel {
+		if (!this.activeNodeLayer) {
 			const layers = this.getNodeLayers();
-			if(layers.length === 0){
-				this.addLayer(new NodeLayerModel())
-			}else{
+			if (layers.length === 0) {
+				this.addLayer(new NodeLayerModel());
+			} else {
 				this.activeNodeLayer = layers[0];
 			}
 		}
 		return this.activeNodeLayer;
 	}
 
-	getActiveLinkLayer(): LinkLayerModel{
-		if(!this.activeLinkLayer){
+	getActiveLinkLayer(): LinkLayerModel {
+		if (!this.activeLinkLayer) {
 			const layers = this.getLinkLayers();
-			if(layers.length === 0){
-				this.addLayer(new NodeLayerModel())
-			}else{
+			if (layers.length === 0) {
+				this.addLayer(new NodeLayerModel());
+			} else {
 				this.activeLinkLayer = layers[0];
 			}
 		}
@@ -79,18 +79,18 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	getNode(node: string): NodeModel {
-		for(const layer of this.getNodeLayers()){
+		for (const layer of this.getNodeLayers()) {
 			const model = layer.getModel(node);
-			if(model){
+			if (model) {
 				return model;
 			}
 		}
 	}
 
 	getLink(link: string): LinkModel {
-		for(const layer of this.getLinkLayers()){
+		for (const layer of this.getLinkLayers()) {
 			const model = layer.getModel(link);
-			if(model){
+			if (model) {
 				return model;
 			}
 		}
@@ -136,32 +136,32 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	removeLink(link: LinkModel) {
-		const removed = _.some(this.getLinkLayers(), (layer) => {
+		const removed = _.some(this.getLinkLayers(), layer => {
 			return layer.removeModel(link);
 		});
-		if(removed){
+		if (removed) {
 			this.fireEvent({ link, isCreated: false }, 'linksUpdated');
 		}
 	}
 
 	removeNode(node: NodeModel) {
-		const removed = _.some(this.getNodeLayers(), (layer) => {
+		const removed = _.some(this.getNodeLayers(), layer => {
 			return layer.removeModel(node);
 		});
-		if(removed){
+		if (removed) {
 			this.fireEvent({ node, isCreated: false }, 'nodesUpdated');
 		}
 	}
 
 	getLinks(): LinkModel[] {
-		return _.flatMap(this.getLinkLayers(), (layer) => {
+		return _.flatMap(this.getLinkLayers(), layer => {
 			return _.values(layer.getModels());
 		});
 	}
 
 	getNodes(): NodeModel[] {
-		return _.flatMap(this.getNodeLayers(), (layer) => {
-			return _.values(layer.getModels())
+		return _.flatMap(this.getNodeLayers(), layer => {
+			return _.values(layer.getModels());
 		});
 	}
 }

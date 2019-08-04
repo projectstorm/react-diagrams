@@ -9,7 +9,7 @@ import {
 	BaseModelListener,
 	BasePositionModel,
 	BasePositionModelGenerics
-} from "@projectstorm/react-canvas-core";
+} from '@projectstorm/react-canvas-core';
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
@@ -130,7 +130,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 
 	removePort(port: PortModel) {
 		// clear the port from the links
-		for(let link of _.values(port.getLinks())){
+		for (let link of _.values(port.getLinks())) {
 			link.clearPort(port);
 		}
 		//clear the parent node reference

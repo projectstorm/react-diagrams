@@ -1,17 +1,16 @@
-import {CanvasEngine} from "../../CanvasEngine";
-import * as _ from "lodash";
+import { CanvasEngine } from '../../CanvasEngine';
+import * as _ from 'lodash';
 import {
 	BaseEntity,
 	BaseEntityEvent,
 	BaseEntityGenerics,
 	BaseEntityListener,
 	BaseEntityOptions
-} from "../../core-models/BaseEntity";
-import {LayerModel} from "../layer/LayerModel";
-import {BaseModel} from "../../core-models/BaseModel";
+} from '../../core-models/BaseEntity';
+import { LayerModel } from '../layer/LayerModel';
+import { BaseModel } from '../../core-models/BaseModel';
 
 export interface DiagramListener extends BaseEntityListener {
-
 	offsetUpdated?(event: BaseEntityEvent<CanvasModel> & { offsetX: number; offsetY: number }): void;
 
 	zoomUpdated?(event: BaseEntityEvent<CanvasModel> & { zoom: number }): void;
@@ -33,7 +32,6 @@ export interface CanvasModelGenerics extends BaseEntityGenerics {
 }
 
 export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> extends BaseEntity<G> {
-
 	protected layers: G['LAYER'][];
 
 	constructor(options: G['OPTIONS'] = {}) {
@@ -47,10 +45,10 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		this.layers = [];
 	}
 
-	getSelectedItems(): BaseModel[]{
-		return _.flatMap(this.layers, (layer) => {
+	getSelectedItems(): BaseModel[] {
+		return _.flatMap(this.layers, layer => {
 			return layer.getSelectedEntities();
-		})
+		});
 	}
 
 	clearSelection(ignore: BaseModel | null = null) {
@@ -62,18 +60,18 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		});
 	}
 
-	getModels(): BaseModel[]{
-		return _.flatMap(this.layers, (layer) => {
+	getModels(): BaseModel[] {
+		return _.flatMap(this.layers, layer => {
 			return _.values(layer.getModels());
 		});
 	}
 
-	addLayer(layer: LayerModel){
+	addLayer(layer: LayerModel) {
 		layer.setParent(this);
 		this.layers.push(layer);
 	}
 
-	getLayers(){
+	getLayers() {
 		return this.layers;
 	}
 

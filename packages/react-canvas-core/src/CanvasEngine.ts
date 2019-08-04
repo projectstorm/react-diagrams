@@ -1,14 +1,14 @@
-import {CanvasModel} from "./entities/canvas/CanvasModel";
-import {FactoryBank} from "./core/FactoryBank";
-import {AbstractReactFactory} from "./core/AbstractReactFactory";
-import {LayerModel} from "./entities/layer/LayerModel";
-import {BaseListener, BaseObserver} from "./core/BaseObserver";
-import {MouseEvent} from "react";
-import {BaseModel} from "./core-models/BaseModel";
-import {Point} from "@projectstorm/geometry";
-import {ActionEventBus} from "./core-actions/ActionEventBus";
-import {ZoomCanvasAction} from "./actions/ZoomCanvasAction";
-import {DeleteItemsAction} from "./actions/DeleteItemsAction";
+import { CanvasModel } from './entities/canvas/CanvasModel';
+import { FactoryBank } from './core/FactoryBank';
+import { AbstractReactFactory } from './core/AbstractReactFactory';
+import { LayerModel } from './entities/layer/LayerModel';
+import { BaseListener, BaseObserver } from './core/BaseObserver';
+import { MouseEvent } from 'react';
+import { BaseModel } from './core-models/BaseModel';
+import { Point } from '@projectstorm/geometry';
+import { ActionEventBus } from './core-actions/ActionEventBus';
+import { ZoomCanvasAction } from './actions/ZoomCanvasAction';
+import { DeleteItemsAction } from './actions/DeleteItemsAction';
 
 export interface CanvasEngineListener extends BaseListener {
 	canvasReady?(): void;
@@ -18,8 +18,10 @@ export interface CanvasEngineListener extends BaseListener {
 	rendered?(): void;
 }
 
-export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener, M extends CanvasModel = CanvasModel> extends BaseObserver<L> {
-
+export class CanvasEngine<
+	L extends CanvasEngineListener = CanvasEngineListener,
+	M extends CanvasModel = CanvasModel
+> extends BaseObserver<L> {
 	protected model: M;
 	protected layerFactories: FactoryBank<AbstractReactFactory<LayerModel>>;
 	protected canvas: HTMLDivElement;
@@ -100,7 +102,7 @@ export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 		}
 	}
 
-	getCanvas(){
+	getCanvas() {
 		return this.canvas;
 	}
 

@@ -1,16 +1,15 @@
-import {WheelEvent} from 'react';
-import {Action, InputType} from "../core-actions/Action";
+import { WheelEvent } from 'react';
+import { Action, InputType } from '../core-actions/Action';
 
 export interface ZoomCanvasActionOptions {
 	inverseZoom?: boolean;
 }
 
 export class ZoomCanvasAction extends Action {
-
-	constructor(options: ZoomCanvasActionOptions = {}){
+	constructor(options: ZoomCanvasActionOptions = {}) {
 		super({
 			type: InputType.MOUSE_WHEEL,
-			fire:(event: WheelEvent) => {
+			fire: (event: WheelEvent) => {
 				const model = this.engine.getModel();
 				event.stopPropagation();
 				const oldZoomFactor = this.engine.getModel().getZoomLevel() / 100;
@@ -46,10 +45,7 @@ export class ZoomCanvasAction extends Action {
 				const xFactor = (clientX - model.getOffsetX()) / oldZoomFactor / clientWidth;
 				const yFactor = (clientY - model.getOffsetY()) / oldZoomFactor / clientHeight;
 
-				model.setOffset(
-					model.getOffsetX() - widthDiff * xFactor,
-					model.getOffsetY() - heightDiff * yFactor
-				);
+				model.setOffset(model.getOffsetX() - widthDiff * xFactor, model.getOffsetY() - heightDiff * yFactor);
 				this.engine.repaintCanvas();
 			}
 		});

@@ -9,7 +9,7 @@ import {
 } from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from '../label/DefaultLabelModel';
 import { BezierCurve } from '@projectstorm/geometry';
-import {BaseEntityEvent, BaseModelOptions} from "@projectstorm/react-canvas-core";
+import { BaseEntityEvent, BaseModelOptions } from '@projectstorm/react-canvas-core';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEntityEvent<DefaultLinkModel> & { color: null | string }): void;

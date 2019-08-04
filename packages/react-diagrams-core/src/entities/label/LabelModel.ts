@@ -1,6 +1,6 @@
 import { DiagramEngine } from '../../DiagramEngine';
 import { LinkModel } from '../link/LinkModel';
-import {BaseModel, BaseModelGenerics, BaseModelOptions} from "@projectstorm/react-canvas-core";
+import { BaseModel, BaseModelGenerics, BaseModelOptions } from '@projectstorm/react-canvas-core';
 
 export interface LabelModelOptions extends BaseModelOptions {
 	offsetX?: number;

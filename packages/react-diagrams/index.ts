@@ -1,6 +1,4 @@
-import {
-	DiagramEngine, LinkLayerFactory, NodeLayerFactory,
-} from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, LinkLayerFactory, NodeLayerFactory } from '@projectstorm/react-diagrams-core';
 import {
 	DefaultLabelFactory,
 	DefaultLinkFactory,

@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { DiagramEngine } from '../../DiagramEngine';
 import { NodeModel } from './NodeModel';
-import {BaseEntityEvent, BaseModel, ListenerHandle, PeformanceWidget} from "@projectstorm/react-canvas-core";
-import styled from "@emotion/styled";
+import { BaseEntityEvent, BaseModel, ListenerHandle, PeformanceWidget } from '@projectstorm/react-canvas-core';
+import styled from '@emotion/styled';
 
 export interface NodeProps {
 	node: NodeModel;
@@ -11,7 +11,7 @@ export interface NodeProps {
 	diagramEngine: DiagramEngine;
 }
 
-namespace S{
+namespace S {
 	export const Node = styled.div`
 		position: absolute;
 		-webkit-touch-callout: none; /* iOS Safari */
@@ -19,7 +19,7 @@ namespace S{
 		user-select: none;
 		cursor: move;
 		pointer-events: all;
-	`
+	`;
 }
 
 export class NodeWidget extends React.Component<NodeProps> {

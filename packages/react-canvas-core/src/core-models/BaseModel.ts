@@ -41,8 +41,6 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 		return [];
 	}
 
-
-
 	serialize() {
 		return {
 			...super.serialize(),
@@ -68,12 +66,12 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 
 	isLocked(): boolean {
 		const locked = super.isLocked();
-		if(locked){
+		if (locked) {
 			return true;
 		}
 
 		// delegate this call up to the parent
-		if(this.parent){
+		if (this.parent) {
 			return this.parent.isLocked();
 		}
 		return false;

@@ -1,13 +1,11 @@
 import * as React from 'react';
-import {
-	DiagramEngine,
-} from '@projectstorm/react-diagrams-core';
+import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
 import { PathFindingLinkWidget } from './PathFindingLinkWidget';
 import * as _ from 'lodash';
 import * as Path from 'paths-js/path';
 import { DefaultLinkFactory } from '@projectstorm/react-diagrams-defaults';
-import {AbstractFactory, FactoryBank, ListenerHandle} from "@projectstorm/react-canvas-core";
+import { AbstractFactory, FactoryBank, ListenerHandle } from '@projectstorm/react-canvas-core';
 
 export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkModel> {
 	ROUTING_SCALING_FACTOR: number = 5;

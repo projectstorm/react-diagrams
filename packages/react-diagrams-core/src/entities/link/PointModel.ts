@@ -4,7 +4,7 @@ import {
 	BasePositionModel,
 	BasePositionModelGenerics,
 	BasePositionModelOptions
-} from "@projectstorm/react-canvas-core";
+} from '@projectstorm/react-canvas-core';
 
 export interface PointModelOptions extends Omit<BasePositionModelOptions, 'type'> {
 	link: LinkModel;

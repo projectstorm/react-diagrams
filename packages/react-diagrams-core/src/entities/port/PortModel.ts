@@ -5,10 +5,11 @@ import { DiagramEngine } from '../../DiagramEngine';
 import { Point } from '@projectstorm/geometry';
 import {
 	BaseEntityEvent,
-	BaseModelOptions, BasePositionModel,
+	BaseModelOptions,
+	BasePositionModel,
 	BasePositionModelGenerics,
 	BasePositionModelListener
-} from "@projectstorm/react-canvas-core";
+} from '@projectstorm/react-canvas-core';
 
 export enum PortModelAlignment {
 	TOP = 'top',

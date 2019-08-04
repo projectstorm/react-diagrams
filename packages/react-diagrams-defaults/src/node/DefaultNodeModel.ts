@@ -1,12 +1,7 @@
 import * as _ from 'lodash';
-import {
-	DiagramEngine,
-	NodeModel,
-	NodeModelGenerics,
-	PortModelAlignment
-} from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, NodeModel, NodeModelGenerics, PortModelAlignment } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from '../port/DefaultPortModel';
-import {BasePositionModelOptions} from "@projectstorm/react-canvas-core";
+import { BasePositionModelOptions } from '@projectstorm/react-canvas-core';
 
 export interface DefaultNodeModelOptions extends BasePositionModelOptions {
 	name?: string;

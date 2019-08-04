@@ -6,7 +6,7 @@ import { PortModel } from '../port/PortModel';
 import { MouseEvent } from 'react';
 import * as _ from 'lodash';
 import { LabelWidget } from '../label/LabelWidget';
-import {BaseEntityEvent, BasePositionModel, ListenerHandle, PeformanceWidget} from "@projectstorm/react-canvas-core";
+import { BaseEntityEvent, BasePositionModel, ListenerHandle, PeformanceWidget } from '@projectstorm/react-canvas-core';
 
 export interface LinkProps {
 	link: LinkModel;

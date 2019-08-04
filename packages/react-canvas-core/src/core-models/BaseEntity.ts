@@ -90,7 +90,7 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 	}
 
 	public isLocked(): boolean {
-		 return this.options.locked;
+		return this.options.locked;
 	}
 
 	public setLocked(locked: boolean = true) {

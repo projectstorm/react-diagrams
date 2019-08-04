@@ -1,8 +1,8 @@
-import * as React from "react";
-import styled from "@emotion/styled";
-import {css} from "@emotion/core";
-import {CSSProperties} from "react";
-import {LayerModel} from "./LayerModel";
+import * as React from 'react';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
+import { CSSProperties } from 'react';
+import { LayerModel } from './LayerModel';
 
 export interface TransformLayerWidgetProps {
 	layer: LayerModel;
@@ -22,19 +22,18 @@ namespace S {
 	`;
 
 	export const DivLayer = styled.div`
-      ${shared}
-  `;
+		${shared}
+	`;
 
 	export const SvgLayer = styled.svg`
-      ${shared}
-  `;
+		${shared}
+	`;
 }
 
 export class TransformLayerWidget extends React.Component<TransformLayerWidgetProps> {
-
 	constructor(props: TransformLayerWidgetProps) {
 		super(props);
-		this.state = {}
+		this.state = {};
 	}
 
 	getTransform() {
@@ -46,30 +45,22 @@ export class TransformLayerWidget extends React.Component<TransformLayerWidgetPr
 			scale(
 				${model.getZoomLevel() / 100.0}
 			)
-  	`
+  	`;
 	}
 
 	getTransformStyle(): CSSProperties {
 		if (this.props.layer.getOptions().transformed) {
 			return {
-				'transform': this.getTransform()
-			}
+				transform: this.getTransform()
+			};
 		}
 		return {};
 	}
 
 	render() {
 		if (this.props.layer.getOptions().isSvg) {
-			return (
-				<S.SvgLayer style={this.getTransformStyle()}>
-					{this.props.children}
-				</S.SvgLayer>
-			)
+			return <S.SvgLayer style={this.getTransformStyle()}>{this.props.children}</S.SvgLayer>;
 		}
-		return (
-			<S.DivLayer style={this.getTransformStyle()}>
-				{this.props.children}
-			</S.DivLayer>
-		);
+		return <S.DivLayer style={this.getTransformStyle()}>{this.props.children}</S.DivLayer>;
 	}
 }

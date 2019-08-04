@@ -5,7 +5,7 @@ import { LabelModel } from '../label/LabelModel';
 import { DiagramEngine } from '../../DiagramEngine';
 import { DiagramModel } from '../../models/DiagramModel';
 import { Point } from '@projectstorm/geometry';
-import {BaseEntityEvent, BaseModel, BaseModelGenerics, BaseModelListener} from "@projectstorm/react-canvas-core";
+import { BaseEntityEvent, BaseModel, BaseModelGenerics, BaseModelListener } from '@projectstorm/react-canvas-core';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
@@ -116,11 +116,10 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		}
 	}
 
-	clearPort(port: PortModel){
-		if(this.sourcePort === port){
+	clearPort(port: PortModel) {
+		if (this.sourcePort === port) {
 			this.setSourcePort(null);
-		}
-		else if(this.targetPort === port){
+		} else if (this.targetPort === port) {
 			this.setTargetPort(null);
 		}
 	}

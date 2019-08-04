@@ -11,10 +11,9 @@ import {
 	CanvasEngine,
 	FactoryBank,
 	Toolkit
-} from "@projectstorm/react-canvas-core";
-import {CanvasEngineListener} from "@projectstorm/react-canvas-core";
-import {DiagramModel} from "./models/DiagramModel";
-
+} from '@projectstorm/react-canvas-core';
+import { CanvasEngineListener } from '@projectstorm/react-canvas-core';
+import { DiagramModel } from './models/DiagramModel';
 
 /**
  * Passed as a parameter to the DiagramWidget
@@ -53,7 +52,6 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		setup(this.portFactories);
 		setup(this.labelFactories);
 	}
-
 
 	/**
 	 * Gets a model and element under the mouse cursor
@@ -187,10 +185,8 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		var rel = this.getRelativePoint(sourceRect.left, sourceRect.top);
 
 		return new Point(
-			sourceElement.offsetWidth / 2 +
-				(rel.x - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100.0),
-			sourceElement.offsetHeight / 2 +
-				(rel.y - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100.0)
+			sourceElement.offsetWidth / 2 + (rel.x - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100.0),
+			sourceElement.offsetHeight / 2 + (rel.y - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100.0)
 		);
 	}
 
@@ -216,11 +212,8 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		const canvasRect = this.canvas.getBoundingClientRect() as ClientRect;
 
 		return {
-			x:
-				(sourceRect.left - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100.0) -
-				canvasRect.left,
-			y:
-				(sourceRect.top - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100.0) - canvasRect.top,
+			x: (sourceRect.left - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100.0) - canvasRect.left,
+			y: (sourceRect.top - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100.0) - canvasRect.top,
 			width: sourceRect.width,
 			height: sourceRect.height
 		};
@@ -254,5 +247,4 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 	setMaxNumberPointsPerLink(max: number) {
 		this.maxNumberPointsPerLink = max;
 	}
-
 }

@@ -1,5 +1,5 @@
-import {BaseEvent, BaseListener, BaseObserver} from './BaseObserver';
-import {AbstractFactory} from './AbstractFactory';
+import { BaseEvent, BaseListener, BaseObserver } from './BaseObserver';
+import { AbstractFactory } from './AbstractFactory';
 import * as _ from 'lodash';
 
 export interface FactoryBankListener<F extends AbstractFactory = AbstractFactory> extends BaseListener {
@@ -14,11 +14,13 @@ export interface FactoryBankListener<F extends AbstractFactory = AbstractFactory
 	factoryRemoved?: (event: BaseEvent & { factory: F }) => any;
 }
 
-
 /**
  * Store and managed Factories that extend from Abstractfactory
  */
-export class FactoryBank<F extends AbstractFactory = AbstractFactory, L extends FactoryBankListener<F> = FactoryBankListener<F>> extends BaseObserver<L> {
+export class FactoryBank<
+	F extends AbstractFactory = AbstractFactory,
+	L extends FactoryBankListener<F> = FactoryBankListener<F>
+> extends BaseObserver<L> {
 	protected factories: { [type: string]: F };
 
 	constructor() {
@@ -47,7 +49,7 @@ export class FactoryBank<F extends AbstractFactory = AbstractFactory, L extends 
 		factory.setFactoryBank(this);
 		this.factories[factory.getType()] = factory;
 		// todo fixme
-		this.fireEvent<'factoryAdded'>({factory} as any, 'factoryAdded');
+		this.fireEvent<'factoryAdded'>({ factory } as any, 'factoryAdded');
 	}
 
 	deregisterFactory(type: string) {
@@ -55,6 +57,6 @@ export class FactoryBank<F extends AbstractFactory = AbstractFactory, L extends 
 		factory.setFactoryBank(null);
 		delete this.factories[type];
 		// todo fixme
-		this.fireEvent<'factoryRemoved'>({factory} as any, 'factoryRemoved');
+		this.fireEvent<'factoryRemoved'>({ factory } as any, 'factoryRemoved');
 	}
 }
