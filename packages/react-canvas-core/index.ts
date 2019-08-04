@@ -16,9 +16,13 @@ export * from './src/entities/canvas/CanvasModel';
 export * from './src/entities/canvas/CanvasWidget';
 
 export * from './src/entities/layer/LayerModel';
+export * from './src/entities/layer/TransformLayerWidget';
+
+export * from './src/entities/selection/SelectionBoxLayerFactory';
+export * from './src/entities/selection/SelectionBoxWidget';
+export * from './src/entities/selection/SelectionLayerModel';
 
 export * from './src/widgets/PeformanceWidget';
-export * from './src/entities/layer/TransformLayerWidget';
 
 export * from './src/states/DefaultState';
 export * from './src/states/DragCanvasState';

@@ -68,7 +68,19 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 
 	addLayer(layer: LayerModel) {
 		layer.setParent(this);
+		layer.registerListener({
+			entityRemoved: (event: BaseEntityEvent<BaseModel>): void => {}
+		});
 		this.layers.push(layer);
+	}
+
+	removeLayer(layer: LayerModel) {
+		const index = this.layers.indexOf(layer);
+		if (index !== -1) {
+			this.layers.splice(index, 1);
+			return true;
+		}
+		return false;
 	}
 
 	getLayers() {

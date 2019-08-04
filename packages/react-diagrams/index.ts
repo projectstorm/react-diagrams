@@ -6,7 +6,7 @@ import {
 	DefaultPortFactory
 } from '@projectstorm/react-diagrams-defaults';
 import { PathFindingLinkFactory } from '@projectstorm/react-diagrams-routing';
-import { DefaultState } from '@projectstorm/react-canvas-core';
+import { DefaultState, SelectionBoxLayerFactory } from '@projectstorm/react-canvas-core';
 
 export * from '@projectstorm/react-diagrams-core';
 export * from '@projectstorm/react-diagrams-defaults';
@@ -21,6 +21,7 @@ export default (): DiagramEngine => {
 	// register model factories
 	engine.getLayerFactories().registerFactory(new NodeLayerFactory());
 	engine.getLayerFactories().registerFactory(new LinkLayerFactory());
+	engine.getLayerFactories().registerFactory(new SelectionBoxLayerFactory());
 
 	engine.getLabelFactories().registerFactory(new DefaultLabelFactory());
 	engine.getNodeFactories().registerFactory(new DefaultNodeFactory()); // i cant figure out why

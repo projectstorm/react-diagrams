@@ -12,7 +12,8 @@ export abstract class State {
 	protected actions: Action[];
 	protected keys: string[];
 	protected options: StateOptions;
-	private childStates: State[];
+	protected childStates: State[];
+
 	private handler1;
 	private handler2;
 
@@ -45,7 +46,6 @@ export abstract class State {
 	}
 
 	tryActivateParentState(keys: string[]) {
-		console.log('trying parent state');
 		if (this.keys.length > 0 && !this.isKeysFullfilled(keys)) {
 			this.eject();
 			return true;

@@ -20,6 +20,13 @@ export class LayerModel<G extends LayerModelGenerics = LayerModelGenerics> exten
 		this.models = {};
 	}
 
+	remove() {
+		if (this.parent) {
+			this.parent.removeLayer(this);
+		}
+		super.remove();
+	}
+
 	addModel(model: G['CHILDREN']) {
 		model.setParent(this);
 		this.models[model.getID()] = model;
