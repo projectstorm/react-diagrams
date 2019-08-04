@@ -1,6 +1,9 @@
 import { AbstractDisplacementState, AbstractDisplacementStateEvent } from '../core-state/AbstractDisplacementState';
 import { State } from '../core-state/State';
 import { SelectionLayerModel } from '../entities/selection/SelectionLayerModel';
+import { CanvasModel } from '../entities/canvas/CanvasModel';
+import { BasePositionModel } from '../core-models/BasePositionModel';
+import { Rectangle } from '@projectstorm/geometry';
 
 export class SelectionBoxState extends AbstractDisplacementState {
 	layer: SelectionLayerModel;
@@ -36,6 +39,18 @@ export class SelectionBoxState extends AbstractDisplacementState {
 
 	fireMouseMoved(event: AbstractDisplacementStateEvent) {
 		this.layer.setBox(this.getBoxDimensions(event));
+
+		var relative = this.engine.getRelativeMousePoint(event.event);
+		const rect = new Rectangle(relative, event.virtualDisplacementX, event.virtualDisplacementY);
+
+		for (let model of this.engine.getModel().getModels()) {
+			if (model instanceof BasePositionModel) {
+				if (rect.containsPoint(model.getPosition())) {
+					model.setSelected(true);
+				}
+			}
+		}
+
 		this.engine.repaintCanvas();
 	}
 }

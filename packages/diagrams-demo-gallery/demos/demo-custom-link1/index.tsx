@@ -2,13 +2,12 @@ import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
-	DiagramWidget,
 	DefaultLinkWidget,
 	DefaultLinkFactory,
-	LinkModel,
 	DefaultLinkModel
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 	constructor() {
@@ -91,15 +90,14 @@ export class AdvancedLinkSegment extends React.Component<{ model: AdvancedLinkMo
 
 export class AdvancedLinkFactory extends DefaultLinkFactory {
 	constructor() {
-		super();
-		this.type = 'advanced';
+		super('advanced');
 	}
 
 	generateModel(): AdvancedLinkModel {
 		return new AdvancedLinkModel();
 	}
 
-	generateLinkSegment(model: AdvancedLinkModel, widget: DefaultLinkWidget, selected: boolean, path: string) {
+	generateLinkSegment(model: AdvancedLinkModel, selected: boolean, path: string) {
 		return (
 			<g>
 				<AdvancedLinkSegment model={model} path={path} />
@@ -147,8 +145,8 @@ export default () => {
 	model.addAll(node1, node2, node3, node4);
 
 	// load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	// render the diagram!
-	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />;
+	return <CanvasWidget className="srd-demo-canvas" engine={engine} />;
 };

@@ -4,9 +4,10 @@ import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { DefaultNodeModel } from './DefaultNodeModel';
 import { DefaultPortLabel } from '../port/DefaultPortLabelWidget';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 
 namespace S {
-	export const Node = styled.div<{ background: string }>`
+	export const Node = styled.div<{ background: string; selected: boolean }>`
 		background-color: ${p => p.background};
 		border-radius: 5px;
 		font-family: sans-serif;
@@ -14,6 +15,7 @@ namespace S {
 		border: solid 2px black;
 		overflow: visible;
 		font-size: 11px;
+		border: solid 2px ${p => (p.selected ? 'rgb(0,192,255)' : 'black')};
 	`;
 
 	export const Title = styled.div`
@@ -64,7 +66,7 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps> {
 
 	render() {
 		return (
-			<S.Node background={this.props.node.getOptions().color}>
+			<S.Node selected={this.props.node.isSelected()} background={this.props.node.getOptions().color}>
 				<S.Title>
 					<S.TitleName>{this.props.node.getOptions().name}</S.TitleName>
 				</S.Title>

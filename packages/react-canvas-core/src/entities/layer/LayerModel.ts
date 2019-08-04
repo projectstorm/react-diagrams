@@ -1,5 +1,6 @@
 import { BaseModel, BaseModelGenerics, BaseModelOptions } from '../../core-models/BaseModel';
 import { CanvasModel } from '../canvas/CanvasModel';
+import * as _ from 'lodash';
 
 export interface LayerModelOptions extends BaseModelOptions {
 	isSvg?: boolean;
@@ -50,6 +51,10 @@ export class LayerModel<G extends LayerModelGenerics = LayerModelGenerics> exten
 	}
 
 	getSelectedEntities(): Array<BaseModel> {
-		return super.getSelectedEntities();
+		return super.getSelectedEntities().concat(
+			_.filter(this.models, entity => {
+				return entity.isSelected();
+			})
+		);
 	}
 }

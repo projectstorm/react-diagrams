@@ -2,7 +2,6 @@ import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
-	DiagramWidget,
 	NodeModel,
 	DagreEngine,
 	DiagramEngine,
@@ -10,6 +9,7 @@ import createEngine, {
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
 
 function createNode(name): any {
 	return new DefaultNodeModel(name, 'rgb(0,192,255)');
@@ -70,13 +70,13 @@ class Demo8Widget extends React.Component<{ model: DiagramModel; engine: Diagram
 	render() {
 		return (
 			<DemoWorkspaceWidget buttons={<button onClick={this.autoDistribute}>Re-distribute</button>}>
-				<DiagramWidget
+				<CanvasWidget
 					className="srd-demo-canvas"
-					diagramEngine={this.props.engine}
-					actionStoppedFiring={() => {
-						// only happens if pathfing is enabled (check line 25)
-						this.reroute();
-					}}
+					engine={this.props.engine}
+					// actionStoppedFiring={() => {
+					// 	// only happens if pathfing is enabled (check line 25)
+					// 	this.reroute();
+					// }}
 				/>
 			</DemoWorkspaceWidget>
 		);
@@ -127,7 +127,7 @@ export default () => {
 		model.addLink(link);
 	});
 
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	return <Demo8Widget model={model} engine={engine} />;
 };

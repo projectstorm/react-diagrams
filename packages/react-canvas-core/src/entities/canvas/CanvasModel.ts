@@ -51,11 +51,8 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		});
 	}
 
-	clearSelection(ignore: BaseModel | null = null) {
+	clearSelection() {
 		_.forEach(this.getSelectedItems(), element => {
-			if (ignore && ignore.getID() === element.getID()) {
-				return;
-			}
 			element.setSelected(false);
 		});
 	}

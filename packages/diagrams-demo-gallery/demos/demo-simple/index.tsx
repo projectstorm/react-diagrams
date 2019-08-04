@@ -1,10 +1,6 @@
-import createEngine, {
-	DiagramModel,
-	DefaultNodeModel,
-	DiagramWidget,
-	DefaultLinkModel
-} from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel, DefaultLinkModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
 
 export default () => {
 	//1) setup the diagram engine
@@ -31,8 +27,8 @@ export default () => {
 	model.addAll(node1, node2, link1);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//6) render the diagram!
-	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />;
+	return <CanvasWidget className="srd-demo-canvas" engine={engine} />;
 };

@@ -31,6 +31,13 @@ export class Rectangle extends Polygon {
 		super.setPoints(points);
 	}
 
+	containsPoint(point: Point) {
+		const tl = this.getTopLeft();
+		const br = this.getBottomRight();
+
+		return point.x >= tl.x && point.x <= br.x && point.y >= tl.y && point.y <= br.y;
+	}
+
 	getWidth(): number {
 		return Math.sqrt(
 			Math.pow(this.getTopLeft().x - this.getTopRight().x, 2) + Math.pow(this.getTopLeft().y - this.getTopRight().y, 2)

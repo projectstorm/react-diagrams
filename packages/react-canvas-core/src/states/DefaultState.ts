@@ -3,6 +3,7 @@ import { Action, InputType } from '../core-actions/Action';
 import { MouseEvent } from 'react';
 import { DragCanvasState } from './DragCanvasState';
 import { SelectingState } from './SelectingState';
+import { MoveItemsState } from './MoveItemsState';
 
 export class DefaultState extends State {
 	constructor() {
@@ -21,6 +22,8 @@ export class DefaultState extends State {
 					// the canvas was clicked on, transition to the dragging canvas state
 					if (!element) {
 						this.transitionWithEvent(new DragCanvasState(), event);
+					} else {
+						this.transitionWithEvent(new MoveItemsState(), event);
 					}
 				}
 			})

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { storiesOf, addParameters, addDecorator } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
-import { Toolkit } from '@projectstorm/react-diagrams';
 import { themes } from '@storybook/theming';
 import './demos/helpers/demo.scss';
 
-Toolkit.TESTING = true;
+// Toolkit.TESTING = true;
 
 addParameters({
 	options: {
@@ -68,6 +67,7 @@ storiesOf('Custom Models', module)
 	.add('Custom animated links', demo_cust_links);
 
 import demo_3rd_dagre from './demos/demo-dagre';
+import { Toolkit } from '@projectstorm/react-canvas-core';
 
 storiesOf('3rd party libraries', module).add('Auto Distribute (Dagre)', demo_3rd_dagre);
 

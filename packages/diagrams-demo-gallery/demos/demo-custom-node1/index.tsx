@@ -1,15 +1,11 @@
-import createEngine, {
-	DefaultNodeModel,
-	DiagramModel,
-	DiagramWidget,
-	PortModelAlignment
-} from '@projectstorm/react-diagrams';
+import createEngine, { DefaultNodeModel, DiagramModel, PortModelAlignment } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 // import the custom models
 import { DiamondNodeModel } from './DiamondNodeModel';
 import { DiamondNodeFactory } from './DiamondNodeFactory';
 import { SimplePortFactory } from './SimplePortFactory';
 import { DiamondPortModel } from './DiamondPortModel';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
 
 /**
  * @Author Dylan Vorster
@@ -60,8 +56,8 @@ export default () => {
 	model.addAll(node1, node2, node3, link1, link2, node4, link3, link4, node5);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//6) render the diagram!
-	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />;
+	return <CanvasWidget className="srd-demo-canvas" engine={engine} />;
 };

@@ -3,7 +3,7 @@ import { CanvasEngine } from '../../CanvasEngine';
 import { TransformLayerWidget } from '../layer/TransformLayerWidget';
 import styled from '@emotion/styled';
 
-export interface DiagramProps extends React.Component {
+export interface DiagramProps {
 	engine: CanvasEngine;
 	className?: string;
 }

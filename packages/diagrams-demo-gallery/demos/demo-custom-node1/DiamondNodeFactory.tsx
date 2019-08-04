@@ -1,9 +1,10 @@
 import { DiamonNodeWidget } from './DiamondNodeWidget';
 import { DiamondNodeModel } from './DiamondNodeModel';
 import * as React from 'react';
-import { AbstractReactFactory } from '@projectstorm/react-diagrams';
+import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
+import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 
-export class DiamondNodeFactory extends AbstractReactFactory<DiamondNodeModel> {
+export class DiamondNodeFactory extends AbstractReactFactory<DiamondNodeModel, DiagramEngine> {
 	constructor() {
 		super('diamond');
 	}

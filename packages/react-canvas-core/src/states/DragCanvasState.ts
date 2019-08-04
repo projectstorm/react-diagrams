@@ -13,6 +13,8 @@ export class DragCanvasState extends AbstractDisplacementState {
 
 	activated(prev) {
 		super.activated(prev);
+		this.engine.getModel().clearSelection();
+		this.engine.repaintCanvas();
 		this.initialCanvasX = this.engine.getModel().getOffsetX();
 		this.initialCanvasY = this.engine.getModel().getOffsetY();
 	}
