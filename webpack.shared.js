@@ -13,7 +13,7 @@ module.exports = (directory) => {
 		},
 		externals: [
 			nodeExternals({modulesDir: path.join(directory, 'node_modules')}),
-			nodeExternals({modulesDir: path.join(path.join(directory, '..'), 'node_modules')})
+			nodeExternals({modulesDir: path.join(__dirname, 'node_modules')})
 		],
 		module: {
 			rules: [
