@@ -44,7 +44,7 @@ export class ActionEventBus {
 		} else if (event.type === 'mouseup') {
 			return this.getActionsForType(InputType.MOUSE_UP);
 		} else if (event.type === 'keydown') {
-			// stor the recorded key
+			// store the recorded key
 			this.keys[(event as KeyboardEvent).key.toLowerCase()] = true;
 			return this.getActionsForType(InputType.KEY_DOWN);
 		} else if (event.type === 'keyup') {

@@ -5,11 +5,9 @@ export class DragCanvasState extends AbstractDisplacementState {
 	initialCanvasX: number;
 	initialCanvasY: number;
 
-	static NAME = 'drag-canvas';
-
 	constructor() {
 		super({
-			name: DragCanvasState.NAME
+			name: 'drag-canvas'
 		});
 	}
 

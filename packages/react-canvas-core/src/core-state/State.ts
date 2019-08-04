@@ -4,7 +4,6 @@ import { SyntheticEvent } from 'react';
 import * as _ from 'lodash';
 
 export interface StateOptions {
-	parent?: string;
 	name: string;
 }
 
@@ -13,8 +12,9 @@ export abstract class State {
 	protected actions: Action[];
 	protected keys: string[];
 	protected options: StateOptions;
-	protected childStates: State[];
-	private handler;
+	private childStates: State[];
+	private handler1;
+	private handler2;
 
 	constructor(options: StateOptions) {
 		this.actions = [];
@@ -44,8 +44,17 @@ export abstract class State {
 		this.actions.push(action);
 	}
 
-	tryActivateChildState() {
-		const state = this.findStateToActivate();
+	tryActivateParentState(keys: string[]) {
+		console.log('trying parent state');
+		if (this.keys.length > 0 && !this.isKeysFullfilled(keys)) {
+			this.eject();
+			return true;
+		}
+		return false;
+	}
+
+	tryActivateChildState(keys: string[]) {
+		const state = this.findStateToActivate(keys);
 		if (state) {
 			this.engine.getStateMachine().pushState(state);
 			return true;
@@ -53,11 +62,9 @@ export abstract class State {
 		return false;
 	}
 
-	findStateToActivate() {
-		const keys = this.engine.getActionEventBus().getKeys();
+	findStateToActivate(keys: string[]) {
 		for (let child of this.childStates) {
-			// activate this state!
-			if (_.intersection(child.keys, keys).length === child.keys.length) {
+			if (child.isKeysFullfilled(keys)) {
 				return child;
 			}
 		}
@@ -65,28 +72,47 @@ export abstract class State {
 		return null;
 	}
 
+	isKeysFullfilled(keys: string[]) {
+		return _.intersection(this.keys, keys).length === this.keys.length;
+	}
+
 	activated(previous: State) {
-		if (this.keys.length > 0) {
-			// try and activate a child state, if we cant, listen for keyboard events to try again
-			if (!this.tryActivateChildState()) {
-				this.handler = this.engine.getActionEventBus().registerAction(
-					new Action({
-						type: InputType.KEY_DOWN,
-						fire: () => {
-							this.tryActivateChildState();
-						}
-					})
-				);
-			}
+		const keys = this.engine.getActionEventBus().getKeys();
+
+		if (this.tryActivateParentState(keys) || this.tryActivateChildState(keys)) {
+			return;
 		}
+
+		// perhaps we need to pop again?
+		this.handler1 = this.engine.getActionEventBus().registerAction(
+			new Action({
+				type: InputType.KEY_DOWN,
+				fire: () => {
+					this.tryActivateChildState(this.engine.getActionEventBus().getKeys());
+				}
+			})
+		);
+
+		this.handler2 = this.engine.getActionEventBus().registerAction(
+			new Action({
+				type: InputType.KEY_UP,
+				fire: () => {
+					this.tryActivateParentState(this.engine.getActionEventBus().getKeys());
+				}
+			})
+		);
+
 		for (let action of this.actions) {
 			this.engine.getActionEventBus().registerAction(action);
 		}
 	}
 
 	deactivated(next: State) {
-		if (this.handler) {
-			this.handler();
+		if (this.handler1) {
+			this.handler1();
+		}
+		if (this.handler2) {
+			this.handler2();
 		}
 		// if this happens, we are going into heirachial state machine mode
 		for (let action of this.actions) {

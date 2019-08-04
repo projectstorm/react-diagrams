@@ -3,11 +3,9 @@ import { Action, InputType } from '../core-actions/Action';
 import { SelectionBoxState } from './SelectionBoxState';
 
 export class SelectingState extends State {
-	static NAME = 'selecting';
-
 	constructor() {
 		super({
-			name: SelectingState.NAME
+			name: 'selecting'
 		});
 		this.keys = ['shift'];
 
