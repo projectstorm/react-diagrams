@@ -22,7 +22,7 @@ export interface Mapping {
 
 export interface ActionOptions {
 	type: InputType;
-	fire(event: Mapping[this['type']]);
+	fire: (event: Mapping[this['type']]) => void;
 }
 
 export class Action<T extends CanvasEngine = CanvasEngine> {

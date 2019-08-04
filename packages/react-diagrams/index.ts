@@ -6,6 +6,7 @@ import {
 	DefaultPortFactory
 } from '@projectstorm/react-diagrams-defaults';
 import { PathFindingLinkFactory } from '@projectstorm/react-diagrams-routing';
+import { DefaultState } from '@projectstorm/react-canvas-core';
 
 export * from '@projectstorm/react-diagrams-core';
 export * from '@projectstorm/react-diagrams-defaults';
@@ -28,8 +29,6 @@ export default (): DiagramEngine => {
 	engine.getPortFactories().registerFactory(new DefaultPortFactory());
 
 	// register the default interaction behaviours
-	// engine.getActionFactories().registerFactory(new MoveCanvasActionFactory());
-	// engine.getActionFactories().registerFactory(new SelectingItemsActionFactory());
-	// engine.getActionFactories().registerFactory(new MoveItemsActionFactory());
+	engine.getStateMachine().pushState(new DefaultState());
 	return engine;
 };

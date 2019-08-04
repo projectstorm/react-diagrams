@@ -9,6 +9,7 @@ import { Point } from '@projectstorm/geometry';
 import { ActionEventBus } from './core-actions/ActionEventBus';
 import { ZoomCanvasAction } from './actions/ZoomCanvasAction';
 import { DeleteItemsAction } from './actions/DeleteItemsAction';
+import { StateMachine } from './core-state/StateMachine';
 
 export interface CanvasEngineListener extends BaseListener {
 	canvasReady?(): void;
@@ -26,16 +27,21 @@ export class CanvasEngine<
 	protected layerFactories: FactoryBank<AbstractReactFactory<LayerModel>>;
 	protected canvas: HTMLDivElement;
 	protected eventBus: ActionEventBus;
+	protected stateMachine: StateMachine;
 
 	constructor() {
 		super();
 		this.model = null;
 		this.eventBus = new ActionEventBus(this);
+		this.stateMachine = new StateMachine(this);
 		this.layerFactories = new FactoryBank();
-
 		this.registerFactoryBank(this.layerFactories);
 		this.eventBus.registerAction(new ZoomCanvasAction());
 		this.eventBus.registerAction(new DeleteItemsAction());
+	}
+
+	getStateMachine() {
+		return this.stateMachine;
 	}
 
 	getRelativeMousePoint(event): Point {

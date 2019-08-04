@@ -19,3 +19,8 @@ export * from './src/entities/layer/LayerModel';
 
 export * from './src/widgets/PeformanceWidget';
 export * from './src/entities/layer/TransformLayerWidget';
+
+export * from './src/states/DefaultState';
+export * from './src/states/DragCanvasState';
+export * from './src/states/SelectingState';
+export * from './src/states/SelectionBoxState';

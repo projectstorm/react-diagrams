@@ -1,20 +1,30 @@
 import { Action, InputType } from './Action';
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, KeyboardEvent } from 'react';
 import * as _ from 'lodash';
 import { CanvasEngine } from '../CanvasEngine';
 
 export class ActionEventBus {
 	protected actions: { [id: string]: Action };
 	protected engine: CanvasEngine;
+	protected keys: { [key: string]: boolean };
 
 	constructor(engine: CanvasEngine) {
 		this.actions = {};
 		this.engine = engine;
+
+		this.keys = {};
 	}
 
-	registerAction(action: Action) {
+	getKeys(): string[] {
+		return _.keys(this.keys);
+	}
+
+	registerAction(action: Action): () => void {
 		action.setEngine(this.engine);
 		this.actions[action.id] = action;
+		return () => {
+			this.deregisterAction(action);
+		};
 	}
 
 	deregisterAction(action: Action) {
@@ -34,8 +44,12 @@ export class ActionEventBus {
 		} else if (event.type === 'mouseup') {
 			return this.getActionsForType(InputType.MOUSE_UP);
 		} else if (event.type === 'keydown') {
+			// stor the recorded key
+			this.keys[(event as KeyboardEvent).key.toLowerCase()] = true;
 			return this.getActionsForType(InputType.KEY_DOWN);
 		} else if (event.type === 'keyup') {
+			// delete the recorded key
+			delete this.keys[(event as KeyboardEvent).key.toLowerCase()];
 			return this.getActionsForType(InputType.KEY_UP);
 		} else if (event.type === 'mousemove') {
 			return this.getActionsForType(InputType.MOUSE_MOVE);
