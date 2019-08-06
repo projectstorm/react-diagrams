@@ -35,6 +35,9 @@ export class MoveItemsState extends AbstractDisplacementState {
 		const items = this.engine.getModel().getSelectedItems();
 		for (let item of items) {
 			if (item instanceof BasePositionModel) {
+				if (item.isLocked()) {
+					continue;
+				}
 				if (!this.initialPositions[item.getID()]) {
 					this.initialPositions[item.getID()] = item.getPosition();
 				}

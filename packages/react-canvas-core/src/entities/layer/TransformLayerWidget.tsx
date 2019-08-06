@@ -19,6 +19,7 @@ namespace S {
 		transform-origin: 0 0;
 		width: 100%;
 		height: 100%;
+		overflow: visible;
 	`;
 
 	export const DivLayer = styled.div`
@@ -41,7 +42,7 @@ export class TransformLayerWidget extends React.Component<TransformLayerWidgetPr
 		return `
 			translate(
 				${model.getOffsetX()}px,
-				${model.getOffsetY()}px) 
+				${model.getOffsetY()}px)
 			scale(
 				${model.getZoomLevel() / 100.0}
 			)

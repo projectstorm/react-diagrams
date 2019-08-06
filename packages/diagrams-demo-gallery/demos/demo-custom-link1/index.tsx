@@ -70,6 +70,7 @@ export class AdvancedLinkSegment extends React.Component<{ model: AdvancedLinkMo
 		return (
 			<>
 				<path
+					fill="none"
 					ref={ref => {
 						this.path = ref;
 					}}
