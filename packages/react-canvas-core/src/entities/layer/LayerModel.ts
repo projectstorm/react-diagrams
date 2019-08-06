@@ -15,10 +15,20 @@ export interface LayerModelGenerics extends BaseModelGenerics {
 
 export class LayerModel<G extends LayerModelGenerics = LayerModelGenerics> extends BaseModel<G> {
 	protected models: { [id: string]: G['CHILDREN'] };
+	protected repaintEnabled: boolean;
 
 	constructor(options: G['OPTIONS'] = {}) {
 		super(options);
 		this.models = {};
+		this.repaintEnabled = true;
+	}
+
+	isRepaintEnabled() {
+		return this.repaintEnabled;
+	}
+
+	allowRepaint(allow: boolean = true) {
+		this.repaintEnabled = allow;
 	}
 
 	remove() {

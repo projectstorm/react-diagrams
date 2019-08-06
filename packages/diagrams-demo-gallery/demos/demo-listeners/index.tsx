@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
-import createEngine, {
-	DiagramModel,
-	DiagramProps,
-	DefaultNodeModel,
-	DiagramWidget
-} from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 /**
  * Shows some of the events triggered when elements are selected
@@ -39,21 +36,15 @@ export default () => {
 	// add a selection listener to each
 	models.forEach(item => {
 		item.registerListener({
-			selectionChanged: action('selectionChanged')
+			eventDidFire: action('eventDidFired')
 		});
 	});
 
-	engine.setDiagramModel(model);
-
-	var props = {
-		diagramEngine: engine,
-		maxNumberPointsPerLink: 0 // no extra points so link selection is fired straight away
-	} as DiagramProps;
+	engine.setModel(model);
 
 	return (
-		<div>
-			<p>Click the diagram elements to inspect some of the possible events.</p>
-			<DiagramWidget className="srd-demo-canvas" {...props} />
-		</div>
+		<DemoCanvasWidget>
+			<CanvasWidget engine={engine} />
+		</DemoCanvasWidget>
 	);
 };

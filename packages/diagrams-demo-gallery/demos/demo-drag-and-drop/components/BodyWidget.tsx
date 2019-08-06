@@ -3,7 +3,9 @@ import * as _ from 'lodash';
 import { TrayWidget } from './TrayWidget';
 import { Application } from '../Application';
 import { TrayItemWidget } from './TrayItemWidget';
-import { DefaultNodeModel, DiagramWidget } from '@projectstorm/react-diagrams';
+import { DefaultNodeModel } from '@projectstorm/react-diagrams';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../../helpers/DemoCanvasWidget';
 
 export interface BodyWidgetProps {
 	app: Application;
@@ -11,9 +13,6 @@ export interface BodyWidgetProps {
 
 export interface BodyWidgetState {}
 
-/**
- * @author Dylan Vorster
- */
 export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState> {
 	constructor(props: BodyWidgetProps) {
 		super(props);
@@ -38,7 +37,7 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 							var nodesCount = _.keys(
 								this.props.app
 									.getDiagramEngine()
-									.getDiagramModel()
+									.getModel()
 									.getNodes()
 							).length;
 
@@ -54,14 +53,16 @@ export class BodyWidget extends React.Component<BodyWidgetProps, BodyWidgetState
 							node.setPosition(point);
 							this.props.app
 								.getDiagramEngine()
-								.getDiagramModel()
+								.getModel()
 								.addNode(node);
 							this.forceUpdate();
 						}}
 						onDragOver={event => {
 							event.preventDefault();
 						}}>
-						<DiagramWidget className="srd-demo-canvas" diagramEngine={this.props.app.getDiagramEngine()} />
+						<DemoCanvasWidget>
+							<CanvasWidget engine={this.props.app.getDiagramEngine()} />
+						</DemoCanvasWidget>
 					</div>
 				</div>
 			</div>

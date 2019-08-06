@@ -10,6 +10,11 @@ export class ZoomCanvasAction extends Action {
 		super({
 			type: InputType.MOUSE_WHEEL,
 			fire: (event: WheelEvent) => {
+				// we can block layer rendering because we are only targeting the transforms
+				for (let layer of this.engine.getModel().getLayers()) {
+					layer.allowRepaint(false);
+				}
+
 				const model = this.engine.getModel();
 				event.stopPropagation();
 				const oldZoomFactor = this.engine.getModel().getZoomLevel() / 100;
@@ -47,6 +52,11 @@ export class ZoomCanvasAction extends Action {
 
 				model.setOffset(model.getOffsetX() - widthDiff * xFactor, model.getOffsetY() - heightDiff * yFactor);
 				this.engine.repaintCanvas();
+
+				// re-enable rendering
+				for (let layer of this.engine.getModel().getLayers()) {
+					layer.allowRepaint(true);
+				}
 			}
 		});
 	}

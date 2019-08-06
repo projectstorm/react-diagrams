@@ -1,5 +1,7 @@
-import createEngine, { DiagramModel, DefaultNodeModel, DiagramWidget } from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 /**
  * Tests the grid size
@@ -29,8 +31,12 @@ export default () => {
 	model.addAll(node1, node2, link1);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//6) render the diagram!
-	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />;
+	return (
+		<DemoCanvasWidget>
+			<CanvasWidget engine={engine} />
+		</DemoCanvasWidget>
+	);
 };

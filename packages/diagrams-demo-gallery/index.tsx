@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf, addParameters, addDecorator } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import { themes } from '@storybook/theming';
-import './demos/helpers/demo.scss';
+import './demos/helpers/index.css';
 
 // Toolkit.TESTING = true;
 
@@ -28,7 +28,6 @@ import demo_flow from './demos/demo-simple-flow';
 import demo_performance from './demos/demo-performance';
 import demo_locks from './demos/demo-locks';
 import demo_grid from './demos/demo-grid';
-import demo_limit_points from './demos/demo-limit-points';
 import demo_listeners from './demos/demo-listeners';
 import demo_zoom from './demos/demo-zoom-to-fit';
 import demo_labels from './demos/demo-labelled-links';
@@ -40,7 +39,6 @@ storiesOf('Simple Usage', module)
 	.add('Performance demo', demo_performance)
 	.add('Locked widget', demo_locks)
 	.add('Canvas grid size', demo_grid)
-	.add('Limiting link points', demo_limit_points)
 	.add('Events and listeners', demo_listeners)
 	.add('Zoom to fit', demo_zoom)
 	.add('Dynamic ports', demo_dynamic_ports)

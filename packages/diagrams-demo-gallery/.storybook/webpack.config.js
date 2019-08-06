@@ -19,8 +19,7 @@ module.exports = async ({ config, mode }) => {
 							{
 								loader: 'postcss-loader',
 								options: { config: { path: path.join(__dirname, '..') } }
-							},
-							'sass-loader'
+							}
 						]
 					},
 					{

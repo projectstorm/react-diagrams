@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CanvasEngine } from '../../CanvasEngine';
 import { TransformLayerWidget } from '../layer/TransformLayerWidget';
 import styled from '@emotion/styled';
+import { SmartLayerWidget } from '../layer/SmartLayerWidget';
 
 export interface DiagramProps {
 	engine: CanvasEngine;
@@ -93,7 +94,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 				{model.getLayers().map(layer => {
 					return (
 						<TransformLayerWidget layer={layer}>
-							{engine.getFactoryForLayer(layer).generateReactWidget({ model: layer })}
+							<SmartLayerWidget layer={layer} engine={this.props.engine} key={layer.getID()} />
 						</TransformLayerWidget>
 					);
 				})}

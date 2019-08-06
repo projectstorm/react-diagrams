@@ -1,8 +1,9 @@
 import createEngine, { DiagramModel, DefaultNodeModel, LinkModel, NodeModel } from '@projectstorm/react-diagrams';
 import * as _ from 'lodash';
 import * as React from 'react';
-import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { BaseModel, CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 /**
  * Tests cloning
@@ -42,8 +43,10 @@ class CloneSelected extends React.Component<any, any> {
 	render() {
 		const { engine } = this.props;
 		return (
-			<DemoWorkspaceWidget buttons={<button onClick={this.cloneSelected}>Clone Selected</button>}>
-				<CanvasWidget className="srd-demo-canvas" engine={engine} />
+			<DemoWorkspaceWidget buttons={<DemoButton onClick={this.cloneSelected}>Clone Selected</DemoButton>}>
+				<DemoCanvasWidget>
+					<CanvasWidget engine={engine} />
+				</DemoCanvasWidget>
 			</DemoWorkspaceWidget>
 		);
 	}

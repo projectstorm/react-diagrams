@@ -1,6 +1,8 @@
-import createEngine, { DiagramModel, DefaultNodeModel, DiagramWidget } from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
-import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 /**
  * Tests the grid size
@@ -40,14 +42,16 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		return (
 			<DemoWorkspaceWidget
 				buttons={[
-					<button key={1} onClick={this.updatePosition}>
+					<DemoButton key={1} onClick={this.updatePosition}>
 						Update position
-					</button>,
-					<button key={2} onClick={this.updatePositionViaSerialize}>
+					</DemoButton>,
+					<DemoButton key={2} onClick={this.updatePositionViaSerialize}>
 						Update position via serialize
-					</button>
+					</DemoButton>
 				]}>
-				<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
+				<DemoCanvasWidget>
+					<CanvasWidget engine={engine} />
+				</DemoCanvasWidget>
 			</DemoWorkspaceWidget>
 		);
 	}
@@ -77,7 +81,7 @@ export default () => {
 	model.addAll(node1, node2, link1);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//6) render the diagram!
 	return <NodeDelayedPosition engine={engine} model={model} />;

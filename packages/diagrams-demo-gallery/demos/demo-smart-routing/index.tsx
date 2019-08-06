@@ -2,13 +2,14 @@ import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
-	DiagramWidget,
 	PathFindingLinkFactory,
 	DefaultLabelModel
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { action } from '@storybook/addon-actions';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 export default () => {
 	// setup the diagram engine
@@ -51,7 +52,7 @@ export default () => {
 	model.addAll(node1, node2, node3, node4, node5, link1, link2);
 
 	// load model into engine and render
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	return (
 		<DemoWorkspaceWidget
@@ -63,13 +64,9 @@ export default () => {
 					Serialize Graph
 				</button>
 			}>
-			<DiagramWidget
-				actionStoppedFiring={() => {
-					pathfinding.calculateRoutingMatrix();
-				}}
-				className="srd-demo-canvas"
-				diagramEngine={engine}
-			/>
+			<DemoCanvasWidget>
+				<CanvasWidget engine={engine} />
+			</DemoCanvasWidget>
 		</DemoWorkspaceWidget>
 	);
 };

@@ -18,10 +18,6 @@ module.exports = (directory) => {
 		module: {
 			rules: [
 				{
-					test: /\.scss$/,
-					use: ['style-loader', 'css-loader', 'sass-loader']
-				},
-				{
 					enforce: "pre",
 					test: /\.js$/,
 					loader: "source-map-loader"

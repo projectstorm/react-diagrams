@@ -6,6 +6,7 @@ import { DiamondNodeFactory } from './DiamondNodeFactory';
 import { SimplePortFactory } from './SimplePortFactory';
 import { DiamondPortModel } from './DiamondPortModel';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 /**
  * @Author Dylan Vorster
@@ -59,5 +60,9 @@ export default () => {
 	engine.setModel(model);
 
 	//6) render the diagram!
-	return <CanvasWidget className="srd-demo-canvas" engine={engine} />;
+	return (
+		<DemoCanvasWidget>
+			<CanvasWidget engine={engine} />
+		</DemoCanvasWidget>
+	);
 };

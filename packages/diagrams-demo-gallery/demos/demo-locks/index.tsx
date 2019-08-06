@@ -1,10 +1,7 @@
 import * as React from 'react';
-import createEngine, {
-	DiagramModel,
-	DefaultNodeModel,
-	DiagramWidget,
-	DiagramProps
-} from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 /**
  *
@@ -47,19 +44,17 @@ export default () => {
 
 	model.addAll(node3, node4, link2);
 
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//!========================================= <<<<<<<
 
 	model.setLocked(true);
-	var props = {
-		diagramEngine: engine,
-		allowLooseLinks: false,
-		allowCanvasTranslation: false,
-		allowCanvasZoom: false
-	} as DiagramProps;
 
 	//!=========================================  <<<<<<<
 
-	return <DiagramWidget className="srd-demo-canvas" {...props} />;
+	return (
+		<DemoCanvasWidget>
+			<CanvasWidget engine={engine} />
+		</DemoCanvasWidget>
+	);
 };

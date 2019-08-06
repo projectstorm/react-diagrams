@@ -1,12 +1,9 @@
-import createEngine, {
-	DiagramModel,
-	DefaultNodeModel,
-	DiagramWidget,
-	DefaultLinkModel
-} from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel, DefaultLinkModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
-import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { action } from '@storybook/addon-actions';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 export default () => {
 	// setup the diagram engine
@@ -48,19 +45,21 @@ export default () => {
 	model.addAll(node1, node2, node3, node4, link1, link2, link3);
 
 	// load model into engine and render
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	return (
 		<DemoWorkspaceWidget
 			buttons={
-				<button
+				<DemoButton
 					onClick={() => {
 						action('Serialized Graph')(JSON.stringify(model.serializeDiagram(), null, 2));
 					}}>
 					Serialize Graph
-				</button>
+				</DemoButton>
 			}>
-			<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
+			<DemoCanvasWidget>
+				<CanvasWidget engine={engine} />
+			</DemoCanvasWidget>
 		</DemoWorkspaceWidget>
 	);
 };

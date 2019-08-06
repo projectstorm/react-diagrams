@@ -8,6 +8,7 @@ import createEngine, {
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 	constructor() {
@@ -148,5 +149,9 @@ export default () => {
 	engine.setModel(model);
 
 	// render the diagram!
-	return <CanvasWidget className="srd-demo-canvas" engine={engine} />;
+	return (
+		<DemoCanvasWidget>
+			<CanvasWidget engine={engine} />
+		</DemoCanvasWidget>
+	);
 };

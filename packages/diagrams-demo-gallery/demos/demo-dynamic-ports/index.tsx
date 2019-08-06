@@ -1,12 +1,9 @@
-import createEngine, {
-	DiagramModel,
-	DefaultNodeModel,
-	DiagramWidget,
-	DiagramEngine
-} from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel, DiagramEngine } from '@projectstorm/react-diagrams';
 import * as _ from 'lodash';
 import * as React from 'react';
-import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 class CloneSelected extends React.Component<{ model: DiagramModel; engine: DiagramEngine }, any> {
 	addPorts = () => {
@@ -24,8 +21,10 @@ class CloneSelected extends React.Component<{ model: DiagramModel; engine: Diagr
 	render() {
 		const { engine } = this.props;
 		return (
-			<DemoWorkspaceWidget buttons={<button onClick={this.addPorts}>Add more ports</button>}>
-				<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
+			<DemoWorkspaceWidget buttons={<DemoButton onClick={this.addPorts}>Add more ports</DemoButton>}>
+				<DemoCanvasWidget>
+					<CanvasWidget engine={engine} />
+				</DemoCanvasWidget>
 			</DemoWorkspaceWidget>
 		);
 	}
@@ -52,7 +51,7 @@ export default () => {
 	model.addAll(node1, node2);
 
 	//5) load model into engine
-	engine.setDiagramModel(model);
+	engine.setModel(model);
 
 	//6) render the diagram!
 	return <CloneSelected engine={engine} model={model} />;
