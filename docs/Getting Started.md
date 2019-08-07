@@ -7,13 +7,13 @@ The first thing you need to do, is grab the distribution files on NPM. You can d
 **Via yarn:**
 
 ```
-yarn add storm-react-diagrams
+yarn add @projectstorm/react-diagrams
 ```
 
 **Via npm:**
 
 ```
-npm install storm-react-diagrams
+npm install @projectstorm/react-diagrams
 ```
 
 When you run this in your project directory, this will install the library into node\_modules/storm-react-diagrams. You will then find a dist folder that contains all the minified and production ready code.
@@ -29,13 +29,13 @@ When including the library you will need both the javascript files as well as th
 **Using Typescript / ES6: \(recommended\)**
 
 ```js
-import * as SRD from "storm-react-diagrams"
+import * as SRD from "@projectstorm/react-diagrams"
 ```
 
 **Using RequireJS:**
 
 ```js
-var SRD = require("storm-react-diagrams)
+var SRD = require("@projectstorm/react-diagrams")
 ```
 
 **As a script tag \(not recommended\)**
