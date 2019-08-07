@@ -46,15 +46,13 @@ export default () => {
 	const node4 = new DefaultNodeModel("Node D", "rgb(192,0,255)");
 	const port4 = node4.addPort(new LabViewPortModel(true, "in-1", "In"));
 	node4.setPosition(95, 185);
-	const node5 = new DefaultNodeModel("Node E", "rgb(192,255,0)");
-	node5.setPosition(250, 180);
 
 	// linking things together
 	const link1 = port1.link(port4);
 	const link2 = port2.link(port3);
 
 	// add all to the main model
-	model.addAll(node1, node2, node3, node4, node5, link1, link2);
+	model.addAll(node1, node2, node3, node4, link1, link2);
 
 	// load model into engine and render
 	engine.setDiagramModel(model);

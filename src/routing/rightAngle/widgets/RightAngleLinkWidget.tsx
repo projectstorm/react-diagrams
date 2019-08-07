@@ -9,7 +9,7 @@ import * as _ from "lodash";
 import { LabelModel } from "../../../models/LabelModel";
 import { BaseWidget, BaseWidgetProps } from "../../../widgets/BaseWidget";
 
-export interface LabViewLinkProps extends BaseWidgetProps {
+export interface RightAngleLinkProps extends BaseWidgetProps {
 	color?: string;
 	width?: number;
 	smooth?: boolean;
@@ -18,13 +18,13 @@ export interface LabViewLinkProps extends BaseWidgetProps {
 	pointAdded?: (point: PointModel, event: MouseEvent) => any;
 }
 
-export interface LabViewLinkState {
+export interface RightAngleLinkState {
 	selected: boolean,
 	canDrag: boolean,
 }
 
-export class RightAngleLinkWidget extends BaseWidget<LabViewLinkProps, LabViewLinkState> {
-	public static defaultProps: LabViewLinkProps = {
+export class RightAngleLinkWidget extends BaseWidget<RightAngleLinkProps, RightAngleLinkState> {
+	public static defaultProps: RightAngleLinkProps = {
 		color: "red",
 		width: 3,
 		link: null,
@@ -40,7 +40,7 @@ export class RightAngleLinkWidget extends BaseWidget<LabViewLinkProps, LabViewLi
 
 	pathFinding: PathFinding; // only set when smart routing is active
 
-	constructor(props: LabViewLinkProps) {
+	constructor(props: RightAngleLinkProps) {
 		super("srd-default-link", props);
 
 		this.refLabels = {};
