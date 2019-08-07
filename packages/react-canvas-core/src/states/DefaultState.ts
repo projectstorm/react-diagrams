@@ -1,5 +1,5 @@
 import { State } from '../core-state/State';
-import { Action, InputType } from '../core-actions/Action';
+import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { MouseEvent } from 'react';
 import { DragCanvasState } from './DragCanvasState';
 import { SelectingState } from './SelectingState';
@@ -16,8 +16,8 @@ export class DefaultState extends State {
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_DOWN,
-				fire: (event: MouseEvent) => {
-					const element = this.engine.getMouseElement(event);
+				fire: (event: ActionEvent<MouseEvent>) => {
+					const element = this.engine.getActionEventBus().getModelForEvent(event);
 
 					// the canvas was clicked on, transition to the dragging canvas state
 					if (!element) {

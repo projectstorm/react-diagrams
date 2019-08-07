@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PointModel } from '@projectstorm/react-diagrams-core';
+import styled from '@emotion/styled';
 
 export interface DefaultLinkPointWidgetProps {
 	point: PointModel;
@@ -9,6 +10,12 @@ export interface DefaultLinkPointWidgetProps {
 
 export interface DefaultLinkPointWidgetState {
 	selected: boolean;
+}
+
+namespace S {
+	export const PointTop = styled.circle`
+		pointer-events: all;
+	`;
 }
 
 export class DefaultLinkPointWidget extends React.Component<DefaultLinkPointWidgetProps, DefaultLinkPointWidgetState> {
@@ -29,7 +36,7 @@ export class DefaultLinkPointWidget extends React.Component<DefaultLinkPointWidg
 					r={5}
 					fill={this.state.selected || this.props.point.isSelected() ? this.props.colorSelected : this.props.color}
 				/>
-				<circle
+				<S.PointTop
 					className="point"
 					onMouseLeave={() => {
 						this.setState({ selected: false });
@@ -42,7 +49,7 @@ export class DefaultLinkPointWidget extends React.Component<DefaultLinkPointWidg
 					cx={point.getPosition().x}
 					cy={point.getPosition().y}
 					r={15}
-					opacity={0}
+					opacity={0.0}
 				/>
 			</g>
 		);

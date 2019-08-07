@@ -1,5 +1,5 @@
 import { State, StateOptions } from './State';
-import { Action, InputType } from '../core-actions/Action';
+import { Action, ActionEvent, InputType } from '../core-actions/Action';
 
 export interface AbstractDisplacementStateEvent {
 	displacementX: number;
@@ -18,16 +18,17 @@ export abstract class AbstractDisplacementState extends State {
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_DOWN,
-				fire: (event: React.MouseEvent) => {
-					this.initialX = event.clientX;
-					this.initialY = event.clientY;
+				fire: (actionEvent: ActionEvent<React.MouseEvent>) => {
+					this.initialX = actionEvent.event.clientX;
+					this.initialY = actionEvent.event.clientY;
 				}
 			})
 		);
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_MOVE,
-				fire: (event: React.MouseEvent) => {
+				fire: (actionEvent: ActionEvent<React.MouseEvent>) => {
+					const { event } = actionEvent;
 					this.fireMouseMoved({
 						displacementX: event.clientX - this.initialX,
 						displacementY: event.clientY - this.initialY,
@@ -41,7 +42,7 @@ export abstract class AbstractDisplacementState extends State {
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_UP,
-				fire: (event: React.MouseEvent) => {
+				fire: (event: ActionEvent<React.MouseEvent>) => {
 					// when the mouse if up, we eject this state
 					this.eject();
 				}

@@ -10,6 +10,7 @@ import { ActionEventBus } from './core-actions/ActionEventBus';
 import { ZoomCanvasAction } from './actions/ZoomCanvasAction';
 import { DeleteItemsAction } from './actions/DeleteItemsAction';
 import { StateMachine } from './core-state/StateMachine';
+import { ActionEvent } from './core-actions/Action';
 
 export interface CanvasEngineListener extends BaseListener {
 	canvasReady?(): void;
@@ -44,8 +45,8 @@ export class CanvasEngine<
 		return this.stateMachine;
 	}
 
-	getRelativeMousePoint(event): Point {
-		var point = this.getRelativePoint(event.clientX, event.clientY);
+	getRelativeMousePoint(event: { clientX: number; clientY: number }): Point {
+		const point = this.getRelativePoint(event.clientX, event.clientY);
 		return new Point(
 			(point.x - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100.0),
 			(point.y - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100.0)
@@ -53,7 +54,7 @@ export class CanvasEngine<
 	}
 
 	getRelativePoint(x, y): Point {
-		var canvasRect = this.canvas.getBoundingClientRect();
+		const canvasRect = this.canvas.getBoundingClientRect();
 		return new Point(x - canvasRect.left, y - canvasRect.top);
 	}
 
@@ -112,7 +113,7 @@ export class CanvasEngine<
 		return this.canvas;
 	}
 
-	getMouseElement(event: MouseEvent): { model: BaseModel; element: Element } {
+	getMouseElement(event: MouseEvent): BaseModel {
 		return null;
 	}
 

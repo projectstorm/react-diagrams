@@ -56,7 +56,7 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 	/**
 	 * Gets a model and element under the mouse cursor
 	 */
-	getMouseElement(event: MouseEvent): { model: BaseModel; element: Element } {
+	getMouseElement(event: MouseEvent): BaseModel {
 		var target = event.target as Element;
 		var diagramModel = this.model;
 
@@ -64,37 +64,25 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		var element = Toolkit.closest(target, '.port[data-name]');
 		if (element) {
 			var nodeElement = Toolkit.closest(target, '.node[data-nodeid]') as HTMLElement;
-			return {
-				model: diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-name')),
-				element: element
-			};
+			return diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-name'));
 		}
 
 		//look for a point
 		element = Toolkit.closest(target, '.point[data-id]');
 		if (element) {
-			return {
-				model: diagramModel.getLink(element.getAttribute('data-linkid')).getPointModel(element.getAttribute('data-id')),
-				element: element
-			};
+			return diagramModel.getLink(element.getAttribute('data-linkid')).getPointModel(element.getAttribute('data-id'));
 		}
 
 		//look for a link
 		element = Toolkit.closest(target, '[data-linkid]');
 		if (element) {
-			return {
-				model: diagramModel.getLink(element.getAttribute('data-linkid')),
-				element: element
-			};
+			return diagramModel.getLink(element.getAttribute('data-linkid'));
 		}
 
 		//look for a node
 		element = Toolkit.closest(target, '.node[data-nodeid]');
 		if (element) {
-			return {
-				model: diagramModel.getNode(element.getAttribute('data-nodeid')),
-				element: element
-			};
+			return diagramModel.getNode(element.getAttribute('data-nodeid'));
 		}
 
 		return null;

@@ -1,6 +1,7 @@
-import { MouseEvent, KeyboardEvent, WheelEvent } from 'react';
+import { MouseEvent, KeyboardEvent, WheelEvent, SyntheticEvent } from 'react';
 import { Toolkit } from '../Toolkit';
 import { CanvasEngine } from '../CanvasEngine';
+import { BaseModel } from '../core-models/BaseModel';
 
 export enum InputType {
 	MOUSE_DOWN = 'mouse-down',
@@ -20,9 +21,14 @@ export interface Mapping {
 	[InputType.KEY_UP]: KeyboardEvent;
 }
 
+export interface ActionEvent<Event extends SyntheticEvent = SyntheticEvent> {
+	event: Event;
+	model?: BaseModel;
+}
+
 export interface ActionOptions {
 	type: InputType;
-	fire: (event: Mapping[this['type']]) => void;
+	fire: (event: ActionEvent<Mapping[this['type']]>) => void;
 }
 
 export class Action<T extends CanvasEngine = CanvasEngine> {

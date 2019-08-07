@@ -1,5 +1,5 @@
 import { WheelEvent } from 'react';
-import { Action, InputType } from '../core-actions/Action';
+import { Action, ActionEvent, InputType } from '../core-actions/Action';
 
 export interface ZoomCanvasActionOptions {
 	inverseZoom?: boolean;
@@ -9,7 +9,8 @@ export class ZoomCanvasAction extends Action {
 	constructor(options: ZoomCanvasActionOptions = {}) {
 		super({
 			type: InputType.MOUSE_WHEEL,
-			fire: (event: WheelEvent) => {
+			fire: (actionEvent: ActionEvent<WheelEvent>) => {
+				const { event } = actionEvent;
 				// we can block layer rendering because we are only targeting the transforms
 				for (let layer of this.engine.getModel().getLayers()) {
 					layer.allowRepaint(false);

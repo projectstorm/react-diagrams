@@ -1,7 +1,8 @@
-import { Action, InputType } from './Action';
-import { SyntheticEvent, KeyboardEvent } from 'react';
+import { Action, ActionEvent, InputType } from './Action';
+import { KeyboardEvent, MouseEvent } from 'react';
 import * as _ from 'lodash';
 import { CanvasEngine } from '../CanvasEngine';
+import { BaseModel } from '../core-models/BaseModel';
 
 export class ActionEventBus {
 	protected actions: { [id: string]: Action };
@@ -11,7 +12,6 @@ export class ActionEventBus {
 	constructor(engine: CanvasEngine) {
 		this.actions = {};
 		this.engine = engine;
-
 		this.keys = {};
 	}
 
@@ -38,7 +38,15 @@ export class ActionEventBus {
 		});
 	}
 
-	getActionsForEvent(event: SyntheticEvent): Action[] {
+	getModelForEvent(actionEvent: ActionEvent<MouseEvent>): BaseModel {
+		if (actionEvent.model) {
+			return actionEvent.model;
+		}
+		return this.engine.getMouseElement(actionEvent.event);
+	}
+
+	getActionsForEvent(actionEvent: ActionEvent): Action[] {
+		const { event } = actionEvent;
 		if (event.type === 'mousedown') {
 			return this.getActionsForType(InputType.MOUSE_DOWN);
 		} else if (event.type === 'mouseup') {
@@ -59,10 +67,10 @@ export class ActionEventBus {
 		return [];
 	}
 
-	fireAction(event: SyntheticEvent) {
-		const actions = this.getActionsForEvent(event);
+	fireAction(actionEvent: ActionEvent) {
+		const actions = this.getActionsForEvent(actionEvent);
 		for (let action of actions) {
-			action.options.fire(event as any);
+			action.options.fire(actionEvent as any);
 		}
 	}
 }

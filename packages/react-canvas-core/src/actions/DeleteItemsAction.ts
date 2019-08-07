@@ -1,4 +1,4 @@
-import { Action, InputType } from '../core-actions/Action';
+import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { KeyboardEvent } from 'react';
 import * as _ from 'lodash';
 
@@ -17,8 +17,8 @@ export class DeleteItemsAction extends Action {
 		};
 		super({
 			type: InputType.KEY_DOWN,
-			fire: (event: KeyboardEvent) => {
-				if (options.keyCodes.indexOf(event.keyCode) !== -1) {
+			fire: (event: ActionEvent<KeyboardEvent>) => {
+				if (options.keyCodes.indexOf(event.event.keyCode) !== -1) {
 					_.forEach(this.engine.getModel().getSelectedItems(), model => {
 						// only delete items which are not locked
 						if (!model.isLocked) {

@@ -1,6 +1,7 @@
 import { State } from '../core-state/State';
-import { Action, InputType } from '../core-actions/Action';
+import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { SelectionBoxState } from './SelectionBoxState';
+import { MouseEvent } from 'react';
 
 export class SelectingState extends State {
 	constructor() {
@@ -12,12 +13,15 @@ export class SelectingState extends State {
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_DOWN,
-				fire: (event: React.MouseEvent) => {
-					const element = this.engine.getMouseElement(event);
+				fire: (event: ActionEvent<MouseEvent>) => {
+					const element = this.engine.getActionEventBus().getModelForEvent(event);
 
 					// go into a selection box on the canvas state
 					if (!element) {
 						this.transitionWithEvent(new SelectionBoxState(), event);
+					} else {
+						element.setSelected(true);
+						this.engine.repaintCanvas();
 					}
 				}
 			})

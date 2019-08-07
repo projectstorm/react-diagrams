@@ -1,6 +1,6 @@
 import { AbstractDisplacementState, AbstractDisplacementStateEvent } from '../core-state/AbstractDisplacementState';
 import { State } from '../core-state/State';
-import { Action, InputType } from '../core-actions/Action';
+import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { BasePositionModel } from '../core-models/BasePositionModel';
 import { Point } from '@projectstorm/geometry';
 
@@ -14,12 +14,12 @@ export class MoveItemsState extends AbstractDisplacementState {
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_DOWN,
-				fire: (event: React.MouseEvent) => {
-					const element = this.engine.getMouseElement(event);
-					if (!element.model.isSelected()) {
+				fire: (event: ActionEvent<React.MouseEvent>) => {
+					const element = this.engine.getActionEventBus().getModelForEvent(event);
+					if (!element.isSelected()) {
 						this.engine.getModel().clearSelection();
 					}
-					element.model.setSelected(true);
+					element.setSelected(true);
 					this.engine.repaintCanvas();
 				}
 			})

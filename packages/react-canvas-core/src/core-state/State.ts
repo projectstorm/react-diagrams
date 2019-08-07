@@ -1,5 +1,5 @@
 import { CanvasEngine } from '../CanvasEngine';
-import { Action, InputType } from '../core-actions/Action';
+import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { SyntheticEvent } from 'react';
 import * as _ from 'lodash';
 
@@ -36,7 +36,7 @@ export abstract class State {
 		this.engine.getStateMachine().popState();
 	}
 
-	transitionWithEvent(state: State, event: SyntheticEvent) {
+	transitionWithEvent(state: State, event: ActionEvent<SyntheticEvent>) {
 		this.engine.getStateMachine().pushState(state);
 		this.engine.getActionEventBus().fireAction(event);
 	}

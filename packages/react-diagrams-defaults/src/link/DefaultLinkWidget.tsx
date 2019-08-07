@@ -3,7 +3,7 @@ import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagr
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkPointWidget } from './DefaultLinkPointWidget';
 import { DefaultLinkSegmentWidget } from './DefaultLinkSegmentWidget';
-import { Toolkit } from '@projectstorm/react-canvas-core';
+import { MouseEvent } from 'react';
 
 export interface DefaultLinkProps {
 	link: DefaultLinkModel;
@@ -46,7 +46,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		this.props.link.setRenderedPaths([]);
 	}
 
-	addPointToLink = (event: MouseEvent, index: number): void => {
+	addPointToLink(event: MouseEvent, index: number) {
 		if (
 			!event.shiftKey &&
 			!this.props.link.isLocked() &&
@@ -57,10 +57,16 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				position: this.props.diagramEngine.getRelativeMousePoint(event)
 			});
 			this.props.link.addPoint(point, index);
-			this.forceUpdate();
-			this.props.pointAdded(point, event);
+			event.persist();
+			event.stopPropagation();
+			this.forceUpdate(() => {
+				this.props.diagramEngine.getActionEventBus().fireAction({
+					event,
+					model: point
+				});
+			});
 		}
-	};
+	}
 
 	generatePoint(point: PointModel): JSX.Element {
 		return (

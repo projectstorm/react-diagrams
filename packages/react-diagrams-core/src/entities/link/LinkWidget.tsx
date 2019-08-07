@@ -3,7 +3,6 @@ import { DiagramEngine } from '../../DiagramEngine';
 import { LinkModel } from './LinkModel';
 import { PointModel } from './PointModel';
 import { PortModel } from '../port/PortModel';
-import { MouseEvent } from 'react';
 import * as _ from 'lodash';
 import { LabelWidget } from '../label/LabelWidget';
 import { BaseEntityEvent, BasePositionModel, ListenerHandle, PeformanceWidget } from '@projectstorm/react-canvas-core';
@@ -11,7 +10,6 @@ import { BaseEntityEvent, BasePositionModel, ListenerHandle, PeformanceWidget } 
 export interface LinkProps {
 	link: LinkModel;
 	diagramEngine: DiagramEngine;
-	pointAdded: (point: PointModel, event: MouseEvent) => any;
 }
 
 export interface LinkState {
@@ -104,9 +102,7 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 				{() => {
 					return (
 						<g>
-							{React.cloneElement(this.props.diagramEngine.generateWidgetForLink(link), {
-								pointAdded: this.props.pointAdded
-							})}
+							{this.props.diagramEngine.generateWidgetForLink(link)}
 							{_.map(this.props.link.getLabels(), (labelModel, index) => {
 								return <LabelWidget engine={this.props.diagramEngine} label={labelModel} index={index} />;
 							})}

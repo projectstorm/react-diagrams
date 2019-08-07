@@ -62,8 +62,8 @@ export class LayerModel<G extends LayerModelGenerics = LayerModelGenerics> exten
 
 	getSelectedEntities(): Array<BaseModel> {
 		return super.getSelectedEntities().concat(
-			_.filter(this.models, entity => {
-				return entity.isSelected();
+			_.flatMap(this.models, entity => {
+				return entity.getSelectedEntities();
 			})
 		);
 	}

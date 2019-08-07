@@ -60,10 +60,10 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 		});
 
 		this.keyDown = event => {
-			this.props.engine.getActionEventBus().fireAction(event);
+			this.props.engine.getActionEventBus().fireAction({ event });
 		};
 		this.keyUp = event => {
-			this.props.engine.getActionEventBus().fireAction(event);
+			this.props.engine.getActionEventBus().fireAction({ event });
 		};
 
 		document.addEventListener('keyup', this.keyUp);
@@ -80,16 +80,16 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 				className={this.props.className}
 				ref={this.ref}
 				onWheel={event => {
-					this.props.engine.getActionEventBus().fireAction(event);
+					this.props.engine.getActionEventBus().fireAction({ event });
 				}}
 				onMouseDown={event => {
-					this.props.engine.getActionEventBus().fireAction(event);
+					this.props.engine.getActionEventBus().fireAction({ event });
 				}}
 				onMouseUp={event => {
-					this.props.engine.getActionEventBus().fireAction(event);
+					this.props.engine.getActionEventBus().fireAction({ event });
 				}}
 				onMouseMove={event => {
-					this.props.engine.getActionEventBus().fireAction(event);
+					this.props.engine.getActionEventBus().fireAction({ event });
 				}}>
 				{model.getLayers().map(layer => {
 					return (
