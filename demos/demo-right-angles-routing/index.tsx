@@ -5,7 +5,7 @@ import {
 	LinkModel,
 	DefaultPortModel,
 	DiagramWidget,
-	LabViewLinkFactory, DefaultLinkModel,
+	RightAngleLinkFactory, DefaultLinkModel,
 } from "storm-react-diagrams";
 import * as React from "react";
 import { DemoWorkspaceWidget } from "../.helpers/DemoWorkspaceWidget";
@@ -13,7 +13,7 @@ import { action } from "@storybook/addon-actions";
 
 export class LabViewLinkModel extends DefaultLinkModel {
 	constructor() {
-		super("labview");
+		super("rightAngle");
 	}
 }
 
@@ -27,7 +27,7 @@ export default () => {
 	// setup the diagram engine
 	const engine = new DiagramEngine();
 	engine.installDefaultFactories();
-	engine.registerLinkFactory(new LabViewLinkFactory());
+	engine.registerLinkFactory(new RightAngleLinkFactory());
 
 	// setup the diagram model
 	const model = new DiagramModel();

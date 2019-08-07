@@ -1,13 +1,13 @@
 import * as React from "react";
-import { DiagramEngine } from "../../DiagramEngine";
-import { PointModel } from "../../models/PointModel";
-import { Toolkit } from "../../Toolkit";
-import { LabViewLinkFactory } from "../factories/LabViewLinkFactory";
-import { DefaultLinkModel } from "../../defaults/models/DefaultLinkModel";
-import PathFinding from "../../routing/PathFinding";
+import { DiagramEngine } from "../../../DiagramEngine";
+import { PointModel } from "../../../models/PointModel";
+import { Toolkit } from "../../../Toolkit";
+import { RightAngleLinkFactory } from "../factories/RightAngleLinkFactory";
+import { DefaultLinkModel } from "../../../defaults/models/DefaultLinkModel";
+import PathFinding from "../../PathFinding";
 import * as _ from "lodash";
-import { LabelModel } from "../../models/LabelModel";
-import { BaseWidget, BaseWidgetProps } from "../../widgets/BaseWidget";
+import { LabelModel } from "../../../models/LabelModel";
+import { BaseWidget, BaseWidgetProps } from "../../../widgets/BaseWidget";
 
 export interface LabViewLinkProps extends BaseWidgetProps {
 	color?: string;
@@ -23,7 +23,7 @@ export interface LabViewLinkState {
 	canDrag: boolean,
 }
 
-export class LabViewLinkWidget extends BaseWidget<LabViewLinkProps, LabViewLinkState> {
+export class RightAngleLinkWidget extends BaseWidget<LabViewLinkProps, LabViewLinkState> {
 	public static defaultProps: LabViewLinkProps = {
 		color: "red",
 		width: 3,
@@ -146,7 +146,7 @@ export class LabViewLinkWidget extends BaseWidget<LabViewLinkProps, LabViewLinkS
 		var props = this.props;
 
 		var Bottom = React.cloneElement(
-			(props.diagramEngine.getFactoryForLink(this.props.link) as LabViewLinkFactory).generateLinkSegment(
+			(props.diagramEngine.getFactoryForLink(this.props.link) as RightAngleLinkFactory).generateLinkSegment(
 				this.props.link,
 				this,
 				this.state.selected || this.props.link.isSelected(),
