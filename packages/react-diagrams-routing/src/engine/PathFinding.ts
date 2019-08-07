@@ -59,14 +59,22 @@ export default class PathFinding {
 		pathToStart: number[][];
 		pathToEnd: number[][];
 	} {
-		const startIndex = path.findIndex(point => matrix[point[1]][point[0]] === 0);
+		const startIndex = path.findIndex(point => {
+			if (matrix[point[1]])
+				return matrix[point[1]][point[0]] === 0;
+			else return false;
+		});
 		const endIndex =
 			path.length -
 			1 -
 			path
 				.slice()
 				.reverse()
-				.findIndex(point => matrix[point[1]][point[0]] === 0);
+				.findIndex(point => {
+					if (matrix[point[1]])
+						return matrix[point[1]][point[0]] === 0;
+					else return false;
+				});
 
 		// are we trying to create a path exclusively through blocked areas?
 		// if so, let's fallback to the linear routing
