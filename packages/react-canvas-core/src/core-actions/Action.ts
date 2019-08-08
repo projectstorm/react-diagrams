@@ -21,9 +21,9 @@ export interface Mapping {
 	[InputType.KEY_UP]: KeyboardEvent;
 }
 
-export interface ActionEvent<Event extends SyntheticEvent = SyntheticEvent> {
+export interface ActionEvent<Event extends SyntheticEvent = SyntheticEvent, Model extends BaseModel = BaseModel> {
 	event: Event;
-	model?: BaseModel;
+	model?: Model;
 }
 
 export interface ActionOptions {

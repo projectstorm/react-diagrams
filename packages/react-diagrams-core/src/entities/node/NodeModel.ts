@@ -42,10 +42,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 
 		// also update the port co-ordinates (for make glorious speed)
 		_.forEach(this.ports, port => {
-			_.forEach(port.getLinks(), link => {
-				let point = link.getPointForPort(port);
-				point.setPosition(point.getX() + x - old.x, point.getY() + y - old.y);
-			});
+			port.setPosition(port.getX() + x - old.x, port.getY() + y - old.y);
 		});
 	}
 

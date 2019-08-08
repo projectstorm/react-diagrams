@@ -1,5 +1,6 @@
 import { State, StateOptions } from './State';
 import { Action, ActionEvent, InputType } from '../core-actions/Action';
+import { CanvasEngine } from '../CanvasEngine';
 
 export interface AbstractDisplacementStateEvent {
 	displacementX: number;
@@ -9,7 +10,7 @@ export interface AbstractDisplacementStateEvent {
 	event: React.MouseEvent;
 }
 
-export abstract class AbstractDisplacementState extends State {
+export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasEngine> extends State<E> {
 	initialX: number;
 	initialY: number;
 

@@ -7,8 +7,8 @@ export interface StateOptions {
 	name: string;
 }
 
-export abstract class State {
-	protected engine: CanvasEngine;
+export abstract class State<E extends CanvasEngine = CanvasEngine> {
+	protected engine: E;
 	protected actions: Action[];
 	protected keys: string[];
 	protected options: StateOptions;
@@ -24,7 +24,7 @@ export abstract class State {
 		this.options = options;
 	}
 
-	setEngine(engine: CanvasEngine) {
+	setEngine(engine: E) {
 		this.engine = engine;
 	}
 

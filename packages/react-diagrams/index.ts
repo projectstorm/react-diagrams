@@ -1,4 +1,9 @@
-import { DiagramEngine, LinkLayerFactory, NodeLayerFactory } from '@projectstorm/react-diagrams-core';
+import {
+	DefaultDiagramState,
+	DiagramEngine,
+	LinkLayerFactory,
+	NodeLayerFactory
+} from '@projectstorm/react-diagrams-core';
 import {
 	DefaultLabelFactory,
 	DefaultLinkFactory,
@@ -6,7 +11,7 @@ import {
 	DefaultPortFactory
 } from '@projectstorm/react-diagrams-defaults';
 import { PathFindingLinkFactory } from '@projectstorm/react-diagrams-routing';
-import { DefaultState, SelectionBoxLayerFactory } from '@projectstorm/react-canvas-core';
+import { SelectionBoxLayerFactory } from '@projectstorm/react-canvas-core';
 
 export * from '@projectstorm/react-diagrams-core';
 export * from '@projectstorm/react-diagrams-defaults';
@@ -30,6 +35,6 @@ export default (): DiagramEngine => {
 	engine.getPortFactories().registerFactory(new DefaultPortFactory());
 
 	// register the default interaction behaviours
-	engine.getStateMachine().pushState(new DefaultState());
+	engine.getStateMachine().pushState(new DefaultDiagramState());
 	return engine;
 };

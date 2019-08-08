@@ -21,7 +21,7 @@ export class DeleteItemsAction extends Action {
 				if (options.keyCodes.indexOf(event.event.keyCode) !== -1) {
 					_.forEach(this.engine.getModel().getSelectedItems(), model => {
 						// only delete items which are not locked
-						if (!model.isLocked) {
+						if (!model.isLocked()) {
 							model.remove();
 						}
 					});

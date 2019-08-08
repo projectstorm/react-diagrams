@@ -3,9 +3,16 @@ import { State } from '../core-state/State';
 import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { BasePositionModel } from '../core-models/BasePositionModel';
 import { Point } from '@projectstorm/geometry';
+import { BaseModel } from '../core-models/BaseModel';
+import { CanvasEngine } from '../CanvasEngine';
 
-export class MoveItemsState extends AbstractDisplacementState {
-	initialPositions: { [id: string]: Point };
+export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends AbstractDisplacementState<E> {
+	initialPositions: {
+		[id: string]: {
+			point: Point;
+			item: BaseModel;
+		};
+	};
 
 	constructor() {
 		super({
@@ -39,10 +46,13 @@ export class MoveItemsState extends AbstractDisplacementState {
 					continue;
 				}
 				if (!this.initialPositions[item.getID()]) {
-					this.initialPositions[item.getID()] = item.getPosition();
+					this.initialPositions[item.getID()] = {
+						point: item.getPosition(),
+						item: item
+					};
 				}
 
-				const pos = this.initialPositions[item.getID()];
+				const pos = this.initialPositions[item.getID()].point;
 				item.setPosition(pos.x + event.virtualDisplacementX, pos.y + event.virtualDisplacementY);
 			}
 		}

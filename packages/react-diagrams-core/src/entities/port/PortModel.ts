@@ -70,6 +70,17 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		};
 	}
 
+	setPosition(point: Point);
+	setPosition(x: number, y: number);
+	setPosition(x, y?) {
+		let old = this.position;
+		super.setPosition(x, y);
+		_.forEach(this.getLinks(), link => {
+			let point = link.getPointForPort(this);
+			point.setPosition(point.getX() + x - old.x, point.getY() + y - old.y);
+		});
+	}
+
 	doClone(lookupTable = {}, clone) {
 		clone.links = {};
 		clone.parentNode = this.getParent().clone(lookupTable);
@@ -115,22 +126,29 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		return null;
 	}
 
-	updateCoords(cords: { x: number; y: number; width: number; height: number }) {
-		const { x, y, width, height } = cords;
-		this.width = width;
-		this.height = height;
-		this.setPosition(x, y);
-		const center = new Point(x + width / 2, y + height / 2);
+	reportPosition() {
 		_.forEach(this.getLinks(), link => {
-			link.getPointForPort(this).setPosition(center.clone());
+			link.getPointForPort(this).setPosition(this.getCenter());
 		});
-		this.reportedPosition = true;
 		this.fireEvent(
 			{
 				entity: this
 			},
 			'reportInitialPosition'
 		);
+	}
+
+	getCenter(): Point {
+		return new Point(this.getX() + this.width / 2, this.getY() + this.height / 2);
+	}
+
+	updateCoords(cords: { x: number; y: number; width: number; height: number }) {
+		const { x, y, width, height } = cords;
+		this.width = width;
+		this.height = height;
+		this.setPosition(x, y);
+		this.reportedPosition = true;
+		this.reportPosition();
 	}
 
 	canLinkToPort(port: PortModel): boolean {

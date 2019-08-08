@@ -27,7 +27,12 @@ export * from './src/entities/selection/SelectionLayerModel';
 
 export * from './src/widgets/PeformanceWidget';
 
+export * from './src/core-state/AbstractDisplacementState';
+export * from './src/core-state/State';
+export * from './src/core-state/StateMachine';
+
 export * from './src/states/DefaultState';
 export * from './src/states/DragCanvasState';
 export * from './src/states/SelectingState';
 export * from './src/states/SelectionBoxState';
+export * from './src/states/MoveItemsState';
