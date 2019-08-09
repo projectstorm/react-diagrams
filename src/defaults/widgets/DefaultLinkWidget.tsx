@@ -120,13 +120,12 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 	}
 
 	generateLabel(label: LabelModel) {
-		const canvas = this.props.diagramEngine.canvas as HTMLElement;
 		return (
 			<foreignObject
 				key={label.id}
 				className={this.bem("__label")}
-				width={canvas.offsetWidth}
-				height={canvas.offsetHeight}
+				width="1"
+				height="1"
 			>
 				<div ref={ref => (this.refLabels[label.id] = ref)}>
 					{this.props.diagramEngine
