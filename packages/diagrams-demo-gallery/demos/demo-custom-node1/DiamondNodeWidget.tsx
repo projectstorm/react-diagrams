@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DiamondNodeModel } from './DiamondNodeModel';
 import { DiagramEngine, PortModelAlignment, PortWidget } from '@projectstorm/react-diagrams';
+import styled from '@emotion/styled';
 
 export interface DiamonNodeWidgetProps {
 	node: DiamondNodeModel;
@@ -8,17 +9,25 @@ export interface DiamonNodeWidgetProps {
 	size?: number;
 }
 
-export interface DiamonNodeWidgetState {}
+namespace S {
+	export const Port = styled.div`
+		width: 16px;
+		height: 16px;
+		z-index: 10;
+		background: rgba(0, 0, 0, 0.5);
+		border-radius: 8px;
+		cursor: pointer;
+
+		&:hover {
+			background: rgba(0, 0, 0, 1);
+		}
+	`;
+}
 
 /**
  * @author Dylan Vorster
  */
-export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, DiamonNodeWidgetState> {
-	constructor(props: DiamonNodeWidgetProps) {
-		super(props);
-		this.state = {};
-	}
-
+export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps> {
 	render() {
 		return (
 			<div
@@ -37,7 +46,9 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
           <g id="Layer_1">
           </g>
           <g id="Layer_2">
-            <polygon fill="mediumpurple" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,` +
+            <polygon fill="mediumpurple" stroke="${
+							this.props.node.isSelected() ? 'white' : '#000000'
+						}" stroke-width="3" stroke-miterlimit="10" points="10,` +
 							this.props.size / 2 +
 							` ` +
 							this.props.size / 2 +
@@ -54,42 +65,46 @@ export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps, Dia
         `
 					}}
 				/>
-				<div
+				<PortWidget
 					style={{
-						position: 'absolute',
-						zIndex: 10,
 						top: this.props.size / 2 - 8,
-						left: -8
-					}}>
-					<PortWidget port={this.props.node.getPort(PortModelAlignment.LEFT)} engine={this.props.engine} />
-				</div>
-				<div
+						left: -8,
+						position: 'absolute'
+					}}
+					port={this.props.node.getPort(PortModelAlignment.LEFT)}
+					engine={this.props.engine}>
+					<S.Port />
+				</PortWidget>
+				<PortWidget
 					style={{
-						position: 'absolute',
-						zIndex: 10,
 						left: this.props.size / 2 - 8,
-						top: -8
-					}}>
-					<PortWidget port={this.props.node.getPort(PortModelAlignment.TOP)} engine={this.props.engine} />
-				</div>
-				<div
+						top: -8,
+						position: 'absolute'
+					}}
+					port={this.props.node.getPort(PortModelAlignment.TOP)}
+					engine={this.props.engine}>
+					<S.Port />
+				</PortWidget>
+				<PortWidget
 					style={{
-						position: 'absolute',
-						zIndex: 10,
 						left: this.props.size - 8,
-						top: this.props.size / 2 - 8
-					}}>
-					<PortWidget port={this.props.node.getPort(PortModelAlignment.RIGHT)} engine={this.props.engine} />
-				</div>
-				<div
+						top: this.props.size / 2 - 8,
+						position: 'absolute'
+					}}
+					port={this.props.node.getPort(PortModelAlignment.RIGHT)}
+					engine={this.props.engine}>
+					<S.Port />
+				</PortWidget>
+				<PortWidget
 					style={{
-						position: 'absolute',
-						zIndex: 10,
 						left: this.props.size / 2 - 8,
-						top: this.props.size - 8
-					}}>
-					<PortWidget port={this.props.node.getPort(PortModelAlignment.BOTTOM)} engine={this.props.engine} />
-				</div>
+						top: this.props.size - 8,
+						position: 'absolute'
+					}}
+					port={this.props.node.getPort(PortModelAlignment.BOTTOM)}
+					engine={this.props.engine}>
+					<S.Port />
+				</PortWidget>
 			</div>
 		);
 	}

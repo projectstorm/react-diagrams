@@ -7,22 +7,17 @@ import { ListenerHandle, Toolkit } from '@projectstorm/react-canvas-core';
 export interface PortProps {
 	port: PortModel;
 	engine: DiagramEngine;
+	className?;
+	style?;
 }
 
-export interface PortState {
-	selected: boolean;
-}
-
-export class PortWidget extends React.Component<PortProps, PortState> {
+export class PortWidget extends React.Component<PortProps> {
 	ref: React.RefObject<HTMLDivElement>;
 	engineListenerHandle: ListenerHandle;
 
 	constructor(props: PortProps) {
 		super(props);
 		this.ref = React.createRef();
-		this.state = {
-			selected: false
-		};
 	}
 
 	report() {
@@ -33,7 +28,7 @@ export class PortWidget extends React.Component<PortProps, PortState> {
 		this.engineListenerHandle && this.engineListenerHandle.deregister();
 	}
 
-	componentDidUpdate(prevProps: Readonly<PortProps>, prevState: Readonly<PortState>, snapshot?: any): void {
+	componentDidUpdate(prevProps: Readonly<PortProps>, prevState, snapshot?: any): void {
 		if (!this.props.port.reportedPosition) {
 			this.report();
 		}
@@ -63,14 +58,9 @@ export class PortWidget extends React.Component<PortProps, PortState> {
 	render() {
 		return (
 			<div
+				style={this.props.style}
 				ref={this.ref}
-				className="port"
-				onMouseEnter={() => {
-					this.setState({ selected: true });
-				}}
-				onMouseLeave={() => {
-					this.setState({ selected: false });
-				}}
+				className={`port ${this.props.className || ''}`}
 				data-name={this.props.port.getName()}
 				data-nodeid={this.props.port.getNode().getID()}
 				{...this.getExtraProps()}>

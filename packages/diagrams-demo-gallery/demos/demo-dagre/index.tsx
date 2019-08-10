@@ -8,7 +8,7 @@ import createEngine, {
 	PathFindingLinkFactory
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
-import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
@@ -70,7 +70,7 @@ class DemoWidget extends React.Component<{ model: DiagramModel; engine: DiagramE
 
 	render() {
 		return (
-			<DemoWorkspaceWidget buttons={<button onClick={this.autoDistribute}>Re-distribute</button>}>
+			<DemoWorkspaceWidget buttons={<DemoButton onClick={this.autoDistribute}>Re-distribute</DemoButton>}>
 				<DemoCanvasWidget>
 					<CanvasWidget engine={this.props.engine} />
 				</DemoCanvasWidget>
