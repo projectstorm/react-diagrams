@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { DiagramEngine, NodeModel, NodeModelGenerics, PortModelAlignment } from '@projectstorm/react-diagrams-core';
+import { NodeModel, NodeModelGenerics, PortModelAlignment } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from '../port/DefaultPortModel';
-import { BasePositionModelOptions } from '@projectstorm/react-canvas-core';
+import { BasePositionModelOptions, DeserializeEvent } from '@projectstorm/react-canvas-core';
 
 export interface DefaultNodeModelOptions extends BasePositionModelOptions {
 	name?: string;
@@ -90,14 +90,14 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 		return this.addPort(p);
 	}
 
-	deserialize(object, engine: DiagramEngine) {
-		super.deserialize(object, engine);
-		this.options.name = object.name;
-		this.options.color = object.color;
-		this.portsIn = _.map(object.portsInOrder, id => {
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.name = event.data.name;
+		this.options.color = event.data.color;
+		this.portsIn = _.map(event.data.portsInOrder, id => {
 			return this.getPortFromID(id);
 		}) as DefaultPortModel[];
-		this.portsOut = _.map(object.portsOutOrder, id => {
+		this.portsOut = _.map(event.data.portsOutOrder, id => {
 			return this.getPortFromID(id);
 		}) as DefaultPortModel[];
 	}

@@ -2,10 +2,10 @@ import * as React from 'react';
 import { DiagramEngine } from '../../DiagramEngine';
 import { LinkModel } from './LinkModel';
 import { PointModel } from './PointModel';
-import { PortModel } from '../port/PortModel';
 import * as _ from 'lodash';
 import { LabelWidget } from '../label/LabelWidget';
 import { BaseEntityEvent, BasePositionModel, ListenerHandle, PeformanceWidget } from '@projectstorm/react-canvas-core';
+import { PortModel } from '../port/PortModel';
 
 export interface LinkProps {
 	link: LinkModel;
@@ -13,8 +13,8 @@ export interface LinkProps {
 }
 
 export interface LinkState {
-	sourceID: PortModel;
-	targetID: PortModel;
+	sourcePort: PortModel;
+	targetPort: PortModel;
 }
 
 export class LinkWidget extends React.Component<LinkProps, LinkState> {
@@ -24,8 +24,8 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sourceID: null,
-			targetID: null
+			sourcePort: null,
+			targetPort: null
 		};
 	}
 
@@ -40,41 +40,36 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 
 	static getDerivedStateFromProps(nextProps: LinkProps, prevState: LinkState): LinkState {
 		return {
-			sourceID: nextProps.link.getSourcePort(),
-			targetID: nextProps.link.getTargetPort()
+			sourcePort: nextProps.link.getSourcePort(),
+			targetPort: nextProps.link.getTargetPort()
 		};
 	}
 
-	ensureInstalled(installSource: boolean, installTarget: boolean) {
-		if (installSource) {
-			this.sourceListener = this.props.link.getSourcePort().registerListener({
-				reportInitialPosition: (event: BaseEntityEvent<BasePositionModel>) => {
-					this.forceUpdate();
-				}
-			});
-		}
-
-		if (installTarget) {
-			this.targetListener = this.props.link.getTargetPort().registerListener({
-				reportInitialPosition: (event: BaseEntityEvent<BasePositionModel>) => {
-					this.forceUpdate();
-				}
-			});
-		}
+	installTarget() {
+		this.targetListener && this.targetListener.deregister();
+		this.targetListener = this.props.link.getTargetPort().registerListener({
+			reportInitialPosition: (event: BaseEntityEvent<BasePositionModel>) => {
+				this.forceUpdate();
+			}
+		});
 	}
 
-	componentDidUpdate(prevProps: Readonly<LinkProps>, prevState: Readonly<LinkState>, snapshot?: any): void {
-		let installSource = false;
-		let installTarget = false;
-		if (this.state.sourceID !== prevState.sourceID) {
-			this.sourceListener && this.sourceListener.deregister();
-			installSource = true;
+	installSource() {
+		this.sourceListener && this.sourceListener.deregister();
+		this.sourceListener = this.props.link.getSourcePort().registerListener({
+			reportInitialPosition: (event: BaseEntityEvent<BasePositionModel>) => {
+				this.forceUpdate();
+			}
+		});
+	}
+
+	componentDidUpdate(prevProps: Readonly<LinkProps>, prevState: Readonly<LinkState>, snapshot) {
+		if (prevState.sourcePort !== this.state.sourcePort) {
+			this.installSource();
 		}
-		if (this.state.targetID !== prevState.targetID) {
-			this.targetListener && this.targetListener.deregister();
-			installTarget = true;
+		if (prevState.targetPort !== this.state.targetPort) {
+			this.installTarget();
 		}
-		this.ensureInstalled(installSource, installTarget);
 	}
 
 	public static generateLinePath(firstPoint: PointModel, lastPoint: PointModel): string {
@@ -82,7 +77,12 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 	}
 
 	componentDidMount(): void {
-		this.ensureInstalled(!!this.props.link.getSourcePort(), !!this.props.link.getTargetPort());
+		if (this.props.link.getSourcePort()) {
+			this.installSource();
+		}
+		if (this.props.link.getTargetPort()) {
+			this.installTarget();
+		}
 	}
 
 	render() {
@@ -98,7 +98,7 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 
 		//generate links
 		return (
-			<PeformanceWidget serialized={this.props.link.serialize()}>
+			<PeformanceWidget model={this.props.link} serialized={this.props.link.serialize()}>
 				{() => {
 					return (
 						<g>

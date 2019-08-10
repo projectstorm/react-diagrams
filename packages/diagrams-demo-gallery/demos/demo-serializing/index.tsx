@@ -35,7 +35,6 @@ export default () => {
 	//!------------- SERIALIZING ------------------
 
 	var str = JSON.stringify(model.serialize());
-	console.log(model.serialize());
 
 	//!------------- DESERIALIZING ----------------
 

@@ -1,5 +1,5 @@
-import { DiagramEngine, LabelModel, LabelModelGenerics } from '@projectstorm/react-diagrams-core';
-import { LabelModelOptions } from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, LabelModel, LabelModelGenerics, LabelModelOptions } from '@projectstorm/react-diagrams-core';
+import { DeserializeEvent } from '@projectstorm/react-canvas-core';
 
 export interface DefaultLabelModelOptions extends LabelModelOptions {
 	label?: string;
@@ -22,9 +22,9 @@ export class DefaultLabelModel extends LabelModel<DefaultLabelModelGenerics> {
 		this.options.label = label;
 	}
 
-	deserialize(ob, engine: DiagramEngine) {
-		super.deserialize(ob, engine);
-		this.options.label = ob.label;
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.label = event.data.label;
 	}
 
 	serialize() {

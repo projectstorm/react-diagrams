@@ -9,7 +9,7 @@ import {
 } from '@projectstorm/react-diagrams-core';
 import { DefaultLabelModel } from '../label/DefaultLabelModel';
 import { BezierCurve } from '@projectstorm/geometry';
-import { BaseEntityEvent, BaseModelOptions } from '@projectstorm/react-canvas-core';
+import { BaseEntityEvent, BaseModelOptions, DeserializeEvent } from '@projectstorm/react-canvas-core';
 
 export interface DefaultLinkModelListener extends LinkModelListener {
 	colorChanged?(event: BaseEntityEvent<DefaultLinkModel> & { color: null | string }): void;
@@ -90,12 +90,12 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelGenerics> {
 		};
 	}
 
-	deserialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
-		super.deserialize(ob, engine);
-		this.options.color = ob.color;
-		this.options.width = ob.width;
-		this.options.curvyness = ob.curvyness;
-		this.options.selectedColor = ob.selectedColor;
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.color = event.data.color;
+		this.options.width = event.data.width;
+		this.options.curvyness = event.data.curvyness;
+		this.options.selectedColor = event.data.selectedColor;
 	}
 
 	addLabel(label: LabelModel | string) {

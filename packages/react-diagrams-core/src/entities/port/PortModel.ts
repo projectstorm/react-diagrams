@@ -1,7 +1,6 @@
 import { NodeModel } from '../node/NodeModel';
 import { LinkModel } from '../link/LinkModel';
 import * as _ from 'lodash';
-import { DiagramEngine } from '../../DiagramEngine';
 import { Point } from '@projectstorm/geometry';
 import {
 	BaseEntityEvent,

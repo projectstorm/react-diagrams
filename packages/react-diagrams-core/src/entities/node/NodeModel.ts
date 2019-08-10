@@ -41,26 +41,10 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		let old = this.position;
 		super.setPosition(x, y);
 
-		// also update the port co-ordinates (for make glorious speed)
+		//also update the port co-ordinates (for make glorious speed)
 		_.forEach(this.ports, port => {
 			port.setPosition(port.getX() + x - old.x, port.getY() + y - old.y);
 		});
-	}
-
-	getSelectedEntities() {
-		let entities = super.getSelectedEntities();
-
-		// add the points of each link that are selected here
-		if (this.isSelected()) {
-			_.forEach(this.ports, port => {
-				entities = entities.concat(
-					_.map(port.getLinks(), link => {
-						return link.getPointForPort(port);
-					})
-				);
-			});
-		}
-		return entities;
 	}
 
 	deserialize(event: DeserializeEvent<this>) {

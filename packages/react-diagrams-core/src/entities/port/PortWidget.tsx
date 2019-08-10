@@ -30,7 +30,7 @@ export class PortWidget extends React.Component<PortProps, PortState> {
 	}
 
 	componentWillUnmount(): void {
-		this.engineListenerHandle.deregister();
+		this.engineListenerHandle && this.engineListenerHandle.deregister();
 	}
 
 	componentDidUpdate(prevProps: Readonly<PortProps>, prevState: Readonly<PortState>, snapshot?: any): void {

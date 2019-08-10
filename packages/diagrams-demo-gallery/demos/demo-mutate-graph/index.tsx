@@ -30,9 +30,10 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		let str = JSON.stringify(model.serialize());
 		let model2 = new DiagramModel();
 		let obj: ReturnType<DiagramModel['serialize']> = JSON.parse(str);
-		let node: ReturnType<NodeModel['serialize']> = _.values(obj.layers[0].models)[0] as any;
+		let node: ReturnType<NodeModel['serialize']> = _.values(obj.layers[1].models)[0] as any;
 		node.x += 30;
 		node.y += 30;
+
 		model2.deserializeModel(obj, engine);
 		engine.setModel(model2);
 	}

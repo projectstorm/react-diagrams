@@ -10,7 +10,6 @@ import { ActionEventBus } from './core-actions/ActionEventBus';
 import { ZoomCanvasAction } from './actions/ZoomCanvasAction';
 import { DeleteItemsAction } from './actions/DeleteItemsAction';
 import { StateMachine } from './core-state/StateMachine';
-import { ActionEvent } from './core-actions/Action';
 
 export interface CanvasEngineListener extends BaseListener {
 	canvasReady?(): void;
@@ -86,6 +85,11 @@ export class CanvasEngine<
 
 	setModel(model: M) {
 		this.model = model;
+		if (this.canvas) {
+			requestAnimationFrame(() => {
+				this.repaintCanvas();
+			});
+		}
 	}
 
 	getModel(): M {

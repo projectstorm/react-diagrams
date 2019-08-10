@@ -7,7 +7,8 @@ import {
 	BaseModel,
 	CanvasModel,
 	CanvasModelGenerics,
-	LayerModel
+	LayerModel,
+	DeserializeEvent
 } from '@projectstorm/react-canvas-core';
 import { NodeLayerModel } from '../entities/node-layer/NodeLayerModel';
 import { LinkLayerModel } from '../entities/link-layer/LinkLayerModel';
@@ -30,6 +31,11 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 		super(options);
 		this.addLayer(new LinkLayerModel());
 		this.addLayer(new NodeLayerModel());
+	}
+
+	deserialize(event: DeserializeEvent<this>) {
+		this.layers = [];
+		super.deserialize(event);
 	}
 
 	addLayer(layer: LayerModel): void {

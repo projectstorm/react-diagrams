@@ -69,7 +69,7 @@ export class NodeWidget extends React.Component<NodeProps> {
 
 	render() {
 		return (
-			<PeformanceWidget serialized={this.props.node.serialize()}>
+			<PeformanceWidget model={this.props.node} serialized={this.props.node.serialize()}>
 				{() => {
 					return (
 						<S.Node

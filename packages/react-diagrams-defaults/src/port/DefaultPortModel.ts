@@ -7,7 +7,7 @@ import {
 	PortModelOptions
 } from '@projectstorm/react-diagrams-core';
 import { DefaultLinkModel } from '../link/DefaultLinkModel';
-import { AbstractModelFactory } from '@projectstorm/react-canvas-core';
+import { AbstractModelFactory, DeserializeEvent } from '@projectstorm/react-canvas-core';
 
 export interface DefaultPortModelOptions extends PortModelOptions {
 	label?: string;
@@ -38,10 +38,10 @@ export class DefaultPortModel extends PortModel<DefaultPortModelGenerics> {
 		});
 	}
 
-	deserialize(object, engine: DiagramEngine) {
-		super.deserialize(object, engine);
-		this.options.in = object.in;
-		this.options.label = object.label;
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.in = event.data.in;
+		this.options.label = event.data.label;
 	}
 
 	serialize() {
