@@ -1,4 +1,4 @@
-# STORM React Diagrams __6__ [beta] •
+# STORM React Diagrams __6__ [beta]
 
  [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![NPM](https://img.shields.io/npm/v/@projectstorm/react-diagrams.svg)](https://npmjs.org/package/@projectstorm/react-diagrams)  [![Package Quality](http://npm.packagequality.com/shield/storm-react-diagrams.svg)](http://packagequality.com/#?package=storm-react-diagrams)  [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
@@ -9,16 +9,7 @@
 ---
 
 **DEMO**: [http://projectstorm.cloud/react-diagrams](http://projectstorm.cloud/react-diagrams)
-
-**(SOME) DOCS:** [https://projectstorm.gitbooks.io/react-diagrams](https://projectstorm.gitbooks.io/react-diagrams)
-
-
-Example implementation using custom models: (Dylan's personal code)
-
-![Personal Project](./docs/images/example1.jpg)
-![](./docs/images/example2.jpg)
-Get started with the default models right out of the box:
-![](./docs/images/example3.jpg)
+**DOCS (incomplete)** [https://projectstorm.gitbooks.io/react-diagrams](https://projectstorm.gitbooks.io/react-diagrams)
 
 ## What
 
@@ -29,6 +20,17 @@ A flow & process orientated diagramming library inspired by __Blender__, __Labvi
 * __HTML nodes as a first class citizen__ the library was originally written to represent advanced dynamic nodes, that are difficult to represent as SVG's due to complex input requirements ux requirements.
 * __Designed for process__ the library is aimed for software engineers that want to rewire their programs at runtime, and that want to make their software more dynamic.
 * __Fast diagram editing__ the defaults provided give the heighest priority to editing diagrams as fast as possible.
+
+## Gallery
+
+Example implementation using custom models: (Dylan's personal code)
+
+![Personal Project](./docs/images/example1.jpg)
+![](./docs/images/example2.jpg)
+
+Get started with the default models right out of the box:
+
+![](./docs/images/example3.jpg)
 
 ## Installing
 
