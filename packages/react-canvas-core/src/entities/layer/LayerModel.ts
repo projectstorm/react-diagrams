@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import { CanvasEngine } from '../../CanvasEngine';
 import { FactoryBank } from '../../core/FactoryBank';
 import { AbstractModelFactory } from '../../core/AbstractModelFactory';
+import { DeserializeEvent } from '../../core-models/BaseEntity';
 
 export interface LayerModelOptions extends BaseModelOptions {
 	isSvg?: boolean;
@@ -32,17 +33,20 @@ export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGeneri
 	 */
 	abstract getChildModelFactoryBank(engine: G['ENGINE']): FactoryBank<AbstractModelFactory<BaseModel>>;
 
-	deserialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
-		super.deserialize(data, engine);
-		this.options.isSvg = !!data.isSvg;
-		this.options.transformed = !!data.transformed;
-		_.forEach(data.models, model => {
-			const modelOb = this.getChildModelFactoryBank(engine)
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.isSvg = !!event.data.isSvg;
+		this.options.transformed = !!event.data.transformed;
+		_.forEach(event.data.models, model => {
+			const modelOb = this.getChildModelFactoryBank(event.engine)
 				.getFactory(model.type)
 				.generateModel({
 					initialConfig: model
 				});
-			modelOb.deserialize(model, engine);
+			modelOb.deserialize({
+				...event,
+				data: model
+			});
 			this.addModel(modelOb);
 		});
 	}

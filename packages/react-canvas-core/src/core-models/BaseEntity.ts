@@ -2,6 +2,8 @@ import { Toolkit } from '../Toolkit';
 import * as _ from 'lodash';
 import { CanvasEngine } from '../CanvasEngine';
 import { BaseEvent, BaseListener, BaseObserver } from '../core/BaseObserver';
+import { AbstractModelFactory } from '../core/AbstractModelFactory';
+import { BaseModel } from './BaseModel';
 
 export interface BaseEntityEvent<T extends BaseEntity = BaseEntity> extends BaseEvent {
 	entity: T;
@@ -22,6 +24,13 @@ export type BaseEntityGenerics = {
 	LISTENER: BaseEntityListener;
 	OPTIONS: BaseEntityOptions;
 };
+
+export interface DeserializeEvent<T extends BaseEntity = BaseEntity> {
+	engine: CanvasEngine;
+	data: ReturnType<T['serialize']>;
+	registerModel(model: BaseModel);
+	getModel<T extends BaseModel>(id: string): Promise<T>;
+}
 
 export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> extends BaseObserver<T['LISTENER']> {
 	protected options: T['OPTIONS'];
@@ -67,9 +76,9 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 		this.listeners = {};
 	}
 
-	deserialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
-		this.options.id = data.id;
-		this.options.locked = data.locked;
+	deserialize(event: DeserializeEvent<this>) {
+		this.options.id = event.data.id;
+		this.options.locked = event.data.locked;
 	}
 
 	serialize() {

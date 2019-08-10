@@ -34,13 +34,13 @@ export default () => {
 
 	//!------------- SERIALIZING ------------------
 
-	var str = JSON.stringify(model.serializeDiagram());
-	console.log(model.serializeDiagram());
+	var str = JSON.stringify(model.serialize());
+	console.log(model.serialize());
 
 	//!------------- DESERIALIZING ----------------
 
 	var model2 = new DiagramModel();
-	model2.deSerializeDiagram(JSON.parse(str), engine);
+	model2.deserializeModel(JSON.parse(str), engine);
 	engine.setModel(model2);
 
 	return (
@@ -48,7 +48,7 @@ export default () => {
 			buttons={
 				<DemoButton
 					onClick={() => {
-						action('Serialized Graph')(beautify(model2.serializeDiagram(), null, 2, 80));
+						action('Serialized Graph')(beautify(model2.serialize(), null, 2, 80));
 					}}>
 					Serialize Graph
 				</DemoButton>

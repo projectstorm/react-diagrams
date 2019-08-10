@@ -5,7 +5,13 @@ import { LabelModel } from '../label/LabelModel';
 import { DiagramEngine } from '../../DiagramEngine';
 import { DiagramModel } from '../../models/DiagramModel';
 import { Point } from '@projectstorm/geometry';
-import { BaseEntityEvent, BaseModel, BaseModelGenerics, BaseModelListener } from '@projectstorm/react-canvas-core';
+import {
+	BaseEntityEvent,
+	BaseModel,
+	BaseModelGenerics,
+	BaseModelListener,
+	DeserializeEvent
+} from '@projectstorm/react-canvas-core';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
@@ -51,38 +57,41 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		);
 	}
 
-	deserialize(ob, engine: DiagramEngine) {
-		super.deserialize(ob, engine);
-		this.points = _.map(ob.points || [], (point: { x; y }) => {
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.points = _.map(event.data.points || [], point => {
 			var p = new PointModel({
 				link: this,
 				position: new Point(point.x, point.y)
 			});
-			p.deserialize(point, engine);
+			p.deserialize({
+				...event,
+				data: point
+			});
 			return p;
 		});
 
 		//deserialize labels
-		_.forEach(ob.labels || [], (label: any) => {
-			let labelOb = engine.getFactoryForLabel(label.type).generateModel({});
-			labelOb.deserialize(label, engine);
+		_.forEach(event.data.labels || [], (label: any) => {
+			let labelOb = (event.engine as DiagramEngine).getFactoryForLabel(label.type).generateModel({});
+			labelOb.deserialize({
+				...event,
+				data: label
+			});
 			this.addLabel(labelOb);
 		});
 
-		if (ob.target) {
-			this.setTargetPort(
-				this.getParent()
-					.getNode(ob.target)
-					.getPortFromID(ob.targetPort)
-			);
+		// these happen async, so we use the promises for these (they need to be done like this without the async keyword
+		// because we need the deserailize method to finish for other methods while this happen
+		if (event.data.target) {
+			event.getModel(event.data.targetPort).then((model: PortModel) => {
+				this.setTargetPort(model);
+			});
 		}
-
-		if (ob.source) {
-			this.setSourcePort(
-				this.getParent()
-					.getNode(ob.source)
-					.getPortFromID(ob.sourcePort)
-			);
+		if (event.data.source) {
+			event.getModel(event.data.sourcePort).then((model: PortModel) => {
+				this.setSourcePort(model);
+			});
 		}
 	}
 

@@ -8,7 +8,8 @@ import {
 	BaseModelOptions,
 	BasePositionModel,
 	BasePositionModelGenerics,
-	BasePositionModelListener
+	BasePositionModelListener,
+	DeserializeEvent
 } from '@projectstorm/react-canvas-core';
 
 export enum PortModelAlignment {
@@ -51,11 +52,11 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		this.reportedPosition = false;
 	}
 
-	deserialize(ob, engine: DiagramEngine) {
-		super.deserialize(ob, engine);
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
 		this.reportedPosition = false;
-		this.options.name = ob.name;
-		this.options.alignment = ob.alignment;
+		this.options.name = event.data.name;
+		this.options.alignment = event.data.alignment;
 	}
 
 	serialize() {

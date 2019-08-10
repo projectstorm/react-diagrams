@@ -1,5 +1,13 @@
-import { BaseEntity, BaseEntityEvent, BaseEntityGenerics, BaseEntityListener, BaseEntityOptions } from './BaseEntity';
+import {
+	BaseEntity,
+	BaseEntityEvent,
+	BaseEntityGenerics,
+	BaseEntityListener,
+	BaseEntityOptions,
+	DeserializeEvent
+} from './BaseEntity';
 import { CanvasEngine } from '../CanvasEngine';
+import { AbstractModelFactory } from '../core/AbstractModelFactory';
 
 export interface BaseModelListener extends BaseEntityListener {
 	selectionChanged?(event: BaseEntityEvent<BaseModel> & { isSelected: boolean }): void;
@@ -50,10 +58,10 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 		};
 	}
 
-	deserialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
-		super.deserialize(data, engine);
-		this.options.extras = data.extras;
-		this.options.selected = data.selected;
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.extras = event.data.extras;
+		this.options.selected = event.data.selected;
 	}
 
 	getType(): string {

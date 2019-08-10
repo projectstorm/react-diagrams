@@ -1,6 +1,5 @@
 import { BaseModel, BaseModelGenerics, BaseModelListener, BaseModelOptions } from './BaseModel';
-import { CanvasEngine } from '../CanvasEngine';
-import { BaseEntityEvent } from './BaseEntity';
+import { BaseEntityEvent, DeserializeEvent } from './BaseEntity';
 import { Point } from '@projectstorm/geometry';
 
 export interface BasePositionModelListener extends BaseModelListener {
@@ -35,9 +34,9 @@ export class BasePositionModel<G extends BasePositionModelGenerics = BasePositio
 		this.fireEvent({}, 'positionChanged');
 	}
 
-	deserialize(ob, engine: CanvasEngine) {
-		super.deserialize(ob, engine);
-		this.position = new Point(ob.x, ob.y);
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.position = new Point(event.data.x, event.data.y);
 	}
 
 	serialize() {

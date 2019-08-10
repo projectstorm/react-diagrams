@@ -7,7 +7,7 @@ export interface GenerateModelEvent {
 }
 
 export abstract class AbstractModelFactory<
-	T extends BaseModel,
+	T extends BaseModel = BaseModel,
 	E extends CanvasEngine = CanvasEngine
 > extends AbstractFactory<E> {
 	/**

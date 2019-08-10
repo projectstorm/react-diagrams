@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import { DiagramEngine } from '../../DiagramEngine';
 import { DiagramModel } from '../../models/DiagramModel';
 import { PortModel } from '../port/PortModel';
 import { LinkModel } from '../link/LinkModel';
@@ -8,8 +7,10 @@ import {
 	BaseEntityEvent,
 	BaseModelListener,
 	BasePositionModel,
-	BasePositionModelGenerics
+	BasePositionModelGenerics,
+	DeserializeEvent
 } from '@projectstorm/react-canvas-core';
+import { DiagramEngine } from '../../DiagramEngine';
 
 export interface NodeModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<NodeModel>): void;
@@ -62,13 +63,18 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		return entities;
 	}
 
-	deserialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
-		super.deserialize(ob, engine);
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
 
 		//deserialize ports
-		_.forEach(ob.ports, (port: any) => {
-			let portOb = engine.getFactoryForPort(port.type).generateModel({});
-			portOb.deserialize(port, engine);
+		_.forEach(event.data.ports, (port: any) => {
+			let portOb = (event.engine as DiagramEngine).getFactoryForPort(port.type).generateModel({});
+			portOb.deserialize({
+				...event,
+				data: port
+			});
+			// the links need these
+			event.registerModel(portOb);
 			this.addPort(portOb);
 		});
 	}

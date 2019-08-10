@@ -1,14 +1,16 @@
-import { CanvasEngine } from '../../CanvasEngine';
 import * as _ from 'lodash';
 import {
 	BaseEntity,
 	BaseEntityEvent,
 	BaseEntityGenerics,
 	BaseEntityListener,
-	BaseEntityOptions
+	BaseEntityOptions,
+	DeserializeEvent
 } from '../../core-models/BaseEntity';
 import { LayerModel } from '../layer/LayerModel';
 import { BaseModel } from '../../core-models/BaseModel';
+import { CanvasEngine } from '../../CanvasEngine';
+import { AbstractModelFactory } from '../../core/AbstractModelFactory';
 
 export interface DiagramListener extends BaseEntityListener {
 	offsetUpdated?(event: BaseEntityEvent<CanvasModel> & { offsetX: number; offsetY: number }): void;
@@ -96,17 +98,55 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		return this.options.gridSize * Math.floor((pos + this.options.gridSize / 2) / this.options.gridSize);
 	}
 
-	deserialize(object: any, engine: CanvasEngine) {
-		super.deserialize(object, engine);
-		this.options.offsetX = object.offsetX;
-		this.options.offsetY = object.offsetY;
-		this.options.zoom = object.zoom;
-		this.options.gridSize = object.gridSize;
-		_.forEach(object.layers, layer => {
-			const layerOb = engine.getFactoryForLayer(layer.type).generateModel({
+	deserializeModel(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
+		const models: {
+			[id: string]: BaseModel;
+		} = {};
+		const promises: {
+			[id: string]: Promise<BaseModel>;
+		} = {};
+		const resolvers: {
+			[id: string]: (model: BaseModel) => any;
+		} = {};
+
+		const event: DeserializeEvent = {
+			data: data,
+			engine: engine,
+			registerModel: (model: BaseModel) => {
+				models[model.getID()] = model;
+				if (resolvers[model.getID()]) {
+					resolvers[model.getID()](model);
+				}
+			},
+			getModel<T extends BaseModel>(id: string): Promise<T> {
+				if (models[id]) {
+					return Promise.resolve(models[id]) as Promise<T>;
+				}
+				if (!promises[id]) {
+					promises[id] = new Promise(resolve => {
+						resolvers[id] = resolve;
+					});
+				}
+				return promises[id] as Promise<T>;
+			}
+		};
+		this.deserialize(event);
+	}
+
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.offsetX = event.data.offsetX;
+		this.options.offsetY = event.data.offsetY;
+		this.options.zoom = event.data.zoom;
+		this.options.gridSize = event.data.gridSize;
+		_.forEach(event.data.layers, layer => {
+			const layerOb = event.engine.getFactoryForLayer(layer.type).generateModel({
 				initialConfig: layer
 			});
-			layerOb.deserialize(layer, engine);
+			layerOb.deserialize({
+				...event,
+				data: layer
+			});
 			this.addLayer(layerOb);
 		});
 	}

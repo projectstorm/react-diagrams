@@ -1,5 +1,6 @@
-import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel, NodeModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
+import * as _ from 'lodash';
 import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
@@ -27,15 +28,13 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		let { engine } = this.props;
 		let model = engine.getModel();
 		let str = JSON.stringify(model.serialize());
-		console.log(model.serialize());
 		let model2 = new DiagramModel();
-		let obj = JSON.parse(str);
-		let node = obj.nodes[0];
+		let obj: ReturnType<DiagramModel['serialize']> = JSON.parse(str);
+		let node: ReturnType<NodeModel['serialize']> = _.values(obj.layers[0].models)[0] as any;
 		node.x += 30;
 		node.y += 30;
-		model2.deSerialize(obj, engine);
+		model2.deserializeModel(obj, engine);
 		engine.setModel(model2);
-		this.forceUpdate();
 	}
 
 	render() {

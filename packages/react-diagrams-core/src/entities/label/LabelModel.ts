@@ -1,6 +1,6 @@
 import { DiagramEngine } from '../../DiagramEngine';
 import { LinkModel } from '../link/LinkModel';
-import { BaseModel, BaseModelGenerics, BaseModelOptions } from '@projectstorm/react-canvas-core';
+import { BaseModel, BaseModelGenerics, BaseModelOptions, DeserializeEvent } from '@projectstorm/react-canvas-core';
 
 export interface LabelModelOptions extends BaseModelOptions {
 	offsetX?: number;
@@ -21,10 +21,10 @@ export class LabelModel<G extends LabelModelGenerics = LabelModelGenerics> exten
 		});
 	}
 
-	deserialize(ob, engine: DiagramEngine) {
-		super.deserialize(ob, engine);
-		this.options.offsetX = ob.offsetX;
-		this.options.offsetY = ob.offsetY;
+	deserialize(event: DeserializeEvent<this>) {
+		super.deserialize(event);
+		this.options.offsetX = event.data.offsetX;
+		this.options.offsetY = event.data.offsetY;
 	}
 
 	serialize() {
