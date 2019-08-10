@@ -1,8 +1,6 @@
-# STORM React Diagrams
+# STORM React Diagrams __6__ [beta] • [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![NPM](https://img.shields.io/npm/v/@projectstorm/react-diagrams.svg)](https://npmjs.org/package/@projectstorm/react-diagrams)  [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams) [![Package Quality](http://npm.packagequality.com/shield/storm-react-diagrams.svg)](http://packagequality.com/#?package=storm-react-diagrams)  [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
-__PSA 2018__: React Diagrams ~is currently~ was getting a bit of a rewrite to enable much more advanced features. To see the new foundation WIP visit [https://github.com/projectstorm/react-canvas](https://github.com/projectstorm/react-canvas).
-
-__PSA 2019__: I still want to jump onto the rewrite, but it is a much larger project than anticipated, so going to try maintain this one in the mean time.
+[pssst! Looking for the old version 5?](https://github.com/projectstorm/react-diagrams/tree/v5.3.2)
 
 ---
 
@@ -14,8 +12,6 @@ __PSA 2019__: I still want to jump onto the rewrite, but it is a much larger pro
 
 A super simple, no-nonsense diagramming library written in React that just works.
 
-[![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![NPM](https://img.shields.io/npm/v/@projectstorm/react-diagrams.svg)](https://npmjs.org/package/@projectstorm/react-diagrams)  [![NPM](https://img.shields.io/npm/dt/storm-react-diagrams.svg)](https://npmjs.org/package/storm-react-diagrams) [![Package Quality](http://npm.packagequality.com/shield/storm-react-diagrams.svg)](http://packagequality.com/#?package=storm-react-diagrams)  [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
-
 
 Example implementation using custom models: (Dylan's personal code)
 
@@ -24,17 +20,15 @@ Example implementation using custom models: (Dylan's personal code)
 Get started with the default models right out of the box:
 ![](./docs/images/example3.jpg)
 
-## Introduction
+## What
 
-A no-nonsense diagramming library written entirely in React with the help of a few small libraries. It aims to be:
+A flow & process orientated diagramming library inspired by __Blender__, __Labview__ and __Unreal engine__.
 
-* Simple, and void of any fuss/complications when implementing it into your own application
-* Customizable without having to hack the core \(adapters/factories etc..\)
-* Simple to operate and understand without sugar and magic
-* Fast and optimized to handle large diagrams with hundreds of nodes/links
-* Use HTML to create nodes, instead of SVG's
-* Super easy to use, and should work as you expect it to
-* Perfect for creating declarative systems such as programmatic pipelines and visual programming languages (Labview, Symlink etc..)
+* __Modern Codebase__ written entirely in Typescript and React, the library makes use of powerful generics, advanced software engineering principles and is broken up into multiple modules.
+* __Hackable and extensible__ the entire library including its core can be extended, rewired and re-assembled into fundamentally different software to suit your own software needs.
+* __HTML nodes as a first class citizen__ the library was originally written to represent advanced dynamic nodes, that are difficult to represent as SVG's due to complex input requirements ux requirements.
+* __Designed for process__ the library is aimed for software engineers that want to rewire their programs at runtime, and that want to make their software more dynamic.
+* __Fast diagram editing__ the defaults provided give the heighest priority to editing diagrams as fast as possible.
 
 ## Installing
 
@@ -42,7 +36,7 @@ For all the bells and whistles:
 
     yarn add @projectstorm/react-diagrams
 
-This includes all the packages listed below (and works like it used to before version 6.0)
+This includes all the packages listed below (and works (mostly and conceptually) like it used to in version 5.0)
 
 ### A more modular approach
 
@@ -50,22 +44,34 @@ This library now has a more modular design and you can import just the core (con
 
     yarn add @projectstorm/react-diagrams-core
 
-and add some extras:
+this is built ontop of the evolving __react-canvas-core__ library
+
+```
+yarn add @projectstorm/react-diagrams-core
+```
+
+which makes use of
+
+```
+yarn add @projectstorm/react-geometry
+```
+
+and of course, you can add some extras:
 
     yarn add @projectstorm/react-diagrams-defaults
     yarn add @projectstorm/react-diagrams-routing
-    
+
 ## How to use
 
-Take a look at the demos [lib-demo-gallery/demos](https://github.com/projectstorm/react-diagrams/tree/lerna/lib-demo-gallery/demos)
+Take a look at the demos [lib-demo-gallery/demos](packages/diagrams-demo-library)
 
 __or__
 
-Take a look at the demo project: [lib-demo-project](https://github.com/projectstorm/react-diagrams/tree/lerna/lib-demo-project)
+Take a look at the demo project: [lib-demo-project](packages/diagrams-demo-project)
 
 ## Run the demos
 
-After running `yarn install` you must then run:  `yarn run storybook`
+After running `yarn install` you must then run:  `cd packages/diagrams-demo-gallery && yarn run start`
 
 ## Building from source
 
