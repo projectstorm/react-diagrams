@@ -33,8 +33,8 @@ export class JSCustomNodeModel extends NodeModel {
 		};
 	}
 
-	deSerialize(ob, engine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob, engine) {
+		super.deserialize(ob, engine);
 		this.color = ob.color;
 	}
 }

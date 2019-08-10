@@ -38,8 +38,8 @@ export class DefaultPortModel extends PortModel<DefaultPortModelGenerics> {
 		});
 	}
 
-	deSerialize(object, engine: DiagramEngine) {
-		super.deSerialize(object, engine);
+	deserialize(object, engine: DiagramEngine) {
+		super.deserialize(object, engine);
 		this.options.in = object.in;
 		this.options.label = object.label;
 	}

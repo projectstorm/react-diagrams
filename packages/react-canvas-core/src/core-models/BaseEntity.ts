@@ -67,7 +67,7 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 		this.listeners = {};
 	}
 
-	deSerialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
+	deserialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
 		this.options.id = data.id;
 		this.options.locked = data.locked;
 	}

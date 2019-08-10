@@ -51,8 +51,8 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		this.reportedPosition = false;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob, engine: DiagramEngine) {
+		super.deserialize(ob, engine);
 		this.reportedPosition = false;
 		this.options.name = ob.name;
 		this.options.alignment = ob.alignment;

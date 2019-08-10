@@ -1,6 +1,9 @@
 import { BaseModel, BaseModelGenerics, BaseModelOptions } from '../../core-models/BaseModel';
 import { CanvasModel } from '../canvas/CanvasModel';
 import * as _ from 'lodash';
+import { CanvasEngine } from '../../CanvasEngine';
+import { FactoryBank } from '../../core/FactoryBank';
+import { AbstractModelFactory } from '../../core/AbstractModelFactory';
 
 export interface LayerModelOptions extends BaseModelOptions {
 	isSvg?: boolean;
@@ -11,9 +14,10 @@ export interface LayerModelGenerics extends BaseModelGenerics {
 	OPTIONS: LayerModelOptions;
 	PARENT: CanvasModel;
 	CHILDREN: BaseModel;
+	ENGINE: CanvasEngine;
 }
 
-export class LayerModel<G extends LayerModelGenerics = LayerModelGenerics> extends BaseModel<G> {
+export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGenerics> extends BaseModel<G> {
 	protected models: { [id: string]: G['CHILDREN'] };
 	protected repaintEnabled: boolean;
 
@@ -21,6 +25,37 @@ export class LayerModel<G extends LayerModelGenerics = LayerModelGenerics> exten
 		super(options);
 		this.models = {};
 		this.repaintEnabled = true;
+	}
+
+	/**
+	 * This is used for deserialization
+	 */
+	abstract getChildModelFactoryBank(engine: G['ENGINE']): FactoryBank<AbstractModelFactory<BaseModel>>;
+
+	deserialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
+		super.deserialize(data, engine);
+		this.options.isSvg = !!data.isSvg;
+		this.options.transformed = !!data.transformed;
+		_.forEach(data.models, model => {
+			const modelOb = this.getChildModelFactoryBank(engine)
+				.getFactory(model.type)
+				.generateModel({
+					initialConfig: model
+				});
+			modelOb.deserialize(model, engine);
+			this.addModel(modelOb);
+		});
+	}
+
+	serialize() {
+		return {
+			...super.serialize(),
+			isSvg: this.options.isSvg,
+			transformed: this.options.transformed,
+			models: _.mapValues(this.models, model => {
+				return model.serialize();
+			})
+		};
 	}
 
 	isRepaintEnabled() {

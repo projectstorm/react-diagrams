@@ -90,8 +90,8 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 		return this.addPort(p);
 	}
 
-	deSerialize(object, engine: DiagramEngine) {
-		super.deSerialize(object, engine);
+	deserialize(object, engine: DiagramEngine) {
+		super.deserialize(object, engine);
 		this.options.name = object.name;
 		this.options.color = object.color;
 		this.portsIn = _.map(object.portsInOrder, id => {

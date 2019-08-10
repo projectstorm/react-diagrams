@@ -77,7 +77,7 @@ export class CanvasEngine<
 		return this.layerFactories;
 	}
 
-	getFactoryForLayer<F extends AbstractReactFactory<LayerModel>>(layer: LayerModel) {
+	getFactoryForLayer<F extends AbstractReactFactory<LayerModel>>(layer: LayerModel | string) {
 		if (typeof layer === 'string') {
 			return this.layerFactories.getFactory(layer);
 		}

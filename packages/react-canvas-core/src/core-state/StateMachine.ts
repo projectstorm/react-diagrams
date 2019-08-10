@@ -12,6 +12,10 @@ export class StateMachine {
 		this.stateStack = [];
 	}
 
+	getCurrentState() {
+		return this.currentState;
+	}
+
 	pushState(state: State) {
 		this.stateStack.push(state);
 		this.setState(state);

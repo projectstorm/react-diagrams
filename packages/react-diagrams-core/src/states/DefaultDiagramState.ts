@@ -13,11 +13,18 @@ import { DiagramEngine } from '../DiagramEngine';
 import { DragDiagramItemsState } from './DragDiagramItemsState';
 
 export class DefaultDiagramState extends State<DiagramEngine> {
+	dragCanvas: DragCanvasState;
+	dragNewLink: DragNewLinkState;
+	dragItems: DragDiagramItemsState;
+
 	constructor() {
 		super({
 			name: 'default-diagrams'
 		});
 		this.childStates = [new SelectingState()];
+		this.dragCanvas = new DragCanvasState();
+		this.dragNewLink = new DragNewLinkState();
+		this.dragItems = new DragDiagramItemsState();
 
 		// determine what was clicked on
 		this.registerAction(
@@ -28,15 +35,15 @@ export class DefaultDiagramState extends State<DiagramEngine> {
 
 					// the canvas was clicked on, transition to the dragging canvas state
 					if (!element) {
-						this.transitionWithEvent(new DragCanvasState(), event);
+						this.transitionWithEvent(this.dragCanvas, event);
 					}
 					// initiate dragging a new link
 					else if (element instanceof PortModel) {
-						this.transitionWithEvent(new DragNewLinkState(), event);
+						this.transitionWithEvent(this.dragNewLink, event);
 					}
 					// move the items (and potentially link points)
 					else {
-						this.transitionWithEvent(new DragDiagramItemsState(), event);
+						this.transitionWithEvent(this.dragItems, event);
 					}
 				}
 			})

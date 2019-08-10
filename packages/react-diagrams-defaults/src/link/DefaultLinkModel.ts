@@ -90,8 +90,8 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelGenerics> {
 		};
 	}
 
-	deSerialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
+		super.deserialize(ob, engine);
 		this.options.color = ob.color;
 		this.options.width = ob.width;
 		this.options.curvyness = ob.curvyness;

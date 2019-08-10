@@ -1,4 +1,4 @@
-import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel, DefaultDiagramState } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
@@ -8,7 +8,10 @@ export default () => {
 	var engine = createEngine();
 
 	// ############################################ MAGIC HAPPENS HERE
-	// engine.getStateMachine().registerFactory(new MoveItemsActionFactory({ allowLooseLinks: false }));
+	const state = engine.getStateMachine().getCurrentState();
+	if (state instanceof DefaultDiagramState) {
+		state.dragNewLink.config.allowLooseLinks = false;
+	}
 	// ############################################ MAGIC HAPPENS HERE
 
 	//2) setup the diagram model

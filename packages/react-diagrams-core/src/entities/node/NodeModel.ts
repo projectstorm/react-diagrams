@@ -62,13 +62,13 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		return entities;
 	}
 
-	deSerialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob: ReturnType<this['serialize']>, engine: DiagramEngine) {
+		super.deserialize(ob, engine);
 
 		//deserialize ports
 		_.forEach(ob.ports, (port: any) => {
 			let portOb = engine.getFactoryForPort(port.type).generateModel({});
-			portOb.deSerialize(port, engine);
+			portOb.deserialize(port, engine);
 			this.addPort(portOb);
 		});
 	}

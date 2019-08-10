@@ -21,8 +21,8 @@ export class LabelModel<G extends LabelModelGenerics = LabelModelGenerics> exten
 		});
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob, engine: DiagramEngine) {
+		super.deserialize(ob, engine);
 		this.options.offsetX = ob.offsetX;
 		this.options.offsetY = ob.offsetY;
 	}

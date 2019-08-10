@@ -16,24 +16,25 @@ class NodeDelayedPosition extends React.Component<any, any> {
 
 	updatePosition() {
 		const { engine } = this.props;
-		let model = engine.getDiagramModel();
+		let model = engine.getModel();
 		const nodes = model.getNodes();
 		let node = nodes[Object.keys(nodes)[0]];
-		node.setPosition(node.x + 30, node.y + 30);
-		this.forceUpdate();
+		node.setPosition(node.getX() + 30, node.getY() + 30);
+		engine.repaintCanvas();
 	}
 
 	updatePositionViaSerialize() {
 		let { engine } = this.props;
-		let model = engine.getDiagramModel();
-		let str = JSON.stringify(model.serializeDiagram());
+		let model = engine.getModel();
+		let str = JSON.stringify(model.serialize());
+		console.log(model.serialize());
 		let model2 = new DiagramModel();
 		let obj = JSON.parse(str);
 		let node = obj.nodes[0];
 		node.x += 30;
 		node.y += 30;
-		model2.deSerializeDiagram(obj, engine);
-		engine.setDiagramModel(model2);
+		model2.deSerialize(obj, engine);
+		engine.setModel(model2);
 		this.forceUpdate();
 	}
 

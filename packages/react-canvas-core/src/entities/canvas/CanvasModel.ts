@@ -96,22 +96,31 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		return this.options.gridSize * Math.floor((pos + this.options.gridSize / 2) / this.options.gridSize);
 	}
 
-	deSerializeDiagram(object: any, diagramEngine: CanvasEngine) {
-		this.deSerialize(object, diagramEngine);
-
+	deserialize(object: any, engine: CanvasEngine) {
+		super.deserialize(object, engine);
 		this.options.offsetX = object.offsetX;
 		this.options.offsetY = object.offsetY;
 		this.options.zoom = object.zoom;
 		this.options.gridSize = object.gridSize;
+		_.forEach(object.layers, layer => {
+			const layerOb = engine.getFactoryForLayer(layer.type).generateModel({
+				initialConfig: layer
+			});
+			layerOb.deserialize(layer, engine);
+			this.addLayer(layerOb);
+		});
 	}
 
-	serializeDiagram() {
+	serialize() {
 		return {
-			...this.serialize(),
+			...super.serialize(),
 			offsetX: this.options.offsetX,
 			offsetY: this.options.offsetY,
 			zoom: this.options.zoom,
-			gridSize: this.options.gridSize
+			gridSize: this.options.gridSize,
+			layers: _.map(this.layers, layer => {
+				return layer.serialize();
+			})
 		};
 	}
 

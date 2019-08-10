@@ -22,8 +22,8 @@ export class DefaultLabelModel extends LabelModel<DefaultLabelModelGenerics> {
 		this.options.label = label;
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob, engine: DiagramEngine) {
+		super.deserialize(ob, engine);
 		this.options.label = ob.label;
 	}
 

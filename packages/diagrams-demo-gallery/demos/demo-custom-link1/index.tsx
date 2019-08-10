@@ -2,7 +2,6 @@ import createEngine, {
 	DiagramModel,
 	DefaultNodeModel,
 	DefaultPortModel,
-	DefaultLinkWidget,
 	DefaultLinkFactory,
 	DefaultLinkModel
 } from '@projectstorm/react-diagrams';

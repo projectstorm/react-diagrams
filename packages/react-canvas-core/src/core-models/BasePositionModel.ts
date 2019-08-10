@@ -35,8 +35,8 @@ export class BasePositionModel<G extends BasePositionModelGenerics = BasePositio
 		this.fireEvent({}, 'positionChanged');
 	}
 
-	deSerialize(ob, engine: CanvasEngine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob, engine: CanvasEngine) {
+		super.deserialize(ob, engine);
 		this.position = new Point(ob.x, ob.y);
 	}
 

@@ -51,21 +51,21 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		);
 	}
 
-	deSerialize(ob, engine: DiagramEngine) {
-		super.deSerialize(ob, engine);
+	deserialize(ob, engine: DiagramEngine) {
+		super.deserialize(ob, engine);
 		this.points = _.map(ob.points || [], (point: { x; y }) => {
 			var p = new PointModel({
 				link: this,
 				position: new Point(point.x, point.y)
 			});
-			p.deSerialize(point, engine);
+			p.deserialize(point, engine);
 			return p;
 		});
 
 		//deserialize labels
 		_.forEach(ob.labels || [], (label: any) => {
 			let labelOb = engine.getFactoryForLabel(label.type).generateModel({});
-			labelOb.deSerialize(label, engine);
+			labelOb.deserialize(label, engine);
 			this.addLabel(labelOb);
 		});
 

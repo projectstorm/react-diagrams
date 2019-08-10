@@ -37,8 +37,8 @@ export class TSCustomNodeModel extends NodeModel {
 		};
 	}
 
-	deSerialize(ob: any, engine: DiagramEngine): void {
-		super.deSerialize(ob, engine);
+	deserialize(ob: any, engine: DiagramEngine): void {
+		super.deserialize(ob, engine);
 		this.color = ob.color;
 	}
 }

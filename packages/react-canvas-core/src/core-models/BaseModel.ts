@@ -50,8 +50,8 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 		};
 	}
 
-	deSerialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
-		super.deSerialize(data, engine);
+	deserialize(data: ReturnType<this['serialize']>, engine: CanvasEngine) {
+		super.deserialize(data, engine);
 		this.options.extras = data.extras;
 		this.options.selected = data.selected;
 	}
