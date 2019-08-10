@@ -1,7 +1,34 @@
 __6.0.0__ 
 
-* (maintenance) move to Lerna and break up the library
-* (api)(breaking) smart routing is now a Link Factory
+Note: This is a complete rewrite of the library, a good place to start to see how the new system works
+is with the new demo project which illustrates the new capability.
+
+I would also recommend taking a look at the new updated DiamondPort widget which shows more capability.
+
+* Break up library into monorepo
+* Introduce react-canvas-core as a new framework
+* Use geometry classes instead of raw X and Y primitives so we can do matrix stuff in the future
+* move testing framework to a name based system instead of ID's
+* Introduce multiple layers (can now have multiple node and link layers)
+* Rewrote the deserialization system to be promise based
+* Completely overhauled the observer framework on the models
+* Moved all the logic in the DiagramWidget into a a new hierarchical state machine  
+* Introduces new states for editing
+* Introduced faster layout rendering when transforming the canvas directly
+* Moved all canvas smart routing into its own link-type under routing package
+* Broke up link rendering into a much more modular system that is much easier to extend
+* Introduced port alignment allowing the developer to specify how enter it
+* Improved generics throughout the entire model system with Mapped Types
+* Rewrote all the styles using emotion instead of sass
+* Fixed up all the demos to use the new API
+* Introduced a demo project that illustrates how to use the library with ES6 as well as with Typescript
+* Improved the grid rendering system to allow graphical elements to specify how they get transformed
+* Introduced a performance widget for improving performance in a more deterministic way by comparing the serialization of the model (with a way of opting out)
+* Renamed a bunch of methods to be more consistent and more understandable
+* Completely removed the double render state system that required nodes to render before links, this is done when ports report their new positions
+* Ports can now dynamically be added and removed without having to tell the system it happeend
+* Port widgets are now containers dumb containers for you own ports
+* Port widgets report new sizing information to their target links when they change position, you no longer need to invalidate them 
 
 __5.3.2__
 
