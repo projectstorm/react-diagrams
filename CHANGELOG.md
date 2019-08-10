@@ -1,75 +1,107 @@
+__6.0.0__ 
+
+Note: This is a complete rewrite of the library, a good place to start to see how the new system works
+is with the new demo project which illustrates the new capability.
+
+I would also recommend taking a look at the new updated DiamondPort widget which shows more capability.
+
+* Break up library into monorepo
+* Introduce react-canvas-core as a new framework
+* Use geometry classes instead of raw X and Y primitives so we can do matrix stuff in the future
+* move testing framework to a name based system instead of ID's
+* Introduce multiple layers (can now have multiple node and link layers)
+* Rewrote the deserialization system to be promise based
+* Completely overhauled the observer framework on the models
+* Moved all the logic in the DiagramWidget into a a new hierarchical state machine  
+* Introduces new states for editing
+* Introduced faster layout rendering when transforming the canvas directly
+* Moved all canvas smart routing into its own link-type under routing package
+* Broke up link rendering into a much more modular system that is much easier to extend
+* Introduced port alignment allowing the developer to specify how enter it
+* Improved generics throughout the entire model system with Mapped Types
+* Rewrote all the styles using emotion instead of sass
+* Fixed up all the demos to use the new API
+* Introduced a demo project that illustrates how to use the library with ES6 as well as with Typescript
+* Improved the grid rendering system to allow graphical elements to specify how they get transformed
+* Introduced a performance widget for improving performance in a more deterministic way by comparing the serialization of the model (with a way of opting out)
+* Renamed a bunch of methods to be more consistent and more understandable
+* Completely removed the double render state system that required nodes to render before links, this is done when ports report their new positions
+* Ports can now dynamically be added and removed without having to tell the system it happeend
+* Port widgets are now containers dumb containers for you own ports
+* Port widgets report new sizing information to their target links when they change position, you no longer need to invalidate them 
+
 __5.3.2__
 
-* [maintenance] Upgrade :allthethings: (all the build tooling was upgrade)
-* [api] move to ES6 (JS now contains native classes)
-* [api] changed package name to @projectstorm/react-diagrams
-* [bug] [PR259](https://github.com/projectstorm/react-diagrams/pull/259) Fixes #258
-* [refactor] [PR 306](https://github.com/projectstorm/react-diagrams/pull/306) `:any` fix
-* [feature] [PR 178](https://github.com/projectstorm/react-diagrams/pull/178) Trigger a positionChanged event when moving a Node that has the listener assigned.
-* [fix] [PR 356](https://github.com/projectstorm/react-diagrams/pull/356) Fixed Type issue with 'PointModel[]'
-* [demo] dark mode and upgrade storybook
+* (maintenance) Upgrade :allthethings: (all the build tooling was upgrade)
+* (api) move to ES6 (JS now contains native classes)
+* (api) changed package name to @projectstorm/react-diagrams
+* (bug) (PR259)(https://github.com/projectstorm/react-diagrams/pull/259) Fixes #258
+* (refactor) (PR 306)(https://github.com/projectstorm/react-diagrams/pull/306) `:any` fix
+* (feature) (PR 178)(https://github.com/projectstorm/react-diagrams/pull/178) Trigger a positionChanged event when moving a Node that has the listener assigned.
+* (fix) (PR 356)(https://github.com/projectstorm/react-diagrams/pull/356) Fixed Type issue with 'PointModel()'
+* (demo) dark mode and upgrade storybook
 
 __5.2.1__
 
-* [fix] Always remove link from old source/target port on port change
-* [maintenance] upgrade node modules
-* [refactor] https://github.com/projectstorm/react-diagrams/commit/55f62587bd3b12513c7d37eff59edfc8bdb8d6c9
-* [bug] https://github.com/projectstorm/react-diagrams/commit/75ef02dd4d131a0e7c08b2680c69efc390e50b84
+* (fix) Always remove link from old source/target port on port change
+* (maintenance) upgrade node modules
+* (refactor) https://github.com/projectstorm/react-diagrams/commit/55f62587bd3b12513c7d37eff59edfc8bdb8d6c9
+* (bug) https://github.com/projectstorm/react-diagrams/commit/75ef02dd4d131a0e7c08b2680c69efc390e50b84
 -> and other improvements, also checkout the foundation work happening over at https://github.com/projectstorm/react-canvas
 
 __5.1.0__ 
 
-* [api] Rename XXXFactory into AbstractXXXFactory
-* [refactor] tslint and prettier are now the same
-* [refactor] Each class now explicitely has its own class file (consistency)
-* [feature] Smooth vertical links (no longer limited to horizontal)
-* [feature] Dedicated documentation via gitbook
-* [bug] forgot to export some
-* [refactor] consistently use lodash where possible
-* [maintenance] upgrade node modules
+* (api) Rename XXXFactory into AbstractXXXFactory
+* (refactor) tslint and prettier are now the same
+* (refactor) Each class now explicitely has its own class file (consistency)
+* (feature) Smooth vertical links (no longer limited to horizontal)
+* (feature) Dedicated documentation via gitbook
+* (bug) forgot to export some
+* (refactor) consistently use lodash where possible
+* (maintenance) upgrade node modules
 
 __5.0.0__ http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/
 
 PR: https://github.com/projectstorm/react-diagrams/pull/145
 
-* [refactor] Links completely overhauled
-* [feature] Smart Routing
-* [feature] Flow support
-* [demo] Smart Routing
-* [demo] Animated links
-* [api] Bootstrapping Improvements
-* [feature] add custom properties to all widgets
-* [refactor] use BEM for all css
-* [feature] Default Link factory hooks
-* [tests] e2e tests + helper framework
-* [tests] automatically load JEST Snapshots
-* [feature] Link labels!
+* (refactor) Links completely overhauled
+* (feature) Smart Routing
+* (feature) Flow support
+* (demo) Smart Routing
+* (demo) Animated links
+* (api) Bootstrapping Improvements
+* (feature) add custom properties to all widgets
+* (refactor) use BEM for all css
+* (feature) Default Link factory hooks
+* (tests) e2e tests + helper framework
+* (tests) automatically load JEST Snapshots
+* (feature) Link labels!
 
 __4.0.0__ http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/
 
-* [refactor] Events system was completely overhauled
-* [demo] Custom Link Sizes
-* [refactor] Demos are now much more verbose and better managed
-* [update] node packages
-* [bug] Fix #129
-* [feature] Control link creation through ports
-* [refactor] Models are now in seperate files
-* [refactor] Merged the concept of instance factories and widget factories into one
-* [feature] Models can now be cloned at various parts of the model graph
-* [demo] Cloning
-* [feature] models control isLocked 
+* (refactor) Events system was completely overhauled
+* (demo) Custom Link Sizes
+* (refactor) Demos are now much more verbose and better managed
+* (update) node packages
+* (bug) Fix #129
+* (feature) Control link creation through ports
+* (refactor) Models are now in seperate files
+* (refactor) Merged the concept of instance factories and widget factories into one
+* (feature) Models can now be cloned at various parts of the model graph
+* (demo) Cloning
+* (feature) models control isLocked 
 
 __3.2.0__ http://dylanv.blog/2017/11/22/storm-react-diagrams-3-2-0/
-* [feature] zoom to fit
+* (feature) zoom to fit
 * added Circle CI tests
-* [demo] dagre automatic layouts
-* [demo] zoom to fit
-* [demo] selection events
-* [demo] limit number of points
-* [demo] programmatic node updating
+* (demo) dagre automatic layouts
+* (demo) zoom to fit
+* (demo) selection events
+* (demo) limit number of points
+* (demo) programmatic node updating
 * updated dependencies
-* [bugs] swapping diagram models in engines
-* [bugs] issues with the rendering pipeline #107
+* (bugs) swapping diagram models in engines
+* (bugs) issues with the rendering pipeline #107
 * added ci badge to Readme
 
 __3.1.3__ 

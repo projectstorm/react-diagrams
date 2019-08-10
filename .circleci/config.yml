@@ -2,30 +2,22 @@ version: 2
 jobs:
   build:
     docker:
-      - image: projectstorm/react-diagrams-ci
-
+      - image: buildkite/puppeteer
     working_directory: ~/repo
-
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-
+            - v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn install
-
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
 
       # test building project
-      - run: yarn run prepublishOnly
-
-      # test building storybook
-      - run: yarn run storybook:build
+      - run: yarn run build
 
       # test e2e tests and jest snapshots
-      - run: yarn run test:ci
+      - run: cd packages/diagrams-demo-gallery && yarn run test --ci
+      - run: cd packages/react-diagrams-routing && yarn run test --ci

@@ -4,6 +4,6 @@ indent_size = 2
 trim_trailing_whitespace = true
 
 # Some exceptions
-[{package.json}]
+[{package.json,*.yml}]
 indent_style = space
 indent_size = 2
