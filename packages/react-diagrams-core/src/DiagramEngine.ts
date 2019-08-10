@@ -2,7 +2,7 @@ import { NodeModel } from './entities/node/NodeModel';
 import { PortModel } from './entities/port/PortModel';
 import { LinkModel } from './entities/link/LinkModel';
 import { LabelModel } from './entities/label/LabelModel';
-import { Point } from '@projectstorm/geometry';
+import { Point, Rectangle } from '@projectstorm/geometry';
 import { MouseEvent } from 'react';
 import {
 	AbstractModelFactory,
@@ -167,29 +167,13 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 	}
 
 	getPortCenter(port: PortModel): Point {
-		var sourceElement = this.getNodePortElement(port);
-		var sourceRect = sourceElement.getBoundingClientRect();
-
-		var rel = this.getRelativePoint(sourceRect.left, sourceRect.top);
-
-		return new Point(
-			sourceElement.offsetWidth / 2 + (rel.x - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100.0),
-			sourceElement.offsetHeight / 2 + (rel.y - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100.0)
-		);
+		return this.getPortCoords(port).getOrigin();
 	}
 
 	/**
 	 * Calculate rectangular coordinates of the port passed in.
 	 */
-	getPortCoords(
-		port: PortModel,
-		element?: HTMLDivElement
-	): {
-		x: number;
-		y: number;
-		width: number;
-		height: number;
-	} {
+	getPortCoords(port: PortModel, element?: HTMLDivElement): Rectangle {
 		if (!this.canvas) {
 			throw new Error('Canvas needs to be set first');
 		}
@@ -197,14 +181,12 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 			element = this.getNodePortElement(port);
 		}
 		const sourceRect = element.getBoundingClientRect();
-		const canvasRect = this.canvas.getBoundingClientRect() as ClientRect;
-
-		return {
-			x: (sourceRect.left - this.model.getOffsetX()) / (this.model.getZoomLevel() / 100.0) - canvasRect.left,
-			y: (sourceRect.top - this.model.getOffsetY()) / (this.model.getZoomLevel() / 100.0) - canvasRect.top,
-			width: sourceRect.width,
-			height: sourceRect.height
-		};
+		const point = this.getRelativeMousePoint({
+			clientX: sourceRect.left,
+			clientY: sourceRect.top
+		});
+		const zoom = this.model.getZoomLevel() / 100.0;
+		return new Rectangle(point.x, point.y, sourceRect.width / zoom, sourceRect.height / zoom);
 	}
 
 	/**

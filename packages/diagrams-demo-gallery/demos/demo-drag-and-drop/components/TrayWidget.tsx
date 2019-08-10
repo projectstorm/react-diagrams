@@ -1,21 +1,17 @@
 import * as React from 'react';
+import styled from '@emotion/styled';
 
-export interface TrayWidgetProps {}
+namespace S {
+	export const Tray = styled.div`
+		min-width: 200px;
+		background: rgb(20, 20, 20);
+		flex-grow: 0;
+		flex-shrink: 0;
+	`;
+}
 
-export interface TrayWidgetState {}
-
-/**
- * @author Dylan Vorster
- */
-export class TrayWidget extends React.Component<TrayWidgetProps, TrayWidgetState> {
-	public static defaultProps: TrayWidgetProps = {};
-
-	constructor(props: TrayWidgetProps) {
-		super(props);
-		this.state = {};
-	}
-
+export class TrayWidget extends React.Component {
 	render() {
-		return <div className="tray">{this.props.children}</div>;
+		return <S.Tray>{this.props.children}</S.Tray>;
 	}
 }

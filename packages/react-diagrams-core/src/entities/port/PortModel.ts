@@ -1,7 +1,7 @@
 import { NodeModel } from '../node/NodeModel';
 import { LinkModel } from '../link/LinkModel';
 import * as _ from 'lodash';
-import { Point } from '@projectstorm/geometry';
+import { Point, Rectangle } from '@projectstorm/geometry';
 import {
 	BaseEntityEvent,
 	BaseModelOptions,
@@ -142,11 +142,10 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		return new Point(this.getX() + this.width / 2, this.getY() + this.height / 2);
 	}
 
-	updateCoords(cords: { x: number; y: number; width: number; height: number }) {
-		const { x, y, width, height } = cords;
-		this.width = width;
-		this.height = height;
-		this.setPosition(x, y);
+	updateCoords(coords: Rectangle) {
+		this.width = coords.getWidth();
+		this.height = coords.getHeight();
+		this.setPosition(coords.getTopLeft());
 		this.reportedPosition = true;
 		this.reportPosition();
 	}

@@ -6,7 +6,7 @@ import createEngine, {
 	DefaultLabelModel
 } from '@projectstorm/react-diagrams';
 import * as React from 'react';
-import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { action } from '@storybook/addon-actions';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
@@ -57,12 +57,12 @@ export default () => {
 	return (
 		<DemoWorkspaceWidget
 			buttons={
-				<button
+				<DemoButton
 					onClick={() => {
-						action('Serialized Graph')(JSON.stringify(model.serializeDiagram(), null, 2));
+						action('Serialized Graph')(JSON.stringify(model.serialize(), null, 2));
 					}}>
 					Serialize Graph
-				</button>
+				</DemoButton>
 			}>
 			<DemoCanvasWidget>
 				<CanvasWidget engine={engine} />
