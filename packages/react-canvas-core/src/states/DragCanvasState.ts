@@ -12,10 +12,10 @@ export class DragCanvasState extends AbstractDisplacementState {
 		});
 	}
 
-	activated(prev) {
+	async activated(prev) {
 		super.activated(prev);
 		this.engine.getModel().clearSelection();
-		this.engine.repaintCanvas();
+		await this.engine.repaintCanvas(true);
 
 		// we can block layer rendering because we are only targeting the transforms
 		for (let layer of this.engine.getModel().getLayers()) {

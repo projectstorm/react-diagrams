@@ -6,8 +6,6 @@ import {
 	BaseEntityOptions,
 	DeserializeEvent
 } from './BaseEntity';
-import { CanvasEngine } from '../CanvasEngine';
-import { AbstractModelFactory } from '../core/AbstractModelFactory';
 
 export interface BaseModelListener extends BaseEntityListener {
 	selectionChanged?(event: BaseEntityEvent<BaseModel> & { isSelected: boolean }): void;
@@ -42,11 +40,8 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 		this.parent = parent;
 	}
 
-	getSelectedEntities(): Array<BaseModel> {
-		if (this.isSelected()) {
-			return [this];
-		}
-		return [];
+	getSelectionEntities(): Array<BaseModel> {
+		return [this];
 	}
 
 	serialize() {

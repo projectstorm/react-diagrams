@@ -96,12 +96,29 @@ export class CanvasEngine<
 		return this.model;
 	}
 
-	repaintCanvas() {
-		this.iterateListeners(listener => {
-			if (listener.repaintCanvas) {
-				listener.repaintCanvas();
-			}
-		});
+	repaintCanvas(promise: true): Promise<any>;
+	repaintCanvas(): void;
+	repaintCanvas(promise?): Promise<any> | void {
+		const repaint = () => {
+			this.iterateListeners(listener => {
+				if (listener.repaintCanvas) {
+					listener.repaintCanvas();
+				}
+			});
+		};
+
+		if (promise) {
+			return new Promise(resolve => {
+				const l = this.registerListener({
+					rendered: () => {
+						resolve();
+						l.deregister();
+					}
+				} as L);
+				repaint();
+			});
+		}
+		repaint();
 	}
 
 	setCanvas(canvas?: HTMLDivElement) {

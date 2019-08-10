@@ -49,12 +49,8 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		this.labels = [];
 	}
 
-	getSelectedEntities(): Array<BaseModel> {
-		return super.getSelectedEntities().concat(
-			_.flatMap(this.points, point => {
-				return point.getSelectedEntities();
-			})
-		);
+	getSelectionEntities(): Array<BaseModel> {
+		return super.getSelectionEntities().concat(this.points);
 	}
 
 	deserialize(event: DeserializeEvent<this>) {

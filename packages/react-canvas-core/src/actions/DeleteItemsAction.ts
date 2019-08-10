@@ -19,7 +19,7 @@ export class DeleteItemsAction extends Action {
 			type: InputType.KEY_DOWN,
 			fire: (event: ActionEvent<KeyboardEvent>) => {
 				if (options.keyCodes.indexOf(event.event.keyCode) !== -1) {
-					_.forEach(this.engine.getModel().getSelectedItems(), model => {
+					_.forEach(this.engine.getModel().getSelectedEntities(), model => {
 						// only delete items which are not locked
 						if (!model.isLocked()) {
 							model.remove();

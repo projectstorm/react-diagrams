@@ -82,6 +82,20 @@ export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGeneri
 		this.models[model.getID()] = model;
 	}
 
+	getSelectionEntities(): Array<BaseModel> {
+		return _.flatMap(this.models, model => {
+			return model.getSelectionEntities();
+		});
+	}
+
+	getSelectedEntities(): Array<BaseModel> {
+		return super.getSelectedEntities().concat(
+			_.flatMap(this.models, entity => {
+				return entity.getSelectedEntities();
+			})
+		);
+	}
+
 	getModels() {
 		return this.models;
 	}
@@ -97,13 +111,5 @@ export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGeneri
 			return true;
 		}
 		return false;
-	}
-
-	getSelectedEntities(): Array<BaseModel> {
-		return super.getSelectedEntities().concat(
-			_.flatMap(this.models, entity => {
-				return entity.getSelectedEntities();
-			})
-		);
 	}
 }

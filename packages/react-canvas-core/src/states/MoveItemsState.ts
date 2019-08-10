@@ -39,7 +39,7 @@ export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends Abstr
 	}
 
 	fireMouseMoved(event: AbstractDisplacementStateEvent) {
-		const items = this.engine.getModel().getSelectedItems();
+		const items = this.engine.getModel().getSelectedEntities();
 		for (let item of items) {
 			if (item instanceof BasePositionModel) {
 				if (item.isLocked()) {

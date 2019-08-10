@@ -10,7 +10,6 @@ import {
 import { LayerModel } from '../layer/LayerModel';
 import { BaseModel } from '../../core-models/BaseModel';
 import { CanvasEngine } from '../../CanvasEngine';
-import { AbstractModelFactory } from '../../core/AbstractModelFactory';
 
 export interface DiagramListener extends BaseEntityListener {
 	offsetUpdated?(event: BaseEntityEvent<CanvasModel> & { offsetX: number; offsetY: number }): void;
@@ -47,14 +46,20 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		this.layers = [];
 	}
 
-	getSelectedItems(): BaseModel[] {
+	getSelectionEntities(): BaseModel[] {
 		return _.flatMap(this.layers, layer => {
-			return layer.getSelectedEntities();
+			return layer.getSelectionEntities();
+		});
+	}
+
+	getSelectedEntities(): BaseModel[] {
+		return _.filter(this.getSelectionEntities(), ob => {
+			return ob.isSelected();
 		});
 	}
 
 	clearSelection() {
-		_.forEach(this.getSelectedItems(), element => {
+		_.forEach(this.getSelectedEntities(), element => {
 			element.setSelected(false);
 		});
 	}

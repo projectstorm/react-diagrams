@@ -45,7 +45,7 @@ export class SelectionBoxState extends AbstractDisplacementState {
 		});
 		const rect = new Rectangle(relative, event.virtualDisplacementX, event.virtualDisplacementY);
 
-		for (let model of this.engine.getModel().getModels()) {
+		for (let model of this.engine.getModel().getSelectionEntities()) {
 			if (model instanceof BasePositionModel) {
 				if (rect.containsPoint(model.getPosition())) {
 					model.setSelected(true);
