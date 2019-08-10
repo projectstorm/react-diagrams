@@ -66,7 +66,10 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps> {
 
 	render() {
 		return (
-			<S.Node selected={this.props.node.isSelected()} background={this.props.node.getOptions().color}>
+			<S.Node
+				data-default-node-name={this.props.node.getOptions().name}
+				selected={this.props.node.isSelected()}
+				background={this.props.node.getOptions().color}>
 				<S.Title>
 					<S.TitleName>{this.props.node.getOptions().name}</S.TitleName>
 				</S.Title>

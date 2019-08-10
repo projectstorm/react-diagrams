@@ -21,8 +21,9 @@ export default () => {
 	node2.setPosition(400, 100);
 
 	// link the ports
-	let link1 = port1.link(port2);
-	(link1 as DefaultLinkModel).addLabel('Hello World!');
+	let link1 = port1.link<DefaultLinkModel>(port2);
+	link1.getOptions().testName = 'Test';
+	link1.addLabel('Hello World!');
 
 	//4) add the models to the root graph
 	model.addAll(node1, node2, link1);

@@ -1,5 +1,5 @@
 import 'jest';
-import { E2ENode } from './helpers/E2EHelper';
+import { E2ENode } from './helpers/E2ENode';
 
 describe('simple flow test', () => {
 	beforeEach(async () => {
@@ -8,11 +8,11 @@ describe('simple flow test', () => {
 
 	it('drag link to port adds a link', async () => {
 		// create a new link
-		let node1 = new E2ENode('18');
-		let node2 = new E2ENode('10');
+		let node1 = new E2ENode('Node 3');
+		let node2 = new E2ENode('Node 2');
 
-		let port1 = await node1.port('19');
-		let port2 = await node2.port('11');
+		let port1 = await node1.port('Out');
+		let port2 = await node2.port('In');
 
 		let newlink = await port1.link(port2);
 		await expect(await newlink.waitForElement()).toBeTruthy();
@@ -20,10 +20,10 @@ describe('simple flow test', () => {
 
 	it('drag link to node does not add a link', async () => {
 		// create a new link
-		let node1 = new E2ENode('18');
-		let node2 = new E2ENode('10');
+		let node1 = new E2ENode('Node 3');
+		let node2 = new E2ENode('Node 2');
 
-		let port1 = await node1.port('19');
+		let port1 = await node1.port('Out');
 
 		let node2Bounds = await (await node2.waitForElement()).boundingBox();
 		let newlink = await port1.linkToPoint(node2Bounds.x, node2Bounds.y);

@@ -23,6 +23,7 @@ export interface DefaultLinkModelOptions extends BaseModelOptions {
 	selectedColor?: string;
 	curvyness?: number;
 	type?: string;
+	testName?: string;
 }
 
 export interface DefaultLinkModelGenerics extends LinkModelGenerics {

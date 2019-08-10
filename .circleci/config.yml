@@ -19,4 +19,5 @@ jobs:
       - run: yarn run build
 
       # test e2e tests and jest snapshots
-      - run: yarn run test:ci
+      - run: cd packages/diagrams-demo-gallery && yarn run test --ci
+			- run: cd packages/react-diagrams-routing && yarn run test --ci

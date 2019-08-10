@@ -101,7 +101,7 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 			<PeformanceWidget model={this.props.link} serialized={this.props.link.serialize()}>
 				{() => {
 					return (
-						<g>
+						<g data-linkid={this.props.link.getID()}>
 							{this.props.diagramEngine.generateWidgetForLink(link)}
 							{_.map(this.props.link.getLabels(), (labelModel, index) => {
 								return (

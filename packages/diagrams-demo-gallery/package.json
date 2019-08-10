@@ -13,7 +13,7 @@
 		"storybook:build": "../../node_modules/.bin/build-storybook -c .storybook -o .out",
 		"github": "../../node_modules/.bin/storybook-to-ghpages",
 		"test:run": "../../node_modules/.bin/jest --no-cache",
-		"test": "yarn build && yarn test:run"
+		"test": "yarn storybook:build && yarn test:run"
 	},
 	"keywords": [
 		"web",

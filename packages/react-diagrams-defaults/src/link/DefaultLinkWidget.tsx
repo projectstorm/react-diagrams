@@ -150,6 +150,6 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			}
 		}
 
-		return paths;
+		return <g data-default-link-test={this.props.link.getOptions().testName}>{paths}</g>;
 	}
 }

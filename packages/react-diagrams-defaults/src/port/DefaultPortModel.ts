@@ -51,11 +51,11 @@ export class DefaultPortModel extends PortModel<DefaultPortModelGenerics> {
 		};
 	}
 
-	link(port: PortModel, factory?: AbstractModelFactory<LinkModel>): LinkModel {
+	link<T extends LinkModel>(port: PortModel, factory?: AbstractModelFactory<T>): T {
 		let link = this.createLinkModel(factory);
 		link.setSourcePort(this);
 		link.setTargetPort(port);
-		return link;
+		return link as T;
 	}
 
 	canLinkToPort(port: PortModel): boolean {

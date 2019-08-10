@@ -3,8 +3,9 @@ import { storiesOf, addParameters, addDecorator } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import { themes } from '@storybook/theming';
 import './demos/helpers/index.css';
+import { Toolkit } from '@projectstorm/react-canvas-core';
 
-// Toolkit.TESTING = true;
+Toolkit.TESTING = true;
 
 addParameters({
 	options: {
@@ -68,6 +69,3 @@ import demo_3rd_dagre from './demos/demo-dagre';
 import { Toolkit } from '@projectstorm/react-canvas-core';
 
 storiesOf('3rd party libraries', module).add('Auto Distribute (Dagre)', demo_3rd_dagre);
-
-// enable this to log mouse location when writing new puppeteer tests
-//Helper.logMousePosition()
