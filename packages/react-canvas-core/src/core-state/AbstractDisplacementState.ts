@@ -13,6 +13,8 @@ export interface AbstractDisplacementStateEvent {
 export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasEngine> extends State<E> {
 	initialX: number;
 	initialY: number;
+	initialXRelative: number;
+	initialYRelative: number;
 
 	constructor(options: StateOptions) {
 		super(options);
@@ -22,6 +24,9 @@ export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasE
 				fire: (actionEvent: ActionEvent<React.MouseEvent>) => {
 					this.initialX = actionEvent.event.clientX;
 					this.initialY = actionEvent.event.clientY;
+					const rel = this.engine.getRelativePoint(actionEvent.event.clientX, actionEvent.event.clientY);
+					this.initialXRelative = rel.x;
+					this.initialYRelative = rel.y;
 				}
 			})
 		);

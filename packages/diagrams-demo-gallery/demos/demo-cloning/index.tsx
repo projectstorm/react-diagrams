@@ -17,10 +17,10 @@ class CloneSelected extends React.Component<any, any> {
 	cloneSelected() {
 		let { engine } = this.props;
 		let offset = { x: 100, y: 100 };
-		let model = engine.getDiagramModel();
+		let model = engine.getModel();
 
 		let itemMap = {};
-		_.forEach(model.getSelectedItems(), (item: BaseModel<any>) => {
+		_.forEach(model.getSelectedEntities(), (item: BaseModel<any>) => {
 			let newItem = item.clone(itemMap);
 
 			// offset the nodes slightly
@@ -34,7 +34,7 @@ class CloneSelected extends React.Component<any, any> {
 				});
 				model.addLink(newItem);
 			}
-			newItem.selected = false;
+			(newItem as BaseModel).setSelected(false);
 		});
 
 		this.forceUpdate();

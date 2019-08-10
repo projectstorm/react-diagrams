@@ -26,13 +26,15 @@ export class SelectionBoxState extends AbstractDisplacementState {
 	}
 
 	getBoxDimensions(event: AbstractDisplacementStateEvent): ClientRect {
+		const rel = this.engine.getRelativePoint(event.event.clientX, event.event.clientY);
+
 		return {
-			left: event.event.clientX > this.initialX ? this.initialX : event.event.clientX,
-			top: event.event.clientY > this.initialY ? this.initialY : event.event.clientY,
-			width: Math.abs(event.event.clientX - this.initialX),
-			height: Math.abs(event.event.clientY - this.initialY),
-			right: event.event.clientX < this.initialX ? this.initialX : event.event.clientX,
-			bottom: event.event.clientY < this.initialY ? this.initialY : event.event.clientY
+			left: rel.x > this.initialXRelative ? this.initialXRelative : rel.x,
+			top: rel.y > this.initialYRelative ? this.initialYRelative : rel.y,
+			width: Math.abs(rel.x - this.initialXRelative),
+			height: Math.abs(rel.y - this.initialYRelative),
+			right: rel.x < this.initialXRelative ? this.initialXRelative : rel.x,
+			bottom: rel.y < this.initialYRelative ? this.initialYRelative : rel.y
 		};
 	}
 
@@ -43,7 +45,13 @@ export class SelectionBoxState extends AbstractDisplacementState {
 			clientX: this.initialX,
 			clientY: this.initialY
 		});
-		const rect = new Rectangle(relative, event.virtualDisplacementX, event.virtualDisplacementY);
+		if (event.virtualDisplacementX < 0) {
+			relative.x -= Math.abs(event.virtualDisplacementX);
+		}
+		if (event.virtualDisplacementY < 0) {
+			relative.y -= Math.abs(event.virtualDisplacementY);
+		}
+		const rect = new Rectangle(relative, Math.abs(event.virtualDisplacementX), Math.abs(event.virtualDisplacementY));
 
 		for (let model of this.engine.getModel().getSelectionEntities()) {
 			if (model instanceof BasePositionModel) {
