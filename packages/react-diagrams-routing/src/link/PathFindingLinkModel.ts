@@ -8,4 +8,8 @@ export class PathFindingLinkModel extends DefaultLinkModel {
 			...options
 		});
 	}
+
+	performanceTune() {
+		return false;
+	}
 }

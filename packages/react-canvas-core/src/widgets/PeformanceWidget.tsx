@@ -16,6 +16,9 @@ export class PeformanceWidget extends React.Component<PeformanceWidgetProps, Pef
 		nextState: Readonly<PeformanceWidgetState>,
 		nextContext: any
 	): boolean {
+		if (!this.props.model.performanceTune()) {
+			return true;
+		}
 		// deserialization event
 		if (this.props.model !== nextProps.model) {
 			return true;

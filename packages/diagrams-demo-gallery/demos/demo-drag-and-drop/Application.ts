@@ -14,7 +14,7 @@ export class Application {
 
 	public newModel() {
 		this.activeModel = new SRD.DiagramModel();
-		this.diagramEngine.setDiagramModel(this.activeModel);
+		this.diagramEngine.setModel(this.activeModel);
 
 		//3-A) create a default node
 		var node1 = new SRD.DefaultNodeModel('Node 1', 'rgb(0,192,255)');

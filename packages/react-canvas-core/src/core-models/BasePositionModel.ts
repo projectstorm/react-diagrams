@@ -28,7 +28,7 @@ export class BasePositionModel<G extends BasePositionModelGenerics = BasePositio
 	setPosition(x, y?) {
 		if (typeof x === 'object') {
 			this.position = x;
-		} else {
+		} else if (typeof x) {
 			this.position = new Point(x, y);
 		}
 		this.fireEvent({}, 'positionChanged');

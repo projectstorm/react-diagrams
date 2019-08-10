@@ -40,6 +40,7 @@ export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends Abstr
 
 	fireMouseMoved(event: AbstractDisplacementStateEvent) {
 		const items = this.engine.getModel().getSelectedEntities();
+		const model = this.engine.getModel();
 		for (let item of items) {
 			if (item instanceof BasePositionModel) {
 				if (item.isLocked()) {
@@ -53,7 +54,10 @@ export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends Abstr
 				}
 
 				const pos = this.initialPositions[item.getID()].point;
-				item.setPosition(pos.x + event.virtualDisplacementX, pos.y + event.virtualDisplacementY);
+				item.setPosition(
+					model.getGridPosition(pos.x + event.virtualDisplacementX),
+					model.getGridPosition(pos.y + event.virtualDisplacementY)
+				);
 			}
 		}
 		this.engine.repaintCanvas();

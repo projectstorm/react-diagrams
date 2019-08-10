@@ -1,5 +1,4 @@
 import {
-	DiagramEngine,
 	LinkModel,
 	PortModel,
 	PortModelAlignment,

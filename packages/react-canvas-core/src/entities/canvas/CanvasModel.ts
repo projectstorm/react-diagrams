@@ -96,7 +96,7 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		this.fireEvent({ size: size }, 'gridUpdated');
 	}
 
-	getGridPosition(pos) {
+	getGridPosition(pos: number) {
 		if (this.options.gridSize === 0) {
 			return pos;
 		}

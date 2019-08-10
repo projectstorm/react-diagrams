@@ -88,14 +88,6 @@ export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGeneri
 		});
 	}
 
-	getSelectedEntities(): Array<BaseModel> {
-		return super.getSelectedEntities().concat(
-			_.flatMap(this.models, entity => {
-				return entity.getSelectedEntities();
-			})
-		);
-	}
-
 	getModels() {
 		return this.models;
 	}

@@ -50,6 +50,17 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 	}
 
 	getSelectionEntities(): Array<BaseModel> {
+		if (this.getTargetPort() && this.getSourcePort()) {
+			return super.getSelectionEntities().concat(_.slice(this.points, 1, this.points.length - 1));
+		}
+		// allow selection of the first point
+		if (!this.getSourcePort()) {
+			return super.getSelectionEntities().concat(_.slice(this.points, 0, this.points.length - 1));
+		}
+		// allow selection of the last point
+		if (!this.getTargetPort()) {
+			return super.getSelectionEntities().concat(_.slice(this.points, 1, this.points.length));
+		}
 		return super.getSelectionEntities().concat(this.points);
 	}
 

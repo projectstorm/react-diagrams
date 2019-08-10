@@ -6,6 +6,7 @@ import {
 	BaseEntityOptions,
 	DeserializeEvent
 } from './BaseEntity';
+import { CanvasModel } from '../entities/canvas/CanvasModel';
 
 export interface BaseModelListener extends BaseEntityListener {
 	selectionChanged?(event: BaseEntityEvent<BaseModel> & { isSelected: boolean }): void;
@@ -30,6 +31,22 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 
 	constructor(options: G['OPTIONS']) {
 		super(options);
+	}
+
+	performanceTune() {
+		return true;
+	}
+
+	getParentCanvasModel(): CanvasModel {
+		if (!this.parent) {
+			return null;
+		}
+		if (this.parent instanceof CanvasModel) {
+			return this.parent;
+		} else if (this.parent instanceof BaseModel) {
+			return this.parent.getParentCanvasModel();
+		}
+		return null;
 	}
 
 	getParent(): G['PARENT'] {

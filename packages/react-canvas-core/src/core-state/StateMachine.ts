@@ -1,13 +1,19 @@
 import { State } from './State';
 import * as _ from 'lodash';
 import { CanvasEngine } from '../CanvasEngine';
+import { BaseEvent, BaseListener, BaseObserver } from '../core/BaseObserver';
 
-export class StateMachine {
+export interface StateMachineListener extends BaseListener {
+	stateChanged?: (event: BaseEvent & { newState: State }) => any;
+}
+
+export class StateMachine extends BaseObserver<StateMachineListener> {
 	protected currentState: State;
 	protected stateStack: State[];
 	protected engine: CanvasEngine;
 
 	constructor(engine: CanvasEngine) {
+		super();
 		this.engine = engine;
 		this.stateStack = [];
 	}
@@ -22,8 +28,8 @@ export class StateMachine {
 	}
 
 	popState() {
-		const oldState = this.stateStack.pop();
-		const state = this.setState(_.last(this.stateStack));
+		this.stateStack.pop();
+		this.setState(_.last(this.stateStack));
 	}
 
 	setState(state: State) {
@@ -37,6 +43,12 @@ export class StateMachine {
 		this.currentState = state;
 		if (this.currentState) {
 			this.currentState.activated(old);
+			this.fireEvent<'stateChanged'>(
+				{
+					newState: state
+				},
+				'stateChanged'
+			);
 		}
 	}
 }

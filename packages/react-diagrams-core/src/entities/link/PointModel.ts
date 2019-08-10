@@ -27,13 +27,6 @@ export class PointModel<G extends PointModelGenerics = PointModelGenerics> exten
 		this.parent = options.link;
 	}
 
-	getSelectedEntities() {
-		if (super.isSelected() && !this.isConnectedToPort()) {
-			return [this];
-		}
-		return [];
-	}
-
 	isConnectedToPort(): boolean {
 		return this.parent.getPortForPoint(this) !== null;
 	}
