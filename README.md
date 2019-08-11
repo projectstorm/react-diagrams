@@ -10,7 +10,7 @@
 
 **DEMO**: [http://projectstorm.cloud/react-diagrams](http://projectstorm.cloud/react-diagrams)
 
-**DOCS (incomplete)** [https://projectstorm.gitbooks.io/react-diagrams](https://projectstorm.gitbooks.io/react-diagrams)
+**DOCS (wip)** [https://projectstorm.gitbook.io/react-diagrams](https://projectstorm.gitbook.io/react-diagrams)
 
 ## [! BETA NOTICE !]
 
@@ -72,7 +72,7 @@ and of course, you can add some extras:
 
 ## How to use
 
-Take a look at the [demos](packages/diagrams-demo-gallery)
+Take a look at the [diagram demos](packages/diagrams-demo-gallery/demos)
 
 __or__
 
@@ -84,10 +84,9 @@ After running `yarn install` you must then run:  `cd packages/diagrams-demo-gall
 
 ## Building from source
 
-Simply run `yarn build` in the root directory \(or `NODE_ENV=production yarn build` if you want a production build\) and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
-We use webpack for this because TSC cannot compile a single UMD file \(TSC can currently only output multiple UMD files\).
+Simply run `yarn build` or `yarn build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 
-## [Checkout the docs](https://projectstorm.gitbooks.io/react-diagrams)
+## [Checkout the docs](https://projectstorm.gitbook.io/react-diagrams/)
 
 
 
