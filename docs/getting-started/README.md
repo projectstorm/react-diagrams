@@ -26,15 +26,7 @@ The library includes it's dependencies as peer-dependencies, so yarn will output
 yarn add closest lodash react mathjs dagre pathfinding paths-js
 ```
 
-We do this, so that you can better control the versions of these libraries yourself since you might make use of `Lodash` in other parts of your software. 
-
-
-
-## Next steps
-
-[Using the library](./using-the-library.md)
-
-
+We do this, so that you can better control the versions of these libraries yourself since you might make use of `Lodash` in other parts of your software.
 
 
 

@@ -57,3 +57,17 @@ class DefaultPortModel extends PortModel{
 	}
 }
 ```
+
+## Specifying what type of link is generated from a port
+
+When a user drags on a port to generate a link, the port is also responsible for specifying
+what link is created. This happens through the `createLinkModel()` method:
+
+```typescript
+class DefaultPortModel extends PortModel{
+    ...
+    createLinkModel(): LinkModel{
+        return new DefaultLinkModel(); // <-- here we generate a DefaultLinkModel
+    }
+}
+```
