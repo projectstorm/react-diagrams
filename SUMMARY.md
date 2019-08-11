@@ -1,11 +1,10 @@
-# Summary
+# Table of contents
 
 * [Introduction](README.md)
-* [Interacting with diagrams](/docs/Interactive Usage.md)
-* [Getting Started](/docs/Getting Started.md)
-* [About the project](about-the-project.md)
-  * [Testing](/docs/Testing.md)
-  * [Architecture Questions](/docs/Architecture Questions.md)
-
-
+* [Interacting with diagrams](interactive-usage.md)
+* [Getting Started](getting-started/README.md)
+  * [Using the library](getting-started/using-the-library.md)
+* [About the project](about-the-project/README.md)
+  * [Testing](about-the-project/testing.md)
+  * [Architecture Questions](about-the-project/architecture-questions.md)
 
