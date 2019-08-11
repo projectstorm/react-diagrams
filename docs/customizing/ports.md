@@ -1,12 +1,34 @@
 # Ports
 
+Ports allow links to connect to your nodes. Each port that is rendered in a node must also have a corresponding PortModel in the corresponding NodeModel (as is the case with essentially all of the models and widgets in this library).
+
+## Custom port widgets
+
+If you want to create a custom port that looks entirely different (much like in the image below), then you simply need to create your own widget and wrap it in a `PortWidget`:
+
+```jsx
+<PortWidget
+    port={this.props.node.getPort("in"}
+    engine={this.props.engine} >
+    <div
+        style={{
+            width: 40,
+            height: 40,
+            background: 'orange'
+        }}
+    />
+</PortWidget>
+```
+
+Obviously, you can create the React widgets in any way you like. Whether you use __Emotion__, __BEM__ or plain old __CSS__, the only important thing is that your custom port is wrapped inside a `PortWidget`
+
 ## Specifying alignment
 
 When links enter ports, depending on the alignment specified, they can help the links render differently. Take the following example:
 
 ![](./images/diamond-node.png)
 
-In the above example, the 4 ports on the diamond node are setup with different alignment:
+In the above example, the 4 ports on the diamond node model are setup with different alignment:
 
 ```typescript
 this.addPort(new DiamondPortModel(PortModelAlignment.TOP));
