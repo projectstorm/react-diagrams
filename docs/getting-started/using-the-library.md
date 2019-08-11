@@ -62,4 +62,3 @@ And then we render with **React**!
 ```jsx
 <CanvasWidget engine={engine} />
 ```
-

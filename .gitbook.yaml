@@ -1,1 +1,4 @@
 root: ./docs/
+
+structure:
+  summary: README.md
