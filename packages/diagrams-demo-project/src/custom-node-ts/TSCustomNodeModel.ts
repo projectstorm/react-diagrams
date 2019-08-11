@@ -1,4 +1,4 @@
-import { DiagramEngine, NodeModel, DefaultPortModel } from '@projectstorm/react-diagrams';
+import { NodeModel, DefaultPortModel } from '@projectstorm/react-diagrams';
 import { BaseModelOptions } from '@projectstorm/react-canvas-core';
 
 export interface TSCustomNodeModelOptions extends BaseModelOptions {
@@ -37,8 +37,8 @@ export class TSCustomNodeModel extends NodeModel {
 		};
 	}
 
-	deserialize(ob: any, engine: DiagramEngine): void {
-		super.deserialize(ob, engine);
-		this.color = ob.color;
+	deserialize(event): void {
+		super.deserialize(event);
+		this.color = event.data.color;
 	}
 }
