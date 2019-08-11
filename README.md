@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/projectstorm/react-diagrams](https://badges.gitter.im/projectstorm/react-diagrams.svg)](https://gitter.im/projectstorm/react-diagrams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![NPM](https://img.shields.io/npm/v/@projectstorm/react-diagrams.svg)](https://npmjs.org/package/@projectstorm/react-diagrams) [![Package Quality](http://npm.packagequality.com/shield/storm-react-diagrams.svg)](http://packagequality.com/#?package=storm-react-diagrams) [![CircleCI](https://circleci.com/gh/projectstorm/react-diagrams/tree/master.svg?style=svg)](https://circleci.com/gh/projectstorm/react-diagrams/tree/master) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
-![](.gitbook/assets/logo.jpg)
+![](docs/images/logo.jpg)
 
 [pssst! Looking for the old version 5?](https://github.com/projectstorm/react-diagrams/tree/v5.3.2)
 
@@ -30,11 +30,12 @@ A flow & process orientated diagramming library inspired by **Blender**, **Labvi
 
 Example implementation using custom models: \(Dylan's personal code\)
 
-![Personal Project](.gitbook/assets/example1.jpg) ![](.gitbook/assets/example2.jpg)
+![Personal Project](docs/images/example1.jpg) 
+![](docs/images/example2.jpg)
 
 Get started with the default models right out of the box:
 
-![](.gitbook/assets/example3.jpg)
+![](docs/images/example3.jpg)
 
 ## Installing
 
