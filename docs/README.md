@@ -1,10 +1,9 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [Interacting with diagrams](interactive-usage.md)
-* [Getting Started](getting-started)
+* [Getting Started](getting-started/README.md)
   * [Using the library](getting-started/using-the-library.md)
-* [Customizing](customizing)
+* [Customizing](customizing/README.md)
   * [Ports](customizing/ports.md)
 * [About the project](about-the-project/README.md)
   * [Testing](about-the-project/testing.md)
