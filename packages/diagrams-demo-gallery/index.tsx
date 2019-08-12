@@ -50,13 +50,15 @@ import demo_adv_ser_des from './demos/demo-serializing';
 import demo_adv_prog from './demos/demo-mutate-graph';
 import demo_adv_dnd from './demos/demo-drag-and-drop';
 import demo_smart_routing from './demos/demo-smart-routing';
+import demo_right_angles_routing from './demos/demo-right-angles-routing';
 
 storiesOf('Advanced Techniques', module)
 	.add('Clone Selected', demo_adv_clone_selected)
 	.add('Serializing and de-serializing', demo_adv_ser_des)
 	.add('Programatically modifying graph', demo_adv_prog)
 	.add('Drag and drop', demo_adv_dnd)
-	.add('Smart routing', demo_smart_routing);
+	.add('Smart routing', demo_smart_routing)
+	.add('Right angles routing', demo_right_angles_routing);
 
 import demo_cust_nodes from './demos/demo-custom-node1';
 import demo_cust_links from './demos/demo-custom-link1';
