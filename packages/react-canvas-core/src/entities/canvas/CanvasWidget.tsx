@@ -11,6 +11,7 @@ export interface DiagramProps {
 
 namespace S {
 	export const Canvas = styled.div`
+		height: 100%;
 		position: relative;
 		cursor: move;
 		overflow: hidden;
