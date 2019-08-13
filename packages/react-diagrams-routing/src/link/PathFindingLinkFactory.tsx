@@ -196,6 +196,14 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		}));
 
 		const canvas = this.engine.getCanvas() as HTMLDivElement;
+		if (!canvas) {
+			return {
+				width: 0,
+				hAdjustmentFactor: 0,
+				height: 0,
+				vAdjustmentFactor: 0,
+			};
+		}
 		const minX =
 			Math.floor(
 				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x).x, 0) /
