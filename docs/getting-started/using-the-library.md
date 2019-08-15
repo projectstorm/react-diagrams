@@ -12,6 +12,10 @@ import createEngine, {
     DefaultNodeModel,
     DiagramModel 
 } from '@projectstorm/react-diagrams';
+
+import {
+    CanvasWidget
+} from '@projectstorm/react-canvas-core';
 ```
 
 Now we call `createEngine` which will bootstrap a **DiagramEngine** for us that contains all the defaults setup.
