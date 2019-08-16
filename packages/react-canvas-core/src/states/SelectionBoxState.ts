@@ -3,6 +3,7 @@ import { State } from '../core-state/State';
 import { SelectionLayerModel } from '../entities/selection/SelectionLayerModel';
 import { BasePositionModel } from '../core-models/BasePositionModel';
 import { Rectangle } from '@projectstorm/geometry';
+import { LinkModel } from '@projectstorm/react-diagrams-core';
 
 export class SelectionBoxState extends AbstractDisplacementState {
 	layer: SelectionLayerModel;
@@ -56,6 +57,11 @@ export class SelectionBoxState extends AbstractDisplacementState {
 		for (let model of this.engine.getModel().getSelectionEntities()) {
 			if (model instanceof BasePositionModel) {
 				if (rect.containsPoint(model.getPosition())) {
+					model.setSelected(true);
+				}
+			} else if (model instanceof LinkModel ) {
+				const inRect = !(<LinkModel>model).getPoints().some(point => !rect.containsPoint(point.getPosition()));
+				if (inRect) {
 					model.setSelected(true);
 				}
 			}
