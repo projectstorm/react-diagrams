@@ -13,7 +13,7 @@ export default () => {
 	//3-A) create a default node
 	var node1 = new DefaultNodeModel({
 		name: 'Node 1',
-		color: 'rgb(0,192,255)',
+		color: 'rgb(0,192,255)'
 	});
 	node1.setPosition(100, 100);
 	let port1 = node1.addOutPort('Out');

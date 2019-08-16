@@ -1,10 +1,10 @@
-import * as React from "react";
-import {DiagramEngine, LinkWidget, PointModel} from '@projectstorm/react-diagrams-core';
-import { RightAngleLinkFactory } from "./RightAngleLinkFactory";
-import {DefaultLinkModel, DefaultLinkSegmentWidget} from "@projectstorm/react-diagrams-defaults";
-import {Point} from "@projectstorm/geometry";
-import {MouseEvent} from "react";
-import {RightAngleLinkModel} from "./RightAngleLinkModel";
+import * as React from 'react';
+import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagrams-core';
+import { RightAngleLinkFactory } from './RightAngleLinkFactory';
+import { DefaultLinkModel, DefaultLinkSegmentWidget } from '@projectstorm/react-diagrams-defaults';
+import { Point } from '@projectstorm/geometry';
+import { MouseEvent } from 'react';
+import { RightAngleLinkModel } from './RightAngleLinkModel';
 
 export interface RightAngleLinkProps {
 	color?: string;
@@ -16,18 +16,18 @@ export interface RightAngleLinkProps {
 }
 
 export interface RightAngleLinkState {
-	selected: boolean,
-	canDrag: boolean,
+	selected: boolean;
+	canDrag: boolean;
 }
 
 export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, RightAngleLinkState> {
 	public static defaultProps: RightAngleLinkProps = {
-		color: "red",
+		color: 'red',
 		width: 3,
 		link: null,
 		smooth: false,
 		diagramEngine: null,
-		factory: null,
+		factory: null
 	};
 
 	refPaths: React.RefObject<SVGPathElement>[];
@@ -42,7 +42,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		this.refPaths = [];
 		this.state = {
 			selected: false,
-			canDrag: false,
+			canDrag: false
 		};
 
 		this.dragging_index = 0;
@@ -94,7 +94,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 			let point = new PointModel({
 				link: this.props.link,
 				position: new Point(points[index].getX(), points[index].getY())
-			},);
+			});
 			this.props.link.addPoint(point, index);
 			this.dragging_index++;
 			return;
@@ -102,7 +102,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 			let point = new PointModel({
 				link: this.props.link,
 				position: new Point(points[index + 1].getX(), points[index + 1].getY())
-			},);
+			});
 			this.props.link.addPoint(point, index + 1);
 			return;
 		}
@@ -112,7 +112,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 			let _points = {
 				[index - 2]: points[index - 2].getPosition(),
 				[index + 1]: points[index + 1].getPosition(),
-				[index - 1]: points[index - 1].getPosition(),
+				[index - 1]: points[index - 1].getPosition()
 			};
 			if (Math.abs(_points[index - 1][coordinate] - _points[index + 1][coordinate]) < 5) {
 				_points[index - 2][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event)[coordinate];
@@ -133,7 +133,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 				[index + 3]: points[index + 3].getPosition(),
 				[index + 2]: points[index + 2].getPosition(),
 				[index + 1]: points[index + 1].getPosition(),
-				[index]: points[index].getPosition(),
+				[index]: points[index].getPosition()
 			};
 			if (Math.abs(_points[index + 1][coordinate] - _points[index + 2][coordinate]) < 5) {
 				_points[index][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event)[coordinate];
@@ -149,7 +149,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		// If no condition above handled then just update path points position
 		let _points = {
 			[index]: points[index].getPosition(),
-			[index + 1]: points[index + 1].getPosition(),
+			[index + 1]: points[index + 1].getPosition()
 		};
 		_points[index][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event)[coordinate];
 		_points[index + 1][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event)[coordinate];
@@ -172,11 +172,11 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		}
 	}
 
-	handleMove = function (event: MouseEvent) {
+	handleMove = function(event: MouseEvent) {
 		this.draggingEvent(event, this.dragging_index);
 	}.bind(this);
 
-	handleUp = function (event: MouseEvent) {
+	handleUp = function(event: MouseEvent) {
 		// Unregister handlers to avoid multiple event handlers for other links
 		this.setState({ canDrag: false, selected: false });
 		window.removeEventListener('mousemove', this.handleMove);
@@ -199,11 +199,13 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 
 		// When new link add one middle point to get everywhere 90° angle
 		if (this.props.link.getTargetPort() === null && points.length === 2) {
-			this.props.link.addPoint(new PointModel({
-				link: this.props.link,
-				position: new Point(pointLeft.getX(), pointRight.getY())
-			}), 1);
-
+			this.props.link.addPoint(
+				new PointModel({
+					link: this.props.link,
+					position: new Point(pointLeft.getX(), pointRight.getY())
+				}),
+				1
+			);
 		}
 		// When new link is moving and not connected to target port move with middle point
 		else if (this.props.link.getTargetPort() === null) {
@@ -213,16 +215,22 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		// Node is moved and in this case fix coordinates to get 90° angle.
 		// For loop just for first and last path
 		else if (!this.state.canDrag && points.length > 2) {
-			for (let i = 1; i < points.length; i+= points.length - 2) {
+			for (let i = 1; i < points.length; i += points.length - 2) {
 				let dx = Math.abs(points[i].getX() - points[i - 1].getX());
 				let dy = Math.abs(points[i].getY() - points[i - 1].getY());
 				if (dx !== 0 || dy !== 0) {
 					if (dx < dy) {
-						if (i - 1 === 0) { points[i].setPosition(points[i - 1].getX(), points[i].getY()); }
-						else if (i === points.length - 1) { points[i - 1].setPosition(points[i].getX(), points[i - 1].getY());}
+						if (i - 1 === 0) {
+							points[i].setPosition(points[i - 1].getX(), points[i].getY());
+						} else if (i === points.length - 1) {
+							points[i - 1].setPosition(points[i].getX(), points[i - 1].getY());
+						}
 					} else {
-						if (i - 1 === 0) { points[i].setPosition(points[i].getX(), points[i - 1].getY());}
-						else if (i === points.length - 1) { points[i - 1].setPosition(points[i - 1].getX(), points[i].getY());}
+						if (i - 1 === 0) {
+							points[i].setPosition(points[i].getX(), points[i - 1].getY());
+						} else if (i === points.length - 1) {
+							points[i - 1].setPosition(points[i - 1].getX(), points[i].getY());
+						}
 					}
 				}
 			}
@@ -231,10 +239,13 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		// If there is existing link which has two points add one
 		// NOTE: It doesn't matter if check is for dy or dx
 		if (points.length === 2 && dy !== 0 && !this.state.canDrag) {
-			this.props.link.addPoint(new PointModel({
-				link: this.props.link,
-				position: new Point(pointLeft.getX(), pointRight.getY())
-			}), 1);
+			this.props.link.addPoint(
+				new PointModel({
+					link: this.props.link,
+					position: new Point(pointLeft.getX(), pointRight.getY())
+				}),
+				1
+			);
 		}
 
 		for (let j = 0; j < points.length - 1; j++) {

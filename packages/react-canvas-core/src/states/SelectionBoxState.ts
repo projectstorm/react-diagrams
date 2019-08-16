@@ -59,7 +59,7 @@ export class SelectionBoxState extends AbstractDisplacementState {
 				if (rect.containsPoint(model.getPosition())) {
 					model.setSelected(true);
 				}
-			} else if (model instanceof LinkModel ) {
+			} else if (model instanceof LinkModel) {
 				const inRect = !(<LinkModel>model).getPoints().some(point => !rect.containsPoint(point.getPosition()));
 				if (inRect) {
 					model.setSelected(true);
