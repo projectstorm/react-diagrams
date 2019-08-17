@@ -36,8 +36,12 @@ export default () => {
 	// add a selection listener to each
 	models.forEach(item => {
 		item.registerListener({
-			eventDidFire: action('eventDidFired')
+			eventDidFire: action('element eventDidFire')
 		});
+	});
+
+	model.registerListener({
+		eventDidFire: action('model eventDidFire')
 	});
 
 	engine.setModel(model);
