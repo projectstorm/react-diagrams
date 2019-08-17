@@ -7,6 +7,7 @@ export * from './src/core/AbstractModelFactory';
 export * from './src/core/AbstractReactFactory';
 export * from './src/core/BaseObserver';
 export * from './src/core/FactoryBank';
+export * from './src/core/ModelGeometryInterface';
 
 export * from './src/core-actions/Action';
 export * from './src/core-actions/ActionEventBus';

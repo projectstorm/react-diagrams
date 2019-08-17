@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { LabelModel } from '../label/LabelModel';
 import { DiagramEngine } from '../../DiagramEngine';
 import { DiagramModel } from '../../models/DiagramModel';
-import { Point } from '@projectstorm/geometry';
+import { Point, Polygon, Rectangle } from '@projectstorm/geometry';
 import {
 	BaseEntityEvent,
 	BaseModel,
@@ -12,6 +12,7 @@ import {
 	BaseModelListener,
 	DeserializeEvent
 } from '@projectstorm/react-canvas-core';
+import { ModelGeometryInterface } from '@projectstorm/react-canvas-core/src/core/ModelGeometryInterface';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
@@ -24,7 +25,8 @@ export interface LinkModelGenerics extends BaseModelGenerics {
 	PARENT: DiagramModel;
 }
 
-export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends BaseModel<G> {
+export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends BaseModel<G>
+	implements ModelGeometryInterface {
 	protected sourcePort: PortModel | null;
 	protected targetPort: PortModel | null;
 
@@ -47,6 +49,14 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		this.targetPort = null;
 		this.renderedPaths = [];
 		this.labels = [];
+	}
+
+	getBoundingBox(): Rectangle {
+		return Polygon.boundingBoxFromPoints(
+			_.map(this.points, (point: PointModel) => {
+				return point.getPosition();
+			})
+		);
 	}
 
 	getSelectionEntities(): Array<BaseModel> {

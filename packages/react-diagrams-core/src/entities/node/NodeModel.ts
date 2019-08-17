@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { DiagramModel } from '../../models/DiagramModel';
 import { PortModel } from '../port/PortModel';
 import { LinkModel } from '../link/LinkModel';
-import { Point } from '@projectstorm/geometry';
+import { Point, Rectangle } from '@projectstorm/geometry';
 import {
 	BaseEntityEvent,
 	BaseModelListener,
@@ -33,6 +33,10 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		this.ports = {};
 		this.width = 0;
 		this.height = 0;
+	}
+
+	getBoundingBox(): Rectangle {
+		return new Rectangle(this.getPosition(), this.width, this.height);
 	}
 
 	setPosition(point: Point);

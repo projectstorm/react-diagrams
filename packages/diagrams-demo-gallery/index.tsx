@@ -68,6 +68,5 @@ storiesOf('Custom Models', module)
 	.add('Custom animated links', demo_cust_links);
 
 import demo_3rd_dagre from './demos/demo-dagre';
-import { Toolkit } from '@projectstorm/react-canvas-core';
 
 storiesOf('3rd party libraries', module).add('Auto Distribute (Dagre)', demo_3rd_dagre);

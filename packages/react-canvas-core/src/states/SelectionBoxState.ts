@@ -1,8 +1,8 @@
 import { AbstractDisplacementState, AbstractDisplacementStateEvent } from '../core-state/AbstractDisplacementState';
 import { State } from '../core-state/State';
 import { SelectionLayerModel } from '../entities/selection/SelectionLayerModel';
-import { BasePositionModel } from '../core-models/BasePositionModel';
 import { Rectangle } from '@projectstorm/geometry';
+import { ModelGeometryInterface } from '../core/ModelGeometryInterface';
 
 export class SelectionBoxState extends AbstractDisplacementState {
 	layer: SelectionLayerModel;
@@ -54,8 +54,9 @@ export class SelectionBoxState extends AbstractDisplacementState {
 		const rect = new Rectangle(relative, Math.abs(event.virtualDisplacementX), Math.abs(event.virtualDisplacementY));
 
 		for (let model of this.engine.getModel().getSelectionEntities()) {
-			if (model instanceof BasePositionModel) {
-				if (rect.containsPoint(model.getPosition())) {
+			if (((model as unknown) as ModelGeometryInterface).getBoundingBox) {
+				const bounds = ((model as unknown) as ModelGeometryInterface).getBoundingBox();
+				if (rect.containsPoint(bounds.getTopLeft()) && rect.containsPoint(bounds.getBottomRight())) {
 					model.setSelected(true);
 				}
 			}

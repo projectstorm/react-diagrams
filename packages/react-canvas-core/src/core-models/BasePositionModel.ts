@@ -1,6 +1,7 @@
 import { BaseModel, BaseModelGenerics, BaseModelListener, BaseModelOptions } from './BaseModel';
 import { BaseEntityEvent, DeserializeEvent } from './BaseEntity';
-import { Point } from '@projectstorm/geometry';
+import { Point, Rectangle } from '@projectstorm/geometry';
+import { ModelGeometryInterface } from '../core/ModelGeometryInterface';
 
 export interface BasePositionModelListener extends BaseModelListener {
 	positionChanged?(event: BaseEntityEvent<BasePositionModel>): void;
@@ -15,7 +16,8 @@ export interface BasePositionModelGenerics extends BaseModelGenerics {
 	OPTIONS: BasePositionModelOptions;
 }
 
-export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics> extends BaseModel<G> {
+export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics> extends BaseModel<G>
+	implements ModelGeometryInterface {
 	protected position: Point;
 
 	constructor(options: G['OPTIONS']) {
@@ -32,6 +34,10 @@ export class BasePositionModel<G extends BasePositionModelGenerics = BasePositio
 			this.position = new Point(x, y);
 		}
 		this.fireEvent({}, 'positionChanged');
+	}
+
+	getBoundingBox(): Rectangle {
+		return new Rectangle(this.position, 0, 0);
 	}
 
 	deserialize(event: DeserializeEvent<this>) {
