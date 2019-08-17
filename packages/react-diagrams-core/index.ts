@@ -19,6 +19,7 @@ export * from './src/entities/port/PortModel';
 export * from './src/entities/port/PortWidget';
 
 export * from './src/states/DefaultDiagramState';
+export * from './src/states/DragDiagramItemsState';
 export * from './src/states/DragNewLinkState';
 
 export * from './src/DiagramEngine';
