@@ -10,9 +10,9 @@ import {
 	BaseModel,
 	BaseModelGenerics,
 	BaseModelListener,
-	DeserializeEvent
+	DeserializeEvent,
+	ModelGeometryInterface
 } from '@projectstorm/react-canvas-core';
-import { ModelGeometryInterface } from '@projectstorm/react-canvas-core/src/core/ModelGeometryInterface';
 
 export interface LinkModelListener extends BaseModelListener {
 	sourcePortChanged?(event: BaseEntityEvent<LinkModel> & { port: null | PortModel }): void;
