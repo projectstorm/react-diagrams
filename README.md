@@ -58,7 +58,7 @@ yarn add @projectstorm/react-diagrams-core@next
 this is built ontop of the evolving **react-canvas-core** library
 
 ```text
-yarn add @projectstorm/react-diagrams-core@next
+yarn add @projectstorm/react-canvas-core@next
 ```
 
 which makes use of
