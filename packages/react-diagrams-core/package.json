@@ -37,5 +37,8 @@
 		"lodash": "4.*",
 		"react": "16.*"
 	},
-	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
+	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e",
+	"devDependencies": {
+		"resize-observer-polyfill": "^1.5.1"
+	}
 }
