@@ -28,7 +28,6 @@ export class DefaultLinkSegmentWidget extends React.Component<DefaultLinkSegment
 		);
 
 		const Top = React.cloneElement(Bottom, {
-			...this.props.extras,
 			strokeLinecap: 'round',
 			onMouseLeave: () => {
 				this.props.onSelection(false);
@@ -36,6 +35,7 @@ export class DefaultLinkSegmentWidget extends React.Component<DefaultLinkSegment
 			onMouseEnter: () => {
 				this.props.onSelection(true);
 			},
+			...this.props.extras,
 			ref: null,
 			'data-linkid': this.props.link.getID(),
 			strokeOpacity: this.props.selected ? 0.1 : 0,

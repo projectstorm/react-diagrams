@@ -264,6 +264,10 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 								window.addEventListener('mousemove', this.handleMove);
 								window.addEventListener('mouseup', this.handleUp);
 							}
+						},
+						onMouseEnter: (event: MouseEvent) => {
+							this.setState({ selected: true });
+							this.props.link.lastHoverIndexOfPath = j;
 						}
 					},
 					j

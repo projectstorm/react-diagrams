@@ -2,11 +2,13 @@ import { DefaultLinkModel, DefaultLinkModelOptions } from '@projectstorm/react-d
 import { RightAngleLinkFactory } from './RightAngleLinkFactory';
 
 export class RightAngleLinkModel extends DefaultLinkModel {
-	constructor(options: DefaultLinkModelOptions = {}) {
+	lastHoverIndexOfPath: number;
+	constructor(options: DefaultLinkModelOptions = { }) {
 		super({
 			type: RightAngleLinkFactory.NAME,
 			...options
 		});
+		this.lastHoverIndexOfPath = 0;
 	}
 
 	performanceTune() {
