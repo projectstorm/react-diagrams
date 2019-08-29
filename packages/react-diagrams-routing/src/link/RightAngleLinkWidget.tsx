@@ -191,25 +191,30 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		// Get points based on link orientation
 		let pointLeft = points[0];
 		let pointRight = points[points.length - 1];
+		let hadToSwitch = false;
 		if (pointLeft.getX() > pointRight.getX()) {
 			pointLeft = points[points.length - 1];
 			pointRight = points[0];
+			hadToSwitch = true;
 		}
 		let dy = Math.abs(points[0].getY() - points[points.length - 1].getY());
 
 		// When new link add one middle point to get everywhere 90° angle
 		if (this.props.link.getTargetPort() === null && points.length === 2) {
-			this.props.link.addPoint(
-				new PointModel({
+			[...Array(2)].forEach(item => {
+				this.props.link.addPoint(new PointModel({
 					link: this.props.link,
 					position: new Point(pointLeft.getX(), pointRight.getY())
-				}),
-				1
+				}), 1);
+			});
 			);
 		}
 		// When new link is moving and not connected to target port move with middle point
 		else if (this.props.link.getTargetPort() === null) {
-			points[1].setPosition(pointLeft.getX(), pointRight.getY());
+			points[1].setPosition(pointRight.getX() + (pointLeft.getX() - pointRight.getX())/2,
+				!hadToSwitch ? pointLeft.getY() : pointRight.getY());
+			points[2].setPosition(pointRight.getX() + (pointLeft.getX() - pointRight.getX())/2,
+				!hadToSwitch ? pointRight.getY() : pointLeft.getY());
 		}
 		// Render was called but link is not moved but user.
 		// Node is moved and in this case fix coordinates to get 90° angle.
