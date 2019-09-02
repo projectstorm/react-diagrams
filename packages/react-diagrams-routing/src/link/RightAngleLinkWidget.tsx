@@ -35,6 +35,8 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 	// DOM references to the label and paths (if label is given), used to calculate dynamic positioning
 	refLabels: { [id: string]: HTMLElement };
 	dragging_index: number;
+	lastPathXdirection: boolean;
+	firstPathXdirection: boolean;
 
 	constructor(props: RightAngleLinkProps) {
 		super(props);
@@ -178,8 +180,8 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		for (let i = 1; i < points.length; i+= points.length - 2) {
 			let dx = Math.abs(points[i].getX() - points[i - 1].getX());
 			let dy = Math.abs(points[i].getY() - points[i - 1].getY());
-			if (i - 1 === 0) { this.props.link.firstPathXdirection = dx > dy }
-			else if (i === points.length - 1) { this.props.link.lastPathXdirection = dx > dy }
+			if (i - 1 === 0) { this.firstPathXdirection = dx > dy }
+			else if (i === points.length - 1) { this.lastPathXdirection = dx > dy }
 		}
 	}
 
@@ -232,18 +234,18 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		// For loop just for first and last path
 		else if (!this.state.canDrag && points.length > 2) {
 			// Run this only if source or target node is selected
-			if(this.props.link.getSourcePort().getParent().isSelected() 
+			if(this.props.link.getSourcePort().getParent().isSelected()
 				|| this.props.link.getTargetPort().getParent().isSelected()) {
 				// Those points and its position only will be moved
 				for (let i = 1; i < points.length; i+= points.length - 2) {
 					if (i - 1 === 0) {
-						if (this.props.link.firstPathXdirection) { points[i].setPosition(points[i].getX(), points[i - 1].getY()) }
+						if (this.firstPathXdirection) { points[i].setPosition(points[i].getX(), points[i - 1].getY()) }
 						else { points[i].setPosition(points[i - 1].getX(), points[i].getY()) }
 						} else if (i === points.length - 1) {
 							points[i - 1].setPosition(points[i].getX(), points[i - 1].getY());
 						}
 					} else {
-						if (this.props.link.lastPathXdirection) { points[i - 1].setPosition(points[i - 1].getX(), points[i].getY()) }
+						if (this.lastPathXdirection) { points[i - 1].setPosition(points[i - 1].getX(), points[i].getY()) }
 						else { points[i - 1].setPosition(points[i].getX(), points[i - 1].getY()) }
 						} else if (i === points.length - 1) {
 							points[i - 1].setPosition(points[i - 1].getX(), points[i].getY());
