@@ -170,6 +170,17 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		} else if (dy === 0) {
 			this.calculatePositions(points, event, index, 'y');
 		}
+		this.setFirstAndLastPathsDirection();
+	}
+
+	setFirstAndLastPathsDirection() {
+		let points = this.props.link.getPoints();
+		for (let i = 1; i < points.length; i+= points.length - 2) {
+			let dx = Math.abs(points[i].getX() - points[i - 1].getX());
+			let dy = Math.abs(points[i].getY() - points[i - 1].getY());
+			if (i - 1 === 0) { this.props.link.firstPathXdirection = dx > dy }
+			else if (i === points.length - 1) { this.props.link.lastPathXdirection = dx > dy }
+		}
 	}
 
 	handleMove = function(event: MouseEvent) {
@@ -207,7 +218,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 					position: new Point(pointLeft.getX(), pointRight.getY())
 				}), 1);
 			});
-			);
+			this.setFirstAndLastPathsDirection();
 		}
 		// When new link is moving and not connected to target port move with middle point
 		else if (this.props.link.getTargetPort() === null) {
@@ -220,19 +231,20 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		// Node is moved and in this case fix coordinates to get 90° angle.
 		// For loop just for first and last path
 		else if (!this.state.canDrag && points.length > 2) {
-			for (let i = 1; i < points.length; i += points.length - 2) {
-				let dx = Math.abs(points[i].getX() - points[i - 1].getX());
-				let dy = Math.abs(points[i].getY() - points[i - 1].getY());
-				if (dx !== 0 || dy !== 0) {
-					if (dx < dy) {
-						if (i - 1 === 0) {
-							points[i].setPosition(points[i - 1].getX(), points[i].getY());
+			// Run this only if source or target node is selected
+			if(this.props.link.getSourcePort().getParent().isSelected() 
+				|| this.props.link.getTargetPort().getParent().isSelected()) {
+				// Those points and its position only will be moved
+				for (let i = 1; i < points.length; i+= points.length - 2) {
+					if (i - 1 === 0) {
+						if (this.props.link.firstPathXdirection) { points[i].setPosition(points[i].getX(), points[i - 1].getY()) }
+						else { points[i].setPosition(points[i - 1].getX(), points[i].getY()) }
 						} else if (i === points.length - 1) {
 							points[i - 1].setPosition(points[i].getX(), points[i - 1].getY());
 						}
 					} else {
-						if (i - 1 === 0) {
-							points[i].setPosition(points[i].getX(), points[i - 1].getY());
+						if (this.props.link.lastPathXdirection) { points[i - 1].setPosition(points[i - 1].getX(), points[i].getY()) }
+						else { points[i - 1].setPosition(points[i].getX(), points[i - 1].getY()) }
 						} else if (i === points.length - 1) {
 							points[i - 1].setPosition(points[i - 1].getX(), points[i].getY());
 						}
@@ -249,7 +261,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 					link: this.props.link,
 					position: new Point(pointLeft.getX(), pointRight.getY())
 				}),
-				1
+			this.setFirstAndLastPathsDirection();
 			);
 		}
 
