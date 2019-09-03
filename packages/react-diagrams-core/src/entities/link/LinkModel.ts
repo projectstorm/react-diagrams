@@ -244,8 +244,8 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		this.fireEvent({ port }, 'targetPortChanged');
 	}
 
-	point(x: number, y: number): PointModel {
-		return this.addPoint(this.generatePoint(x, y));
+	point(x: number, y: number, index: number = 1): PointModel {
+		return this.addPoint(this.generatePoint(x, y), index);
 	}
 
 	addLabel(label: LabelModel) {

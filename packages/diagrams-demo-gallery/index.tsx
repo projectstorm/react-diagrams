@@ -33,6 +33,7 @@ import demo_listeners from './demos/demo-listeners';
 import demo_zoom from './demos/demo-zoom-to-fit';
 import demo_labels from './demos/demo-labelled-links';
 import demo_dynamic_ports from './demos/demo-dynamic-ports';
+import demo_alternative_linking from './demos/demo-alternative-linking';
 
 storiesOf('Simple Usage', module)
 	.add('Simple example', demo_simple)
@@ -58,7 +59,8 @@ storiesOf('Advanced Techniques', module)
 	.add('Programatically modifying graph', demo_adv_prog)
 	.add('Drag and drop', demo_adv_dnd)
 	.add('Smart routing', demo_smart_routing)
-	.add('Right angles routing', demo_right_angles_routing);
+	.add('Right angles routing', demo_right_angles_routing)
+	.add('Create link by clicking instead of dragging', demo_alternative_linking);
 
 import demo_cust_nodes from './demos/demo-custom-node1';
 import demo_cust_links from './demos/demo-custom-link1';
