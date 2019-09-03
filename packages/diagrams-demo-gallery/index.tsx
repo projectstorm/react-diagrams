@@ -60,7 +60,7 @@ storiesOf('Advanced Techniques', module)
 	.add('Drag and drop', demo_adv_dnd)
 	.add('Smart routing', demo_smart_routing)
 	.add('Right angles routing', demo_right_angles_routing)
-	.add('Create link by clicking instead of dragging', demo_alternative_linking);
+	.add('Linking by clicking instead of dragging', demo_alternative_linking);
 
 import demo_cust_nodes from './demos/demo-custom-node1';
 import demo_cust_links from './demos/demo-custom-link1';
