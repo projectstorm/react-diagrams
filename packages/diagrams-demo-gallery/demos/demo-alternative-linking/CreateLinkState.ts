@@ -42,6 +42,7 @@ export class CreateLinkState extends State<DiagramEngine> {
 						if (this.sourcePort.canLinkToPort(element)) {
 							this.link.setTargetPort(element);
 							element.reportPosition();
+							this.clearState();
 							this.eject();
 						}
 					} else if (element === this.link.getLastPoint()) {
@@ -72,13 +73,17 @@ export class CreateLinkState extends State<DiagramEngine> {
 					// on esc press remove any started link and pop back to default state
 					if (actionEvent.event.keyCode === 27) {
 						this.link.remove();
-						this.link = undefined;
-						this.sourcePort = undefined;
+						this.clearState();
 						this.eject();
 						this.engine.repaintCanvas();
 					}
 				}
 			})
 		);
+	}
+
+	clearState() {
+		this.link = undefined;
+		this.sourcePort = undefined;
 	}
 }
