@@ -4,6 +4,7 @@ import { DiagramEngine } from '../../DiagramEngine';
 import { NodeModel } from './NodeModel';
 import { BaseEntityEvent, BaseModel, ListenerHandle, PeformanceWidget } from '@projectstorm/react-canvas-core';
 import styled from '@emotion/styled';
+import ResizeObserver from 'resize-observer-polyfill';
 
 export interface NodeProps {
 	node: NodeModel;
