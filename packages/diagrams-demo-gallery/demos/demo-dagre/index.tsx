@@ -41,7 +41,9 @@ class DemoWidget extends React.Component<{ model: DiagramModel; engine: DiagramE
 		this.engine = new DagreEngine({
 			graph: {
 				rankdir: 'RL',
-				ranker: 'longest-path'
+				ranker: 'longest-path', 
+				marginx:25,
+				marginy:25
 			},
 			includeLinks: true
 		});
