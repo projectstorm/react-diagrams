@@ -59,7 +59,7 @@ export class DagreEngine {
 
 		g.nodes().forEach(v => {
 			const node = g.node(v);
-			model.getNode(v).setPosition(node.x, node.y);
+			model.getNode(v).setPosition(node.x - (node.width / 2), node.y - (node.height / 2));
 		});
 
 		// also include links?
