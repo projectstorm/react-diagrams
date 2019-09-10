@@ -61,7 +61,7 @@ export interface DefaultNodeProps {
  */
 export class DefaultNodeWidget extends React.Component<DefaultNodeProps> {
 	generatePort = port => {
-		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.id} />;
+		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.getID()} />;
 	};
 
 	render() {

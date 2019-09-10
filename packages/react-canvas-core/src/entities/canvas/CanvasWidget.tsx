@@ -93,7 +93,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 				}}>
 				{model.getLayers().map(layer => {
 					return (
-						<TransformLayerWidget layer={layer}>
+						<TransformLayerWidget layer={layer} key={layer.getID()}>
 							<SmartLayerWidget layer={layer} engine={this.props.engine} key={layer.getID()} />
 						</TransformLayerWidget>
 					);
