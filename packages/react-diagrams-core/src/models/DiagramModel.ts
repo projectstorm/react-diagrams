@@ -114,11 +114,6 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	addLink(link: LinkModel): LinkModel {
-		link.registerListener({
-			entityRemoved: () => {
-				this.removeLink(link);
-			}
-		});
 		this.getActiveLinkLayer().addModel(link);
 		this.fireEvent(
 			{
@@ -131,11 +126,6 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	addNode(node: NodeModel): NodeModel {
-		node.registerListener({
-			entityRemoved: () => {
-				this.removeNode(node);
-			}
-		});
 		this.getActiveNodeLayer().addModel(node);
 		this.fireEvent({ node, isCreated: true }, 'nodesUpdated');
 		return node;
