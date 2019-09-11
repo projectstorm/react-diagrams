@@ -40,7 +40,7 @@ namespace S {
 		display: flex;
 		flex-direction: column;
 
-		&:first-child {
+		&:first-of-type {
 			margin-right: 10px;
 		}
 
