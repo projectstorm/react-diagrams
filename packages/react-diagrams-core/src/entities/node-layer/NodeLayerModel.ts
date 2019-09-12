@@ -1,7 +1,7 @@
 import { LayerModel, LayerModelGenerics } from '@projectstorm/react-canvas-core';
 import { NodeModel } from '../node/NodeModel';
 import { DiagramEngine } from '../../DiagramEngine';
-import {DiagramModel} from "../../..";
+import { DiagramModel } from '../../models/DiagramModel';
 
 export interface NodeLayerModelGenerics extends LayerModelGenerics {
 	CHILDREN: NodeModel;

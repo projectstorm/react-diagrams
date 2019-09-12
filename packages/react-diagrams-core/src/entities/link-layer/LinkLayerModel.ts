@@ -1,7 +1,7 @@
 import { LayerModel, LayerModelGenerics } from '@projectstorm/react-canvas-core';
 import { LinkModel } from '../link/LinkModel';
 import { DiagramEngine } from '../../DiagramEngine';
-import {DiagramModel} from "../../..";
+import { DiagramModel } from '../../models/DiagramModel';
 
 export interface LinkLayerModelGenerics extends LayerModelGenerics {
 	CHILDREN: LinkModel;
