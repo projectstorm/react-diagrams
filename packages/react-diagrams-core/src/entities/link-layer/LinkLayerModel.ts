@@ -1,6 +1,7 @@
 import { LayerModel, LayerModelGenerics } from '@projectstorm/react-canvas-core';
 import { LinkModel } from '../link/LinkModel';
 import { DiagramEngine } from '../../DiagramEngine';
+import { DiagramModel } from '../../models/DiagramModel';
 
 export interface LinkLayerModelGenerics extends LayerModelGenerics {
 	CHILDREN: LinkModel;
@@ -20,6 +21,11 @@ export class LinkLayerModel<G extends LinkLayerModelGenerics = LinkLayerModelGen
 		if (!(model instanceof LinkModel)) {
 			throw new Error('Can only add links to this layer');
 		}
+		model.registerListener({
+			entityRemoved: () => {
+				(this.getParent() as DiagramModel).removeLink(model);
+			}
+		});
 		super.addModel(model);
 	}
 
