@@ -211,7 +211,9 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 			this.props.link.setManuallyFirstAndLastPathsDirection(true, true);
 		}
 		// When new link is moving and not connected to target port move with middle point
-		else if (this.props.link.getTargetPort() === null) {
+		// TODO: @DanielLazarLDAPPS This will be better to update in DragNewLinkState 
+		//  in function fireMouseMoved to avoid calling this unexpectedly e.g. after Deserialize
+		else if (this.props.link.getTargetPort() === null && this.props.link.getSourcePort() !== null) {
 			points[1].setPosition(pointRight.getX() + (pointLeft.getX() - pointRight.getX())/2,
 				!hadToSwitch ? pointLeft.getY() : pointRight.getY());
 			points[2].setPosition(pointRight.getX() + (pointLeft.getX() - pointRight.getX())/2,
@@ -231,7 +233,6 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 					else { points[i - 1].setPosition(points[i].getX(), points[i - 1].getY()) }
 				}
 			}
-
 		}
 
 		// If there is existing link which has two points add one
