@@ -60,7 +60,7 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 		if (lookupTable[this.options.id]) {
 			return lookupTable[this.options.id];
 		}
-		let clone = _.clone(this);
+		let clone = _.cloneDeep(this);
 		clone.options = {
 			...this.options,
 			id: Toolkit.UID()
