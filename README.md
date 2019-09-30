@@ -76,11 +76,11 @@ yarn add @projectstorm/react-diagrams-routing@next
 
 ## How to use
 
-Take a look at the [diagram demos](https://github.com/projectstorm/react-diagrams/tree/8fbd87df8c074e0263fd86a64b05a56687a631cf/packages/diagrams-demo-gallery/demos/README.md)
+Take a look at the [diagram demos](https://github.com/projectstorm/react-diagrams/tree/master/packages/diagrams-demo-gallery/demos)
 
 **or**
 
-Take a look at the [demo project](https://github.com/projectstorm/react-diagrams/tree/8fbd87df8c074e0263fd86a64b05a56687a631cf/packages/diagrams-demo-project/README.md) which contains an example for ES6 as well as Typescript
+Take a look at the [demo project](https://github.com/projectstorm/react-diagrams/tree/master/packages/diagrams-demo-project) which contains an example for ES6 as well as Typescript
 
 ## Run the demos
 
