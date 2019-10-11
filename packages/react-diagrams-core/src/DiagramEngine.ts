@@ -143,6 +143,9 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 	}
 
 	getNodeElement(node: NodeModel): Element {
+		if(!this.canvas) {
+			return null;
+		}
 		const selector = this.canvas.querySelector(`.node[data-nodeid="${node.getID()}"]`);
 		if (selector === null) {
 			throw new Error('Cannot find Node element with nodeID: [' + node.getID() + ']');
@@ -151,6 +154,9 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 	}
 
 	getNodePortElement(port: PortModel): any {
+		if(!this.canvas) {
+			return null;
+		}
 		var selector = this.canvas.querySelector(
 			`.port[data-name="${port.getName()}"][data-nodeid="${port.getParent().getID()}"]`
 		);
@@ -179,6 +185,9 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		}
 		if (!element) {
 			element = this.getNodePortElement(port);
+			if (!element) {
+				return new Rectangle(0,0,0,0);
+			}
 		}
 		const sourceRect = element.getBoundingClientRect();
 		const point = this.getRelativeMousePoint({
@@ -202,6 +211,12 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		}
 
 		const nodeElement = this.getNodeElement(node);
+		if (!nodeElement) {
+			return {
+				width: 0,
+				height: 0,
+			};
+		}
 		const nodeRect = nodeElement.getBoundingClientRect();
 
 		return {
