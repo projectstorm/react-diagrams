@@ -21,6 +21,7 @@ export * from './src/entities/canvas/CanvasWidget';
 
 export * from './src/entities/layer/LayerModel';
 export * from './src/entities/layer/TransformLayerWidget';
+export * from './src/entities/layer/SmartLayerWidget';
 
 export * from './src/entities/selection/SelectionBoxLayerFactory';
 export * from './src/entities/selection/SelectionBoxWidget';
