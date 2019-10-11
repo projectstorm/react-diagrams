@@ -23,9 +23,11 @@ export class DragDiagramItemsState extends MoveItemsState<DiagramEngine> {
 								if (link.getLastPoint() !== position.item) {
 									return;
 								}
-								link.setTargetPort(item);
-								item.reportPosition();
-								this.engine.repaintCanvas();
+								if (link.getSourcePort().canLinkToPort(item)) {
+									link.setTargetPort(item);
+									item.reportPosition();
+									this.engine.repaintCanvas();
+								}
 							}
 						});
 					}
