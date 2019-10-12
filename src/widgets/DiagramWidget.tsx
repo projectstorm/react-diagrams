@@ -300,6 +300,11 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 	}
 
 	onKeyUp(event) {
+		// Do not delete node if there is a focus on an input
+		if (document.activeElement !== document.body) {
+			return
+		}
+		
 		//delete all selected
 		if (this.props.deleteKeys.indexOf(event.keyCode) !== -1) {
 			_.forEach(this.props.diagramEngine.getDiagramModel().getSelectedItems(), element => {
