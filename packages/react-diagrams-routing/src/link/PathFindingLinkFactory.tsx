@@ -195,25 +195,20 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 			height: 0
 		}));
 
-		const canvas = this.engine.getCanvas() as HTMLDivElement;
-		const minX =
-			Math.floor(
-				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x).x, 0) /
-					this.ROUTING_SCALING_FACTOR
-			) * this.ROUTING_SCALING_FACTOR;
-		const maxXElement = _.maxBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.x + item.width);
-		const maxX = Math.max(maxXElement.x + maxXElement.width, canvas.offsetWidth);
+		const sumProps = (object, props) => _.reduce(props, (acc, prop) => acc + _.get(object, prop, 0), 0);
 
+		const canvas = this.engine.getCanvas() as HTMLDivElement;
+		const concatedCoords = _.concat(allNodesCoords, allPortsCoords, allPointsCoords);
+		const minX =
+			Math.floor(Math.min(_.get(_.minBy(concatedCoords, 'x'), 'x', 0), 0) / this.ROUTING_SCALING_FACTOR) *
+			this.ROUTING_SCALING_FACTOR;
+		const maxXElement = _.maxBy(concatedCoords, item => sumProps(item, ['x', 'width']));
+		const maxX = Math.max(sumProps(maxXElement, ['x', 'width']), canvas.offsetWidth);
+		const minYCoords = _.minBy(concatedCoords, 'y');
 		const minY =
-			Math.floor(
-				Math.min(_.minBy(_.concat(allNodesCoords, allPortsCoords, allPointsCoords), item => item.y).y, 0) /
-					this.ROUTING_SCALING_FACTOR
-			) * this.ROUTING_SCALING_FACTOR;
-		const maxYElement = _.maxBy(
-			_.concat(allNodesCoords, allPortsCoords, allPointsCoords),
-			item => item.y + item.height
-		);
-		const maxY = Math.max(maxYElement.y + maxYElement.height, canvas.offsetHeight);
+			Math.floor(Math.min(_.get(minYCoords, 'y', 0), 0) / this.ROUTING_SCALING_FACTOR) * this.ROUTING_SCALING_FACTOR;
+		const maxYElement = _.maxBy(concatedCoords, item => sumProps(item, ['y', 'height']));
+		const maxY = Math.max(sumProps(maxYElement, ['y', 'height']), canvas.offsetHeight);
 
 		return {
 			width: Math.ceil(Math.abs(minX) + maxX),
