@@ -9,6 +9,7 @@ import { PortModel } from '../entities/port/PortModel';
 import { MouseEvent } from 'react';
 import { LinkModel } from '../entities/link/LinkModel';
 import { DiagramEngine } from '../DiagramEngine';
+import { Point } from '@projectstorm/geometry';
 
 export interface DragNewLinkStateOptions {
 	/**
@@ -26,6 +27,9 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 	port: PortModel;
 	link: LinkModel;
 	config: DragNewLinkStateOptions;
+
+	// will contain the mouse x,y position when it starts dragging a new link
+	startingPoint: Point;
 
 	constructor(options: DragNewLinkStateOptions = {}) {
 		super({
@@ -56,6 +60,9 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 					this.link.setSourcePort(this.port);
 					this.engine.getModel().addLink(this.link);
 					this.port.reportPosition();
+
+					// save the mouse position for further precision in calculating the link's far-end point
+					this.startingPoint = new Point(event.event.clientX, event.event.clientY);
 				}
 			})
 		);
@@ -79,14 +86,23 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 						this.link.remove();
 						this.engine.repaintCanvas();
 					}
+
+					// clear the starting point
+					this.startingPoint = undefined;
 				}
 			})
 		);
 	}
-
+	/**
+	 * When the mouse moves calculates the link's far-end point position.
+	 * In order to be as precise as possible the mouse startingPoint is taken into account.
+	 */
 	fireMouseMoved(event: AbstractDisplacementStateEvent): any {
 		const pos = this.port.getPosition();
-		this.link.getLastPoint().setPosition(pos.x + event.virtualDisplacementX, pos.y + event.virtualDisplacementY);
+		const linkNextPosX = pos.x + (this.startingPoint.x - pos.x) + event.virtualDisplacementX;
+		const linkNextPosY = pos.y + (this.startingPoint.y - pos.y) + event.virtualDisplacementY;
+
+		this.link.getLastPoint().setPosition(linkNextPosX, linkNextPosY);
 		this.engine.repaintCanvas();
 	}
 }
