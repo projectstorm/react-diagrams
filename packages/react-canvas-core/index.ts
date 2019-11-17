@@ -38,3 +38,6 @@ export * from './src/states/DragCanvasState';
 export * from './src/states/SelectingState';
 export * from './src/states/SelectionBoxState';
 export * from './src/states/MoveItemsState';
+
+export * from './src/actions/DeleteItemsAction';
+export * from './src/actions/ZoomCanvasAction';

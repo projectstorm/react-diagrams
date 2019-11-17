@@ -29,6 +29,9 @@ export class CanvasEngine<
 	protected eventBus: ActionEventBus;
 	protected stateMachine: StateMachine;
 
+	deregisterDefaultDeleteItemsAction: () => void;
+	deregisterDefaultZoomCanvasAction: () => void;
+
 	constructor() {
 		super();
 		this.model = null;
@@ -36,8 +39,8 @@ export class CanvasEngine<
 		this.stateMachine = new StateMachine(this);
 		this.layerFactories = new FactoryBank();
 		this.registerFactoryBank(this.layerFactories);
-		this.eventBus.registerAction(new ZoomCanvasAction());
-		this.eventBus.registerAction(new DeleteItemsAction());
+		this.deregisterDefaultZoomCanvasAction = this.eventBus.registerAction(new ZoomCanvasAction());
+		this.deregisterDefaultDeleteItemsAction = this.eventBus.registerAction(new DeleteItemsAction());
 	}
 
 	getStateMachine() {
