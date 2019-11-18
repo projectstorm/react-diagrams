@@ -36,10 +36,7 @@ export class CanvasEngine<
 	protected stateMachine: StateMachine;
 	protected options: O;
 
-	deregisterDefaultDeleteItemsAction: () => void;
-	deregisterDefaultZoomCanvasAction: () => void;
-
-	constructor(options: CanvasEngineOptions = {}) {
+	constructor(options:O = {}) {
 		super();
 		this.model = null;
 		this.eventBus = new ActionEventBus(this);
