@@ -26,17 +26,16 @@ export interface CanvasEngineOptions {
 
 export class CanvasEngine<
 	L extends CanvasEngineListener = CanvasEngineListener,
-	M extends CanvasModel = CanvasModel,
-	O extends CanvasEngineOptions = CanvasEngineOptions
+	M extends CanvasModel = CanvasModel
 > extends BaseObserver<L> {
 	protected model: M;
 	protected layerFactories: FactoryBank<AbstractReactFactory<LayerModel>>;
 	protected canvas: HTMLDivElement;
 	protected eventBus: ActionEventBus;
 	protected stateMachine: StateMachine;
-	protected options: O;
+	protected options: CanvasEngineOptions;
 
-	constructor(options:O = {}) {
+	constructor(options: CanvasEngineOptions = {}) {
 		super();
 		this.model = null;
 		this.eventBus = new ActionEventBus(this);
