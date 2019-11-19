@@ -86,13 +86,13 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 	}
 
 	/**
-	 * When the mouse moves calculates the link's far-end point position.
-	 * In order to be as precise as possible the mouse initialX & initialY are taken into account.
+	 * Calculates the link's far-end point position on mouse move.
+	 * In order to be as precise as possible the mouse initialXRelative & initialYRelative are taken into account.
 	 */
 	fireMouseMoved(event: AbstractDisplacementStateEvent): any {
 		const pos = this.port.getPosition();
-		const linkNextPosX = pos.x + (this.initialX - pos.x) + event.virtualDisplacementX;
-		const linkNextPosY = pos.y + (this.initialY - pos.y) + event.virtualDisplacementY;
+		const linkNextPosX = pos.x + (this.initialXRelative - pos.x) + event.virtualDisplacementX;
+		const linkNextPosY = pos.y + (this.initialYRelative - pos.y) + event.virtualDisplacementY;
 
 		this.link.getLastPoint().setPosition(linkNextPosX, linkNextPosY);
 		this.engine.repaintCanvas();
