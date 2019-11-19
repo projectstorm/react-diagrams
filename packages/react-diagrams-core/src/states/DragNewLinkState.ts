@@ -9,6 +9,7 @@ import { PortModel } from '../entities/port/PortModel';
 import { MouseEvent } from 'react';
 import { LinkModel } from '../entities/link/LinkModel';
 import { DiagramEngine } from '../DiagramEngine';
+import { Point } from '@projectstorm/geometry';
 
 export interface DragNewLinkStateOptions {
 	/**
@@ -84,9 +85,19 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 		);
 	}
 
+	/**
+	 * Calculates the link's far-end point position on mouse move.
+	 * In order to be as precise as possible the mouse initialXRelative & initialYRelative are taken into account as well
+	 * as the possible engine offset
+	 */
 	fireMouseMoved(event: AbstractDisplacementStateEvent): any {
-		const pos = this.port.getPosition();
-		this.link.getLastPoint().setPosition(pos.x + event.virtualDisplacementX, pos.y + event.virtualDisplacementY);
+		const portPos = this.port.getPosition();
+		const engineOffsetX = this.engine.getModel().getOffsetX();
+		const engineOffsetY = this.engine.getModel().getOffsetY();
+		const linkNextX = portPos.x - engineOffsetX + (this.initialXRelative - portPos.x) + event.virtualDisplacementX;
+		const linkNextY = portPos.y - engineOffsetY + (this.initialYRelative - portPos.y) + event.virtualDisplacementY;
+
+		this.link.getLastPoint().setPosition(linkNextX, linkNextY);
 		this.engine.repaintCanvas();
 	}
 }
