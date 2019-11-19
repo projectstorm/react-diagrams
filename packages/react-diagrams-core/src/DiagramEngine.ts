@@ -12,7 +12,7 @@ import {
 	FactoryBank,
 	Toolkit
 } from '@projectstorm/react-canvas-core';
-import { CanvasEngineListener } from '@projectstorm/react-canvas-core';
+import { CanvasEngineListener, CanvasEngineOptions } from '@projectstorm/react-canvas-core';
 import { DiagramModel } from './models/DiagramModel';
 
 /**
@@ -26,8 +26,8 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 
 	maxNumberPointsPerLink: number;
 
-	constructor() {
-		super();
+	constructor(options: CanvasEngineOptions = {}) {
+		super(options);
 		this.maxNumberPointsPerLink = 1000;
 
 		// create banks for the different factory types

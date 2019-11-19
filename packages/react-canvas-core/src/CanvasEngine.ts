@@ -19,6 +19,11 @@ export interface CanvasEngineListener extends BaseListener {
 	rendered?(): void;
 }
 
+export interface CanvasEngineOptions {
+	registerDefaultDeleteItemsAction?: boolean;
+	registerDefaultZoomCanvasAction?: boolean;
+}
+
 export class CanvasEngine<
 	L extends CanvasEngineListener = CanvasEngineListener,
 	M extends CanvasModel = CanvasModel
@@ -28,16 +33,26 @@ export class CanvasEngine<
 	protected canvas: HTMLDivElement;
 	protected eventBus: ActionEventBus;
 	protected stateMachine: StateMachine;
+	protected options: CanvasEngineOptions;
 
-	constructor() {
+	constructor(options: CanvasEngineOptions = {}) {
 		super();
 		this.model = null;
 		this.eventBus = new ActionEventBus(this);
 		this.stateMachine = new StateMachine(this);
 		this.layerFactories = new FactoryBank();
 		this.registerFactoryBank(this.layerFactories);
-		this.eventBus.registerAction(new ZoomCanvasAction());
-		this.eventBus.registerAction(new DeleteItemsAction());
+		this.options = {
+			registerDefaultDeleteItemsAction: true,
+			registerDefaultZoomCanvasAction: true,
+			...options
+		};
+		if (this.options.registerDefaultZoomCanvasAction === true) {
+			this.eventBus.registerAction(new ZoomCanvasAction());
+		}
+		if (this.options.registerDefaultDeleteItemsAction === true) {
+			this.eventBus.registerAction(new DeleteItemsAction());
+		}
 	}
 
 	getStateMachine() {

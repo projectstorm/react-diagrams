@@ -11,7 +11,7 @@ import {
 	DefaultPortFactory
 } from '@projectstorm/react-diagrams-defaults';
 import { PathFindingLinkFactory } from '@projectstorm/react-diagrams-routing';
-import { SelectionBoxLayerFactory } from '@projectstorm/react-canvas-core';
+import { SelectionBoxLayerFactory, CanvasEngineOptions } from '@projectstorm/react-canvas-core';
 
 export * from '@projectstorm/react-diagrams-core';
 export * from '@projectstorm/react-diagrams-defaults';
@@ -20,8 +20,8 @@ export * from '@projectstorm/react-diagrams-routing';
 /**
  * Construct an engine with the defaults installed
  */
-export default (): DiagramEngine => {
-	const engine = new DiagramEngine();
+export default (options: CanvasEngineOptions = {}): DiagramEngine => {
+	const engine = new DiagramEngine(options);
 
 	// register model factories
 	engine.getLayerFactories().registerFactory(new NodeLayerFactory());
