@@ -92,10 +92,13 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 	 */
 	fireMouseMoved(event: AbstractDisplacementStateEvent): any {
 		const portPos = this.port.getPosition();
-		const engineOffsetX = this.engine.getModel().getOffsetX();
-		const engineOffsetY = this.engine.getModel().getOffsetY();
-		const linkNextX = portPos.x - engineOffsetX + (this.initialXRelative - portPos.x) + event.virtualDisplacementX;
-		const linkNextY = portPos.y - engineOffsetY + (this.initialYRelative - portPos.y) + event.virtualDisplacementY;
+		const zoomLevelPercentage = this.engine.getModel().getZoomLevel() / 100;
+		const engineOffsetX = this.engine.getModel().getOffsetX() / zoomLevelPercentage;
+		const engineOffsetY = this.engine.getModel().getOffsetY() / zoomLevelPercentage;
+		const initialXRelative = this.initialXRelative / zoomLevelPercentage;
+		const initialYRelative = this.initialYRelative / zoomLevelPercentage;
+		const linkNextX = portPos.x - engineOffsetX + (initialXRelative - portPos.x) + event.virtualDisplacementX;
+		const linkNextY = portPos.y - engineOffsetY + (initialYRelative - portPos.y) + event.virtualDisplacementY;
 
 		this.link.getLastPoint().setPosition(linkNextX, linkNextY);
 		this.engine.repaintCanvas();
