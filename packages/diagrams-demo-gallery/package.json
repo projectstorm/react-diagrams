@@ -25,5 +25,8 @@
 		"simple",
 		"links",
 		"nodes"
-	]
+	],
+	"dependencies": {
+		"gsap": "^3.0.1"
+	}
 }

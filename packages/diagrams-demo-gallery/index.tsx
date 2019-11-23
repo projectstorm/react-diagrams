@@ -72,5 +72,8 @@ storiesOf('Custom Models', module)
 	.add('Custom animated links', demo_cust_links);
 
 import demo_3rd_dagre from './demos/demo-dagre';
+import demo_gsap from './demos/demo-animation';
 
-storiesOf('3rd party libraries', module).add('Auto Distribute (Dagre)', demo_3rd_dagre);
+storiesOf('3rd party libraries', module)
+	.add('Auto Distribute (Dagre)', demo_3rd_dagre)
+	.add('Animated node moves (GSAP)', demo_gsap);
