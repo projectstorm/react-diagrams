@@ -76,12 +76,27 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 						}
 					}
 
-					if (!this.config.allowLooseLinks) {
+					if (this.isNearbySourcePort(event.event) || !this.config.allowLooseLinks) {
 						this.link.remove();
 						this.engine.repaintCanvas();
 					}
 				}
 			})
+		);
+	}
+
+	/**
+	 * Checks whether the mouse event appears to happen in proximity of the link's source port
+	 * @param event
+	 */
+	isNearbySourcePort({ clientX, clientY }: MouseEvent): boolean {
+		const sourcePort = this.link.getSourcePort();
+		const sourcePortPosition = this.link.getSourcePort().getPosition();
+
+		return (
+			clientX >= sourcePortPosition.x &&
+			clientX <= sourcePortPosition.x + sourcePort.width &&
+			(clientY >= sourcePortPosition.y && clientY <= sourcePortPosition.y + sourcePort.height)
 		);
 	}
 
