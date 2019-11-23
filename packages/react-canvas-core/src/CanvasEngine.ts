@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import { CanvasModel } from './entities/canvas/CanvasModel';
 import { FactoryBank } from './core/FactoryBank';
 import { AbstractReactFactory } from './core/AbstractReactFactory';
@@ -24,10 +25,8 @@ export interface CanvasEngineOptions {
 	registerDefaultZoomCanvasAction?: boolean;
 }
 
-export class CanvasEngine<
-	L extends CanvasEngineListener = CanvasEngineListener,
-	M extends CanvasModel = CanvasModel
-> extends BaseObserver<L> {
+export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
+	M extends CanvasModel = CanvasModel> extends BaseObserver<L> {
 	protected model: M;
 	protected layerFactories: FactoryBank<AbstractReactFactory<LayerModel>>;
 	protected canvas: HTMLDivElement;
@@ -114,13 +113,13 @@ export class CanvasEngine<
 	repaintCanvas(promise: true): Promise<any>;
 	repaintCanvas(): void;
 	repaintCanvas(promise?): Promise<any> | void {
-		const repaint = () => {
+		const repaint = debounce(() => {
 			this.iterateListeners(listener => {
 				if (listener.repaintCanvas) {
 					listener.repaintCanvas();
 				}
 			});
-		};
+		}, 60);
 
 		if (promise) {
 			return new Promise(resolve => {
