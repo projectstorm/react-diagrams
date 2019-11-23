@@ -9,7 +9,6 @@ import { PortModel } from '../entities/port/PortModel';
 import { MouseEvent } from 'react';
 import { LinkModel } from '../entities/link/LinkModel';
 import { DiagramEngine } from '../DiagramEngine';
-import { Point } from '@projectstorm/geometry';
 
 export interface DragNewLinkStateOptions {
 	/**
@@ -29,14 +28,14 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 	config: DragNewLinkStateOptions;
 
 	constructor(options: DragNewLinkStateOptions = {}) {
-		super({
-			name: 'drag-new-link'
-		});
+		super({ name: 'drag-new-link' });
+
 		this.config = {
 			allowLooseLinks: true,
 			allowLinksFromLockedPorts: false,
 			...options
 		};
+
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_DOWN,
@@ -60,6 +59,7 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 				}
 			})
 		);
+
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_UP,
