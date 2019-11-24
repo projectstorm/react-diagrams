@@ -20,10 +20,22 @@ export interface CanvasEngineListener extends BaseListener {
 	rendered?(): void;
 }
 
+/**
+ * Defines the CanvasEngine options
+ */
 export interface CanvasEngineOptions {
 	registerDefaultDeleteItemsAction?: boolean;
 	registerDefaultZoomCanvasAction?: boolean;
+	/**
+	 * If set to true debounce the `repaintCanvas` method
+	 */
+	repaintDebounce?: boolean
+	/**
+	 * Defines the debounce wait time in milliseconds
+	 */
+	repaintDebounceMs?: number,
 }
+
 
 export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 	M extends CanvasModel = CanvasModel> extends BaseObserver<L> {
@@ -41,9 +53,15 @@ export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 		this.stateMachine = new StateMachine(this);
 		this.layerFactories = new FactoryBank();
 		this.registerFactoryBank(this.layerFactories);
+
+		/**
+		 * Overrides the standard options with the possible given options
+		 */
 		this.options = {
 			registerDefaultDeleteItemsAction: true,
 			registerDefaultZoomCanvasAction: true,
+			repaintDebounce: false,
+			repaintDebounceMs: 0,
 			...options
 		};
 		if (this.options.registerDefaultZoomCanvasAction === true) {
@@ -113,13 +131,21 @@ export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 	repaintCanvas(promise: true): Promise<any>;
 	repaintCanvas(): void;
 	repaintCanvas(promise?): Promise<any> | void {
-		const repaint = debounce(() => {
+		const { repaintDebounce, repaintDebounceMs } = this.options;
+
+		/**
+		 * The actual repaint function
+		 */
+		const repaint = () => {
 			this.iterateListeners(listener => {
 				if (listener.repaintCanvas) {
 					listener.repaintCanvas();
 				}
 			});
-		}, 60);
+		};
+
+		// if repaintDebounce is set to true, debounce the 'repaint' function by the milliseconds defined by repaintDebounceMs
+		const repaintFn = repaintDebounce ? debounce(repaint, repaintDebounceMs) : repaint;
 
 		if (promise) {
 			return new Promise(resolve => {
@@ -129,10 +155,11 @@ export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 						l.deregister();
 					}
 				} as L);
-				repaint();
+				repaintFn();
 			});
 		}
-		repaint();
+
+		repaintFn();
 	}
 
 	setCanvas(canvas?: HTMLDivElement) {
