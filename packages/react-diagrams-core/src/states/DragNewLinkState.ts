@@ -6,7 +6,7 @@ import {
 	InputType
 } from '@projectstorm/react-canvas-core';
 import { PortModel } from '../entities/port/PortModel';
-import { MouseEvent } from 'react';
+import { MouseEvent, TouchEvent } from 'react';
 import { LinkModel } from '../entities/link/LinkModel';
 import { DiagramEngine } from '../DiagramEngine';
 
@@ -62,8 +62,56 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 
 		this.registerAction(
 			new Action({
+				type: InputType.TOUCH_START,
+				fire: (event: ActionEvent<TouchEvent, PortModel>) => {
+					this.port = this.engine.getMouseElement(event.event) as PortModel;
+					if (!this.config.allowLinksFromLockedPorts && this.port.isLocked()) {
+						this.eject();
+						return;
+					}
+					this.link = this.port.createLinkModel();
+
+					// if no link is given, just eject the state
+					if (!this.link) {
+						this.eject();
+						return;
+					}
+					this.link.setSelected(true);
+					this.link.setSourcePort(this.port);
+					this.engine.getModel().addLink(this.link);
+					this.port.reportPosition();
+				}
+			})
+		);
+
+		this.registerAction(
+			new Action({
 				type: InputType.MOUSE_UP,
 				fire: (event: ActionEvent<MouseEvent>) => {
+					const model = this.engine.getMouseElement(event.event);
+
+					// check to see if we connected to a new port
+					if (model instanceof PortModel) {
+						if (this.port.canLinkToPort(model)) {
+							this.link.setTargetPort(model);
+							model.reportPosition();
+							this.engine.repaintCanvas();
+							return;
+						}
+					}
+
+					if (this.isNearbySourcePort(event.event) || !this.config.allowLooseLinks) {
+						this.link.remove();
+						this.engine.repaintCanvas();
+					}
+				}
+			})
+		);
+
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_END,
+				fire: (event: ActionEvent<TouchEvent>) => {
 					const model = this.engine.getMouseElement(event.event);
 
 					// check to see if we connected to a new port
@@ -89,15 +137,25 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 	 * Checks whether the mouse event appears to happen in proximity of the link's source port
 	 * @param event
 	 */
-	isNearbySourcePort({ clientX, clientY }: MouseEvent): boolean {
+	isNearbySourcePort(event: MouseEvent | TouchEvent): boolean {
+		// @ts-ignore
 		const sourcePort = this.link.getSourcePort();
 		const sourcePortPosition = this.link.getSourcePort().getPosition();
 
-		return (
-			clientX >= sourcePortPosition.x &&
-			clientX <= sourcePortPosition.x + sourcePort.width &&
-			(clientY >= sourcePortPosition.y && clientY <= sourcePortPosition.y + sourcePort.height)
-		);
+		if (event instanceof TouchEvent) {
+			return (
+				event.touches[0].clientX >= sourcePortPosition.x &&
+				event.touches[0].clientX <= sourcePortPosition.x + sourcePort.width &&
+				(event.touches[0].clientY >= sourcePortPosition.y &&
+					event.touches[0].clientY <= sourcePortPosition.y + sourcePort.height)
+			);
+		} else {
+			return (
+				event.clientX >= sourcePortPosition.x &&
+				event.clientX <= sourcePortPosition.x + sourcePort.width &&
+				(event.clientY >= sourcePortPosition.y && event.clientY <= sourcePortPosition.y + sourcePort.height)
+			);
+		}
 	}
 
 	/**

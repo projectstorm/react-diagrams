@@ -3,7 +3,7 @@ import { FactoryBank } from './core/FactoryBank';
 import { AbstractReactFactory } from './core/AbstractReactFactory';
 import { LayerModel } from './entities/layer/LayerModel';
 import { BaseListener, BaseObserver } from './core/BaseObserver';
-import { MouseEvent } from 'react';
+import { MouseEvent, TouchEvent } from 'react';
 import { BaseModel } from './core-models/BaseModel';
 import { Point } from '@projectstorm/geometry';
 import { ActionEventBus } from './core-actions/ActionEventBus';
@@ -149,7 +149,7 @@ export class CanvasEngine<
 		return this.canvas;
 	}
 
-	getMouseElement(event: MouseEvent): BaseModel {
+	getMouseElement(event: MouseEvent | TouchEvent): BaseModel {
 		return null;
 	}
 

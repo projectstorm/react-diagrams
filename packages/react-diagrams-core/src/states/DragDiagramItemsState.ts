@@ -34,5 +34,30 @@ export class DragDiagramItemsState extends MoveItemsState<DiagramEngine> {
 				}
 			})
 		);
+
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_MOVE,
+				fire: (event: ActionEvent<TouchEvent>) => {
+					const item = this.engine.getMouseElement(event.event);
+					if (item instanceof PortModel) {
+						_.forEach(this.initialPositions, position => {
+							if (position.item instanceof PointModel) {
+								const link = position.item.getParent();
+								// only care about the last links
+								if (link.getLastPoint() !== position.item) {
+									return;
+								}
+								if (link.getSourcePort().canLinkToPort(item)) {
+									link.setTargetPort(item);
+									item.reportPosition();
+									this.engine.repaintCanvas();
+								}
+							}
+						});
+					}
+				}
+			})
+		);
 	}
 }

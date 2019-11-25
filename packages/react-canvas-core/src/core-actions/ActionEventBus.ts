@@ -1,5 +1,5 @@
 import { Action, ActionEvent, InputType } from './Action';
-import { KeyboardEvent, MouseEvent } from 'react';
+import { KeyboardEvent, MouseEvent, TouchEvent } from 'react';
 import * as _ from 'lodash';
 import { CanvasEngine } from '../CanvasEngine';
 import { BaseModel } from '../core-models/BaseModel';
@@ -38,7 +38,7 @@ export class ActionEventBus {
 		});
 	}
 
-	getModelForEvent(actionEvent: ActionEvent<MouseEvent>): BaseModel {
+	getModelForEvent(actionEvent: ActionEvent): BaseModel {
 		if (actionEvent.model) {
 			return actionEvent.model;
 		}
@@ -49,8 +49,12 @@ export class ActionEventBus {
 		const { event } = actionEvent;
 		if (event.type === 'mousedown') {
 			return this.getActionsForType(InputType.MOUSE_DOWN);
+		} else if (event.type === 'touchstart') {
+			return this.getActionsForType(InputType.TOUCH_START);
 		} else if (event.type === 'mouseup') {
 			return this.getActionsForType(InputType.MOUSE_UP);
+		} else if (event.type === 'touchend') {
+			return this.getActionsForType(InputType.TOUCH_END);
 		} else if (event.type === 'keydown') {
 			// store the recorded key
 			this.keys[(event as KeyboardEvent).key.toLowerCase()] = true;
@@ -61,6 +65,8 @@ export class ActionEventBus {
 			return this.getActionsForType(InputType.KEY_UP);
 		} else if (event.type === 'mousemove') {
 			return this.getActionsForType(InputType.MOUSE_MOVE);
+		} else if (event.type === 'touchmove') {
+			return this.getActionsForType(InputType.TOUCH_MOVE);
 		} else if (event.type === 'wheel') {
 			return this.getActionsForType(InputType.MOUSE_WHEEL);
 		}
