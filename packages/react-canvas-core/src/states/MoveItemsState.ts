@@ -31,6 +31,19 @@ export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends Abstr
 				}
 			})
 		);
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_START,
+				fire: (event: ActionEvent<React.TouchEvent>) => {
+					const element = this.engine.getActionEventBus().getModelForEvent(event);
+					if (!element.isSelected()) {
+						this.engine.getModel().clearSelection();
+					}
+					element.setSelected(true);
+					this.engine.repaintCanvas();
+				}
+			})
+		);
 	}
 
 	activated(previous: State) {

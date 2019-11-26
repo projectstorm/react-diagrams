@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { PointModel } from '../entities/link/PointModel';
 import { DiagramEngine } from '../DiagramEngine';
 import { PortModel } from '../entities/port/PortModel';
-import { MouseEvent } from 'react';
+import { MouseEvent, TouchEvent } from 'react';
 import { LinkModel } from '../entities/link/LinkModel';
 
 export class DragDiagramItemsState extends MoveItemsState<DiagramEngine> {
@@ -37,7 +37,7 @@ export class DragDiagramItemsState extends MoveItemsState<DiagramEngine> {
 
 		this.registerAction(
 			new Action({
-				type: InputType.TOUCH_MOVE,
+				type: InputType.TOUCH_END,
 				fire: (event: ActionEvent<TouchEvent>) => {
 					const item = this.engine.getMouseElement(event.event);
 					if (item instanceof PortModel) {

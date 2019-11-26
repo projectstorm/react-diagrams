@@ -113,10 +113,12 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 				type: InputType.TOUCH_END,
 				fire: (event: ActionEvent<TouchEvent>) => {
 					const model = this.engine.getMouseElement(event.event);
-
+					console.log(model);
 					// check to see if we connected to a new port
 					if (model instanceof PortModel) {
+						console.log('linking?');
 						if (this.port.canLinkToPort(model)) {
+							console.log('linking !');
 							this.link.setTargetPort(model);
 							model.reportPosition();
 							this.engine.repaintCanvas();
@@ -142,7 +144,7 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 		const sourcePort = this.link.getSourcePort();
 		const sourcePortPosition = this.link.getSourcePort().getPosition();
 
-		if (event instanceof TouchEvent) {
+		if (event.touches && event.touches[0]) {
 			return (
 				event.touches[0].clientX >= sourcePortPosition.x &&
 				event.touches[0].clientX <= sourcePortPosition.x + sourcePort.width &&
