@@ -134,6 +134,16 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	addPort(port: PortModel): PortModel {
 		port.setParent(this);
 		this.ports[port.getName()] = port;
+
+		port.registerListener({
+			portLinkRemoved: event => {
+				this.fireEvent({ ...event, port }, 'nodeLinkRemoved');
+			},
+			portLinkAdded: event => {
+				this.fireEvent({ ...event, port }, 'nodeLinkAdded');
+			}
+		});
+
 		return port;
 	}
 

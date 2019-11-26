@@ -59,6 +59,9 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			this.props.link.addPoint(point, index);
 			event.persist();
 			event.stopPropagation();
+
+			this.props.link.fireEvent({ link: this.props.link }, 'newPointCreated');
+
 			this.forceUpdate(() => {
 				this.props.diagramEngine.getActionEventBus().fireAction({
 					event,
