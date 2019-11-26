@@ -27,15 +27,10 @@ export interface CanvasEngineOptions {
 	registerDefaultDeleteItemsAction?: boolean;
 	registerDefaultZoomCanvasAction?: boolean;
 	/**
-	 * If set to true debounce the `repaintCanvas` method
+	 * Defines the debounce wait time in milliseconds if > 0
 	 */
-	repaintDebounce?: boolean
-	/**
-	 * Defines the debounce wait time in milliseconds
-	 */
-	repaintDebounceMs?: number,
+	repaintDebounceMs?: number;
 }
-
 
 export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 	M extends CanvasModel = CanvasModel> extends BaseObserver<L> {
@@ -60,7 +55,6 @@ export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 		this.options = {
 			registerDefaultDeleteItemsAction: true,
 			registerDefaultZoomCanvasAction: true,
-			repaintDebounce: false,
 			repaintDebounceMs: 0,
 			...options
 		};
@@ -131,7 +125,7 @@ export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 	repaintCanvas(promise: true): Promise<any>;
 	repaintCanvas(): void;
 	repaintCanvas(promise?): Promise<any> | void {
-		const { repaintDebounce, repaintDebounceMs } = this.options;
+		const { repaintDebounceMs } = this.options;
 
 		/**
 		 * The actual repaint function
@@ -144,8 +138,12 @@ export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
 			});
 		};
 
-		// if repaintDebounce is set to true, debounce the 'repaint' function by the milliseconds defined by repaintDebounceMs
-		const repaintFn = repaintDebounce ? debounce(repaint, repaintDebounceMs) : repaint;
+		// if the `repaintDebounceMs` option is > 0, then apply the debounce
+		let repaintFn = repaint;
+
+		if (repaintDebounceMs > 0) {
+			repaintFn = debounce(repaint, repaintDebounceMs);
+		}
 
 		if (promise) {
 			return new Promise(resolve => {

@@ -5,7 +5,6 @@ import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
-
 /**
  * Tests the grid size
  */
