@@ -26,7 +26,7 @@
 		"links",
 		"nodes"
 	],
-	"main": "./dist/index.js",
+	"main": "./dist/index.min.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
 		"@projectstorm/geometry": "^6.0.1-beta.6",
