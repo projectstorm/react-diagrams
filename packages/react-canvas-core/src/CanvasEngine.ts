@@ -32,8 +32,10 @@ export interface CanvasEngineOptions {
 	repaintDebounceMs?: number;
 }
 
-export class CanvasEngine<L extends CanvasEngineListener = CanvasEngineListener,
-	M extends CanvasModel = CanvasModel> extends BaseObserver<L> {
+export class CanvasEngine<
+	L extends CanvasEngineListener = CanvasEngineListener,
+	M extends CanvasModel = CanvasModel
+> extends BaseObserver<L> {
 	protected model: M;
 	protected layerFactories: FactoryBank<AbstractReactFactory<LayerModel>>;
 	protected canvas: HTMLDivElement;
