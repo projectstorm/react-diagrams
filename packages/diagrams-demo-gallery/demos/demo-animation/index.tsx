@@ -1,10 +1,9 @@
-import createEngine, { DiagramModel, DefaultNodeModel, NodeModel } from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
-import * as _ from 'lodash';
-import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
+import gsap from 'gsap';
+import { DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
-import gsap from 'gsap';
 
 /**
  * Tests the grid size
@@ -28,7 +27,7 @@ class NodeDelayedPosition extends React.Component<any, any> {
 
 export default () => {
 	//1) setup the diagram engine
-	var engine = createEngine();
+	var engine = createEngine({ repaintDebounceMs: 12 });
 
 	//2) setup the diagram model
 	var model = new DiagramModel();

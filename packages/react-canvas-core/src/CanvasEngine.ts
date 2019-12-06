@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import { CanvasModel } from './entities/canvas/CanvasModel';
 import { FactoryBank } from './core/FactoryBank';
 import { AbstractReactFactory } from './core/AbstractReactFactory';
@@ -19,9 +20,16 @@ export interface CanvasEngineListener extends BaseListener {
 	rendered?(): void;
 }
 
+/**
+ * Defines the CanvasEngine options
+ */
 export interface CanvasEngineOptions {
 	registerDefaultDeleteItemsAction?: boolean;
 	registerDefaultZoomCanvasAction?: boolean;
+	/**
+	 * Defines the debounce wait time in milliseconds if > 0
+	 */
+	repaintDebounceMs?: number;
 }
 
 export class CanvasEngine<
@@ -42,9 +50,14 @@ export class CanvasEngine<
 		this.stateMachine = new StateMachine(this);
 		this.layerFactories = new FactoryBank();
 		this.registerFactoryBank(this.layerFactories);
+
+		/**
+		 * Overrides the standard options with the possible given options
+		 */
 		this.options = {
 			registerDefaultDeleteItemsAction: true,
 			registerDefaultZoomCanvasAction: true,
+			repaintDebounceMs: 0,
 			...options
 		};
 		if (this.options.registerDefaultZoomCanvasAction === true) {
@@ -114,6 +127,11 @@ export class CanvasEngine<
 	repaintCanvas(promise: true): Promise<any>;
 	repaintCanvas(): void;
 	repaintCanvas(promise?): Promise<any> | void {
+		const { repaintDebounceMs } = this.options;
+
+		/**
+		 * The actual repaint function
+		 */
 		const repaint = () => {
 			this.iterateListeners(listener => {
 				if (listener.repaintCanvas) {
@@ -121,6 +139,13 @@ export class CanvasEngine<
 				}
 			});
 		};
+
+		// if the `repaintDebounceMs` option is > 0, then apply the debounce
+		let repaintFn = repaint;
+
+		if (repaintDebounceMs > 0) {
+			repaintFn = debounce(repaint, repaintDebounceMs);
+		}
 
 		if (promise) {
 			return new Promise(resolve => {
@@ -130,10 +155,11 @@ export class CanvasEngine<
 						l.deregister();
 					}
 				} as L);
-				repaint();
+				repaintFn();
 			});
 		}
-		repaint();
+
+		repaintFn();
 	}
 
 	setCanvas(canvas?: HTMLDivElement) {
