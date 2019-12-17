@@ -98,14 +98,16 @@ export class BaseModel<G extends BaseModelGenerics = BaseModelGenerics> extends 
 	}
 
 	setSelected(selected: boolean = true) {
-		this.options.selected = selected;
+		if (this.options.selected !== selected) {
+			this.options.selected = selected;
 
-		this.fireEvent(
-			{
-				isSelected: selected
-			},
-			'selectionChanged'
-		);
+			this.fireEvent(
+				{
+					isSelected: selected
+				},
+				'selectionChanged'
+			);
+		}
 	}
 
 	remove() {

@@ -58,6 +58,8 @@ export class SelectionBoxState extends AbstractDisplacementState {
 				const bounds = ((model as unknown) as ModelGeometryInterface).getBoundingBox();
 				if (rect.containsPoint(bounds.getTopLeft()) && rect.containsPoint(bounds.getBottomRight())) {
 					model.setSelected(true);
+				} else {
+					model.setSelected(false);
 				}
 			}
 		}
