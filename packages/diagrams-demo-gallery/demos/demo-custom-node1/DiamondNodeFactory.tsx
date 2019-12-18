@@ -1,4 +1,4 @@
-import { DiamonNodeWidget } from './DiamondNodeWidget';
+import { DiamondNodeWidget } from './DiamondNodeWidget';
 import { DiamondNodeModel } from './DiamondNodeModel';
 import * as React from 'react';
 import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
@@ -10,7 +10,7 @@ export class DiamondNodeFactory extends AbstractReactFactory<DiamondNodeModel, D
 	}
 
 	generateReactWidget(event): JSX.Element {
-		return <DiamonNodeWidget engine={this.engine} size={50} node={event.model} />;
+		return <DiamondNodeWidget engine={this.engine} size={50} node={event.model} />;
 	}
 
 	generateModel(event) {
