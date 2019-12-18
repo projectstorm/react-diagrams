@@ -66,10 +66,12 @@ storiesOf('Advanced Techniques', module)
 
 import demo_cust_nodes from './demos/demo-custom-node1';
 import demo_cust_links from './demos/demo-custom-link1';
+import demo_cust_links2 from './demos/demo-custom-link2';
 
 storiesOf('Custom Models', module)
 	.add('Custom diamond node', demo_cust_nodes)
-	.add('Custom animated links', demo_cust_links);
+	.add('Custom animated links', demo_cust_links)
+	.add('Custom link ends (arrows)', demo_cust_links2);
 
 import demo_3rd_dagre from './demos/demo-dagre';
 import demo_gsap from './demos/demo-animation';
