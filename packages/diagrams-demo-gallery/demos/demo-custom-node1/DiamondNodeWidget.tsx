@@ -3,7 +3,7 @@ import { DiamondNodeModel } from './DiamondNodeModel';
 import { DiagramEngine, PortModelAlignment, PortWidget } from '@projectstorm/react-diagrams';
 import styled from '@emotion/styled';
 
-export interface DiamonNodeWidgetProps {
+export interface DiamondNodeWidgetProps {
 	node: DiamondNodeModel;
 	engine: DiagramEngine;
 	size?: number;
@@ -27,7 +27,7 @@ namespace S {
 /**
  * @author Dylan Vorster
  */
-export class DiamonNodeWidget extends React.Component<DiamonNodeWidgetProps> {
+export class DiamondNodeWidget extends React.Component<DiamondNodeWidgetProps> {
 	render() {
 		return (
 			<div
