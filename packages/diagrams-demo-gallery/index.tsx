@@ -35,6 +35,7 @@ import demo_labels from './demos/demo-labelled-links';
 import demo_dynamic_ports from './demos/demo-dynamic-ports';
 import demo_alternative_linking from './demos/demo-alternative-linking';
 import demo_custom_delete_keys from './demos/demo-custom_delete_keys';
+import demo_custom_action from './demos/demo-custom-action';
 
 storiesOf('Simple Usage', module)
 	.add('Simple example', demo_simple)
@@ -68,10 +69,11 @@ import demo_cust_nodes from './demos/demo-custom-node1';
 import demo_cust_links from './demos/demo-custom-link1';
 import demo_cust_links2 from './demos/demo-custom-link2';
 
-storiesOf('Custom Models', module)
+storiesOf('Customization', module)
 	.add('Custom diamond node', demo_cust_nodes)
 	.add('Custom animated links', demo_cust_links)
-	.add('Custom link ends (arrows)', demo_cust_links2);
+	.add('Custom link ends (arrows)', demo_cust_links2)
+	.add('Custom event', demo_custom_action);
 
 import demo_3rd_dagre from './demos/demo-dagre';
 import demo_gsap from './demos/demo-animation';
