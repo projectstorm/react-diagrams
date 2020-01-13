@@ -8,6 +8,6 @@ export interface BodyWidgetProps {
 
 export class BodyWidget extends React.Component<BodyWidgetProps> {
 	render() {
-		return <CanvasWidget className="diagram-container" engine={this.props.engine} />;
+		return <CanvasWidget svgLayerStyles={{background: 'yellow'}} className="diagram-container" engine={this.props.engine} />;
 	}
 }

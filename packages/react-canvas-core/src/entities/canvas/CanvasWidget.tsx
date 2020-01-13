@@ -6,6 +6,7 @@ import { SmartLayerWidget } from '../layer/SmartLayerWidget';
 
 export interface DiagramProps {
 	engine: CanvasEngine;
+	svgLayerStyles?: {};
 	className?: string;
 }
 
@@ -93,7 +94,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 				}}>
 				{model.getLayers().map(layer => {
 					return (
-						<TransformLayerWidget layer={layer} key={layer.getID()}>
+						<TransformLayerWidget svgLayerStyles={this.props.svgLayerStyles} layer={layer} key={layer.getID()}>
 							<SmartLayerWidget layer={layer} engine={this.props.engine} key={layer.getID()} />
 						</TransformLayerWidget>
 					);
