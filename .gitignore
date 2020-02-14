@@ -1,8 +1,7 @@
-dist
 .DS_Store
 .idea
 .out
 *.zip
 .env
 node_modules
-yarn-error.log
+yarn-error.logs
