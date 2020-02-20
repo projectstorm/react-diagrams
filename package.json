@@ -84,6 +84,7 @@
 		"react-syntax-highlighter": "^11.0.2",
 		"react-test-renderer": "^16.8.6",
 		"resize-observer-polyfill": "^1.5.1",
+		"rimraf": "^3.0.2",
 		"source-map-loader": "^0.2.4",
 		"storybook-host": "^5.1.0",
 		"storybook-readme": "^5.0.5",
