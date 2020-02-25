@@ -82,6 +82,10 @@ Take a look at the [diagram demos](https://github.com/projectstorm/react-diagram
 
 Take a look at the [demo project](https://github.com/projectstorm/react-diagrams/tree/master/packages/diagrams-demo-project) which contains an example for ES6 as well as Typescript
 
+**or**
+
+[Checkout the docs](https://projectstorm.gitbook.io/react-diagrams/)
+
 ## Run the demos
 
 After running `yarn install` you must then run: `cd packages/diagrams-demo-gallery && yarn run start`
@@ -90,5 +94,5 @@ After running `yarn install` you must then run: `cd packages/diagrams-demo-galle
 
 Simply run `yarn build` or `yarn build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 
-## [Checkout the docs](https://projectstorm.gitbook.io/react-diagrams/)
-
+## Built with react-diagrams
+> Do you have an interesting project built with *react-diagrams*? PR it into this section for others to see.
