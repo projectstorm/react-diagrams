@@ -21,6 +21,7 @@
 	],
 	"scripts": {
 		"build": "yarn build:clean && lerna run build --stream",
+		"build:es": "lerna run build:es --stream",
 		"build:prod": "yarn build:clean && lerna run build:prod --stream",
 		"watch": "yarn build:clean && lerna run watch --stream",
 		"publish:dev": "yarn build:prod && lerna publish --force-publish --dist-tag=next",

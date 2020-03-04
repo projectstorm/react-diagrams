@@ -3,6 +3,6 @@ module.exports = {
 	...config,
 	output: {
 		...config.output,
-		library: 'projectstorm/react-diagrams-gemoetry'
+		library: '@projectstorm/react-diagrams-geometry'
 	}
 };
