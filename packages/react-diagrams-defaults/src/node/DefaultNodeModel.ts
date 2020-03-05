@@ -44,9 +44,9 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 	removePort(port: DefaultPortModel): void {
 		super.removePort(port);
 		if (port.getOptions().in) {
-			this.portsIn.splice(this.portsIn.indexOf(port));
+			this.portsIn.splice(this.portsIn.indexOf(port), 1);
 		} else {
-			this.portsOut.splice(this.portsOut.indexOf(port));
+			this.portsOut.splice(this.portsOut.indexOf(port), 1);
 		}
 	}
 
