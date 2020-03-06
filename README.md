@@ -10,10 +10,6 @@
 
 **DOCS \(wip\)** [https://projectstorm.gitbook.io/react-diagrams](https://projectstorm.gitbook.io/react-diagrams)
 
-## \[! BETA NOTICE !\]
-
-Version 6 is now in Beta, please let us know if you find anything inconsistent so we can try and get ready for a final release. Everything in master here represents 6.0, [if you are looking for the stable and old version 5, please go here](https://github.com/projectstorm/react-diagrams/tree/v5.3.2) :\)
-
 Docs are currently being worked on, along with a migration path.
 
 ## What
