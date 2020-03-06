@@ -92,7 +92,7 @@ After running `yarn install` you must then run: `cd packages/diagrams-demo-galle
 
 ## Building from source
 
-Simply run `yarn build` or `yarn build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
+Simply run `yarn` then `yarn build` or `yarn build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 
 ## Built with react-diagrams
 > Do you have an interesting project built with *react-diagrams*? PR it into this section for others to see.
