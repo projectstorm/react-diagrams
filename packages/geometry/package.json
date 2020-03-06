@@ -10,7 +10,8 @@
 	"scripts": {
 		"clean": "rimraf ./dist",
 		"build": "../../node_modules/.bin/webpack",
-		"build:prod": "NODE_ENV=production ../../node_modules/.bin/webpack"
+		"build:es": "../../node_modules/.bin/tsc",
+		"build:prod": "NODE_ENV=production ../../node_modules/.bin/webpack && NODE_ENV=production ../../node_modules/.bin/tsc"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -27,6 +28,7 @@
 		"nodes"
 	],
 	"main": "./dist/index.js",
+	"module": "./dist/es/index.js",
 	"typings": "./dist/@types/index",
 	"peerDependencies": {
 		"mathjs": "^6.0.3"

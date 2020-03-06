@@ -3,16 +3,16 @@
 	"compilerOptions": {
 		"suppressExcessPropertyErrors": true,
 		"declaration": false,
-		"outDir": "dist/@types",
 		"strictNullChecks": false,
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"jsx": "react",
-		"target": "es6",
+		"target": "ES6",
 		"module": "commonjs",
+		"strict": false,
 		"lib": [
-			"dom",
-			"es6"
+			"DOM",
+			"ES6"
 		]
 	},
 	"include": [

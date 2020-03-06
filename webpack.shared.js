@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = (directory) => {
 	return {
-		entry: path.join(directory, 'index.ts'),
+		entry: path.join(directory, './src/index.ts'),
 		output: {
 			filename: "index.js",
 			path: path.join(directory, 'dist'),
@@ -13,7 +13,7 @@ module.exports = (directory) => {
 		},
 		externals: [
 			nodeExternals({modulesDir: path.join(directory, 'node_modules')}),
-			nodeExternals({modulesDir: path.join(__dirname, 'node_modules')})
+			nodeExternals({modulesDir: path.join(__dirname, 'node_modules')}),
 		],
 		module: {
 			rules: [
@@ -24,7 +24,7 @@ module.exports = (directory) => {
 				},
 				{
 					test: /\.tsx?$/,
-					loader: "ts-loader"
+					loader: "ts-loader",
 				}
 			]
 		},
