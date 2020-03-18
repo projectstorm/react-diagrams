@@ -35,6 +35,6 @@ export class JSCustomNodeModel extends NodeModel {
 
 	deserialize(ob, engine) {
 		super.deserialize(ob, engine);
-		this.color = ob.color;
+		this.options.color = ob.data.color;
 	}
 }
