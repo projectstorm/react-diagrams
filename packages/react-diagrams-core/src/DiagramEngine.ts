@@ -2,7 +2,7 @@ import { NodeModel } from './entities/node/NodeModel';
 import { PortModel } from './entities/port/PortModel';
 import { LinkModel } from './entities/link/LinkModel';
 import { LabelModel } from './entities/label/LabelModel';
-import { Point, Rectangle } from '@projectstorm/geometry';
+import { Point, Rectangle, Polygon } from '@projectstorm/geometry';
 import { MouseEvent } from 'react';
 import {
 	AbstractModelFactory,
@@ -208,6 +208,81 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 			width: nodeRect.width,
 			height: nodeRect.height
 		};
+	}
+
+	/**
+	 * Get nodes bounding box coordinates with or without margin
+	 * @returns rectangle points in node layer coordinates
+	 */
+	getBoundingNodesRect(nodes: NodeModel[], margin?: number): Rectangle {
+		if (nodes) {
+			if (nodes.length === 0) {
+				return new Rectangle(0, 0, 0, 0);
+			}
+
+			let boundingBox = Polygon.boundingBoxFromPolygons(nodes.map(node => node.getBoundingBox()));
+			if (margin) {
+				return new Rectangle(
+					boundingBox.getTopLeft().x - margin,
+					boundingBox.getTopLeft().y - margin,
+					boundingBox.getWidth() + 2 * margin,
+					boundingBox.getHeight() + 2 * margin
+				);
+			}
+			return boundingBox;
+		}
+	}
+
+	zoomToFitNodes(margin?: number) {
+		let nodesRect; // nodes bounding rectangle
+		let selectedNodes = this.model
+			.getSelectedEntities()
+			.filter(entity => entity instanceof NodeModel)
+			.map(node => node) as NodeModel[];
+
+		// no node selected
+		if (selectedNodes.length == 0) {
+			let allNodes = this.model
+				.getSelectionEntities()
+				.filter(entity => entity instanceof NodeModel)
+				.map(node => node) as NodeModel[];
+
+			// get nodes bounding box with margin
+			nodesRect = this.getBoundingNodesRect(allNodes, margin);
+		} else {
+			// get nodes bounding box with margin
+			nodesRect = this.getBoundingNodesRect(selectedNodes, margin);
+		}
+
+		if (nodesRect) {
+			// there is something we should zoom on
+			let canvasRect = this.canvas.getBoundingClientRect();
+			let canvasTopLeftPoint = {
+				x: canvasRect.left,
+				y: canvasRect.top
+			};
+			let nodeLayerTopLeftPoint = {
+				x: canvasTopLeftPoint.x + this.getModel().getOffsetX(),
+				y: canvasTopLeftPoint.y + this.getModel().getOffsetY()
+			};
+
+			const xFactor = this.canvas.clientWidth / nodesRect.getWidth();
+			const yFactor = this.canvas.clientHeight / nodesRect.getHeight();
+			const zoomFactor = xFactor < yFactor ? xFactor : yFactor;
+
+			this.model.setZoomLevel(zoomFactor * 100);
+
+			let nodesRectTopLeftPoint = {
+				x: nodeLayerTopLeftPoint.x + nodesRect.getTopLeft().x * zoomFactor,
+				y: nodeLayerTopLeftPoint.y + nodesRect.getTopLeft().y * zoomFactor
+			};
+
+			this.model.setOffset(
+				this.model.getOffsetX() + canvasTopLeftPoint.x - nodesRectTopLeftPoint.x,
+				this.model.getOffsetY() + canvasTopLeftPoint.y - nodesRectTopLeftPoint.y
+			);
+			this.repaintCanvas();
+		}
 	}
 
 	getMaxNumberPointsPerLink(): number {
