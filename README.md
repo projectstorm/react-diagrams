@@ -20,7 +20,7 @@ A flow & process orientated diagramming library inspired by **Blender**, **Labvi
 * **Hackable and extensible** the entire library including its core can be extended, rewired and re-assembled into fundamentally different software to suit your own software needs.
 * **HTML nodes as a first class citizen** the library was originally written to represent advanced dynamic nodes, that are difficult to represent as SVG's due to complex input requirements ux requirements.
 * **Designed for process** the library is aimed for software engineers that want to rewire their programs at runtime, and that want to make their software more dynamic.
-* **Fast diagram editing** the defaults provided give the heighest priority to editing diagrams as fast as possible.
+* **Fast diagram editing** the defaults provided give the highest priority to editing diagrams as fast as possible.
 
 ## Gallery
 
