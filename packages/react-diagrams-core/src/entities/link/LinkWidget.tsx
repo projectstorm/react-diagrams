@@ -47,6 +47,8 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 
 	installTarget() {
 		this.targetListener && this.targetListener.deregister();
+
+		if (!this.props.link.getTargetPort()) return;
 		this.targetListener = this.props.link.getTargetPort().registerListener({
 			reportInitialPosition: (event: BaseEntityEvent<BasePositionModel>) => {
 				this.forceUpdate();
@@ -56,6 +58,8 @@ export class LinkWidget extends React.Component<LinkProps, LinkState> {
 
 	installSource() {
 		this.sourceListener && this.sourceListener.deregister();
+
+		if (!this.props.link.getSourcePort()) return;
 		this.sourceListener = this.props.link.getSourcePort().registerListener({
 			reportInitialPosition: (event: BaseEntityEvent<BasePositionModel>) => {
 				this.forceUpdate();
