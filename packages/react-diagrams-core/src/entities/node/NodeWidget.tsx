@@ -36,6 +36,9 @@ export class NodeWidget extends React.Component<NodeProps> {
 	componentWillUnmount(): void {
 		this.ob.disconnect();
 		this.ob = null;
+
+		this.listener.deregister();
+		this.listener = null;
 	}
 
 	componentDidUpdate(prevProps: Readonly<NodeProps>, prevState: Readonly<any>, snapshot?: any): void {
