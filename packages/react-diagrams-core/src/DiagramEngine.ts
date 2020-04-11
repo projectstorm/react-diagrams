@@ -3,7 +3,7 @@ import { PortModel } from './entities/port/PortModel';
 import { LinkModel } from './entities/link/LinkModel';
 import { LabelModel } from './entities/label/LabelModel';
 import { Point, Rectangle } from '@projectstorm/geometry';
-import { MouseEvent } from 'react';
+import { MouseEvent, TouchEvent } from 'react';
 import {
 	AbstractModelFactory,
 	AbstractReactFactory,
@@ -58,7 +58,21 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 	 */
 	getMouseElement(event: MouseEvent): BaseModel {
 		var target = event.target as Element;
-		var diagramModel = this.model;
+
+		return this.getElement(target);
+	}
+
+	getTouchElement(event: TouchEvent): BaseModel {
+		let x = event.touches.length > 0 ? event.touches[0].clientX : event.changedTouches[0].clientX;
+		let y = event.touches.length > 0 ? event.touches[0].clientY : event.changedTouches[0].clientY;
+
+		const target = document.elementFromPoint(x, y);
+
+		return this.getElement(target);
+	}
+
+	getElement(target: Element): BaseModel {
+		const diagramModel = this.model;
 
 		//is it a port
 		var element = Toolkit.closest(target, '.port[data-name]');
