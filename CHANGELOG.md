@@ -1,3 +1,12 @@
+__6.1.0__ 
+
+* (feature) https://github.com/projectstorm/react-diagrams/pull/576 [Add zoom to fit nodes feature, fixes #568]
+* (improvement) https://github.com/projectstorm/react-diagrams/pull/621 [Support deriving from DefaultLabelModel]
+* (fix) https://github.com/projectstorm/react-diagrams/pull/603 
+   [Fixes selectionChanged listener not being deregistered on NodeWidget, Fixes unchecked access to this.props.link.getSourcePort() on LinkWidget]
+* (maintenance) bump everything
+* fix serialize/deserialize issue with example project raw JS node
+
 __6.0.0__ 
 
 Note: This is a complete rewrite of the library, a good place to start to see how the new system works
