@@ -31,6 +31,7 @@ import demo_locks from './demos/demo-locks';
 import demo_grid from './demos/demo-grid';
 import demo_listeners from './demos/demo-listeners';
 import demo_zoom from './demos/demo-zoom-to-fit';
+import demo_zoom_nodes from './demos/demo-zoom-to-fit-nodes';
 import demo_labels from './demos/demo-labelled-links';
 import demo_dynamic_ports from './demos/demo-dynamic-ports';
 import demo_alternative_linking from './demos/demo-alternative-linking';
@@ -45,6 +46,7 @@ storiesOf('Simple Usage', module)
 	.add('Canvas grid size', demo_grid)
 	.add('Events and listeners', demo_listeners)
 	.add('Zoom to fit', demo_zoom)
+	.add('Zoom to fit nodes', demo_zoom_nodes)
 	.add('Dynamic ports', demo_dynamic_ports)
 	.add('Links with labels', demo_labels);
 
