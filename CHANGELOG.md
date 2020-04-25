@@ -1,4 +1,4 @@
-__6.1.0__ 
+__6.1.1__ 
 
 * (feature) https://github.com/projectstorm/react-diagrams/pull/576 [Add zoom to fit nodes feature, fixes #568]
 * (improvement) https://github.com/projectstorm/react-diagrams/pull/621 [Support deriving from DefaultLabelModel]
