@@ -29,7 +29,7 @@ export class JSCustomNodeModel extends NodeModel {
 	serialize() {
 		return {
 			...super.serialize(),
-			color: this.options.color
+			color: this.color
 		};
 	}
 

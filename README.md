@@ -31,7 +31,7 @@ Example implementation using custom models: \(Dylan's personal code\)
 
 Get started with the default models right out of the box:
 
-![](docs/images/example3.jpg)
+![](.gitbook/assets/example3.jpg)
 
 ## Installing
 
