@@ -12,9 +12,9 @@ export interface DefaultLabelModelGenerics extends LabelModelGenerics {
 export class DefaultLabelModel extends LabelModel<DefaultLabelModelGenerics> {
 	constructor(options: DefaultLabelModelOptions = {}) {
 		super({
-			...options,
 			offsetY: options.offsetY == null ? -23 : options.offsetY,
-			type: 'default'
+			type: 'default',
+			...options
 		});
 	}
 
