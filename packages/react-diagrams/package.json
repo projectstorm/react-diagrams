@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams",
-	"version": "6.0.2",
+	"version": "6.1.0",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"repository": {
@@ -31,9 +31,9 @@
 	"module": "./dist/es/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-core": "^6.0.2",
-		"@projectstorm/react-diagrams-defaults": "^6.0.2",
-		"@projectstorm/react-diagrams-routing": "^6.0.2"
+		"@projectstorm/react-diagrams-core": "^6.1.0",
+		"@projectstorm/react-diagrams-defaults": "^6.1.0",
+		"@projectstorm/react-diagrams-routing": "^6.1.0"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }
