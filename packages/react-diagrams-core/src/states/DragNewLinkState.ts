@@ -71,12 +71,14 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 						if (this.port.canLinkToPort(model)) {
 							this.link.setTargetPort(model);
 							model.reportPosition();
+							this.engine.repaintCanvas();
+							return;
 						}
 						else if(this.isNearbySourcePort(event.event)) {
 							this.link.remove();
+							this.engine.repaintCanvas();
+							return;
 						}
-						this.engine.repaintCanvas();
-						return;
 					}
 					if (!this.config.allowLooseLinks) {
 						this.link.remove();
