@@ -1,6 +1,6 @@
 import { Point } from './Point';
 import * as _ from 'lodash';
-import { Matrix } from 'mathjs';
+import { Matrix } from 'ml-matrix'
 
 export class Polygon {
 	protected points: Point[];

@@ -31,7 +31,7 @@
 	"module": "./dist/es/index.js",
 	"typings": "./dist/@types/index",
 	"peerDependencies": {
-		"mathjs": "^6.0.3"
+		"ml-matrix": "^6.5.0"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }
