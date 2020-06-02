@@ -1,5 +1,4 @@
-import { Point } from './Point';
-import { Polygon } from './Polygon';
+import { Point, Polygon } from './index';
 
 export class Rectangle extends Polygon {
 	constructor(tl: Point, tr: Point, br: Point, bl: Point);
