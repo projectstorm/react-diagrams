@@ -41,7 +41,7 @@ export interface ListenerHandle {
 	/**
 	 * Original Listener
 	 */
-	listner: BaseListener;
+	listener: BaseListener;
 }
 
 /**
@@ -55,7 +55,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 	}
 
 	private fireEventInternal(fire: boolean, k: keyof L, event: BaseEvent) {
-		this.iterateListeners(listener => {
+		this.iterateListeners((listener) => {
 			// returning false here will instruct itteration to stop
 			if (!fire && !event.firing) {
 				return false;
@@ -73,13 +73,13 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 			stopPropagation: () => {
 				event.firing = false;
 			},
-			...event
+			...event,
 		};
 
 		// fire pre
 		this.fireEventInternal(true, 'eventWillFire', {
 			...event,
-			function: k
+			function: k,
 		} as BaseEventProxy);
 
 		// fire main event
@@ -88,7 +88,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		// fire post
 		this.fireEventInternal(true, 'eventDidFire', {
 			...event,
-			function: k
+			function: k,
 		} as BaseEventProxy);
 	}
 
@@ -107,10 +107,10 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 			if (this.listeners[id] === listener) {
 				return {
 					id: id,
-					listner: listener,
+					listener: listener,
 					deregister: () => {
 						delete this.listeners[id];
-					}
+					},
 				};
 			}
 		}
@@ -121,10 +121,10 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		this.listeners[id] = listener;
 		return {
 			id: id,
-			listner: listener,
+			listener: listener,
 			deregister: () => {
 				delete this.listeners[id];
-			}
+			},
 		};
 	}
 
