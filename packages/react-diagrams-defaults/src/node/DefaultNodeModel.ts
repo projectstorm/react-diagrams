@@ -94,10 +94,10 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 		super.deserialize(event);
 		this.options.name = event.data.name;
 		this.options.color = event.data.color;
-		this.portsIn = _.map(event.data.portsInOrder, id => {
+		this.portsIn = _.map(event.data.portsInOrder, (id) => {
 			return this.getPortFromID(id);
 		}) as DefaultPortModel[];
-		this.portsOut = _.map(event.data.portsOutOrder, id => {
+		this.portsOut = _.map(event.data.portsOutOrder, (id) => {
 			return this.getPortFromID(id);
 		}) as DefaultPortModel[];
 	}
@@ -107,10 +107,10 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 			...super.serialize(),
 			name: this.options.name,
 			color: this.options.color,
-			portsInOrder: _.map(this.portsIn, port => {
+			portsInOrder: _.map(this.portsIn, (port) => {
 				return port.getID();
 			}),
-			portsOutOrder: _.map(this.portsOut, port => {
+			portsOutOrder: _.map(this.portsOut, (port) => {
 				return port.getID();
 			})
 		};

@@ -50,7 +50,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 
 	componentDidUpdate(): void {
 		this.props.link.setRenderedPaths(
-			this.refPaths.map(ref => {
+			this.refPaths.map((ref) => {
 				return ref.current;
 			})
 		);
@@ -58,7 +58,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 
 	componentDidMount(): void {
 		this.props.link.setRenderedPaths(
-			this.refPaths.map(ref => {
+			this.refPaths.map((ref) => {
 				return ref.current;
 			})
 		);
@@ -80,7 +80,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 				factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
 				link={this.props.link}
 				forwardRef={ref}
-				onSelection={selected => {
+				onSelection={(selected) => {
 					this.setState({ selected: selected });
 				}}
 				extras={extraProps}
@@ -173,11 +173,11 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		this.props.link.setFirstAndLastPathsDirection();
 	}
 
-	handleMove = function(event: MouseEvent) {
+	handleMove = function (event: MouseEvent) {
 		this.draggingEvent(event, this.dragging_index);
 	}.bind(this);
 
-	handleUp = function(event: MouseEvent) {
+	handleUp = function (event: MouseEvent) {
 		// Unregister handlers to avoid multiple event handlers for other links
 		this.setState({ canDrag: false, selected: false });
 		window.removeEventListener('mousemove', this.handleMove);
@@ -202,7 +202,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 
 		// When new link add one middle point to get everywhere 90° angle
 		if (this.props.link.getTargetPort() === null && points.length === 2) {
-			[...Array(2)].forEach(item => {
+			[...Array(2)].forEach((item) => {
 				this.props.link.addPoint(
 					new PointModel({
 						link: this.props.link,

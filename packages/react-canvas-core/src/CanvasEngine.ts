@@ -87,10 +87,10 @@ export class CanvasEngine<
 
 	registerFactoryBank(factory: FactoryBank) {
 		factory.registerListener({
-			factoryAdded: event => {
+			factoryAdded: (event) => {
 				event.factory.setDiagramEngine(this);
 			},
-			factoryRemoved: event => {
+			factoryRemoved: (event) => {
 				event.factory.setDiagramEngine(null);
 			}
 		});
@@ -133,7 +133,7 @@ export class CanvasEngine<
 		 * The actual repaint function
 		 */
 		const repaint = () => {
-			this.iterateListeners(listener => {
+			this.iterateListeners((listener) => {
 				if (listener.repaintCanvas) {
 					listener.repaintCanvas();
 				}
@@ -148,7 +148,7 @@ export class CanvasEngine<
 		}
 
 		if (promise) {
-			return new Promise(resolve => {
+			return new Promise((resolve) => {
 				const l = this.registerListener({
 					rendered: () => {
 						resolve();

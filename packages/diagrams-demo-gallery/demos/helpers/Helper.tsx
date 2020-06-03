@@ -15,7 +15,7 @@ export class Helper {
 		element.style.zIndex = '10';
 		window.parent.document.body.appendChild(element);
 
-		window.parent.window.addEventListener('mousemove', event => {
+		window.parent.window.addEventListener('mousemove', (event) => {
 			console.clear();
 			console.log(event.clientX, event.clientY);
 		});

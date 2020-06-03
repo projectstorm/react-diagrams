@@ -19,7 +19,7 @@ setOptions({
 	addonPanelInRight: true
 });
 
-addDecorator(fn => {
+addDecorator((fn) => {
 	Toolkit.TESTING_UID = 0;
 	return fn();
 });

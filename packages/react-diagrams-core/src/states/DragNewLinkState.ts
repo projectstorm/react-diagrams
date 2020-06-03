@@ -65,7 +65,6 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 				type: InputType.MOUSE_UP,
 				fire: (event: ActionEvent<MouseEvent>) => {
 					const model = this.engine.getMouseElement(event.event);
-
 					// check to see if we connected to a new port
 					if (model instanceof PortModel) {
 						if (this.port.canLinkToPort(model)) {
@@ -73,30 +72,19 @@ export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
 							model.reportPosition();
 							this.engine.repaintCanvas();
 							return;
+						} else {
+							this.link.remove();
+							this.engine.repaintCanvas();
+							return;
 						}
 					}
 
-					if (this.isNearbySourcePort(event.event) || !this.config.allowLooseLinks) {
+					if (!this.config.allowLooseLinks) {
 						this.link.remove();
 						this.engine.repaintCanvas();
 					}
 				}
 			})
-		);
-	}
-
-	/**
-	 * Checks whether the mouse event appears to happen in proximity of the link's source port
-	 * @param event
-	 */
-	isNearbySourcePort({ clientX, clientY }: MouseEvent): boolean {
-		const sourcePort = this.link.getSourcePort();
-		const sourcePortPosition = this.link.getSourcePort().getPosition();
-
-		return (
-			clientX >= sourcePortPosition.x &&
-			clientX <= sourcePortPosition.x + sourcePort.width &&
-			(clientY >= sourcePortPosition.y && clientY <= sourcePortPosition.y + sourcePort.height)
 		);
 	}
 

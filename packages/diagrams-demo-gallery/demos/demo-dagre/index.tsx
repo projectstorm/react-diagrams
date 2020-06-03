@@ -121,7 +121,7 @@ export default () => {
 		model.addNode(node);
 	});
 
-	links.forEach(link => {
+	links.forEach((link) => {
 		model.addLink(link);
 	});
 

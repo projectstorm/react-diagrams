@@ -25,30 +25,24 @@ export class DagreEngine {
 			multigraph: true
 		});
 		g.setGraph(this.options.graph || {});
-		g.setDefaultEdgeLabel(function() {
+		g.setDefaultEdgeLabel(function () {
 			return {};
 		});
 
 		const processedlinks: { [id: string]: boolean } = {};
 
 		// set nodes
-		_.forEach(model.getNodes(), node => {
+		_.forEach(model.getNodes(), (node) => {
 			g.setNode(node.getID(), { width: node.width, height: node.height });
 		});
 
-		_.forEach(model.getLinks(), link => {
+		_.forEach(model.getLinks(), (link) => {
 			// set edges
 			if (link.getSourcePort() && link.getTargetPort()) {
 				processedlinks[link.getID()] = true;
 				g.setEdge({
-					v: link
-						.getSourcePort()
-						.getNode()
-						.getID(),
-					w: link
-						.getTargetPort()
-						.getNode()
-						.getID(),
+					v: link.getSourcePort().getNode().getID(),
+					w: link.getTargetPort().getNode().getID(),
 					name: link.getID()
 				});
 			}
@@ -57,14 +51,14 @@ export class DagreEngine {
 		// layout the graph
 		dagre.layout(g);
 
-		g.nodes().forEach(v => {
+		g.nodes().forEach((v) => {
 			const node = g.node(v);
 			model.getNode(v).setPosition(node.x - node.width / 2, node.y - node.height / 2);
 		});
 
 		// also include links?
 		if (this.options.includeLinks) {
-			g.edges().forEach(e => {
+			g.edges().forEach((e) => {
 				const edge = g.edge(e);
 				const link = model.getLink(e.name);
 

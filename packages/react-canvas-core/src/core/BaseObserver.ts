@@ -73,13 +73,13 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 			stopPropagation: () => {
 				event.firing = false;
 			},
-			...event,
+			...event
 		};
 
 		// fire pre
 		this.fireEventInternal(true, 'eventWillFire', {
 			...event,
-			function: k,
+			function: k
 		} as BaseEventProxy);
 
 		// fire main event
@@ -88,7 +88,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		// fire post
 		this.fireEventInternal(true, 'eventDidFire', {
 			...event,
-			function: k,
+			function: k
 		} as BaseEventProxy);
 	}
 
@@ -110,7 +110,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 					listener: listener,
 					deregister: () => {
 						delete this.listeners[id];
-					},
+					}
 				};
 			}
 		}
@@ -124,7 +124,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 			listener: listener,
 			deregister: () => {
 				delete this.listeners[id];
-			},
+			}
 		};
 	}
 

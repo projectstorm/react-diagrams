@@ -1,4 +1,4 @@
-import { Matrix } from 'ml-matrix'
+import { Matrix } from 'ml-matrix';
 
 export class Point {
 	x: number;
@@ -45,15 +45,27 @@ export class Point {
 	}
 
 	public static scaleMatrix(x: number, y: number): Matrix {
-		return new Matrix([[x, 0, 0], [0, y, 0], [0, 0, 1]])
+		return new Matrix([
+			[x, 0, 0],
+			[0, y, 0],
+			[0, 0, 1]
+		]);
 	}
 
 	public static translateMatrix(x: number, y: number): Matrix {
-		return new Matrix([[1, 0, x], [0, 1, y], [0, 0, 1]])
+		return new Matrix([
+			[1, 0, x],
+			[0, 1, y],
+			[0, 0, 1]
+		]);
 	}
 
 	public static rotateMatrix(deg: number): Matrix {
-		return new Matrix([[Math.cos(deg), -1 * Math.sin(deg), 0], [Math.sin(deg), Math.cos(deg), 0], [0, 0, 1]])
+		return new Matrix([
+			[Math.cos(deg), -1 * Math.sin(deg), 0],
+			[Math.sin(deg), Math.cos(deg), 0],
+			[0, 0, 1]
+		]);
 	}
 
 	static createScaleMatrix(x, y, origin: Point): Matrix {

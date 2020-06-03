@@ -37,7 +37,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 
 		// listen for drag changes
 		engine.getStateMachine().registerListener({
-			stateChanged: event => {
+			stateChanged: (event) => {
 				if (event.newState instanceof AbstractDisplacementState) {
 					const deRegister = engine.getActionEventBus().registerAction(
 						new Action<DiagramEngine>({
@@ -171,7 +171,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		height: number;
 		vAdjustmentFactor: number;
 	} => {
-		const allNodesCoords = _.values(this.engine.getModel().getNodes()).map(item => ({
+		const allNodesCoords = _.values(this.engine.getModel().getNodes()).map((item) => ({
 			x: item.getX(),
 			width: item.width,
 			y: item.getY(),
@@ -179,15 +179,15 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		}));
 
 		const allLinks = _.values(this.engine.getModel().getLinks());
-		const allPortsCoords = _.flatMap(allLinks.map(link => [link.getSourcePort(), link.getTargetPort()]))
-			.filter(port => port !== null)
-			.map(item => ({
+		const allPortsCoords = _.flatMap(allLinks.map((link) => [link.getSourcePort(), link.getTargetPort()]))
+			.filter((port) => port !== null)
+			.map((item) => ({
 				x: item.getX(),
 				width: item.width,
 				y: item.getY(),
 				height: item.height
 			}));
-		const allPointsCoords = _.flatMap(allLinks.map(link => link.getPoints())).map(item => ({
+		const allPointsCoords = _.flatMap(allLinks.map((link) => link.getPoints())).map((item) => ({
 			// points don't have width/height, so let's just use 0
 			x: item.getX(),
 			width: 0,
@@ -202,12 +202,12 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		const minX =
 			Math.floor(Math.min(_.get(_.minBy(concatedCoords, 'x'), 'x', 0), 0) / this.ROUTING_SCALING_FACTOR) *
 			this.ROUTING_SCALING_FACTOR;
-		const maxXElement = _.maxBy(concatedCoords, item => sumProps(item, ['x', 'width']));
+		const maxXElement = _.maxBy(concatedCoords, (item) => sumProps(item, ['x', 'width']));
 		const maxX = Math.max(sumProps(maxXElement, ['x', 'width']), canvas.offsetWidth);
 		const minYCoords = _.minBy(concatedCoords, 'y');
 		const minY =
 			Math.floor(Math.min(_.get(minYCoords, 'y', 0), 0) / this.ROUTING_SCALING_FACTOR) * this.ROUTING_SCALING_FACTOR;
-		const maxYElement = _.maxBy(concatedCoords, item => sumProps(item, ['y', 'height']));
+		const maxYElement = _.maxBy(concatedCoords, (item) => sumProps(item, ['y', 'height']));
 		const maxY = Math.max(sumProps(maxYElement, ['y', 'height']), canvas.offsetHeight);
 
 		return {
@@ -222,7 +222,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 	 * Updates (by reference) where nodes will be drawn on the matrix passed in.
 	 */
 	markNodes = (matrix: number[][]): void => {
-		_.values(this.engine.getModel().getNodes()).forEach(node => {
+		_.values(this.engine.getModel().getNodes()).forEach((node) => {
 			const startX = Math.floor(node.getX() / this.ROUTING_SCALING_FACTOR);
 			const endX = Math.ceil((node.getX() + node.width) / this.ROUTING_SCALING_FACTOR);
 			const startY = Math.floor(node.getY() / this.ROUTING_SCALING_FACTOR);
@@ -241,11 +241,11 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 	 */
 	markPorts = (matrix: number[][]): void => {
 		const allElements = _.flatMap(
-			_.values(this.engine.getModel().getLinks()).map(link => [].concat(link.getSourcePort(), link.getTargetPort()))
+			_.values(this.engine.getModel().getLinks()).map((link) => [].concat(link.getSourcePort(), link.getTargetPort()))
 		);
 		allElements
-			.filter(port => port !== null)
-			.forEach(port => {
+			.filter((port) => port !== null)
+			.forEach((port) => {
 				const startX = Math.floor(port.x / this.ROUTING_SCALING_FACTOR);
 				const endX = Math.ceil((port.x + port.width) / this.ROUTING_SCALING_FACTOR);
 				const startY = Math.floor(port.y / this.ROUTING_SCALING_FACTOR);
@@ -268,7 +268,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 	generateDynamicPath(pathCoords: number[][]) {
 		let path = Path();
 		path = path.moveto(pathCoords[0][0] * this.ROUTING_SCALING_FACTOR, pathCoords[0][1] * this.ROUTING_SCALING_FACTOR);
-		pathCoords.slice(1).forEach(coords => {
+		pathCoords.slice(1).forEach((coords) => {
 			path = path.lineto(coords[0] * this.ROUTING_SCALING_FACTOR, coords[1] * this.ROUTING_SCALING_FACTOR);
 		});
 		return path.print();

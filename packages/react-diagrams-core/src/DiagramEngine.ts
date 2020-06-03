@@ -38,10 +38,10 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 
 		const setup = (factory: FactoryBank) => {
 			factory.registerListener({
-				factoryAdded: event => {
+				factoryAdded: (event) => {
 					event.factory.setDiagramEngine(this);
 				},
-				factoryRemoved: event => {
+				factoryRemoved: (event) => {
 					event.factory.setDiagramEngine(null);
 				}
 			});
@@ -220,7 +220,7 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 				return new Rectangle(0, 0, 0, 0);
 			}
 
-			let boundingBox = Polygon.boundingBoxFromPolygons(nodes.map(node => node.getBoundingBox()));
+			let boundingBox = Polygon.boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox()));
 			if (margin) {
 				return new Rectangle(
 					boundingBox.getTopLeft().x - margin,
@@ -237,15 +237,15 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		let nodesRect; // nodes bounding rectangle
 		let selectedNodes = this.model
 			.getSelectedEntities()
-			.filter(entity => entity instanceof NodeModel)
-			.map(node => node) as NodeModel[];
+			.filter((entity) => entity instanceof NodeModel)
+			.map((node) => node) as NodeModel[];
 
 		// no node selected
 		if (selectedNodes.length == 0) {
 			let allNodes = this.model
 				.getSelectionEntities()
-				.filter(entity => entity instanceof NodeModel)
-				.map(node => node) as NodeModel[];
+				.filter((entity) => entity instanceof NodeModel)
+				.map((node) => node) as NodeModel[];
 
 			// get nodes bounding box with margin
 			nodesRect = this.getBoundingNodesRect(allNodes, margin);

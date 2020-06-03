@@ -59,16 +59,8 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelGenerics> {
 			const curve = new BezierCurve();
 			curve.setSource(this.getFirstPoint().getPosition());
 			curve.setTarget(this.getLastPoint().getPosition());
-			curve.setSourceControl(
-				this.getFirstPoint()
-					.getPosition()
-					.clone()
-			);
-			curve.setTargetControl(
-				this.getLastPoint()
-					.getPosition()
-					.clone()
-			);
+			curve.setSourceControl(this.getFirstPoint().getPosition().clone());
+			curve.setTargetControl(this.getLastPoint().getPosition().clone());
 
 			if (this.sourcePort) {
 				curve.getSourceControl().translate(...this.calculateControlOffset(this.getSourcePort()));

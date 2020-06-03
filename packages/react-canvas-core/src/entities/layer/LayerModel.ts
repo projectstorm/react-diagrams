@@ -37,12 +37,10 @@ export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGeneri
 		super.deserialize(event);
 		this.options.isSvg = !!event.data.isSvg;
 		this.options.transformed = !!event.data.transformed;
-		_.forEach(event.data.models, model => {
-			const modelOb = this.getChildModelFactoryBank(event.engine)
-				.getFactory(model.type)
-				.generateModel({
-					initialConfig: model
-				});
+		_.forEach(event.data.models, (model) => {
+			const modelOb = this.getChildModelFactoryBank(event.engine).getFactory(model.type).generateModel({
+				initialConfig: model
+			});
 			modelOb.deserialize({
 				...event,
 				data: model
@@ -56,7 +54,7 @@ export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGeneri
 			...super.serialize(),
 			isSvg: this.options.isSvg,
 			transformed: this.options.transformed,
-			models: _.mapValues(this.models, model => {
+			models: _.mapValues(this.models, (model) => {
 				return model.serialize();
 			})
 		};
@@ -83,7 +81,7 @@ export abstract class LayerModel<G extends LayerModelGenerics = LayerModelGeneri
 	}
 
 	getSelectionEntities(): Array<BaseModel> {
-		return _.flatMap(this.models, model => {
+		return _.flatMap(this.models, (model) => {
 			return model.getSelectionEntities();
 		});
 	}

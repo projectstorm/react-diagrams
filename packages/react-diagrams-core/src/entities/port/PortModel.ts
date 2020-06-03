@@ -64,7 +64,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 			name: this.options.name,
 			alignment: this.options.alignment,
 			parentNode: this.parent.getID(),
-			links: _.map(this.links, link => {
+			links: _.map(this.links, (link) => {
 				return link.getID();
 			})
 		};
@@ -75,7 +75,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	setPosition(x, y?) {
 		let old = this.position;
 		super.setPosition(x, y);
-		_.forEach(this.getLinks(), link => {
+		_.forEach(this.getLinks(), (link) => {
 			let point = link.getPointForPort(this);
 			point.setPosition(point.getX() + x - old.x, point.getY() + y - old.y);
 		});
@@ -127,7 +127,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	}
 
 	reportPosition() {
-		_.forEach(this.getLinks(), link => {
+		_.forEach(this.getLinks(), (link) => {
 			link.getPointForPort(this).setPosition(this.getCenter());
 		});
 		this.fireEvent(

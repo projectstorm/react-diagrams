@@ -26,7 +26,7 @@ class CustomDeleteItemsAction extends Action {
 						const confirm = window.confirm('Are you sure you want to delete?');
 
 						if (confirm) {
-							_.forEach(selectedEntities, model => {
+							_.forEach(selectedEntities, (model) => {
 								// only delete items which are not locked
 								if (!model.isLocked()) {
 									model.remove();

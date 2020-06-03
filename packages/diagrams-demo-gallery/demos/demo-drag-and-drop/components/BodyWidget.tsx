@@ -55,14 +55,9 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 						<TrayItemWidget model={{ type: 'out' }} name="Out Node" color="rgb(0,192,255)" />
 					</TrayWidget>
 					<S.Layer
-						onDrop={event => {
+						onDrop={(event) => {
 							var data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'));
-							var nodesCount = _.keys(
-								this.props.app
-									.getDiagramEngine()
-									.getModel()
-									.getNodes()
-							).length;
+							var nodesCount = _.keys(this.props.app.getDiagramEngine().getModel().getNodes()).length;
 
 							var node: DefaultNodeModel = null;
 							if (data.type === 'in') {
@@ -74,13 +69,10 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 							}
 							var point = this.props.app.getDiagramEngine().getRelativeMousePoint(event);
 							node.setPosition(point);
-							this.props.app
-								.getDiagramEngine()
-								.getModel()
-								.addNode(node);
+							this.props.app.getDiagramEngine().getModel().addNode(node);
 							this.forceUpdate();
 						}}
-						onDragOver={event => {
+						onDragOver={(event) => {
 							event.preventDefault();
 						}}>
 						<DemoCanvasWidget>

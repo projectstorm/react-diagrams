@@ -33,7 +33,7 @@ export class ActionEventBus {
 	}
 
 	getActionsForType(type: InputType): Action[] {
-		return _.filter(this.actions, action => {
+		return _.filter(this.actions, (action) => {
 			return action.options.type === type;
 		});
 	}

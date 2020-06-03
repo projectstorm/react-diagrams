@@ -46,7 +46,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		super.setPosition(x, y);
 
 		//also update the port co-ordinates (for make glorious speed)
-		_.forEach(this.ports, port => {
+		_.forEach(this.ports, (port) => {
 			port.setPosition(port.getX() + x - old.x, port.getY() + y - old.y);
 		});
 	}
@@ -70,7 +70,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	serialize() {
 		return {
 			...super.serialize(),
-			ports: _.map(this.ports, port => {
+			ports: _.map(this.ports, (port) => {
 				return port.serialize();
 			})
 		};
@@ -79,15 +79,15 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	doClone(lookupTable = {}, clone) {
 		// also clone the ports
 		clone.ports = {};
-		_.forEach(this.ports, port => {
+		_.forEach(this.ports, (port) => {
 			clone.addPort(port.clone(lookupTable));
 		});
 	}
 
 	remove() {
 		super.remove();
-		_.forEach(this.ports, port => {
-			_.forEach(port.getLinks(), link => {
+		_.forEach(this.ports, (port) => {
+			_.forEach(port.getLinks(), (link) => {
 				link.remove();
 			});
 		});
