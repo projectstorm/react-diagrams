@@ -1,5 +1,4 @@
-import * as mathjs from 'mathjs';
-import { Matrix } from 'mathjs';
+import { Matrix } from 'ml-matrix'
 
 export class Point {
 	x: number;
@@ -24,13 +23,13 @@ export class Point {
 	}
 
 	asMatrix() {
-		return mathjs.matrix([[this.x], [this.y], [1]]);
+		return new Matrix([[this.x], [this.y], [1]]);
 	}
 
 	transform(matrix: Matrix) {
-		let final: Matrix = mathjs.multiply(matrix, this.asMatrix()) as Matrix;
-		this.x = final.get([0, 0]);
-		this.y = final.get([1, 0]);
+		let final: Matrix = matrix.mmul(this.asMatrix());
+		this.x = final.get(0, 0);
+		this.y = final.get(1, 0);
 	}
 
 	public static middlePoint(pointA: Point, pointB: Point): Point {
@@ -40,21 +39,21 @@ export class Point {
 	public static multiply(...matrices: Matrix[]): Matrix {
 		let m: Matrix = matrices[0];
 		for (let i = 1; i < matrices.length; i++) {
-			m = mathjs.multiply(m, matrices[i]) as Matrix;
+			m = m.mmul(matrices[i]);
 		}
 		return m;
 	}
 
 	public static scaleMatrix(x: number, y: number): Matrix {
-		return mathjs.matrix([[x, 0, 0], [0, y, 0], [0, 0, 1]]);
+		return new Matrix([[x, 0, 0], [0, y, 0], [0, 0, 1]])
 	}
 
 	public static translateMatrix(x: number, y: number): Matrix {
-		return mathjs.matrix([[1, 0, x], [0, 1, y], [0, 0, 1]]);
+		return new Matrix([[1, 0, x], [0, 1, y], [0, 0, 1]])
 	}
 
 	public static rotateMatrix(deg: number): Matrix {
-		return mathjs.matrix([[Math.cos(deg), -1 * Math.sin(deg), 0], [Math.sin(deg), Math.cos(deg), 0], [0, 0, 1]]);
+		return new Matrix([[Math.cos(deg), -1 * Math.sin(deg), 0], [Math.sin(deg), Math.cos(deg), 0], [0, 0, 1]])
 	}
 
 	static createScaleMatrix(x, y, origin: Point): Matrix {
