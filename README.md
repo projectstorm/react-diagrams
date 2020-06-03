@@ -26,7 +26,7 @@ A flow & process orientated diagramming library inspired by **Blender**, **Labvi
 
 Example implementation using custom models: \(Dylan's personal code\)
 
-![Personal Project](.gitbook/assets/example1.jpg) 
+![Personal Project](.gitbook/assets/example1.jpg)
 ![](.gitbook/assets/example2.jpg)
 
 Get started with the default models right out of the box:
@@ -72,6 +72,9 @@ yarn add @projectstorm/react-diagrams-routing@next
 
 ## How to use
 
+Before running any of the examples, please run `yarn build` in the root. This project is a monorepo, and the packages (including the demos) require the packages to first be built.
+
+
 Take a look at the [diagram demos](https://github.com/projectstorm/react-diagrams/tree/master/packages/diagrams-demo-gallery/demos)
 
 **or**
@@ -91,4 +94,5 @@ After running `yarn install` you must then run: `cd packages/diagrams-demo-galle
 Simply run `yarn` then `yarn build` or `yarn build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 
 ## Built with react-diagrams
+
 > Do you have an interesting project built with *react-diagrams*? PR it into this section for others to see.
