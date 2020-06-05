@@ -38,7 +38,7 @@ Get started with the default models right out of the box:
 For all the bells and whistles:
 
 ```text
-yarn add @projectstorm/react-diagrams@next
+yarn add @projectstorm/react-diagrams
 ```
 
 This includes all the packages listed below \(and works \(mostly and conceptually\) like it used to in version 5.0\)
@@ -48,26 +48,26 @@ This includes all the packages listed below \(and works \(mostly and conceptuall
 This library now has a more modular design and you can import just the core \(contains no default factories or routing\)
 
 ```text
-yarn add @projectstorm/react-diagrams-core@next
+yarn add @projectstorm/react-diagrams-core
 ```
 
 this is built ontop of the evolving **react-canvas-core** library
 
 ```text
-yarn add @projectstorm/react-canvas-core@next
+yarn add @projectstorm/react-canvas-core
 ```
 
 which makes use of
 
 ```text
-yarn add @projectstorm/react-geometry@next
+yarn add @projectstorm/react-geometry
 ```
 
 and of course, you can add some extras:
 
 ```text
-yarn add @projectstorm/react-diagrams-defaults@next
-yarn add @projectstorm/react-diagrams-routing@next
+yarn add @projectstorm/react-diagrams-defaults
+yarn add @projectstorm/react-diagrams-routing
 ```
 
 ## How to use
