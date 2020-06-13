@@ -37,6 +37,7 @@ import demo_dynamic_ports from './demos/demo-dynamic-ports';
 import demo_alternative_linking from './demos/demo-alternative-linking';
 import demo_custom_delete_keys from './demos/demo-custom_delete_keys';
 import demo_custom_action from './demos/demo-custom-action';
+import demo_canvas_drag from './demos/demo-canvas-drag';
 
 storiesOf('Simple Usage', module)
 	.add('Simple example', demo_simple)
@@ -47,6 +48,7 @@ storiesOf('Simple Usage', module)
 	.add('Events and listeners', demo_listeners)
 	.add('Zoom to fit', demo_zoom)
 	.add('Zoom to fit nodes', demo_zoom_nodes)
+	.add('Canvas drag', demo_canvas_drag)
 	.add('Dynamic ports', demo_dynamic_ports)
 	.add('Links with labels', demo_labels);
 

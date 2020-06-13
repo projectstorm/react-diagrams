@@ -1,15 +1,27 @@
 import { AbstractDisplacementState, AbstractDisplacementStateEvent } from '../core-state/AbstractDisplacementState';
 import { State } from '../core-state/State';
 
+export interface DragCanvasStateOptions {
+	/**
+	 * If enabled, the canvas is available to drag
+	 */
+	allowDrag?: boolean;
+}
+
 export class DragCanvasState extends AbstractDisplacementState {
 	// store this as we drag the canvas
 	initialCanvasX: number;
 	initialCanvasY: number;
+	config: DragCanvasStateOptions;
 
-	constructor() {
+	constructor(options: DragCanvasStateOptions = {}) {
 		super({
 			name: 'drag-canvas'
 		});
+		this.config = {
+			allowDrag: true,
+			...options
+		};
 	}
 
 	async activated(prev) {
@@ -34,9 +46,11 @@ export class DragCanvasState extends AbstractDisplacementState {
 	}
 
 	fireMouseMoved(event: AbstractDisplacementStateEvent) {
-		this.engine
-			.getModel()
-			.setOffset(this.initialCanvasX + event.displacementX, this.initialCanvasY + event.displacementY);
-		this.engine.repaintCanvas();
+		if (this.config.allowDrag) {
+			this.engine
+				.getModel()
+				.setOffset(this.initialCanvasX + event.displacementX, this.initialCanvasY + event.displacementY);
+			this.engine.repaintCanvas();
+		}
 	}
 }
