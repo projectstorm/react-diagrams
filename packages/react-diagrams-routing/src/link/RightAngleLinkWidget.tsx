@@ -120,8 +120,6 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 				points[index - 2].setPosition(_points[index - 2]);
 				points[index + 1].setPosition(_points[index + 1]);
 				points[index - 1].remove();
-				points[index - 1].remove();
-				this.dragging_index--;
 				this.dragging_index--;
 				return;
 			}
@@ -140,7 +138,6 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 				_points[index + 3][coordinate] = this.props.diagramEngine.getRelativeMousePoint(event)[coordinate];
 				points[index].setPosition(_points[index]);
 				points[index + 3].setPosition(_points[index + 3]);
-				points[index + 1].remove();
 				points[index + 1].remove();
 				return;
 			}
