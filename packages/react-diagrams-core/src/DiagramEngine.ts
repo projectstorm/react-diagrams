@@ -61,10 +61,10 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		var diagramModel = this.model;
 
 		//is it a port
-		var element = Toolkit.closest(target, '.port[data-name]');
+		var element = Toolkit.closest(target, '.port[data-id]');
 		if (element) {
 			var nodeElement = Toolkit.closest(target, '.node[data-nodeid]') as HTMLElement;
-			return diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-name'));
+			return diagramModel.getNode(nodeElement.getAttribute('data-nodeid')).getPort(element.getAttribute('data-id'));
 		}
 
 		//look for a point
@@ -152,7 +152,7 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 
 	getNodePortElement(port: PortModel): any {
 		var selector = this.canvas.querySelector(
-			`.port[data-name="${port.getName()}"][data-nodeid="${port.getParent().getID()}"]`
+			`.port[data-id="${port.getID()}"][data-nodeid="${port.getParent().getID()}"]`
 		);
 		if (selector === null) {
 			throw new Error(

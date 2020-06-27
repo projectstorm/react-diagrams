@@ -62,6 +62,7 @@ export class PortWidget extends React.Component<PortProps> {
 				ref={this.ref}
 				className={`port ${this.props.className || ''}`}
 				data-name={this.props.port.getName()}
+				data-id={this.props.port.getID()}
 				data-nodeid={this.props.port.getNode().getID()}
 				{...this.getExtraProps()}>
 				{this.props.children}
