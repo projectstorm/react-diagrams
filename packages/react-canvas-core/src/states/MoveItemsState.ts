@@ -23,6 +23,9 @@ export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends Abstr
 				type: InputType.MOUSE_DOWN,
 				fire: (event: ActionEvent<React.MouseEvent>) => {
 					const element = this.engine.getActionEventBus().getModelForEvent(event);
+					if (!element) {
+						return;
+					}
 					if (!element.isSelected()) {
 						this.engine.getModel().clearSelection();
 					}
