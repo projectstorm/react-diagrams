@@ -16,7 +16,8 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
       # test building project
-      - run: yarn run build
+      - run: yarn build
+      - run: yarn build:es
 
       # test e2e tests and jest snapshots
       - run: cd packages/diagrams-demo-gallery && yarn run test --ci
