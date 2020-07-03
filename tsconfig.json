@@ -5,7 +5,7 @@
 		"declaration": false,
 		"strictNullChecks": false,
 		"sourceMap": true,
-		"skipLibCheck": true,
+		"esModuleInterop": true,
 		"jsx": "react",
 		"target": "ES6",
 		"module": "commonjs",
