@@ -26,7 +26,7 @@ A flow & process orientated diagramming library inspired by **Blender**, **Labvi
 
 Example implementation using custom models: \(Dylan's personal code\)
 
-![Personal Project](.gitbook/assets/example1.jpg) 
+![Personal Project](.gitbook/assets/example1.jpg)
 ![](.gitbook/assets/example2.jpg)
 
 Get started with the default models right out of the box:
@@ -38,7 +38,7 @@ Get started with the default models right out of the box:
 For all the bells and whistles:
 
 ```text
-yarn add @projectstorm/react-diagrams@next
+yarn add @projectstorm/react-diagrams
 ```
 
 This includes all the packages listed below \(and works \(mostly and conceptually\) like it used to in version 5.0\)
@@ -48,29 +48,32 @@ This includes all the packages listed below \(and works \(mostly and conceptuall
 This library now has a more modular design and you can import just the core \(contains no default factories or routing\)
 
 ```text
-yarn add @projectstorm/react-diagrams-core@next
+yarn add @projectstorm/react-diagrams-core
 ```
 
 this is built ontop of the evolving **react-canvas-core** library
 
 ```text
-yarn add @projectstorm/react-canvas-core@next
+yarn add @projectstorm/react-canvas-core
 ```
 
 which makes use of
 
 ```text
-yarn add @projectstorm/react-geometry@next
+yarn add @projectstorm/react-geometry
 ```
 
 and of course, you can add some extras:
 
 ```text
-yarn add @projectstorm/react-diagrams-defaults@next
-yarn add @projectstorm/react-diagrams-routing@next
+yarn add @projectstorm/react-diagrams-defaults
+yarn add @projectstorm/react-diagrams-routing
 ```
 
 ## How to use
+
+Before running any of the examples, please run `yarn build` in the root. This project is a monorepo, and the packages (including the demos) require the packages to first be built.
+
 
 Take a look at the [diagram demos](https://github.com/projectstorm/react-diagrams/tree/master/packages/diagrams-demo-gallery/demos)
 
@@ -91,4 +94,5 @@ After running `yarn install` you must then run: `cd packages/diagrams-demo-galle
 Simply run `yarn` then `yarn build` or `yarn build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 
 ## Built with react-diagrams
+
 > Do you have an interesting project built with *react-diagrams*? PR it into this section for others to see.

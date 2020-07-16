@@ -47,25 +47,25 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 	}
 
 	getSelectionEntities(): BaseModel[] {
-		return _.flatMap(this.layers, layer => {
+		return _.flatMap(this.layers, (layer) => {
 			return layer.getSelectionEntities();
 		});
 	}
 
 	getSelectedEntities(): BaseModel[] {
-		return _.filter(this.getSelectionEntities(), ob => {
+		return _.filter(this.getSelectionEntities(), (ob) => {
 			return ob.isSelected();
 		});
 	}
 
 	clearSelection() {
-		_.forEach(this.getSelectedEntities(), element => {
+		_.forEach(this.getSelectedEntities(), (element) => {
 			element.setSelected(false);
 		});
 	}
 
 	getModels(): BaseModel[] {
-		return _.flatMap(this.layers, layer => {
+		return _.flatMap(this.layers, (layer) => {
 			return _.values(layer.getModels());
 		});
 	}
@@ -128,7 +128,7 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 					return Promise.resolve(models[id]) as Promise<T>;
 				}
 				if (!promises[id]) {
-					promises[id] = new Promise(resolve => {
+					promises[id] = new Promise((resolve) => {
 						resolvers[id] = resolve;
 					});
 				}
@@ -144,7 +144,7 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		this.options.offsetY = event.data.offsetY;
 		this.options.zoom = event.data.zoom;
 		this.options.gridSize = event.data.gridSize;
-		_.forEach(event.data.layers, layer => {
+		_.forEach(event.data.layers, (layer) => {
 			const layerOb = event.engine.getFactoryForLayer(layer.type).generateModel({
 				initialConfig: layer
 			});
@@ -163,7 +163,7 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 			offsetY: this.options.offsetY,
 			zoom: this.options.zoom,
 			gridSize: this.options.gridSize,
-			layers: _.map(this.layers, layer => {
+			layers: _.map(this.layers, (layer) => {
 				return layer.serialize();
 			})
 		};

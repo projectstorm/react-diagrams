@@ -27,7 +27,7 @@ export class AdvancedPortModel extends DefaultPortModel {
 	}
 }
 
-const CustomLinkArrowWidget = props => {
+const CustomLinkArrowWidget = (props) => {
 	const { point, previousPoint } = props;
 
 	const angle =

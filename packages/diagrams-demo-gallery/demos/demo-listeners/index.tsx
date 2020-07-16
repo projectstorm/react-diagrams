@@ -34,7 +34,7 @@ export default () => {
 	let models = model.addAll(node1, node2, node3, link1, link2);
 
 	// add a selection listener to each
-	models.forEach(item => {
+	models.forEach((item) => {
 		item.registerListener({
 			eventDidFire: action('element eventDidFire')
 		});

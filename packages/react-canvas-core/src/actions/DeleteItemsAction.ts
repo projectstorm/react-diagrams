@@ -32,7 +32,7 @@ export class DeleteItemsAction extends Action {
 				const { keyCode, ctrlKey, shiftKey, altKey, metaKey } = event.event;
 
 				if (keyCodes.indexOf(keyCode) !== -1 && _.isEqual({ ctrlKey, shiftKey, altKey, metaKey }, modifiers)) {
-					_.forEach(this.engine.getModel().getSelectedEntities(), model => {
+					_.forEach(this.engine.getModel().getSelectedEntities(), (model) => {
 						// only delete items which are not locked
 						if (!model.isLocked()) {
 							model.remove();

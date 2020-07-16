@@ -70,7 +70,7 @@ export class AdvancedLinkSegment extends React.Component<{ model: AdvancedLinkMo
 			<>
 				<path
 					fill="none"
-					ref={ref => {
+					ref={(ref) => {
 						this.path = ref;
 					}}
 					strokeWidth={this.props.model.getOptions().width}
@@ -78,7 +78,7 @@ export class AdvancedLinkSegment extends React.Component<{ model: AdvancedLinkMo
 					d={this.props.path}
 				/>
 				<circle
-					ref={ref => {
+					ref={(ref) => {
 						this.circle = ref;
 					}}
 					r={10}

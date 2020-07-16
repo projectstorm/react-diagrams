@@ -43,7 +43,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 
 	registerCanvas() {
 		this.props.engine.setCanvas(this.ref.current);
-		this.props.engine.iterateListeners(list => {
+		this.props.engine.iterateListeners((list) => {
 			list.rendered && list.rendered();
 		});
 	}
@@ -59,10 +59,10 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 			}
 		});
 
-		this.keyDown = event => {
+		this.keyDown = (event) => {
 			this.props.engine.getActionEventBus().fireAction({ event });
 		};
-		this.keyUp = event => {
+		this.keyUp = (event) => {
 			this.props.engine.getActionEventBus().fireAction({ event });
 		};
 
@@ -79,19 +79,19 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 			<S.Canvas
 				className={this.props.className}
 				ref={this.ref}
-				onWheel={event => {
+				onWheel={(event) => {
 					this.props.engine.getActionEventBus().fireAction({ event });
 				}}
-				onMouseDown={event => {
+				onMouseDown={(event) => {
 					this.props.engine.getActionEventBus().fireAction({ event });
 				}}
-				onMouseUp={event => {
+				onMouseUp={(event) => {
 					this.props.engine.getActionEventBus().fireAction({ event });
 				}}
-				onMouseMove={event => {
+				onMouseMove={(event) => {
 					this.props.engine.getActionEventBus().fireAction({ event });
 				}}>
-				{model.getLayers().map(layer => {
+				{model.getLayers().map((layer) => {
 					return (
 						<TransformLayerWidget layer={layer} key={layer.getID()}>
 							<SmartLayerWidget layer={layer} engine={this.props.engine} key={layer.getID()} />

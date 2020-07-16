@@ -4,7 +4,7 @@ export class E2ELink extends E2EBase {
 	isID: boolean;
 
 	async select(): Promise<any> {
-		const point = await page.evaluate(id => {
+		const point = await page.evaluate((id) => {
 			const path = document.querySelector(id) as SVGPathElement;
 			const point = path.getPointAtLength(path.getTotalLength() / 2);
 			return {

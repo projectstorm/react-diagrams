@@ -13,7 +13,7 @@ namespace S {
 		font-family: Helvetica, Arial;
 		padding: 5px;
 		margin: 0px 10px;
-		border: solid 1px ${p => p.color};
+		border: solid 1px ${(p) => p.color};
 		border-radius: 5px;
 		margin-bottom: 2px;
 		cursor: pointer;
@@ -26,7 +26,7 @@ export class TrayItemWidget extends React.Component<TrayItemWidgetProps> {
 			<S.Tray
 				color={this.props.color}
 				draggable={true}
-				onDragStart={event => {
+				onDragStart={(event) => {
 					event.dataTransfer.setData('storm-diagram-node', JSON.stringify(this.props.model));
 				}}
 				className="tray-item">

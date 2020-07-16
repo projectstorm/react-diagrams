@@ -9,7 +9,7 @@ export interface DemoCanvasWidgetProps {
 namespace S {
 	export const Container = styled.div<{ color: string; background: string }>`
 		height: 100%;
-		background-color: ${p => p.background};
+		background-color: ${(p) => p.background};
 		background-size: 50px 50px;
 		display: flex;
 
@@ -21,24 +21,24 @@ namespace S {
 		background-image: linear-gradient(
 				0deg,
 				transparent 24%,
-				${p => p.color} 25%,
-				${p => p.color} 26%,
+				${(p) => p.color} 25%,
+				${(p) => p.color} 26%,
 				transparent 27%,
 				transparent 74%,
-				${p => p.color} 75%,
-				${p => p.color} 76%,
+				${(p) => p.color} 75%,
+				${(p) => p.color} 76%,
 				transparent 77%,
 				transparent
 			),
 			linear-gradient(
 				90deg,
 				transparent 24%,
-				${p => p.color} 25%,
-				${p => p.color} 26%,
+				${(p) => p.color} 25%,
+				${(p) => p.color} 26%,
 				transparent 27%,
 				transparent 74%,
-				${p => p.color} 75%,
-				${p => p.color} 76%,
+				${(p) => p.color} 75%,
+				${(p) => p.color} 76%,
 				transparent 77%,
 				transparent
 			);

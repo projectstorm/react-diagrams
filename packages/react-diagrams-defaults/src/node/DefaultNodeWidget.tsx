@@ -8,14 +8,14 @@ import { css } from '@emotion/core';
 
 namespace S {
 	export const Node = styled.div<{ background: string; selected: boolean }>`
-		background-color: ${p => p.background};
+		background-color: ${(p) => p.background};
 		border-radius: 5px;
 		font-family: sans-serif;
 		color: white;
 		border: solid 2px black;
 		overflow: visible;
 		font-size: 11px;
-		border: solid 2px ${p => (p.selected ? 'rgb(0,192,255)' : 'black')};
+		border: solid 2px ${(p) => (p.selected ? 'rgb(0,192,255)' : 'black')};
 	`;
 
 	export const Title = styled.div`
@@ -60,7 +60,7 @@ export interface DefaultNodeProps {
  * for both all the input ports on the left, and the output ports on the right.
  */
 export class DefaultNodeWidget extends React.Component<DefaultNodeProps> {
-	generatePort = port => {
+	generatePort = (port) => {
 		return <DefaultPortLabel engine={this.props.engine} port={port} key={port.getID()} />;
 	};
 

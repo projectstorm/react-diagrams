@@ -59,7 +59,7 @@ export default class PathFinding {
 		pathToStart: number[][];
 		pathToEnd: number[][];
 	} {
-		const startIndex = path.findIndex(point => {
+		const startIndex = path.findIndex((point) => {
 			if (matrix[point[1]]) return matrix[point[1]][point[0]] === 0;
 			else return false;
 		});
@@ -69,7 +69,7 @@ export default class PathFinding {
 			path
 				.slice()
 				.reverse()
-				.findIndex(point => {
+				.findIndex((point) => {
 					if (matrix[point[1]]) return matrix[point[1]][point[0]] === 0;
 					else return false;
 				});
@@ -121,7 +121,7 @@ export default class PathFinding {
 		// aggregate everything to have the calculated path ready for rendering
 		const pathCoords = pathToStart
 			.concat(dynamicPath, pathToEnd)
-			.map(coords => [
+			.map((coords) => [
 				this.factory.translateRoutingX(coords[0], true),
 				this.factory.translateRoutingY(coords[1], true)
 			]);

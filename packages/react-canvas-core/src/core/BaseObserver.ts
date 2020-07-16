@@ -41,7 +41,7 @@ export interface ListenerHandle {
 	/**
 	 * Original Listener
 	 */
-	listner: BaseListener;
+	listener: BaseListener;
 }
 
 /**
@@ -55,7 +55,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 	}
 
 	private fireEventInternal(fire: boolean, k: keyof L, event: BaseEvent) {
-		this.iterateListeners(listener => {
+		this.iterateListeners((listener) => {
 			// returning false here will instruct itteration to stop
 			if (!fire && !event.firing) {
 				return false;
@@ -107,7 +107,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 			if (this.listeners[id] === listener) {
 				return {
 					id: id,
-					listner: listener,
+					listener: listener,
 					deregister: () => {
 						delete this.listeners[id];
 					}
@@ -121,7 +121,7 @@ export class BaseObserver<L extends BaseListener = BaseListener> {
 		this.listeners[id] = listener;
 		return {
 			id: id,
-			listner: listener,
+			listener: listener,
 			deregister: () => {
 				delete this.listeners[id];
 			}

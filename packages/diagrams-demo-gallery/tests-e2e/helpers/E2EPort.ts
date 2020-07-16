@@ -13,14 +13,14 @@ export class E2EPort extends E2EBase {
 	}
 
 	async getLinks(): Promise<E2ELink[]> {
-		const attribute = await page.evaluate(id => {
+		const attribute = await page.evaluate((id) => {
 			return document.querySelector(id).getAttribute('data-links');
 		}, this.selector());
 		if (attribute.trim() === '') {
 			return [];
 		}
 
-		return _.map(attribute.split(','), id => {
+		return _.map(attribute.split(','), (id) => {
 			const e = new E2ELink(id);
 			e.isID = true;
 			return e;

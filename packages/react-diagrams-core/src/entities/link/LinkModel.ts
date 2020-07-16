@@ -76,7 +76,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 
 	deserialize(event: DeserializeEvent<this>) {
 		super.deserialize(event);
-		this.points = _.map(event.data.points || [], point => {
+		this.points = _.map(event.data.points || [], (point) => {
 			var p = new PointModel({
 				link: this,
 				position: new Point(point.x, point.y)
@@ -127,10 +127,10 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 			sourcePort: this.sourcePort ? this.sourcePort.getID() : null,
 			target: this.targetPort ? this.targetPort.getParent().getID() : null,
 			targetPort: this.targetPort ? this.targetPort.getID() : null,
-			points: _.map(this.points, point => {
+			points: _.map(this.points, (point) => {
 				return point.serialize();
 			}),
-			labels: _.map(this.labels, label => {
+			labels: _.map(this.labels, (label) => {
 				return label.serialize();
 			})
 		};
@@ -262,7 +262,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 	}
 
 	setPoints(points: PointModel[]) {
-		_.forEach(points, point => {
+		_.forEach(points, (point) => {
 			point.setParent(this);
 		});
 		this.points = points;

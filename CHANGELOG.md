@@ -1,13 +1,19 @@
-__6.1.1__ 
+__6.2.0__
+
+* (improvement) Move away fromn math-js (https://github.com/projectstorm/react-diagrams/pull/651)
+* (fix) https://github.com/projectstorm/react-diagrams/pull/639
+* (fix) Fixing link spawning at (0,0) when clicking port once (inspired by https://github.com/projectstorm/react-diagrams/pull/637)
+
+__6.1.1__
 
 * (feature) https://github.com/projectstorm/react-diagrams/pull/576 [Add zoom to fit nodes feature, fixes #568]
 * (improvement) https://github.com/projectstorm/react-diagrams/pull/621 [Support deriving from DefaultLabelModel]
-* (fix) https://github.com/projectstorm/react-diagrams/pull/603 
+* (fix) https://github.com/projectstorm/react-diagrams/pull/603
    [Fixes selectionChanged listener not being deregistered on NodeWidget, Fixes unchecked access to this.props.link.getSourcePort() on LinkWidget]
 * (maintenance) bump everything
 * fix serialize/deserialize issue with example project raw JS node
 
-__6.0.0__ 
+__6.0.0__
 
 Note: This is a complete rewrite of the library, a good place to start to see how the new system works
 is with the new demo project which illustrates the new capability.
@@ -21,7 +27,7 @@ I would also recommend taking a look at the new updated DiamondPort widget which
 * Introduce multiple layers (can now have multiple node and link layers)
 * Rewrote the deserialization system to be promise based
 * Completely overhauled the observer framework on the models
-* Moved all the logic in the DiagramWidget into a a new hierarchical state machine  
+* Moved all the logic in the DiagramWidget into a a new hierarchical state machine
 * Introduces new states for editing
 * Introduced faster layout rendering when transforming the canvas directly
 * Moved all canvas smart routing into its own link-type under routing package
@@ -37,7 +43,7 @@ I would also recommend taking a look at the new updated DiamondPort widget which
 * Completely removed the double render state system that required nodes to render before links, this is done when ports report their new positions
 * Ports can now dynamically be added and removed without having to tell the system it happeend
 * Port widgets are now containers dumb containers for you own ports
-* Port widgets report new sizing information to their target links when they change position, you no longer need to invalidate them 
+* Port widgets report new sizing information to their target links when they change position, you no longer need to invalidate them
 
 __5.3.2__
 
@@ -58,7 +64,7 @@ __5.2.1__
 * (bug) https://github.com/projectstorm/react-diagrams/commit/75ef02dd4d131a0e7c08b2680c69efc390e50b84
 -> and other improvements, also checkout the foundation work happening over at https://github.com/projectstorm/react-canvas
 
-__5.1.0__ 
+__5.1.0__
 
 * (api) Rename XXXFactory into AbstractXXXFactory
 * (refactor) tslint and prettier are now the same
@@ -98,7 +104,7 @@ __4.0.0__ http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/
 * (refactor) Merged the concept of instance factories and widget factories into one
 * (feature) Models can now be cloned at various parts of the model graph
 * (demo) Cloning
-* (feature) models control isLocked 
+* (feature) models control isLocked
 
 __3.2.0__ http://dylanv.blog/2017/11/22/storm-react-diagrams-3-2-0/
 * (feature) zoom to fit
@@ -113,13 +119,13 @@ __3.2.0__ http://dylanv.blog/2017/11/22/storm-react-diagrams-3-2-0/
 * (bugs) issues with the rendering pipeline #107
 * added ci badge to Readme
 
-__3.1.3__ 
+__3.1.3__
 * Refactor links slightly
 * use min extension for css
 * bump package versions
 * export more classes
 
-__3.1.2__ 
+__3.1.2__
 * Hotfix: fix zooming when canvas not in the top left corner
 (https://github.com/projectstorm/react-diagrams/pull/88)
 
@@ -128,7 +134,7 @@ __3.1.0__ http://dylanv.blog/2017/09/15/storm-react-diagrams-3-1-0/
 * Fixed links not connecting when grid is larger than port size
 * Prevented points from dragging when connected to a port and the node itself is not selected
 * API fixes
-* Code cleanup 
+* Code cleanup
 
 __3.0.0__ http://dylanv.blog/2017/09/13/storm-react-diagrams-v3/
 * Massive performance updates

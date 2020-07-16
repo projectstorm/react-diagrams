@@ -34,7 +34,7 @@ export class PathFindingLinkWidget extends React.Component<PathFindingLinkWidget
 
 	componentDidUpdate(): void {
 		this.props.link.setRenderedPaths(
-			this.refPaths.map(ref => {
+			this.refPaths.map((ref) => {
 				return ref.current;
 			})
 		);
@@ -42,7 +42,7 @@ export class PathFindingLinkWidget extends React.Component<PathFindingLinkWidget
 
 	componentDidMount(): void {
 		this.props.link.setRenderedPaths(
-			this.refPaths.map(ref => {
+			this.refPaths.map((ref) => {
 				return ref.current;
 			})
 		);
@@ -64,7 +64,7 @@ export class PathFindingLinkWidget extends React.Component<PathFindingLinkWidget
 				factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
 				link={this.props.link}
 				forwardRef={ref}
-				onSelection={selected => {
+				onSelection={(selected) => {
 					this.setState({ selected: selected });
 				}}
 				extras={{}}

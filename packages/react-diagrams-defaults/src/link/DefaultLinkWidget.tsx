@@ -28,7 +28,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 
 	componentDidUpdate(): void {
 		this.props.link.setRenderedPaths(
-			this.refPaths.map(ref => {
+			this.refPaths.map((ref) => {
 				return ref.current;
 			})
 		);
@@ -36,7 +36,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 
 	componentDidMount(): void {
 		this.props.link.setRenderedPaths(
-			this.refPaths.map(ref => {
+			this.refPaths.map((ref) => {
 				return ref.current;
 			})
 		);
@@ -91,7 +91,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
 				link={this.props.link}
 				forwardRef={ref}
-				onSelection={selected => {
+				onSelection={(selected) => {
 					this.setState({ selected: selected });
 				}}
 				extras={extraProps}
@@ -110,7 +110,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				this.generateLink(
 					this.props.link.getSVGPath(),
 					{
-						onMouseDown: event => {
+						onMouseDown: (event) => {
 							this.addPointToLink(event, 1);
 						}
 					},

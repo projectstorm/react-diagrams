@@ -60,7 +60,7 @@ export default () => {
 	engine.setModel(model);
 
 	var interval = setInterval(() => {
-		[node1, node2, node3, node4].map(node => {
+		[node1, node2, node3, node4].map((node) => {
 			var obj = { x: 0, y: 0 };
 			gsap.fromTo(
 				obj,
