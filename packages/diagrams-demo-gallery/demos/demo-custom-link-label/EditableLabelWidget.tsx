@@ -24,8 +24,7 @@ export const EditableLabelWidget: React.FunctionComponent<FlowAliasLabelWidgetPr
 		<S.Label>
 			<input
 				value={str}
-
-				onChange={event => {
+				onChange={(event) => {
 					const newVal = event.target.value;
 
 					// update value both in internal component state
@@ -35,11 +34,7 @@ export const EditableLabelWidget: React.FunctionComponent<FlowAliasLabelWidgetPr
 				}}
 			/>
 
-			<button
-				onClick={() => action('model eventDidFire')('You clicked the button')}
-			>
-				Click me!
-			</button>
+			<button onClick={() => action('model eventDidFire')('You clicked the button')}>Click me!</button>
 		</S.Label>
 	);
 };

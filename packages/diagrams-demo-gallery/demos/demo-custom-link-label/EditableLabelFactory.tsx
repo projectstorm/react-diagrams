@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {AbstractReactFactory, GenerateWidgetEvent} from '@projectstorm/react-canvas-core';
-import {DiagramEngine} from '@projectstorm/react-diagrams';
+import { AbstractReactFactory, GenerateWidgetEvent } from '@projectstorm/react-canvas-core';
+import { DiagramEngine } from '@projectstorm/react-diagrams';
 
 import { EditableLabelModel } from './EditableLabelModel';
 import { EditableLabelWidget } from './EditableLabelWidget';
@@ -15,6 +15,6 @@ export class EditableLabelFactory extends AbstractReactFactory<EditableLabelMode
 	}
 
 	generateReactWidget(event: GenerateWidgetEvent<EditableLabelModel>): JSX.Element {
-		return <EditableLabelWidget model={event.model}/>;
+		return <EditableLabelWidget model={event.model} />;
 	}
 }

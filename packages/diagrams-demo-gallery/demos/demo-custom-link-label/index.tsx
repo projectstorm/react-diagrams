@@ -34,9 +34,11 @@ export default () => {
 
 	// !!!
 	// add our custom label to link
-	link1.addLabel(new EditableLabelModel({
-		value: 'Hello, I am label!'
-	}));
+	link1.addLabel(
+		new EditableLabelModel({
+			value: 'Hello, I am label!'
+		})
+	);
 
 	// add models to the root graph
 	model.addAll(node1, port1, node2, port2, link1);
@@ -49,5 +51,5 @@ export default () => {
 		<DemoCanvasWidget>
 			<CanvasWidget engine={engine} />
 		</DemoCanvasWidget>
-	)
-}
+	);
+};
