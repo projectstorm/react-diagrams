@@ -36,6 +36,7 @@ import demo_labels from './demos/demo-labelled-links';
 import demo_dynamic_ports from './demos/demo-dynamic-ports';
 import demo_alternative_linking from './demos/demo-alternative-linking';
 import demo_custom_delete_keys from './demos/demo-custom_delete_keys';
+import demo_custom_link_label from './demos/demo-custom-link-label';
 import demo_custom_action from './demos/demo-custom-action';
 import demo_canvas_drag from './demos/demo-canvas-drag';
 
@@ -77,6 +78,7 @@ storiesOf('Customization', module)
 	.add('Custom diamond node', demo_cust_nodes)
 	.add('Custom animated links', demo_cust_links)
 	.add('Custom link ends (arrows)', demo_cust_links2)
+	.add('Custom link label', demo_custom_link_label)
 	.add('Custom event', demo_custom_action);
 
 import demo_3rd_dagre from './demos/demo-dagre';
