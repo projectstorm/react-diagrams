@@ -46,15 +46,6 @@ export class DragCanvasState extends AbstractDisplacementState {
 	}
 
 	fireMouseMoved(event: AbstractDisplacementStateEvent) {
-		const isMouseDown = event.event.buttons !== 0;
-
-		if (!isMouseDown) {
-			// If the mouse is not down, it should return to the previous state
-			// and stop processing the mouse move event
-			this.engine.getStateMachine().popState();
-			return;
-		}
-
 		if (this.config.allowDrag) {
 			this.engine
 				.getModel()
