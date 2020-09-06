@@ -38,8 +38,7 @@
 		"lodash": "4.*",
 		"pathfinding": "^0.4.18",
 		"paths-js": "^0.4.10",
-		"react": "16.*",
-    "ml-matrix": "6.*"
+		"react": "16.*"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.10.2",
@@ -74,7 +73,6 @@
 		"json-beautify": "^1.1.1",
 		"lerna": "^3.22.0",
 		"lodash": "4.*",
-		"ml-matrix": "^6.5.0",
 		"pathfinding": "^0.4.18",
 		"paths-js": "^0.4.10",
 		"prettier": "^2.0.5",

@@ -1,4 +1,4 @@
-import { Matrix } from 'ml-matrix';
+import { Matrix } from './Matrix';
 
 export class Point {
 	x: number;
