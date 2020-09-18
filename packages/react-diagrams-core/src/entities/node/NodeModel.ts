@@ -94,17 +94,8 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	}
 
 	getPortFromID(id): PortModel | null {
-		for (var i in this.ports) {
-			if (this.ports[i].getID() === id) {
-				return this.ports[i];
-			}
-		}
-		return null;
-	}
-
-	getPortFromName(name): PortModel | null {
 		for (let i in this.ports) {
-			if (this.ports[i].getName() === name) {
+			if (this.ports[i].getID() === id) {
 				return this.ports[i];
 			}
 		}
@@ -121,7 +112,12 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	}
 
 	getPort(name: string): PortModel | null {
-		return this.ports[name];
+		for (let i in this.ports) {
+			if (this.ports[i].getName() === name) {
+				return this.ports[i];
+			}
+		}
+		return null;
 	}
 
 	getPorts(): { [s: string]: PortModel } {

@@ -47,7 +47,7 @@ export class PortWidget extends React.Component<PortProps> {
 
 	getExtraProps() {
 		if (Toolkit.TESTING) {
-			const links = _.keys(this.props.port.getNode().getPort(this.props.port.getName()).links).join(',');
+			const links = _.keys(this.props.port.getNode().getPortFromID(this.props.port.getID()).links).join(',');
 			return {
 				'data-links': links
 			};
