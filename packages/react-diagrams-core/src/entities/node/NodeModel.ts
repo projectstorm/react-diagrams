@@ -94,8 +94,17 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	}
 
 	getPortFromID(id): PortModel | null {
-		for (var i in this.ports) {
+		for (let i in this.ports) {
 			if (this.ports[i].getID() === id) {
+				return this.ports[i];
+			}
+		}
+		return null;
+	}
+
+	getPortFromName(name): PortModel | null {
+		for (let i in this.ports) {
+			if (this.ports[i].getName() === name) {
 				return this.ports[i];
 			}
 		}
@@ -125,15 +134,15 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 			link.clearPort(port);
 		}
 		//clear the parent node reference
-		if (this.ports[port.getName()]) {
-			this.ports[port.getName()].setParent(null);
-			delete this.ports[port.getName()];
+		if (this.ports[port.getID()]) {
+			this.ports[port.getID()].setParent(null);
+			delete this.ports[port.getID()];
 		}
 	}
 
 	addPort(port: PortModel): PortModel {
 		port.setParent(this);
-		this.ports[port.getName()] = port;
+		this.ports[port.getID()] = port;
 		return port;
 	}
 
