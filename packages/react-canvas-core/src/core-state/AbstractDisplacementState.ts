@@ -40,7 +40,7 @@ export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasE
 						// If buttons is 0, it means the mouse is not down, the user may have released it
 						// outside of the canvas, then we eject the state
 						this.eject();
-						
+
 						return;
 					}
 
