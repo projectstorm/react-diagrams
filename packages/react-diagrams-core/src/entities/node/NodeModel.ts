@@ -94,7 +94,12 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	}
 
 	getPortFromID(id): PortModel | null {
-		return this.ports[id]
+		for (let i in this.ports) {
+			if (this.ports[i].getID() === id) {
+				return this.ports[i];
+			}
+		}
+		return null;
 	}
 
 	getLink(id: string): LinkModel {
