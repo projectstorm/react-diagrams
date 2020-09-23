@@ -60,7 +60,7 @@ yarn add @projectstorm/react-canvas-core
 which makes use of
 
 ```text
-yarn add @projectstorm/react-geometry
+yarn add @projectstorm/geometry
 ```
 
 and of course, you can add some extras:
