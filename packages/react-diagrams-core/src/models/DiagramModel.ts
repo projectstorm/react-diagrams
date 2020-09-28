@@ -76,7 +76,7 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 		if (!this.activeLinkLayer) {
 			const layers = this.getLinkLayers();
 			if (layers.length === 0) {
-				this.addLayer(new NodeLayerModel());
+				this.addLayer(new LinkLayerModel());
 			} else {
 				this.activeLinkLayer = layers[0];
 			}
