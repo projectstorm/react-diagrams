@@ -1,5 +1,9 @@
 {
 	"extends": "../../tsconfig",
+	"compilerOptions": {
+		// Use native async await
+		"target": "ES2018"
+	},
 	"include": [
 		"./demos"
 	]

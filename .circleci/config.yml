@@ -4,6 +4,13 @@ jobs:
     docker:
       - image: buildkite/puppeteer
     working_directory: ~/repo
+
+    # Add testim cloud project details here
+    # environment:
+    #     TESTIM_PROJECT_TOKEN: 'YYY'
+    #     TESTIM_PROJECT_ID: 'XXX'
+    #     TESTIM_PERSIST_RESULTS_TO_CLOUD: 'true'
+
     steps:
       - checkout
       - restore_cache:
