@@ -45,7 +45,8 @@ class DemoWidget extends React.Component<{ model: DiagramModel; engine: DiagramE
 				marginx: 25,
 				marginy: 25
 			},
-			includeLinks: true
+			includeLinks: true,
+			nodeMargin: 25
 		});
 	}
 
@@ -57,6 +58,13 @@ class DemoWidget extends React.Component<{ model: DiagramModel; engine: DiagramE
 		this.props.engine.repaintCanvas();
 	};
 
+	autoRefreshLinks = () => {
+		this.engine.refreshLinks(this.props.model);
+
+		// only happens if pathfing is enabled (check line 25)
+		this.reroute();
+		this.props.engine.repaintCanvas();
+	};
 	componentDidMount(): void {
 		setTimeout(() => {
 			this.autoDistribute();
@@ -72,7 +80,12 @@ class DemoWidget extends React.Component<{ model: DiagramModel; engine: DiagramE
 
 	render() {
 		return (
-			<DemoWorkspaceWidget buttons={<DemoButton onClick={this.autoDistribute}>Re-distribute</DemoButton>}>
+			<DemoWorkspaceWidget buttons={
+				<div>
+					<DemoButton onClick={this.autoDistribute}>Re-distribute</DemoButton>
+					<DemoButton onClick={this.autoRefreshLinks}>Refresh Links</DemoButton>
+				</div>
+			}>
 				<DemoCanvasWidget>
 					<CanvasWidget engine={this.props.engine} />
 				</DemoCanvasWidget>
@@ -106,9 +119,11 @@ export default () => {
 	});
 
 	// more links for more complicated diagram
-	links.push(connectNodes(nodesFrom[0], nodesTo[1], engine));
-	links.push(connectNodes(nodesTo[0], nodesFrom[1], engine));
-	links.push(connectNodes(nodesFrom[1], nodesTo[2], engine));
+	links.push(connectNodes(nodesTo[0], nodesTo[1], engine));
+	links.push(connectNodes(nodesTo[1], nodesTo[2], engine));
+	links.push(connectNodes(nodesTo[0], nodesTo[2], engine));
+	links.push(connectNodes(nodesFrom[0], nodesFrom[2], engine));
+	links.push(connectNodes(nodesFrom[0], nodesTo[2], engine));
 
 	// initial random position
 	nodesFrom.forEach((node, index) => {
