@@ -37,7 +37,7 @@
 		"@emotion/core": "^10.*",
 		"@emotion/styled": "^10.*",
 		"lodash": "4.*",
-		"react": "16.*"
+		"react": "16.* || 17.*"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }
