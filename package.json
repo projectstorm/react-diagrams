@@ -85,7 +85,7 @@
 		"resize-observer-polyfill": "^1.5.1",
 		"rimraf": "^3.0.2",
 		"source-map-loader": "^1.1.0",
-		"storybook-host": "^5.1.0",
+		"storybook-host": "^5.2.0",
 		"storybook-readme": "^5.0.8",
 		"style-loader": "^1.2.1",
 		"terser-webpack-plugin": "^4.2.2",
