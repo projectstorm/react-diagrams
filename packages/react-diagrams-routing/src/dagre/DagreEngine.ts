@@ -88,13 +88,13 @@ export class DagreEngine {
 		}
 	}
 
-	public refreshLinks(diagram: DiagramModel) {
+		public refreshLinks(diagram: DiagramModel) {
 		const { nodeMargin } = this.options;
 		const nodes = diagram.getNodes();
 		const links = diagram.getLinks();
 		let maxChunkRowIndex = -1;
 		// build the chunk matrix
-		const chunks: { [id: number]: { [id: number]: boolean } } = {};
+		const chunks: { [id: number]: { [id: number]: boolean } } = {}; // true: occupied, false: blank
 		const NodeXColumnIndexDictionary: { [id: number]: number } = {};
 		let verticalLines: number[] = [];
 		_.forEach(nodes, (node) => {
@@ -157,14 +157,14 @@ export class DagreEngine {
 					};
 			}
 		});
-		const sortedLinks = _.sortBy(edges, (link) => {
+		const sortedEdges = _.sortBy(edges, (link) => {
 			return Math.abs(link.targetIndex - link.sourceIndex);
 		})
 		// set link points
 
 		if (this.options.includeLinks) {
 
-			_.forEach(sortedLinks, (edge) => {
+			_.forEach(sortedEdges, (edge) => {
 
 				const link = diagram.getLink(edge.link.getID())
 				// re-draw
