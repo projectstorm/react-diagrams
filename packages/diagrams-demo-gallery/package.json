@@ -28,5 +28,8 @@
 	],
 	"dependencies": {
 		"gsap": "^3.0.1"
+	},
+	"devDependencies": {
+		"@testim/root-cause-jest": "^0.1.24"
 	}
 }

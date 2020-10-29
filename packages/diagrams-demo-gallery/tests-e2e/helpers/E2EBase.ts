@@ -19,7 +19,8 @@ export abstract class E2EBase {
 	}
 
 	async waitForElement(): Promise<ElementHandle | null> {
-		return (await this.getSelector()).waitForSelector(this.selector(), {
+		// The await here is needed to preserve async stack traces
+		return await (await this.getSelector()).waitForSelector(this.selector(), {
 			timeout: 1000
 		});
 	}
