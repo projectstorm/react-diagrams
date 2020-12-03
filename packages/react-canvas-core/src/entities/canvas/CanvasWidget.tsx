@@ -64,7 +64,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 		};
 		this.keyUp = (event) => {
 			this.props.engine.getActionEventBus().fireAction({ event });
-			
+
 			if (
 				this.props.engine.getActionEventBus().getKeys().length > 1 &&
 				this.props.engine
@@ -77,7 +77,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 				// Prevent canvas from locking after MacOS screenshot by clearing actionEventBus keys array.
 				// Shift-Cmd-4 on mac duplicates the issue, because it pops up Preview as you're letting go of
 				// the shift key, and the browser doesn't see the key up event
-				(this.props.engine.getActionEventBus() as any).keys = []
+				(this.props.engine.getActionEventBus() as any).keys = [];
 			}
 		};
 
