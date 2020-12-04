@@ -6,6 +6,7 @@ import { LayerModel } from './LayerModel';
 
 export interface TransformLayerWidgetProps {
 	layer: LayerModel;
+	svgLayerStyles?: {};
 }
 
 namespace S {
@@ -59,8 +60,10 @@ export class TransformLayerWidget extends React.Component<TransformLayerWidgetPr
 	}
 
 	render() {
+		const svgLayerStyles = this.props.svgLayerStyles || {};
+
 		if (this.props.layer.getOptions().isSvg) {
-			return <S.SvgLayer style={this.getTransformStyle()}>{this.props.children}</S.SvgLayer>;
+			return <S.SvgLayer style={{ ...svgLayerStyles, ...this.getTransformStyle()}}>{this.props.children}</S.SvgLayer>;
 		}
 		return <S.DivLayer style={this.getTransformStyle()}>{this.props.children}</S.DivLayer>;
 	}
