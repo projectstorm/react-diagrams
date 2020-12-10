@@ -30,11 +30,11 @@ export class LabelWidget extends React.Component<LabelWidgetProps> {
 	}
 
 	componentDidUpdate() {
-		window.requestAnimationFrame(this.calculateLabelPosition);
+		if (typeof window !== 'undefined') window.requestAnimationFrame(this.calculateLabelPosition);
 	}
 
 	componentDidMount() {
-		window.requestAnimationFrame(this.calculateLabelPosition);
+		if (typeof window !== 'undefined') window.requestAnimationFrame(this.calculateLabelPosition);
 	}
 
 	findPathAndRelativePositionToRenderLabel = (index: number): { path: SVGPathElement; position: number } => {

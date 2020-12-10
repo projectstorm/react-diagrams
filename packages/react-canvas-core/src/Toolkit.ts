@@ -1,5 +1,3 @@
-import * as closest from 'closest';
-
 export class Toolkit {
 	static TESTING: boolean = false;
 	static TESTING_UID = 0;
