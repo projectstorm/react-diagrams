@@ -10,6 +10,7 @@ module.exports = (directory) => {
 			filename: "index.js",
 			path: path.join(directory, 'dist'),
 			libraryTarget: "umd",
+			globalObject: "this"
 		},
 		externals: [
 			nodeExternals({modulesDir: path.join(directory, 'node_modules')}),

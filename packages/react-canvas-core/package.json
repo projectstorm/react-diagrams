@@ -34,7 +34,6 @@
 		"@projectstorm/geometry": "^6.3.0"
 	},
 	"peerDependencies": {
-		"closest": "^0.0.1",
 		"lodash": "4.*",
 		"react": "16.*"
 	},
