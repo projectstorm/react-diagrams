@@ -34,10 +34,10 @@
 		"@projectstorm/react-diagrams-core": "^6.3.0"
 	},
 	"peerDependencies": {
-		"@emotion/core": "^10.*",
-		"@emotion/styled": "^10.*",
+		"@emotion/core": "^11.*",
+		"@emotion/styled": "^11.*",
 		"lodash": "4.*",
-		"react": "16.*"
+		"react": "17.*"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }

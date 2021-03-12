@@ -9,7 +9,7 @@
 		"url": "https://github.com/projectstorm/react-diagrams.git"
 	},
 	"scripts": {
-		"start": "../../node_modules/.bin/webpack-dev-server"
+		"start": "./node_modules/.bin/webpack serve --open"
 	},
 	"keywords": [
 		"web",
@@ -25,7 +25,10 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams": "^6.3.0"
-	},
+		"@projectstorm/react-diagrams": "^6.3.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-cli": "^4.5.0",
+    "webpack": "^5.25.0"
+  },
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }
