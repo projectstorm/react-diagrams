@@ -9,10 +9,10 @@
 		"url": "https://github.com/projectstorm/react-diagrams.git"
 	},
 	"scripts": {
-		"start": "../../node_modules/.bin/start-storybook",
-		"storybook:build": "../../node_modules/.bin/build-storybook -c .storybook -o .out",
-		"github": "../../node_modules/.bin/storybook-to-ghpages",
-		"test:run": "../../node_modules/.bin/jest --no-cache",
+		"start": "../node_modules/.bin/start-storybook",
+		"storybook:build": "../node_modules/.bin/build-storybook -c .storybook -o .out",
+		"github": "../node_modules/.bin/storybook-to-ghpages",
+		"test:run": "../node_modules/.bin/jest --no-cache",
 		"test": "yarn storybook:build && yarn test:run"
 	},
 	"keywords": [
