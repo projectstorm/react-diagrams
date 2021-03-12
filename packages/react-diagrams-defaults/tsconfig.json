@@ -1,14 +1,16 @@
 {
-	"extends": "../../tsconfig",
+	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
-		"declaration": true,
-		"outDir": "dist/es/",
+		"outDir": "dist",
+		"rootDir": "src",
 		"declarationDir": "dist/@types"
 	},
 	"include": [
 		"./src"
 	],
-	"exclude": [
-		"./dist"
+	"references": [
+		{
+			"path": "../react-diagrams-core"
+		}
 	]
 }

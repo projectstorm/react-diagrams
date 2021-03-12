@@ -25,7 +25,8 @@ export interface LinkModelGenerics extends BaseModelGenerics {
 	PARENT: DiagramModel;
 }
 
-export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends BaseModel<G>
+export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
+	extends BaseModel<G>
 	implements ModelGeometryInterface {
 	protected sourcePort: PortModel | null;
 	protected targetPort: PortModel | null;

@@ -9,9 +9,7 @@
 	},
 	"scripts": {
 		"clean": "rimraf ./dist",
-		"build": "../../node_modules/.bin/webpack",
-		"build:es": "../../node_modules/.bin/tsc",
-		"build:prod": "NODE_ENV=production ../../node_modules/.bin/webpack && NODE_ENV=production ../../node_modules/.bin/tsc"
+		"build": "../../node_modules/.bin/webpack"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -27,8 +25,8 @@
 		"links",
 		"nodes"
 	],
-	"main": "./dist/index.js",
-	"module": "./dist/es/index.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }

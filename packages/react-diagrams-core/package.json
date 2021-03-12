@@ -27,8 +27,8 @@
 		"links",
 		"nodes"
 	],
-	"main": "./dist/index.js",
-	"module": "./dist/es/index.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
 		"@projectstorm/geometry": "^6.3.0",

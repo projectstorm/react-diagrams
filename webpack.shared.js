@@ -7,7 +7,7 @@ module.exports = (directory) => {
 	return {
 		entry: path.join(directory, './src/index.ts'),
 		output: {
-			filename: "index.js",
+			filename: "index.umd.js",
 			path: path.join(directory, 'dist'),
 			libraryTarget: "umd",
 		},

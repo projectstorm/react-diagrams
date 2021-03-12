@@ -4,7 +4,6 @@ import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { DefaultNodeModel } from './DefaultNodeModel';
 import { DefaultPortLabel } from '../port/DefaultPortLabelWidget';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 
 namespace S {
 	export const Node = styled.div<{ background: string; selected: boolean }>`
