@@ -1,4 +1,4 @@
-__6.3.0__
+__6.4.0__
 
 * Bump all packages and move to Emotion 11 and React 17
 * Move to the latest Storybook
