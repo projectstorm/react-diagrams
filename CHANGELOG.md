@@ -1,3 +1,8 @@
+__6.3.0__
+
+* Bump all packages and move to Emotion 11 and React 17
+* Move to the latest Storybook
+
 __6.2.0__
 
 * (improvement) Move away fromn math-js (https://github.com/projectstorm/react-diagrams/pull/651)

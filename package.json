@@ -29,7 +29,7 @@
 		"watch": "yarn build:clean && lerna run watch --stream",
 		"publish:dev": "yarn build:prod && lerna publish --force-publish --dist-tag=next",
 		"publish:prod": "yarn build:prod && lerna publish --force-publish",
-		"publish:storybook": "cd packages/diagrams-demo-gallery && yarn storybook:build && ../../node_modules/.bin/storybook-to-ghpages --existing-output-dir .out",
+		"publish:storybook": "cd diagrams-demo-gallery && yarn storybook:build && ../node_modules/.bin/storybook-to-ghpages --existing-output-dir .out",
 		"test:ci": "lerna run test --stream -- --runInBand --ci ",
     "test": "lerna run test --stream",
 		"pretty": "prettier --write \"packages/**/*.{ts,tsx,scss,js,jsx}\""
