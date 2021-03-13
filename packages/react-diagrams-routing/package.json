@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-routing",
-	"version": "6.3.0",
+	"version": "6.4.0",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"repository": {
@@ -12,7 +12,7 @@
 		"build": "../../node_modules/.bin/webpack",
 		"build:es": "../../node_modules/.bin/tsc",
 		"build:prod": "NODE_ENV=production ../../node_modules/.bin/webpack && NODE_ENV=production  ../../node_modules/.bin/tsc",
-		"test": "../../node_modules/.bin/jest --no-cache"
+		"test": "../../node_modules/.bin/jest"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -28,20 +28,20 @@
 		"links",
 		"nodes"
 	],
-	"main": "./dist/index.js",
-	"module": "./dist/es/index.js",
+	"main": "./dist/index.umd.js",
+	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.3.0",
-		"@projectstorm/react-diagrams-core": "^6.3.0",
-		"@projectstorm/react-diagrams-defaults": "^6.3.0"
+		"@projectstorm/geometry": "^6.4.0",
+		"@projectstorm/react-diagrams-core": "^6.4.0",
+		"@projectstorm/react-diagrams-defaults": "^6.4.0"
 	},
 	"peerDependencies": {
-		"dagre": "^0.8.4",
+		"dagre": "^0.8.5",
 		"lodash": "4.*",
 		"pathfinding": "^0.4.18",
-		"paths-js": "^0.4.9",
-		"react": "16.*"
+		"paths-js": "^0.4.11",
+		"react": "17.*"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }

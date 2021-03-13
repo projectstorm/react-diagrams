@@ -7,13 +7,13 @@ The first thing you need to do, is grab the distribution files on NPM. You can d
 **Via yarn:**
 
 ```text
-yarn add @projectstorm/react-diagrams@next
+yarn add @projectstorm/react-diagrams
 ```
 
 **Via npm:**
 
 ```text
-npm install @projectstorm/react-diagrams@next
+npm install @projectstorm/react-diagrams
 ```
 
 When you run this in your project directory, this will install the library into `./node_modules/@projectstorm/react-diagrams`. You will then find a **dist** folder that contains all the minified and production ready code.
@@ -31,7 +31,7 @@ yarn add closest lodash react dagre pathfinding paths-js @emotion/core @emotion/
 **Via npm:**
 
 ```text
-npm install closest lodash react dagre pathfinding paths-js @emotion/core @emotion/styled resize-observer-polyfill
+npm install closest lodash react dagre pathfinding paths-js @emotion/react @emotion/styled resize-observer-polyfill
 ```
 
 We do this, so that you can better control the versions of these libraries yourself since you might make use of `Lodash` in other parts of your software.

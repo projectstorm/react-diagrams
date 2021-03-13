@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-gallery",
-	"version": "6.3.0",
+	"version": "6.4.0",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"private": true,
@@ -9,10 +9,10 @@
 		"url": "https://github.com/projectstorm/react-diagrams.git"
 	},
 	"scripts": {
-		"start": "../../node_modules/.bin/start-storybook",
-		"storybook:build": "../../node_modules/.bin/build-storybook -c .storybook -o .out",
-		"github": "../../node_modules/.bin/storybook-to-ghpages",
-		"test:run": "../../node_modules/.bin/jest --no-cache",
+		"start": "../node_modules/.bin/start-storybook",
+		"storybook:build": "../node_modules/.bin/build-storybook -c .storybook -o .out",
+		"github": "../node_modules/.bin/storybook-to-ghpages",
+		"test:run": "../node_modules/.bin/jest --no-cache",
 		"test": "yarn storybook:build && yarn test:run"
 	},
 	"keywords": [
@@ -27,6 +27,6 @@
 		"nodes"
 	],
 	"dependencies": {
-		"gsap": "^3.0.1"
+		"gsap": "^3.6.0"
 	}
 }

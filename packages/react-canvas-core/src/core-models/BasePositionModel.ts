@@ -16,7 +16,8 @@ export interface BasePositionModelGenerics extends BaseModelGenerics {
 	OPTIONS: BasePositionModelOptions;
 }
 
-export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics> extends BaseModel<G>
+export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics>
+	extends BaseModel<G>
 	implements ModelGeometryInterface {
 	protected position: Point;
 

@@ -1,6 +1,6 @@
 import PathFinding from '../src/engine/PathFinding';
 
-describe('calculating start and end points', function() {
+describe('calculating start and end points', function () {
 	beforeEach(() => {
 		this.pathFinding = new PathFinding(null);
 	});
