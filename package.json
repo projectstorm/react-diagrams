@@ -25,7 +25,7 @@
 	"scripts": {
 		"clean": "tsc --build --clean && lerna run clean --stream",
 		"build": "tsc --build && lerna run build --stream",
-		"build:prod": "yarn build:clean && tsc --build && lerna run build:prod --stream",
+		"build:prod": "NODE_ENV=production yarn build",
 		"watch": "yarn build:clean && lerna run watch --stream",
 		"publish:dev": "yarn build:prod && lerna publish --force-publish --dist-tag=next",
 		"publish:prod": "yarn build:prod && lerna publish --force-publish",
