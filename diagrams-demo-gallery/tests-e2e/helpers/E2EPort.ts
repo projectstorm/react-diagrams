@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import { FrameBase } from 'puppeteer';
 import { E2EBase } from './E2EBase';
 import { E2ENode } from './E2ENode';
 import { E2ELink } from './E2ELink';
@@ -73,7 +72,7 @@ export class E2EPort extends E2EBase {
 		return new E2ELink(link);
 	}
 
-	async getSelector(): Promise<FrameBase> {
+	async getSelector(): Promise<any> {
 		return (await this.parent.getElement()) as any;
 	}
 

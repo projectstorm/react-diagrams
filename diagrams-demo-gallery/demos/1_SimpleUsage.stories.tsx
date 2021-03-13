@@ -1,3 +1,10 @@
+import { Toolkit } from "@projectstorm/react-canvas-core";
+Toolkit.TESTING = true;
+
+export default {
+	title: 'Simple Usage'
+};
+
 import demo_simple from "./demo-simple";
 import demo_flow from "./demo-simple-flow";
 import demo_performance from "./demo-performance";
@@ -9,10 +16,6 @@ import demo_zoom_nodes from "./demo-zoom-to-fit-nodes";
 import demo_canvas_drag from "./demo-canvas-drag";
 import demo_dynamic_ports from "./demo-dynamic-ports";
 import demo_labels from "./demo-labelled-links";
-
-export default {
-	title: 'Simple Usage'
-};
 
 export const DemoSimple = demo_simple;
 export const SimpleFlowExample = demo_flow;

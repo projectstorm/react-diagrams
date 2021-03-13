@@ -4,7 +4,7 @@ import { E2ENode } from './helpers/E2ENode';
 
 describe('simple test', () => {
 	beforeAll(async () => {
-		await page.goto(`file://${__dirname}/../.out/iframe.html?path=/story/simple-usage--simple-example`);
+		await page.goto(`file://${__dirname}/../.out/iframe.html?path=/story/simple-usage--demo-simple`);
 	});
 
 	it('should delete a link and create a new one', async () => {

@@ -1,3 +1,6 @@
+import { Toolkit } from "@projectstorm/react-canvas-core";
+Toolkit.TESTING = true;
+
 export default {
 	title: 'Advanced Usage'
 };

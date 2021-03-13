@@ -1,4 +1,4 @@
-import { ElementHandle, FrameBase } from 'puppeteer';
+import { ElementHandle } from 'puppeteer';
 
 export abstract class E2EBase {
 	name: string;
@@ -7,8 +7,8 @@ export abstract class E2EBase {
 		this.name = name;
 	}
 
-	async getSelector(): Promise<FrameBase> {
-		return page as FrameBase;
+	async getSelector(): Promise<any> {
+		return page;
 	}
 
 	async getElement(): Promise<ElementHandle> {

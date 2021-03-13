@@ -12,7 +12,7 @@
 		"build": "../../node_modules/.bin/webpack",
 		"build:es": "../../node_modules/.bin/tsc",
 		"build:prod": "NODE_ENV=production ../../node_modules/.bin/webpack && NODE_ENV=production  ../../node_modules/.bin/tsc",
-		"test": "../../node_modules/.bin/jest --no-cache"
+		"test": "../../node_modules/.bin/jest"
 	},
 	"publishConfig": {
 		"access": "public"
