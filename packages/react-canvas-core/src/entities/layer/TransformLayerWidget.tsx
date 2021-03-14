@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 import { CSSProperties } from 'react';
 import { LayerModel } from './LayerModel';
+import { css } from '@emotion/react';
 
 export interface TransformLayerWidgetProps {
 	layer: LayerModel;
