@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = (directory) => {
 	return {
-		entry: path.join(directory, './src/index.ts'),
+		entry: path.join(directory, './dist/index.js'),
 		output: {
 			filename: "index.umd.js",
 			path: path.join(directory, 'dist'),
@@ -21,10 +21,6 @@ module.exports = (directory) => {
 					enforce: "pre",
 					test: /\.js$/,
 					loader: "source-map-loader"
-				},
-				{
-					test: /\.tsx?$/,
-					loader: "ts-loader",
 				}
 			]
 		},
