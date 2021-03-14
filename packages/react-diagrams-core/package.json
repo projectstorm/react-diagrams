@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-core",
-	"version": "6.4.1",
+	"version": "6.4.2",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"repository": {
@@ -31,8 +31,8 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.4.1",
-		"@projectstorm/react-canvas-core": "^6.4.1"
+		"@projectstorm/geometry": "^6.4.2",
+		"@projectstorm/react-canvas-core": "^6.4.2"
 	},
 	"peerDependencies": {
 		"closest": "^0.0.1",
