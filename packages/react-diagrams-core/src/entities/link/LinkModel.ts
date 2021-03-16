@@ -223,7 +223,8 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 			this.sourcePort.removeLink(this);
 		}
 		this.sourcePort = port;
-		this.fireEvent({ port }, 'sourcePortChanged');
+
+		this.fireEvent({ port }, 'linkSetSourcePort');
 	}
 
 	getSourcePort(): PortModel {
@@ -242,7 +243,8 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 			this.targetPort.removeLink(this);
 		}
 		this.targetPort = port;
-		this.fireEvent({ port }, 'targetPortChanged');
+
+		this.fireEvent({ port }, 'linkSetTargetPort');
 	}
 
 	point(x: number, y: number, index: number = 1): PointModel {

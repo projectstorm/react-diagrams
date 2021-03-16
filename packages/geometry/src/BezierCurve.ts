@@ -19,7 +19,7 @@ export class BezierCurve extends Polygon {
 
 	setPoints(points: Point[]) {
 		if (points.length !== 4) {
-			throw new Error('BezierCurve must have extactly 4 points');
+			throw new Error('BezierCurve must have exactly 4 points');
 		}
 		super.setPoints(points);
 	}
