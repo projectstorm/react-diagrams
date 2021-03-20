@@ -142,6 +142,10 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		return new Point(this.getX() + this.width / 2, this.getY() + this.height / 2);
 	}
 
+	getBoundingBox(): Rectangle {
+		return new Rectangle(this.position, this.width, this.height);
+	}
+
 	updateCoords(coords: Rectangle) {
 		this.width = coords.getWidth();
 		this.height = coords.getHeight();

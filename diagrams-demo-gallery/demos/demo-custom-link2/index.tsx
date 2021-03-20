@@ -3,14 +3,14 @@ import createEngine, {
 	DefaultNodeModel,
 	DefaultPortModel,
 	DefaultLinkFactory,
-	DefaultLinkPointWidget,
 	DefaultLinkModel,
 	DefaultLinkWidget
 } from '@projectstorm/react-diagrams';
-import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagrams-core';
+import {LinkWidget, PointModel} from '@projectstorm/react-diagrams-core';
 import * as React from 'react';
-import { CanvasWidget } from '@projectstorm/react-canvas-core';
-import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
+import {CanvasWidget} from '@projectstorm/react-canvas-core';
+import {DemoCanvasWidget} from '../helpers/DemoCanvasWidget';
+import {MouseEvent} from "react";
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 	constructor() {
@@ -28,33 +28,27 @@ export class AdvancedPortModel extends DefaultPortModel {
 }
 
 const CustomLinkArrowWidget = (props) => {
-	const { point, previousPoint } = props;
+	const {point, previousPoint} = props;
 
 	const angle =
 		90 +
 		(Math.atan2(
 			point.getPosition().y - previousPoint.getPosition().y,
 			point.getPosition().x - previousPoint.getPosition().x
-		) *
+			) *
 			180) /
-			Math.PI;
+		Math.PI;
 
 	//translate(50, -10),
 	return (
 		<g className="arrow" transform={'translate(' + point.getPosition().x + ', ' + point.getPosition().y + ')'}>
-			<g style={{ transform: 'rotate(' + angle + 'deg)' }}>
+			<g style={{transform: 'rotate(' + angle + 'deg)'}}>
 				<g transform={'translate(0, -3)'}>
 					<polygon
 						points="0,10 8,30 -8,30"
 						fill={props.color}
-						onMouseLeave={() => {
-							this.setState({ selected: false });
-						}}
-						onMouseEnter={() => {
-							this.setState({ selected: true });
-						}}
 						data-id={point.getID()}
-						data-linkid={point.getLink().getID()}></polygon>
+						data-linkid={point.getLink().getID()}/>
 				</g>
 			</g>
 		</g>
@@ -122,9 +116,10 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 	}
 
 	generateReactWidget(event): JSX.Element {
-		return <AdvancedLinkWidget link={event.model} diagramEngine={this.engine} />;
+		return <AdvancedLinkWidget link={event.model} diagramEngine={this.engine}/>;
 	}
 }
+
 /**
  *
  * Simple link styling demo
@@ -166,7 +161,7 @@ export default () => {
 	// render the diagram!
 	return (
 		<DemoCanvasWidget>
-			<CanvasWidget engine={engine} />
+			<CanvasWidget engine={engine}/>
 		</DemoCanvasWidget>
 	);
 };

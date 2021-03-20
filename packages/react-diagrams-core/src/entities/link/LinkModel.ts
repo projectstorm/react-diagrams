@@ -224,6 +224,9 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 		}
 		this.sourcePort = port;
 		this.fireEvent({ port }, 'sourcePortChanged');
+		if (port.reportedPosition) {
+			this.getPointForPort(port).setPosition(port.getCenter());
+		}
 	}
 
 	getSourcePort(): PortModel {
@@ -243,6 +246,9 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 		}
 		this.targetPort = port;
 		this.fireEvent({ port }, 'targetPortChanged');
+		if (port.reportedPosition) {
+			this.getPointForPort(port).setPosition(port.getCenter());
+		}
 	}
 
 	point(x: number, y: number, index: number = 1): PointModel {

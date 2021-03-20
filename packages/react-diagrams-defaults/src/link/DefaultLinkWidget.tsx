@@ -9,6 +9,8 @@ export interface DefaultLinkProps {
 	link: DefaultLinkModel;
 	diagramEngine: DiagramEngine;
 	pointAdded?: (point: PointModel, event: MouseEvent) => any;
+	renderPoints?: boolean;
+	selected?: (event: MouseEvent) => any;
 }
 
 export interface DefaultLinkState {
@@ -24,6 +26,10 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 		this.state = {
 			selected: false
 		};
+	}
+
+	renderPoints() {
+		return this.props.renderPoints ?? true;
 	}
 
 	componentDidUpdate(): void {
@@ -111,6 +117,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 					this.props.link.getSVGPath(),
 					{
 						onMouseDown: (event) => {
+							this.props.selected?.(event);
 							this.addPointToLink(event, 1);
 						}
 					},
@@ -132,6 +139,7 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 							'data-linkid': this.props.link.getID(),
 							'data-point': j,
 							onMouseDown: (event: MouseEvent) => {
+								this.props.selected?.(event);
 								this.addPointToLink(event, j + 1);
 							}
 						},
@@ -140,13 +148,15 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 				);
 			}
 
-			//render the circles
-			for (let i = 1; i < points.length - 1; i++) {
-				paths.push(this.generatePoint(points[i]));
-			}
+			if (this.renderPoints()) {
+				//render the circles
+				for (let i = 1; i < points.length - 1; i++) {
+					paths.push(this.generatePoint(points[i]));
+				}
 
-			if (this.props.link.getTargetPort() == null) {
-				paths.push(this.generatePoint(points[points.length - 1]));
+				if (this.props.link.getTargetPort() == null) {
+					paths.push(this.generatePoint(points[points.length - 1]));
+				}
 			}
 		}
 
