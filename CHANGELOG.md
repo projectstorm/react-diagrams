@@ -1,4 +1,14 @@
+__6.5.0__
+
+https://github.com/projectstorm/react-diagrams/pull/814
+
+* Some rendering fixes
+* small api change around `zoomToFit`
+* more api options with the `DefaultLink`
+
 __6.4.0__
+
+https://github.com/projectstorm/react-diagrams/pull/813
 
 * Bump all packages and move to Emotion 11 and React 17
 * Move to the latest Storybook

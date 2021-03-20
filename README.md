@@ -4,8 +4,6 @@
 
 ![](.gitbook/assets/logo.jpg)
 
-[pssst! Looking for the old version 5?](https://github.com/projectstorm/react-diagrams/tree/v5.3.2)
-
 **DEMO**: [http://projectstorm.cloud/react-diagrams](http://projectstorm.cloud/react-diagrams)
 
 **DOCS \(wip\)** [https://projectstorm.gitbook.io/react-diagrams](https://projectstorm.gitbook.io/react-diagrams)
