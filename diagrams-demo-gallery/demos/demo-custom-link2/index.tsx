@@ -3,14 +3,14 @@ import createEngine, {
 	DefaultNodeModel,
 	DefaultPortModel,
 	DefaultLinkFactory,
-	DefaultLinkPointWidget,
 	DefaultLinkModel,
 	DefaultLinkWidget
 } from '@projectstorm/react-diagrams';
-import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagrams-core';
+import { LinkWidget, PointModel } from '@projectstorm/react-diagrams-core';
 import * as React from 'react';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
+import { MouseEvent } from 'react';
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 	constructor() {
@@ -47,14 +47,9 @@ const CustomLinkArrowWidget = (props) => {
 					<polygon
 						points="0,10 8,30 -8,30"
 						fill={props.color}
-						onMouseLeave={() => {
-							this.setState({ selected: false });
-						}}
-						onMouseEnter={() => {
-							this.setState({ selected: true });
-						}}
 						data-id={point.getID()}
-						data-linkid={point.getLink().getID()}></polygon>
+						data-linkid={point.getLink().getID()}
+					/>
 				</g>
 			</g>
 		</g>
@@ -125,6 +120,7 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 		return <AdvancedLinkWidget link={event.model} diagramEngine={this.engine} />;
 	}
 }
+
 /**
  *
  * Simple link styling demo

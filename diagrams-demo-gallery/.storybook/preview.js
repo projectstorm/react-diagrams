@@ -1,3 +1,3 @@
 export const parameters = {
-	layout: 'fullscreen',
+	layout: 'fullscreen'
 };

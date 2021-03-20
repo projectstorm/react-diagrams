@@ -1,4 +1,4 @@
-import { Toolkit } from "@projectstorm/react-canvas-core";
+import { Toolkit } from '@projectstorm/react-canvas-core';
 Toolkit.TESTING = true;
 
 export default {
@@ -9,4 +9,4 @@ import demo_3rd_dagre from './demo-dagre';
 import demo_gsap from './demo-animation';
 
 export const DagreDistribute = demo_3rd_dagre;
-export const GsapAnimation = demo_gsap
+export const GsapAnimation = demo_gsap;

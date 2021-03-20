@@ -233,27 +233,32 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		}
 	}
 
-	zoomToFitNodes(margin?: number) {
-		let nodesRect; // nodes bounding rectangle
-		let selectedNodes = this.model
+	zoomToFitSelectedNodes(margin: number) {
+		const nodes: NodeModel[] = this.model
 			.getSelectedEntities()
-			.filter((entity) => entity instanceof NodeModel)
-			.map((node) => node) as NodeModel[];
+			.filter((entity) => entity instanceof NodeModel) as NodeModel[];
 
-		// no node selected
-		if (selectedNodes.length == 0) {
-			let allNodes = this.model
-				.getSelectionEntities()
-				.filter((entity) => entity instanceof NodeModel)
-				.map((node) => node) as NodeModel[];
+		this.zoomToFitNodes({
+			margin: margin,
+			nodes: nodes.length > 0 ? nodes : null
+		});
+	}
 
-			// get nodes bounding box with margin
-			nodesRect = this.getBoundingNodesRect(allNodes, margin);
-		} else {
-			// get nodes bounding box with margin
-			nodesRect = this.getBoundingNodesRect(selectedNodes, margin);
+	zoomToFitNodes(options: { margin?: number; nodes?: NodeModel[] });
+	zoomToFitNodes(margin: number);
+	zoomToFitNodes(options) {
+		let margin = options || 0;
+		let nodes: NodeModel[] = [];
+		if (!!options && typeof options == 'object') {
+			margin = options.margin || 0;
+			nodes = options.nodes || [];
 		}
 
+		// no node selected
+		if (nodes.length === 0) {
+			nodes = this.model.getNodes();
+		}
+		const nodesRect = this.getBoundingNodesRect(nodes, margin);
 		if (nodesRect) {
 			// there is something we should zoom on
 			let canvasRect = this.canvas.getBoundingClientRect();

@@ -37,7 +37,7 @@ export class NodeWidget extends React.Component<NodeProps> {
 		this.ob.disconnect();
 		this.ob = null;
 
-		this.listener.deregister();
+		this.listener?.deregister();
 		this.listener = null;
 	}
 
@@ -56,17 +56,26 @@ export class NodeWidget extends React.Component<NodeProps> {
 		});
 	}
 
+	updateSize(width: number, height: number) {
+		this.props.node.updateDimensions({ width, height });
+
+		//now mark the links as dirty
+		try {
+			_.forEach(this.props.node.getPorts(), (port) => {
+				port.updateCoords(this.props.diagramEngine.getPortCoords(port));
+			});
+		} catch (ex) {}
+	}
+
 	componentDidMount(): void {
 		// @ts-ignore
 		this.ob = new ResizeObserver((entities) => {
 			const bounds = entities[0].contentRect;
-			this.props.node.updateDimensions({ width: bounds.width, height: bounds.height });
-
-			//now mark the links as dirty
-			_.forEach(this.props.node.getPorts(), (port) => {
-				port.updateCoords(this.props.diagramEngine.getPortCoords(port));
-			});
+			this.updateSize(bounds.width, bounds.height);
 		});
+
+		const b = this.ref.current.getBoundingClientRect();
+		this.updateSize(b.width, b.height);
 		this.ob.observe(this.ref.current);
 		this.installSelectionListener();
 	}
