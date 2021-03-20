@@ -31,7 +31,7 @@
 		"publish:storybook": "cd diagrams-demo-gallery && yarn storybook:build && ../node_modules/.bin/storybook-to-ghpages --existing-output-dir .out",
 		"test:ci": "lerna run test --stream -- --runInBand --ci ",
     "test": "lerna run test --stream",
-		"pretty": "prettier --write \"packages/**/*.{ts,tsx,scss,js,jsx}\""
+		"pretty": "prettier --write \"**/*.{ts,tsx,scss,js,jsx}\""
 	},
 	"peerDependencies": {
 		"closest": "^0.0.1",

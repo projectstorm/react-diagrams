@@ -28,7 +28,8 @@ export default () => {
 
 	//6) render the diagram!
 	return (
-		<DemoWorkspaceWidget buttons={<DemoButton onClick={() => engine.zoomToFitNodes(50)}>Zoom to fit</DemoButton>}>
+		<DemoWorkspaceWidget
+			buttons={<DemoButton onClick={() => engine.zoomToFitSelectedNodes(50)}>Zoom to fit</DemoButton>}>
 			<DemoCanvasWidget>
 				<CanvasWidget engine={engine} />
 			</DemoCanvasWidget>
