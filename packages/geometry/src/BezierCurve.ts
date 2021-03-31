@@ -1,5 +1,4 @@
-import { Point } from './';
-import { Polygon } from './';
+import { Point, Polygon } from './';
 
 export enum BezierCurvepPoints {
 	SOURCE = 0,
