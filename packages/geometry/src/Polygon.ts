@@ -1,6 +1,6 @@
-import { Point } from './Point';
 import * as _ from 'lodash';
-import { Matrix } from './Matrix';
+import { Point } from './';
+import { Matrix } from './';
 
 export class Polygon {
 	protected points: Point[];

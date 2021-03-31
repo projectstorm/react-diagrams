@@ -1,4 +1,4 @@
-import { Matrix } from './Matrix';
+import { Matrix } from './';
 
 export class Point {
 	x: number;
