@@ -16,6 +16,9 @@ namespace S {
 export class SelectionBoxWidget extends React.Component<SelectionBoxWidgetProps> {
 	render() {
 		const { rect } = this.props;
+
+		if (!rect) return;
+
 		return (
 			<S.Container
 				style={{
