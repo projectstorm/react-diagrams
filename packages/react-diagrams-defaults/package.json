@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-defaults",
-	"version": "6.5.0",
+	"version": "6.5.1",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"repository": {
@@ -29,10 +29,10 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-core": "^6.5.0"
+		"@projectstorm/react-diagrams-core": "^6.5.1"
 	},
 	"peerDependencies": {
-		"@emotion/core": "^11.*",
+		"@emotion/react": "^11.*",
 		"@emotion/styled": "^11.*",
 		"lodash": "4.*",
 		"react": "17.*"
