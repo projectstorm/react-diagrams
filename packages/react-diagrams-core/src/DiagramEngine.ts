@@ -210,70 +210,78 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		};
 	}
 
-	/**
-	 * Get nodes bounding box coordinates with or without margin
-	 * @returns rectangle points in node layer coordinates
-	 */
-	getBoundingNodesRect(nodes: NodeModel[], margin?: number): Rectangle {
+	getBoundingNodesRect(nodes: NodeModel[]): Rectangle {
 		if (nodes) {
 			if (nodes.length === 0) {
 				return new Rectangle(0, 0, 0, 0);
 			}
 
-			let boundingBox = Polygon.boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox()));
-			if (margin) {
-				return new Rectangle(
-					boundingBox.getTopLeft().x - margin,
-					boundingBox.getTopLeft().y - margin,
-					boundingBox.getWidth() + 2 * margin,
-					boundingBox.getHeight() + 2 * margin
-				);
-			}
-			return boundingBox;
+			return Polygon.boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox()));
 		}
 	}
 
-	zoomToFitSelectedNodes(margin: number) {
+	zoomToFitSelectedNodes(options: { margin?: number; maxZoom?: number }) {
 		const nodes: NodeModel[] = this.model
 			.getSelectedEntities()
 			.filter((entity) => entity instanceof NodeModel) as NodeModel[];
-
 		this.zoomToFitNodes({
-			margin: margin,
+			margin: options.margin,
+			maxZoom: options.maxZoom,
 			nodes: nodes.length > 0 ? nodes : null
 		});
 	}
 
-	zoomToFitNodes(options: { margin?: number; nodes?: NodeModel[] });
+	zoomToFitNodes(options: { margin?: number; nodes?: NodeModel[]; maxZoom?: number });
+	/**
+	 * @deprecated
+	 */
 	zoomToFitNodes(margin: number);
 	zoomToFitNodes(options) {
 		let margin = options || 0;
 		let nodes: NodeModel[] = [];
+		let maxZoom: number | null = null;
 		if (!!options && typeof options == 'object') {
 			margin = options.margin || 0;
 			nodes = options.nodes || [];
+			maxZoom = options.maxZoom || null;
 		}
 
 		// no node selected
 		if (nodes.length === 0) {
 			nodes = this.model.getNodes();
 		}
-		const nodesRect = this.getBoundingNodesRect(nodes, margin);
+		const nodesRect = this.getBoundingNodesRect(nodes);
 		if (nodesRect) {
 			// there is something we should zoom on
 			let canvasRect = this.canvas.getBoundingClientRect();
 
-			const xFactor = this.canvas.clientWidth / nodesRect.getWidth();
-			const yFactor = this.canvas.clientHeight / nodesRect.getHeight();
-			const zoomFactor = xFactor < yFactor ? xFactor : yFactor;
+			const calculate = (margin: number = 0) => {
+				// work out zoom
+				const xFactor = this.canvas.clientWidth / (nodesRect.getWidth() + margin * 2);
+				const yFactor = this.canvas.clientHeight / (nodesRect.getHeight() + margin * 2);
 
-			this.model.setZoomLevel(zoomFactor * 100);
+				let zoomFactor = xFactor < yFactor ? xFactor : yFactor;
+				if (maxZoom && zoomFactor > maxZoom) {
+					zoomFactor = maxZoom;
+				}
 
-			if(canvasRect.width > canvasRect.height){
-				this.model.setOffset((canvasRect.width / 2) - (nodesRect.getWidth() * zoomFactor / 2), 0);
-			}else{
-				this.model.setOffset(0, (canvasRect.height / 2) - (nodesRect.getHeight() * zoomFactor / 2));
+				return {
+					zoom: zoomFactor,
+					x: canvasRect.width / 2 - ((nodesRect.getWidth() +(margin*2)) * zoomFactor) / 2 + margin,
+					y: canvasRect.height / 2 - ((nodesRect.getHeight() + (margin*2)) * zoomFactor) / 2 + margin
+				};
+			};
+
+			let params = calculate(0);
+			if (margin) {
+				if (params.x < margin || params.y < margin) {
+					params = calculate(margin);
+				}
 			}
+
+			// apply
+			this.model.setZoomLevel(params.zoom * 100);
+			this.model.setOffset(params.x, params.y);
 			this.repaintCanvas();
 		}
 	}
