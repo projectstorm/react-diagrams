@@ -32,7 +32,7 @@
 		"@projectstorm/react-diagrams-core": "^6.5.0"
 	},
 	"peerDependencies": {
-		"@emotion/core": "^11.*",
+		"@emotion/react": "^11.*",
 		"@emotion/styled": "^11.*",
 		"lodash": "4.*",
 		"react": "17.*"

@@ -262,14 +262,6 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		if (nodesRect) {
 			// there is something we should zoom on
 			let canvasRect = this.canvas.getBoundingClientRect();
-			let canvasTopLeftPoint = {
-				x: canvasRect.left,
-				y: canvasRect.top
-			};
-			let nodeLayerTopLeftPoint = {
-				x: canvasTopLeftPoint.x + this.getModel().getOffsetX(),
-				y: canvasTopLeftPoint.y + this.getModel().getOffsetY()
-			};
 
 			const xFactor = this.canvas.clientWidth / nodesRect.getWidth();
 			const yFactor = this.canvas.clientHeight / nodesRect.getHeight();
@@ -277,15 +269,11 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 
 			this.model.setZoomLevel(zoomFactor * 100);
 
-			let nodesRectTopLeftPoint = {
-				x: nodeLayerTopLeftPoint.x + nodesRect.getTopLeft().x * zoomFactor,
-				y: nodeLayerTopLeftPoint.y + nodesRect.getTopLeft().y * zoomFactor
-			};
-
-			this.model.setOffset(
-				this.model.getOffsetX() + canvasTopLeftPoint.x - nodesRectTopLeftPoint.x,
-				this.model.getOffsetY() + canvasTopLeftPoint.y - nodesRectTopLeftPoint.y
-			);
+			if(canvasRect.width > canvasRect.height){
+				this.model.setOffset((canvasRect.width / 2) - (nodesRect.getWidth() * zoomFactor / 2), 0);
+			}else{
+				this.model.setOffset(0, (canvasRect.height / 2) - (nodesRect.getHeight() * zoomFactor / 2));
+			}
 			this.repaintCanvas();
 		}
 	}
