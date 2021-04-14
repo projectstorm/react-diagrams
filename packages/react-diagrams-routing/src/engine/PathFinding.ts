@@ -13,7 +13,7 @@ const pathFinderInstance = new PF.JumpPointFinder({
 	diagonalMovement: PF.DiagonalMovement.Never
 });
 
-export default class PathFinding {
+export class PathFinding {
 	instance: any;
 	factory: PathFindingLinkFactory;
 

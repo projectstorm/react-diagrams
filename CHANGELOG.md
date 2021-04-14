@@ -1,3 +1,10 @@
+__6.5.1__
+
+https://github.com/projectstorm/react-diagrams/pull/829/files
+
+* (improved) zoom to fit now centers correctly
+* (fix) remove wrong peer dependency (@emotion/core)
+
 __6.5.0__
 
 https://github.com/projectstorm/react-diagrams/pull/814
