@@ -10,9 +10,10 @@ import {
 	BaseModel,
 	CanvasEngine,
 	FactoryBank,
-	Toolkit
+	Toolkit,
+	CanvasEngineListener,
+	CanvasEngineOptions
 } from '@projectstorm/react-canvas-core';
-import { CanvasEngineListener, CanvasEngineOptions } from '@projectstorm/react-canvas-core';
 import { DiagramModel } from './models/DiagramModel';
 
 /**
@@ -267,8 +268,16 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 
 				return {
 					zoom: zoomFactor,
-					x: canvasRect.width / 2 - ((nodesRect.getWidth() +(margin*2)) * zoomFactor) / 2 + margin,
-					y: canvasRect.height / 2 - ((nodesRect.getHeight() + (margin*2)) * zoomFactor) / 2 + margin
+					x:
+						canvasRect.width / 2 -
+						((nodesRect.getWidth() + margin * 2) * zoomFactor) / 2 +
+						margin -
+						nodesRect.getTopLeft().x,
+					y:
+						canvasRect.height / 2 -
+						((nodesRect.getHeight() + margin * 2) * zoomFactor) / 2 +
+						margin -
+						nodesRect.getTopLeft().y
 				};
 			};
 
