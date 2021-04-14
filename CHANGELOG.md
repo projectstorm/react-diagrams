@@ -1,6 +1,14 @@
+__6.5.2__
+
+https://github.com/projectstorm/react-diagrams/pull/830
+
+* (fix) issue with zoom to fit selected
+* (improvement) properly export PathFinding
+* (maintenance) bump all dependencies
+
 __6.5.1__
 
-https://github.com/projectstorm/react-diagrams/pull/829/files
+https://github.com/projectstorm/react-diagrams/pull/829
 
 * (improved) zoom to fit now centers correctly
 * (fix) remove wrong peer dependency (@emotion/core)
