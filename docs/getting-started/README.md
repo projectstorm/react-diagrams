@@ -25,13 +25,13 @@ The library includes it's dependencies as peer-dependencies, so yarn will output
 **Via yarn:**
 
 ```text
-yarn add closest lodash react dagre pathfinding paths-js @emotion/core @emotion/styled resize-observer-polyfill
+yarn add closest lodash react dagre pathfinding paths-js @emotion/core @emotion/react @emotion/styled resize-observer-polyfill
 ```
 
 **Via npm:**
 
 ```text
-npm install closest lodash react dagre pathfinding paths-js @emotion/react @emotion/styled resize-observer-polyfill
+npm install closest lodash react dagre pathfinding paths-js @emotion/core @emotion/react @emotion/styled resize-observer-polyfill
 ```
 
 We do this, so that you can better control the versions of these libraries yourself since you might make use of `Lodash` in other parts of your software.
