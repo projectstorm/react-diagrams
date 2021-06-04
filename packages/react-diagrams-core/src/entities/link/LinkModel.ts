@@ -215,7 +215,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 		return this.points[this.points.length - 1];
 	}
 
-	setSourcePort(port: PortModel) {
+	setSourcePort(port: PortModel | null) {
 		if (port !== null) {
 			port.addLink(this);
 		}
@@ -224,7 +224,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 		}
 		this.sourcePort = port;
 		this.fireEvent({ port }, 'sourcePortChanged');
-		if (port.reportedPosition) {
+		if (port?.reportedPosition) {
 			this.getPointForPort(port).setPosition(port.getCenter());
 		}
 	}
@@ -237,7 +237,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 		return this.targetPort;
 	}
 
-	setTargetPort(port: PortModel) {
+	setTargetPort(port: PortModel | null) {
 		if (port !== null) {
 			port.addLink(this);
 		}
@@ -246,7 +246,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 		}
 		this.targetPort = port;
 		this.fireEvent({ port }, 'targetPortChanged');
-		if (port.reportedPosition) {
+		if (port?.reportedPosition) {
 			this.getPointForPort(port).setPosition(port.getCenter());
 		}
 	}
