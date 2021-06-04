@@ -73,11 +73,11 @@ yarn add @projectstorm/react-diagrams-routing
 Before running any of the examples, please run `yarn build` in the root. This project is a monorepo, and the packages (including the demos) require the packages to first be built.
 
 
-Take a look at the [diagram demos](https://github.com/projectstorm/react-diagrams/tree/master/packages/diagrams-demo-gallery/demos)
+Take a look at the [diagram demos](https://github.com/projectstorm/react-diagrams/tree/master/diagrams-demo-gallery/demos)
 
 **or**
 
-Take a look at the [demo project](https://github.com/projectstorm/react-diagrams/tree/master/packages/diagrams-demo-project) which contains an example for ES6 as well as Typescript
+Take a look at the [demo project](https://github.com/projectstorm/react-diagrams/tree/master/diagrams-demo-project) which contains an example for ES6 as well as Typescript
 
 **or**
 
@@ -85,7 +85,7 @@ Take a look at the [demo project](https://github.com/projectstorm/react-diagrams
 
 ## Run the demos
 
-After running `yarn install` you must then run: `cd packages/diagrams-demo-gallery && yarn run start`
+After running `yarn install` you must then run: `cd diagrams-demo-gallery && yarn run start`
 
 ## Building from source
 
