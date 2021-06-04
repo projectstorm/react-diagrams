@@ -25,7 +25,7 @@ The library includes it's dependencies as peer-dependencies, so yarn will output
 **Via yarn:**
 
 ```text
-yarn add closest lodash react dagre pathfinding paths-js @emotion/core @emotion/styled resize-observer-polyfill
+yarn add closest lodash react dagre pathfinding paths-js @emotion/react @emotion/styled resize-observer-polyfill
 ```
 
 **Via npm:**
