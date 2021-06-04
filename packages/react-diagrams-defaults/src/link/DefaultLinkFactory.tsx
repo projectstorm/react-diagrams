@@ -24,7 +24,7 @@ namespace S {
 	export const Path = styled.path<{ selected: boolean }>`
 		${(p) => p.selected && selected};
 		fill: none;
-		pointer-events: all;
+		pointer-events: auto;
 	`;
 }
 
