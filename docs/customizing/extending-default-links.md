@@ -47,6 +47,6 @@ export class AdvancedLinkFactory extends DefaultLinkFactory {
 }
 ```
 
-The actual code for the `AdvancedLinkSegment` [can be found here](https://github.com/projectstorm/react-diagrams/blob/master/packages/diagrams-demo-gallery/demos/demo-custom-link1/index.tsx) (it is in the `demo-custom-link1` folder in the demo gallery).
+The actual code for the `AdvancedLinkSegment` [can be found here](https://github.com/projectstorm/react-diagrams/tree/master/diagrams-demo-gallery/demos/demo-custom-link1) (it is in the `demo-custom-link1` folder in the demo gallery).
 
 This is the easiest and most simple way to get started with custom links. 
