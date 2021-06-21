@@ -10,7 +10,7 @@ export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends Abstr
 	initialPositions: {
 		[id: string]: {
 			point: Point;
-			item: BaseModel;
+			item: BasePositionModel;
 		};
 	};
 
