@@ -49,7 +49,7 @@ export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasE
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_UP,
-				fire: () => this.handleMoveEnd(),
+				fire: () => this.handleMoveEnd()
 			})
 		);
 
@@ -75,7 +75,7 @@ export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasE
 		this.registerAction(
 			new Action({
 				type: InputType.TOUCH_END,
-				fire: () => this.handleMoveEnd(),
+				fire: () => this.handleMoveEnd()
 			})
 		);
 	}
@@ -94,7 +94,7 @@ export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasE
 			displacementY: y - this.initialY,
 			virtualDisplacementX: (x - this.initialX) / (this.engine.getModel().getZoomLevel() / 100.0),
 			virtualDisplacementY: (y - this.initialY) / (this.engine.getModel().getZoomLevel() / 100.0),
-			event,
+			event
 		});
 	}
 

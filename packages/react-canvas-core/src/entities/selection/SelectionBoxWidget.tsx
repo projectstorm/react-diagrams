@@ -17,7 +17,7 @@ export class SelectionBoxWidget extends React.Component<SelectionBoxWidgetProps>
 	render() {
 		const { rect } = this.props;
 
-		if (!rect) return;
+		if (!rect) return null;
 
 		return (
 			<S.Container
