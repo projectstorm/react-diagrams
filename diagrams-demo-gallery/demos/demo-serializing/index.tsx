@@ -1,4 +1,4 @@
-import createEngine, { DiagramModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
+import createEngine, { DiagramModel, DefaultNodeModel, DefaultLabelModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
 import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { action } from '@storybook/addon-actions';
@@ -25,6 +25,7 @@ export default () => {
 
 	//3-C) link the 2 nodes together
 	var link1 = port1.link(port2);
+	link1.addLabel(new DefaultLabelModel({ label: 'Label' }));
 
 	//4) add the models to the root graph
 	model.addAll(node1, node2, link1);
