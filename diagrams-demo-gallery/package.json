@@ -27,6 +27,6 @@
 		"nodes"
 	],
 	"dependencies": {
-		"gsap": "^3.6.0"
+		"gsap": "^3.7.0"
 	}
 }

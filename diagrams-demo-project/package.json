@@ -26,8 +26,8 @@
 	"typings": "./dist/@types/index",
 	"dependencies": {
 		"@projectstorm/react-diagrams": "^6.5.2",
-		"webpack": "^5.25.0",
-		"webpack-cli": "^4.5.0",
+		"webpack": "^5.44.0",
+		"webpack-cli": "^4.7.2",
 		"webpack-dev-server": "^3.11.2"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
