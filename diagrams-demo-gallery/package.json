@@ -9,9 +9,9 @@
 		"url": "https://github.com/projectstorm/react-diagrams.git"
 	},
 	"scripts": {
-		"start": "../node_modules/.bin/start-storybook",
-		"storybook:build": "../node_modules/.bin/build-storybook -c .storybook -o .out",
-		"github": "../node_modules/.bin/storybook-to-ghpages",
+		"start": "./node_modules/.bin/start-storybook",
+		"storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out",
+		"github": "./node_modules/.bin/storybook-to-ghpages",
 		"test:run": "../node_modules/.bin/jest --no-cache",
 		"test": "yarn storybook:build && yarn test:run"
 	},
@@ -27,6 +27,15 @@
 		"nodes"
 	],
 	"dependencies": {
-		"gsap": "^3.7.0"
+		"gsap": "^3.7.0",
+    "@storybook/addon-actions": "^6.3.4",
+		"@storybook/addon-options": "^5.3.21",
+		"@storybook/addons": "^6.3.4",
+		"@storybook/react": "^6.3.4",
+		"@storybook/storybook-deployer": "^2.8.10",
+    "@storybook/builder-webpack5": "^6.3.4",
+    "@storybook/manager-webpack5": "^6.3.4",
+		"@storybook/theming": "^6.3.4",
+    "regenerator-runtime": "^0.13.7"
 	}
 }

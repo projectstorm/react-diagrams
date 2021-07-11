@@ -18,7 +18,8 @@ export interface BasePositionModelGenerics extends BaseModelGenerics {
 
 export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics>
 	extends BaseModel<G>
-	implements ModelGeometryInterface {
+	implements ModelGeometryInterface
+{
 	protected position: Point;
 
 	constructor(options: G['OPTIONS']) {
