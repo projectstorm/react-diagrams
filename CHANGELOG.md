@@ -1,3 +1,15 @@
+__6.6.0__
+
+* (docs-broken) https://github.com/projectstorm/react-diagrams/pull/834
+* (bug) https://github.com/projectstorm/react-diagrams/pull/838
+* (docs-broken) https://github.com/projectstorm/react-diagrams/pull/847
+* (bug) https://github.com/projectstorm/react-diagrams/pull/852
+* (docs-broken) https://github.com/projectstorm/react-diagrams/pull/856
+* (improvement) https://github.com/projectstorm/react-diagrams/pull/857
+* (bug) https://github.com/projectstorm/react-diagrams/pull/860
+
+Also includes a bump on all packages using `ncu` recursively.
+
 __6.5.2__
 
 https://github.com/projectstorm/react-diagrams/pull/830
