@@ -289,7 +289,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 
 	removeMiddlePoints() {
 		if (this.points.length > 2) {
-			this.points.splice(0, this.points.length - 2);
+			this.points.splice(1, this.points.length - 2);
 		}
 	}
 
