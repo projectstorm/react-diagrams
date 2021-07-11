@@ -7,7 +7,7 @@ export interface AbstractDisplacementStateEvent {
 	displacementY: number;
 	virtualDisplacementX: number;
 	virtualDisplacementY: number;
-	event: React.MouseEvent;
+	event: React.MouseEvent | React.TouchEvent;
 }
 
 export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasEngine> extends State<E> {
@@ -22,11 +22,8 @@ export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasE
 			new Action({
 				type: InputType.MOUSE_DOWN,
 				fire: (actionEvent: ActionEvent<React.MouseEvent>) => {
-					this.initialX = actionEvent.event.clientX;
-					this.initialY = actionEvent.event.clientY;
-					const rel = this.engine.getRelativePoint(actionEvent.event.clientX, actionEvent.event.clientY);
-					this.initialXRelative = rel.x;
-					this.initialYRelative = rel.y;
+					const { clientX, clientY } = actionEvent.event;
+					this.handleMoveStart(clientX, clientY);
 				}
 			})
 		);
@@ -44,25 +41,65 @@ export abstract class AbstractDisplacementState<E extends CanvasEngine = CanvasE
 						return;
 					}
 
-					this.fireMouseMoved({
-						displacementX: event.clientX - this.initialX,
-						displacementY: event.clientY - this.initialY,
-						virtualDisplacementX: (event.clientX - this.initialX) / (this.engine.getModel().getZoomLevel() / 100.0),
-						virtualDisplacementY: (event.clientY - this.initialY) / (this.engine.getModel().getZoomLevel() / 100.0),
-						event: event
-					});
+					const { clientX, clientY } = event;
+					this.handleMove(clientX, clientY, event);
 				}
 			})
 		);
 		this.registerAction(
 			new Action({
 				type: InputType.MOUSE_UP,
-				fire: (event: ActionEvent<React.MouseEvent>) => {
-					// when the mouse if up, we eject this state
-					this.eject();
+				fire: () => this.handleMoveEnd()
+			})
+		);
+
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_START,
+				fire: (actionEvent: ActionEvent<React.TouchEvent>) => {
+					const { clientX, clientY } = actionEvent.event.touches[0];
+					this.handleMoveStart(clientX, clientY);
 				}
 			})
 		);
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_MOVE,
+				fire: (actionEvent: ActionEvent<React.TouchEvent>) => {
+					const { event } = actionEvent;
+					const { clientX, clientY } = event.touches[0];
+					this.handleMove(clientX, clientY, event);
+				}
+			})
+		);
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_END,
+				fire: () => this.handleMoveEnd()
+			})
+		);
+	}
+
+	protected handleMoveStart(x: number, y: number): void {
+		this.initialX = x;
+		this.initialY = y;
+		const rel = this.engine.getRelativePoint(x, y);
+		this.initialXRelative = rel.x;
+		this.initialYRelative = rel.y;
+	}
+
+	protected handleMove(x: number, y: number, event: React.MouseEvent | React.TouchEvent): void {
+		this.fireMouseMoved({
+			displacementX: x - this.initialX,
+			displacementY: y - this.initialY,
+			virtualDisplacementX: (x - this.initialX) / (this.engine.getModel().getZoomLevel() / 100.0),
+			virtualDisplacementY: (y - this.initialY) / (this.engine.getModel().getZoomLevel() / 100.0),
+			event
+		});
+	}
+
+	protected handleMoveEnd(): void {
+		this.eject();
 	}
 
 	abstract fireMouseMoved(event: AbstractDisplacementStateEvent);

@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, TouchEvent } from 'react';
 import {
 	SelectingState,
 	State,
@@ -45,6 +45,16 @@ export class DefaultDiagramState extends State<DiagramEngine> {
 					else {
 						this.transitionWithEvent(this.dragItems, event);
 					}
+				}
+			})
+		);
+
+		// touch drags the canvas
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_START,
+				fire: (event: ActionEvent<TouchEvent>) => {
+					this.transitionWithEvent(this.dragCanvas, event);
 				}
 			})
 		);

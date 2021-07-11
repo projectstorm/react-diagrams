@@ -1,7 +1,8 @@
+import { MouseEvent, TouchEvent } from 'react';
 import { AbstractDisplacementState, AbstractDisplacementStateEvent } from '../core-state/AbstractDisplacementState';
 import { State } from '../core-state/State';
 import { SelectionLayerModel } from '../entities/selection/SelectionLayerModel';
-import { Rectangle } from '@projectstorm/geometry';
+import { Point, Rectangle } from '@projectstorm/geometry';
 import { ModelGeometryInterface } from '../core/ModelGeometryInterface';
 
 export class SelectionBoxState extends AbstractDisplacementState {
@@ -26,7 +27,13 @@ export class SelectionBoxState extends AbstractDisplacementState {
 	}
 
 	getBoxDimensions(event: AbstractDisplacementStateEvent): ClientRect {
-		const rel = this.engine.getRelativePoint(event.event.clientX, event.event.clientY);
+		let rel: Point;
+		if (event.event instanceof MouseEvent) {
+			rel = this.engine.getRelativePoint(event.event.clientX, event.event.clientY);
+		} else if (event.event instanceof TouchEvent) {
+			const touch = event.event.touches[0];
+			rel = this.engine.getRelativePoint(touch.clientX, touch.clientY);
+		}
 
 		return {
 			left: rel.x > this.initialXRelative ? this.initialXRelative : rel.x,

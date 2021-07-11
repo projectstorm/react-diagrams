@@ -1,6 +1,6 @@
 import { State } from '../core-state/State';
 import { Action, ActionEvent, InputType } from '../core-actions/Action';
-import { MouseEvent } from 'react';
+import { MouseEvent, TouchEvent } from 'react';
 import { DragCanvasState } from './DragCanvasState';
 import { SelectingState } from './SelectingState';
 import { MoveItemsState } from './MoveItemsState';
@@ -25,6 +25,16 @@ export class DefaultState extends State {
 					} else {
 						this.transitionWithEvent(new MoveItemsState(), event);
 					}
+				}
+			})
+		);
+
+		// touch drags the canvas
+		this.registerAction(
+			new Action({
+				type: InputType.TOUCH_START,
+				fire: (event: ActionEvent<TouchEvent>) => {
+					this.transitionWithEvent(new DragCanvasState(), event);
 				}
 			})
 		);
