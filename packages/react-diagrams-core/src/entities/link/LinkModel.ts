@@ -27,7 +27,8 @@ export interface LinkModelGenerics extends BaseModelGenerics {
 
 export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 	extends BaseModel<G>
-	implements ModelGeometryInterface {
+	implements ModelGeometryInterface
+{
 	protected sourcePort: PortModel | null;
 	protected targetPort: PortModel | null;
 

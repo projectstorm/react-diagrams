@@ -1,8 +1,10 @@
 import { PathFinding } from '../src/engine/PathFinding';
 
 describe('calculating start and end points', function () {
+	let pathFinding: PathFinding = new PathFinding(null);
+
 	beforeEach(() => {
-		this.pathFinding = new PathFinding(null);
+		pathFinding = new PathFinding(null);
 	});
 
 	test('return correct object for valid walkable input', () => {
@@ -23,7 +25,7 @@ describe('calculating start and end points', function () {
 			[5, 0]
 		];
 
-		const result = this.pathFinding.calculateLinkStartEndCoords(matrix, path);
+		const result = pathFinding.calculateLinkStartEndCoords(matrix, path);
 
 		expect(result.start).toEqual({
 			x: 2,
@@ -58,7 +60,7 @@ describe('calculating start and end points', function () {
 			[3, 0]
 		];
 
-		const result = this.pathFinding.calculateLinkStartEndCoords(matrix, path);
+		const result = pathFinding.calculateLinkStartEndCoords(matrix, path);
 
 		expect(result).toBeUndefined();
 	});
