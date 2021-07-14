@@ -52,12 +52,23 @@ export class ActionEventBus {
 		} else if (event.type === 'mouseup') {
 			return this.getActionsForType(InputType.MOUSE_UP);
 		} else if (event.type === 'keydown') {
+			// In rare cases (exact conditions unknown) the passed event is an Event
+			// rather than KeyboardEvent, so doesn't contain a key property. I prefer
+			// to test directly for whether key is present rather than the class:
+			// given we're already in weird territory let's not try and make
+			// assumptions from other information.
+			const key = (event as KeyboardEvent).key;
+			if (!key) return [];
+
 			// store the recorded key
-			this.keys[(event as KeyboardEvent).key.toLowerCase()] = true;
+			this.keys[key.toLowerCase()] = true;
 			return this.getActionsForType(InputType.KEY_DOWN);
 		} else if (event.type === 'keyup') {
+			const key = (event as KeyboardEvent).key;
+			if (!key) return [];
+
 			// delete the recorded key
-			delete this.keys[(event as KeyboardEvent).key.toLowerCase()];
+			delete this.keys[key.toLowerCase()];
 			return this.getActionsForType(InputType.KEY_UP);
 		} else if (event.type === 'mousemove') {
 			return this.getActionsForType(InputType.MOUSE_MOVE);
