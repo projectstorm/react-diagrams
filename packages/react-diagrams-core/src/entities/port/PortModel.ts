@@ -81,9 +81,9 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		});
 	}
 
-	doClone(lookupTable = {}, clone) {
+	doClone(lookupTable = {}, clone: PortModel) {
 		clone.links = {};
-		clone.parentNode = this.getParent().clone(lookupTable);
+		clone.parent = this.getParent().clone(lookupTable);
 	}
 
 	getNode(): NodeModel {
