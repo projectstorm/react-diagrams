@@ -39,7 +39,7 @@
 		"lodash": "4.*",
 		"pathfinding": "^0.4.18",
 		"paths-js": "^0.4.11",
-		"react": "17.*"
+		"react": "16.* || 17.*"
 	},
 	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }
