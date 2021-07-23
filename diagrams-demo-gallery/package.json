@@ -27,15 +27,14 @@
 		"nodes"
 	],
 	"dependencies": {
-		"gsap": "^3.7.0",
-    "@storybook/addon-actions": "^6.3.4",
-		"@storybook/addon-options": "^5.3.21",
-		"@storybook/addons": "^6.3.4",
-		"@storybook/react": "^6.3.4",
-		"@storybook/storybook-deployer": "^2.8.10",
-    "@storybook/builder-webpack5": "^6.3.4",
-    "@storybook/manager-webpack5": "^6.3.4",
-		"@storybook/theming": "^6.3.4",
-    "regenerator-runtime": "^0.13.7"
-	}
+		"gsap": "^3.7.1",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-options": "^5.3.21",
+    "@storybook/addons": "^6.2.8",
+    "@storybook/builder-webpack5": "^6.2.8",
+    "@storybook/manager-webpack5": "^6.3.2",
+    "@storybook/react": "^6.3.2",
+    "@storybook/storybook-deployer": "^2.8.7",
+    "@storybook/theming": "^6.2.8"
+  }
 }

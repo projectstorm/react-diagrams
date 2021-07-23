@@ -1,5 +1,3 @@
-import * as closest from 'closest';
-
 export class Toolkit {
 	static TESTING: boolean = false;
 	static TESTING_UID = 0;
@@ -20,13 +18,18 @@ export class Toolkit {
 		});
 	}
 
-	/**
-	 * Finds the closest element as a polyfill
-	 */
 	public static closest(element: Element, selector: string) {
-		if (document.body.closest) {
-			return element.closest(selector);
+		if (!Element.prototype.closest) {
+			Element.prototype.closest = function(s) {
+				var el = this;
+
+				do {
+					if (Element.prototype.matches.call(el, s)) return el;
+					el = el.parentElement || el.parentNode;
+				} while (el !== null && el.nodeType === 1);
+				return null;
+			};
 		}
-		return closest(element, selector);
+		return element.closest(selector);
 	}
 }
