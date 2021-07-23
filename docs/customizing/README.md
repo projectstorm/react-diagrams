@@ -1,8 +1,8 @@
 # Customizing
 
-Almost every components in react-diagrams are customizable. While some customization is better documented than others, the best way to learn about customization is through the examples in the codebase and by looking at the type annotations that come with the library.
+Almost all components in react-diagrams are customizable. While some customization is better documented than others, the best way to learn about customization is through the examples in the codebase and by looking at the type annotations that come with the library.
 
-Most UI customizations can be done through extending existing base classes. While node, port, and link have different data models, they share the same customization pattern:
+Most UI customization can be done through extending existing base classes. While node, port, and link have different data models, they share the same customization pattern:
 
 - they need a **model factory** extended off `AbstractModelFactory`, and that factory needs to be registered with the engine under a different model type
 - optionally, if you data model is different from the default, you can extend existing base classes such as `NodeModel`, `PortModel`, `DefaultLinkModel`, etc.
