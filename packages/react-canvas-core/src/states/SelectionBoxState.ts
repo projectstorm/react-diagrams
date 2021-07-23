@@ -1,4 +1,3 @@
-import { MouseEvent, TouchEvent } from 'react';
 import { AbstractDisplacementState, AbstractDisplacementStateEvent } from '../core-state/AbstractDisplacementState';
 import { State } from '../core-state/State';
 import { SelectionLayerModel } from '../entities/selection/SelectionLayerModel';
@@ -28,11 +27,12 @@ export class SelectionBoxState extends AbstractDisplacementState {
 
 	getBoxDimensions(event: AbstractDisplacementStateEvent): ClientRect {
 		let rel: Point;
-		if (event.event instanceof MouseEvent) {
-			rel = this.engine.getRelativePoint(event.event.clientX, event.event.clientY);
-		} else if (event.event instanceof TouchEvent) {
+
+		if ('touches' in event.event) {
 			const touch = event.event.touches[0];
 			rel = this.engine.getRelativePoint(touch.clientX, touch.clientY);
+		} else {
+			rel = this.engine.getRelativePoint(event.event.clientX, event.event.clientY);
 		}
 
 		return {
