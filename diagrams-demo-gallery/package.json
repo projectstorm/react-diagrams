@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-gallery",
-	"version": "6.6.0",
+	"version": "6.6.1",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"private": true,
@@ -27,14 +27,14 @@
 		"nodes"
 	],
 	"dependencies": {
-		"gsap": "^3.7.1",
-    "@storybook/addon-actions": "^6.2.8",
-    "@storybook/addon-options": "^5.3.21",
-    "@storybook/addons": "^6.2.8",
-    "@storybook/builder-webpack5": "^6.2.8",
-    "@storybook/manager-webpack5": "^6.3.2",
-    "@storybook/react": "^6.3.2",
-    "@storybook/storybook-deployer": "^2.8.7",
-    "@storybook/theming": "^6.2.8"
-  }
+		"@storybook/addon-actions": "^6.2.8",
+		"@storybook/addon-options": "^5.3.21",
+		"@storybook/addons": "^6.2.8",
+		"@storybook/builder-webpack5": "^6.2.8",
+		"@storybook/manager-webpack5": "^6.3.2",
+		"@storybook/react": "^6.3.2",
+		"@storybook/storybook-deployer": "^2.8.7",
+		"@storybook/theming": "^6.2.8",
+		"gsap": "^3.7.1"
+	}
 }
