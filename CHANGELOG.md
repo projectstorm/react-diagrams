@@ -1,3 +1,13 @@
+__6.6.1__
+
+bug fixes:
+* https://github.com/projectstorm/react-diagrams/pull/861
+* https://github.com/projectstorm/react-diagrams/pull/871
+* https://github.com/projectstorm/react-diagrams/pull/870
+
+Some maintenance:
+* https://github.com/projectstorm/react-diagrams/pull/861
+
 __6.6.0__
 
 * (docs-broken) https://github.com/projectstorm/react-diagrams/pull/834
