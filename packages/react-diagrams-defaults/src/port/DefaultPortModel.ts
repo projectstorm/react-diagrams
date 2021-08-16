@@ -11,6 +11,7 @@ import { AbstractModelFactory, DeserializeEvent } from '@projectstorm/react-canv
 export interface DefaultPortModelOptions extends PortModelOptions {
 	label?: string;
 	in?: boolean;
+	type?: string;
 }
 
 export interface DefaultPortModelGenerics extends PortModelGenerics {
