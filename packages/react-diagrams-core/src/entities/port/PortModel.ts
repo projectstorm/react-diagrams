@@ -1,4 +1,4 @@
-import { NodeModel } from '../node/NodeModel';
+const { NodeModel } from '../node/NodeModel';
 import { LinkModel } from '../link/LinkModel';
 import * as _ from 'lodash';
 import { Point, Rectangle } from '@projectstorm/geometry';
@@ -73,14 +73,14 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	setPosition(point: Point): void;
 	setPosition(x: number, y: number): void;
 	setPosition(x: number | Point, y?: number): void {
-		let old = this.position;
+		const old = this.position;
 		if (x instanceof Point) {
 			super.setPosition(x);
 		} else {
 			super.setPosition(x, y);
 		}
 		_.forEach(this.getLinks(), (link) => {
-			let point = link.getPointForPort(this);
+			const point = link.getPointForPort(this);
 			point.setPosition(point.getX() + this.getPosition().x - old.x, point.getY() + this.getPosition().y - old.y);
 		});
 	}

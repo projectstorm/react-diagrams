@@ -42,7 +42,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	setPosition(point: Point): void;
 	setPosition(x: number, y: number): void;
 	setPosition(x: number | Point, y?: number): void {
-		let old = this.position;
+		const old = this.position;
 
 		if (x instanceof Point) {
 			super.setPosition(x);
