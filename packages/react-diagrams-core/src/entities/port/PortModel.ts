@@ -1,4 +1,4 @@
-const { NodeModel } from '../node/NodeModel';
+import { NodeModel } from '../node/NodeModel';
 import { LinkModel } from '../link/LinkModel';
 import * as _ from 'lodash';
 import { Point, Rectangle } from '@projectstorm/geometry';
