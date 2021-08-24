@@ -81,7 +81,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		}
 		_.forEach(this.getLinks(), (link) => {
 			const point = link.getPointForPort(this);
-			point.setPosition(point.getX() + this.getPosition().x - old.x, point.getY() + this.getPosition().y - old.y);
+			point.setPosition(point.getX() + this.position.x - old.x, point.getY() + this.position.y - old.y);
 		});
 	}
 
