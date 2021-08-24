@@ -70,21 +70,6 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		};
 	}
 
-	setPosition(point: Point): void;
-	setPosition(x: number, y: number): void;
-	setPosition(x: number | Point, y?: number): void {
-		const old = this.position;
-		if (x instanceof Point) {
-			super.setPosition(x);
-		} else {
-			super.setPosition(x, y);
-		}
-		_.forEach(this.getLinks(), (link) => {
-			const point = link.getPointForPort(this);
-			point.setPosition(point.getX() + this.position.x - old.x, point.getY() + this.position.y - old.y);
-		});
-	}
-
 	doClone(lookupTable = {}, clone: PortModel) {
 		clone.links = {};
 		clone.parent = this.getParent().clone(lookupTable);
