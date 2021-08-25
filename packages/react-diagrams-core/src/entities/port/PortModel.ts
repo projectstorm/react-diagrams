@@ -70,6 +70,17 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		};
 	}
 
+	setPosition(point: Point);
+	setPosition(x: number, y: number);
+	setPosition(x, y?) {
+		let old = this.position;
+		super.setPosition(x, y);
+		_.forEach(this.getLinks(), (link) => {
+			let point = link.getPointForPort(this);
+			point.setPosition(point.getX() + x - old.x, point.getY() + y - old.y);
+		});
+	}
+
 	doClone(lookupTable = {}, clone: PortModel) {
 		clone.links = {};
 		clone.parent = this.getParent().clone(lookupTable);
