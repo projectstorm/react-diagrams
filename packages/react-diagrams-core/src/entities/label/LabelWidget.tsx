@@ -71,10 +71,16 @@ export class LabelWidget extends React.Component<LabelWidgetProps> {
 
 		const { path, position } = found;
 
-		const labelDimensions = {
-			width: this.ref.current.offsetWidth,
-			height: this.ref.current.offsetHeight
+		let labelDimensions = {
+				width: 0,
+				height: 0,
 		};
+		if (this.ref.current) {
+				labelDimensions = {
+						width: this.ref.current.offsetWidth,
+						height: this.ref.current.offsetHeight
+				};
+		}
 
 		const pathCentre = path.getPointAtLength(position);
 
