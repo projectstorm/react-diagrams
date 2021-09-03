@@ -1,6 +1,6 @@
 {
 	"name": "@adeptly/react-diagrams-routing",
-	"version": "6.6.5",
+	"version": "6.6.6",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"repository": {
@@ -30,9 +30,9 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@adeptly/geometry": "^6.6.4",
-		"@adeptly/react-diagrams-core": "^6.6.4",
-		"@adeptly/react-diagrams-defaults": "^6.6.4"
+		"@adeptly/geometry": "^6.6.6",
+		"@adeptly/react-diagrams-core": "^6.6.6",
+		"@adeptly/react-diagrams-defaults": "^6.6.6"
 	},
 	"peerDependencies": {
 		"dagre": "^0.8.5",
