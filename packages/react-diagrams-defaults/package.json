@@ -29,7 +29,7 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-core": "^6.6.4"
+		"@adeptly/react-diagrams-core": "^6.6.4"
 	},
 	"peerDependencies": {
 		"@emotion/react": "^11.*",

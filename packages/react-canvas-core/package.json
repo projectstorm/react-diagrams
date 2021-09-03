@@ -29,7 +29,7 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.6.4"
+		"@adeptly/geometry": "^6.6.4"
 	},
 	"peerDependencies": {
 		"lodash": "4.*",

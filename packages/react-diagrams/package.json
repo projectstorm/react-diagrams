@@ -29,9 +29,9 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-core": "^6.6.4",
-		"@projectstorm/react-diagrams-defaults": "^6.6.4",
-		"@projectstorm/react-diagrams-routing": "^6.6.4"
+		"@adeptly/react-diagrams-core": "^6.6.4",
+		"@adeptly/react-diagrams-defaults": "^6.6.4",
+		"@adeptly/react-diagrams-routing": "^6.6.4"
 	},
 	"gitHead": "d921a380a77e7a6ff98f72588d3f337821817dc3"
 }

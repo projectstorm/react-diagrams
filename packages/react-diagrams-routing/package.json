@@ -30,9 +30,9 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.6.4",
-		"@projectstorm/react-diagrams-core": "^6.6.4",
-		"@projectstorm/react-diagrams-defaults": "^6.6.4"
+		"@adeptly/geometry": "^6.6.4",
+		"@adeptly/react-diagrams-core": "^6.6.4",
+		"@adeptly/react-diagrams-defaults": "^6.6.4"
 	},
 	"peerDependencies": {
 		"dagre": "^0.8.5",
