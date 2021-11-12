@@ -39,15 +39,20 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 		return new Rectangle(this.getPosition(), this.width, this.height);
 	}
 
-	setPosition(point: Point);
-	setPosition(x: number, y: number);
-	setPosition(x, y?) {
-		let old = this.position;
-		super.setPosition(x, y);
+	setPosition(point: Point): void;
+	setPosition(x: number, y: number): void;
+	setPosition(x: number | Point, y?: number): void {
+		const old = this.position;
+
+		if (x instanceof Point) {
+			super.setPosition(x);
+		} else {
+			super.setPosition(x, y);
+		}
 
 		//also update the port co-ordinates (for make glorious speed)
 		_.forEach(this.ports, (port) => {
-			port.setPosition(port.getX() + x - old.x, port.getY() + y - old.y);
+			port.setPosition(port.getX() + this.position.x - old.x, port.getY() + this.position.y - old.y);
 		});
 	}
 
