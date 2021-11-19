@@ -22,6 +22,7 @@ export type BaseListener = {
 	 * Generic event that fires after a specific event was fired (even if it was consumed)
 	 */
 	eventDidFire?: (event: BaseEvent & { function: string }) => void;
+} & {
 	/**
 	 * Type for other events that will fire
 	 */
