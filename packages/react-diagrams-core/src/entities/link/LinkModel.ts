@@ -163,11 +163,11 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 	remove() {
 		if (this.sourcePort) {
 			this.sourcePort.removeLink(this);
-			delete super.sourcePort;
+			delete this.sourcePort;
 		}
 		if (this.targetPort) {
 			this.targetPort.removeLink(this);
-			delete super.targetPort;
+			delete this.targetPort;
 		}
 		super.remove();
 	}
