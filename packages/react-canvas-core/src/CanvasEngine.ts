@@ -8,6 +8,7 @@ import { MouseEvent } from 'react';
 import { BaseModel } from './core-models/BaseModel';
 import { Point } from '@projectstorm/geometry';
 import { ActionEventBus } from './core-actions/ActionEventBus';
+import { PanAndZoomCanvasAction } from './actions/PanAndZoomCanvasAction';
 import { ZoomCanvasAction } from './actions/ZoomCanvasAction';
 import { DeleteItemsAction } from './actions/DeleteItemsAction';
 import { StateMachine } from './core-state/StateMachine';
@@ -25,6 +26,7 @@ export interface CanvasEngineListener extends BaseListener {
  */
 export interface CanvasEngineOptions {
 	registerDefaultDeleteItemsAction?: boolean;
+	registerDefaultPanAndZoomCanvasAction?: boolean;
 	registerDefaultZoomCanvasAction?: boolean;
 	/**
 	 * Defines the debounce wait time in milliseconds if > 0
@@ -62,6 +64,8 @@ export class CanvasEngine<
 		};
 		if (this.options.registerDefaultZoomCanvasAction === true) {
 			this.eventBus.registerAction(new ZoomCanvasAction());
+		} else if (this.options.registerDefaultPanAndZoomCanvasAction === true) {
+			this.eventBus.registerAction(new PanAndZoomCanvasAction());
 		}
 		if (this.options.registerDefaultDeleteItemsAction === true) {
 			this.eventBus.registerAction(new DeleteItemsAction());
