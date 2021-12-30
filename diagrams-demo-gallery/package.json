@@ -1,0 +1,40 @@
+{
+	"name": "@projectstorm/react-diagrams-gallery",
+	"version": "6.6.1",
+	"author": "dylanvorster",
+	"license": "MIT",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/projectstorm/react-diagrams.git"
+	},
+	"scripts": {
+		"start": "./node_modules/.bin/start-storybook",
+		"storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out",
+		"github": "./node_modules/.bin/storybook-to-ghpages",
+		"test:run": "../node_modules/.bin/jest --no-cache",
+		"test": "yarn storybook:build && yarn test:run"
+	},
+	"keywords": [
+		"web",
+		"diagram",
+		"diagrams",
+		"react",
+		"typescript",
+		"flowchart",
+		"simple",
+		"links",
+		"nodes"
+	],
+	"dependencies": {
+		"@storybook/addon-actions": "^6.2.8",
+		"@storybook/addon-options": "^5.3.21",
+		"@storybook/addons": "^6.2.8",
+		"@storybook/builder-webpack5": "^6.2.8",
+		"@storybook/manager-webpack5": "^6.3.2",
+		"@storybook/react": "^6.3.2",
+		"@storybook/storybook-deployer": "^2.8.7",
+		"@storybook/theming": "^6.2.8",
+		"gsap": "^3.7.1"
+	}
+}

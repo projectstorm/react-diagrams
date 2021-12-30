@@ -10,9 +10,10 @@ import {
 	BaseModel,
 	CanvasEngine,
 	FactoryBank,
-	Toolkit
+	Toolkit,
+	CanvasEngineListener,
+	CanvasEngineOptions
 } from '@projectstorm/react-canvas-core';
-import { CanvasEngineListener, CanvasEngineOptions } from '@projectstorm/react-canvas-core';
 import { DiagramModel } from './models/DiagramModel';
 
 /**
@@ -210,77 +211,86 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 		};
 	}
 
-	/**
-	 * Get nodes bounding box coordinates with or without margin
-	 * @returns rectangle points in node layer coordinates
-	 */
-	getBoundingNodesRect(nodes: NodeModel[], margin?: number): Rectangle {
+	getBoundingNodesRect(nodes: NodeModel[]): Rectangle {
 		if (nodes) {
 			if (nodes.length === 0) {
 				return new Rectangle(0, 0, 0, 0);
 			}
 
-			let boundingBox = Polygon.boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox()));
-			if (margin) {
-				return new Rectangle(
-					boundingBox.getTopLeft().x - margin,
-					boundingBox.getTopLeft().y - margin,
-					boundingBox.getWidth() + 2 * margin,
-					boundingBox.getHeight() + 2 * margin
-				);
-			}
-			return boundingBox;
+			return Polygon.boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox()));
 		}
 	}
 
-	zoomToFitNodes(margin?: number) {
-		let nodesRect; // nodes bounding rectangle
-		let selectedNodes = this.model
+	zoomToFitSelectedNodes(options: { margin?: number; maxZoom?: number }) {
+		const nodes: NodeModel[] = this.model
 			.getSelectedEntities()
-			.filter((entity) => entity instanceof NodeModel)
-			.map((node) => node) as NodeModel[];
+			.filter((entity) => entity instanceof NodeModel) as NodeModel[];
+		this.zoomToFitNodes({
+			margin: options.margin,
+			maxZoom: options.maxZoom,
+			nodes: nodes.length > 0 ? nodes : null
+		});
+	}
 
-		// no node selected
-		if (selectedNodes.length == 0) {
-			let allNodes = this.model
-				.getSelectionEntities()
-				.filter((entity) => entity instanceof NodeModel)
-				.map((node) => node) as NodeModel[];
-
-			// get nodes bounding box with margin
-			nodesRect = this.getBoundingNodesRect(allNodes, margin);
-		} else {
-			// get nodes bounding box with margin
-			nodesRect = this.getBoundingNodesRect(selectedNodes, margin);
+	zoomToFitNodes(options: { margin?: number; nodes?: NodeModel[]; maxZoom?: number });
+	/**
+	 * @deprecated
+	 */
+	zoomToFitNodes(margin: number);
+	zoomToFitNodes(options) {
+		let margin = options || 0;
+		let nodes: NodeModel[] = [];
+		let maxZoom: number | null = null;
+		if (!!options && typeof options == 'object') {
+			margin = options.margin || 0;
+			nodes = options.nodes || [];
+			maxZoom = options.maxZoom || null;
 		}
 
+		// no node selected
+		if (nodes.length === 0) {
+			nodes = this.model.getNodes();
+		}
+		const nodesRect = this.getBoundingNodesRect(nodes);
 		if (nodesRect) {
 			// there is something we should zoom on
 			let canvasRect = this.canvas.getBoundingClientRect();
-			let canvasTopLeftPoint = {
-				x: canvasRect.left,
-				y: canvasRect.top
+
+			const calculate = (margin: number = 0) => {
+				// work out zoom
+				const xFactor = this.canvas.clientWidth / (nodesRect.getWidth() + margin * 2);
+				const yFactor = this.canvas.clientHeight / (nodesRect.getHeight() + margin * 2);
+
+				let zoomFactor = xFactor < yFactor ? xFactor : yFactor;
+				if (maxZoom && zoomFactor > maxZoom) {
+					zoomFactor = maxZoom;
+				}
+
+				return {
+					zoom: zoomFactor,
+					x:
+						canvasRect.width / 2 -
+						((nodesRect.getWidth() + margin * 2) * zoomFactor) / 2 +
+						margin -
+						nodesRect.getTopLeft().x,
+					y:
+						canvasRect.height / 2 -
+						((nodesRect.getHeight() + margin * 2) * zoomFactor) / 2 +
+						margin -
+						nodesRect.getTopLeft().y
+				};
 			};
-			let nodeLayerTopLeftPoint = {
-				x: canvasTopLeftPoint.x + this.getModel().getOffsetX(),
-				y: canvasTopLeftPoint.y + this.getModel().getOffsetY()
-			};
 
-			const xFactor = this.canvas.clientWidth / nodesRect.getWidth();
-			const yFactor = this.canvas.clientHeight / nodesRect.getHeight();
-			const zoomFactor = xFactor < yFactor ? xFactor : yFactor;
+			let params = calculate(0);
+			if (margin) {
+				if (params.x < margin || params.y < margin) {
+					params = calculate(margin);
+				}
+			}
 
-			this.model.setZoomLevel(zoomFactor * 100);
-
-			let nodesRectTopLeftPoint = {
-				x: nodeLayerTopLeftPoint.x + nodesRect.getTopLeft().x * zoomFactor,
-				y: nodeLayerTopLeftPoint.y + nodesRect.getTopLeft().y * zoomFactor
-			};
-
-			this.model.setOffset(
-				this.model.getOffsetX() + canvasTopLeftPoint.x - nodesRectTopLeftPoint.x,
-				this.model.getOffsetY() + canvasTopLeftPoint.y - nodesRectTopLeftPoint.y
-			);
+			// apply
+			this.model.setZoomLevel(params.zoom * 100);
+			this.model.setOffset(params.x, params.y);
 			this.repaintCanvas();
 		}
 	}

@@ -63,7 +63,14 @@ export class ActionEventBus {
 			return this.getActionsForType(InputType.MOUSE_MOVE);
 		} else if (event.type === 'wheel') {
 			return this.getActionsForType(InputType.MOUSE_WHEEL);
+		} else if (event.type === 'touchstart') {
+			return this.getActionsForType(InputType.TOUCH_START);
+		} else if (event.type === 'touchend') {
+			return this.getActionsForType(InputType.TOUCH_END);
+		} else if (event.type === 'touchmove') {
+			return this.getActionsForType(InputType.TOUCH_MOVE);
 		}
+
 		return [];
 	}
 

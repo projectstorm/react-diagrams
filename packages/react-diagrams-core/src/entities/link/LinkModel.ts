@@ -25,8 +25,10 @@ export interface LinkModelGenerics extends BaseModelGenerics {
 	PARENT: DiagramModel;
 }
 
-export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends BaseModel<G>
-	implements ModelGeometryInterface {
+export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
+	extends BaseModel<G>
+	implements ModelGeometryInterface
+{
 	protected sourcePort: PortModel | null;
 	protected targetPort: PortModel | null;
 
@@ -214,7 +216,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		return this.points[this.points.length - 1];
 	}
 
-	setSourcePort(port: PortModel) {
+	setSourcePort(port: PortModel | null) {
 		if (port !== null) {
 			port.addLink(this);
 		}
@@ -223,6 +225,9 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		}
 		this.sourcePort = port;
 		this.fireEvent({ port }, 'sourcePortChanged');
+		if (port?.reportedPosition) {
+			this.getPointForPort(port).setPosition(port.getCenter());
+		}
 	}
 
 	getSourcePort(): PortModel {
@@ -233,7 +238,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		return this.targetPort;
 	}
 
-	setTargetPort(port: PortModel) {
+	setTargetPort(port: PortModel | null) {
 		if (port !== null) {
 			port.addLink(this);
 		}
@@ -242,6 +247,9 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 		}
 		this.targetPort = port;
 		this.fireEvent({ port }, 'targetPortChanged');
+		if (port?.reportedPosition) {
+			this.getPointForPort(port).setPosition(port.getCenter());
+		}
 	}
 
 	point(x: number, y: number, index: number = 1): PointModel {
@@ -282,7 +290,7 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics> extends 
 
 	removeMiddlePoints() {
 		if (this.points.length > 2) {
-			this.points.splice(0, this.points.length - 2);
+			this.points.splice(1, this.points.length - 2);
 		}
 	}
 

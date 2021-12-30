@@ -22,14 +22,13 @@ export class DagreEngine {
 	redistribute(model: DiagramModel) {
 		// Create a new directed graph
 		var g = new dagre.graphlib.Graph({
-			multigraph: true
+			multigraph: true,
+			compound: true
 		});
 		g.setGraph(this.options.graph || {});
 		g.setDefaultEdgeLabel(function () {
 			return {};
 		});
-
-		const processedlinks: { [id: string]: boolean } = {};
 
 		// set nodes
 		_.forEach(model.getNodes(), (node) => {
@@ -39,7 +38,6 @@ export class DagreEngine {
 		_.forEach(model.getLinks(), (link) => {
 			// set edges
 			if (link.getSourcePort() && link.getTargetPort()) {
-				processedlinks[link.getID()] = true;
 				g.setEdge({
 					v: link.getSourcePort().getNode().getID(),
 					w: link.getTargetPort().getNode().getID(),
@@ -63,7 +61,7 @@ export class DagreEngine {
 				const link = model.getLink(e.name);
 
 				const points = [link.getFirstPoint()];
-				for (let i = 1; i < edge.points.length - 2; i++) {
+				for (let i = 1; i < edge.points.length - 1; i++) {
 					points.push(new PointModel({ link: link, position: new Point(edge.points[i].x, edge.points[i].y) }));
 				}
 				link.setPoints(points.concat(link.getLastPoint()));

@@ -81,9 +81,9 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 		});
 	}
 
-	doClone(lookupTable = {}, clone) {
+	doClone(lookupTable = {}, clone: PortModel) {
 		clone.links = {};
-		clone.parentNode = this.getParent().clone(lookupTable);
+		clone.parent = this.getParent().clone(lookupTable);
 	}
 
 	getNode(): NodeModel {
@@ -140,6 +140,10 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 
 	getCenter(): Point {
 		return new Point(this.getX() + this.width / 2, this.getY() + this.height / 2);
+	}
+
+	getBoundingBox(): Rectangle {
+		return new Rectangle(this.position, this.width, this.height);
 	}
 
 	updateCoords(coords: Rectangle) {

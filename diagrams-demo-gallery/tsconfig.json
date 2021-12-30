@@ -1,0 +1,23 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"suppressExcessPropertyErrors": true,
+		"declaration": true,
+		"composite": true,
+		"incremental": true,
+		"strictNullChecks": false,
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"jsx": "react",
+		"target": "ES6",
+		"module": "commonjs",
+		"strict": false,
+		"lib": [
+			"DOM",
+			"ES6"
+		]
+	},
+	"include": [
+		"demos"
+	]
+}

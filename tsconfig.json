@@ -1,26 +1,23 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"suppressExcessPropertyErrors": true,
-		"declaration": false,
-		"strictNullChecks": false,
-		"sourceMap": true,
-		"skipLibCheck": true,
-		"jsx": "react",
-		"target": "ES6",
-		"module": "commonjs",
-		"strict": false,
-		"lib": [
-			"DOM",
-			"ES6"
-		]
-	},
-	"include": [
-		"./src"
-	],
-	"exclude": [
-		"node_modules",
-		"**/*.spec.ts",
-		"./dist"
+	"files": [],
+	"references": [
+		{
+			"path": "./packages/geometry"
+		},
+		{
+			"path": "./packages/react-canvas-core"
+		},
+		{
+			"path": "./packages/react-diagrams"
+		},
+		{
+			"path": "./packages/react-diagrams-core"
+		},
+		{
+			"path": "./packages/react-diagrams-defaults"
+		},
+		{
+			"path": "./packages/react-diagrams-routing"
+		}
 	]
 }

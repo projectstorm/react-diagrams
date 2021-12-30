@@ -3,14 +3,13 @@ import { State } from '../core-state/State';
 import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { BasePositionModel } from '../core-models/BasePositionModel';
 import { Point } from '@projectstorm/geometry';
-import { BaseModel } from '../core-models/BaseModel';
 import { CanvasEngine } from '../CanvasEngine';
 
 export class MoveItemsState<E extends CanvasEngine = CanvasEngine> extends AbstractDisplacementState<E> {
 	initialPositions: {
 		[id: string]: {
 			point: Point;
-			item: BaseModel;
+			item: BasePositionModel;
 		};
 	};
 

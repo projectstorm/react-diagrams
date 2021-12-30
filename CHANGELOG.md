@@ -1,3 +1,55 @@
+__6.6.1__
+
+bug fixes:
+* https://github.com/projectstorm/react-diagrams/pull/861
+* https://github.com/projectstorm/react-diagrams/pull/871
+* https://github.com/projectstorm/react-diagrams/pull/870
+
+Some maintenance:
+* https://github.com/projectstorm/react-diagrams/pull/861
+
+__6.6.0__
+
+* (docs-broken) https://github.com/projectstorm/react-diagrams/pull/834
+* (bug) https://github.com/projectstorm/react-diagrams/pull/838
+* (docs-broken) https://github.com/projectstorm/react-diagrams/pull/847
+* (bug) https://github.com/projectstorm/react-diagrams/pull/852
+* (docs-broken) https://github.com/projectstorm/react-diagrams/pull/856
+* (improvement) https://github.com/projectstorm/react-diagrams/pull/857
+* (bug) https://github.com/projectstorm/react-diagrams/pull/860
+
+Also includes a bump on all packages using `ncu` recursively.
+
+__6.5.2__
+
+https://github.com/projectstorm/react-diagrams/pull/830
+
+* (fix) issue with zoom to fit selected
+* (improvement) properly export PathFinding
+* (maintenance) bump all dependencies
+
+__6.5.1__
+
+https://github.com/projectstorm/react-diagrams/pull/829
+
+* (improved) zoom to fit now centers correctly
+* (fix) remove wrong peer dependency (@emotion/core)
+
+__6.5.0__
+
+https://github.com/projectstorm/react-diagrams/pull/814
+
+* Some rendering fixes
+* small api change around `zoomToFit`
+* more api options with the `DefaultLink`
+
+__6.4.0__
+
+https://github.com/projectstorm/react-diagrams/pull/813
+
+* Bump all packages and move to Emotion 11 and React 17
+* Move to the latest Storybook
+
 __6.2.0__
 
 * (improvement) Move away fromn math-js (https://github.com/projectstorm/react-diagrams/pull/651)

@@ -148,7 +148,7 @@ export class CanvasEngine<
 		}
 
 		if (promise) {
-			return new Promise((resolve) => {
+			return new Promise<void>((resolve) => {
 				const l = this.registerListener({
 					rendered: () => {
 						resolve();

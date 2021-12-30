@@ -16,7 +16,8 @@ export interface BasePositionModelGenerics extends BaseModelGenerics {
 	OPTIONS: BasePositionModelOptions;
 }
 
-export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics> extends BaseModel<G>
+export class BasePositionModel<G extends BasePositionModelGenerics = BasePositionModelGenerics>
+	extends BaseModel<G>
 	implements ModelGeometryInterface {
 	protected position: Point;
 
@@ -25,12 +26,12 @@ export class BasePositionModel<G extends BasePositionModelGenerics = BasePositio
 		this.position = options.position || new Point(0, 0);
 	}
 
-	setPosition(point: Point);
-	setPosition(x: number, y: number);
-	setPosition(x, y?) {
-		if (typeof x === 'object') {
+	setPosition(point: Point): void;
+	setPosition(x: number, y: number): void;
+	setPosition(x: number | Point, y?: number): void {
+		if (x instanceof Point) {
 			this.position = x;
-		} else if (typeof x) {
+		} else {
 			this.position = new Point(x, y);
 		}
 		this.fireEvent({}, 'positionChanged');

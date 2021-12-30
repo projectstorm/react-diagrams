@@ -2,9 +2,9 @@ import * as React from 'react';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkWidget } from './DefaultLinkWidget';
 import styled from '@emotion/styled';
-import { css, keyframes } from '@emotion/core';
 import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
+import { css, keyframes } from '@emotion/react';
 
 namespace S {
 	export const Keyframes = keyframes`
@@ -24,7 +24,7 @@ namespace S {
 	export const Path = styled.path<{ selected: boolean }>`
 		${(p) => p.selected && selected};
 		fill: none;
-		pointer-events: all;
+		pointer-events: auto;
 	`;
 }
 
