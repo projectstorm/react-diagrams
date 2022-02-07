@@ -41,3 +41,4 @@ export * from './states/MoveItemsState';
 
 export * from './actions/DeleteItemsAction';
 export * from './actions/ZoomCanvasAction';
+export * from './actions/PanAndZoomCanvasAction';

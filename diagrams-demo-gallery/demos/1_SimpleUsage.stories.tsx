@@ -14,6 +14,7 @@ import demo_listeners from './demo-listeners';
 import demo_zoom from './demo-zoom-to-fit';
 import demo_zoom_nodes from './demo-zoom-to-fit-nodes';
 import demo_canvas_drag from './demo-canvas-drag';
+import demo_pan_and_zoom from './demo-pan-and-zoom';
 import demo_dynamic_ports from './demo-dynamic-ports';
 import demo_labels from './demo-labelled-links';
 
@@ -26,5 +27,6 @@ export const EventsAndListeners = demo_listeners;
 export const ZoomToFit = demo_zoom;
 export const ZoomToFitSelectNodes = demo_zoom_nodes;
 export const CanvasDrag = demo_canvas_drag;
+export const CanvasPanAndZoom = demo_pan_and_zoom;
 export const DynamicPorts = demo_dynamic_ports;
 export const LinksWithLabels = demo_labels;
