@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-canvas-core",
-	"version": "6.6.1",
+	"version": "6.7.0",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"repository": {
@@ -29,7 +29,7 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.6.1"
+		"@projectstorm/geometry": "^6.7.0"
 	},
 	"peerDependencies": {
 		"lodash": "4.*",
