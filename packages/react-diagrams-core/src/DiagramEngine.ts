@@ -270,14 +270,12 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 					zoom: zoomFactor,
 					x:
 						canvasRect.width / 2 -
-						((nodesRect.getWidth() + margin * 2) * zoomFactor) / 2 +
-						margin -
-						nodesRect.getTopLeft().x,
+						((nodesRect.getWidth() + margin * 2) / 2 + nodesRect.getTopLeft().x) * zoomFactor +
+						margin,
 					y:
 						canvasRect.height / 2 -
-						((nodesRect.getHeight() + margin * 2) * zoomFactor) / 2 +
-						margin -
-						nodesRect.getTopLeft().y
+						((nodesRect.getHeight() + margin * 2) / 2 + nodesRect.getTopLeft().y) * zoomFactor +
+						margin
 				};
 			};
 
