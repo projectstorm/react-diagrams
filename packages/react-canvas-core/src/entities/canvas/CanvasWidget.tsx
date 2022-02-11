@@ -68,7 +68,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 		};
 		this.blur = () => {
 			this.props.engine.getActionEventBus().clearKeys();
-		}
+		};
 
 		document.addEventListener('keyup', this.keyUp);
 		document.addEventListener('keydown', this.keyDown);

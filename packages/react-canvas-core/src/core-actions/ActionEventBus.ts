@@ -83,7 +83,7 @@ export class ActionEventBus {
 
 	clearKeys() {
 		_.forEach(Object.keys(this.keys), (key) => {
-			document.dispatchEvent(new KeyboardEvent('keyup', {'key': key}));
+			document.dispatchEvent(new KeyboardEvent('keyup', { key: key }));
 		});
 	}
 }
