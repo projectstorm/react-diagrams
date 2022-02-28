@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/projectstorm/react-diagrams.git"
+		"url": "https://github.com/adeptly-ai/react-diagrams.git"
 	},
 	"scripts": {
 		"clean": "rimraf ./dist",
@@ -29,7 +29,7 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@adeptly/geometry": "^6.6.6"
+		"@adeptly/geometry": "^6.6.4"
 	},
 	"peerDependencies": {
 		"lodash": "4.*",
