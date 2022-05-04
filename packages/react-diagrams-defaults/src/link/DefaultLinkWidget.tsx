@@ -58,11 +58,8 @@ export class DefaultLinkWidget extends React.Component<DefaultLinkProps, Default
 			!this.props.link.isLocked() &&
 			this.props.link.getPoints().length - 1 <= this.props.diagramEngine.getMaxNumberPointsPerLink()
 		) {
-			const point = new PointModel({
-				link: this.props.link,
-				position: this.props.diagramEngine.getRelativeMousePoint(event)
-			});
-			this.props.link.addPoint(point, index);
+			const position = this.props.diagramEngine.getRelativeMousePoint(event);
+			const point = this.props.link.point(position.x, position.y, index);
 			event.persist();
 			event.stopPropagation();
 			this.forceUpdate(() => {
