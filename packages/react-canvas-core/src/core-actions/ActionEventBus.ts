@@ -8,11 +8,13 @@ export class ActionEventBus {
 	protected actions: { [id: string]: Action };
 	protected engine: CanvasEngine;
 	protected keys: { [key: string]: boolean };
+	protected mouseButtonPressed: number;
 
 	constructor(engine: CanvasEngine) {
 		this.actions = {};
 		this.engine = engine;
 		this.keys = {};
+		this.mouseButtonPressed = null;
 	}
 
 	getKeys(): string[] {
@@ -47,31 +49,52 @@ export class ActionEventBus {
 
 	getActionsForEvent(actionEvent: ActionEvent): Action[] {
 		const { event } = actionEvent;
-		if (event.type === 'mousedown') {
-			return this.getActionsForType(InputType.MOUSE_DOWN);
-		} else if (event.type === 'mouseup') {
-			return this.getActionsForType(InputType.MOUSE_UP);
-		} else if (event.type === 'keydown') {
-			// store the recorded key
-			this.keys[(event as KeyboardEvent).key.toLowerCase()] = true;
-			return this.getActionsForType(InputType.KEY_DOWN);
-		} else if (event.type === 'keyup') {
-			// delete the recorded key
-			delete this.keys[(event as KeyboardEvent).key.toLowerCase()];
-			return this.getActionsForType(InputType.KEY_UP);
-		} else if (event.type === 'mousemove') {
-			return this.getActionsForType(InputType.MOUSE_MOVE);
-		} else if (event.type === 'wheel') {
-			return this.getActionsForType(InputType.MOUSE_WHEEL);
-		} else if (event.type === 'touchstart') {
-			return this.getActionsForType(InputType.TOUCH_START);
-		} else if (event.type === 'touchend') {
-			return this.getActionsForType(InputType.TOUCH_END);
-		} else if (event.type === 'touchmove') {
-			return this.getActionsForType(InputType.TOUCH_MOVE);
-		}
+		const eventActions = {
+			// Mouse events
+			mousedown: () => {
+				if (this.mouseButtonPressed === null || this.mouseButtonPressed === (event as MouseEvent).button) {
+					// store the pressed mouse button
+					this.mouseButtonPressed = (event as MouseEvent).button;
+					return this.getActionsForType(InputType.MOUSE_DOWN);
+				}
+			},
+			mouseup: () => {
+				if (this.mouseButtonPressed === (event as MouseEvent).button) {
+					// delete the pressed mouse button
+					this.mouseButtonPressed = null;
+					return this.getActionsForType(InputType.MOUSE_UP);
+				}
+			},
+			mousemove: () => {
+				return this.getActionsForType(InputType.MOUSE_MOVE);
+			},
+			wheel: () => {
+				return this.getActionsForType(InputType.MOUSE_WHEEL);
+			},
+			// Keyboard events
+			keydown: () => {
+				// store the recorded key
+				this.keys[(event as KeyboardEvent).key.toLowerCase()] = true;
+				return this.getActionsForType(InputType.KEY_DOWN);
+			},
+			keyup: () => {
+				// delete the recorded key
+				delete this.keys[(event as KeyboardEvent).key.toLowerCase()];
+				return this.getActionsForType(InputType.KEY_UP);
+			},
+			// Touch events
+			touchstart: () => {
+				return this.getActionsForType(InputType.TOUCH_START);
+			},
+			touchend: () => {
+				return this.getActionsForType(InputType.TOUCH_END);
+			},
+			touchmove: () => {
+				return this.getActionsForType(InputType.TOUCH_MOVE);
+			}
+		};
 
-		return [];
+		return eventActions[event.type]?.() || [];
 	}
 
 	fireAction(actionEvent: ActionEvent) {
