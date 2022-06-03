@@ -1,8 +1,9 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import { SimpleClientRect } from '../../states/SelectionBoxState';
 
 export interface SelectionBoxWidgetProps {
-	rect: ClientRect;
+	rect: SimpleClientRect;
 }
 
 namespace S {

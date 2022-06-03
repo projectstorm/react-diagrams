@@ -11,7 +11,7 @@ export interface PortProps {
 	style?;
 }
 
-export class PortWidget extends React.Component<PortProps> {
+export class PortWidget extends React.Component<React.PropsWithChildren<PortProps>> {
 	ref: React.RefObject<HTMLDivElement>;
 	engineListenerHandle: ListenerHandle;
 
@@ -63,7 +63,8 @@ export class PortWidget extends React.Component<PortProps> {
 				className={`port ${this.props.className || ''}`}
 				data-name={this.props.port.getName()}
 				data-nodeid={this.props.port.getNode().getID()}
-				{...this.getExtraProps()}>
+				{...this.getExtraProps()}
+			>
 				{this.props.children}
 			</div>
 		);

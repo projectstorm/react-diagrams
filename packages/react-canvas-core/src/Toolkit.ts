@@ -20,7 +20,7 @@ export class Toolkit {
 
 	public static closest(element: Element, selector: string) {
 		if (!Element.prototype.closest) {
-			Element.prototype.closest = function(s) {
+			Element.prototype.closest = function (s) {
 				var el = this;
 
 				do {

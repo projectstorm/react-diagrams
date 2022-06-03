@@ -2,9 +2,10 @@ import { LayerModel } from '../layer/LayerModel';
 import { FactoryBank } from '../../core/FactoryBank';
 import { AbstractModelFactory } from '../../core/AbstractModelFactory';
 import { BaseModel } from '../../core-models/BaseModel';
+import { SimpleClientRect } from '../../states/SelectionBoxState';
 
 export class SelectionLayerModel extends LayerModel {
-	box: ClientRect;
+	box: SimpleClientRect;
 
 	constructor() {
 		super({
@@ -14,7 +15,7 @@ export class SelectionLayerModel extends LayerModel {
 		});
 	}
 
-	setBox(rect: ClientRect) {
+	setBox(rect: SimpleClientRect) {
 		this.box = rect;
 	}
 

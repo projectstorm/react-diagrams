@@ -74,7 +74,8 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 						}}
 						onDragOver={(event) => {
 							event.preventDefault();
-						}}>
+						}}
+					>
 						<DemoCanvasWidget>
 							<CanvasWidget engine={this.props.app.getDiagramEngine()} />
 						</DemoCanvasWidget>

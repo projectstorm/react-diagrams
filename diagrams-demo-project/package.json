@@ -26,9 +26,15 @@
 	"typings": "./dist/@types/index",
 	"dependencies": {
 		"@projectstorm/react-diagrams": "^6.7.0",
-		"webpack": "^5.46.0",
-		"webpack-cli": "^4.7.2",
-		"webpack-dev-server": "^3.11.2"
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
 	},
-	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
+  "devDependencies": {
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
 }

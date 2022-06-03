@@ -53,10 +53,12 @@ export default () => {
 				<DemoButton
 					onClick={() => {
 						action('Serialized Graph')(JSON.stringify(model.serializeDiagram(), null, 2));
-					}}>
+					}}
+				>
 					Serialize Graph
 				</DemoButton>
-			}>
+			}
+		>
 			<DemoCanvasWidget>
 				<CanvasWidget engine={engine} />
 			</DemoCanvasWidget>

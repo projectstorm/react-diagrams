@@ -99,7 +99,8 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 				}}
 				onTouchMove={(event) => {
 					this.props.engine.getActionEventBus().fireAction({ event });
-				}}>
+				}}
+			>
 				{model.getLayers().map((layer) => {
 					return (
 						<TransformLayerWidget layer={layer} key={layer.getID()}>

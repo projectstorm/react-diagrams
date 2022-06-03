@@ -49,7 +49,8 @@ class NodeDelayedPosition extends React.Component<any, any> {
 					<DemoButton key={2} onClick={this.updatePositionViaSerialize}>
 						Update position via serialize
 					</DemoButton>
-				]}>
+				]}
+			>
 				<DemoCanvasWidget>
 					<CanvasWidget engine={engine} />
 				</DemoCanvasWidget>
