@@ -92,7 +92,8 @@ export class NodeWidget extends React.Component<NodeProps> {
 							style={{
 								top: this.props.node.getY(),
 								left: this.props.node.getX()
-							}}>
+							}}
+						>
 							{this.props.diagramEngine.generateWidgetForNode(this.props.node)}
 						</S.Node>
 					);

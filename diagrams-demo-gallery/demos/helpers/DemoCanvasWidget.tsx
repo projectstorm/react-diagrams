@@ -55,14 +55,15 @@ namespace S {
 	`;
 }
 
-export class DemoCanvasWidget extends React.Component<DemoCanvasWidgetProps> {
+export class DemoCanvasWidget extends React.Component<React.PropsWithChildren<DemoCanvasWidgetProps>> {
 	render() {
 		return (
 			<>
 				<Global styles={S.Expand} />
 				<S.Container
 					background={this.props.background || 'rgb(60, 60, 60)'}
-					color={this.props.color || 'rgba(255,255,255, 0.05)'}>
+					color={this.props.color || 'rgba(255,255,255, 0.05)'}
+				>
 					{this.props.children}
 				</S.Container>
 			</>

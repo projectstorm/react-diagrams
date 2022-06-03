@@ -4,6 +4,15 @@ import { SelectionLayerModel } from '../entities/selection/SelectionLayerModel';
 import { Point, Rectangle } from '@projectstorm/geometry';
 import { ModelGeometryInterface } from '../core/ModelGeometryInterface';
 
+export interface SimpleClientRect {
+	left: number;
+	right: number;
+	width: number;
+	height: number;
+	top: number;
+	bottom: number;
+}
+
 export class SelectionBoxState extends AbstractDisplacementState {
 	layer: SelectionLayerModel;
 
@@ -25,7 +34,7 @@ export class SelectionBoxState extends AbstractDisplacementState {
 		this.engine.repaintCanvas();
 	}
 
-	getBoxDimensions(event: AbstractDisplacementStateEvent): ClientRect {
+	getBoxDimensions(event: AbstractDisplacementStateEvent): SimpleClientRect {
 		let rel: Point;
 
 		if ('touches' in event.event) {

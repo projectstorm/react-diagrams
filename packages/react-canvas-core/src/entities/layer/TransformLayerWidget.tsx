@@ -31,7 +31,7 @@ namespace S {
 	`;
 }
 
-export class TransformLayerWidget extends React.Component<TransformLayerWidgetProps> {
+export class TransformLayerWidget extends React.Component<React.PropsWithChildren<TransformLayerWidgetProps>> {
 	constructor(props: TransformLayerWidgetProps) {
 		super(props);
 		this.state = {};

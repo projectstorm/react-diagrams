@@ -31,7 +31,8 @@ class CanvasDragToggle extends React.Component<any, any> {
 					<DemoButton key={2} onClick={this.disableDrag}>
 						Disable canvas drag
 					</DemoButton>
-				]}>
+				]}
+			>
 				<DemoCanvasWidget>
 					<CanvasWidget engine={engine} />
 				</DemoCanvasWidget>

@@ -29,7 +29,8 @@ export class TrayItemWidget extends React.Component<TrayItemWidgetProps> {
 				onDragStart={(event) => {
 					event.dataTransfer.setData('storm-diagram-node', JSON.stringify(this.props.model));
 				}}
-				className="tray-item">
+				className="tray-item"
+			>
 				{this.props.name}
 			</S.Tray>
 		);

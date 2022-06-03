@@ -49,10 +49,12 @@ export default () => {
 				<DemoButton
 					onClick={() => {
 						action('Serialized Graph')(beautify(model2.serialize(), null, 2, 80));
-					}}>
+					}}
+				>
 					Serialize Graph
 				</DemoButton>
-			}>
+			}
+		>
 			<DemoCanvasWidget>
 				<CanvasWidget engine={engine} />
 			</DemoCanvasWidget>

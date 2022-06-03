@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './main.css';
 import createEngine, { DefaultLinkModel, DiagramModel } from '@projectstorm/react-diagrams';
 import { JSCustomNodeFactory } from './custom-node-js/JSCustomNodeFactory';
@@ -39,5 +39,6 @@ model.addAll(node1, node2, link1);
 engine.setModel(model);
 
 document.addEventListener('DOMContentLoaded', () => {
-	ReactDOM.render(<BodyWidget engine={engine} />, document.querySelector('#application'));
+	const root = createRoot(document.querySelector('#application'));
+	root.render(<BodyWidget engine={engine} />);
 });
