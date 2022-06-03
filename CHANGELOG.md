@@ -1,3 +1,10 @@
+__6.7.4__
+
+.0 -> .4 because I messed up the version / publishing
+
+* (upgrade all dependencies, including a move to React 18)
+  * https://github.com/projectstorm/react-diagrams/pull/947
+
 __6.7.0__
 
 bug fixes:
