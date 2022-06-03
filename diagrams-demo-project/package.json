@@ -1,6 +1,6 @@
 {
 	"name": "@projectstorm/react-diagrams-demo",
-	"version": "6.7.3",
+	"version": "6.7.4",
 	"author": "dylanvorster",
 	"license": "MIT",
 	"private": true,
@@ -25,7 +25,7 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams": "^6.7.3",
+		"@projectstorm/react-diagrams": "^6.7.4",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0"
 	},
