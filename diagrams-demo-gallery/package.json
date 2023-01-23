@@ -26,18 +26,26 @@
 		"links",
 		"nodes"
 	],
-	"dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-		"@storybook/addons": "^6.5.15",
-		"@storybook/addon-actions": "^6.5.15",
-		"@storybook/addon-options": "^5.3.21",
-		"@storybook/builder-webpack5": "^6.5.15",
-		"@storybook/manager-webpack5": "^6.5.15",
-		"@storybook/react": "^6.5.15",
-		"@storybook/storybook-deployer": "^2.8.16",
-		"@storybook/theming": "^6.5.15",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "@projectstorm/react-canvas-core": "workspace:*",
+    "@projectstorm/react-diagrams": "workspace:*",
+    "@projectstorm/react-diagrams-core": "workspace:*",
+    "@projectstorm/react-diagrams-defaults": "workspace:*",
+    "gsap": "^3.11.4",
     "json-beautify": "^1.1.1",
-		"gsap": "^3.11.4"
-	}
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/react": "^18.0.27",
+    "@storybook/addons": "^6.5.15",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-options": "^5.3.21",
+    "@storybook/builder-webpack5": "^6.5.15",
+    "@storybook/manager-webpack5": "^6.5.15",
+    "@storybook/react": "^6.5.15",
+    "@storybook/storybook-deployer": "^2.8.16",
+    "@storybook/theming": "^6.5.15"
+  }
 }
