@@ -29,11 +29,14 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.7.4"
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+		"@projectstorm/geometry": "workspace:*",
+    "react": "^18.2.0",
+    "lodash": "^4.17.21"
 	},
-	"peerDependencies": {
-		"lodash": "4.*",
-		"react": "18.*"
-	},
-	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/lodash": "^4.14.191"
+  }
 }

@@ -30,16 +30,19 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.7.4",
-		"@projectstorm/react-diagrams-core": "^6.7.4",
-		"@projectstorm/react-diagrams-defaults": "^6.7.4"
-	},
-	"peerDependencies": {
-		"dagre": "^0.8.5",
-		"lodash": "4.*",
-		"pathfinding": "^0.4.18",
-		"paths-js": "^0.4.11",
-		"react": "18.*"
-	},
-	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
+		"@projectstorm/geometry": "workspace:*",
+		"@projectstorm/react-canvas-core": "workspace:*",
+		"@projectstorm/react-diagrams-core": "workspace:*",
+		"@projectstorm/react-diagrams-defaults": "workspace:*",
+    "dagre": "^0.8.5",
+    "lodash": "^4.17.21",
+    "pathfinding": "^0.4.18",
+    "paths-js": "^0.4.11",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/dagre": "^0.7.48",
+    "@types/lodash": "^4.14.191",
+    "@types/react": "^18.0.27"
+  }
 }

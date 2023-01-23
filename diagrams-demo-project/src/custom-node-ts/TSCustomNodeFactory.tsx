@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { TSCustomNodeModel } from './TSCustomNodeModel';
 import { TSCustomNodeWidget } from './TSCustomNodeWidget';
-import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
-import { DiagramEngine } from '@projectstorm/react-diagrams-core';
+import { AbstractReactFactory } from '@projectstorm/react-diagrams';
+import { DiagramEngine } from '@projectstorm/react-diagrams';
 
 export class TSCustomNodeFactory extends AbstractReactFactory<TSCustomNodeModel, DiagramEngine> {
 	constructor() {

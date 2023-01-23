@@ -2,7 +2,6 @@ import { Toolkit } from '../Toolkit';
 import * as _ from 'lodash';
 import { CanvasEngine } from '../CanvasEngine';
 import { BaseEvent, BaseListener, BaseObserver } from '../core/BaseObserver';
-import { AbstractModelFactory } from '../core/AbstractModelFactory';
 import { BaseModel } from './BaseModel';
 
 export interface BaseEntityEvent<T extends BaseEntity = BaseEntity> extends BaseEvent {
@@ -13,6 +12,9 @@ export interface BaseEntityListener<T extends BaseEntity = BaseEntity> extends B
 	lockChanged?(event: BaseEntityEvent<T> & { locked: boolean }): void;
 }
 
+/**
+ * @TODO move to enums
+ */
 export type BaseEntityType = 'node' | 'link' | 'port' | 'point';
 
 export interface BaseEntityOptions {

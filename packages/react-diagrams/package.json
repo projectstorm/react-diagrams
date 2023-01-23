@@ -29,9 +29,9 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-diagrams-core": "^6.7.4",
-		"@projectstorm/react-diagrams-defaults": "^6.7.4",
-		"@projectstorm/react-diagrams-routing": "^6.7.4"
-	},
-	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
+		"@projectstorm/react-canvas-core": "workspace:*",
+		"@projectstorm/react-diagrams-core": "workspace:*",
+		"@projectstorm/react-diagrams-defaults": "workspace:*",
+		"@projectstorm/react-diagrams-routing": "workspace:*"
+	}
 }
