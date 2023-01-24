@@ -5,7 +5,7 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
-    container: buildkite/puppeteer
+    container: browserless/chrome
     env:
       CI: true
     steps:
