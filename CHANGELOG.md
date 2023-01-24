@@ -1,3 +1,12 @@
+__V7!__
+
+we are now using changesets! you can see the changes for individual packages in their corresponding folders.
+Here is the main changeset for the core package which depends on everything:
+
+[Changelog for @projectstorm/react-diagrams](./packages/react-diagrams/CHANGELOG.md)
+
+---
+
 __6.7.4__
 
 .0 -> .4 because I messed up the version / publishing
