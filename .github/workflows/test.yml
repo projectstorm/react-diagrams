@@ -11,13 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        uses: actions/setup-node@v2
-        env:
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-        with:
-          args: install
-
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
@@ -25,6 +18,9 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+
+      - name: Test
+        run: pnpm test
   build:
     name: Build
     runs-on: ubuntu-latest
