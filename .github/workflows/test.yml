@@ -13,10 +13,6 @@ jobs:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         with:
           args: install
-      - name: Install PNPM
-        uses: pnpm/action-setup@v2
-        with:
-        version: latest
       - name: Test Code
         uses: mujo-code/puppeteer-headful@16.6.0
         env:
