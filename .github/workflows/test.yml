@@ -1,10 +1,6 @@
-name: Build
-
+name: Build and Test
 on:
   pull_request:
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
-
 jobs:
   e2e:
     name: E2E Tests
