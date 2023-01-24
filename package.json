@@ -27,6 +27,7 @@
     "release:storybook": "tsc --build && cd demo && pnpm storybook:build && ./node_modules/.bin/storybook-to-ghpages --existing-output-dir .out"
 	},
 	"devDependencies": {
+    "@changesets/cli": "^2.26.0",
 		"@types/jest": "^29.2.6",
 		"@types/jest-environment-puppeteer": "^5.0.3",
 		"@types/node": "^18.11.18",
