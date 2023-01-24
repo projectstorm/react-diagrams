@@ -21,10 +21,11 @@
     "ncu": "ncu -u && pnpm recursive exec -- ncu -u",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx}\"",
     "clean": "rm -rf packages/*/dist",
+    "test": "pnpm run -r test",
     "build": "tsc --build && pnpm run -r build",
     "build:prod": "NODE_ENV=production pnpm build",
     "release": "pnpm build:prod && pnpm changeset publish",
-    "release:storybook": "tsc --build && cd demo && pnpm storybook:build && ./node_modules/.bin/storybook-to-ghpages --existing-output-dir .out"
+    "release:storybook": "tsc --build && cd diagrams-demo-gallery && pnpm storybook:build && ./node_modules/.bin/storybook-to-ghpages --existing-output-dir .out"
 	},
 	"devDependencies": {
     "@changesets/cli": "^2.26.0",

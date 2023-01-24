@@ -11,9 +11,8 @@
 	"scripts": {
 		"start": "./node_modules/.bin/start-storybook",
 		"storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out",
-		"github": "./node_modules/.bin/storybook-to-ghpages",
 		"test:run": "../node_modules/.bin/jest --no-cache",
-		"test": "yarn storybook:build && yarn test:run"
+		"test": "pnpm storybook:build && pnpm test:run"
 	},
 	"keywords": [
 		"web",
