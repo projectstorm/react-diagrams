@@ -7,8 +7,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   e2e:
-    name: end-to-end
-    on: push
+    name: e2e
     jobs:
       installDependencies:
         name: Install Dependencies
@@ -31,7 +30,6 @@ jobs:
               CI: "true"
             with:
               args: pnpm test
-
   build:
     name: Build
     runs-on: ubuntu-latest
