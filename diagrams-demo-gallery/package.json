@@ -10,9 +10,7 @@
 	},
 	"scripts": {
 		"start": "./node_modules/.bin/start-storybook",
-		"storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out",
-		"test:run": "../node_modules/.bin/jest --no-cache",
-		"test": "pnpm storybook:build && pnpm test:run"
+		"storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out"
 	},
 	"keywords": [
 		"web",

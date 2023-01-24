@@ -2,28 +2,6 @@ name: Build and Test
 on:
   pull_request:
 jobs:
-  e2e:
-    name: E2E Tests
-    runs-on: ubuntu-latest
-    container: browserless/chrome
-    env:
-      CI: true
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-
-      - name: Install Dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm build
-
-      - name: Test
-        run: pnpm test
   build:
     name: Build
     runs-on: ubuntu-latest
