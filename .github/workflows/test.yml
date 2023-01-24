@@ -5,6 +5,9 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    container: buildkite/puppeteer
+    env:
+      CI: true
     steps:
       - uses: actions/checkout@v3
 
@@ -22,13 +25,6 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
-
-      - name: Test Code
-        uses: mujo-code/puppeteer-headful@16.6.0
-        env:
-          CI: "true"
-        with:
-          args: pnpm test
   build:
     name: Build
     runs-on: ubuntu-latest
