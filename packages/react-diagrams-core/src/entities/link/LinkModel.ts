@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { LabelModel } from '../label/LabelModel';
 import { DiagramEngine } from '../../DiagramEngine';
 import { DiagramModel } from '../../models/DiagramModel';
-import { Point, Polygon, Rectangle } from '@projectstorm/geometry';
+import { boundingBoxFromPoints, Point, Rectangle } from '@projectstorm/geometry';
 import {
 	BaseEntityEvent,
 	BaseModel,
@@ -54,10 +54,12 @@ export class LinkModel<G extends LinkModelGenerics = LinkModelGenerics>
 	}
 
 	getBoundingBox(): Rectangle {
-		return Polygon.boundingBoxFromPoints(
-			_.map(this.points, (point: PointModel) => {
-				return point.getPosition();
-			})
+		return new Rectangle(
+			boundingBoxFromPoints(
+				_.map(this.points, (point: PointModel) => {
+					return point.getPosition();
+				})
+			)
 		);
 	}
 

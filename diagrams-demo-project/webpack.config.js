@@ -1,6 +1,7 @@
 const path = require('path');
 const production = process.env.NODE_ENV === 'production';
 const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	mode: production ? 'production' : 'development',
@@ -23,8 +24,18 @@ module.exports = {
 			})
 		]
 	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: 'index.html'
+		})
+	],
 	module: {
 		rules: [
+			{
+				enforce: 'pre',
+				test: /\.js$/,
+				loader: 'source-map-loader'
+			},
 			{
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader']
@@ -36,18 +47,15 @@ module.exports = {
 			},
 			{
 				test: /\.tsx?$/,
-				loader: 'ts-loader',
-				options: {
-					transpileOnly: true
-				}
+				loader: 'ts-loader'
 			}
 		]
 	},
-
 	devServer: {
-		host: '0.0.0.0',
-		compress: true,
-		disableHostCheck: true,
-		overlay: true
+		client: {
+			overlay: true
+		},
+		hot: false,
+		compress: true
 	}
 };
