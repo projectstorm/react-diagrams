@@ -10,7 +10,8 @@
 		"skipLibCheck": true,
 		"jsx": "react",
 		"target": "ES6",
-		"module": "commonjs",
+		"moduleResolution": "Node",
+		"module": "es6",
 		"strict": false,
 		"lib": [
 			"DOM",

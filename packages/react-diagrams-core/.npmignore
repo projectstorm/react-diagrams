@@ -1,5 +1,4 @@
 *
-!src/**/*
 !dist/**/*
 !package.json
-!README.md
+dist/tsconfig.tsbuildinfo

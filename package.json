@@ -36,7 +36,7 @@
 		"jest-puppeteer": "^6.2",
 		"prettier": "^2.8.3",
 		"puppeteer": "19.6.0",
-		"react-dom": "^18.2.0",
+    "rimraf": "^4.1.1",
 		"react-test-renderer": "^18.2.0",
 		"source-map-loader": "^4.0.1",
 		"terser-webpack-plugin": "^5.3.6",

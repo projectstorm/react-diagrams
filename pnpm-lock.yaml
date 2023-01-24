@@ -13,8 +13,8 @@ importers:
       jest-puppeteer: ^6.2
       prettier: ^2.8.3
       puppeteer: 19.6.0
-      react-dom: ^18.2.0
       react-test-renderer: ^18.2.0
+      rimraf: ^4.1.1
       source-map-loader: ^4.0.1
       terser-webpack-plugin: ^5.3.6
       ts-jest: ^29.0.5
@@ -34,8 +34,8 @@ importers:
       jest-puppeteer: 6.2.0_puppeteer@19.6.0
       prettier: 2.8.3
       puppeteer: 19.6.0
-      react-dom: 18.2.0
       react-test-renderer: 18.2.0
+      rimraf: 4.1.1
       source-map-loader: 4.0.1_webpack@5.75.0
       terser-webpack-plugin: 5.3.6_webpack@5.75.0
       ts-jest: 29.0.5_p6ekqnroyms5nhqbfxosryz7rm
@@ -10855,15 +10855,6 @@ packages:
       - supports-color
     dev: true
 
-  /react-dom/18.2.0:
-    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
-    peerDependencies:
-      react: ^18.2.0
-    dependencies:
-      loose-envify: 1.4.0
-      scheduler: 0.23.0
-    dev: true
-
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -11297,6 +11288,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
+
+  /rimraf/4.1.1:
+    resolution: {integrity: sha512-Z4Y81w8atcvaJuJuBB88VpADRH66okZAuEm+Jtaufa+s7rZmIz+Hik2G53kGaNytE7lsfXyWktTmfVz0H9xuDg==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /ripemd160/2.0.2:
