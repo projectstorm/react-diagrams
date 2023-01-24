@@ -1,4 +1,4 @@
-# Changelog
+# @projectstorm/geometry
 
 ## 7.0.0
 
@@ -22,23 +22,3 @@
   - [breaking change] static methods on `Polygon` and `Rectangle` moved to standalone methods
   - [breaking change] static construction methods to rather deal with different Rectangle constructor overloads (I now consider this bad design)
   - [breaking change] introduce `Bounds` as a simpler point-array type to deal with boundary computation instead
-
-### Patch Changes
-
-- Updated dependencies [b051697]
-  - @projectstorm/react-canvas-core@7.0.0
-  - @projectstorm/geometry@7.0.0
-
-## 6.0.0
-
-### Breaking changes
-
-- `AbstractFactory:getNewInstance` renamed to `AbstractFactory:generateModel` and now gets given an event object
-  so that we can add to the event object without relying on more parameters
-
-- `AbstractFactory::generateReactWidget` now receives an event object
-
-- Moved factories in the diagramEngine into `FactoryBank`'s, which means we can remove the listeners in the DiagramEngine.
-  methods such as factoryAdded and factoryRemoved are now available on the FactoryBank (better design that allows more control)
-
-- `addListener` renamed to `registerListener`
