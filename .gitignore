@@ -5,6 +5,5 @@ dist
 *.zip
 .env
 node_modules
-yarn-error.log
 tsconfig.tsbuildinfo
 .vscode

@@ -36,7 +36,7 @@ export class NodeModel<G extends NodeModelGenerics = NodeModelGenerics> extends 
 	}
 
 	getBoundingBox(): Rectangle {
-		return new Rectangle(this.getPosition(), this.width, this.height);
+		return Rectangle.fromPointAndSize(this.getPosition(), this.width, this.height);
 	}
 
 	setPosition(point: Point): void;

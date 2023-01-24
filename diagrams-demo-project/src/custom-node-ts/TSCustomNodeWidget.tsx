@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DiagramEngine, PortWidget } from '@projectstorm/react-diagrams-core';
+import { DiagramEngine, PortWidget } from '@projectstorm/react-diagrams';
 import { TSCustomNodeModel } from './TSCustomNodeModel';
 
 export interface TSCustomNodeWidgetProps {

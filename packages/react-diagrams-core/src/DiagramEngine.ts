@@ -2,17 +2,17 @@ import { NodeModel } from './entities/node/NodeModel';
 import { PortModel } from './entities/port/PortModel';
 import { LinkModel } from './entities/link/LinkModel';
 import { LabelModel } from './entities/label/LabelModel';
-import { Point, Rectangle, Polygon } from '@projectstorm/geometry';
+import { boundingBoxFromPolygons, Point, Rectangle } from '@projectstorm/geometry';
 import { MouseEvent } from 'react';
 import {
 	AbstractModelFactory,
 	AbstractReactFactory,
 	BaseModel,
 	CanvasEngine,
-	FactoryBank,
-	Toolkit,
 	CanvasEngineListener,
-	CanvasEngineOptions
+	CanvasEngineOptions,
+	FactoryBank,
+	Toolkit
 } from '@projectstorm/react-canvas-core';
 import { DiagramModel } from './models/DiagramModel';
 
@@ -187,7 +187,7 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 			clientY: sourceRect.top
 		});
 		const zoom = this.model.getZoomLevel() / 100.0;
-		return new Rectangle(point.x, point.y, sourceRect.width / zoom, sourceRect.height / zoom);
+		return Rectangle.fromPointAndSize(point, sourceRect.width / zoom, sourceRect.height / zoom);
 	}
 
 	/**
@@ -214,10 +214,9 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 	getBoundingNodesRect(nodes: NodeModel[]): Rectangle {
 		if (nodes) {
 			if (nodes.length === 0) {
-				return new Rectangle(0, 0, 0, 0);
+				return new Rectangle();
 			}
-
-			return Polygon.boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox()));
+			return new Rectangle(boundingBoxFromPolygons(nodes.map((node) => node.getBoundingBox())));
 		}
 	}
 

@@ -5,7 +5,7 @@
 		"jsx": "react",
 		"allowJs": true,
 		"target": "es6",
-		"moduleResolution": "node"
+		"module": "CommonJS"
 	},
 	"include": [
 		"./src"

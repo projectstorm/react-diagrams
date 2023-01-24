@@ -3,11 +3,9 @@
 	"compilerOptions": {
 		"outDir": "dist",
 		"rootDir": "src",
-		"declarationDir": "dist/@types"
+		"declarationDir": "dist/@types",
+		"tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
 	},
-	"include": [
-		"./src"
-	],
 	"references": [
 		{
 			"path": "../react-canvas-core"

@@ -143,7 +143,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	}
 
 	getBoundingBox(): Rectangle {
-		return new Rectangle(this.position, this.width, this.height);
+		return Rectangle.fromPointAndSize(this.position, this.width, this.height);
 	}
 
 	updateCoords(coords: Rectangle) {

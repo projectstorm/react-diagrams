@@ -1,4 +1,3 @@
-import { DiagramEngine } from '../../DiagramEngine';
 import { LinkModel } from '../link/LinkModel';
 import { BaseModel, BaseModelGenerics, BaseModelOptions, DeserializeEvent } from '@projectstorm/react-canvas-core';
 

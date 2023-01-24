@@ -11,7 +11,7 @@ import { LayerModel } from '../layer/LayerModel';
 import { BaseModel } from '../../core-models/BaseModel';
 import { CanvasEngine } from '../../CanvasEngine';
 
-export interface DiagramListener extends BaseEntityListener {
+export interface CanvasModelListener extends BaseEntityListener {
 	offsetUpdated?(event: BaseEntityEvent<CanvasModel> & { offsetX: number; offsetY: number }): void;
 
 	zoomUpdated?(event: BaseEntityEvent<CanvasModel> & { zoom: number }): void;
@@ -19,7 +19,7 @@ export interface DiagramListener extends BaseEntityListener {
 	gridUpdated?(event: BaseEntityEvent<CanvasModel> & { size: number }): void;
 }
 
-export interface DiagramModelOptions extends BaseEntityOptions {
+export interface CanvasModelOptions extends BaseEntityOptions {
 	offsetX?: number;
 	offsetY?: number;
 	zoom?: number;
@@ -27,8 +27,8 @@ export interface DiagramModelOptions extends BaseEntityOptions {
 }
 
 export interface CanvasModelGenerics extends BaseEntityGenerics {
-	LISTENER: DiagramListener;
-	OPTIONS: DiagramModelOptions;
+	LISTENER: CanvasModelListener;
+	OPTIONS: CanvasModelOptions;
 	LAYER: LayerModel;
 }
 

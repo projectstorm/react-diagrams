@@ -1,0 +1,4 @@
+packages:
+  - 'packages/*'
+  - 'diagrams-demo-gallery'
+  - 'diagrams-demo-project'

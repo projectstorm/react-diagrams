@@ -31,13 +31,15 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/geometry": "^6.7.4",
-		"@projectstorm/react-canvas-core": "^6.7.4"
+    "@emotion/styled": "^11.10.5",
+		"@projectstorm/geometry": "workspace:*",
+		"@projectstorm/react-canvas-core": "workspace:*",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "resize-observer-polyfill": "^1.5.1"
 	},
-	"peerDependencies": {
-		"lodash": "4.*",
-		"react": "18.*",
-		"resize-observer-polyfill": "^1.5.1"
-	},
-	"gitHead": "bb878657ba0c2f81764f32901fd96158a0f8352e"
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/lodash": "^4.14.191"
+  }
 }

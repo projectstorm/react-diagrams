@@ -1,27 +1,37 @@
 import { Point } from './Point';
 import { Polygon } from './Polygon';
+import { Bounds, BoundsCorner, boundsFromPositionAndSize, createEmptyBounds } from './Bounds';
 
 export class Rectangle extends Polygon {
-	constructor(tl: Point, tr: Point, br: Point, bl: Point);
-	constructor(position: Point, width: number, height: number);
-	constructor(x?: number, y?: number, width?: number, height?: number);
-
-	constructor(a: any = 0, b: any = 0, c: any = 0, d: any = 0) {
-		if (a instanceof Point && b instanceof Point && c instanceof Point && d instanceof Point) {
-			super([a, b, c, d]);
-		} else if (a instanceof Point) {
-			super([a, new Point(a.x + b, a.y), new Point(a.x + b, a.y + c), new Point(a.x, a.y + c)]);
-		} else {
-			super(Rectangle.pointsFromBounds(a, b, c, d));
-		}
+	static fromPositionAndSize(x: number, y: number, width: number, height: number) {
+		return new Rectangle(boundsFromPositionAndSize(x, y, width, height));
 	}
 
-	static pointsFromBounds(x: number, y: number, width: number, height: number): Point[] {
-		return [new Point(x, y), new Point(x + width, y), new Point(x + width, y + height), new Point(x, y + height)];
+	static fromPointAndSize(position: Point, width: number, height: number) {
+		return new Rectangle(boundsFromPositionAndSize(position.x, position.y, width, height));
+	}
+
+	constructor(points?: Bounds) {
+		if (!points) {
+			points = createEmptyBounds();
+		}
+
+		super([
+			points[BoundsCorner.TOP_LEFT],
+			points[BoundsCorner.TOP_RIGHT],
+			points[BoundsCorner.BOTTOM_RIGHT],
+			points[BoundsCorner.BOTTOM_LEFT]
+		]);
 	}
 
 	updateDimensions(x: number, y: number, width: number, height: number) {
-		this.points = Rectangle.pointsFromBounds(x, y, width, height);
+		const points = boundsFromPositionAndSize(x, y, width, height);
+		this.setPoints([
+			points[BoundsCorner.TOP_LEFT],
+			points[BoundsCorner.TOP_RIGHT],
+			points[BoundsCorner.BOTTOM_RIGHT],
+			points[BoundsCorner.BOTTOM_LEFT]
+		]);
 	}
 
 	setPoints(points: Point[]) {
