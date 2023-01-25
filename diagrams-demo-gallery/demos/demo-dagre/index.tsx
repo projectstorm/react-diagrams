@@ -80,12 +80,14 @@ class DemoWidget extends React.Component<{ model: DiagramModel; engine: DiagramE
 
 	render() {
 		return (
-			<DemoWorkspaceWidget buttons={
-				<div>
-					<DemoButton onClick={this.autoDistribute}>Re-distribute</DemoButton>
-					<DemoButton onClick={this.autoRefreshLinks}>Refresh Links</DemoButton>
-				</div>
-			}>
+			<DemoWorkspaceWidget
+				buttons={
+					<div>
+						<DemoButton onClick={this.autoDistribute}>Re-distribute</DemoButton>
+						<DemoButton onClick={this.autoRefreshLinks}>Refresh Links</DemoButton>
+					</div>
+				}
+			>
 				<DemoCanvasWidget>
 					<CanvasWidget engine={this.props.engine} />
 				</DemoCanvasWidget>
