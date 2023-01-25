@@ -1,5 +1,13 @@
 # @projectstorm/react-diagrams
 
+## 7.0.1
+
+### Patch Changes
+
+- Updated dependencies [e0d21f1]
+  - @projectstorm/react-diagrams-defaults@7.1.0
+  - @projectstorm/react-diagrams-routing@7.1.0
+
 ## 7.0.0
 
 ### Major Changes
