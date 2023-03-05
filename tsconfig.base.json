@@ -7,6 +7,7 @@
 		"incremental": true,
 		"strictNullChecks": false,
 		"sourceMap": true,
+		"inlineSources": true,
 		"skipLibCheck": true,
 		"jsx": "react",
 		"target": "ES6",
