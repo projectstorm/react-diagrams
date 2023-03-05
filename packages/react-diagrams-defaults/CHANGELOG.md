@@ -1,5 +1,15 @@
 # @projectstorm/react-diagrams-defaults
 
+## 7.1.1
+
+### Patch Changes
+
+- b8a4cbd: Inline sources in sourcemap
+- Updated dependencies [b8a4cbd]
+  - @projectstorm/geometry@7.0.1
+  - @projectstorm/react-canvas-core@7.0.1
+  - @projectstorm/react-diagrams-core@7.0.1
+
 ## 7.1.0
 
 ### Minor Changes

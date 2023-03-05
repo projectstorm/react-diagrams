@@ -1,5 +1,13 @@
 # @projectstorm/react-diagrams-demo
 
+## 7.0.2
+
+### Patch Changes
+
+- b8a4cbd: Inline sources in sourcemap
+- Updated dependencies [b8a4cbd]
+  - @projectstorm/react-diagrams@7.0.2
+
 ## 7.0.1
 
 ### Patch Changes
