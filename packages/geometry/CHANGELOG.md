@@ -1,5 +1,11 @@
 # @projectstorm/geometry
 
+## 7.0.1
+
+### Patch Changes
+
+- b8a4cbd: Inline sources in sourcemap
+
 ## 7.0.0
 
 ### Major Changes

@@ -1,5 +1,13 @@
 # @projectstorm/react-canvas-core
 
+## 7.0.1
+
+### Patch Changes
+
+- b8a4cbd: Inline sources in sourcemap
+- Updated dependencies [b8a4cbd]
+  - @projectstorm/geometry@7.0.1
+
 ## 7.0.0
 
 ### Major Changes
