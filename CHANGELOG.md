@@ -157,7 +157,7 @@ __5.1.0__
 * (refactor) consistently use lodash where possible
 * (maintenance) upgrade node modules
 
-__5.0.0__ http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/
+__5.0.0__ [http://dylanv.blog/2018/03/03/storm-react-diagrams-5-0-0/](https://dylanvorster.com/storm-react-diagrams-v5-0/)
 
 PR: https://github.com/projectstorm/react-diagrams/pull/145
 
@@ -174,7 +174,7 @@ PR: https://github.com/projectstorm/react-diagrams/pull/145
 * (tests) automatically load JEST Snapshots
 * (feature) Link labels!
 
-__4.0.0__ http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/
+__4.0.0__ [http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/](https://dylanvorster.com/storm-react-diagrams-v4-0/)
 
 * (refactor) Events system was completely overhauled
 * (demo) Custom Link Sizes
@@ -188,7 +188,7 @@ __4.0.0__ http://dylanv.blog/2018/01/18/storm-react-diagrams-v4-0-0/
 * (demo) Cloning
 * (feature) models control isLocked
 
-__3.2.0__ http://dylanv.blog/2017/11/22/storm-react-diagrams-3-2-0/
+__3.2.0__ [http://dylanv.blog/2017/11/22/storm-react-diagrams-3-2-0/](https://dylanvorster.com/storm-react-diagrams-3-2-0/)
 * (feature) zoom to fit
 * added Circle CI tests
 * (demo) dagre automatic layouts
@@ -211,14 +211,14 @@ __3.1.2__
 * Hotfix: fix zooming when canvas not in the top left corner
 (https://github.com/projectstorm/react-diagrams/pull/88)
 
-__3.1.0__ http://dylanv.blog/2017/09/15/storm-react-diagrams-3-1-0/
+__3.1.0__ [http://dylanv.blog/2017/09/15/storm-react-diagrams-3-1-0/](https://dylanvorster.com/storm-react-diagrams-3-1-0/)
 * Zoom relative to mouse location
 * Fixed links not connecting when grid is larger than port size
 * Prevented points from dragging when connected to a port and the node itself is not selected
 * API fixes
 * Code cleanup
 
-__3.0.0__ http://dylanv.blog/2017/09/13/storm-react-diagrams-v3/
+__3.0.0__ [http://dylanv.blog/2017/09/13/storm-react-diagrams-v3/](https://dylanvorster.com/storm-react-diagrams-3-0/)
 * Massive performance updates
 * Complete rewrite
 * Started a changelog and design documents for each revision
