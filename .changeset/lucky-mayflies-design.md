@@ -1,5 +1,5 @@
 ---
-'@projectstorm/react-diagrams-defaults': major
+'@projectstorm/react-diagrams-defaults': patch
 ---
 
 bug fix
