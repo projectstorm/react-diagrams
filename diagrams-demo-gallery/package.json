@@ -1,48 +1,53 @@
 {
-	"name": "@projectstorm/react-diagrams-gallery",
-	"version": "7.1.1",
-	"author": "dylanvorster",
-	"license": "MIT",
-	"private": true,
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/projectstorm/react-diagrams.git"
-	},
-	"scripts": {
-		"start": "./node_modules/.bin/start-storybook",
-		"storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out"
-	},
-	"keywords": [
-		"web",
-		"diagram",
-		"diagrams",
-		"react",
-		"typescript",
-		"flowchart",
-		"simple",
-		"links",
-		"nodes"
-	],
-	"dependencies": {
-		"lodash": "^4.17.21",
-		"@projectstorm/react-canvas-core": "workspace:*",
-		"@projectstorm/react-diagrams": "workspace:*",
-		"@projectstorm/react-diagrams-core": "workspace:*",
-		"@projectstorm/react-diagrams-defaults": "workspace:*",
-		"gsap": "^3.11.4",
-		"json-beautify": "^1.1.1",
-		"react": "^18.2.0"
-	},
-	"devDependencies": {
-		"@types/lodash": "^4.14.191",
-		"@types/react": "^18.0.27",
-		"@storybook/addons": "^6.5.15",
-		"@storybook/addon-actions": "^6.5.15",
-		"@storybook/addon-options": "^5.3.21",
-		"@storybook/builder-webpack5": "^6.5.15",
-		"@storybook/manager-webpack5": "^6.5.15",
-		"@storybook/react": "^6.5.15",
-		"@storybook/storybook-deployer": "^2.8.16",
-		"@storybook/theming": "^6.5.15"
-	}
+  "name": "@projectstorm/react-diagrams-gallery",
+  "version": "7.1.1",
+  "author": "dylanvorster",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/projectstorm/react-diagrams.git"
+  },
+  "scripts": {
+    "start": "pnpm storybook dev",
+    "storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out"
+  },
+  "keywords": [
+    "web",
+    "diagram",
+    "diagrams",
+    "react",
+    "typescript",
+    "flowchart",
+    "simple",
+    "links",
+    "nodes"
+  ],
+  "dependencies": {
+    "@projectstorm/react-canvas-core": "workspace:*",
+    "@projectstorm/react-diagrams": "workspace:*",
+    "@projectstorm/react-diagrams-core": "workspace:*",
+    "@projectstorm/react-diagrams-defaults": "workspace:*",
+    "gsap": "^3.12.2",
+    "json-beautify": "^1.1.1",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
+    "@storybook/addon-actions": "^7.4.4",
+    "@storybook/addon-options": "^5.3.21",
+    "@storybook/addons": "^7.4.4",
+    "@storybook/react": "^7.4.4",
+    "@storybook/react-webpack5": "^7.4.4",
+    "@storybook/storybook-deployer": "^2.8.16",
+    "@storybook/theming": "^7.4.4",
+    "@types/lodash": "^4.14.199",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "storybook": "^7.4.4"
+  }
 }

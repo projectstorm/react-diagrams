@@ -29,14 +29,14 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@emotion/react": "^11.10.5",
-		"@emotion/styled": "^11.10.5",
+		"@emotion/react": "^11.11.1",
+		"@emotion/styled": "^11.11.0",
 		"@projectstorm/geometry": "workspace:*",
 		"react": "^18.2.0",
 		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
-		"@types/react": "^18.0.27",
-		"@types/lodash": "^4.14.191"
+		"@types/react": "^18.2.22",
+		"@types/lodash": "^4.14.199"
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"suppressExcessPropertyErrors": true,
 		"declaration": true,
 		"composite": true,
 		"incremental": true,

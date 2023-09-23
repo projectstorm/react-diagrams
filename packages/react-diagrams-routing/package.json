@@ -41,8 +41,8 @@
 		"react": "^18.2.0"
 	},
 	"devDependencies": {
-		"@types/dagre": "^0.7.48",
-		"@types/lodash": "^4.14.191",
-		"@types/react": "^18.0.27"
+		"@types/dagre": "^0.7.50",
+		"@types/lodash": "^4.14.199",
+		"@types/react": "^18.2.22"
 	}
 }
