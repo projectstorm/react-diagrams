@@ -1,5 +1,16 @@
 # @projectstorm/react-diagrams-gallery
 
+## 7.1.2
+
+### Patch Changes
+
+- 66c687a: Upgrade all dependencies and fix Storybook after upgrade
+- Updated dependencies [66c687a]
+  - @projectstorm/react-diagrams-defaults@7.1.2
+  - @projectstorm/react-diagrams-core@7.0.2
+  - @projectstorm/react-canvas-core@7.0.2
+  - @projectstorm/react-diagrams@7.0.3
+
 ## 7.1.1
 
 ### Patch Changes

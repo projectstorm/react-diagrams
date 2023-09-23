@@ -1,5 +1,13 @@
 # @projectstorm/react-canvas-core
 
+## 7.0.2
+
+### Patch Changes
+
+- 66c687a: Upgrade all dependencies and fix Storybook after upgrade
+- Updated dependencies [66c687a]
+  - @projectstorm/geometry@7.0.2
+
 ## 7.0.1
 
 ### Patch Changes

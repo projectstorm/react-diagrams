@@ -1,5 +1,12 @@
 # @projectstorm/react-diagrams-demo
 
+## 7.0.3
+
+### Patch Changes
+
+- 66c687a: Upgrade all dependencies and fix Storybook after upgrade
+  - @projectstorm/react-diagrams@7.0.3
+
 ## 7.0.2
 
 ### Patch Changes
