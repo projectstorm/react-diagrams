@@ -85,7 +85,7 @@ Take a look at the [demo project](https://github.com/projectstorm/react-diagrams
 
 ## Run the demos
 
-After running `yarn install` and `yarn build`, you must then run: `cd diagrams-demo-gallery && yarn run start`
+After running `pnpm install` and `pnpm build`, you must then run: `cd diagrams-demo-gallery && pnpm run start`
 
 ## Building from source
 
