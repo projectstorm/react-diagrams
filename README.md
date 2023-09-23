@@ -70,7 +70,7 @@ yarn add @projectstorm/react-diagrams-routing
 
 ## How to use
 
-Before running any of the examples, please run `yarn build` in the root. This project is a monorepo, and the packages (including the demos) require the packages to first be built.
+Before running any of the examples, please run `pnpm build` in the root. This project is a monorepo, and the packages (including the demos) require the packages to first be built.
 
 
 Take a look at the [diagram demos](https://github.com/projectstorm/react-diagrams/tree/master/diagrams-demo-gallery/demos)
