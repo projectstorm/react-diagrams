@@ -1,5 +1,11 @@
 # @projectstorm/geometry
 
+## 7.0.2
+
+### Patch Changes
+
+- 66c687a: Upgrade all dependencies and fix Storybook after upgrade
+
 ## 7.0.1
 
 ### Patch Changes
