@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "pnpm storybook dev",
-    "storybook:build": "./node_modules/.bin/build-storybook -c .storybook -o .out"
+    "storybook:build": "pnpm storybook build -c .storybook -o .out"
   },
   "keywords": [
     "web",
