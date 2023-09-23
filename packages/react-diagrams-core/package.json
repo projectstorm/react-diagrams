@@ -31,7 +31,7 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@emotion/styled": "^11.10.5",
+		"@emotion/styled": "^11.11.0",
 		"@projectstorm/geometry": "workspace:*",
 		"@projectstorm/react-canvas-core": "workspace:*",
 		"lodash": "^4.17.21",
@@ -39,7 +39,7 @@
 		"resize-observer-polyfill": "^1.5.1"
 	},
 	"devDependencies": {
-		"@types/react": "^18.0.27",
-		"@types/lodash": "^4.14.191"
+		"@types/react": "^18.2.22",
+		"@types/lodash": "^4.14.199"
 	}
 }
