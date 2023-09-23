@@ -89,7 +89,7 @@ After running `pnpm install` and `pnpm build`, you must then run: `cd diagrams-d
 
 ## Building from source
 
-Simply run `yarn` then `yarn build` or `yarn build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
+Simply run `pnpm` then `pnpm build` or `pnpm build:prod` in the root directory and it will spit out the transpiled code and typescript definitions into the dist directory as a single file.
 
 ## Built with react-diagrams
 
