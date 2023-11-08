@@ -1,4 +1,8 @@
-import * as _ from 'lodash';
+import _filter from 'lodash/filter';
+import _flatMap from 'lodash/flatMap';
+import _forEach from 'lodash/forEach';
+import _map from 'lodash/map';
+import _values from 'lodash/values';
 import {
 	BaseEntity,
 	BaseEntityEvent,
@@ -47,26 +51,26 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 	}
 
 	getSelectionEntities(): BaseModel[] {
-		return _.flatMap(this.layers, (layer) => {
+		return _flatMap(this.layers, (layer) => {
 			return layer.getSelectionEntities();
 		});
 	}
 
 	getSelectedEntities(): BaseModel[] {
-		return _.filter(this.getSelectionEntities(), (ob) => {
+		return _filter(this.getSelectionEntities(), (ob) => {
 			return ob.isSelected();
 		});
 	}
 
 	clearSelection() {
-		_.forEach(this.getSelectedEntities(), (element) => {
+		_forEach(this.getSelectedEntities(), (element) => {
 			element.setSelected(false);
 		});
 	}
 
 	getModels(): BaseModel[] {
-		return _.flatMap(this.layers, (layer) => {
-			return _.values(layer.getModels());
+		return _flatMap(this.layers, (layer) => {
+			return _values(layer.getModels());
 		});
 	}
 
@@ -144,7 +148,7 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 		this.options.offsetY = event.data.offsetY;
 		this.options.zoom = event.data.zoom;
 		this.options.gridSize = event.data.gridSize;
-		_.forEach(event.data.layers, (layer) => {
+		_forEach(event.data.layers, (layer) => {
 			const layerOb = event.engine.getFactoryForLayer(layer.type).generateModel({
 				initialConfig: layer
 			});
@@ -163,7 +167,7 @@ export class CanvasModel<G extends CanvasModelGenerics = CanvasModelGenerics> ex
 			offsetY: this.options.offsetY,
 			zoom: this.options.zoom,
 			gridSize: this.options.gridSize,
-			layers: _.map(this.layers, (layer) => {
+			layers: _map(this.layers, (layer) => {
 				return layer.serialize();
 			})
 		};

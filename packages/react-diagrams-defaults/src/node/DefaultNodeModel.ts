@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _map from 'lodash/map';
 import { NodeModel, NodeModelGenerics, PortModelAlignment } from '@projectstorm/react-diagrams-core';
 import { DefaultPortModel } from '../port/DefaultPortModel';
 import { BasePositionModelOptions, DeserializeEvent } from '@projectstorm/react-canvas-core';
@@ -94,10 +94,10 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 		super.deserialize(event);
 		this.options.name = event.data.name;
 		this.options.color = event.data.color;
-		this.portsIn = _.map(event.data.portsInOrder, (id) => {
+		this.portsIn = _map(event.data.portsInOrder, (id) => {
 			return this.getPortFromID(id);
 		}) as DefaultPortModel[];
-		this.portsOut = _.map(event.data.portsOutOrder, (id) => {
+		this.portsOut = _map(event.data.portsOutOrder, (id) => {
 			return this.getPortFromID(id);
 		}) as DefaultPortModel[];
 	}
@@ -107,10 +107,10 @@ export class DefaultNodeModel extends NodeModel<DefaultNodeModelGenerics> {
 			...super.serialize(),
 			name: this.options.name,
 			color: this.options.color,
-			portsInOrder: _.map(this.portsIn, (port) => {
+			portsInOrder: _map(this.portsIn, (port) => {
 				return port.getID();
 			}),
-			portsOutOrder: _.map(this.portsOut, (port) => {
+			portsOutOrder: _map(this.portsOut, (port) => {
 				return port.getID();
 			})
 		};

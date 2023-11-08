@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as _ from 'lodash';
+import _map from 'lodash/map';
 import { NodeModel } from '../node/NodeModel';
 import { NodeWidget } from '../node/NodeWidget';
 import { NodeLayerModel } from './NodeLayerModel';
@@ -14,7 +14,7 @@ export class NodeLayerWidget extends React.Component<NodeLayerWidgetProps> {
 	render() {
 		return (
 			<>
-				{_.map(this.props.layer.getNodes(), (node: NodeModel) => {
+				{_map(this.props.layer.getNodes(), (node: NodeModel) => {
 					return <NodeWidget key={node.getID()} diagramEngine={this.props.engine} node={node} />;
 				})}
 			</>

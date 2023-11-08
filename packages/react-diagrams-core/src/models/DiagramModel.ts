@@ -1,4 +1,8 @@
-import * as _ from 'lodash';
+import _filter from 'lodash/filter';
+import _flatMap from 'lodash/flatMap';
+import _forEach from 'lodash/forEach';
+import _some from 'lodash/some';
+import _values from 'lodash/values';
 import { LinkModel } from '../entities/link/LinkModel';
 import { NodeModel } from '../entities/node/NodeModel';
 import {
@@ -49,13 +53,13 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	getLinkLayers(): LinkLayerModel[] {
-		return _.filter(this.layers, (layer) => {
+		return _filter(this.layers, (layer) => {
 			return layer instanceof LinkLayerModel;
 		}) as LinkLayerModel[];
 	}
 
 	getNodeLayers(): NodeLayerModel[] {
-		return _.filter(this.layers, (layer) => {
+		return _filter(this.layers, (layer) => {
 			return layer instanceof NodeLayerModel;
 		}) as NodeLayerModel[];
 	}
@@ -103,7 +107,7 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	addAll(...models: BaseModel[]): BaseModel[] {
-		_.forEach(models, (model) => {
+		_forEach(models, (model) => {
 			if (model instanceof LinkModel) {
 				this.addLink(model);
 			} else if (model instanceof NodeModel) {
@@ -132,7 +136,7 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	removeLink(link: LinkModel) {
-		const removed = _.some(this.getLinkLayers(), (layer) => {
+		const removed = _some(this.getLinkLayers(), (layer) => {
 			return layer.removeModel(link);
 		});
 		if (removed) {
@@ -141,7 +145,7 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	removeNode(node: NodeModel) {
-		const removed = _.some(this.getNodeLayers(), (layer) => {
+		const removed = _some(this.getNodeLayers(), (layer) => {
 			return layer.removeModel(node);
 		});
 		if (removed) {
@@ -150,14 +154,14 @@ export class DiagramModel<G extends DiagramModelGenerics = DiagramModelGenerics>
 	}
 
 	getLinks(): LinkModel[] {
-		return _.flatMap(this.getLinkLayers(), (layer) => {
-			return _.values(layer.getModels());
+		return _flatMap(this.getLinkLayers(), (layer) => {
+			return _values(layer.getModels());
 		});
 	}
 
 	getNodes(): NodeModel[] {
-		return _.flatMap(this.getNodeLayers(), (layer) => {
-			return _.values(layer.getModels());
+		return _flatMap(this.getNodeLayers(), (layer) => {
+			return _values(layer.getModels());
 		});
 	}
 }

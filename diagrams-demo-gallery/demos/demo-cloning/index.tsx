@@ -1,5 +1,5 @@
 import createEngine, { DiagramModel, DefaultNodeModel, LinkModel, NodeModel } from '@projectstorm/react-diagrams';
-import * as _ from 'lodash';
+import _forEach from 'lodash/forEach';
 import * as React from 'react';
 import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { BaseModel, CanvasWidget } from '@projectstorm/react-canvas-core';
@@ -20,7 +20,7 @@ class CloneSelected extends React.Component<any, any> {
 		let model = engine.getModel();
 
 		let itemMap = {};
-		_.forEach(model.getSelectedEntities(), (item: BaseModel<any>) => {
+		_forEach(model.getSelectedEntities(), (item: BaseModel<any>) => {
 			let newItem = item.clone(itemMap);
 
 			// offset the nodes slightly

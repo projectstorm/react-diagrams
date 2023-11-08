@@ -1,13 +1,12 @@
 {
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
 		"outDir": "dist",
 		"rootDir": "src",
 		"sourceMap": true,
 		"declarationDir": "dist/@types",
 		"tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
 	},
-	"include": [
-		"./src"
-	]
+	"include": ["./src"]
 }

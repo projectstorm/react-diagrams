@@ -1,5 +1,5 @@
 import { Point } from './Point';
-import * as _ from 'lodash';
+import _flatMap from 'lodash/flatMap';
 import { Polygon } from './Polygon';
 import { Bounds, BoundsCorner, createEmptyBounds } from './Bounds';
 
@@ -38,7 +38,7 @@ export const boundingBoxFromPoints = (points: Point[]): Bounds => {
 
 export const boundingBoxFromPolygons = (polygons: Polygon[]): Bounds => {
 	return boundingBoxFromPoints(
-		_.flatMap(polygons, (polygon) => {
+		_flatMap(polygons, (polygon) => {
 			return polygon.getPoints();
 		})
 	);

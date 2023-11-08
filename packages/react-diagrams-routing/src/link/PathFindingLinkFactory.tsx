@@ -2,7 +2,16 @@ import * as React from 'react';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
 import { PathFindingLinkWidget } from './PathFindingLinkWidget';
-import * as _ from 'lodash';
+import _cloneDeep from 'lodash/cloneDeep';
+import _concat from 'lodash/concat';
+import _defer from 'lodash/defer';
+import _flatMap from 'lodash/flatMap';
+import _get from 'lodash/get';
+import _minBy from 'lodash/minBy';
+import _maxBy from 'lodash/maxBy';
+import _range from 'lodash/range';
+import _reduce from 'lodash/reduce';
+import _values from 'lodash/values';
 import * as Path from 'paths-js/path';
 import { DefaultLinkFactory } from '@projectstorm/react-diagrams-defaults';
 import {
@@ -54,7 +63,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		});
 		this.listener = engine.registerListener({
 			canvasReady: () => {
-				_.defer(() => {
+				_defer(() => {
 					this.calculateRoutingMatrix();
 					engine.repaintCanvas();
 				});
@@ -112,7 +121,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		const matrixWidth = Math.ceil(canvasWidth / this.ROUTING_SCALING_FACTOR);
 		const matrixHeight = Math.ceil(canvasHeight / this.ROUTING_SCALING_FACTOR);
 
-		this.canvasMatrix = _.range(0, matrixHeight).map(() => {
+		this.canvasMatrix = _range(0, matrixHeight).map(() => {
 			return new Array(matrixWidth).fill(0);
 		});
 	}
@@ -139,7 +148,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		return this.routingMatrix;
 	}
 	calculateRoutingMatrix(): void {
-		const matrix = _.cloneDeep(this.getCanvasMatrix());
+		const matrix = _cloneDeep(this.getCanvasMatrix());
 
 		// nodes need to be marked as blocked points
 		this.markNodes(matrix);
@@ -171,15 +180,15 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 		height: number;
 		vAdjustmentFactor: number;
 	} => {
-		const allNodesCoords = _.values(this.engine.getModel().getNodes()).map((item) => ({
+		const allNodesCoords = _values(this.engine.getModel().getNodes()).map((item) => ({
 			x: item.getX(),
 			width: item.width,
 			y: item.getY(),
 			height: item.height
 		}));
 
-		const allLinks = _.values(this.engine.getModel().getLinks());
-		const allPortsCoords = _.flatMap(allLinks.map((link) => [link.getSourcePort(), link.getTargetPort()]))
+		const allLinks = _values(this.engine.getModel().getLinks());
+		const allPortsCoords = _flatMap(allLinks.map((link) => [link.getSourcePort(), link.getTargetPort()]))
 			.filter((port) => port !== null)
 			.map((item) => ({
 				x: item.getX(),
@@ -187,7 +196,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 				y: item.getY(),
 				height: item.height
 			}));
-		const allPointsCoords = _.flatMap(allLinks.map((link) => link.getPoints())).map((item) => ({
+		const allPointsCoords = _flatMap(allLinks.map((link) => link.getPoints())).map((item) => ({
 			// points don't have width/height, so let's just use 0
 			x: item.getX(),
 			width: 0,
@@ -195,19 +204,19 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 			height: 0
 		}));
 
-		const sumProps = (object, props) => _.reduce(props, (acc, prop) => acc + _.get(object, prop, 0), 0);
+		const sumProps = (object, props) => _reduce(props, (acc, prop) => acc + _get(object, prop, 0), 0);
 
 		const canvas = this.engine.getCanvas() as HTMLDivElement;
-		const concatedCoords = _.concat(allNodesCoords, allPortsCoords, allPointsCoords);
+		const concatedCoords = _concat(allNodesCoords, allPortsCoords, allPointsCoords);
 		const minX =
-			Math.floor(Math.min(_.get(_.minBy(concatedCoords, 'x'), 'x', 0), 0) / this.ROUTING_SCALING_FACTOR) *
+			Math.floor(Math.min(_get(_minBy(concatedCoords, 'x'), 'x', 0), 0) / this.ROUTING_SCALING_FACTOR) *
 			this.ROUTING_SCALING_FACTOR;
-		const maxXElement = _.maxBy(concatedCoords, (item) => sumProps(item, ['x', 'width']));
+		const maxXElement = _maxBy(concatedCoords, (item) => sumProps(item, ['x', 'width']));
 		const maxX = Math.max(sumProps(maxXElement, ['x', 'width']), canvas.offsetWidth);
-		const minYCoords = _.minBy(concatedCoords, 'y');
+		const minYCoords = _minBy(concatedCoords, 'y');
 		const minY =
-			Math.floor(Math.min(_.get(minYCoords, 'y', 0), 0) / this.ROUTING_SCALING_FACTOR) * this.ROUTING_SCALING_FACTOR;
-		const maxYElement = _.maxBy(concatedCoords, (item) => sumProps(item, ['y', 'height']));
+			Math.floor(Math.min(_get(minYCoords, 'y', 0), 0) / this.ROUTING_SCALING_FACTOR) * this.ROUTING_SCALING_FACTOR;
+		const maxYElement = _maxBy(concatedCoords, (item) => sumProps(item, ['y', 'height']));
 		const maxY = Math.max(sumProps(maxYElement, ['y', 'height']), canvas.offsetHeight);
 
 		return {
@@ -222,7 +231,7 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 	 * Updates (by reference) where nodes will be drawn on the matrix passed in.
 	 */
 	markNodes = (matrix: number[][]): void => {
-		_.values(this.engine.getModel().getNodes()).forEach((node) => {
+		_values(this.engine.getModel().getNodes()).forEach((node) => {
 			const startX = Math.floor(node.getX() / this.ROUTING_SCALING_FACTOR);
 			const endX = Math.ceil((node.getX() + node.width) / this.ROUTING_SCALING_FACTOR);
 			const startY = Math.floor(node.getY() / this.ROUTING_SCALING_FACTOR);
@@ -240,8 +249,8 @@ export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkMo
 	 * Updates (by reference) where ports will be drawn on the matrix passed in.
 	 */
 	markPorts = (matrix: number[][]): void => {
-		const allElements = _.flatMap(
-			_.values(this.engine.getModel().getLinks()).map((link) => [].concat(link.getSourcePort(), link.getTargetPort()))
+		const allElements = _flatMap(
+			_values(this.engine.getModel().getLinks()).map((link) => [].concat(link.getSourcePort(), link.getTargetPort()))
 		);
 		allElements
 			.filter((port) => port !== null)

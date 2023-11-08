@@ -1,7 +1,7 @@
 import { CanvasEngine } from '../CanvasEngine';
 import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { SyntheticEvent } from 'react';
-import * as _ from 'lodash';
+import _intersection from 'lodash/intersection';
 
 export interface StateOptions {
 	name: string;
@@ -73,7 +73,7 @@ export abstract class State<E extends CanvasEngine = CanvasEngine> {
 	}
 
 	isKeysFullfilled(keys: string[]) {
-		return _.intersection(this.keys, keys).length === this.keys.length;
+		return _intersection(this.keys, keys).length === this.keys.length;
 	}
 
 	activated(previous: State) {

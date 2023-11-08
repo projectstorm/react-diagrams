@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as _ from 'lodash';
+import _map from 'lodash/map';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { DefaultNodeModel } from './DefaultNodeModel';
 import { DefaultPortLabel } from '../port/DefaultPortLabelWidget';
@@ -74,8 +74,8 @@ export class DefaultNodeWidget extends React.Component<DefaultNodeProps> {
 					<S.TitleName>{this.props.node.getOptions().name}</S.TitleName>
 				</S.Title>
 				<S.Ports>
-					<S.PortsContainer>{_.map(this.props.node.getInPorts(), this.generatePort)}</S.PortsContainer>
-					<S.PortsContainer>{_.map(this.props.node.getOutPorts(), this.generatePort)}</S.PortsContainer>
+					<S.PortsContainer>{_map(this.props.node.getInPorts(), this.generatePort)}</S.PortsContainer>
+					<S.PortsContainer>{_map(this.props.node.getOutPorts(), this.generatePort)}</S.PortsContainer>
 				</S.Ports>
 			</S.Node>
 		);

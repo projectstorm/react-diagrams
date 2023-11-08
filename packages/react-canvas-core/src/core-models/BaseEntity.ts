@@ -1,5 +1,5 @@
 import { Toolkit } from '../Toolkit';
-import * as _ from 'lodash';
+import _cloneDeep from 'lodash/cloneDeep';
 import { CanvasEngine } from '../CanvasEngine';
 import { BaseEvent, BaseListener, BaseObserver } from '../core/BaseObserver';
 import { BaseModel } from './BaseModel';
@@ -62,7 +62,7 @@ export class BaseEntity<T extends BaseEntityGenerics = BaseEntityGenerics> exten
 		if (lookupTable[this.options.id]) {
 			return lookupTable[this.options.id];
 		}
-		let clone = _.cloneDeep(this);
+		let clone = _cloneDeep(this);
 		clone.options = {
 			...this.options,
 			id: Toolkit.UID()
