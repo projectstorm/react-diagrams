@@ -2,8 +2,9 @@ import { State } from '../core-state/State';
 import { Action, ActionEvent, InputType } from '../core-actions/Action';
 import { SelectionBoxState } from './SelectionBoxState';
 import { MouseEvent } from 'react';
+import { CanvasEngine } from '../CanvasEngine';
 
-export class SelectingState extends State {
+export class SelectingState<E extends CanvasEngine = CanvasEngine> extends State<E> {
 	constructor() {
 		super({
 			name: 'selecting'

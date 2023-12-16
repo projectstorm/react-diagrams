@@ -1,3 +1,4 @@
+import { CanvasEngine } from '../CanvasEngine';
 import { AbstractDisplacementState, AbstractDisplacementStateEvent } from '../core-state/AbstractDisplacementState';
 import { State } from '../core-state/State';
 
@@ -8,7 +9,7 @@ export interface DragCanvasStateOptions {
 	allowDrag?: boolean;
 }
 
-export class DragCanvasState extends AbstractDisplacementState {
+export class DragCanvasState<E extends CanvasEngine = CanvasEngine> extends AbstractDisplacementState<E> {
 	// store this as we drag the canvas
 	initialCanvasX: number;
 	initialCanvasY: number;

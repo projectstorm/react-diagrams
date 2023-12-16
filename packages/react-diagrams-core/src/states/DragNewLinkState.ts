@@ -22,7 +22,7 @@ export interface DragNewLinkStateOptions {
 	allowLinksFromLockedPorts?: boolean;
 }
 
-export class DragNewLinkState extends AbstractDisplacementState<DiagramEngine> {
+export class DragNewLinkState<E extends DiagramEngine = DiagramEngine> extends AbstractDisplacementState<E> {
 	port: PortModel;
 	link: LinkModel;
 	config: DragNewLinkStateOptions;
