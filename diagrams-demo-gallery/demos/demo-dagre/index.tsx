@@ -7,7 +7,7 @@ import createEngine, {
 	DiagramEngine,
 	PathFindingLinkFactory
 } from '@projectstorm/react-diagrams';
-import * as React from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
@@ -33,72 +33,82 @@ function connectNodes(nodeFrom, nodeTo, engine: DiagramEngine) {
 /**
  * Tests auto distribution
  */
-class DemoWidget extends React.Component<{ model: DiagramModel; engine: DiagramEngine }, any> {
-	engine: DagreEngine;
+function genDagreEngine() {
+	return new DagreEngine({
+		graph: {
+			rankdir: 'RL',
+			ranker: 'longest-path',
+			marginx: 25,
+			marginy: 25
+		},
+		includeLinks: true,
+		nodeMargin: 25
+	});
+}
 
-	constructor(props) {
-		super(props);
-		this.engine = new DagreEngine({
-			graph: {
-				rankdir: 'RL',
-				ranker: 'longest-path',
-				marginx: 25,
-				marginy: 25
-			},
-			includeLinks: true,
-			nodeMargin: 25
-		});
-	}
+function autoDistribute(engine: DiagramEngine) {
+	const model = engine.getModel();
 
-	autoDistribute = () => {
-		this.engine.redistribute(this.props.model);
+	const dagreEngine = genDagreEngine();
+	dagreEngine.redistribute(model);
 
-		// only happens if pathfing is enabled (check line 25)
-		this.reroute();
-		this.props.engine.repaintCanvas();
-	};
+	reroute(engine);
+	engine.repaintCanvas();
+}
 
-	autoRefreshLinks = () => {
-		this.engine.refreshLinks(this.props.model);
+function autoRefreshLinks(engine: DiagramEngine) {
+	const model = engine.getModel();
 
-		// only happens if pathfing is enabled (check line 25)
-		this.reroute();
-		this.props.engine.repaintCanvas();
-	};
-	componentDidMount(): void {
-		setTimeout(() => {
-			this.autoDistribute();
-		}, 500);
-	}
+	const dagreEngine = genDagreEngine();
+	dagreEngine.refreshLinks(model);
 
-	reroute() {
-		this.props.engine
+	// only happens if pathfing is enabled (check line 29)
+	reroute(engine);
+	engine.repaintCanvas();
+}
+
+function reroute(engine: DiagramEngine) {
+		engine
 			.getLinkFactories()
 			.getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME)
 			.calculateRoutingMatrix();
+}
+
+function DemoWidget(props) {
+	const engine = props.engine;
+
+	useLayoutEffect(() => {
+		autoDistribute(engine);
+	}, []);
+
+	const redistribute = () => {
+		autoDistribute(engine);
 	}
 
-	render() {
-		return (
-			<DemoWorkspaceWidget
-				buttons={
-					<div>
-						<DemoButton onClick={this.autoDistribute}>Re-distribute</DemoButton>
-						<DemoButton onClick={this.autoRefreshLinks}>Refresh Links</DemoButton>
-					</div>
-				}
-			>
-				<DemoCanvasWidget>
-					<CanvasWidget engine={this.props.engine} />
-				</DemoCanvasWidget>
-			</DemoWorkspaceWidget>
-		);
+	const refreshLinks = () => {
+		autoRefreshLinks(engine);
 	}
+
+	return (
+		<DemoWorkspaceWidget
+			buttons={
+				<div>
+					<DemoButton onClick={redistribute}>Re-distribute</DemoButton>
+					<DemoButton onClick={refreshLinks}>Refresh Links</DemoButton>
+				</div>
+			}
+		>
+			<DemoCanvasWidget>
+				<CanvasWidget engine={engine} />
+			</DemoCanvasWidget>
+		</DemoWorkspaceWidget>
+	);
 }
 
 export default () => {
 	//1) setup the diagram engine
-	let engine = createEngine();
+	const engineRef = useRef(createEngine());
+	let engine = engineRef.current;
 
 	//2) setup the diagram model
 	let model = new DiagramModel();
