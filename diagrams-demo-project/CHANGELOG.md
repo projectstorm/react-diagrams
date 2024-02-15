@@ -1,5 +1,11 @@
 # @projectstorm/react-diagrams-demo
 
+## 7.0.4
+
+### Patch Changes
+
+- @projectstorm/react-diagrams@7.0.4
+
 ## 7.0.3
 
 ### Patch Changes

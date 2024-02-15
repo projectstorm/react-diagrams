@@ -1,5 +1,17 @@
 # @projectstorm/react-diagrams-defaults
 
+## 7.1.3
+
+### Patch Changes
+
+- 20766f5: fix default link widget with react strict mode
+- 80285fe: refactor: update lodash imports to use individual functions
+- Updated dependencies [09ed60f]
+- Updated dependencies [80285fe]
+  - @projectstorm/react-canvas-core@7.0.3
+  - @projectstorm/react-diagrams-core@7.0.3
+  - @projectstorm/geometry@7.0.3
+
 ## 7.1.2
 
 ### Patch Changes

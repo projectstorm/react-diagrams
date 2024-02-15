@@ -1,5 +1,22 @@
 # @projectstorm/react-diagrams-gallery
 
+## 7.2.0
+
+### Minor Changes
+
+- 1be4073: Remove setTimeout from demo-dagre to avoid layout breaks
+
+### Patch Changes
+
+- 80285fe: refactor: update lodash imports to use individual functions
+- Updated dependencies [09ed60f]
+- Updated dependencies [20766f5]
+- Updated dependencies [80285fe]
+  - @projectstorm/react-canvas-core@7.0.3
+  - @projectstorm/react-diagrams-core@7.0.3
+  - @projectstorm/react-diagrams-defaults@7.1.3
+  - @projectstorm/react-diagrams@7.0.4
+
 ## 7.1.2
 
 ### Patch Changes
