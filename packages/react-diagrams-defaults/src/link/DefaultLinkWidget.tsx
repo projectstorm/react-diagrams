@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagrams-core';
+import * as React from 'react';
+import { MouseEvent, useEffect, useRef } from 'react';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkPointWidget } from './DefaultLinkPointWidget';
 import { DefaultLinkSegmentWidget } from './DefaultLinkSegmentWidget';
-import { MouseEvent } from 'react';
 
 export interface DefaultLinkProps {
 	link: DefaultLinkModel;
@@ -13,150 +13,120 @@ export interface DefaultLinkProps {
 	selected?: (event: MouseEvent) => any;
 }
 
-export interface DefaultLinkState {
-	selected: boolean;
-}
+export const DefaultLinkWidget: React.FC<DefaultLinkProps> = (props) => {
+	const [selected, setSelected] = React.useState(false);
+	const refPaths = useRef<React.RefObject<SVGPathElement>[]>([]);
 
-export class DefaultLinkWidget extends React.Component<DefaultLinkProps, DefaultLinkState> {
-	refPaths: React.RefObject<SVGPathElement>[];
+	const renderPoints = () => {
+		return props.renderPoints ?? true;
+	};
 
-	constructor(props: DefaultLinkProps) {
-		super(props);
-		this.refPaths = [];
-		this.state = {
-			selected: false
+	useEffect(() => {
+		props.link.setRenderedPaths(refPaths.current.map((ref) => ref.current).filter(Boolean) as SVGPathElement[]);
+		return () => {
+			props.link.setRenderedPaths([]);
 		};
-	}
+	}, [props.link]);
 
-	renderPoints() {
-		return this.props.renderPoints ?? true;
-	}
+	const generateRef = () => {
+		const ref = React.createRef<SVGPathElement>();
+		refPaths.current.push(ref);
+		return ref;
+	};
 
-	componentDidUpdate(): void {
-		this.props.link.setRenderedPaths(
-			this.refPaths.map((ref) => {
-				return ref.current;
-			})
-		);
-	}
-
-	componentDidMount(): void {
-		this.props.link.setRenderedPaths(
-			this.refPaths.map((ref) => {
-				return ref.current;
-			})
-		);
-	}
-
-	componentWillUnmount(): void {
-		this.props.link.setRenderedPaths([]);
-	}
-
-	addPointToLink(event: MouseEvent, index: number) {
+	const addPointToLink = (event: MouseEvent, index: number) => {
 		if (
 			!event.shiftKey &&
-			!this.props.link.isLocked() &&
-			this.props.link.getPoints().length - 1 <= this.props.diagramEngine.getMaxNumberPointsPerLink()
+			!props.link.isLocked() &&
+			props.link.getPoints().length - 1 <= props.diagramEngine.getMaxNumberPointsPerLink()
 		) {
-			const position = this.props.diagramEngine.getRelativeMousePoint(event);
-			const point = this.props.link.point(position.x, position.y, index);
+			const position = props.diagramEngine.getRelativeMousePoint(event);
+			const point = props.link.point(position.x, position.y, index);
 			event.persist();
 			event.stopPropagation();
-			this.forceUpdate(() => {
-				this.props.diagramEngine.getActionEventBus().fireAction({
-					event,
-					model: point
-				});
+			props.diagramEngine.getActionEventBus().fireAction({
+				event,
+				model: point
 			});
 		}
-	}
+	};
 
-	generatePoint(point: PointModel): JSX.Element {
+	const generatePoint = (point: PointModel): JSX.Element => {
 		return (
 			<DefaultLinkPointWidget
 				key={point.getID()}
 				point={point as any}
-				colorSelected={this.props.link.getOptions().selectedColor}
-				color={this.props.link.getOptions().color}
+				colorSelected={props.link.getOptions().selectedColor ?? ''}
+				color={props.link.getOptions().color}
 			/>
 		);
-	}
+	};
 
-	generateLink(path: string, extraProps: any, id: string | number): JSX.Element {
-		const ref = React.createRef<SVGPathElement>();
-		this.refPaths.push(ref);
+	const generateLink = (path: string, extraProps: any, id: string | number): JSX.Element => {
 		return (
 			<DefaultLinkSegmentWidget
 				key={`link-${id}`}
 				path={path}
-				selected={this.state.selected}
-				diagramEngine={this.props.diagramEngine}
-				factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
-				link={this.props.link}
-				forwardRef={ref}
-				onSelection={(selected) => {
-					this.setState({ selected: selected });
-				}}
+				selected={selected}
+				diagramEngine={props.diagramEngine}
+				factory={props.diagramEngine.getFactoryForLink(props.link)}
+				link={props.link}
+				forwardRef={generateRef()}
+				onSelection={setSelected}
 				extras={extraProps}
 			/>
 		);
-	}
+	};
 
-	render() {
-		//ensure id is present for all points on the path
-		var points = this.props.link.getPoints();
-		var paths = [];
-		this.refPaths = [];
+	const points = props.link.getPoints();
+	const paths = [];
+	refPaths.current = []; // Reset the refPaths for the current render
 
-		if (points.length === 2) {
+	if (points.length === 2) {
+		paths.push(
+			generateLink(
+				props.link.getSVGPath(),
+				{
+					onMouseDown: (event: MouseEvent) => {
+						props.selected?.(event);
+						addPointToLink(event, 1);
+					}
+				},
+				'0'
+			)
+		);
+
+		if (props.link.getTargetPort() == null) {
+			paths.push(generatePoint(points[1]));
+		}
+	} else {
+		for (let j = 0; j < points.length - 1; j++) {
 			paths.push(
-				this.generateLink(
-					this.props.link.getSVGPath(),
+				generateLink(
+					LinkWidget.generateLinePath(points[j], points[j + 1]),
 					{
-						onMouseDown: (event) => {
-							this.props.selected?.(event);
-							this.addPointToLink(event, 1);
+						'data-linkid': props.link.getID(),
+						'data-point': j,
+						onMouseDown: (event: MouseEvent) => {
+							props.selected?.(event);
+							addPointToLink(event, j + 1);
 						}
 					},
-					'0'
+					j
 				)
 			);
-
-			// draw the link as dangeling
-			if (this.props.link.getTargetPort() == null) {
-				paths.push(this.generatePoint(points[1]));
-			}
-		} else {
-			//draw the multiple anchors and complex line instead
-			for (let j = 0; j < points.length - 1; j++) {
-				paths.push(
-					this.generateLink(
-						LinkWidget.generateLinePath(points[j], points[j + 1]),
-						{
-							'data-linkid': this.props.link.getID(),
-							'data-point': j,
-							onMouseDown: (event: MouseEvent) => {
-								this.props.selected?.(event);
-								this.addPointToLink(event, j + 1);
-							}
-						},
-						j
-					)
-				);
-			}
-
-			if (this.renderPoints()) {
-				//render the circles
-				for (let i = 1; i < points.length - 1; i++) {
-					paths.push(this.generatePoint(points[i]));
-				}
-
-				if (this.props.link.getTargetPort() == null) {
-					paths.push(this.generatePoint(points[points.length - 1]));
-				}
-			}
 		}
 
-		return <g data-default-link-test={this.props.link.getOptions().testName}>{paths}</g>;
+		if (renderPoints()) {
+			for (let i = 1; i < points.length - 1; i++) {
+				paths.push(generatePoint(points[i]));
+			}
+
+			if (props.link.getTargetPort() == null) {
+				paths.push(generatePoint(points[points.length - 1]));
+			}
+		}
 	}
-}
+
+	return <g data-default-link-test={props.link.getOptions().testName}>{paths}</g>;
+};
