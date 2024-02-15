@@ -1,7 +1,12 @@
 import { DiagramModel, PointModel } from '@projectstorm/react-diagrams-core';
 import * as dagre from 'dagre';
 import { GraphLabel } from 'dagre';
-import * as _ from 'lodash';
+import _every from 'lodash/every';
+import _findIndex from 'lodash/findIndex';
+import _forEach from 'lodash/forEach';
+import _map from 'lodash/map';
+import _range from 'lodash/range';
+import _sortBy from 'lodash/sortBy';
 import { Point } from '@projectstorm/geometry';
 
 export interface DagreEngineOptions {
@@ -32,11 +37,11 @@ export class DagreEngine {
 		});
 
 		// set nodes
-		_.forEach(model.getNodes(), (node) => {
+		_forEach(model.getNodes(), (node) => {
 			g.setNode(node.getID(), { width: node.width, height: node.height });
 		});
 
-		_.forEach(model.getLinks(), (link) => {
+		_forEach(model.getLinks(), (link) => {
 			// set edges
 			if (link.getSourcePort() && link.getTargetPort()) {
 				g.setEdge({
@@ -82,11 +87,11 @@ export class DagreEngine {
 		const chunks: { [id: number]: { [id: number]: boolean } } = {}; // true: occupied, false: blank
 		const NodeXColumnIndexDictionary: { [id: number]: number } = {};
 		let verticalLines: number[] = [];
-		_.forEach(nodes, (node) => {
+		_forEach(nodes, (node) => {
 			// find vertical lines. vertical lines go through maximum number of nodes located under each other.
 			const nodeColumnCenter = node.getX() + node.width / 2;
 			if (
-				_.every(verticalLines, (vLine) => {
+				_every(verticalLines, (vLine) => {
 					return Math.abs(nodeColumnCenter - vLine) > nodeMargin;
 				})
 			) {
@@ -96,29 +101,29 @@ export class DagreEngine {
 
 		// sort chunk columns
 		verticalLines = verticalLines.sort((a, b) => a - b);
-		_.forEach(verticalLines, (line, index) => {
+		_forEach(verticalLines, (line, index) => {
 			chunks[index] = {};
 			chunks[index + 0.5] = {};
 		});
 
 		// set occupied chunks
-		_.forEach(nodes, (node) => {
+		_forEach(nodes, (node) => {
 			const nodeColumnCenter = node.getX() + node.width / 2;
 			const startChunkIndex = Math.floor(node.getY() / nodeMargin);
 			const endChunkIndex = Math.floor((node.getY() + node.height) / nodeMargin);
 			// find max ChunkRowIndex
 			if (endChunkIndex > maxChunkRowIndex) maxChunkRowIndex = endChunkIndex;
-			const nodeColumnIndex = _.findIndex(verticalLines, (vLine) => {
+			const nodeColumnIndex = _findIndex(verticalLines, (vLine) => {
 				return Math.abs(nodeColumnCenter - vLine) <= nodeMargin;
 			});
-			_.forEach(_.range(startChunkIndex, endChunkIndex + 1), (chunkIndex) => {
+			_forEach(_range(startChunkIndex, endChunkIndex + 1), (chunkIndex) => {
 				chunks[nodeColumnIndex][chunkIndex] = true;
 			});
 			NodeXColumnIndexDictionary[node.getX()] = nodeColumnIndex;
 		});
 
 		// sort links based on their distances
-		const edges = _.map(links, (link) => {
+		const edges = _map(links, (link) => {
 			if (link.getSourcePort() && link.getTargetPort()) {
 				const source = link.getSourcePort().getNode();
 				const target = link.getTargetPort().getNode();
@@ -146,18 +151,18 @@ export class DagreEngine {
 					  };
 			}
 		});
-		const sortedEdges = _.sortBy(edges, (link) => {
+		const sortedEdges = _sortBy(edges, (link) => {
 			return Math.abs(link.targetIndex - link.sourceIndex);
 		});
 
 		// set link points
 		if (this.options.includeLinks) {
-			_.forEach(sortedEdges, (edge) => {
+			_forEach(sortedEdges, (edge) => {
 				const link = diagram.getLink(edge.link.getID());
 				// re-draw
 				if (Math.abs(edge.sourceIndex - edge.targetIndex) > 1) {
 					// get the length of link in column
-					const columns = _.range(edge.sourceIndex - 1, edge.targetIndex);
+					const columns = _range(edge.sourceIndex - 1, edge.targetIndex);
 
 					const chunkIndex = Math.floor(edge.sourceY / nodeMargin);
 					const targetChunkIndex = Math.floor(edge.targetY / nodeMargin);
@@ -167,7 +172,7 @@ export class DagreEngine {
 					let aboveRowIndex = chunkIndex;
 					for (; aboveRowIndex >= 0; aboveRowIndex--, northCost++) {
 						if (
-							_.every(columns, (columnIndex) => {
+							_every(columns, (columnIndex) => {
 								return !(
 									chunks[columnIndex][aboveRowIndex] ||
 									chunks[columnIndex + 0.5][aboveRowIndex] ||
@@ -184,7 +189,7 @@ export class DagreEngine {
 					let belowRowIndex = chunkIndex;
 					for (; belowRowIndex <= maxChunkRowIndex; belowRowIndex++, southCost++) {
 						if (
-							_.every(columns, (columnIndex) => {
+							_every(columns, (columnIndex) => {
 								return !(
 									chunks[columnIndex][belowRowIndex] ||
 									chunks[columnIndex + 0.5][belowRowIndex] ||
@@ -213,7 +218,7 @@ export class DagreEngine {
 						})
 					);
 
-					_.forEach(columns, (column) => {
+					_forEach(columns, (column) => {
 						points.push(
 							new PointModel({
 								link: link,

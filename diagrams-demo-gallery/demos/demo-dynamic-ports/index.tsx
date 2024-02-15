@@ -1,5 +1,5 @@
 import createEngine, { DiagramModel, DefaultNodeModel, DiagramEngine } from '@projectstorm/react-diagrams';
-import * as _ from 'lodash';
+import _values from 'lodash/values';
 import * as React from 'react';
 import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
@@ -7,7 +7,7 @@ import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
 class CloneSelected extends React.Component<{ model: DiagramModel; engine: DiagramEngine }, any> {
 	addPorts = () => {
-		const nodes: DefaultNodeModel[] = _.values(this.props.model.getNodes()) as DefaultNodeModel[];
+		const nodes: DefaultNodeModel[] = _values(this.props.model.getNodes()) as DefaultNodeModel[];
 		for (let node of nodes) {
 			if (node.getOptions().name === 'Node 2') {
 				node.addInPort(`in-${node.getInPorts().length + 1}`, false);

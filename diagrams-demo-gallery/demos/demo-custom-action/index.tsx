@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as _ from 'lodash';
+import _forEach from 'lodash/forEach';
 import createEngine, { DiagramModel, DefaultNodeModel, DefaultLinkModel } from '@projectstorm/react-diagrams';
 import { CanvasWidget, Action, ActionEvent, InputType } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
@@ -26,7 +26,7 @@ class CustomDeleteItemsAction extends Action {
 						const confirm = window.confirm('Are you sure you want to delete?');
 
 						if (confirm) {
-							_.forEach(selectedEntities, (model) => {
+							_forEach(selectedEntities, (model) => {
 								// only delete items which are not locked
 								if (!model.isLocked()) {
 									model.remove();

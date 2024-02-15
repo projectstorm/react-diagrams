@@ -2,6 +2,7 @@
 	"compileOnSave": false,
 	"compilerOptions": {
 		"suppressExcessPropertyErrors": true,
+		"esModuleInterop": true,
 		"declaration": true,
 		"composite": true,
 		"incremental": true,

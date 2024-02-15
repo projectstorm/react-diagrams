@@ -1,6 +1,7 @@
 import { Action, ActionEvent, InputType } from './Action';
 import { KeyboardEvent, MouseEvent } from 'react';
-import * as _ from 'lodash';
+import _filter from 'lodash/filter';
+import _keys from 'lodash/keys';
 import { CanvasEngine } from '../CanvasEngine';
 import { BaseModel } from '../core-models/BaseModel';
 
@@ -16,7 +17,7 @@ export class ActionEventBus {
 	}
 
 	getKeys(): string[] {
-		return _.keys(this.keys);
+		return _keys(this.keys);
 	}
 
 	registerAction(action: Action): () => void {
@@ -33,7 +34,7 @@ export class ActionEventBus {
 	}
 
 	getActionsForType(type: InputType): Action[] {
-		return _.filter(this.actions, (action) => {
+		return _filter(this.actions, (action) => {
 			return action.options.type === type;
 		});
 	}

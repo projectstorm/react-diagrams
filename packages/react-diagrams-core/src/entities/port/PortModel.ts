@@ -1,6 +1,10 @@
 import { NodeModel } from '../node/NodeModel';
 import { LinkModel } from '../link/LinkModel';
-import * as _ from 'lodash';
+import _forEach from 'lodash/forEach';
+import _isFinite from 'lodash/isFinite';
+import _map from 'lodash/map';
+import _size from 'lodash/size';
+import _values from 'lodash/values';
 import { Point, Rectangle } from '@projectstorm/geometry';
 import {
 	BaseEntityEvent,
@@ -64,7 +68,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 			name: this.options.name,
 			alignment: this.options.alignment,
 			parentNode: this.parent.getID(),
-			links: _.map(this.links, (link) => {
+			links: _map(this.links, (link) => {
 				return link.getID();
 			})
 		};
@@ -75,7 +79,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	setPosition(x, y?) {
 		let old = this.position;
 		super.setPosition(x, y);
-		_.forEach(this.getLinks(), (link) => {
+		_forEach(this.getLinks(), (link) => {
 			let point = link.getPointForPort(this);
 			point.setPosition(point.getX() + x - old.x, point.getY() + y - old.y);
 		});
@@ -115,10 +119,10 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	}
 
 	public createLinkModel(): LinkModel | null {
-		if (_.isFinite(this.options.maximumLinks)) {
-			var numberOfLinks: number = _.size(this.links);
+		if (_isFinite(this.options.maximumLinks)) {
+			var numberOfLinks: number = _size(this.links);
 			if (this.options.maximumLinks === 1 && numberOfLinks >= 1) {
-				return _.values(this.links)[0];
+				return _values(this.links)[0];
 			} else if (numberOfLinks >= this.options.maximumLinks) {
 				return null;
 			}
@@ -127,7 +131,7 @@ export class PortModel<G extends PortModelGenerics = PortModelGenerics> extends 
 	}
 
 	reportPosition() {
-		_.forEach(this.getLinks(), (link) => {
+		_forEach(this.getLinks(), (link) => {
 			link.getPointForPort(this).setPosition(this.getCenter());
 		});
 		this.fireEvent(

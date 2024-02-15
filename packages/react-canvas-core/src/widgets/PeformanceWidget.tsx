@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as _ from 'lodash';
+import _isEqual from 'lodash/isEqual';
 import { BaseModel } from '../core-models/BaseModel';
 
 export interface PeformanceWidgetProps {
@@ -25,7 +25,7 @@ export class PeformanceWidget extends React.Component<PeformanceWidgetProps, Pef
 		}
 
 		// change event
-		return !_.isEqual(this.props.serialized, nextProps.serialized);
+		return !_isEqual(this.props.serialized, nextProps.serialized);
 	}
 
 	render() {

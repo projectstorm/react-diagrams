@@ -1,6 +1,6 @@
 import createEngine, { DiagramModel, DefaultNodeModel, NodeModel } from '@projectstorm/react-diagrams';
 import * as React from 'react';
-import * as _ from 'lodash';
+import _values from 'lodash/values';
 import { DemoButton, DemoWorkspaceWidget } from '../helpers/DemoWorkspaceWidget';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
@@ -30,7 +30,7 @@ class NodeDelayedPosition extends React.Component<any, any> {
 		let str = JSON.stringify(model.serialize());
 		let model2 = new DiagramModel();
 		let obj: ReturnType<DiagramModel['serialize']> = JSON.parse(str);
-		let node: ReturnType<NodeModel['serialize']> = _.values(obj.layers[1].models)[0] as any;
+		let node: ReturnType<NodeModel['serialize']> = _values(obj.layers[1].models)[0] as any;
 		node.x += 30;
 		node.y += 30;
 

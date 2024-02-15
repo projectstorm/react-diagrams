@@ -45,7 +45,7 @@
     "@storybook/react-webpack5": "^7.4.4",
     "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/theming": "^7.4.4",
-    "@types/lodash": "^4.14.199",
+    "@types/lodash": "^4.14.200",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "storybook": "^7.4.4"

@@ -1,5 +1,6 @@
 import { Point } from './Point';
-import * as _ from 'lodash';
+import _forEach from 'lodash/forEach';
+import _map from 'lodash/map';
 import { Matrix } from './Matrix';
 import { boundingBoxFromPoints } from './toolkit';
 import { Bounds, BoundsCorner } from './Bounds';
@@ -12,26 +13,26 @@ export class Polygon {
 	}
 
 	serialize() {
-		return _.map(this.points, (point) => {
+		return _map(this.points, (point) => {
 			return [point.x, point.y];
 		});
 	}
 
 	deserialize(data: any) {
-		this.points = _.map(data, (point) => {
+		this.points = _map(data, (point) => {
 			return new Point(point[0], point[1]);
 		});
 	}
 
 	scale(x, y, origin: Point) {
 		let matrix = Matrix.createScaleMatrix(x, y, origin);
-		_.forEach(this.points, (point) => {
+		_forEach(this.points, (point) => {
 			point.transform(matrix);
 		});
 	}
 
 	transform(matrix: Matrix) {
-		_.forEach(this.points, (point) => {
+		_forEach(this.points, (point) => {
 			point.transform(matrix);
 		});
 	}
@@ -49,13 +50,13 @@ export class Polygon {
 	}
 
 	translate(offsetX: number, offsetY: number) {
-		_.forEach(this.points, (point) => {
+		_forEach(this.points, (point) => {
 			point.translate(offsetX, offsetY);
 		});
 	}
 
 	doClone(ob: this) {
-		this.points = _.map(ob.points, (point) => {
+		this.points = _map(ob.points, (point) => {
 			return point.clone();
 		});
 	}

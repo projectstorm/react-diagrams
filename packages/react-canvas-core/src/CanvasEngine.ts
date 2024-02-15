@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import _debounce from 'lodash/debounce';
 import { CanvasModel } from './entities/canvas/CanvasModel';
 import { FactoryBank } from './core/FactoryBank';
 import { AbstractReactFactory } from './core/AbstractReactFactory';
@@ -148,7 +148,7 @@ export class CanvasEngine<
 		let repaintFn = repaint;
 
 		if (repaintDebounceMs > 0) {
-			repaintFn = debounce(repaint, repaintDebounceMs);
+			repaintFn = _debounce(repaint, repaintDebounceMs);
 		}
 
 		if (promise) {
