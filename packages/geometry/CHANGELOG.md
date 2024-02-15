@@ -1,5 +1,11 @@
 # @projectstorm/geometry
 
+## 7.0.3
+
+### Patch Changes
+
+- 80285fe: refactor: update lodash imports to use individual functions
+
 ## 7.0.2
 
 ### Patch Changes

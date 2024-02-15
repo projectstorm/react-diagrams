@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.0.3
+
+### Patch Changes
+
+- 09ed60f: Allow more derived State classes to provide a generic type
+- 80285fe: refactor: update lodash imports to use individual functions
+- Updated dependencies [09ed60f]
+- Updated dependencies [80285fe]
+  - @projectstorm/react-canvas-core@7.0.3
+  - @projectstorm/geometry@7.0.3
+
 ## 7.0.2
 
 ### Patch Changes
