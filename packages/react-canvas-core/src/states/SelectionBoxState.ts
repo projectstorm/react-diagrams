@@ -4,6 +4,7 @@ import { SelectionLayerModel } from '../entities/selection/SelectionLayerModel';
 import { Point, Rectangle } from '@projectstorm/geometry';
 import { BasePositionModel } from '../core-models/BasePositionModel';
 import { ModelGeometryInterface } from '../core/ModelGeometryInterface';
+import { CanvasEngine } from '../CanvasEngine';
 
 export interface SimpleClientRect {
 	left: number;
@@ -14,7 +15,7 @@ export interface SimpleClientRect {
 	bottom: number;
 }
 
-export class SelectionBoxState extends AbstractDisplacementState {
+export class SelectionBoxState<E extends CanvasEngine = CanvasEngine> extends AbstractDisplacementState<E> {
 	layer: SelectionLayerModel;
 
 	constructor() {

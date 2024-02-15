@@ -6,7 +6,7 @@ import { PortModel } from '../entities/port/PortModel';
 import { MouseEvent } from 'react';
 import { LinkModel } from '../entities/link/LinkModel';
 
-export class DragDiagramItemsState extends MoveItemsState<DiagramEngine> {
+export class DragDiagramItemsState<E extends DiagramEngine = DiagramEngine> extends MoveItemsState<E> {
 	constructor() {
 		super();
 		this.registerAction(
