@@ -68,10 +68,7 @@ function autoRefreshLinks(engine: DiagramEngine) {
 }
 
 function reroute(engine: DiagramEngine) {
-		engine
-			.getLinkFactories()
-			.getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME)
-			.calculateRoutingMatrix();
+	engine.getLinkFactories().getFactory<PathFindingLinkFactory>(PathFindingLinkFactory.NAME).calculateRoutingMatrix();
 }
 
 function DemoWidget(props) {
@@ -83,11 +80,11 @@ function DemoWidget(props) {
 
 	const redistribute = () => {
 		autoDistribute(engine);
-	}
+	};
 
 	const refreshLinks = () => {
 		autoRefreshLinks(engine);
-	}
+	};
 
 	return (
 		<DemoWorkspaceWidget
