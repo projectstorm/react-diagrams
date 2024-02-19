@@ -1,5 +1,11 @@
 # @projectstorm/react-diagrams-gallery
 
+## 7.2.1
+
+### Patch Changes
+
+- adb4415: Fixed the demos
+
 ## 7.2.0
 
 ### Minor Changes
