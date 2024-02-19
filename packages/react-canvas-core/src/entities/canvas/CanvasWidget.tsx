@@ -21,6 +21,7 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 	ref: React.RefObject<HTMLDivElement>;
 	keyUp: any;
 	keyDown: any;
+	blur: any;
 	canvasListener: any;
 
 	constructor(props: DiagramProps) {
@@ -65,9 +66,13 @@ export class CanvasWidget extends React.Component<DiagramProps> {
 		this.keyUp = (event) => {
 			this.props.engine.getActionEventBus().fireAction({ event });
 		};
+		this.blur = () => {
+			this.props.engine.getActionEventBus().clearKeys();
+		};
 
 		document.addEventListener('keyup', this.keyUp);
 		document.addEventListener('keydown', this.keyDown);
+		document.addEventListener('blur', this.blur);
 		this.registerCanvas();
 	}
 
