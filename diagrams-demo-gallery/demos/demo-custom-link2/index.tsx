@@ -11,6 +11,8 @@ import * as React from 'react';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 import { MouseEvent } from 'react';
+import { DefaultLinkPointWidget, DefaultLinkSegmentWidget } from '@projectstorm/react-diagrams-defaults/dist';
+import { DiagramEngine } from '@projectstorm/react-diagrams-core/dist';
 
 export class AdvancedLinkModel extends DefaultLinkModel {
 	constructor() {
@@ -56,7 +58,56 @@ const CustomLinkArrowWidget = (props) => {
 	);
 };
 
-export class AdvancedLinkWidget extends DefaultLinkWidget {
+export interface AdvancedLinkWWidgetProps {
+	link: DefaultLinkModel;
+	diagramEngine: DiagramEngine;
+	pointAdded?: (point: PointModel, event: MouseEvent) => any;
+	renderPoints?: boolean;
+	selected?: (event: MouseEvent) => any;
+}
+
+export class AdvancedLinkWidget extends React.Component<AdvancedLinkWWidgetProps> {
+	generatePoint = (point: PointModel): JSX.Element => {
+		return (
+			<DefaultLinkPointWidget
+				key={point.getID()}
+				point={point as any}
+				colorSelected={this.props.link.getOptions().selectedColor ?? ''}
+				color={this.props.link.getOptions().color}
+			/>
+		);
+	};
+
+	generateLink = (path: string, extraProps: any, id: string | number): JSX.Element => {
+		return (
+			<DefaultLinkSegmentWidget
+				key={`link-${id}`}
+				path={path}
+				diagramEngine={this.props.diagramEngine}
+				factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
+				link={this.props.link}
+				extras={extraProps}
+			/>
+		);
+	};
+
+	addPointToLink = (event: MouseEvent, index: number) => {
+		if (
+			!event.shiftKey &&
+			!this.props.link.isLocked() &&
+			this.props.link.getPoints().length - 1 <= this.props.diagramEngine.getMaxNumberPointsPerLink()
+		) {
+			const position = this.props.diagramEngine.getRelativeMousePoint(event);
+			const point = this.props.link.point(position.x, position.y, index);
+			event.persist();
+			event.stopPropagation();
+			this.props.diagramEngine.getActionEventBus().fireAction({
+				event,
+				model: point
+			});
+		}
+	};
+
 	generateArrow(point: PointModel, previousPoint: PointModel): JSX.Element {
 		return (
 			<CustomLinkArrowWidget
@@ -73,7 +124,6 @@ export class AdvancedLinkWidget extends DefaultLinkWidget {
 		//ensure id is present for all points on the path
 		var points = this.props.link.getPoints();
 		var paths = [];
-		this.refPaths = [];
 
 		//draw the multiple anchors and complex line instead
 		for (let j = 0; j < points.length - 1; j++) {
