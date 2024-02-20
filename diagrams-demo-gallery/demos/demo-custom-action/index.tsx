@@ -4,23 +4,16 @@ import createEngine, { DiagramModel, DefaultNodeModel, DefaultLinkModel } from '
 import { CanvasWidget, Action, ActionEvent, InputType } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../helpers/DemoCanvasWidget';
 
-interface CustomDeleteItemsActionOptions {
-	keyCodes?: number[];
-}
 
 /**
  * Deletes all selected items, but asks for confirmation first
  */
 class CustomDeleteItemsAction extends Action {
-	constructor(options: CustomDeleteItemsActionOptions = {}) {
-		options = {
-			keyCodes: [46, 8],
-			...options
-		};
+	constructor() {
 		super({
 			type: InputType.KEY_DOWN,
 			fire: (event: ActionEvent<React.KeyboardEvent>) => {
-				if (options.keyCodes.indexOf(event.event.keyCode) !== -1) {
+				if (event.event.code === 'Delete') {
 					const selectedEntities = this.engine.getModel().getSelectedEntities();
 					if (selectedEntities.length > 0) {
 						const confirm = window.confirm('Are you sure you want to delete?');
