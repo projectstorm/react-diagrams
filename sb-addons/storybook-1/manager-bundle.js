@@ -1,0 +1,3 @@
+try{
+var l=__STORYBOOKADDONS__,{addons:a,types:p,mockChannel:O}=__STORYBOOKADDONS__;var S=__STORYBOOKTHEMING__,{CacheProvider:b,ClassNames:u,Global:R,ThemeProvider:x,background:k,color:y,convert:C,create:o,createCache:D,createGlobal:N,createReset:B,css:G,darken:K,ensure:Y,ignoreSsrWarning:v,isPropValid:M,jsx:P,keyframes:j,lighten:A,styled:E,themes:H,typography:I,useTheme:w,withTheme:U}=__STORYBOOKTHEMING__;var s=o({base:"dark",brandTitle:"STORM React Diagrams",brandUrl:"https://github.com/projectstorm/react-diagrams"});a.setConfig({theme:s});
+}catch(e){ console.error("[Storybook] One of your manager-entries failed: " + import.meta.url, e); }
