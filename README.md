@@ -94,3 +94,5 @@ Simply run `pnpm` then `pnpm build` or `pnpm build:prod` in the root directory a
 ## Built with react-diagrams
 
 > Do you have an interesting project built with *react-diagrams*? PR it into this section for others to see.
+
+Diagrams for GraphQL schema and query plan: [GraphQL Diagrams](https://github.com/xiaogezhang/graphql-diagrams)
