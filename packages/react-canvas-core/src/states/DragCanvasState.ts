@@ -23,12 +23,13 @@ export class DragCanvasState<E extends CanvasEngine = CanvasEngine> extends Abst
 			allowDrag: true,
 			...options
 		};
+		this.initialCanvasX = 0;
+    this.initialCanvasY = 0;
 	}
 
 	async activated(prev) {
 		super.activated(prev);
 		this.engine.getModel().clearSelection();
-		await this.engine.repaintCanvas(true);
 
 		// we can block layer rendering because we are only targeting the transforms
 		for (let layer of this.engine.getModel().getLayers()) {
@@ -37,6 +38,7 @@ export class DragCanvasState<E extends CanvasEngine = CanvasEngine> extends Abst
 
 		this.initialCanvasX = this.engine.getModel().getOffsetX();
 		this.initialCanvasY = this.engine.getModel().getOffsetY();
+		await this.engine.repaintCanvas(true);
 	}
 
 	deactivated(next: State) {

@@ -7,3 +7,6 @@ dist
 node_modules
 tsconfig.tsbuildinfo
 .vscode
+.npmrc
+yarn.lock
+package-lock.json
