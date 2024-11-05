@@ -188,6 +188,7 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 		//ensure id is present for all points on the path
 		let points = this.props.link.getPoints();
 		let paths = [];
+		this.refPaths = [];
 
 		// Get points based on link orientation
 		let pointLeft = points[0];
@@ -286,7 +287,6 @@ export class RightAngleLinkWidget extends React.Component<RightAngleLinkProps, R
 			);
 		}
 
-		this.refPaths = [];
 		return <g data-default-link-test={this.props.link.getOptions().testName}>{paths}</g>;
 	}
 }
