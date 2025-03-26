@@ -40,5 +40,13 @@
 	"devDependencies": {
 		"@types/lodash": "^4.14.200",
 		"@types/react": "^19.0.12"
+	},
+	"overrides": {
+		"@emotion/react": {
+			"react": "^19.0.0"
+		},
+		"@emotion/styled": {
+			"react": "^19.0.0"
+		}
 	}
 }
