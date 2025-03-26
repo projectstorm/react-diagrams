@@ -1,6 +1,7 @@
 import * as React from 'react';
 import _isEqual from 'lodash/isEqual';
 import { BaseModel } from '../core-models/BaseModel';
+import { JSX } from 'react';
 
 export interface PeformanceWidgetProps {
 	children: () => JSX.Element;

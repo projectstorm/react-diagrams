@@ -3,6 +3,7 @@ import { DefaultNodeModel } from './DefaultNodeModel';
 import { DefaultNodeWidget } from './DefaultNodeWidget';
 import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
+import { JSX } from 'react';
 
 export class DefaultNodeFactory extends AbstractReactFactory<DefaultNodeModel, DiagramEngine> {
 	constructor() {

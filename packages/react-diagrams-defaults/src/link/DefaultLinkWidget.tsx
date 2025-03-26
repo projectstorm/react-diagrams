@@ -1,6 +1,6 @@
 import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagrams-core';
 import * as React from 'react';
-import { MouseEvent, useEffect, useRef } from 'react';
+import { JSX, MouseEvent, useEffect, useRef } from 'react';
 import { DefaultLinkModel } from './DefaultLinkModel';
 import { DefaultLinkPointWidget } from './DefaultLinkPointWidget';
 import { DefaultLinkSegmentWidget } from './DefaultLinkSegmentWidget';

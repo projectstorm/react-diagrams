@@ -31,8 +31,8 @@
     "gsap": "^3.12.2",
     "json-beautify": "^1.1.1",
     "lodash": "^4.17.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
@@ -46,8 +46,8 @@
     "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/theming": "^7.4.4",
     "@types/lodash": "^4.14.200",
-    "@types/react": "^18.2.22",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
     "storybook": "^7.4.4"
   }
 }

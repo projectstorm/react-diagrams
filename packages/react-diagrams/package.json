@@ -30,6 +30,7 @@
 	"typings": "./dist/@types/index",
 	"dependencies": {
 		"@projectstorm/react-canvas-core": "workspace:*",
+		"@projectstorm/react-diagrams": "*",
 		"@projectstorm/react-diagrams-core": "workspace:*",
 		"@projectstorm/react-diagrams-defaults": "workspace:*",
 		"@projectstorm/react-diagrams-routing": "workspace:*"

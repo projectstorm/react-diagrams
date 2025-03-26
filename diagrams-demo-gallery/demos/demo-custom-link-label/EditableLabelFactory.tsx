@@ -4,6 +4,7 @@ import { DiagramEngine } from '@projectstorm/react-diagrams';
 
 import { EditableLabelModel } from './EditableLabelModel';
 import { EditableLabelWidget } from './EditableLabelWidget';
+import { JSX } from 'react';
 
 export class EditableLabelFactory extends AbstractReactFactory<EditableLabelModel, DiagramEngine> {
 	constructor() {

@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 import { css, keyframes } from '@emotion/react';
+import { JSX } from 'react';
 
 namespace S {
 	export const Keyframes = keyframes`

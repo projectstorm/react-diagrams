@@ -3,6 +3,7 @@ import { AbstractReactFactory, GenerateModelEvent, GenerateWidgetEvent } from '@
 import { DiagramEngine } from '../../DiagramEngine';
 import { NodeLayerModel } from './NodeLayerModel';
 import { NodeLayerWidget } from './NodeLayerWidget';
+import { JSX } from 'react';
 
 export class NodeLayerFactory extends AbstractReactFactory<NodeLayerModel, DiagramEngine> {
 	constructor() {
