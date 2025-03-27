@@ -41,8 +41,7 @@ export class DefaultLinkSegmentWidget extends React.Component<DefaultLinkSegment
 			strokeOpacity: this.props.selected ? 0.1 : 0,
 			strokeWidth: 20,
 			fill: 'none',
-			onContextMenu: (event) => {
-				// TODO: check if event still works
+			onContextMenu: () => {
 				if (!this.props.link.isLocked()) {
 					event.preventDefault();
 					this.props.link.remove();
