@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  react: ^19.0.0
+
 importers:
 
   .:
@@ -16,13 +19,13 @@ importers:
         version: 29.5.14
       '@types/node':
         specifier: ^20.6.3
-        version: 20.17.27
+        version: 20.17.28
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+        version: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
       jest-cli:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+        version: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
       prettier:
         specifier: ^3.0.3
         version: 3.5.3
@@ -37,7 +40,7 @@ importers:
         version: 5.3.14(webpack@5.98.0(webpack-cli@5.1.4))
       ts-jest:
         specifier: ^29.1.1
-        version: 29.3.0(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0))(typescript@5.8.2)
+        version: 29.3.0(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0))(typescript@5.8.2)
       ts-loader:
         specifier: ^9.4.4
         version: 9.5.2(typescript@5.8.2)(webpack@5.98.0(webpack-cli@5.1.4))
@@ -98,7 +101,7 @@ importers:
         version: 7.27.0(@babel/core@7.26.10)
       '@storybook/addon-actions':
         specifier: ^8.6.9
-        version: 8.6.9(storybook@8.6.9(prettier@3.5.3))
+        version: 8.6.10(storybook@8.6.10(prettier@3.5.3))
       '@storybook/addon-options':
         specifier: ^5.3.21
         version: 5.3.21(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(regenerator-runtime@0.14.1)
@@ -107,16 +110,16 @@ importers:
         version: 7.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@storybook/react':
         specifier: ^8.6.9
-        version: 8.6.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)
+        version: 8.6.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/react-webpack5':
         specifier: ^8.6.9
-        version: 8.6.9(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
+        version: 8.6.10(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
       '@storybook/storybook-deployer':
         specifier: ^2.8.16
         version: 2.8.16
       '@storybook/theming':
         specifier: ^8.6.9
-        version: 8.6.9(storybook@8.6.9(prettier@3.5.3))
+        version: 8.6.10(storybook@8.6.10(prettier@3.5.3))
       '@types/lodash':
         specifier: ^4.14.200
         version: 4.17.16
@@ -128,7 +131,7 @@ importers:
         version: 19.0.4(@types/react@19.0.12)
       storybook:
         specifier: ^8.6.9
-        version: 8.6.9(prettier@3.5.3)
+        version: 8.6.10(prettier@3.5.3)
 
   diagrams-demo-project:
     dependencies:
@@ -1023,7 +1026,7 @@ packages:
   '@emotion/core@10.3.1':
     resolution: {integrity: sha512-447aUEjPIm0MnE6QYIaFz9VQOHSXf4Iu6EWOIqq11EAPqinkSZmfymPTmlOE3QjLv846lH4JVZBUOtwGbuQoww==}
     peerDependencies:
-      react: '>=16.3.0'
+      react: ^19.0.0
 
   '@emotion/css@10.0.27':
     resolution: {integrity: sha512-6wZjsvYeBhyZQYNrGoR5yPMYbMBNEnanDrqmsqS1mzDm1cOTu12shvl2j4QHNS36UaTE0USIJawCH9C8oW34Zw==}
@@ -1050,7 +1053,7 @@ packages:
     resolution: {integrity: sha512-O000MLDBDdk/EohJPFUqvnp4qnHeYkVP5B0xEG0D/L7cOKP9kefu2DXn8dj74cQfsEzUqh+sr1RzFqiL1o+PpA==}
     peerDependencies:
       '@types/react': '*'
-      react: '>=16.8.0'
+      react: ^19.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -1071,20 +1074,20 @@ packages:
     resolution: {integrity: sha512-PBRqsVKR7QRNkmfH78hTSSwHWcwDpecH9W6heujWAcyp2wdz/64PP73s7fWS1dIPm8/Exc8JAzYS8dEWXjv60w==}
     peerDependencies:
       '@emotion/core': ^10.0.28
-      react: '>=16.3.0'
+      react: ^19.0.0
 
   '@emotion/styled@10.3.0':
     resolution: {integrity: sha512-GgcUpXBBEU5ido+/p/mCT2/Xx+Oqmp9JzQRuC+a4lYM4i4LBBn/dWvc0rQ19N9ObA8/T4NWMrPNe79kMBDJqoQ==}
     peerDependencies:
       '@emotion/core': ^10.0.27
-      react: '>=16.3.0'
+      react: ^19.0.0
 
   '@emotion/styled@11.14.0':
     resolution: {integrity: sha512-XxfOnXFffatap2IyCeJyNov3kiDQWoR08gPUQxvbL7fxKryGBKUZUkG6Hz48DZwVrJSVh9sJboyV1Ds4OW6SgA==}
     peerDependencies:
       '@emotion/react': ^11.0.0-rc.0
       '@types/react': '*'
-      react: '>=16.8.0'
+      react: ^19.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -1101,7 +1104,7 @@ packages:
   '@emotion/use-insertion-effect-with-fallbacks@1.2.0':
     resolution: {integrity: sha512-yJMtVdH59sxi/aVJBpk9FQq+OR8ll5GT8oWd57UpeaKEVGab41JWaCFA7FRLoMLloOZF/c/wsPoe+bfGmRKgDg==}
     peerDependencies:
-      react: '>=16.8.0'
+      react: ^19.0.0
 
   '@emotion/utils@0.11.3':
     resolution: {integrity: sha512-0o4l6pZC+hI88+bzuaX/6BgOvQVhbt2PfmxauVaYOGgbsAw14wdKyvMCZXnsnsHys94iadcF+RG/wZyx6+ZZBw==}
@@ -1398,7 +1401,7 @@ packages:
   '@reach/router@1.3.4':
     resolution: {integrity: sha512-+mtn9wjlB9NN2CNnnC/BRYtwdKBfSyyasPYraNAyvaV1occr/5NnB4CVzjEZipNHwYebQwcndGUmpFzxAUoqSA==}
     peerDependencies:
-      react: 15.x || 16.x || 16.4.0-alpha.0911da3
+      react: ^19.0.0
       react-dom: 15.x || 16.x || 16.4.0-alpha.0911da3
 
   '@sinclair/typebox@0.27.8':
@@ -1410,15 +1413,15 @@ packages:
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
 
-  '@storybook/addon-actions@8.6.9':
-    resolution: {integrity: sha512-H2v17sMbSl8jhSulPxcOyChsFbzik9E7mgCWIf4P114KcIUokWLVuALnSOeqHME6lY0pPBZs3DgvVVMVMm7zNw==}
+  '@storybook/addon-actions@8.6.10':
+    resolution: {integrity: sha512-g+aC1bFwIwZqxSVjw+BhJJeTmZPBhZT52AO6DUYWF+FZ2N3rjnaVKwT1gZYYhuYw2WtWw2wLivkXcq2L/IBbkg==}
     peerDependencies:
-      storybook: ^8.6.9
+      storybook: ^8.6.10
 
   '@storybook/addon-options@5.3.21':
     resolution: {integrity: sha512-Q+xo6Irrb66NOQO9U4QWddAU6UEPNb+Mn5h9NHwJYV87mKl/3bqleApBhtOhSacWw5GjceiigzulXZTCs866Sw==}
     peerDependencies:
-      react: '*'
+      react: ^19.0.0
 
   '@storybook/addons@5.3.21':
     resolution: {integrity: sha512-Ji/21WADTLVbTbiKcZ64BcL0Es+h1Afxx3kNmGJqPSTUYroCwIFCT9mUzCqU6G+YyWaISAmTii5UJkTwMkChwA==}
@@ -1431,10 +1434,10 @@ packages:
     peerDependencies:
       regenerator-runtime: '*'
 
-  '@storybook/builder-webpack5@8.6.9':
-    resolution: {integrity: sha512-1JHRHwZy//Pu0CiNTUbUqRRCrie8V8YWE4OuZsPHKH0Br8PNPE5MkobTkf4wHUmjnyBw7ygrx4xHrOnTWfsexA==}
+  '@storybook/builder-webpack5@8.6.10':
+    resolution: {integrity: sha512-boqjQ+waDfNcnLfcZRnDhwQcU5FaKy5YROetjerztz6zLGLKZe+jvEgbTvHFiPxMJSe3Mpx76ID9SBH2x0ld3Q==}
     peerDependencies:
-      storybook: ^8.6.9
+      storybook: ^8.6.10
       typescript: '*'
     peerDependenciesMeta:
       typescript:
@@ -1452,8 +1455,8 @@ packages:
   '@storybook/client-logger@7.6.17':
     resolution: {integrity: sha512-6WBYqixAXNAXlSaBWwgljWpAu10tPRBJrcFvx2gPUne58EeMM20Gi/iHYBz2kMCY+JLAgeIH7ZxInqwO8vDwiQ==}
 
-  '@storybook/components@8.6.9':
-    resolution: {integrity: sha512-CqWUAYK/RgV++sXfiDG63DM2JF2FeidvnMO5/bki2hFbEqgs0/yy7BKUjhsGmuri5y+r9B2FJhW0WnE6PI8NWw==}
+  '@storybook/components@8.6.10':
+    resolution: {integrity: sha512-9TE2aZU+1zjGO4R74jc4Dmx+pFb+9hm1vnlWH+WVfYV1nCSCZOMmMoO2J86PHPkR6RmPjcQJXz4ySdBbYiwKiw==}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
@@ -1463,13 +1466,13 @@ packages:
   '@storybook/core-events@7.6.17':
     resolution: {integrity: sha512-AriWMCm/k1cxlv10f+jZ1wavThTRpLaN3kY019kHWbYT9XgaSuLU67G7GPr3cGnJ6HuA6uhbzu8qtqVCd6OfXA==}
 
-  '@storybook/core-webpack@8.6.9':
-    resolution: {integrity: sha512-x3zmB0wpdVxdRsPIo6FYAmb+A6+YhtHbDXCDrcU7RS0/GhgLUl/KCeiBafqYMNxxQWsxNj6sN3lCP09vYqbSGw==}
+  '@storybook/core-webpack@8.6.10':
+    resolution: {integrity: sha512-bWLyEUhWgCEmkkjRAIw3pQSU57d7EM0Uv9hDMRQOfqB4a8tCKu3KavP5DRiN7HQ/EVwImfcgpuHDZaTzKkZyig==}
     peerDependencies:
-      storybook: ^8.6.9
+      storybook: ^8.6.10
 
-  '@storybook/core@8.6.9':
-    resolution: {integrity: sha512-psYxJAlj34ZaDAk+OvT/He6ZuUh0eGiHVtZNe0xWbNp5pQvOBjf+dg48swdI6KEbVs3aeU+Wnyra/ViU2RtA+Q==}
+  '@storybook/core@8.6.10':
+    resolution: {integrity: sha512-VyhE/9/idPeeObsx+DyD8RR2iEwLJGL9rYz61r+1IrpndIVnlYD+vjxc0Y/1jTG1RvShWzEF2A/vzsJ9PzXqcw==}
     peerDependencies:
       prettier: ^2 || ^3
     peerDependenciesMeta:
@@ -1488,18 +1491,18 @@ packages:
   '@storybook/manager-api@7.6.17':
     resolution: {integrity: sha512-IJIV1Yc6yw1dhCY4tReHCfBnUKDqEBnMyHp3mbXpsaHxnxJZrXO45WjRAZIKlQKhl/Ge1CrnznmHRCmYgqmrWg==}
 
-  '@storybook/manager-api@8.6.9':
-    resolution: {integrity: sha512-mxq9B9rxAraOCBapGKsUDfI+8yNtFhTgKMZCxmHoUCxvAHaIt4S9JcdX0qQQKUsBTr/b2hHm0O7A8DYrbgBRfw==}
+  '@storybook/manager-api@8.6.10':
+    resolution: {integrity: sha512-roJ2aXqbZfSh9IM4q34U2GpU0CDmUjTKGwAnYOS2SG6rGLPenPflIksW8A52cVFdzGa4eH/KzP2FIg5Zi1KLJQ==}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
-  '@storybook/preset-react-webpack@8.6.9':
-    resolution: {integrity: sha512-KHX29ogvmBAm9+X+X6aSpCFNqS0ZYQzmtTrMVN07ni5805LM389KYIPfFPxzZwCczryA/+I26odbczYYWYUarQ==}
+  '@storybook/preset-react-webpack@8.6.10':
+    resolution: {integrity: sha512-huS+y7rK2a1sPkg8X1L9TgDZ1cqFrz2G2zz4XbmTEftb1E4Xw6R9NJVmPtiWA5ZwnqpiKF3cjImAKCeYEx1Lhw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+      react: ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-      storybook: ^8.6.9
+      storybook: ^8.6.10
       typescript: '*'
     peerDependenciesMeta:
       typescript:
@@ -1508,8 +1511,8 @@ packages:
   '@storybook/preview-api@7.6.17':
     resolution: {integrity: sha512-wLfDdI9RWo1f2zzFe54yRhg+2YWyxLZvqdZnSQ45mTs4/7xXV5Wfbv3QNTtcdw8tT3U5KRTrN1mTfTCiRJc0Kw==}
 
-  '@storybook/preview-api@8.6.9':
-    resolution: {integrity: sha512-hW3Z8NBrGs2bNunaHgrLjpfrOcWsxH0ejAqaba8MolPXjzNs0lTFF/Ela7pUsh2m1R4/kiD+WfddQzyipUo4Mg==}
+  '@storybook/preview-api@8.6.10':
+    resolution: {integrity: sha512-8ki1GgiUlcSqZD3Oe42Fy0uW3E7XPpMAyzO+NSnHCKKfNlZgi036Rr+FyGcKwG5lJyubWwNesPGQX5UHigYu4w==}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
@@ -1519,33 +1522,33 @@ packages:
       typescript: '>= 4.x'
       webpack: '>= 4'
 
-  '@storybook/react-dom-shim@8.6.9':
-    resolution: {integrity: sha512-SjqP6r5yy87OJRAiq1JzFazn6VWfptOA2HaxOiP8zRhJgG41K0Vseh8tbZdycj1AzJYSCcnKaIcfd/GEo/41+g==}
+  '@storybook/react-dom-shim@8.6.10':
+    resolution: {integrity: sha512-r4Q5stsoIlSEvOpOJgyFGPej+t9uuIzGI2ul83XNtiHEBs7xlmUN7qAm+U9cOuNZ7mPOXDKt9nZfUfCP5Ouhyw==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+      react: ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-      storybook: ^8.6.9
+      storybook: ^8.6.10
 
-  '@storybook/react-webpack5@8.6.9':
-    resolution: {integrity: sha512-Kl+eFBVAddE8glOFFNrgXxsk9qUcJG6Z9XvXYFIbUIqciiL3pqovYwY2LeIKttcXWj3UAssUmKyQzLLiWWLOHg==}
+  '@storybook/react-webpack5@8.6.10':
+    resolution: {integrity: sha512-ujyqHor00xhTU/SAL3XWAn818uLsmF9ewNuysSeuqSO3XZbEZe8r0NaUin/EgXvEGjn1Epy824naXcrn6h9Dcw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+      react: ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-      storybook: ^8.6.9
+      storybook: ^8.6.10
       typescript: '>= 4.2.x'
     peerDependenciesMeta:
       typescript:
         optional: true
 
-  '@storybook/react@8.6.9':
-    resolution: {integrity: sha512-xu4eJyYNz3mHeqnHn80KZZ2s22ZfqqCTzCNCVAyM6MWTxUwIpLX6FXC/vmcT1gPwwTl2KcRHZXaE7snB3aOLuw==}
+  '@storybook/react@8.6.10':
+    resolution: {integrity: sha512-QCs5nyXe+G2ZoZ1uspEsnSp7VYLJej5dJ1bSf22rrdHQde641zvC2HZQaba4dqR2YQxRCG9JtCdaQ3UVmnfzzA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@storybook/test': 8.6.9
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+      '@storybook/test': 8.6.10
+      react: ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-      storybook: ^8.6.9
+      storybook: ^8.6.10
       typescript: '>= 4.2.x'
     peerDependenciesMeta:
       '@storybook/test':
@@ -1556,7 +1559,7 @@ packages:
   '@storybook/router@5.3.21':
     resolution: {integrity: sha512-c29m5UikK5Q1lyd6FltOGFhIcpd6PIb855YS3OUNe3F6ZA1tfJ+aNKrCBc65d1c+fvCGG76dYYYv0RvwEmKXXg==}
     peerDependencies:
-      react: '*'
+      react: ^19.0.0
       react-dom: '*'
 
   '@storybook/router@7.6.17':
@@ -1569,17 +1572,17 @@ packages:
   '@storybook/theming@5.3.21':
     resolution: {integrity: sha512-FZbxjizqdO9lV5LUixPio/7+6UdPiswCzTJn8Hcot9uwwgfnrViRdN7xyjmSYRqv9nHP3OlYbtdeCAgZ4aPq8g==}
     peerDependencies:
-      react: '*'
+      react: ^19.0.0
       react-dom: '*'
 
   '@storybook/theming@7.6.17':
     resolution: {integrity: sha512-ZbaBt3KAbmBtfjNqgMY7wPMBshhSJlhodyMNQypv+95xLD/R+Az6aBYbpVAOygLaUQaQk4ar7H/Ww6lFIoiFbA==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
-  '@storybook/theming@8.6.9':
-    resolution: {integrity: sha512-FQafe66itGnIh0V42R65tgFKyz0RshpIs0pTrxrdByuB2yKsep+f8ZgKLJE3fCKw/Egw4bUuICo2m8d7uOOumA==}
+  '@storybook/theming@8.6.10':
+    resolution: {integrity: sha512-4E5ArcJ/bhrWtlYzQDbtA3O3pha/Ys0Ja6X4waJQ5UJENzUMdVz6vTLSUHtG5hNRmSqreogxe4Ed88+0JtY7NQ==}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
@@ -1676,8 +1679,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@20.17.27':
-    resolution: {integrity: sha512-U58sbKhDrthHlxHRJw7ZLiLDZGmAUOZUbpw0S6nL27sYUdhvgBLCRu/keSd6qcTsfArd1sRFCCBxzWATGr/0UA==}
+  '@types/node@20.17.28':
+    resolution: {integrity: sha512-DHlH/fNL6Mho38jTy7/JT7sn2wnXI+wULR6PV4gy4VHLVvnrV/d3pHAMQHhc4gjdLmK2ZiPoMxzp6B3yRajLSQ==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -1705,8 +1708,8 @@ packages:
   '@types/retry@0.12.0':
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
 
-  '@types/semver@7.5.8':
-    resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
+  '@types/semver@7.7.0':
+    resolution: {integrity: sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==}
 
   '@types/send@0.17.4':
     resolution: {integrity: sha512-x2EM6TJOybec7c52BX0ZspPodMsQUd5L6PRwOunVyVUhXiBSKf3AezDL8Dgvgt5o0UfKNfuA0eMLr2wLT4AiBA==}
@@ -2196,7 +2199,7 @@ packages:
     resolution: {integrity: sha512-dNldIoSuNSvlTJ7slIKC/ZFGKexBMBrrcc+TTe1NdmROnaASuLPvqpwj9v4XS4uXZ8+YPu0sNmShX2rXI5LNsw==}
     peerDependencies:
       prop-types: ^15.0.0
-      react: ^0.14.0 || ^15.0.0 || ^16.0.0
+      react: ^19.0.0
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -2366,8 +2369,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.124:
-    resolution: {integrity: sha512-riELkpDUqBi00gqreV3RIGoowxGrfueEKBd6zPdOk/I8lvuFpBGNkYoHof3zUHbiTBsIU8oxdIIL/WNrAG1/7A==}
+  electron-to-chromium@1.5.126:
+    resolution: {integrity: sha512-AtH1uLcTC72LA4vfYcEJJkrMk/MY/X0ub8Hv7QGAePW2JkeUFHEL/QfS4J77R6M87Sss8O0OcqReSaN1bpyA+Q==}
 
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -2383,7 +2386,7 @@ packages:
     resolution: {integrity: sha512-mXiD2Oj7N9b6+h/dC6oLf9hwxbtKHQjoIqtodEyL8CpkN4F3V4IK/BT4D0C7zSs4BBFOu4UlPJbvvBLa88SGEA==}
     peerDependencies:
       '@emotion/core': ^10.0.27
-      react: '>=16.3.0'
+      react: ^19.0.0
 
   encodeurl@1.0.2:
     resolution: {integrity: sha512-TPJXq8JqFaVYm2CWmPvnP2Iyo4ZSM7/QKcSmuMLDObfpH5fi7RUGmd/rTDf+rut/saiDiQEeVTNgAmJEdAOx0w==}
@@ -3756,14 +3759,6 @@ packages:
   react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
 
-  react@16.14.0:
-    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==}
-    engines: {node: '>=0.10.0'}
-
-  react@18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
-    engines: {node: '>=0.10.0'}
-
   react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
     engines: {node: '>=0.10.0'}
@@ -4065,8 +4060,8 @@ packages:
   store2@2.14.4:
     resolution: {integrity: sha512-srTItn1GOvyvOycgxjAnPA63FZNwy0PTyUBFMHRM+hVFltAeoh0LmNBz9SZqUS9mMqGk8rfyWyXn3GH5ReJ8Zw==}
 
-  storybook@8.6.9:
-    resolution: {integrity: sha512-Iw4+R4V3yX7MhXJaLBAT4oLtZ+SaTzX8KvUNZiQzvdD+TrFKVA3QKV8gvWjstGyU2dd+afE1Ph6EG5Xa2Az2CA==}
+  storybook@8.6.10:
+    resolution: {integrity: sha512-7LUD9hNllMZZhDJutxgejrpWI89rsBF+p2kCfWoJ9EuBTgRy8bbVQZlG7bE1gf7qLmnabnklsFslTakS2SbKRw==}
     hasBin: true
     peerDependencies:
       prettier: ^2 || ^3
@@ -5492,7 +5487,7 @@ snapshots:
       '@emotion/weak-memoize': 0.4.0
       stylis: 4.2.0
 
-  '@emotion/core@10.3.1(react@16.14.0)':
+  '@emotion/core@10.3.1(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.27.0
       '@emotion/cache': 10.0.29
@@ -5500,7 +5495,7 @@ snapshots:
       '@emotion/serialize': 0.11.16
       '@emotion/sheet': 0.9.4
       '@emotion/utils': 0.11.3
-      react: 16.14.0
+      react: 19.0.0
     transitivePeerDependencies:
       - supports-color
 
@@ -5544,20 +5539,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@emotion/react@11.14.0(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.27.0
-      '@emotion/babel-plugin': 11.13.5
-      '@emotion/cache': 11.14.0
-      '@emotion/serialize': 1.3.3
-      '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@18.3.1)
-      '@emotion/utils': 1.4.2
-      '@emotion/weak-memoize': 0.4.0
-      hoist-non-react-statics: 3.3.2
-      react: 18.3.1
-    transitivePeerDependencies:
-      - supports-color
-
   '@emotion/serialize@0.11.16':
     dependencies:
       '@emotion/hash': 0.8.0
@@ -5578,21 +5559,21 @@ snapshots:
 
   '@emotion/sheet@1.4.0': {}
 
-  '@emotion/styled-base@10.3.0(@emotion/core@10.3.1(react@16.14.0))(react@16.14.0)':
+  '@emotion/styled-base@10.3.0(@emotion/core@10.3.1(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.27.0
-      '@emotion/core': 10.3.1(react@16.14.0)
+      '@emotion/core': 10.3.1(react@19.0.0)
       '@emotion/is-prop-valid': 0.8.8
       '@emotion/serialize': 0.11.16
       '@emotion/utils': 0.11.3
-      react: 16.14.0
+      react: 19.0.0
 
-  '@emotion/styled@10.3.0(@emotion/core@10.3.1(react@16.14.0))(react@16.14.0)':
+  '@emotion/styled@10.3.0(@emotion/core@10.3.1(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@emotion/core': 10.3.1(react@16.14.0)
-      '@emotion/styled-base': 10.3.0(@emotion/core@10.3.1(react@16.14.0))(react@16.14.0)
+      '@emotion/core': 10.3.1(react@19.0.0)
+      '@emotion/styled-base': 10.3.0(@emotion/core@10.3.1(react@19.0.0))(react@19.0.0)
       babel-plugin-emotion: 10.2.2
-      react: 16.14.0
+      react: 19.0.0
     transitivePeerDependencies:
       - supports-color
 
@@ -5611,28 +5592,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@emotion/styled@11.14.0(@emotion/react@11.14.0(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.27.0
-      '@emotion/babel-plugin': 11.13.5
-      '@emotion/is-prop-valid': 1.3.1
-      '@emotion/react': 11.14.0(react@18.3.1)
-      '@emotion/serialize': 1.3.3
-      '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@18.3.1)
-      '@emotion/utils': 1.4.2
-      react: 18.3.1
-    transitivePeerDependencies:
-      - supports-color
-
   '@emotion/stylis@0.8.5': {}
 
   '@emotion/unitless@0.10.0': {}
 
   '@emotion/unitless@0.7.5': {}
-
-  '@emotion/use-insertion-effect-with-fallbacks@1.2.0(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
 
   '@emotion/use-insertion-effect-with-fallbacks@1.2.0(react@19.0.0)':
     dependencies:
@@ -5743,7 +5707,7 @@ snapshots:
   '@jest/console@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -5756,14 +5720,14 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+      jest-config: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -5788,7 +5752,7 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       jest-mock: 29.7.0
 
   '@jest/expect-utils@29.7.0':
@@ -5806,7 +5770,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -5828,7 +5792,7 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -5898,7 +5862,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -5963,21 +5927,21 @@ snapshots:
 
   '@projectstorm/react-canvas-core@7.0.3':
     dependencies:
-      '@emotion/react': 11.14.0(react@18.3.1)
-      '@emotion/styled': 11.14.0(@emotion/react@11.14.0(react@18.3.1))(react@18.3.1)
+      '@emotion/react': 11.14.0(@types/react@19.0.12)(react@19.0.0)
+      '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.12)(react@19.0.0))(@types/react@19.0.12)(react@19.0.0)
       '@projectstorm/geometry': 7.0.3
       lodash: 4.17.21
-      react: 18.3.1
+      react: 19.0.0
     transitivePeerDependencies:
       - '@types/react'
       - supports-color
 
-  '@reach/router@1.3.4(react-dom@19.0.0(react@19.0.0))(react@16.14.0)':
+  '@reach/router@1.3.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      create-react-context: 0.3.0(prop-types@15.8.1)(react@16.14.0)
+      create-react-context: 0.3.0(prop-types@15.8.1)(react@19.0.0)
       invariant: 2.2.4
       prop-types: 15.8.1
-      react: 16.14.0
+      react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       react-lifecycles-compat: 3.0.4
 
@@ -5991,13 +5955,13 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@storybook/addon-actions@8.6.9(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/addon-actions@8.6.10(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
       '@storybook/global': 5.0.0
       '@types/uuid': 9.0.8
       dequal: 2.0.3
       polished: 4.3.1
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
       uuid: 9.0.1
 
   '@storybook/addon-options@5.3.21(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(regenerator-runtime@0.14.1)':
@@ -6036,13 +6000,13 @@ snapshots:
 
   '@storybook/api@5.3.21(react-dom@19.0.0(react@19.0.0))(regenerator-runtime@0.14.1)':
     dependencies:
-      '@reach/router': 1.3.4(react-dom@19.0.0(react@19.0.0))(react@16.14.0)
+      '@reach/router': 1.3.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@storybook/channels': 5.3.21
       '@storybook/client-logger': 5.3.21
       '@storybook/core-events': 5.3.21
       '@storybook/csf': 0.0.1
-      '@storybook/router': 5.3.21(react-dom@19.0.0(react@19.0.0))(react@16.14.0)
-      '@storybook/theming': 5.3.21(react-dom@19.0.0(react@19.0.0))(react@16.14.0)
+      '@storybook/router': 5.3.21(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@storybook/theming': 5.3.21(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@types/reach__router': 1.3.15
       core-js: 3.41.0
       fast-deep-equal: 2.0.1
@@ -6050,7 +6014,7 @@ snapshots:
       lodash: 4.17.21
       memoizerific: 1.11.3
       prop-types: 15.8.1
-      react: 16.14.0
+      react: 19.0.0
       regenerator-runtime: 0.14.1
       semver: 6.3.1
       shallow-equal: 1.2.1
@@ -6061,10 +6025,10 @@ snapshots:
       - react-dom
       - supports-color
 
-  '@storybook/builder-webpack5@8.6.9(esbuild@0.25.1)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))':
+  '@storybook/builder-webpack5@8.6.10(esbuild@0.25.1)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))':
     dependencies:
-      '@storybook/core-webpack': 8.6.9(storybook@8.6.9(prettier@3.5.3))
-      '@types/semver': 7.5.8
+      '@storybook/core-webpack': 8.6.10(storybook@8.6.10(prettier@3.5.3))
+      '@types/semver': 7.7.0
       browser-assert: 1.2.1
       case-sensitive-paths-webpack-plugin: 2.4.0
       cjs-module-lexer: 1.4.3
@@ -6077,7 +6041,7 @@ snapshots:
       path-browserify: 1.0.1
       process: 0.11.10
       semver: 7.7.1
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
       style-loader: 3.3.4(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0)))
       terser-webpack-plugin: 5.3.14(esbuild@0.25.1)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0)))
       ts-dedent: 2.2.0
@@ -6118,9 +6082,9 @@ snapshots:
     dependencies:
       '@storybook/global': 5.0.0
 
-  '@storybook/components@8.6.9(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/components@8.6.10(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
 
   '@storybook/core-events@5.3.21':
     dependencies:
@@ -6130,14 +6094,14 @@ snapshots:
     dependencies:
       ts-dedent: 2.2.0
 
-  '@storybook/core-webpack@8.6.9(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/core-webpack@8.6.10(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
       ts-dedent: 2.2.0
 
-  '@storybook/core@8.6.9(prettier@3.5.3)(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/core@8.6.10(prettier@3.5.3)(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
-      '@storybook/theming': 8.6.9(storybook@8.6.9(prettier@3.5.3))
+      '@storybook/theming': 8.6.10(storybook@8.6.10(prettier@3.5.3))
       better-opn: 3.0.2
       browser-assert: 1.2.1
       esbuild: 0.25.1
@@ -6186,16 +6150,16 @@ snapshots:
       - react
       - react-dom
 
-  '@storybook/manager-api@8.6.9(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/manager-api@8.6.10(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
 
-  '@storybook/preset-react-webpack@8.6.9(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))':
+  '@storybook/preset-react-webpack@8.6.10(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))':
     dependencies:
-      '@storybook/core-webpack': 8.6.9(storybook@8.6.9(prettier@3.5.3))
-      '@storybook/react': 8.6.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)
+      '@storybook/core-webpack': 8.6.10(storybook@8.6.10(prettier@3.5.3))
+      '@storybook/react': 8.6.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0)))
-      '@types/semver': 7.5.8
+      '@types/semver': 7.7.0
       find-up: 5.0.0
       magic-string: 0.30.17
       react: 19.0.0
@@ -6203,7 +6167,7 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       resolve: 1.22.10
       semver: 7.7.1
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
       tsconfig-paths: 4.2.0
       webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
     optionalDependencies:
@@ -6233,9 +6197,9 @@ snapshots:
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
 
-  '@storybook/preview-api@8.6.9(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/preview-api@8.6.10(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
 
   '@storybook/react-docgen-typescript-plugin@1.0.6--canary.9.0c3f3b7.0(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0)))':
     dependencies:
@@ -6251,20 +6215,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@storybook/react-dom-shim@8.6.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/react-dom-shim@8.6.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
 
-  '@storybook/react-webpack5@8.6.9(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))':
+  '@storybook/react-webpack5@8.6.10(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))':
     dependencies:
-      '@storybook/builder-webpack5': 8.6.9(esbuild@0.25.1)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
-      '@storybook/preset-react-webpack': 8.6.9(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
-      '@storybook/react': 8.6.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)
+      '@storybook/builder-webpack5': 8.6.10(esbuild@0.25.1)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
+      '@storybook/preset-react-webpack': 8.6.10(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
+      '@storybook/react': 8.6.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
     optionalDependencies:
       typescript: 5.8.2
     transitivePeerDependencies:
@@ -6276,23 +6240,23 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/react@8.6.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))(typescript@5.8.2)':
+  '@storybook/react@8.6.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)':
     dependencies:
-      '@storybook/components': 8.6.9(storybook@8.6.9(prettier@3.5.3))
+      '@storybook/components': 8.6.10(storybook@8.6.10(prettier@3.5.3))
       '@storybook/global': 5.0.0
-      '@storybook/manager-api': 8.6.9(storybook@8.6.9(prettier@3.5.3))
-      '@storybook/preview-api': 8.6.9(storybook@8.6.9(prettier@3.5.3))
-      '@storybook/react-dom-shim': 8.6.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.9(prettier@3.5.3))
-      '@storybook/theming': 8.6.9(storybook@8.6.9(prettier@3.5.3))
+      '@storybook/manager-api': 8.6.10(storybook@8.6.10(prettier@3.5.3))
+      '@storybook/preview-api': 8.6.10(storybook@8.6.10(prettier@3.5.3))
+      '@storybook/react-dom-shim': 8.6.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.10(prettier@3.5.3))
+      '@storybook/theming': 8.6.10(storybook@8.6.10(prettier@3.5.3))
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
     optionalDependencies:
       typescript: 5.8.2
 
-  '@storybook/router@5.3.21(react-dom@19.0.0(react@19.0.0))(react@16.14.0)':
+  '@storybook/router@5.3.21(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@reach/router': 1.3.4(react-dom@19.0.0(react@19.0.0))(react@16.14.0)
+      '@reach/router': 1.3.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@storybook/csf': 0.0.1
       '@types/reach__router': 1.3.15
       core-js: 3.41.0
@@ -6300,7 +6264,7 @@ snapshots:
       lodash: 4.17.21
       memoizerific: 1.11.3
       qs: 6.14.0
-      react: 16.14.0
+      react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       util-deprecate: 1.0.2
 
@@ -6318,19 +6282,19 @@ snapshots:
       shelljs: 0.8.5
       yargs: 15.4.1
 
-  '@storybook/theming@5.3.21(react-dom@19.0.0(react@19.0.0))(react@16.14.0)':
+  '@storybook/theming@5.3.21(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@emotion/core': 10.3.1(react@16.14.0)
-      '@emotion/styled': 10.3.0(@emotion/core@10.3.1(react@16.14.0))(react@16.14.0)
+      '@emotion/core': 10.3.1(react@19.0.0)
+      '@emotion/styled': 10.3.0(@emotion/core@10.3.1(react@19.0.0))(react@19.0.0)
       '@storybook/client-logger': 5.3.21
       core-js: 3.41.0
       deep-object-diff: 1.1.9
-      emotion-theming: 10.3.0(@emotion/core@10.3.1(react@16.14.0))(react@16.14.0)
+      emotion-theming: 10.3.0(@emotion/core@10.3.1(react@19.0.0))(react@19.0.0)
       global: 4.4.0
       memoizerific: 1.11.3
       polished: 3.7.2
       prop-types: 15.8.1
-      react: 16.14.0
+      react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       resolve-from: 5.0.0
       ts-dedent: 1.2.0
@@ -6346,9 +6310,9 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@storybook/theming@8.6.9(storybook@8.6.9(prettier@3.5.3))':
+  '@storybook/theming@8.6.10(storybook@8.6.10(prettier@3.5.3))':
     dependencies:
-      storybook: 8.6.9(prettier@3.5.3)
+      storybook: 8.6.10(prettier@3.5.3)
 
   '@storybook/types@7.6.17':
     dependencies:
@@ -6381,20 +6345,20 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/bonjour@3.5.13':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/connect-history-api-fallback@1.5.4':
     dependencies:
       '@types/express-serve-static-core': 5.0.6
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/dagre@0.7.52': {}
 
@@ -6414,14 +6378,14 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.6':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
 
   '@types/express-serve-static-core@5.0.6':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -6435,7 +6399,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/html-minifier-terser@6.1.0': {}
 
@@ -6443,7 +6407,7 @@ snapshots:
 
   '@types/http-proxy@1.17.16':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/is-function@1.0.3': {}
 
@@ -6470,11 +6434,11 @@ snapshots:
 
   '@types/node-forge@1.3.11':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/node@12.20.55': {}
 
-  '@types/node@20.17.27':
+  '@types/node@20.17.28':
     dependencies:
       undici-types: 6.19.8
 
@@ -6500,12 +6464,12 @@ snapshots:
 
   '@types/retry@0.12.0': {}
 
-  '@types/semver@7.5.8': {}
+  '@types/semver@7.7.0': {}
 
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/serve-index@1.9.4':
     dependencies:
@@ -6514,12 +6478,12 @@ snapshots:
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       '@types/send': 0.17.4
 
   '@types/sockjs@0.3.36':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/stack-utils@2.0.3': {}
 
@@ -6527,7 +6491,7 @@ snapshots:
 
   '@types/ws@8.18.0':
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -6880,7 +6844,7 @@ snapshots:
   browserslist@4.24.4:
     dependencies:
       caniuse-lite: 1.0.30001707
-      electron-to-chromium: 1.5.124
+      electron-to-chromium: 1.5.126
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
@@ -7059,13 +7023,13 @@ snapshots:
       path-type: 4.0.0
       yaml: 1.10.2
 
-  create-jest@29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0):
+  create-jest@29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0):
     dependencies:
       '@jest/types': 29.6.3
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
-      jest-config: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+      jest-config: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -7074,11 +7038,11 @@ snapshots:
       - supports-color
       - ts-node
 
-  create-react-context@0.3.0(prop-types@15.8.1)(react@16.14.0):
+  create-react-context@0.3.0(prop-types@15.8.1)(react@19.0.0):
     dependencies:
       gud: 1.0.0
       prop-types: 15.8.1
-      react: 16.14.0
+      react: 19.0.0
       warning: 4.0.3
 
   cross-spawn@7.0.6:
@@ -7237,7 +7201,7 @@ snapshots:
     dependencies:
       jake: 10.9.2
 
-  electron-to-chromium@1.5.124: {}
+  electron-to-chromium@1.5.126: {}
 
   emittery@0.13.1: {}
 
@@ -7245,13 +7209,13 @@ snapshots:
 
   emoji-regex@9.2.2: {}
 
-  emotion-theming@10.3.0(@emotion/core@10.3.1(react@16.14.0))(react@16.14.0):
+  emotion-theming@10.3.0(@emotion/core@10.3.1(react@19.0.0))(react@19.0.0):
     dependencies:
       '@babel/runtime': 7.27.0
-      '@emotion/core': 10.3.1(react@16.14.0)
+      '@emotion/core': 10.3.1(react@19.0.0)
       '@emotion/weak-memoize': 0.2.5
       hoist-non-react-statics: 3.3.2
-      react: 16.14.0
+      react: 19.0.0
 
   encodeurl@1.0.2: {}
 
@@ -7989,7 +7953,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.5.3(babel-plugin-macros@3.1.0)
@@ -8009,16 +7973,16 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0):
+  jest-cli@29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0):
     dependencies:
       '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
       chalk: 4.1.2
-      create-jest: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+      create-jest: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
       exit: 0.1.2
       import-local: 3.2.0
-      jest-config: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+      jest-config: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
       jest-util: 29.7.0
       jest-validate: 29.7.0
       yargs: 17.7.2
@@ -8028,7 +7992,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0):
+  jest-config@29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0):
     dependencies:
       '@babel/core': 7.26.10
       '@jest/test-sequencer': 29.7.0
@@ -8053,7 +8017,7 @@ snapshots:
       slash: 3.0.0
       strip-json-comments: 3.1.1
     optionalDependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -8082,7 +8046,7 @@ snapshots:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
@@ -8092,7 +8056,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -8131,7 +8095,7 @@ snapshots:
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       jest-util: 29.7.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
@@ -8166,7 +8130,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -8194,7 +8158,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       chalk: 4.1.2
       cjs-module-lexer: 1.4.3
       collect-v8-coverage: 1.0.2
@@ -8240,7 +8204,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -8259,7 +8223,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -8268,23 +8232,23 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 20.17.27
+      '@types/node': 20.17.28
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0):
+  jest@29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0):
     dependencies:
       '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)
       '@jest/types': 29.6.3
       import-local: 3.2.0
-      jest-cli: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+      jest-cli: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -8804,16 +8768,6 @@ snapshots:
 
   react-lifecycles-compat@3.0.4: {}
 
-  react@16.14.0:
-    dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-      prop-types: 15.8.1
-
-  react@18.3.1:
-    dependencies:
-      loose-envify: 1.4.0
-
   react@19.0.0: {}
 
   read-yaml-file@1.1.0:
@@ -9158,9 +9112,9 @@ snapshots:
 
   store2@2.14.4: {}
 
-  storybook@8.6.9(prettier@3.5.3):
+  storybook@8.6.10(prettier@3.5.3):
     dependencies:
-      '@storybook/core': 8.6.9(prettier@3.5.3)(storybook@8.6.9(prettier@3.5.3))
+      '@storybook/core': 8.6.10(prettier@3.5.3)(storybook@8.6.10(prettier@3.5.3))
     optionalDependencies:
       prettier: 3.5.3
     transitivePeerDependencies:
@@ -9307,12 +9261,12 @@ snapshots:
 
   ts-dedent@2.2.0: {}
 
-  ts-jest@29.3.0(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0))(typescript@5.8.2):
+  ts-jest@29.3.0(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0))(typescript@5.8.2):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
       fast-json-stable-stringify: 2.1.0
-      jest: 29.7.0(@types/node@20.17.27)(babel-plugin-macros@3.1.0)
+      jest: 29.7.0(@types/node@20.17.28)(babel-plugin-macros@3.1.0)
       jest-util: 29.7.0
       json5: 2.2.3
       lodash.memoize: 4.1.2
