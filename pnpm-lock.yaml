@@ -91,17 +91,20 @@ importers:
         version: 19.0.0(react@19.0.0)
     devDependencies:
       '@babel/preset-env':
-        specifier: ^7.22.20
+        specifier: ^7.26.9
         version: 7.26.9(@babel/core@7.26.10)
       '@babel/preset-react':
-        specifier: ^7.22.15
+        specifier: ^7.26.3
         version: 7.26.3(@babel/core@7.26.10)
       '@babel/preset-typescript':
-        specifier: ^7.22.15
+        specifier: ^7.27.0
         version: 7.27.0(@babel/core@7.26.10)
       '@storybook/addon-actions':
         specifier: ^8.6.9
         version: 8.6.10(storybook@8.6.10(prettier@3.5.3))
+      '@storybook/addon-webpack5-compiler-babel':
+        specifier: ^3.0.5
+        version: 3.0.5(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0)))
       '@storybook/manager-api':
         specifier: ^8.6.10
         version: 8.6.10(storybook@8.6.10(prettier@3.5.3))
@@ -1361,6 +1364,10 @@ packages:
     resolution: {integrity: sha512-g+aC1bFwIwZqxSVjw+BhJJeTmZPBhZT52AO6DUYWF+FZ2N3rjnaVKwT1gZYYhuYw2WtWw2wLivkXcq2L/IBbkg==}
     peerDependencies:
       storybook: ^8.6.10
+
+  '@storybook/addon-webpack5-compiler-babel@3.0.5':
+    resolution: {integrity: sha512-9dlc5PrehEFUHqkgj8x+aKtOY9XH9Zk6WBbtpgY/JCQ7waJ2VvhyDnrgJeXfek+WYlSkJElnta6SlqP+XRG0PQ==}
+    engines: {node: '>=18'}
 
   '@storybook/builder-webpack5@8.6.10':
     resolution: {integrity: sha512-boqjQ+waDfNcnLfcZRnDhwQcU5FaKy5YROetjerztz6zLGLKZe+jvEgbTvHFiPxMJSe3Mpx76ID9SBH2x0ld3Q==}
@@ -5622,6 +5629,14 @@ snapshots:
       storybook: 8.6.10(prettier@3.5.3)
       uuid: 9.0.1
 
+  '@storybook/addon-webpack5-compiler-babel@3.0.5(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0)))':
+    dependencies:
+      '@babel/core': 7.26.10
+      babel-loader: 9.2.1(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0)))
+    transitivePeerDependencies:
+      - supports-color
+      - webpack
+
   '@storybook/builder-webpack5@8.6.10(esbuild@0.25.1)(storybook@8.6.10(prettier@3.5.3))(typescript@5.8.2)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))':
     dependencies:
       '@storybook/core-webpack': 8.6.10(storybook@8.6.10(prettier@3.5.3))
@@ -6147,6 +6162,13 @@ snapshots:
       slash: 3.0.0
     transitivePeerDependencies:
       - supports-color
+
+  babel-loader@9.2.1(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))):
+    dependencies:
+      '@babel/core': 7.26.10
+      find-cache-dir: 4.0.0
+      schema-utils: 4.3.0
+      webpack: 5.98.0(esbuild@0.25.1)(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.98.0))
 
   babel-loader@9.2.1(@babel/core@7.26.10)(webpack@5.98.0(webpack-cli@5.1.4)):
     dependencies:
