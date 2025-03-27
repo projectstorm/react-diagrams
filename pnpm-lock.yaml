@@ -149,10 +149,10 @@ importers:
         version: 19.0.0(react@19.0.0)
     devDependencies:
       '@babel/core':
-        specifier: ^7.22.20
+        specifier: ^7.26.10
         version: 7.26.10
       '@babel/preset-react':
-        specifier: ^7.22.15
+        specifier: ^7.26.3
         version: 7.26.3(@babel/core@7.26.10)
       '@types/react':
         specifier: ^19.0.12
