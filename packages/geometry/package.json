@@ -29,7 +29,6 @@
 	"module": "./dist/index.js",
 	"typings": "./dist/@types/index",
 	"dependencies": {
-		"@projectstorm/react-canvas-core": "^7.0.3",
 		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
