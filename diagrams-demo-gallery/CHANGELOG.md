@@ -1,5 +1,16 @@
 # @projectstorm/react-diagrams-gallery
 
+## 7.2.2
+
+### Patch Changes
+
+- 430e922: Updated packages to support React v19
+- Updated dependencies [430e922]
+  - @projectstorm/react-diagrams-defaults@7.1.4
+  - @projectstorm/react-diagrams-core@7.0.4
+  - @projectstorm/react-canvas-core@7.0.4
+  - @projectstorm/react-diagrams@7.0.5
+
 ## 7.2.1
 
 ### Patch Changes

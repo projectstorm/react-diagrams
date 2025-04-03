@@ -1,5 +1,15 @@
 # @projectstorm/react-diagrams
 
+## 7.0.5
+
+### Patch Changes
+
+- Updated dependencies [430e922]
+  - @projectstorm/react-diagrams-defaults@7.1.4
+  - @projectstorm/react-diagrams-routing@7.1.4
+  - @projectstorm/react-diagrams-core@7.0.4
+  - @projectstorm/react-canvas-core@7.0.4
+
 ## 7.0.4
 
 ### Patch Changes
