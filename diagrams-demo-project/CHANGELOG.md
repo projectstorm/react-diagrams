@@ -1,5 +1,12 @@
 # @projectstorm/react-diagrams-demo
 
+## 7.0.5
+
+### Patch Changes
+
+- 430e922: Updated packages to support React v19
+  - @projectstorm/react-diagrams@7.0.5
+
 ## 7.0.4
 
 ### Patch Changes

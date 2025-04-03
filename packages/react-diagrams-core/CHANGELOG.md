@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.0.4
+
+### Patch Changes
+
+- 430e922: Updated packages to support React v19
+- Updated dependencies [430e922]
+  - @projectstorm/react-canvas-core@7.0.4
+  - @projectstorm/geometry@7.0.4
+
 ## 7.0.3
 
 ### Patch Changes
