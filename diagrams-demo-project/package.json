@@ -26,18 +26,18 @@
 	"typings": "./dist/@types/index",
 	"dependencies": {
 		"@projectstorm/react-diagrams": "workspace:*",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
 	},
 	"devDependencies": {
-		"source-map-loader": "^4.0.1",
-		"html-webpack-plugin": "^5.5.3",
-		"@babel/core": "^7.22.20",
-		"@babel/preset-react": "^7.22.15",
-		"@types/react": "^18.2.22",
-		"@types/react-dom": "^18.2.7",
+		"@babel/core": "^7.26.10",
+		"@babel/preset-react": "^7.26.3",
+		"@types/react": "^19.0.12",
+		"@types/react-dom": "^19.0.4",
 		"babel-loader": "^9.1.3",
 		"css-loader": "^6.8.1",
+		"html-webpack-plugin": "^5.5.3",
+		"source-map-loader": "^4.0.1",
 		"style-loader": "^3.3.3",
 		"webpack": "^5.88.2",
 		"webpack-cli": "^5.1.4",

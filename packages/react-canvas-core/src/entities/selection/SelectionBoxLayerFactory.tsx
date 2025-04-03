@@ -3,6 +3,7 @@ import { AbstractReactFactory, GenerateWidgetEvent } from '../../core/AbstractRe
 import { SelectionLayerModel } from './SelectionLayerModel';
 import { GenerateModelEvent } from '../../core/AbstractModelFactory';
 import { SelectionBoxWidget } from './SelectionBoxWidget';
+import { JSX } from 'react';
 
 export class SelectionBoxLayerFactory extends AbstractReactFactory<SelectionLayerModel> {
 	constructor() {

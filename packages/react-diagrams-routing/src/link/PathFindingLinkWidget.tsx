@@ -6,6 +6,7 @@ import { PathFinding } from '../engine/PathFinding';
 import { PathFindingLinkFactory } from './PathFindingLinkFactory';
 import { PathFindingLinkModel } from './PathFindingLinkModel';
 import { DefaultLinkSegmentWidget } from '@projectstorm/react-diagrams-defaults';
+import { JSX } from 'react';
 
 export interface PathFindingLinkWidgetProps {
 	color?: string;

@@ -22,6 +22,7 @@ import {
 	InputType,
 	ListenerHandle
 } from '@projectstorm/react-canvas-core';
+import { JSX } from 'react';
 
 export class PathFindingLinkFactory extends DefaultLinkFactory<PathFindingLinkModel> {
 	ROUTING_SCALING_FACTOR: number = 5;

@@ -3,7 +3,7 @@ import { PortModel } from './entities/port/PortModel';
 import { LinkModel } from './entities/link/LinkModel';
 import { LabelModel } from './entities/label/LabelModel';
 import { boundingBoxFromPolygons, Point, Rectangle } from '@projectstorm/geometry';
-import { MouseEvent } from 'react';
+import { JSX, MouseEvent } from 'react';
 import {
 	AbstractModelFactory,
 	AbstractReactFactory,
@@ -123,9 +123,9 @@ export class DiagramEngine extends CanvasEngine<CanvasEngineListener, DiagramMod
 
 	getFactoryForLabel<F extends AbstractReactFactory<LabelModel, DiagramEngine>>(label: LabelModel) {
 		if (typeof label === 'string') {
-			return this.labelFactories.getFactory(label);
+			return this.labelFactories.getFactory<F>(label);
 		}
-		return this.labelFactories.getFactory(label.getType());
+		return this.labelFactories.getFactory<F>(label.getType());
 	}
 
 	getFactoryForPort<F extends AbstractModelFactory<PortModel, DiagramEngine>>(port: PortModel) {

@@ -1,6 +1,7 @@
 import { BaseModel } from '../core-models/BaseModel';
 import { AbstractModelFactory } from './AbstractModelFactory';
 import { CanvasEngine } from '../CanvasEngine';
+import { JSX } from 'react';
 
 export interface GenerateWidgetEvent<T extends BaseModel> {
 	model: T;

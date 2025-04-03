@@ -3,7 +3,7 @@ import { DiagramEngine, LinkWidget, PointModel } from '@projectstorm/react-diagr
 import { RightAngleLinkFactory } from './RightAngleLinkFactory';
 import { DefaultLinkModel, DefaultLinkSegmentWidget } from '@projectstorm/react-diagrams-defaults';
 import { Point } from '@projectstorm/geometry';
-import { MouseEvent } from 'react';
+import { JSX, MouseEvent } from 'react';
 import { RightAngleLinkModel } from './RightAngleLinkModel';
 
 export interface RightAngleLinkProps {

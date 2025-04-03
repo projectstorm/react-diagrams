@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RightAngleLinkWidget } from './RightAngleLinkWidget';
 import { DefaultLinkFactory } from '@projectstorm/react-diagrams-defaults';
 import { RightAngleLinkModel } from './RightAngleLinkModel';
+import { JSX } from 'react';
 
 /**
  * @author Daniel Lazar

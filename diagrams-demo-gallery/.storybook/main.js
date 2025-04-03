@@ -1,8 +1,5 @@
 module.exports = {
 	stories: ['../demos/*.stories.tsx'],
-	addons: ['@storybook/addon-actions'],
-	framework: {
-		name: '@storybook/react-webpack5',
-		options: {}
-	}
+	addons: ['@storybook/addon-actions', '@storybook/addon-webpack5-compiler-babel'],
+	framework: '@storybook/react-webpack5'
 };
