@@ -22,7 +22,7 @@ export class DefaultPortModel extends PortModel<DefaultPortModelGenerics> {
 	constructor(isIn: boolean, name?: string, label?: string);
 	constructor(options: DefaultPortModelOptions);
 	constructor(options: DefaultPortModelOptions | boolean, name?: string, label?: string) {
-		if (!!name) {
+		if (typeof options === "boolean") {
 			options = {
 				in: !!options,
 				name: name,
